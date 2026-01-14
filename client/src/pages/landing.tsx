@@ -112,7 +112,7 @@ function Navigation() {
           </div>
 
           <div className="hidden md:flex items-center gap-4">
-            <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-emerald-400 transition-colors" data-testid="link-telegram-nav">
+            <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" className="text-[#0088CC] hover:text-[#0099DD] transition-colors" data-testid="link-telegram-nav">
               <SiTelegram className="w-5 h-5" />
             </a>
             <a href={LOGIN_URL} target="_blank" rel="noopener noreferrer" data-testid="button-login-nav">
@@ -215,8 +215,8 @@ function HeroSection() {
             </Button>
           </a>
           <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" data-testid="button-hero-telegram">
-            <Button variant="outline" className="border-slate-700 text-white hover:bg-slate-800/80 px-8 py-6 text-lg h-auto backdrop-blur-sm">
-              <SiTelegram className="w-5 h-5 mr-2" />
+            <Button variant="outline" className="border-[#0088CC] text-white hover:bg-[#0088CC]/20 px-8 py-6 text-lg h-auto backdrop-blur-sm">
+              <SiTelegram className="w-5 h-5 mr-2 text-[#0088CC]" />
               Написать в Telegram
             </Button>
           </a>
@@ -626,8 +626,8 @@ function CTASection() {
               </Button>
             </a>
             <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" data-testid="button-cta-telegram">
-              <Button variant="outline" className="border-slate-700 text-white hover:bg-slate-800/80 px-10 py-6 text-lg h-auto backdrop-blur-sm">
-                <SiTelegram className="w-5 h-5 mr-2" />
+              <Button variant="outline" className="border-[#0088CC] text-white hover:bg-[#0088CC]/20 px-10 py-6 text-lg h-auto backdrop-blur-sm">
+                <SiTelegram className="w-5 h-5 mr-2 text-[#0088CC]" />
                 Telegram поддержка
               </Button>
             </a>
@@ -670,7 +670,7 @@ function Footer() {
               href={TELEGRAM_URL} 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="flex items-center gap-2 text-slate-400 hover:text-emerald-400 transition-colors"
+              className="flex items-center gap-2 text-[#0088CC] hover:text-[#0099DD] transition-colors"
               data-testid="link-footer-telegram"
             >
               <SiTelegram className="w-5 h-5" />
