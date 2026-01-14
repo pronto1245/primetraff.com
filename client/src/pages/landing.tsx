@@ -105,10 +105,15 @@ function Navigation() {
 function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-900/20 via-transparent to-transparent" />
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-emerald-600/10 rounded-full blur-3xl" />
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-emerald-950/30" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-emerald-600/20 via-transparent to-transparent" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-emerald-800/15 via-transparent to-transparent" />
+      <div className="absolute top-20 left-10 w-72 h-72 bg-emerald-500/20 rounded-full blur-[100px] animate-pulse" />
+      <div className="absolute top-40 right-20 w-96 h-96 bg-emerald-400/15 rounded-full blur-[120px]" />
+      <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-emerald-600/20 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: "1s" }} />
+      <div className="absolute bottom-40 right-10 w-64 h-64 bg-cyan-500/10 rounded-full blur-[80px]" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-emerald-500/5 to-cyan-500/5 rounded-full blur-[150px]" />
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMxMGI5ODEiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-50" />
       
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-32 text-center">
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm font-medium mb-8">
@@ -199,8 +204,10 @@ function FeaturesSection() {
   ];
 
   return (
-    <section id="features" className="py-20 lg:py-32 bg-slate-900/50">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <section id="features" className="py-20 lg:py-32 bg-slate-900/50 relative overflow-hidden">
+      <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-[120px]" />
+      <div className="absolute bottom-0 left-0 w-80 h-80 bg-emerald-600/10 rounded-full blur-[100px]" />
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
             Почему выбирают PrimeTraff
@@ -255,8 +262,11 @@ function HowItWorksSection() {
   ];
 
   return (
-    <section id="how-it-works" className="py-20 lg:py-32 bg-slate-950">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <section id="how-it-works" className="py-20 lg:py-32 bg-slate-950 relative overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-emerald-900/10 via-transparent to-transparent" />
+      <div className="absolute top-1/2 left-0 w-72 h-72 bg-cyan-500/10 rounded-full blur-[100px]" />
+      <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-emerald-500/10 rounded-full blur-[80px]" />
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
             Как начать зарабатывать
@@ -318,8 +328,10 @@ function TestimonialsSection() {
   ];
 
   return (
-    <section id="testimonials" className="py-20 lg:py-32 bg-slate-900/50">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <section id="testimonials" className="py-20 lg:py-32 bg-slate-900/50 relative overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-emerald-800/10 via-transparent to-transparent" />
+      <div className="absolute top-0 left-1/2 w-96 h-96 bg-emerald-500/10 rounded-full blur-[120px]" />
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
             Что говорят партнеры
@@ -374,8 +386,10 @@ function PartnersSection() {
   ];
 
   return (
-    <section id="partners" className="py-20 lg:py-32 bg-slate-950">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <section id="partners" className="py-20 lg:py-32 bg-gradient-to-b from-slate-950 via-slate-900/50 to-slate-950 relative overflow-hidden">
+      <div className="absolute top-20 right-20 w-80 h-80 bg-emerald-500/15 rounded-full blur-[100px]" />
+      <div className="absolute bottom-20 left-20 w-72 h-72 bg-cyan-500/10 rounded-full blur-[80px]" />
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
             Наши партнеры
@@ -438,8 +452,10 @@ function FAQSection() {
   ];
 
   return (
-    <section id="faq" className="py-20 lg:py-32 bg-slate-900/50">
-      <div className="max-w-3xl mx-auto px-6 lg:px-8">
+    <section id="faq" className="py-20 lg:py-32 bg-slate-950 relative overflow-hidden">
+      <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-600/10 rounded-full blur-[100px]" />
+      <div className="absolute bottom-0 left-1/3 w-72 h-72 bg-cyan-500/10 rounded-full blur-[80px]" />
+      <div className="relative z-10 max-w-3xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
             Частые вопросы
@@ -479,8 +495,11 @@ function FAQSection() {
 function CTASection() {
   return (
     <section className="py-20 lg:py-32 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-emerald-950/20 to-slate-950" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-emerald-900/30 via-transparent to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-emerald-950/30 to-slate-900" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-emerald-600/25 via-emerald-900/10 to-transparent" />
+      <div className="absolute top-10 left-10 w-96 h-96 bg-emerald-500/20 rounded-full blur-[120px] animate-pulse" />
+      <div className="absolute bottom-10 right-10 w-80 h-80 bg-cyan-500/15 rounded-full blur-[100px]" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 rounded-full blur-[150px]" />
       
       <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-8 text-center">
         <h2 className="text-3xl lg:text-5xl font-bold text-white mb-6">
