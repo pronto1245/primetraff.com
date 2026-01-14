@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 import { 
   ChevronDown, 
   ArrowRight, 
@@ -19,6 +21,17 @@ import {
   X
 } from "lucide-react";
 import { SiTelegram } from "react-icons/si";
+
+import partnerImg1 from "@assets/stock_images/casino_gambling_slot_c5847f21.jpg";
+import partnerImg2 from "@assets/stock_images/casino_gambling_slot_399e0348.jpg";
+import partnerImg3 from "@assets/stock_images/casino_gambling_slot_aaabdd7b.jpg";
+import partnerImg4 from "@assets/stock_images/casino_gambling_slot_d4ada583.jpg";
+import partnerImg5 from "@assets/stock_images/casino_gambling_slot_c0654f56.jpg";
+import partnerImg6 from "@assets/stock_images/casino_gambling_slot_d2eee45a.jpg";
+import partnerImg7 from "@assets/stock_images/casino_gambling_slot_7c71aa52.jpg";
+import partnerImg8 from "@assets/stock_images/casino_gambling_slot_60c73ee8.jpg";
+import partnerImg9 from "@assets/stock_images/casino_gambling_slot_488e6e1a.jpg";
+import partnerImg10 from "@assets/stock_images/casino_gambling_slot_297d1a29.jpg";
 
 const REGISTER_URL = "https://primetrack.pro/register?ref=ADV-3BT52V85";
 const TELEGRAM_URL = "https://t.me/primetrack_support_bot";
@@ -47,8 +60,8 @@ function Navigation() {
           <div className="hidden md:flex items-center gap-8">
             <a href="#features" className="text-slate-300 hover:text-white transition-colors" data-testid="link-features">Возможности</a>
             <a href="#how-it-works" className="text-slate-300 hover:text-white transition-colors" data-testid="link-how-it-works">Как это работает</a>
+            <a href="#partners" className="text-slate-300 hover:text-white transition-colors" data-testid="link-partners">Партнеры</a>
             <a href="#testimonials" className="text-slate-300 hover:text-white transition-colors" data-testid="link-testimonials">Отзывы</a>
-            <a href="#faq" className="text-slate-300 hover:text-white transition-colors" data-testid="link-faq">FAQ</a>
           </div>
 
           <div className="hidden md:flex items-center gap-4">
@@ -76,8 +89,8 @@ function Navigation() {
             <div className="flex flex-col gap-4 px-4">
               <a href="#features" className="text-slate-300 py-2" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-features">Возможности</a>
               <a href="#how-it-works" className="text-slate-300 py-2" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-how-it-works">Как это работает</a>
+              <a href="#partners" className="text-slate-300 py-2" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-partners">Партнеры</a>
               <a href="#testimonials" className="text-slate-300 py-2" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-testimonials">Отзывы</a>
-              <a href="#faq" className="text-slate-300 py-2" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-faq">FAQ</a>
               <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" className="w-full" data-testid="button-become-partner-mobile">
                 <Button className="w-full bg-emerald-500 hover:bg-emerald-400 text-white font-semibold">
                   Стать партнером
@@ -348,70 +361,63 @@ function TestimonialsSection() {
   );
 }
 
-function FAQSection() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-
-  const faqs = [
-    {
-      question: "Какие требования для партнеров?",
-      answer: "Мы принимаем арбитражников с опытом от 6 месяцев. Для новичков доступен тестовый период с ограниченными условиями. Главное — качественный трафик и готовность к продуктивному сотрудничеству.",
-    },
-    {
-      question: "Какие условия по выплатам?",
-      answer: "Выплаты производятся ежедневно или еженедельно — на выбор. Минимальная сумма для вывода — $100. Доступны USDT (TRC20/ERC20), Bitcoin, банковские карты. Для проверенных партнеров — выплаты в течение 24 часов без холда.",
-    },
-    {
-      question: "Какие офферы доступны?",
-      answer: "Gambling, betting, dating, nutra, crypto — полный спектр вертикалей. Работаем со всеми ключевыми ГЕО: СНГ, Европа, Латам, Азия. Ставки CPA до $150, RevShare до 50%.",
-    },
-    {
-      question: "Есть ли персональный менеджер?",
-      answer: "Да, каждому партнеру назначается персональный менеджер. Поддержка работает 24/7 в Telegram. Среднее время ответа — 5 минут. Помогаем с оптимизацией связок и выбором офферов.",
-    },
-    {
-      question: "Как работает аналитика?",
-      answer: "Полная статистика в реальном времени: клики, лиды, депозиты, ROI. Детализация по subID (sub1-sub10). Интеграция постбеков с любыми трекерами. API доступ для автоматизации.",
-    },
-    {
-      question: "Можно ли работать команде?",
-      answer: "Да, мы поддерживаем командную работу. Создавайте под-аккаунты для медиабаеров, отслеживайте статистику по каждому участнику. Отдельные условия для команд от 5 человек.",
-    },
+function PartnersSection() {
+  const partners = [
+    { img: partnerImg1, name: "Partner Casino 1" },
+    { img: partnerImg2, name: "Partner Casino 2" },
+    { img: partnerImg3, name: "Partner Casino 3" },
+    { img: partnerImg4, name: "Partner Casino 4" },
+    { img: partnerImg5, name: "Partner Casino 5" },
+    { img: partnerImg6, name: "Partner Casino 6" },
+    { img: partnerImg7, name: "Partner Casino 7" },
+    { img: partnerImg8, name: "Partner Casino 8" },
+    { img: partnerImg9, name: "Partner Casino 9" },
+    { img: partnerImg10, name: "Partner Casino 10" },
   ];
 
+  const autoplayPlugin = useRef(
+    Autoplay({ delay: 2000, stopOnInteraction: false, stopOnMouseEnter: true })
+  );
+
   return (
-    <section id="faq" className="py-20 lg:py-32 bg-slate-950">
-      <div className="max-w-3xl mx-auto px-6 lg:px-8">
+    <section id="partners" className="py-20 lg:py-32 bg-slate-950">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
-            Частые вопросы
+            Наши партнеры
           </h2>
-          <p className="text-slate-400 text-lg">
-            Не нашли ответ? Напишите нам в Telegram
+          <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+            Работаем с лучшими брендами индустрии
           </p>
         </div>
 
-        <div className="space-y-4">
-          {faqs.map((faq, i) => (
-            <div 
-              key={i} 
-              className="border border-slate-800 rounded-xl overflow-hidden"
-            >
-              <button
-                className="w-full flex items-center justify-between p-6 text-left hover:bg-slate-800/50 transition-colors"
-                onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                data-testid={`button-faq-${i}`}
-              >
-                <span className="font-semibold text-white pr-4">{faq.question}</span>
-                <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform ${openIndex === i ? "rotate-180" : ""}`} />
-              </button>
-              {openIndex === i && (
-                <div className="px-6 pb-6">
-                  <p className="text-slate-400">{faq.answer}</p>
+        <Carousel
+          opts={{
+            align: "start",
+            loop: true,
+          }}
+          plugins={[autoplayPlugin.current]}
+          className="w-full"
+          data-testid="carousel-partners"
+        >
+          <CarouselContent className="-ml-4">
+            {partners.map((partner, i) => (
+              <CarouselItem key={i} className="pl-4 basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5">
+                <div 
+                  className="relative aspect-video rounded-xl overflow-hidden bg-slate-800/50 border border-slate-700/50 hover:border-emerald-500/30 transition-all duration-300"
+                  data-testid={`card-partner-${i}`}
+                >
+                  <img 
+                    src={partner.img} 
+                    alt={partner.name}
+                    className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent" />
                 </div>
-              )}
-            </div>
-          ))}
-        </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
       </div>
     </section>
   );
@@ -526,8 +532,8 @@ export default function LandingPage() {
       <HeroSection />
       <FeaturesSection />
       <HowItWorksSection />
+      <PartnersSection />
       <TestimonialsSection />
-      <FAQSection />
       <CTASection />
       <Footer />
       <StickyCTA />
