@@ -178,7 +178,7 @@ function HeroSection() {
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-white text-sm font-medium mb-8 backdrop-blur-sm"
         >
           <Zap className="w-4 h-4" />
-          <span>Мгновенное одобрение для опытных арбитражников</span>
+          <span>Мгновенное одобрение</span>
         </motion.div>
 
         <motion.h1
