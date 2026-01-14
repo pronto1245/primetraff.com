@@ -524,7 +524,7 @@ function PartnersSection() {
                     alt={partner.name}
                     loading="lazy"
                     decoding="async"
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 opacity-60 group-hover:opacity-100 transition-all duration-300"
+                    className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-300"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-100 group-hover:opacity-0 transition-opacity" />
                 </div>
