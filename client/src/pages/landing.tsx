@@ -229,14 +229,14 @@ function HeroSection() {
           className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6 max-w-4xl mx-auto"
         >
           {[
-            { value: "500+", label: "Активных партнеров", id: "partners" },
-            { value: "$2M+", label: "Выплачено партнерам", id: "payouts" },
-            { value: "24/7", label: "Поддержка онлайн", id: "support" },
-            { value: "100%", label: "Честные выплаты", id: "honest" },
+            { value: "500+", label: "Активных партнеров", id: "partners", gradient: "from-violet-400 to-purple-400" },
+            { value: "$2M+", label: "Выплачено партнерам", id: "payouts", gradient: "from-amber-400 to-orange-400" },
+            { value: "24/7", label: "Поддержка онлайн", id: "support", gradient: "from-blue-400 to-cyan-400" },
+            { value: "100%", label: "Честные выплаты", id: "honest", gradient: "from-emerald-400 to-green-400" },
           ].map((stat, i) => (
             <GlassCard key={i} className="p-4 lg:p-6" hover={false}>
               <div className="text-center" data-testid={`stat-${stat.id}`}>
-                <div className="text-2xl lg:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400 mb-1" data-testid={`text-stat-value-${stat.id}`}>{stat.value}</div>
+                <div className={`text-2xl lg:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r ${stat.gradient} mb-1`} data-testid={`text-stat-value-${stat.id}`}>{stat.value}</div>
                 <div className="text-sm text-slate-400">{stat.label}</div>
               </div>
             </GlassCard>
@@ -257,31 +257,55 @@ function FeaturesSection() {
       icon: Shield,
       title: "Без шейва",
       description: "Мы много лет работаем в gambling вертикали и знаем все боли рынка. Гарантируем, что шейва через нашу партнерскую сеть не будет.",
+      iconColor: "text-emerald-400",
+      bgGradient: "from-emerald-500/20 to-emerald-600/20",
+      bgGradientHover: "group-hover:from-emerald-500/30 group-hover:to-emerald-600/30",
+      borderColor: "border-emerald-500/10",
     },
     {
       icon: Globe,
       title: "Большой выбор офферов",
       description: "Все офферы, с которыми мы работаем, уже были пролиты нашей командой. Мы знаем что рекомендовать нашим партнерам.",
+      iconColor: "text-blue-400",
+      bgGradient: "from-blue-500/20 to-blue-600/20",
+      bgGradientHover: "group-hover:from-blue-500/30 group-hover:to-blue-600/30",
+      borderColor: "border-blue-500/10",
     },
     {
       icon: Users,
       title: "Помощь в заливах",
       description: "Мы тестируем связки и делимся ими с партнерами. Всё — от креатива до необходимых инструментов. Вам остается взять ссылку из ЛК.",
+      iconColor: "text-violet-400",
+      bgGradient: "from-violet-500/20 to-violet-600/20",
+      bgGradientHover: "group-hover:from-violet-500/30 group-hover:to-violet-600/30",
+      borderColor: "border-violet-500/10",
     },
     {
       icon: DollarSign,
       title: "Быстрые выплаты",
       description: "Стараемся максимально быстро выплачивать вознаграждение. Если у рекла нет претензий к трафику — средства будут на кошельке в кратчайший срок.",
+      iconColor: "text-amber-400",
+      bgGradient: "from-amber-500/20 to-amber-600/20",
+      bgGradientHover: "group-hover:from-amber-500/30 group-hover:to-amber-600/30",
+      borderColor: "border-amber-500/10",
     },
     {
       icon: MessageCircle,
       title: "Приватный канал со связками",
       description: "Для проверенных партнеров есть закрытый канал с продуктом, креативами, таргетом, плейсментами — всё для профитной настройки пролива.",
+      iconColor: "text-pink-400",
+      bgGradient: "from-pink-500/20 to-pink-600/20",
+      bgGradientHover: "group-hover:from-pink-500/30 group-hover:to-pink-600/30",
+      borderColor: "border-pink-500/10",
     },
     {
       icon: BarChart3,
       title: "Полная аналитика",
       description: "Личный кабинет с детальной статистикой по всем показателям. Видишь каждый клик и депозит по своим subID в реальном времени.",
+      iconColor: "text-cyan-400",
+      bgGradient: "from-cyan-500/20 to-cyan-600/20",
+      bgGradientHover: "group-hover:from-cyan-500/30 group-hover:to-cyan-600/30",
+      borderColor: "border-cyan-500/10",
     },
   ];
 
@@ -308,10 +332,10 @@ function FeaturesSection() {
                 className="p-6 lg:p-8 h-full group"
               >
                 <div 
-                  className="w-14 h-14 rounded-xl bg-gradient-to-br from-emerald-500/20 to-cyan-500/20 flex items-center justify-center mb-5 group-hover:from-emerald-500/30 group-hover:to-cyan-500/30 transition-all border border-emerald-500/10"
+                  className={`w-14 h-14 rounded-xl bg-gradient-to-br ${feature.bgGradient} flex items-center justify-center mb-5 ${feature.bgGradientHover} transition-all ${feature.borderColor}`}
                   data-testid={`card-feature-${i}`}
                 >
-                  <feature.icon className="w-7 h-7 text-emerald-400" />
+                  <feature.icon className={`w-7 h-7 ${feature.iconColor}`} />
                 </div>
                 <h3 className="text-xl font-semibold text-white mb-3">{feature.title}</h3>
                 <p className="text-slate-400 leading-relaxed">{feature.description}</p>
@@ -331,24 +355,44 @@ function HowItWorksSection() {
       title: "Регистрация",
       description: "Заполните форму за 2 минуты. Мгновенное одобрение для опытных арбитражников.",
       icon: Users,
+      iconColor: "text-violet-400",
+      bgGradient: "from-violet-500/20 to-violet-600/20",
+      borderColor: "border-violet-500/20",
+      badgeGradient: "from-violet-500 to-violet-600",
+      shadowColor: "shadow-violet-500/30",
     },
     {
       step: "02",
       title: "Получите офферы",
       description: "Выберите офферы и получите уникальные трекинговые ссылки.",
       icon: Globe,
+      iconColor: "text-blue-400",
+      bgGradient: "from-blue-500/20 to-blue-600/20",
+      borderColor: "border-blue-500/20",
+      badgeGradient: "from-blue-500 to-blue-600",
+      shadowColor: "shadow-blue-500/30",
     },
     {
       step: "03",
       title: "Лейте трафик",
       description: "Запускайте рекламные кампании и отслеживайте результаты в реальном времени.",
       icon: BarChart3,
+      iconColor: "text-cyan-400",
+      bgGradient: "from-cyan-500/20 to-cyan-600/20",
+      borderColor: "border-cyan-500/20",
+      badgeGradient: "from-cyan-500 to-cyan-600",
+      shadowColor: "shadow-cyan-500/30",
     },
     {
       step: "04",
       title: "Получайте выплаты",
       description: "Выводите заработок ежедневно. Без холдов для проверенных партнеров.",
       icon: DollarSign,
+      iconColor: "text-amber-400",
+      bgGradient: "from-amber-500/20 to-amber-600/20",
+      borderColor: "border-amber-500/20",
+      badgeGradient: "from-amber-500 to-amber-600",
+      shadowColor: "shadow-amber-500/30",
     },
   ];
 
@@ -376,10 +420,10 @@ function HowItWorksSection() {
               <AnimatedSection key={i} delay={i * 0.15} className="relative">
                 <div className="text-center">
                   <div className="relative inline-flex mb-6">
-                    <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-cyan-500/20 flex items-center justify-center border border-emerald-500/20 backdrop-blur-sm">
-                      <step.icon className="w-8 h-8 text-emerald-400" />
+                    <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${step.bgGradient} flex items-center justify-center ${step.borderColor} backdrop-blur-sm`}>
+                      <step.icon className={`w-8 h-8 ${step.iconColor}`} />
                     </div>
-                    <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center text-white text-sm font-bold shadow-lg shadow-emerald-500/30">
+                    <div className={`absolute -top-2 -right-2 w-8 h-8 rounded-full bg-gradient-to-br ${step.badgeGradient} flex items-center justify-center text-white text-sm font-bold shadow-lg ${step.shadowColor}`}>
                       {i + 1}
                     </div>
                   </div>
