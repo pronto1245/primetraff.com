@@ -20,16 +20,19 @@ import {
 } from "lucide-react";
 import { SiTelegram } from "react-icons/si";
 
-import partnerImg1 from "@assets/stock_images/casino_gambling_slot_c5847f21.jpg";
-import partnerImg2 from "@assets/stock_images/casino_gambling_slot_399e0348.jpg";
-import partnerImg3 from "@assets/stock_images/casino_gambling_slot_aaabdd7b.jpg";
-import partnerImg4 from "@assets/stock_images/casino_gambling_slot_d4ada583.jpg";
-import partnerImg5 from "@assets/stock_images/casino_gambling_slot_c0654f56.jpg";
-import partnerImg6 from "@assets/stock_images/casino_gambling_slot_d2eee45a.jpg";
-import partnerImg7 from "@assets/stock_images/casino_gambling_slot_7c71aa52.jpg";
-import partnerImg8 from "@assets/stock_images/casino_gambling_slot_60c73ee8.jpg";
-import partnerImg9 from "@assets/stock_images/casino_gambling_slot_488e6e1a.jpg";
-import partnerImg10 from "@assets/stock_images/casino_gambling_slot_297d1a29.jpg";
+import partnerMobilbahis from "@assets/Без_названия_(1)_1768417603829.jpeg";
+import partner1win from "@assets/Без_названия_(1)_1768417603829.png";
+import partnerRooster from "@assets/Без_названия_(2)_1768417603829.jpeg";
+import partnerMrBet from "@assets/Без_названия_(2)_1768417603830.png";
+import partnerWinhero from "@assets/Без_названия_(3)_1768417603830.png";
+import partnerCorgiBet from "@assets/Без_названия_(4)_1768417603835.png";
+import partnerLeon from "@assets/Без_названия_1768417603835.jpeg";
+import partnerBettilt from "@assets/img66fbf43306cac_1768417603836.png";
+import partnerSportaza from "@assets/img689b36cf850ac_1768417603836.png";
+import partnerVegasSlot from "@assets/img69380f65d567f_1768417603836.png";
+import partnerBetcool from "@assets/img69400fda54fe8_1768417603836.png";
+import partnerHuhuBet from "@assets/img694005f195a65_1768417603836.png";
+import partner4rabet from "@assets/NPOpJLBugXCTJRBDe8jY2bWxoKEGmEpA4HtrjRVD_1768417603836.png";
 
 const REGISTER_URL = "https://primetrack.pro/register?ref=ADV-3BT52V85";
 const TELEGRAM_URL = "https://t.me/primetrack_support_bot";
@@ -107,13 +110,10 @@ function HeroSection() {
     <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-emerald-950/30" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-emerald-600/20 via-transparent to-transparent" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-emerald-800/15 via-transparent to-transparent" />
-      <div className="absolute top-20 left-10 w-72 h-72 bg-emerald-500/20 rounded-full blur-[100px] animate-pulse" />
-      <div className="absolute top-40 right-20 w-96 h-96 bg-emerald-400/15 rounded-full blur-[120px]" />
-      <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-emerald-600/20 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: "1s" }} />
-      <div className="absolute bottom-40 right-10 w-64 h-64 bg-cyan-500/10 rounded-full blur-[80px]" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-emerald-500/5 to-cyan-500/5 rounded-full blur-[150px]" />
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMxMGI5ODEiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-50" />
+      <div className="absolute top-20 left-10 w-72 h-72 bg-emerald-500/15 rounded-full blur-[80px]" />
+      <div className="absolute top-40 right-20 w-80 h-80 bg-emerald-400/10 rounded-full blur-[80px]" />
+      <div className="absolute bottom-20 left-1/3 w-64 h-64 bg-emerald-600/15 rounded-full blur-[60px]" />
+      <div className="absolute bottom-40 right-10 w-48 h-48 bg-cyan-500/10 rounded-full blur-[60px]" />
       
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-32 text-center">
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm font-medium mb-8">
@@ -205,7 +205,7 @@ function FeaturesSection() {
 
   return (
     <section id="features" className="py-20 lg:py-32 bg-slate-900/50 relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-[120px]" />
+      <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-[60px]" />
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-emerald-600/10 rounded-full blur-[100px]" />
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-16">
@@ -264,8 +264,8 @@ function HowItWorksSection() {
   return (
     <section id="how-it-works" className="py-20 lg:py-32 bg-slate-950 relative overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-emerald-900/10 via-transparent to-transparent" />
-      <div className="absolute top-1/2 left-0 w-72 h-72 bg-cyan-500/10 rounded-full blur-[100px]" />
-      <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-emerald-500/10 rounded-full blur-[80px]" />
+      <div className="absolute top-1/2 left-0 w-48 h-48 bg-cyan-500/10 rounded-full blur-[60px]" />
+      <div className="absolute bottom-0 right-1/4 w-48 h-48 bg-emerald-500/10 rounded-full blur-[60px]" />
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
@@ -330,7 +330,7 @@ function TestimonialsSection() {
   return (
     <section id="testimonials" className="py-20 lg:py-32 bg-slate-900/50 relative overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-emerald-800/10 via-transparent to-transparent" />
-      <div className="absolute top-0 left-1/2 w-96 h-96 bg-emerald-500/10 rounded-full blur-[120px]" />
+      <div className="absolute top-0 left-1/2 w-64 h-64 bg-emerald-500/10 rounded-full blur-[60px]" />
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
@@ -373,22 +373,25 @@ function TestimonialsSection() {
 
 function PartnersSection() {
   const partners = [
-    { img: partnerImg1, name: "Casino Partner 1" },
-    { img: partnerImg2, name: "Casino Partner 2" },
-    { img: partnerImg3, name: "Casino Partner 3" },
-    { img: partnerImg4, name: "Casino Partner 4" },
-    { img: partnerImg5, name: "Casino Partner 5" },
-    { img: partnerImg6, name: "Casino Partner 6" },
-    { img: partnerImg7, name: "Casino Partner 7" },
-    { img: partnerImg8, name: "Casino Partner 8" },
-    { img: partnerImg9, name: "Casino Partner 9" },
-    { img: partnerImg10, name: "Casino Partner 10" },
+    { img: partner1win, name: "1win" },
+    { img: partnerMobilbahis, name: "Mobilbahis" },
+    { img: partnerRooster, name: "Rooster.bet" },
+    { img: partnerMrBet, name: "Mr Bet" },
+    { img: partnerWinhero, name: "Winhero" },
+    { img: partnerCorgiBet, name: "CorgiBet" },
+    { img: partnerLeon, name: "Leon" },
+    { img: partnerBettilt, name: "Bettilt" },
+    { img: partnerSportaza, name: "Sportaza" },
+    { img: partnerVegasSlot, name: "Vegas Slot" },
+    { img: partnerBetcool, name: "Betcool" },
+    { img: partnerHuhuBet, name: "HuhuBet" },
+    { img: partner4rabet, name: "4rabet" },
   ];
 
   return (
     <section id="partners" className="py-20 lg:py-32 bg-gradient-to-b from-slate-950 via-slate-900/50 to-slate-950 relative overflow-hidden">
-      <div className="absolute top-20 right-20 w-80 h-80 bg-emerald-500/15 rounded-full blur-[100px]" />
-      <div className="absolute bottom-20 left-20 w-72 h-72 bg-cyan-500/10 rounded-full blur-[80px]" />
+      <div className="absolute top-20 right-20 w-48 h-48 bg-emerald-500/10 rounded-full blur-[60px]" />
+      <div className="absolute bottom-20 left-20 w-48 h-48 bg-cyan-500/10 rounded-full blur-[60px]" />
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
@@ -416,6 +419,8 @@ function PartnersSection() {
                   <img 
                     src={partner.img} 
                     alt={partner.name}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent" />
@@ -453,8 +458,8 @@ function FAQSection() {
 
   return (
     <section id="faq" className="py-20 lg:py-32 bg-slate-950 relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-600/10 rounded-full blur-[100px]" />
-      <div className="absolute bottom-0 left-1/3 w-72 h-72 bg-cyan-500/10 rounded-full blur-[80px]" />
+      <div className="absolute top-0 right-0 w-48 h-48 bg-emerald-600/10 rounded-full blur-[60px]" />
+      <div className="absolute bottom-0 left-1/3 w-48 h-48 bg-cyan-500/10 rounded-full blur-[60px]" />
       <div className="relative z-10 max-w-3xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
@@ -496,10 +501,9 @@ function CTASection() {
   return (
     <section className="py-20 lg:py-32 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-emerald-950/30 to-slate-900" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-emerald-600/25 via-emerald-900/10 to-transparent" />
-      <div className="absolute top-10 left-10 w-96 h-96 bg-emerald-500/20 rounded-full blur-[120px] animate-pulse" />
-      <div className="absolute bottom-10 right-10 w-80 h-80 bg-cyan-500/15 rounded-full blur-[100px]" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 rounded-full blur-[150px]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-emerald-600/20 via-emerald-900/10 to-transparent" />
+      <div className="absolute top-10 left-10 w-72 h-72 bg-emerald-500/15 rounded-full blur-[80px]" />
+      <div className="absolute bottom-10 right-10 w-64 h-64 bg-cyan-500/10 rounded-full blur-[60px]" />
       
       <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-8 text-center">
         <h2 className="text-3xl lg:text-5xl font-bold text-white mb-6">
