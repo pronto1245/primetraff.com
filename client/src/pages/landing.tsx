@@ -505,26 +505,33 @@ function PartnersSection() {
           </p>
         </AnimatedSection>
 
-        <AnimatedSection delay={0.2}>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 lg:gap-6">
-            {partners.map((partner, i) => (
+        <div className="overflow-hidden">
+          <div 
+            className="flex gap-6"
+            style={{
+              animation: "scroll 30s linear infinite",
+            }}
+          >
+            {[...partners, ...partners].map((partner, i) => (
               <div 
                 key={i}
-                className="group relative aspect-video rounded-xl overflow-hidden bg-slate-800/30 border border-slate-700/30 hover:border-emerald-500/30 transition-all duration-300"
+                className="flex-shrink-0 w-48 md:w-56 lg:w-64 group"
                 data-testid={`card-partner-${i}`}
               >
-                <img 
-                  src={partner.img} 
-                  alt={partner.name}
-                  loading="lazy"
-                  decoding="async"
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 opacity-60 group-hover:opacity-100 transition-all duration-300"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-100 group-hover:opacity-0 transition-opacity" />
+                <div className="relative aspect-video rounded-xl overflow-hidden bg-slate-800/30 border border-slate-700/30 hover:border-emerald-500/30 transition-all duration-300">
+                  <img 
+                    src={partner.img} 
+                    alt={partner.name}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 opacity-60 group-hover:opacity-100 transition-all duration-300"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-100 group-hover:opacity-0 transition-opacity" />
+                </div>
               </div>
             ))}
           </div>
-        </AnimatedSection>
+        </div>
       </div>
     </section>
   );
