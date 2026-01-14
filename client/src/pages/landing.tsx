@@ -20,6 +20,8 @@ import {
 } from "lucide-react";
 import { SiTelegram } from "react-icons/si";
 
+import primeTraffLogo from "@assets/generated_images/primetraff_affiliate_platform_logo.png";
+
 import partnerMobilbahis from "@assets/Без_названия_(1)_1768417603829.jpeg";
 import partner1win from "@assets/Без_названия_(1)_1768417603829.png";
 import partnerRooster from "@assets/Без_названия_(2)_1768417603829.jpeg";
@@ -98,9 +100,7 @@ function Navigation() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           <a href="#" className="flex items-center gap-2" data-testid="link-logo">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center shadow-lg shadow-emerald-500/20">
-              <TrendingUp className="w-5 h-5 text-white" />
-            </div>
+            <img src={primeTraffLogo} alt="PrimeTraff" className="w-8 h-8 rounded-lg shadow-lg shadow-emerald-500/20" />
             <span className="text-xl font-bold text-white">PrimeTraff</span>
           </a>
 
@@ -703,9 +703,7 @@ function Footer() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center shadow-lg shadow-emerald-500/20">
-              <TrendingUp className="w-5 h-5 text-white" />
-            </div>
+            <img src={primeTraffLogo} alt="PrimeTraff" className="w-8 h-8 rounded-lg shadow-lg shadow-emerald-500/20" />
             <span className="text-xl font-bold text-white">PrimeTraff</span>
           </div>
 
