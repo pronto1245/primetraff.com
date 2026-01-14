@@ -749,6 +749,141 @@ function StickyCTA() {
   );
 }
 
+function SpecialOfferPopup() {
+  const [isVisible, setIsVisible] = useState(false);
+  const [timeLeft, setTimeLeft] = useState({
+    days: 1,
+    hours: 0,
+    minutes: 0,
+    seconds: 0
+  });
+
+  // Show popup after 20 seconds
+  useEffect(() => {
+    const showTimer = setTimeout(() => {
+      const dismissed = sessionStorage.getItem('offerDismissed');
+      if (!dismissed) {
+        setIsVisible(true);
+      }
+    }, 20000);
+
+    return () => clearTimeout(showTimer);
+  }, []);
+
+  // Countdown timer - starts from 1 day
+  useEffect(() => {
+    const endTime = localStorage.getItem('offerEndTime');
+    let targetTime: number;
+    
+    if (endTime) {
+      targetTime = parseInt(endTime);
+    } else {
+      targetTime = Date.now() + 24 * 60 * 60 * 1000; // 1 day from now
+      localStorage.setItem('offerEndTime', targetTime.toString());
+    }
+
+    const updateTimer = () => {
+      const now = Date.now();
+      const diff = Math.max(0, targetTime - now);
+      
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+      
+      setTimeLeft({ days, hours, minutes, seconds });
+    };
+
+    updateTimer();
+    const interval = setInterval(updateTimer, 1000);
+    
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleClose = () => {
+    setIsVisible(false);
+    sessionStorage.setItem('offerDismissed', 'true');
+  };
+
+  if (!isVisible) return null;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+      onClick={handleClose}
+    >
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ type: "spring", duration: 0.5 }}
+        className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 border border-emerald-500/30 rounded-2xl p-6 md:p-8 max-w-md w-full shadow-2xl shadow-emerald-500/10"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Close button */}
+        <button
+          onClick={handleClose}
+          className="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors"
+          data-testid="button-close-popup"
+        >
+          <X className="w-6 h-6" />
+        </button>
+
+        {/* Header with alarm emoji */}
+        <div className="text-center mb-6">
+          <span className="text-4xl mb-3 block">⏰</span>
+          <h3 className="text-xl md:text-2xl font-bold text-white">
+            Специальное предложение заканчивается через:
+          </h3>
+        </div>
+
+        {/* Countdown timer */}
+        <div className="grid grid-cols-4 gap-2 md:gap-3 mb-6">
+          <div className="bg-slate-800/80 rounded-xl p-3 text-center border border-slate-700/50">
+            <div className="text-2xl md:text-3xl font-bold text-emerald-400">{timeLeft.days}</div>
+            <div className="text-xs text-slate-400 mt-1">дней</div>
+          </div>
+          <div className="bg-slate-800/80 rounded-xl p-3 text-center border border-slate-700/50">
+            <div className="text-2xl md:text-3xl font-bold text-emerald-400">{String(timeLeft.hours).padStart(2, '0')}</div>
+            <div className="text-xs text-slate-400 mt-1">часов</div>
+          </div>
+          <div className="bg-slate-800/80 rounded-xl p-3 text-center border border-slate-700/50">
+            <div className="text-2xl md:text-3xl font-bold text-emerald-400">{String(timeLeft.minutes).padStart(2, '0')}</div>
+            <div className="text-xs text-slate-400 mt-1">минут</div>
+          </div>
+          <div className="bg-slate-800/80 rounded-xl p-3 text-center border border-slate-700/50">
+            <div className="text-2xl md:text-3xl font-bold text-emerald-400">{String(timeLeft.seconds).padStart(2, '0')}</div>
+            <div className="text-xs text-slate-400 mt-1">секунд</div>
+          </div>
+        </div>
+
+        {/* Bonus text */}
+        <div className="bg-gradient-to-r from-amber-500/20 to-orange-500/20 border border-amber-500/30 rounded-xl p-4 mb-6 text-center">
+          <p className="text-lg md:text-xl font-semibold text-white">
+            Бонус <span className="text-amber-400">200$</span> к первой выплате для новых партнеров
+          </p>
+        </div>
+
+        {/* CTA Button */}
+        <a 
+          href={REGISTER_URL} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="block"
+          data-testid="button-popup-cta"
+        >
+          <Button className="w-full bg-emerald-500 hover:bg-emerald-400 text-white font-bold py-4 text-lg shadow-lg shadow-emerald-500/30">
+            Стать партнером
+            <ArrowRight className="w-5 h-5 ml-2" />
+          </Button>
+        </a>
+      </motion.div>
+    </motion.div>
+  );
+}
+
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-slate-950 relative">
@@ -763,6 +898,7 @@ export default function LandingPage() {
       <CTASection />
       <Footer />
       <StickyCTA />
+      <SpecialOfferPopup />
     </div>
   );
 }
