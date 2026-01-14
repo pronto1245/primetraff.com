@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
 import { 
   ChevronDown, 
   ArrowRight, 
@@ -363,16 +361,16 @@ function TestimonialsSection() {
 
 function PartnersSection() {
   const partners = [
-    { img: partnerImg1, name: "Partner Casino 1" },
-    { img: partnerImg2, name: "Partner Casino 2" },
-    { img: partnerImg3, name: "Partner Casino 3" },
-    { img: partnerImg4, name: "Partner Casino 4" },
-    { img: partnerImg5, name: "Partner Casino 5" },
-    { img: partnerImg6, name: "Partner Casino 6" },
-    { img: partnerImg7, name: "Partner Casino 7" },
-    { img: partnerImg8, name: "Partner Casino 8" },
-    { img: partnerImg9, name: "Partner Casino 9" },
-    { img: partnerImg10, name: "Partner Casino 10" },
+    { img: partnerImg1, name: "Casino Partner 1" },
+    { img: partnerImg2, name: "Casino Partner 2" },
+    { img: partnerImg3, name: "Casino Partner 3" },
+    { img: partnerImg4, name: "Casino Partner 4" },
+    { img: partnerImg5, name: "Casino Partner 5" },
+    { img: partnerImg6, name: "Casino Partner 6" },
+    { img: partnerImg7, name: "Casino Partner 7" },
+    { img: partnerImg8, name: "Casino Partner 8" },
+    { img: partnerImg9, name: "Casino Partner 9" },
+    { img: partnerImg10, name: "Casino Partner 10" },
   ];
 
   return (
@@ -387,24 +385,20 @@ function PartnersSection() {
           </p>
         </div>
 
-        <Carousel
-          opts={{
-            align: "start",
-            loop: true,
-          }}
-          plugins={[
-            Autoplay({ delay: 2000, stopOnInteraction: false, stopOnMouseEnter: true })
-          ]}
-          className="w-full"
-          data-testid="carousel-partners"
-        >
-          <CarouselContent className="-ml-4">
-            {partners.map((partner, i) => (
-              <CarouselItem key={i} className="pl-4 basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5">
-                <div 
-                  className="relative aspect-video rounded-xl overflow-hidden bg-slate-800/50 border border-slate-700/50 hover:border-emerald-500/30 transition-all duration-300"
-                  data-testid={`card-partner-${i}`}
-                >
+        <div className="overflow-hidden">
+          <div 
+            className="flex animate-scroll gap-6"
+            style={{
+              animation: "scroll 30s linear infinite",
+            }}
+          >
+            {[...partners, ...partners].map((partner, i) => (
+              <div 
+                key={i}
+                className="flex-shrink-0 w-48 md:w-56 lg:w-64"
+                data-testid={`card-partner-${i}`}
+              >
+                <div className="relative aspect-video rounded-xl overflow-hidden bg-slate-800/50 border border-slate-700/50 hover:border-emerald-500/30 transition-all duration-300">
                   <img 
                     src={partner.img} 
                     alt={partner.name}
@@ -412,10 +406,10 @@ function PartnersSection() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent" />
                 </div>
-              </CarouselItem>
+              </div>
             ))}
-          </CarouselContent>
-        </Carousel>
+          </div>
+        </div>
       </div>
     </section>
   );
