@@ -679,15 +679,15 @@ function CTASection() {
 
           <div className="mt-12 flex flex-wrap items-center justify-center gap-6 lg:gap-8 text-slate-400">
             <div className="flex items-center gap-2">
-              <CheckCircle className="w-5 h-5 text-emerald-500" />
+              <CheckCircle className="w-5 h-5 text-amber-400" />
               <span>Без холдов</span>
             </div>
             <div className="flex items-center gap-2">
-              <CheckCircle className="w-5 h-5 text-emerald-500" />
+              <CheckCircle className="w-5 h-5 text-violet-400" />
               <span>Быстрое одобрение</span>
             </div>
             <div className="flex items-center gap-2">
-              <CheckCircle className="w-5 h-5 text-emerald-500" />
+              <CheckCircle className="w-5 h-5 text-blue-400" />
               <span>Поддержка 24/7</span>
             </div>
           </div>
