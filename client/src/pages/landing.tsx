@@ -61,7 +61,7 @@ function Navigation() {
             <a href="#features" className="text-slate-300 hover:text-white transition-colors" data-testid="link-features">Возможности</a>
             <a href="#how-it-works" className="text-slate-300 hover:text-white transition-colors" data-testid="link-how-it-works">Как это работает</a>
             <a href="#partners" className="text-slate-300 hover:text-white transition-colors" data-testid="link-partners">Партнеры</a>
-            <a href="#testimonials" className="text-slate-300 hover:text-white transition-colors" data-testid="link-testimonials">Отзывы</a>
+            <a href="#faq" className="text-slate-300 hover:text-white transition-colors" data-testid="link-faq">FAQ</a>
           </div>
 
           <div className="hidden md:flex items-center gap-4">
@@ -90,7 +90,7 @@ function Navigation() {
               <a href="#features" className="text-slate-300 py-2" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-features">Возможности</a>
               <a href="#how-it-works" className="text-slate-300 py-2" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-how-it-works">Как это работает</a>
               <a href="#partners" className="text-slate-300 py-2" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-partners">Партнеры</a>
-              <a href="#testimonials" className="text-slate-300 py-2" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-testimonials">Отзывы</a>
+              <a href="#faq" className="text-slate-300 py-2" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-faq">FAQ</a>
               <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" className="w-full" data-testid="button-become-partner-mobile">
                 <Button className="w-full bg-emerald-500 hover:bg-emerald-400 text-white font-semibold">
                   Стать партнером
@@ -423,6 +423,67 @@ function PartnersSection() {
   );
 }
 
+function FAQSection() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const faqs = [
+    {
+      question: "Предоставляете ли вы готовую воронку для пролива?",
+      answer: "Да, в нее входит: готовое PWA-приложение с настроенными PUSH-уведомлениями + конвертящие креативы + инструкция по запуску",
+    },
+    {
+      question: "Возможно ли получить индивидуальные условия по выплатам?",
+      answer: "Да, активным веб-мастерам мы идем навстречу и готовы предоставлять индивидуальные условия для дополнительного удобства",
+    },
+    {
+      question: "У меня нет трекера, что делать?",
+      answer: "Мы предоставим вам полностью бесплатный трекер с интуитивным интерфейсом, где вы сможете настроить все необходимые параметры, отслеживать конверсии в реальном времени и оптимизировать свои кампании для максимальной эффективности",
+    },
+    {
+      question: "В каких случаях трафик не соответствует минимальным требованиям компании?",
+      answer: "Трафик не соответствует минимальным требованиям компании в случае:\n1. Относится к запрещенным видам трафика\n2. Не соответствует заявленному источнику\n3. Количество повторных депозитов не менее 50% от количества первых\n4. Процент дубликатов свыше 10% от всех привлеченных игроков",
+    },
+  ];
+
+  return (
+    <section id="faq" className="py-20 lg:py-32 bg-slate-900/50">
+      <div className="max-w-3xl mx-auto px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
+            Частые вопросы
+          </h2>
+          <p className="text-slate-400 text-lg">
+            Не нашли ответ? Напишите нам в Telegram
+          </p>
+        </div>
+
+        <div className="space-y-4">
+          {faqs.map((faq, i) => (
+            <div 
+              key={i} 
+              className="border border-slate-700/50 rounded-xl overflow-hidden bg-slate-800/30"
+            >
+              <button
+                className="w-full flex items-center justify-between p-6 text-left hover:bg-slate-800/50 transition-colors"
+                onClick={() => setOpenIndex(openIndex === i ? null : i)}
+                data-testid={`button-faq-${i}`}
+              >
+                <span className="font-semibold text-white pr-4">{faq.question}</span>
+                <ChevronDown className={`w-5 h-5 text-slate-400 flex-shrink-0 transition-transform ${openIndex === i ? "rotate-180" : ""}`} />
+              </button>
+              {openIndex === i && (
+                <div className="px-6 pb-6">
+                  <p className="text-slate-400 whitespace-pre-line">{faq.answer}</p>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function CTASection() {
   return (
     <section className="py-20 lg:py-32 relative overflow-hidden">
@@ -534,6 +595,7 @@ export default function LandingPage() {
       <HowItWorksSection />
       <PartnersSection />
       <TestimonialsSection />
+      <FAQSection />
       <CTASection />
       <Footer />
       <StickyCTA />
