@@ -122,9 +122,9 @@ function HeroSection() {
         </div>
 
         <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white leading-tight mb-6">
-          Зарабатывайте на трафике
+          Превращай трафик в прибыль
           <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-emerald-600">до $500+ в день</span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-emerald-600">без потолка заработка</span>
         </h1>
 
         <p className="text-lg lg:text-xl text-slate-400 max-w-3xl mx-auto mb-10 leading-relaxed">
