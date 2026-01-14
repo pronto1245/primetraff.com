@@ -1,390 +1,218 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Checkbox } from "@/components/ui/checkbox";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { useToast } from "@/hooks/use-toast";
-import { Check, X, Menu, ArrowRight, Play, DollarSign, Zap, Shield, Clock, Users, ChartBar, MessageCircle, ChevronDown } from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { 
+  ChevronDown, 
+  ArrowRight, 
+  Zap, 
+  Shield, 
+  BarChart3, 
+  Users, 
+  Clock, 
+  DollarSign,
+  MessageCircle,
+  Globe,
+  TrendingUp,
+  CheckCircle,
+  Star,
+  Menu,
+  X
+} from "lucide-react";
+import { SiTelegram } from "react-icons/si";
 
-const registrationSchema = z.object({
-  email: z.string().email("Введите корректный email"),
-  telegram: z.string().min(2, "Введите Telegram username"),
-  volume: z.string().min(1, "Выберите объем трафика"),
-  trafficSources: z.array(z.string()).min(1, "Выберите хотя бы один источник"),
-  paymentMethod: z.string().default("usdt"),
-  agreed: z.boolean().refine((val) => val === true, "Необходимо согласие"),
-});
+const REGISTER_URL = "https://primetrack.pro/register?ref=ADV-3BT52V85";
+const TELEGRAM_URL = "https://t.me/primetrack_support_bot";
 
-type RegistrationFormData = z.infer<typeof registrationSchema>;
-
-function Navigation({ onOpenModal }: { onOpenModal: () => void }) {
+function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-sm border-b border-secondary-200 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <div className="flex items-center gap-3">
-            <svg className="w-10 h-10 text-success-500" viewBox="0 0 40 40" fill="none">
-              <rect width="40" height="40" rx="8" fill="currentColor"/>
-              <path d="M12 20L18 26L28 14" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-            <span className="text-xl font-bold text-primary-800">TrafficArb Hub</span>
-          </div>
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-slate-950/90 backdrop-blur-xl border-b border-slate-800/50" : "bg-transparent"}`}>
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 lg:h-20">
+          <a href="#" className="flex items-center gap-2" data-testid="link-logo">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center">
+              <TrendingUp className="w-5 h-5 text-white" />
+            </div>
+            <span className="text-xl font-bold text-white">PrimeTraff</span>
+          </a>
+
           <div className="hidden md:flex items-center gap-8">
-            <a href="#benefits" className="text-secondary-600 hover:text-primary-700 transition-all duration-250" data-testid="link-benefits">Преимущества</a>
-            <a href="#how-it-works" className="text-secondary-600 hover:text-primary-700 transition-all duration-250" data-testid="link-how-it-works">Как работает</a>
-            <a href="#testimonials" className="text-secondary-600 hover:text-primary-700 transition-all duration-250" data-testid="link-testimonials">Отзывы</a>
-            <a href="#faq" className="text-secondary-600 hover:text-primary-700 transition-all duration-250" data-testid="link-faq">FAQ</a>
-            <Button onClick={onOpenModal} className="bg-success-500 hover:bg-success-600" data-testid="button-become-partner-nav">
-              Стать партнером
-            </Button>
+            <a href="#features" className="text-slate-300 hover:text-white transition-colors" data-testid="link-features">Возможности</a>
+            <a href="#how-it-works" className="text-slate-300 hover:text-white transition-colors" data-testid="link-how-it-works">Как это работает</a>
+            <a href="#testimonials" className="text-slate-300 hover:text-white transition-colors" data-testid="link-testimonials">Отзывы</a>
+            <a href="#faq" className="text-slate-300 hover:text-white transition-colors" data-testid="link-faq">FAQ</a>
           </div>
-          <button className="md:hidden p-2" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} data-testid="button-mobile-menu">
-            <Menu className="w-6 h-6" />
+
+          <div className="hidden md:flex items-center gap-4">
+            <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-emerald-400 transition-colors" data-testid="link-telegram-nav">
+              <SiTelegram className="w-5 h-5" />
+            </a>
+            <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" data-testid="button-become-partner-nav">
+              <Button className="bg-emerald-500 hover:bg-emerald-400 text-white font-semibold px-6">
+                Стать партнером
+              </Button>
+            </a>
+          </div>
+
+          <button 
+            className="md:hidden text-white p-2"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            data-testid="button-mobile-menu"
+          >
+            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
-      </div>
-      {mobileMenuOpen && (
-        <div className="md:hidden bg-white border-t border-secondary-200">
-          <div className="px-4 py-2 space-y-2">
-            <a href="#benefits" className="block py-2 text-secondary-600">Преимущества</a>
-            <a href="#how-it-works" className="block py-2 text-secondary-600">Как работает</a>
-            <a href="#testimonials" className="block py-2 text-secondary-600">Отзывы</a>
-            <a href="#faq" className="block py-2 text-secondary-600">FAQ</a>
-            <Button onClick={onOpenModal} className="w-full mt-2 bg-success-500 hover:bg-success-600">
-              Стать партнером
-            </Button>
+
+        {mobileMenuOpen && (
+          <div className="md:hidden bg-slate-900/95 backdrop-blur-xl border-t border-slate-800 py-4">
+            <div className="flex flex-col gap-4 px-4">
+              <a href="#features" className="text-slate-300 py-2" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-features">Возможности</a>
+              <a href="#how-it-works" className="text-slate-300 py-2" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-how-it-works">Как это работает</a>
+              <a href="#testimonials" className="text-slate-300 py-2" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-testimonials">Отзывы</a>
+              <a href="#faq" className="text-slate-300 py-2" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-faq">FAQ</a>
+              <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" className="w-full" data-testid="button-become-partner-mobile">
+                <Button className="w-full bg-emerald-500 hover:bg-emerald-400 text-white font-semibold">
+                  Стать партнером
+                </Button>
+              </a>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </nav>
   );
 }
 
-function HeroSection({ onOpenModal }: { onOpenModal: () => void }) {
+function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary-50 to-success-50">
-      <div className="absolute inset-0 bg-gradient-to-r from-primary-900/10 to-success-900/10"></div>
-      <div className="absolute inset-0">
-        <img 
-          src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2940&auto=format&fit=crop" 
-          alt="Traffic Analytics Background" 
-          className="w-full h-full object-cover opacity-10" 
-        />
-      </div>
+    <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-900/20 via-transparent to-transparent" />
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-emerald-600/10 rounded-full blur-3xl" />
       
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20">
-        <div className="text-center">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-primary-900 mb-6 animate-slide-up">
-            Зарабатывайте ежедневно<br />
-            <span className="bg-gradient-to-r from-success-500 to-success-600 bg-clip-text text-transparent">с трафик-арбитражем</span>
-          </h1>
-          <p className="text-xl md:text-2xl text-secondary-600 mb-8 max-w-3xl mx-auto animate-fade-in">
-            Гарантированные выплаты без шейва с аналитикой в реальном времени. 
-            Присоединяйтесь к 10,000+ успешных партнеров уже сегодня.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12 flex-wrap">
-            <Button 
-              onClick={onOpenModal} 
-              size="lg"
-              className="bg-success-500 hover:bg-success-600 text-lg px-8 py-6 shadow-cta hover:shadow-xl transform hover:-translate-y-1 transition-all duration-250"
-              data-testid="button-register-hero"
-            >
-              Зарегистрироваться как партнер
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-32 text-center">
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm font-medium mb-8">
+          <Zap className="w-4 h-4" />
+          <span>Мгновенное одобрение для опытных арбитражников</span>
+        </div>
+
+        <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white leading-tight mb-6">
+          Зарабатывайте на трафике
+          <br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-emerald-600">до $500+ в день</span>
+        </h1>
+
+        <p className="text-lg lg:text-xl text-slate-400 max-w-3xl mx-auto mb-10 leading-relaxed">
+          Присоединяйтесь к PrimeTraff — партнерской программе нового поколения. 
+          Высокие ставки, моментальные выплаты, персональная поддержка 24/7.
+        </p>
+
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+          <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" data-testid="button-hero-register">
+            <Button className="bg-emerald-500 hover:bg-emerald-400 text-white font-semibold px-8 py-6 text-lg h-auto">
+              Начать зарабатывать
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
-            <Button 
-              variant="outline"
-              size="lg"
-              className="bg-accent-400 hover:bg-accent-500 text-white border-accent-400 text-lg px-8 py-6 shadow-cta hover:shadow-xl transform hover:-translate-y-1 transition-all duration-250"
-              data-testid="button-watch-demo"
-            >
-              Смотреть демо
-              <Play className="w-5 h-5 ml-2" />
+          </a>
+          <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" data-testid="button-hero-telegram">
+            <Button variant="outline" className="border-slate-700 text-white hover:bg-slate-800 px-8 py-6 text-lg h-auto">
+              <SiTelegram className="w-5 h-5 mr-2" />
+              Написать в Telegram
             </Button>
-          </div>
-
-          <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-xl border border-secondary-200 max-w-4xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-success-500 mb-2" data-testid="text-partner-count">10,000+</div>
-                <div className="text-secondary-600">Активных партнеров</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-accent-400 mb-2" data-testid="text-monthly-payouts">$2M+</div>
-                <div className="text-secondary-600">Месячные выплаты</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-primary-600 mb-2" data-testid="text-active-offers">500+</div>
-                <div className="text-secondary-600">Активных офферов</div>
-              </div>
-            </div>
-          </div>
+          </a>
         </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8 max-w-4xl mx-auto">
+          {[
+            { value: "500+", label: "Активных партнеров", id: "partners" },
+            { value: "$2M+", label: "Выплачено партнерам", id: "payouts" },
+            { value: "24ч", label: "Максимум на выплату", id: "payout-time" },
+            { value: "99.9%", label: "Uptime платформы", id: "uptime" },
+          ].map((stat, i) => (
+            <div key={i} className="text-center" data-testid={`stat-${stat.id}`}>
+              <div className="text-2xl lg:text-4xl font-bold text-emerald-400 mb-1" data-testid={`text-stat-value-${stat.id}`}>{stat.value}</div>
+              <div className="text-sm text-slate-500">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+        <ChevronDown className="w-6 h-6 text-slate-500" />
       </div>
     </section>
   );
 }
 
-function ProblemSection() {
-  return (
-    <section className="py-20 bg-secondary-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold text-primary-900 mb-6">
-            Устали от задержек выплат?
-          </h2>
-          <p className="text-xl text-secondary-600 max-w-3xl mx-auto">
-            Большинство арбитражников теряют до 30% прибыли из-за задержек платежей и плохой аналитики
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div className="bg-error-50 border-2 border-error-200 rounded-2xl p-8">
-            <div className="text-center mb-6">
-              <div className="w-16 h-16 bg-error-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <X className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-2xl font-bold text-error-700 mb-4">Обычные сети</h3>
-            </div>
-            <ul className="space-y-4">
-              {[
-                "Выплаты раз в месяц или реже",
-                "Неточная аналитика и отчеты",
-                "Ограниченный выбор офферов",
-                "Медленная поддержка"
-              ].map((item, i) => (
-                <li key={i} className="flex items-start gap-3">
-                  <X className="w-5 h-5 text-error-500 mt-1 flex-shrink-0" />
-                  <span className="text-error-700">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="bg-success-50 border-2 border-success-200 rounded-2xl p-8">
-            <div className="text-center mb-6">
-              <div className="w-16 h-16 bg-success-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Check className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-2xl font-bold text-success-700 mb-4">TrafficArb Hub</h3>
-            </div>
-            <ul className="space-y-4">
-              {[
-                "Гарантированные выплаты без задержек",
-                "Аналитика в реальном времени",
-                "500+ эксклюзивных офферов",
-                "Поддержка 24/7 в Telegram"
-              ].map((item, i) => (
-                <li key={i} className="flex items-start gap-3">
-                  <Check className="w-5 h-5 text-success-500 mt-1 flex-shrink-0" />
-                  <span className="text-success-700">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function DashboardPreview() {
-  return (
-    <section className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold text-primary-900 mb-6">
-            Интерактивная панель управления
-          </h2>
-          <p className="text-xl text-secondary-600 max-w-3xl mx-auto">
-            Полный контроль над вашими кампаниями с продвинутой аналитикой и инструментами оптимизации
-          </p>
-        </div>
-
-        <div className="bg-secondary-50 rounded-2xl p-8 shadow-xl">
-          <div className="bg-white rounded-xl p-6 shadow-lg">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
-              <div>
-                <h3 className="text-2xl font-bold text-primary-900 mb-2">Панель партнера</h3>
-                <p className="text-secondary-600">Добро пожаловать, Алексей Петров</p>
-              </div>
-              <div className="flex items-center gap-4 flex-wrap">
-                <div className="bg-success-100 text-success-700 px-4 py-2 rounded-lg font-semibold">
-                  Баланс: $12,450
-                </div>
-                <Button className="bg-success-500 hover:bg-success-600">Вывести средства</Button>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-              <div className="bg-gradient-to-r from-success-500 to-success-600 text-white p-6 rounded-xl">
-                <div className="text-3xl font-bold mb-2">$1,250</div>
-                <div className="text-success-100">Сегодня</div>
-              </div>
-              <div className="bg-gradient-to-r from-accent-400 to-accent-500 text-white p-6 rounded-xl">
-                <div className="text-3xl font-bold mb-2">$8,900</div>
-                <div className="text-accent-100">Эта неделя</div>
-              </div>
-              <div className="bg-gradient-to-r from-primary-500 to-primary-600 text-white p-6 rounded-xl">
-                <div className="text-3xl font-bold mb-2">45,230</div>
-                <div className="text-primary-100">Клики</div>
-              </div>
-              <div className="bg-gradient-to-r from-secondary-500 to-secondary-600 text-white p-6 rounded-xl">
-                <div className="text-3xl font-bold mb-2">12.5%</div>
-                <div className="text-secondary-100">Конверсия</div>
-              </div>
-            </div>
-
-            <div className="bg-secondary-50 rounded-xl p-6 mb-8">
-              <h4 className="text-lg font-semibold text-primary-900 mb-4">Доходы за последние 30 дней</h4>
-              <div className="h-64 bg-white rounded-lg flex items-center justify-center">
-                <svg className="w-full h-full" viewBox="0 0 800 200">
-                  <defs>
-                    <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" style={{stopColor: "#38a169", stopOpacity: 0.3}}/>
-                      <stop offset="100%" style={{stopColor: "#38a169", stopOpacity: 0}}/>
-                    </linearGradient>
-                  </defs>
-                  <polyline fill="none" stroke="#38a169" strokeWidth="3" points="50,150 100,120 150,100 200,80 250,90 300,70 350,60 400,50 450,40 500,45 550,35 600,30 650,25 700,20 750,15"/>
-                  <polyline fill="url(#gradient)" stroke="none" points="50,150 100,120 150,100 200,80 250,90 300,70 350,60 400,50 450,40 500,45 550,35 600,30 650,25 700,20 750,15 750,180 50,180"/>
-                </svg>
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-8">
-              <div>
-                <h4 className="text-lg font-semibold text-primary-900 mb-4">Активные кампании</h4>
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between p-4 bg-secondary-50 rounded-lg">
-                    <div>
-                      <div className="font-semibold text-primary-900">Финансовые услуги</div>
-                      <div className="text-sm text-secondary-600">CPA: $45 | CR: 8.2%</div>
-                    </div>
-                    <div className="text-success-600 font-semibold">$890</div>
-                  </div>
-                  <div className="flex items-center justify-between p-4 bg-secondary-50 rounded-lg">
-                    <div>
-                      <div className="font-semibold text-primary-900">Криптовалюты</div>
-                      <div className="text-sm text-secondary-600">CPA: $35 | CR: 12.1%</div>
-                    </div>
-                    <div className="text-success-600 font-semibold">$1,240</div>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <h4 className="text-lg font-semibold text-primary-900 mb-4">Последние выплаты</h4>
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between p-4 bg-secondary-50 rounded-lg">
-                    <div>
-                      <div className="font-semibold text-primary-900">04.09.2025</div>
-                      <div className="text-sm text-secondary-600">USDT TRC-20</div>
-                    </div>
-                    <div className="text-success-600 font-semibold">$1,250</div>
-                  </div>
-                  <div className="flex items-center justify-between p-4 bg-secondary-50 rounded-lg">
-                    <div>
-                      <div className="font-semibold text-primary-900">03.09.2025</div>
-                      <div className="text-sm text-secondary-600">USDT TRC-20</div>
-                    </div>
-                    <div className="text-success-600 font-semibold">$980</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function BenefitsSection() {
-  const benefits = [
+function FeaturesSection() {
+  const features = [
     {
       icon: DollarSign,
-      title: "Высокие комиссии",
-      description: "До 80% от прибыли рекламодателя с прозрачной системой расчетов и бонусами за объем",
-      color: "success",
-      details: ["0-10k$ в месяц: 60%", "10-50k$ в месяц: 70%", "50k$+ в месяц: 80%"]
+      title: "Высокие ставки",
+      description: "До $150 за депозит. Конкурентные RevShare условия до 50%.",
     },
     {
       icon: Zap,
       title: "Мгновенные выплаты",
-      description: "Ежедневные выплаты без минимальных порогов. Получайте заработанное каждый день",
-      color: "accent",
-      details: ["Минимальная сумма: $50", "Без комиссии на вывод", "USDT, BTC, ETH"]
+      description: "Выплаты в течение 24 часов. USDT, Bitcoin, карты — на выбор.",
     },
     {
-      icon: ChartBar,
-      title: "Продвинутая аналитика",
-      description: "Real-time статистика с детальной разбивкой по гео, устройствам и источникам",
-      color: "primary",
-      details: ["Статистика в реальном времени", "Детальные отчеты", "API интеграция"]
+      icon: BarChart3,
+      title: "Детальная аналитика",
+      description: "Отслеживайте конверсии в реальном времени. Полная статистика по subID.",
     },
     {
       icon: Shield,
       title: "Антифрод защита",
-      description: "Интеллектуальная система защиты от фрода без шейва честного трафика",
-      color: "success",
-      details: ["ML-алгоритмы", "Честная модерация", "Апелляции 24 часа"]
+      description: "Прозрачные условия. Детализированный учёт всех конверсий.",
     },
     {
       icon: Users,
       title: "Персональный менеджер",
-      description: "Выделенный менеджер для каждого партнера с объемом от $5,000/месяц",
-      color: "accent",
-      details: ["Приоритетная поддержка", "Индивидуальные условия", "Эксклюзивные офферы"]
+      description: "Поддержка 24/7 в Telegram. Помощь с оптимизацией связок.",
     },
     {
-      icon: Clock,
-      title: "24/7 Поддержка",
-      description: "Круглосуточная поддержка в Telegram с ответом до 15 минут",
-      color: "primary",
-      details: ["Telegram-бот", "Живые операторы", "База знаний"]
+      icon: Globe,
+      title: "Все гео и вертикали",
+      description: "Gambling, betting, dating, crypto — любые офферы.",
     },
   ];
 
-  const colorClasses: Record<string, { bg: string; bgHover: string; text: string }> = {
-    success: { bg: "bg-success-100", bgHover: "group-hover:bg-success-500", text: "text-success-500 group-hover:text-white" },
-    accent: { bg: "bg-accent-100", bgHover: "group-hover:bg-accent-400", text: "text-accent-400 group-hover:text-white" },
-    primary: { bg: "bg-primary-100", bgHover: "group-hover:bg-primary-500", text: "text-primary-500 group-hover:text-white" },
-  };
-
   return (
-    <section id="benefits" className="py-20 bg-secondary-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="features" className="py-20 lg:py-32 bg-slate-900/50">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold text-primary-900 mb-6">
-            Почему выбирают нас
+          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
+            Почему выбирают PrimeTraff
           </h2>
-          <p className="text-xl text-secondary-600 max-w-3xl mx-auto">
-            Шесть ключевых преимуществ, которые делают нас лидером в индустрии трафик-арбитража
+          <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+            Созданы арбитражниками для арбитражников. Знаем, что вам нужно.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {benefits.map((benefit, index) => {
-            const colors = colorClasses[benefit.color];
-            const Icon = benefit.icon;
-            return (
-              <div key={index} className="group bg-white rounded-2xl p-8 shadow-card hover:shadow-xl transition-all duration-250 hover:-translate-y-2 cursor-pointer" data-testid={`card-benefit-${index}`}>
-                <div className={`w-16 h-16 ${colors.bg} ${colors.bgHover} rounded-2xl flex items-center justify-center mb-6 transition-all duration-250`}>
-                  <Icon className={`w-8 h-8 ${colors.text} transition-all duration-250`} />
-                </div>
-                <h3 className="text-2xl font-bold text-primary-900 mb-4">{benefit.title}</h3>
-                <p className="text-secondary-600 mb-6">{benefit.description}</p>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          {features.map((feature, i) => (
+            <Card 
+              key={i} 
+              className="bg-slate-800/50 border-slate-700/50 p-6 lg:p-8 hover:border-emerald-500/30 transition-all duration-300 group"
+              data-testid={`card-feature-${i}`}
+            >
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500/20 to-emerald-600/20 flex items-center justify-center mb-4 group-hover:from-emerald-500/30 group-hover:to-emerald-600/30 transition-all">
+                <feature.icon className="w-6 h-6 text-emerald-400" />
               </div>
-            );
-          })}
+              <h3 className="text-xl font-semibold text-white mb-2">{feature.title}</h3>
+              <p className="text-slate-400">{feature.description}</p>
+            </Card>
+          ))}
         </div>
       </div>
     </section>
@@ -393,37 +221,60 @@ function BenefitsSection() {
 
 function HowItWorksSection() {
   const steps = [
-    { step: 1, title: "Регистрация", description: "Заполните форму за 2 минуты и получите мгновенный доступ к панели партнера" },
-    { step: 2, title: "Выбор офферов", description: "Выберите из 500+ проверенных офферов в популярных вертикалях" },
-    { step: 3, title: "Запуск трафика", description: "Получите уникальные ссылки и начните привлекать трафик любым способом" },
-    { step: 4, title: "Получение выплат", description: "Отслеживайте конверсии в реальном времени и получайте ежедневные выплаты" },
+    {
+      step: "01",
+      title: "Регистрация",
+      description: "Заполните форму за 2 минуты. Мгновенное одобрение для опытных арбитражников.",
+    },
+    {
+      step: "02",
+      title: "Получите офферы",
+      description: "Выберите офферы и получите уникальные трекинговые ссылки.",
+    },
+    {
+      step: "03",
+      title: "Лейте трафик",
+      description: "Запускайте рекламные кампании и отслеживайте результаты в реальном времени.",
+    },
+    {
+      step: "04",
+      title: "Получайте выплаты",
+      description: "Выводите заработок ежедневно. Без холдов для проверенных партнеров.",
+    },
   ];
 
   return (
-    <section id="how-it-works" className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="how-it-works" className="py-20 lg:py-32 bg-slate-950">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold text-primary-900 mb-6">
-            Как это работает
+          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
+            Как начать зарабатывать
           </h2>
-          <p className="text-xl text-secondary-600 max-w-3xl mx-auto">
-            Простой процесс из 4 шагов для начала заработка с TrafficArb Hub
+          <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+            Простой старт за 5 минут. Никакой бюрократии.
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {steps.map((item, index) => (
-            <div key={index} className="relative text-center" data-testid={`step-${item.step}`}>
-              <div className="w-20 h-20 bg-success-500 rounded-full flex items-center justify-center mx-auto mb-6 text-white text-2xl font-bold">
-                {item.step}
-              </div>
-              <h3 className="text-xl font-bold text-primary-900 mb-4">{item.title}</h3>
-              <p className="text-secondary-600">{item.description}</p>
-              {index < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-10 left-[60%] w-[80%] border-t-2 border-dashed border-secondary-300"></div>
+          {steps.map((step, i) => (
+            <div key={i} className="relative">
+              <div className="text-6xl font-bold text-emerald-500/10 mb-4">{step.step}</div>
+              <h3 className="text-xl font-semibold text-white mb-2">{step.title}</h3>
+              <p className="text-slate-400">{step.description}</p>
+              {i < steps.length - 1 && (
+                <div className="hidden lg:block absolute top-8 right-0 translate-x-1/2 w-1/2 border-t border-dashed border-slate-700" />
               )}
             </div>
           ))}
+        </div>
+
+        <div className="text-center mt-12">
+          <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" data-testid="button-how-it-works-cta">
+            <Button className="bg-emerald-500 hover:bg-emerald-400 text-white font-semibold px-8 py-6 text-lg h-auto">
+              Начать сейчас
+              <ArrowRight className="w-5 h-5 ml-2" />
+            </Button>
+          </a>
         </div>
       </div>
     </section>
@@ -433,67 +284,63 @@ function HowItWorksSection() {
 function TestimonialsSection() {
   const testimonials = [
     {
-      name: "Дмитрий К.",
-      role: "Арбитражник, 3 года опыта",
-      avatar: "DK",
+      name: "Алексей К.",
+      role: "Media Buyer",
+      avatar: "А",
+      text: "Перешёл с другой партнёрки 3 месяца назад. Ставки реально выше, выплаты как часы. Менеджер всегда на связи, помогает с оптимизацией.",
       rating: 5,
-      text: "Перешел сюда из другой сети и не жалею. Выплаты каждый день, поддержка отвечает за минуты. За месяц заработал на 40% больше.",
-      earnings: "$15,000/месяц"
     },
     {
-      name: "Анна М.",
-      role: "Solo-арбитражник",
-      avatar: "AM",
+      name: "Дмитрий В.",
+      role: "Арбитражник",
+      avatar: "Д",
+      text: "Работаю с PrimeTraff уже полгода. Лучшая аналитика из всех партнёрок, что видел. Постбеки летят мгновенно, статистика точная.",
       rating: 5,
-      text: "Лучшая партнерка для финансовых офферов. Высокие ставки, честная статистика. Рекомендую всем!",
-      earnings: "$8,500/месяц"
     },
     {
-      name: "Михаил С.",
-      role: "Команда из 5 человек",
-      avatar: "MC",
+      name: "Мария С.",
+      role: "Team Lead",
+      avatar: "М",
+      text: "Наша команда из 5 человек полностью перешла на PrimeTraff. Удобно работать, все данные в одном месте. Поддержка отвечает за минуты.",
       rating: 5,
-      text: "Работаем командой, и TrafficArb Hub идеально подходит. Персональный менеджер, эксклюзивные условия, быстрые выплаты.",
-      earnings: "$45,000/месяц"
     },
   ];
 
   return (
-    <section id="testimonials" className="py-20 bg-secondary-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="testimonials" className="py-20 lg:py-32 bg-slate-900/50">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold text-primary-900 mb-6">
+          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
             Что говорят партнеры
           </h2>
-          <p className="text-xl text-secondary-600 max-w-3xl mx-auto">
-            Реальные отзывы от наших партнеров со всего мира
+          <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+            Реальные отзывы от реальных арбитражников
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <div key={index} className="bg-white rounded-2xl p-8 shadow-card" data-testid={`testimonial-${index}`}>
-              <div className="flex items-center mb-6 gap-4">
-                <div className="w-14 h-14 bg-success-500 rounded-full flex items-center justify-center text-white font-bold text-lg">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          {testimonials.map((testimonial, i) => (
+            <Card 
+              key={i} 
+              className="bg-slate-800/50 border-slate-700/50 p-6 lg:p-8"
+              data-testid={`card-testimonial-${i}`}
+            >
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center text-white font-semibold">
                   {testimonial.avatar}
                 </div>
                 <div>
-                  <div className="font-bold text-primary-900">{testimonial.name}</div>
-                  <div className="text-sm text-secondary-600">{testimonial.role}</div>
+                  <div className="font-semibold text-white">{testimonial.name}</div>
+                  <div className="text-sm text-slate-400">{testimonial.role}</div>
                 </div>
               </div>
-              <div className="flex mb-4">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <svg key={i} className="w-5 h-5 text-warning-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                  </svg>
+              <div className="flex gap-1 mb-4">
+                {Array.from({ length: testimonial.rating }).map((_, j) => (
+                  <Star key={j} className="w-4 h-4 fill-emerald-400 text-emerald-400" />
                 ))}
               </div>
-              <p className="text-secondary-600 mb-6">"{testimonial.text}"</p>
-              <div className="bg-success-50 rounded-lg p-3 text-center">
-                <div className="text-success-700 font-bold">{testimonial.earnings}</div>
-              </div>
-            </div>
+              <p className="text-slate-300">{testimonial.text}</p>
+            </Card>
           ))}
         </div>
       </div>
@@ -506,59 +353,60 @@ function FAQSection() {
 
   const faqs = [
     {
-      question: "Как быстро я получу доступ после регистрации?",
-      answer: "Доступ к панели партнера предоставляется мгновенно после подтверждения email. Вы сможете сразу начать выбирать офферы и генерировать ссылки."
+      question: "Какие требования для партнеров?",
+      answer: "Мы принимаем арбитражников с опытом от 6 месяцев. Для новичков доступен тестовый период с ограниченными условиями. Главное — качественный трафик и готовность к продуктивному сотрудничеству.",
     },
     {
-      question: "Какие способы выплат доступны?",
-      answer: "Мы поддерживаем USDT (TRC-20, ERC-20), Bitcoin, Ethereum, банковские переводы и электронные кошельки. Минимальная сумма для вывода - $50 для стандартных партнеров и $25 для VIP."
+      question: "Какие условия по выплатам?",
+      answer: "Выплаты производятся ежедневно или еженедельно — на выбор. Минимальная сумма для вывода — $100. Доступны USDT (TRC20/ERC20), Bitcoin, банковские карты. Для проверенных партнеров — выплаты в течение 24 часов без холда.",
     },
     {
-      question: "Есть ли минимальные требования к трафику?",
-      answer: "Нет строгих минимальных требований. Мы работаем как с начинающими арбитражниками, так и с крупными командами. Главное - качество трафика."
+      question: "Какие офферы доступны?",
+      answer: "Gambling, betting, dating, nutra, crypto — полный спектр вертикалей. Работаем со всеми ключевыми ГЕО: СНГ, Европа, Латам, Азия. Ставки CPA до $150, RevShare до 50%.",
     },
     {
-      question: "Как часто обновляются офферы?",
-      answer: "Новые офферы добавляются ежедневно. Вы получаете уведомления о новых предложениях в вашей вертикали через Telegram-бот."
+      question: "Есть ли персональный менеджер?",
+      answer: "Да, каждому партнеру назначается персональный менеджер. Поддержка работает 24/7 в Telegram. Среднее время ответа — 5 минут. Помогаем с оптимизацией связок и выбором офферов.",
     },
     {
-      question: "Какие вертикали доступны?",
-      answer: "Мы работаем с финансами, криптовалютами, гемблингом, беттингом, дейтингом, нутрой и e-commerce. Более 500 активных офферов."
+      question: "Как работает аналитика?",
+      answer: "Полная статистика в реальном времени: клики, лиды, депозиты, ROI. Детализация по subID (sub1-sub10). Интеграция постбеков с любыми трекерами. API доступ для автоматизации.",
     },
     {
-      question: "Как настроить постбэки и интеграции?",
-      answer: "Настройка постбэков происходит автоматически через панель партнера. Мы поддерживаем интеграции с Voluum, RedTrack, BeMob, ThriveTracker и другими трекерами."
+      question: "Можно ли работать команде?",
+      answer: "Да, мы поддерживаем командную работу. Создавайте под-аккаунты для медиабаеров, отслеживайте статистику по каждому участнику. Отдельные условия для команд от 5 человек.",
     },
   ];
 
   return (
-    <section id="faq" className="py-20 bg-white">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="faq" className="py-20 lg:py-32 bg-slate-950">
+      <div className="max-w-3xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold text-primary-900 mb-6">
-            Часто задаваемые вопросы
+          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
+            Частые вопросы
           </h2>
-          <p className="text-xl text-secondary-600">
-            Ответы на популярные вопросы о работе с TrafficArb Hub
+          <p className="text-slate-400 text-lg">
+            Не нашли ответ? Напишите нам в Telegram
           </p>
         </div>
 
         <div className="space-y-4">
-          {faqs.map((faq, index) => (
-            <div key={index} className="bg-white rounded-lg shadow-card border border-secondary-200" data-testid={`faq-item-${index}`}>
+          {faqs.map((faq, i) => (
+            <div 
+              key={i} 
+              className="border border-slate-800 rounded-xl overflow-hidden"
+            >
               <button
-                className="w-full text-left p-6 focus:outline-none"
-                onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                data-testid={`button-faq-${index}`}
+                className="w-full flex items-center justify-between p-6 text-left hover:bg-slate-800/50 transition-colors"
+                onClick={() => setOpenIndex(openIndex === i ? null : i)}
+                data-testid={`button-faq-${i}`}
               >
-                <div className="flex justify-between items-center gap-4">
-                  <h3 className="text-lg font-semibold text-primary-900">{faq.question}</h3>
-                  <ChevronDown className={`w-5 h-5 text-secondary-400 transition-transform duration-250 flex-shrink-0 ${openIndex === index ? 'rotate-180' : ''}`} />
-                </div>
+                <span className="font-semibold text-white pr-4">{faq.question}</span>
+                <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform ${openIndex === i ? "rotate-180" : ""}`} />
               </button>
-              {openIndex === index && (
+              {openIndex === i && (
                 <div className="px-6 pb-6">
-                  <p className="text-secondary-600">{faq.answer}</p>
+                  <p className="text-slate-400">{faq.answer}</p>
                 </div>
               )}
             </div>
@@ -569,97 +417,49 @@ function FAQSection() {
   );
 }
 
-function CountdownTimer() {
-  const [timeLeft, setTimeLeft] = useState({ days: 7, hours: 12, minutes: 34, seconds: 56 });
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft(prev => {
-        let { days, hours, minutes, seconds } = prev;
-        if (seconds > 0) {
-          seconds--;
-        } else if (minutes > 0) {
-          minutes--;
-          seconds = 59;
-        } else if (hours > 0) {
-          hours--;
-          minutes = 59;
-          seconds = 59;
-        } else if (days > 0) {
-          days--;
-          hours = 23;
-          minutes = 59;
-          seconds = 59;
-        }
-        return { days, hours, minutes, seconds };
-      });
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
-
+function CTASection() {
   return (
-    <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 max-w-md mx-auto">
-      <div className="text-sm font-semibold mb-2">Специальное предложение заканчивается через:</div>
-      <div className="grid grid-cols-4 gap-2 text-center">
-        <div>
-          <div className="text-2xl font-bold">{String(timeLeft.days).padStart(2, '0')}</div>
-          <div className="text-xs text-success-100">дней</div>
-        </div>
-        <div>
-          <div className="text-2xl font-bold">{String(timeLeft.hours).padStart(2, '0')}</div>
-          <div className="text-xs text-success-100">часов</div>
-        </div>
-        <div>
-          <div className="text-2xl font-bold">{String(timeLeft.minutes).padStart(2, '0')}</div>
-          <div className="text-xs text-success-100">минут</div>
-        </div>
-        <div>
-          <div className="text-2xl font-bold">{String(timeLeft.seconds).padStart(2, '0')}</div>
-          <div className="text-xs text-success-100">секунд</div>
-        </div>
-      </div>
-      <div className="text-xs text-success-100 mt-2">
-        Бонус $100 к первой выплате для новых партнеров
-      </div>
-    </div>
-  );
-}
-
-function FinalCTASection({ onOpenModal }: { onOpenModal: () => void }) {
-  return (
-    <section className="py-20 bg-gradient-to-r from-success-500 to-success-600 text-white">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="text-3xl md:text-5xl font-bold mb-6">
-          Готовы увеличить доходы в 3 раза?
+    <section className="py-20 lg:py-32 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-emerald-950/20 to-slate-950" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-emerald-900/30 via-transparent to-transparent" />
+      
+      <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-8 text-center">
+        <h2 className="text-3xl lg:text-5xl font-bold text-white mb-6">
+          Готовы начать зарабатывать?
         </h2>
-        <p className="text-xl text-success-100 mb-8 max-w-2xl mx-auto">
-          Присоединяйтесь к 10,000+ успешных партнеров уже сегодня. 
-          Ограниченное количество мест для новых партнеров!
+        <p className="text-lg lg:text-xl text-slate-400 mb-10 max-w-2xl mx-auto">
+          Присоединяйтесь к PrimeTraff сегодня и получите доступ к лучшим офферам рынка
         </p>
-        
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8 flex-wrap">
-          <Button 
-            onClick={onOpenModal}
-            size="lg"
-            className="bg-white text-success-600 hover:bg-success-50 font-bold py-4 px-8 text-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-250"
-            data-testid="button-cta-register"
-          >
-            Стать партнером сейчас
-            <ArrowRight className="w-5 h-5 ml-2" />
-          </Button>
-          <Button 
-            asChild
-            size="lg"
-            className="bg-success-700 hover:bg-success-800 font-bold py-4 px-8 text-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-250"
-          >
-            <a href="https://t.me/traffichub_support" target="_blank" rel="noopener noreferrer" data-testid="link-telegram-cta">
-              Связаться в Telegram
-              <MessageCircle className="w-5 h-5 ml-2" />
-            </a>
-          </Button>
+
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" data-testid="button-cta-register">
+            <Button className="bg-emerald-500 hover:bg-emerald-400 text-white font-semibold px-10 py-6 text-lg h-auto">
+              Стать партнером
+              <ArrowRight className="w-5 h-5 ml-2" />
+            </Button>
+          </a>
+          <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" data-testid="button-cta-telegram">
+            <Button variant="outline" className="border-slate-700 text-white hover:bg-slate-800 px-10 py-6 text-lg h-auto">
+              <SiTelegram className="w-5 h-5 mr-2" />
+              Telegram поддержка
+            </Button>
+          </a>
         </div>
-        
-        <CountdownTimer />
+
+        <div className="mt-12 flex items-center justify-center gap-8 text-slate-500">
+          <div className="flex items-center gap-2">
+            <CheckCircle className="w-5 h-5 text-emerald-500" />
+            <span>Без холдов</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <CheckCircle className="w-5 h-5 text-emerald-500" />
+            <span>Быстрое одобрение</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <CheckCircle className="w-5 h-5 text-emerald-500" />
+            <span>Поддержка 24/7</span>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -667,74 +467,38 @@ function FinalCTASection({ onOpenModal }: { onOpenModal: () => void }) {
 
 function Footer() {
   return (
-    <footer className="bg-primary-900 text-white py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-4 gap-8">
-          <div>
-            <div className="flex items-center mb-6 gap-3">
-              <svg className="w-10 h-10 text-success-500" viewBox="0 0 40 40" fill="none">
-                <rect width="40" height="40" rx="8" fill="currentColor"/>
-                <path d="M12 20L18 26L28 14" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              <span className="text-xl font-bold">TrafficArb Hub</span>
+    <footer className="py-12 bg-slate-950 border-t border-slate-800">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center">
+              <TrendingUp className="w-5 h-5 text-white" />
             </div>
-            <p className="text-primary-200 mb-6">
-              Ведущая платформа трафик-арбитража с ежедневными выплатами и профессиональной поддержкой.
-            </p>
+            <span className="text-xl font-bold text-white">PrimeTraff</span>
           </div>
 
-          <div>
-            <h3 className="text-lg font-semibold mb-6">Быстрые ссылки</h3>
-            <ul className="space-y-3">
-              <li><a href="#benefits" className="text-primary-200 hover:text-white transition-all duration-250">Преимущества</a></li>
-              <li><a href="#how-it-works" className="text-primary-200 hover:text-white transition-all duration-250">Как работает</a></li>
-              <li><a href="#testimonials" className="text-primary-200 hover:text-white transition-all duration-250">Отзывы</a></li>
-              <li><a href="#faq" className="text-primary-200 hover:text-white transition-all duration-250">FAQ</a></li>
-            </ul>
+          <div className="flex items-center gap-6">
+            <a 
+              href={TELEGRAM_URL} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="flex items-center gap-2 text-slate-400 hover:text-emerald-400 transition-colors"
+              data-testid="link-footer-telegram"
+            >
+              <SiTelegram className="w-5 h-5" />
+              <span>Telegram</span>
+            </a>
+            <a 
+              href="mailto:support@primetraff.com" 
+              className="text-slate-400 hover:text-emerald-400 transition-colors"
+              data-testid="link-footer-email"
+            >
+              support@primetraff.com
+            </a>
           </div>
 
-          <div>
-            <h3 className="text-lg font-semibold mb-6">Поддержка</h3>
-            <ul className="space-y-3">
-              <li>
-                <a href="https://t.me/traffichub_support" className="text-primary-200 hover:text-white transition-all duration-250 flex items-center gap-2">
-                  <MessageCircle className="w-4 h-4" />
-                  Telegram
-                </a>
-              </li>
-              <li>
-                <a href="mailto:support@traffichub.com" className="text-primary-200 hover:text-white transition-all duration-250">
-                  Email
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-lg font-semibold mb-6">Правовая информация</h3>
-            <ul className="space-y-3">
-              <li><a href="#" className="text-primary-200 hover:text-white transition-all duration-250">Условия использования</a></li>
-              <li><a href="#" className="text-primary-200 hover:text-white transition-all duration-250">Политика конфиденциальности</a></li>
-              <li><a href="#" className="text-primary-200 hover:text-white transition-all duration-250">Соглашение партнера</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="border-t border-primary-700 mt-12 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="text-primary-200">
-              © 2025 TrafficArb Hub. Все права защищены.
-            </div>
-            <div className="flex items-center gap-6 flex-wrap">
-              <div className="flex items-center text-primary-200 gap-2">
-                <Shield className="w-4 h-4 text-success-500" />
-                <span className="text-sm">SSL защищено</span>
-              </div>
-              <div className="flex items-center text-primary-200 gap-2">
-                <Check className="w-4 h-4 text-success-500" />
-                <span className="text-sm">ISO 27001</span>
-              </div>
-            </div>
+          <div className="text-slate-500 text-sm">
+            © 2026 PrimeTraff. Все права защищены.
           </div>
         </div>
       </div>
@@ -742,240 +506,31 @@ function Footer() {
   );
 }
 
-function RegistrationModal({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const { toast } = useToast();
-  
-  const form = useForm<RegistrationFormData>({
-    resolver: zodResolver(registrationSchema),
-    defaultValues: {
-      email: "",
-      telegram: "",
-      volume: "",
-      trafficSources: [],
-      paymentMethod: "usdt",
-      agreed: false,
-    },
-  });
-
-  const onSubmit = (data: RegistrationFormData) => {
-    toast({
-      title: "Заявка отправлена!",
-      description: "Мы свяжемся с вами в ближайшее время через Telegram.",
-    });
-    form.reset();
-    onClose();
-  };
-
-  const trafficSources = [
-    { id: "facebook", label: "Facebook" },
-    { id: "google", label: "Google" },
-    { id: "tiktok", label: "TikTok" },
-    { id: "native", label: "Native" },
-  ];
-
+function StickyCTA() {
   return (
-    <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto">
-        <DialogHeader>
-          <div className="text-center mb-4">
-            <div className="w-16 h-16 bg-success-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Users className="w-8 h-8 text-success-500" />
-            </div>
-            <DialogTitle className="text-2xl font-bold text-primary-900">Стать партнером</DialogTitle>
-            <DialogDescription className="text-secondary-600 mt-2">Мгновенное одобрение для опытных арбитражников</DialogDescription>
-          </div>
-        </DialogHeader>
-
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email *</FormLabel>
-                  <FormControl>
-                    <Input placeholder="your@email.com" {...field} data-testid="input-email" />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="telegram"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Telegram *</FormLabel>
-                  <FormControl>
-                    <Input placeholder="@username" {...field} data-testid="input-telegram" />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="volume"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Месячный объем трафика *</FormLabel>
-                  <Select onValueChange={field.onChange} value={field.value}>
-                    <FormControl>
-                      <SelectTrigger data-testid="select-volume">
-                        <SelectValue placeholder="Выберите объем" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value="1k-10k">1K - 10K посетителей</SelectItem>
-                      <SelectItem value="10k-50k">10K - 50K посетителей</SelectItem>
-                      <SelectItem value="50k-100k">50K - 100K посетителей</SelectItem>
-                      <SelectItem value="100k+">100K+ посетителей</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="trafficSources"
-              render={() => (
-                <FormItem>
-                  <FormLabel>Основные источники трафика *</FormLabel>
-                  <div className="grid grid-cols-2 gap-2">
-                    {trafficSources.map((source) => (
-                      <FormField
-                        key={source.id}
-                        control={form.control}
-                        name="trafficSources"
-                        render={({ field }) => (
-                          <FormItem className="flex items-center space-x-2 space-y-0">
-                            <FormControl>
-                              <Checkbox
-                                checked={field.value?.includes(source.id)}
-                                onCheckedChange={(checked) => {
-                                  const value = field.value || [];
-                                  if (checked) {
-                                    field.onChange([...value, source.id]);
-                                  } else {
-                                    field.onChange(value.filter((v) => v !== source.id));
-                                  }
-                                }}
-                                data-testid={`checkbox-${source.id}`}
-                              />
-                            </FormControl>
-                            <FormLabel className="text-sm font-normal cursor-pointer">
-                              {source.label}
-                            </FormLabel>
-                          </FormItem>
-                        )}
-                      />
-                    ))}
-                  </div>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="paymentMethod"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Предпочитаемый способ выплат</FormLabel>
-                  <Select onValueChange={field.onChange} value={field.value}>
-                    <FormControl>
-                      <SelectTrigger data-testid="select-payment">
-                        <SelectValue />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value="usdt">USDT TRC-20</SelectItem>
-                      <SelectItem value="bitcoin">Bitcoin</SelectItem>
-                      <SelectItem value="ethereum">Ethereum</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="agreed"
-              render={({ field }) => (
-                <FormItem className="flex items-start space-x-2 space-y-0">
-                  <FormControl>
-                    <Checkbox
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                      data-testid="checkbox-agree"
-                    />
-                  </FormControl>
-                  <FormLabel className="text-xs text-secondary-600 font-normal leading-relaxed">
-                    Я согласен с условиями использования и политикой конфиденциальности
-                  </FormLabel>
-                </FormItem>
-              )}
-            />
-
-            <Button 
-              type="submit" 
-              className="w-full bg-success-500 hover:bg-success-600"
-              data-testid="button-submit-registration"
-            >
-              Зарегистрироваться
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </Button>
-
-            <div className="text-center">
-              <div className="bg-success-50 p-3 rounded-lg">
-                <div className="text-sm font-semibold text-success-700">Мгновенное одобрение!</div>
-                <div className="text-xs text-success-600">Получите доступ к панели партнера сразу после регистрации</div>
-              </div>
-            </div>
-          </form>
-        </Form>
-      </DialogContent>
-    </Dialog>
-  );
-}
-
-function StickyCTA({ onOpenModal }: { onOpenModal: () => void }) {
-  return (
-    <div className="fixed bottom-0 left-0 right-0 bg-success-500 p-4 z-40 md:hidden">
-      <Button 
-        onClick={onOpenModal}
-        className="w-full bg-white text-success-600 hover:bg-success-50 font-bold py-3 px-6 shadow-lg"
-        data-testid="button-sticky-cta"
-      >
-        Стать партнером
-        <ArrowRight className="w-5 h-5 ml-2" />
-      </Button>
+    <div className="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-xl border-t border-slate-800 p-4 z-40 md:hidden">
+      <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" className="block" data-testid="button-sticky-cta">
+        <Button className="w-full bg-emerald-500 hover:bg-emerald-400 text-white font-semibold py-3">
+          Стать партнером
+          <ArrowRight className="w-5 h-5 ml-2" />
+        </Button>
+      </a>
     </div>
   );
 }
 
 export default function LandingPage() {
-  const [modalOpen, setModalOpen] = useState(false);
-
   return (
-    <div className="min-h-screen bg-white">
-      <Navigation onOpenModal={() => setModalOpen(true)} />
-      <HeroSection onOpenModal={() => setModalOpen(true)} />
-      <ProblemSection />
-      <DashboardPreview />
-      <BenefitsSection />
+    <div className="min-h-screen bg-slate-950">
+      <Navigation />
+      <HeroSection />
+      <FeaturesSection />
       <HowItWorksSection />
       <TestimonialsSection />
       <FAQSection />
-      <FinalCTASection onOpenModal={() => setModalOpen(true)} />
+      <CTASection />
       <Footer />
-      <StickyCTA onOpenModal={() => setModalOpen(true)} />
-      <RegistrationModal open={modalOpen} onClose={() => setModalOpen(false)} />
+      <StickyCTA />
     </div>
   );
 }
