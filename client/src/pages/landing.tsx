@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
@@ -375,10 +375,6 @@ function PartnersSection() {
     { img: partnerImg10, name: "Partner Casino 10" },
   ];
 
-  const autoplayPlugin = useRef(
-    Autoplay({ delay: 2000, stopOnInteraction: false, stopOnMouseEnter: true })
-  );
-
   return (
     <section id="partners" className="py-20 lg:py-32 bg-slate-950">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -396,7 +392,9 @@ function PartnersSection() {
             align: "start",
             loop: true,
           }}
-          plugins={[autoplayPlugin.current]}
+          plugins={[
+            Autoplay({ delay: 2000, stopOnInteraction: false, stopOnMouseEnter: true })
+          ]}
           className="w-full"
           data-testid="carousel-partners"
         >
