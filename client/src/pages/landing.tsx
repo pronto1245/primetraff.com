@@ -151,8 +151,8 @@ function HeroSection() {
           {[
             { value: "500+", label: "Активных партнеров", id: "partners" },
             { value: "$2M+", label: "Выплачено партнерам", id: "payouts" },
-            { value: "24ч", label: "Максимум на выплату", id: "payout-time" },
-            { value: "99.9%", label: "Uptime платформы", id: "uptime" },
+            { value: "24/7", label: "Поддержка онлайн", id: "support" },
+            { value: "100%", label: "Честные выплаты", id: "honest" },
           ].map((stat, i) => (
             <div key={i} className="text-center" data-testid={`stat-${stat.id}`}>
               <div className="text-2xl lg:text-4xl font-bold text-emerald-400 mb-1" data-testid={`text-stat-value-${stat.id}`}>{stat.value}</div>
@@ -173,33 +173,33 @@ function FeaturesSection() {
   const features = [
     {
       icon: DollarSign,
-      title: "Высокие ставки",
-      description: "До $150 за депозит. Конкурентные RevShare условия до 50%.",
+      title: "Щедрые выплаты",
+      description: "Одни из лучших ставок на рынке. CPA и RevShare — выбирай что выгоднее.",
     },
     {
       icon: Zap,
-      title: "Мгновенные выплаты",
-      description: "Выплаты в течение 24 часов. USDT, Bitcoin, карты — на выбор.",
+      title: "Быстрые выплаты",
+      description: "Получай заработанное без задержек. Крипта, карты — как тебе удобно.",
     },
     {
       icon: BarChart3,
-      title: "Детальная аналитика",
-      description: "Отслеживайте конверсии в реальном времени. Полная статистика по subID.",
+      title: "Прозрачная статистика",
+      description: "Видишь каждый клик и каждую конверсию. Полный контроль над результатами.",
     },
     {
       icon: Shield,
-      title: "Антифрод защита",
-      description: "Прозрачные условия. Детализированный учёт всех конверсий.",
+      title: "Честные условия",
+      description: "Никакого шейва. Работаем открыто — ты видишь всё, что происходит с твоим трафиком.",
     },
     {
       icon: Users,
-      title: "Персональный менеджер",
-      description: "Поддержка 24/7 в Telegram. Помощь с оптимизацией связок.",
+      title: "Твой личный менеджер",
+      description: "Всегда на связи в Telegram. Поможет с настройкой и подскажет рабочие связки.",
     },
     {
       icon: Globe,
-      title: "Все гео и вертикали",
-      description: "Gambling, betting, dating, crypto — любые офферы.",
+      title: "Топовые офферы",
+      description: "Gambling, betting, crypto — проверенные бренды с высокой конверсией.",
     },
   ];
 
