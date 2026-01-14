@@ -35,6 +35,7 @@ import partnerHuhuBet from "@assets/img694005f195a65_1768417603836.png";
 import partner4rabet from "@assets/NPOpJLBugXCTJRBDe8jY2bWxoKEGmEpA4HtrjRVD_1768417603836.png";
 
 const REGISTER_URL = "https://primetrack.pro/register?ref=ADV-3BT52V85";
+const LOGIN_URL = "https://primetrack.pro/login";
 const TELEGRAM_URL = "https://t.me/primetrack_support_bot";
 
 function Navigation() {
@@ -69,6 +70,11 @@ function Navigation() {
             <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-emerald-400 transition-colors" data-testid="link-telegram-nav">
               <SiTelegram className="w-5 h-5" />
             </a>
+            <a href={LOGIN_URL} target="_blank" rel="noopener noreferrer" data-testid="button-login-nav">
+              <Button variant="outline" className="border-slate-700 text-white hover:bg-slate-800 font-semibold px-6">
+                Вход
+              </Button>
+            </a>
             <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" data-testid="button-become-partner-nav">
               <Button className="bg-emerald-500 hover:bg-emerald-400 text-white font-semibold px-6">
                 Стать партнером
@@ -92,6 +98,11 @@ function Navigation() {
               <a href="#how-it-works" className="text-slate-300 py-2" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-how-it-works">Как это работает</a>
               <a href="#partners" className="text-slate-300 py-2" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-partners">Партнеры</a>
               <a href="#faq" className="text-slate-300 py-2" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-faq">FAQ</a>
+              <a href={LOGIN_URL} target="_blank" rel="noopener noreferrer" className="w-full" data-testid="button-login-mobile">
+                <Button variant="outline" className="w-full border-slate-700 text-white hover:bg-slate-800 font-semibold">
+                  Вход
+                </Button>
+              </a>
               <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" className="w-full" data-testid="button-become-partner-mobile">
                 <Button className="w-full bg-emerald-500 hover:bg-emerald-400 text-white font-semibold">
                   Стать партнером
