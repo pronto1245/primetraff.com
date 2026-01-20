@@ -1007,6 +1007,48 @@ function SpecialOfferPopup() {
   );
 }
 
+function ScrollToTop() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const toggleVisibility = () => {
+      if (window.scrollY > 500) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener("scroll", toggleVisibility);
+    return () => window.removeEventListener("scroll", toggleVisibility);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  };
+
+  return (
+    <motion.button
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ 
+        opacity: isVisible ? 1 : 0, 
+        scale: isVisible ? 1 : 0.8,
+        pointerEvents: isVisible ? "auto" : "none"
+      }}
+      transition={{ duration: 0.2 }}
+      onClick={scrollToTop}
+      className="fixed bottom-24 right-6 z-50 w-12 h-12 bg-emerald-500/90 hover:bg-emerald-400 text-white rounded-full shadow-lg shadow-emerald-500/30 flex items-center justify-center backdrop-blur-sm border border-emerald-400/30 transition-colors"
+      data-testid="button-scroll-to-top"
+      aria-label="Наверх"
+    >
+      <ChevronDown className="w-6 h-6 rotate-180" />
+    </motion.button>
+  );
+}
+
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-slate-950 relative">
@@ -1031,6 +1073,7 @@ export default function LandingPage() {
       <Footer />
       <StickyCTA />
       <SpecialOfferPopup />
+      <ScrollToTop />
     </div>
   );
 }
