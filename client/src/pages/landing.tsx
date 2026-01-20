@@ -695,7 +695,7 @@ function CTASection() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" data-testid="button-cta-register">
-              <Button className="bg-emerald-500 hover:bg-emerald-400 text-white font-semibold px-10 py-6 text-lg h-auto shadow-xl shadow-emerald-500/30 hover:shadow-emerald-500/50 transition-all">
+              <Button className="bg-emerald-500 hover:bg-emerald-400 text-white font-semibold px-10 py-6 text-lg h-auto animate-pulse-glow transition-all">
                 Стать партнером
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
@@ -915,7 +915,7 @@ function SpecialOfferPopup() {
           className="block"
           data-testid="button-popup-cta"
         >
-          <Button className="w-full bg-emerald-500 hover:bg-emerald-400 text-white font-bold py-4 text-lg shadow-lg shadow-emerald-500/30">
+          <Button className="w-full bg-emerald-500 hover:bg-emerald-400 text-white font-bold py-4 text-lg animate-pulse-glow">
             Стать партнером
             <ArrowRight className="w-5 h-5 ml-2" />
           </Button>
