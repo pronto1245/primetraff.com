@@ -117,9 +117,6 @@ function Navigation() {
               <SiTelegram className="w-4 h-4 text-[#0088CC]" />
               <span className="text-white">Наш канал</span>
             </a>
-            <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" className="text-[#0088CC] hover:text-[#0099DD] transition-colors" data-testid="link-telegram-nav">
-              <SiTelegram className="w-5 h-5" />
-            </a>
             <a href={LOGIN_URL} target="_blank" rel="noopener noreferrer" data-testid="button-login-nav">
               <Button variant="outline" className="border-slate-700 text-white hover:bg-slate-800 font-semibold px-6">
                 Вход
