@@ -72,14 +72,43 @@ function FloatingShapes() {
   );
 }
 
-function GlassCard({ children, className = "", hover = true }: { children: React.ReactNode; className?: string; hover?: boolean }) {
+function GlassCard({ children, className = "", hover = true, tilt = true }: { children: React.ReactNode; className?: string; hover?: boolean; tilt?: boolean }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [transform, setTransform] = useState("");
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!tilt || !cardRef.current) return;
+    
+    const card = cardRef.current;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    
+    const rotateX = (y - centerY) / 10;
+    const rotateY = (centerX - x) / 10;
+    
+    setTransform(`perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`);
+  };
+
+  const handleMouseLeave = () => {
+    setTransform("");
+  };
+
   return (
-    <div className={`
-      relative bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 rounded-2xl
-      ${hover ? "hover:border-emerald-500/40 hover:bg-slate-800/60 hover:shadow-[0_0_30px_-5px_rgba(16,185,129,0.15)]" : ""}
-      transition-all duration-300
-      ${className}
-    `}>
+    <div 
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ transform, transition: "transform 0.15s ease-out" }}
+      className={`
+        relative bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 rounded-2xl
+        ${hover ? "hover:border-emerald-500/40 hover:bg-slate-800/60 hover:shadow-[0_0_30px_-5px_rgba(16,185,129,0.15)]" : ""}
+        transition-all duration-300
+        ${className}
+      `}
+    >
       <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/[0.03] to-transparent pointer-events-none" />
       <div className="relative z-10">{children}</div>
     </div>
@@ -236,7 +265,7 @@ function HeroSection() {
             { value: "24/7", label: "Поддержка онлайн", id: "support", gradient: "from-blue-400 to-cyan-400" },
             { value: "100%", label: "Честные выплаты", id: "honest", gradient: "from-emerald-400 to-green-400" },
           ].map((stat, i) => (
-            <GlassCard key={i} className="p-4 lg:p-6" hover={false}>
+            <GlassCard key={i} className="p-4 lg:p-6" hover={false} tilt={false}>
               <div className="text-center" data-testid={`stat-${stat.id}`}>
                 <div className={`text-2xl lg:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r ${stat.gradient} mb-1`} data-testid={`text-stat-value-${stat.id}`}>{stat.value}</div>
                 <div className="text-sm text-slate-400">{stat.label}</div>
