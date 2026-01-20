@@ -61,6 +61,15 @@ function AnimatedSection({ children, className = "", delay = 0 }: { children: Re
 function FloatingShapes() {
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+      {/* Grid pattern */}
+      <div 
+        className="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+          backgroundSize: '60px 60px'
+        }}
+      />
+      
       {/* Gradient blobs */}
       <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-emerald-500/10 rounded-full blur-[150px]" />
       <div className="absolute top-1/3 right-0 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[150px]" />
@@ -68,14 +77,25 @@ function FloatingShapes() {
       <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-blue-500/8 rounded-full blur-[150px]" />
       <div className="absolute top-2/3 left-1/2 w-[300px] h-[300px] bg-amber-500/5 rounded-full blur-[100px]" />
       
-      {/* Lines */}
-      <div className="absolute top-1/4 left-10 w-px h-32 bg-gradient-to-b from-transparent via-emerald-500/20 to-transparent" />
-      <div className="absolute top-1/3 right-20 w-px h-48 bg-gradient-to-b from-transparent via-emerald-400/15 to-transparent" />
-      <div className="absolute top-2/3 left-1/4 w-24 h-px bg-gradient-to-r from-transparent via-emerald-500/20 to-transparent" />
-      <div className="absolute bottom-1/4 right-1/3 w-32 h-px bg-gradient-to-r from-transparent via-cyan-500/15 to-transparent" />
-      <div className="absolute top-1/2 left-1/3 w-2 h-2 rounded-full bg-emerald-500/20" />
-      <div className="absolute top-1/4 right-1/4 w-1.5 h-1.5 rounded-full bg-cyan-400/20" />
-      <div className="absolute bottom-1/3 left-1/2 w-1 h-1 rounded-full bg-emerald-400/30" />
+      {/* Vignette effect */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_rgba(2,6,23,0.4)_100%)]" />
+      
+      {/* Glowing accent lines */}
+      <div className="absolute top-1/4 left-10 w-px h-32 bg-gradient-to-b from-transparent via-emerald-500/30 to-transparent" />
+      <div className="absolute top-1/3 right-20 w-px h-48 bg-gradient-to-b from-transparent via-emerald-400/25 to-transparent" />
+      <div className="absolute top-2/3 left-1/4 w-24 h-px bg-gradient-to-r from-transparent via-emerald-500/30 to-transparent" />
+      <div className="absolute bottom-1/4 right-1/3 w-32 h-px bg-gradient-to-r from-transparent via-cyan-500/25 to-transparent" />
+      <div className="absolute top-1/2 left-1/3 w-2 h-2 rounded-full bg-emerald-500/30" />
+      <div className="absolute top-1/4 right-1/4 w-1.5 h-1.5 rounded-full bg-cyan-400/30" />
+      <div className="absolute bottom-1/3 left-1/2 w-1 h-1 rounded-full bg-emerald-400/40" />
+    </div>
+  );
+}
+
+function GlowingDivider() {
+  return (
+    <div className="w-full py-4 flex items-center justify-center">
+      <div className="w-1/3 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent" />
     </div>
   );
 }
@@ -366,7 +386,7 @@ function FeaturesSection() {
   ];
 
   return (
-    <section id="features" className="py-20 lg:py-32 relative overflow-hidden">
+    <section id="features" className="py-20 lg:py-32 relative overflow-hidden bg-slate-900/30">
       <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900/50 to-slate-950" />
       <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-500/8 rounded-full blur-[100px]" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-emerald-600/6 rounded-full blur-[120px]" />
@@ -591,7 +611,7 @@ function PartnersSection() {
   ];
 
   return (
-    <section id="partners" className="py-20 lg:py-32 bg-slate-950 relative overflow-hidden">
+    <section id="partners" className="py-20 lg:py-32 bg-slate-900/30 relative overflow-hidden">
       <div className="absolute top-20 right-20 w-64 h-64 bg-emerald-500/6 rounded-full blur-[80px]" />
       <div className="absolute bottom-20 left-20 w-64 h-64 bg-cyan-500/5 rounded-full blur-[80px]" />
       
@@ -660,7 +680,7 @@ function FAQSection() {
   ];
 
   return (
-    <section id="faq" className="py-20 lg:py-32 relative overflow-hidden">
+    <section id="faq" className="py-20 lg:py-32 relative overflow-hidden bg-slate-900/30">
       <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900/30 to-slate-950" />
       <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-600/6 rounded-full blur-[80px]" />
       <div className="absolute bottom-0 left-1/3 w-64 h-64 bg-cyan-500/5 rounded-full blur-[80px]" />
@@ -956,14 +976,19 @@ export default function LandingPage() {
       <FloatingShapes />
       <Navigation />
       <HeroSection />
+      <GlowingDivider />
       <WaveDivider color="slate-900" />
       <FeaturesSection />
+      <GlowingDivider />
       <WaveDivider color="slate-950" flip />
       <HowItWorksSection />
+      <GlowingDivider />
       <WaveDivider color="slate-900" />
       <PartnersSection />
+      <GlowingDivider />
       <TestimonialsSection />
       <FAQSection />
+      <GlowingDivider />
       <WaveDivider color="slate-800" flip />
       <CTASection />
       <Footer />
