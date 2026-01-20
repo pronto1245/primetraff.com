@@ -113,9 +113,9 @@ function Navigation() {
           </div>
 
           <div className="hidden md:flex items-center gap-4">
-            <a href={TELEGRAM_CHANNEL_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-[#0088CC] hover:text-[#0099DD] transition-colors text-sm font-medium" data-testid="link-telegram-channel-nav">
+            <a href={TELEGRAM_CHANNEL_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 bg-[#0088CC]/10 border border-[#0088CC]/30 text-[#0088CC] hover:bg-[#0088CC]/20 transition-colors text-sm font-medium px-3 py-1.5 rounded-full" data-testid="link-telegram-channel-nav">
               <SiTelegram className="w-4 h-4" />
-              <span>Канал</span>
+              <span>Наш канал</span>
             </a>
             <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" className="text-[#0088CC] hover:text-[#0099DD] transition-colors" data-testid="link-telegram-nav">
               <SiTelegram className="w-5 h-5" />
@@ -717,7 +717,7 @@ function Footer() {
               href={TELEGRAM_CHANNEL_URL} 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="flex items-center gap-2 text-[#0088CC] hover:text-[#0099DD] transition-colors"
+              className="flex items-center gap-2 bg-[#0088CC]/10 border border-[#0088CC]/30 text-[#0088CC] hover:bg-[#0088CC]/20 transition-colors px-4 py-2 rounded-full font-medium"
               data-testid="link-footer-telegram-channel"
             >
               <SiTelegram className="w-5 h-5" />
