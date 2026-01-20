@@ -39,6 +39,7 @@ import partner4rabet from "@assets/NPOpJLBugXCTJRBDe8jY2bWxoKEGmEpA4HtrjRVD_1768
 const REGISTER_URL = "https://primetrack.pro/register?ref=ADV-3BT52V85";
 const LOGIN_URL = "https://primetrack.pro/login";
 const TELEGRAM_URL = "https://t.me/primetrack_support_bot";
+const TELEGRAM_CHANNEL_URL = "https://t.me/prime_traf";
 
 function AnimatedSection({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useRef(null);
@@ -112,6 +113,10 @@ function Navigation() {
           </div>
 
           <div className="hidden md:flex items-center gap-4">
+            <a href={TELEGRAM_CHANNEL_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-[#0088CC] hover:text-[#0099DD] transition-colors text-sm font-medium" data-testid="link-telegram-channel-nav">
+              <SiTelegram className="w-4 h-4" />
+              <span>Канал</span>
+            </a>
             <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" className="text-[#0088CC] hover:text-[#0099DD] transition-colors" data-testid="link-telegram-nav">
               <SiTelegram className="w-5 h-5" />
             </a>
@@ -709,6 +714,16 @@ function Footer() {
 
           <div className="flex items-center gap-6">
             <a 
+              href={TELEGRAM_CHANNEL_URL} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="flex items-center gap-2 text-[#0088CC] hover:text-[#0099DD] transition-colors"
+              data-testid="link-footer-telegram-channel"
+            >
+              <SiTelegram className="w-5 h-5" />
+              <span>Наш канал</span>
+            </a>
+            <a 
               href={TELEGRAM_URL} 
               target="_blank" 
               rel="noopener noreferrer" 
@@ -716,7 +731,7 @@ function Footer() {
               data-testid="link-footer-telegram"
             >
               <SiTelegram className="w-5 h-5" />
-              <span>Telegram</span>
+              <span>Поддержка</span>
             </a>
             <a 
               href="mailto:support@primetraff.com" 
