@@ -340,14 +340,16 @@ function HeroSection() {
           className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6 max-w-4xl mx-auto"
         >
           {[
-            { value: "500+", label: "Активных партнеров", id: "partners", gradient: "from-violet-400 to-purple-400" },
-            { value: "$2M+", label: "Выплачено партнерам", id: "payouts", gradient: "from-amber-400 to-orange-400" },
-            { value: "24/7", label: "Поддержка онлайн", id: "support", gradient: "from-blue-400 to-cyan-400" },
-            { value: "100%", label: "Честные выплаты", id: "honest", gradient: "from-emerald-400 to-green-400" },
+            { value: 500, suffix: "+", label: "Активных партнеров", id: "partners", gradient: "from-violet-400 to-purple-400" },
+            { value: 2, prefix: "$", suffix: "M+", label: "Выплачено партнерам", id: "payouts", gradient: "from-amber-400 to-orange-400" },
+            { value: 24, suffix: "/7", label: "Поддержка онлайн", id: "support", gradient: "from-blue-400 to-cyan-400" },
+            { value: 100, suffix: "%", label: "Честные выплаты", id: "honest", gradient: "from-emerald-400 to-green-400" },
           ].map((stat, i) => (
             <GlassCard key={i} className="p-4 lg:p-6" hover={false} tilt={false}>
               <div className="text-center" data-testid={`stat-${stat.id}`}>
-                <div className={`text-2xl lg:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r ${stat.gradient} mb-1`} data-testid={`text-stat-value-${stat.id}`}>{stat.value}</div>
+                <div className={`text-2xl lg:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r ${stat.gradient} mb-1`} data-testid={`text-stat-value-${stat.id}`}>
+                  <AnimatedCounter value={stat.value} prefix={stat.prefix || ""} suffix={stat.suffix} duration={2} />
+                </div>
                 <div className="text-sm text-slate-400">{stat.label}</div>
               </div>
             </GlassCard>
