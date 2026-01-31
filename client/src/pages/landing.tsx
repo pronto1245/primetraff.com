@@ -96,33 +96,12 @@ function AnimatedCounter({ value, suffix = "", prefix = "", duration = 2 }: { va
 function FloatingShapes() {
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-      {/* Grid pattern */}
-      <div 
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-          backgroundSize: '60px 60px'
-        }}
-      />
+      {/* Simple gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
       
-      {/* Gradient blobs */}
-      <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-emerald-500/10 rounded-full blur-[150px]" />
-      <div className="absolute top-1/3 right-0 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[150px]" />
-      <div className="absolute bottom-1/4 left-0 w-[400px] h-[400px] bg-violet-500/10 rounded-full blur-[120px]" />
-      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-blue-500/8 rounded-full blur-[150px]" />
-      <div className="absolute top-2/3 left-1/2 w-[300px] h-[300px] bg-amber-500/5 rounded-full blur-[100px]" />
-      
-      {/* Vignette effect */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_rgba(2,6,23,0.4)_100%)]" />
-      
-      {/* Glowing accent lines */}
-      <div className="absolute top-1/4 left-10 w-px h-32 bg-gradient-to-b from-transparent via-emerald-500/30 to-transparent" />
-      <div className="absolute top-1/3 right-20 w-px h-48 bg-gradient-to-b from-transparent via-emerald-400/25 to-transparent" />
-      <div className="absolute top-2/3 left-1/4 w-24 h-px bg-gradient-to-r from-transparent via-emerald-500/30 to-transparent" />
-      <div className="absolute bottom-1/4 right-1/3 w-32 h-px bg-gradient-to-r from-transparent via-cyan-500/25 to-transparent" />
-      <div className="absolute top-1/2 left-1/3 w-2 h-2 rounded-full bg-emerald-500/30" />
-      <div className="absolute top-1/4 right-1/4 w-1.5 h-1.5 rounded-full bg-cyan-400/30" />
-      <div className="absolute bottom-1/3 left-1/2 w-1 h-1 rounded-full bg-emerald-400/40" />
+      {/* Subtle gradient accents - reduced blur for performance */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl" />
     </div>
   );
 }
@@ -152,44 +131,16 @@ function WaveDivider({ flip = false, color = "slate-900" }: { flip?: boolean; co
   );
 }
 
-function GlassCard({ children, className = "", hover = true, tilt = true }: { children: React.ReactNode; className?: string; hover?: boolean; tilt?: boolean }) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [transform, setTransform] = useState("");
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!tilt || !cardRef.current) return;
-    
-    const card = cardRef.current;
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    
-    const rotateX = (y - centerY) / 10;
-    const rotateY = (centerX - x) / 10;
-    
-    setTransform(`perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`);
-  };
-
-  const handleMouseLeave = () => {
-    setTransform("");
-  };
-
+function GlassCard({ children, className = "", hover = true }: { children: React.ReactNode; className?: string; hover?: boolean }) {
   return (
     <div 
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{ transform, transition: "transform 0.15s ease-out" }}
       className={`
-        relative bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 rounded-2xl
-        ${hover ? "hover:border-emerald-500/40 hover:bg-slate-800/60 hover:shadow-[0_0_30px_-5px_rgba(16,185,129,0.15)]" : ""}
-        transition-all duration-300
+        relative bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-2xl
+        ${hover ? "hover:border-emerald-500/40 hover:bg-slate-800/60" : ""}
+        transition-colors duration-300
         ${className}
       `}
     >
-      <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/[0.03] to-transparent pointer-events-none" />
       <div className="relative z-10">{children}</div>
     </div>
   );
@@ -345,7 +296,7 @@ function HeroSection() {
             { value: 24, suffix: "/7", label: "Поддержка онлайн", id: "support", gradient: "from-blue-400 to-cyan-400" },
             { value: 100, suffix: "%", label: "Честные выплаты", id: "honest", gradient: "from-emerald-400 to-green-400" },
           ].map((stat, i) => (
-            <GlassCard key={i} className="p-4 lg:p-6" hover={false} tilt={false}>
+            <GlassCard key={i} className="p-4 lg:p-6" hover={false}>
               <div className="text-center" data-testid={`stat-${stat.id}`}>
                 <div className={`text-2xl lg:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r ${stat.gradient} mb-1`} data-testid={`text-stat-value-${stat.id}`}>
                   <AnimatedCounter value={stat.value} prefix={stat.prefix || ""} suffix={stat.suffix} duration={2} />
@@ -1055,20 +1006,11 @@ export default function LandingPage() {
       <FloatingShapes />
       <Navigation />
       <HeroSection />
-      <GlowingDivider />
-      <WaveDivider color="slate-900" />
       <FeaturesSection />
-      <GlowingDivider />
-      <WaveDivider color="slate-950" flip />
       <HowItWorksSection />
-      <GlowingDivider />
-      <WaveDivider color="slate-900" />
       <PartnersSection />
-      <GlowingDivider />
       <TestimonialsSection />
       <FAQSection />
-      <GlowingDivider />
-      <WaveDivider color="slate-800" flip />
       <CTASection />
       <Footer />
       <StickyCTA />
