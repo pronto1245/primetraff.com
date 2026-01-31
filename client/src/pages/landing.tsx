@@ -96,33 +96,33 @@ function AnimatedCounter({ value, suffix = "", prefix = "", duration = 2 }: { va
 function FloatingShapes() {
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-      {/* Grid pattern */}
+      {/* Grid pattern - hidden on mobile for performance */}
       <div 
-        className="absolute inset-0 opacity-[0.03]"
+        className="absolute inset-0 opacity-[0.03] hidden md:block"
         style={{
           backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
           backgroundSize: '60px 60px'
         }}
       />
       
-      {/* Gradient blobs */}
-      <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-emerald-500/10 rounded-full blur-[150px]" />
-      <div className="absolute top-1/3 right-0 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[150px]" />
-      <div className="absolute bottom-1/4 left-0 w-[400px] h-[400px] bg-violet-500/10 rounded-full blur-[120px]" />
-      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-blue-500/8 rounded-full blur-[150px]" />
-      <div className="absolute top-2/3 left-1/2 w-[300px] h-[300px] bg-amber-500/5 rounded-full blur-[100px]" />
+      {/* Gradient blobs - simplified on mobile */}
+      <div className="absolute top-0 left-1/4 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-emerald-500/10 rounded-full blur-[80px] md:blur-[150px]" />
+      <div className="absolute top-1/3 right-0 w-[250px] md:w-[500px] h-[250px] md:h-[500px] bg-cyan-500/10 rounded-full blur-[80px] md:blur-[150px]" />
+      <div className="hidden md:block absolute bottom-1/4 left-0 w-[400px] h-[400px] bg-violet-500/10 rounded-full blur-[120px]" />
+      <div className="hidden md:block absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-blue-500/8 rounded-full blur-[150px]" />
+      <div className="hidden md:block absolute top-2/3 left-1/2 w-[300px] h-[300px] bg-amber-500/5 rounded-full blur-[100px]" />
       
       {/* Vignette effect */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_rgba(2,6,23,0.4)_100%)]" />
       
-      {/* Glowing accent lines */}
-      <div className="absolute top-1/4 left-10 w-px h-32 bg-gradient-to-b from-transparent via-emerald-500/30 to-transparent" />
-      <div className="absolute top-1/3 right-20 w-px h-48 bg-gradient-to-b from-transparent via-emerald-400/25 to-transparent" />
-      <div className="absolute top-2/3 left-1/4 w-24 h-px bg-gradient-to-r from-transparent via-emerald-500/30 to-transparent" />
-      <div className="absolute bottom-1/4 right-1/3 w-32 h-px bg-gradient-to-r from-transparent via-cyan-500/25 to-transparent" />
-      <div className="absolute top-1/2 left-1/3 w-2 h-2 rounded-full bg-emerald-500/30" />
-      <div className="absolute top-1/4 right-1/4 w-1.5 h-1.5 rounded-full bg-cyan-400/30" />
-      <div className="absolute bottom-1/3 left-1/2 w-1 h-1 rounded-full bg-emerald-400/40" />
+      {/* Glowing accent lines - desktop only */}
+      <div className="hidden md:block absolute top-1/4 left-10 w-px h-32 bg-gradient-to-b from-transparent via-emerald-500/30 to-transparent" />
+      <div className="hidden md:block absolute top-1/3 right-20 w-px h-48 bg-gradient-to-b from-transparent via-emerald-400/25 to-transparent" />
+      <div className="hidden md:block absolute top-2/3 left-1/4 w-24 h-px bg-gradient-to-r from-transparent via-emerald-500/30 to-transparent" />
+      <div className="hidden md:block absolute bottom-1/4 right-1/3 w-32 h-px bg-gradient-to-r from-transparent via-cyan-500/25 to-transparent" />
+      <div className="hidden md:block absolute top-1/2 left-1/3 w-2 h-2 rounded-full bg-emerald-500/30" />
+      <div className="hidden md:block absolute top-1/4 right-1/4 w-1.5 h-1.5 rounded-full bg-cyan-400/30" />
+      <div className="hidden md:block absolute bottom-1/3 left-1/2 w-1 h-1 rounded-full bg-emerald-400/40" />
     </div>
   );
 }
@@ -157,9 +157,17 @@ function WaveDivider({ flip = false, color = "slate-900" }: { flip?: boolean; co
 function GlassCard({ children, className = "", hover = true, tilt = true }: { children: React.ReactNode; className?: string; hover?: boolean; tilt?: boolean }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768 || 'ontouchstart' in window);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!tilt || !cardRef.current) return;
+    if (!tilt || !cardRef.current || isMobile) return;
     
     if (rafRef.current) return;
     
@@ -193,17 +201,17 @@ function GlassCard({ children, className = "", hover = true, tilt = true }: { ch
   return (
     <div 
       ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
+      onMouseMove={isMobile ? undefined : handleMouseMove}
+      onMouseLeave={isMobile ? undefined : handleMouseLeave}
       style={{ transition: "transform 0.15s ease-out" }}
       className={`
-        relative bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 rounded-2xl
-        ${hover ? "hover:border-emerald-500/40 hover:bg-slate-800/60 hover:shadow-[0_0_30px_-5px_rgba(16,185,129,0.15)]" : ""}
+        relative bg-slate-800/50 md:bg-slate-800/40 backdrop-blur-sm md:backdrop-blur-xl border border-slate-700/50 rounded-2xl
+        ${hover ? "md:hover:border-emerald-500/40 md:hover:bg-slate-800/60 md:hover:shadow-[0_0_30px_-5px_rgba(16,185,129,0.15)]" : ""}
         transition-all duration-300
         ${className}
       `}
     >
-      <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/[0.03] to-transparent pointer-events-none" />
+      <div className="hidden md:block absolute inset-0 rounded-2xl bg-gradient-to-br from-white/[0.03] to-transparent pointer-events-none" />
       <div className="relative z-10">{children}</div>
     </div>
   );
