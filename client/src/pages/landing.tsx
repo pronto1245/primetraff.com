@@ -1016,6 +1016,8 @@ export default function LandingPage() {
       <PartnersSection />
       <GlowingDivider />
       <TestimonialsSection />
+      <GlowingDivider />
+      <WaveDivider flip />
       <FAQSection />
       <GlowingDivider />
       <WaveDivider flip />
