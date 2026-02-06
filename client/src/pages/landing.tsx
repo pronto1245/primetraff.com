@@ -178,12 +178,12 @@ function Navigation() {
               <span className="text-white">Наш канал</span>
             </a>
             <a href={LOGIN_URL} target="_blank" rel="noopener noreferrer" data-testid="button-login-nav">
-              <Button variant="outline" className="border-white/30 text-white font-semibold px-6">
+              <Button variant="outline" className="border-white/25 text-white/80 font-medium px-5 rounded-full">
                 Вход
               </Button>
             </a>
             <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" data-testid="button-become-partner-nav">
-              <Button className="text-white font-semibold px-6" style={{ background: "linear-gradient(135deg, #0077BB, #0099DD)" }}>
+              <Button variant="outline" className="border-white/30 text-white font-medium px-5 rounded-full">
                 Стать партнером
               </Button>
             </a>
@@ -206,12 +206,12 @@ function Navigation() {
               <a href="#partners" className="text-white/70 py-2" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-partners">Партнеры</a>
               <a href="#faq" className="text-white/70 py-2" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-faq">FAQ</a>
               <a href={LOGIN_URL} target="_blank" rel="noopener noreferrer" className="w-full" data-testid="button-login-mobile">
-                <Button variant="outline" className="w-full border-white/30 text-white font-semibold">
+                <Button variant="outline" className="w-full border-white/25 text-white/80 font-medium rounded-full">
                   Вход
                 </Button>
               </a>
               <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" className="w-full" data-testid="button-become-partner-mobile">
-                <Button className="w-full text-white font-semibold" style={{ background: "linear-gradient(135deg, #0077BB, #0099DD)" }}>
+                <Button variant="outline" className="w-full border-white/30 text-white font-medium rounded-full">
                   Стать партнером
                 </Button>
               </a>
@@ -287,13 +287,13 @@ function HeroSection() {
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
         >
           <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" data-testid="button-hero-register">
-            <Button className="text-white font-medium px-8 py-5 text-base h-auto rounded-full transition-all" style={{ background: "linear-gradient(135deg, #0077BB, #00AAEE)", boxShadow: "0 4px 20px rgba(0,136,204,0.35)" }}>
+            <Button variant="outline" className="border-white/30 text-white font-medium px-8 h-auto py-3 rounded-full backdrop-blur-sm transition-all hover:border-white/50 hover:bg-white/5">
               Начать зарабатывать
               <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </a>
           <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" data-testid="button-hero-telegram">
-            <Button variant="outline" className="border-white/20 text-white px-8 py-5 text-base h-auto rounded-full backdrop-blur-sm">
+            <Button variant="outline" className="border-white/15 text-white/80 px-8 h-auto py-3 rounded-full backdrop-blur-sm">
               <SiTelegram className="w-4 h-4 mr-2 text-[#0088CC]" />
               Написать в Telegram
             </Button>
@@ -331,43 +331,60 @@ function HeroSection() {
   );
 }
 
+function HolographicIcon({ icon: Icon, color, glowColor }: { icon: any; color: string; glowColor: string }) {
+  return (
+    <div className="relative w-16 h-16 lg:w-20 lg:h-20 flex items-center justify-center mb-5 lg:mb-6">
+      <div className="absolute inset-0 rounded-full opacity-30 blur-xl animate-[pulse_4s_ease-in-out_infinite]" style={{ background: `radial-gradient(circle, ${glowColor}, transparent 70%)` }} />
+      <div className="absolute inset-1 rounded-full border border-white/10" style={{ background: `radial-gradient(circle at 30% 30%, ${color}30, transparent 60%)` }} />
+      <div className="absolute inset-0 rounded-full" style={{ background: `conic-gradient(from 0deg, transparent, ${color}15, transparent, ${color}10, transparent)`, animation: "spin 8s linear infinite" }} />
+      <Icon className="w-7 h-7 lg:w-8 lg:h-8 relative z-10" style={{ color, filter: `drop-shadow(0 0 8px ${glowColor})` }} />
+    </div>
+  );
+}
+
 function FeaturesSection() {
   const features = [
     {
       icon: Shield,
       title: "Без шейва",
       description: "Мы много лет работаем в gambling вертикали и знаем все боли рынка. Гарантируем, что шейва через нашу партнерскую сеть не будет.",
-      color: "#10b981",
+      color: "#34d399",
+      glowColor: "rgba(52,211,153,0.4)",
     },
     {
       icon: Globe,
       title: "Большой выбор офферов",
       description: "Все офферы, с которыми мы работаем, уже были пролиты нашей командой. Мы знаем что рекомендовать нашим партнерам.",
-      color: "#0088CC",
+      color: "#38bdf8",
+      glowColor: "rgba(56,189,248,0.4)",
     },
     {
       icon: Users,
       title: "Помощь в заливах",
       description: "Мы тестируем связки и делимся ими с партнерами. Всё — от креатива до необходимых инструментов. Вам остается взять ссылку из ЛК.",
-      color: "#8b5cf6",
+      color: "#a78bfa",
+      glowColor: "rgba(167,139,250,0.4)",
     },
     {
       icon: DollarSign,
       title: "Быстрые выплаты",
       description: "Стараемся максимально быстро выплачивать вознаграждение. Если у рекла нет претензий к трафику — средства будут на кошельке в кратчайший срок.",
-      color: "#f59e0b",
+      color: "#fbbf24",
+      glowColor: "rgba(251,191,36,0.4)",
     },
     {
       icon: MessageCircle,
       title: "Приватный канал со связками",
       description: "Для проверенных партнеров есть закрытый канал с продуктом, креативами, таргетом, плейсментами — всё для профитной настройки пролива.",
-      color: "#ec4899",
+      color: "#f472b6",
+      glowColor: "rgba(244,114,182,0.4)",
     },
     {
       icon: BarChart3,
       title: "Полная аналитика",
       description: "Личный кабинет с детальной статистикой по всем показателям. Видишь каждый клик и депозит по своим subID в реальном времени.",
-      color: "#06b6d4",
+      color: "#22d3ee",
+      glowColor: "rgba(34,211,238,0.4)",
     },
   ];
 
@@ -381,7 +398,7 @@ function FeaturesSection() {
           <h2 className="text-3xl lg:text-5xl font-bold text-white mb-4">
             Почему выбирают PrimeTraff
           </h2>
-          <p className="text-white/70 text-lg max-w-2xl mx-auto">
+          <p className="text-white/60 text-lg max-w-2xl mx-auto">
             Созданы арбитражниками для арбитражников. Знаем, что вам нужно.
           </p>
         </AnimatedSection>
@@ -389,16 +406,10 @@ function FeaturesSection() {
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 lg:gap-x-12 lg:gap-y-16 max-w-5xl mx-auto">
           {features.map((feature, i) => (
             <AnimatedSection key={i} delay={i * 0.08} className="text-center">
-              <div className="flex flex-col items-center">
-                <div 
-                  className="w-12 h-12 lg:w-14 lg:h-14 rounded-full flex items-center justify-center mb-4 lg:mb-5"
-                  style={{ backgroundColor: `${feature.color}20`, boxShadow: `0 0 25px ${feature.color}15` }}
-                  data-testid={`card-feature-${i}`}
-                >
-                  <feature.icon className="w-5 h-5 lg:w-6 lg:h-6" style={{ color: feature.color }} />
-                </div>
+              <div className="flex flex-col items-center" data-testid={`card-feature-${i}`}>
+                <HolographicIcon icon={feature.icon} color={feature.color} glowColor={feature.glowColor} />
                 <h3 className="text-base lg:text-lg font-semibold text-white mb-2">{feature.title}</h3>
-                <p className="text-sm text-white/70 leading-relaxed max-w-[260px]">{feature.description}</p>
+                <p className="text-sm text-white/60 leading-relaxed max-w-[260px]">{feature.description}</p>
               </div>
             </AnimatedSection>
           ))}
@@ -415,40 +426,36 @@ function HowItWorksSection() {
       title: "Регистрация",
       description: "Заполните форму за 2 минуты. Мгновенное одобрение для опытных арбитражников.",
       icon: Users,
-      iconColor: "text-violet-400",
-      bgGradient: "from-violet-500/20 to-violet-600/20",
+      color: "#a78bfa",
+      glowColor: "rgba(167,139,250,0.4)",
       badgeGradient: "from-violet-500 to-violet-600",
-      shadowColor: "shadow-violet-500/30",
     },
     {
       step: "02",
       title: "Получите офферы",
       description: "Выберите офферы и получите уникальные трекинговые ссылки.",
       icon: Globe,
-      iconColor: "text-sky-400",
-      bgGradient: "from-sky-500/20 to-sky-600/20",
+      color: "#38bdf8",
+      glowColor: "rgba(56,189,248,0.4)",
       badgeGradient: "from-sky-500 to-sky-600",
-      shadowColor: "shadow-sky-500/30",
     },
     {
       step: "03",
       title: "Лейте трафик",
       description: "Запускайте рекламные кампании и отслеживайте результаты в реальном времени.",
       icon: BarChart3,
-      iconColor: "text-cyan-400",
-      bgGradient: "from-cyan-500/20 to-cyan-600/20",
+      color: "#22d3ee",
+      glowColor: "rgba(34,211,238,0.4)",
       badgeGradient: "from-cyan-500 to-cyan-600",
-      shadowColor: "shadow-cyan-500/30",
     },
     {
       step: "04",
       title: "Получайте выплаты",
       description: "Выводите заработок ежедневно. Без холдов для проверенных партнеров.",
       icon: DollarSign,
-      iconColor: "text-amber-400",
-      bgGradient: "from-amber-500/20 to-amber-600/20",
+      color: "#fbbf24",
+      glowColor: "rgba(251,191,36,0.4)",
       badgeGradient: "from-amber-500 to-amber-600",
-      shadowColor: "shadow-amber-500/30",
     },
   ];
 
@@ -469,22 +476,20 @@ function HowItWorksSection() {
         </AnimatedSection>
 
         <div className="relative">
-          <div className="hidden lg:block absolute top-24 left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-transparent via-sky-400/30 to-transparent" />
+          <div className="hidden lg:block absolute top-12 left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-transparent via-sky-400/20 to-transparent" />
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {steps.map((step, i) => (
               <AnimatedSection key={i} delay={i * 0.15} className="relative">
                 <div className="text-center">
                   <div className="relative inline-flex mb-6">
-                    <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${step.bgGradient} flex items-center justify-center backdrop-blur-sm`}>
-                      <step.icon className={`w-8 h-8 ${step.iconColor}`} />
-                    </div>
-                    <div className={`absolute -top-2 -right-2 w-8 h-8 rounded-full bg-gradient-to-br ${step.badgeGradient} flex items-center justify-center text-white text-sm font-bold shadow-lg ${step.shadowColor}`}>
+                    <HolographicIcon icon={step.icon} color={step.color} glowColor={step.glowColor} />
+                    <div className={`absolute -top-1 -right-1 w-7 h-7 rounded-full bg-gradient-to-br ${step.badgeGradient} flex items-center justify-center text-white text-xs font-bold shadow-lg`}>
                       {i + 1}
                     </div>
                   </div>
                   <h3 className="text-xl font-semibold text-white mb-3">{step.title}</h3>
-                  <p className="text-white/70">{step.description}</p>
+                  <p className="text-white/60">{step.description}</p>
                 </div>
               </AnimatedSection>
             ))}
@@ -493,7 +498,7 @@ function HowItWorksSection() {
 
         <AnimatedSection delay={0.6} className="text-center mt-12">
           <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" data-testid="button-how-it-works-cta">
-            <Button className="text-white font-medium px-8 py-5 text-base h-auto rounded-full transition-all" style={{ background: "linear-gradient(135deg, #0077BB, #00AAEE)", boxShadow: "0 4px 20px rgba(0,136,204,0.35)" }}>
+            <Button variant="outline" className="border-white/25 text-white font-medium px-8 h-auto py-3 rounded-full backdrop-blur-sm">
               Начать сейчас
               <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
@@ -547,23 +552,23 @@ function TestimonialsSection() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {testimonials.map((testimonial, i) => (
             <AnimatedSection key={i} delay={i * 0.1}>
-              <GlassCard className="p-6 lg:p-8 h-full">
+              <div className="relative bg-white/[0.04] border border-white/8 rounded-xl p-6 lg:p-8 h-full transition-all duration-300">
                 <div className="flex items-center gap-4 mb-4">
-                  <div className="w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold" style={{ background: "linear-gradient(135deg, #0077BB, #00CCFF)" }}>
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center text-white/90 text-sm font-medium border border-white/15" style={{ background: "rgba(0,136,204,0.15)" }}>
                     {testimonial.avatar}
                   </div>
                   <div>
-                    <div className="font-semibold text-white">{testimonial.name}</div>
-                    <div className="text-sm text-white/60">{testimonial.role}</div>
+                    <div className="font-medium text-white text-sm">{testimonial.name}</div>
+                    <div className="text-xs text-white/50">{testimonial.role}</div>
                   </div>
                 </div>
-                <div className="flex gap-1 mb-4">
+                <div className="flex gap-0.5 mb-4">
                   {Array.from({ length: testimonial.rating }).map((_, j) => (
-                    <Star key={j} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                    <Star key={j} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                   ))}
                 </div>
-                <p className="text-white/75 leading-relaxed" data-testid={`card-testimonial-${i}`}>{testimonial.text}</p>
-              </GlassCard>
+                <p className="text-sm text-white/65 leading-relaxed" data-testid={`card-testimonial-${i}`}>{testimonial.text}</p>
+              </div>
             </AnimatedSection>
           ))}
         </div>
@@ -720,13 +725,13 @@ function CTASection() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" data-testid="button-cta-register">
-              <Button className="text-white font-medium px-10 py-5 text-base h-auto rounded-full transition-all animate-pulse-glow" style={{ background: "linear-gradient(135deg, #0077BB, #00AAEE)", boxShadow: "0 4px 20px rgba(0,136,204,0.35)" }}>
+              <Button variant="outline" className="border-white/30 text-white font-medium px-10 h-auto py-3 rounded-full backdrop-blur-sm transition-all hover:border-white/50 hover:bg-white/5">
                 Стать партнером
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </a>
             <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" data-testid="button-cta-telegram">
-              <Button variant="outline" className="border-white/20 text-white px-10 py-5 text-base h-auto rounded-full backdrop-blur-sm">
+              <Button variant="outline" className="border-white/15 text-white/80 px-10 h-auto py-3 rounded-full backdrop-blur-sm">
                 <SiTelegram className="w-4 h-4 mr-2 text-[#0088CC]" />
                 Telegram поддержка
               </Button>
@@ -806,7 +811,7 @@ function StickyCTA() {
   return (
     <div className="fixed bottom-0 left-0 right-0 backdrop-blur-xl border-t border-white/10 p-4 z-40 md:hidden" style={{ background: "rgba(0,16,48,0.9)" }}>
       <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" className="block" data-testid="button-sticky-cta">
-        <Button className="w-full text-white font-semibold py-3" style={{ background: "linear-gradient(135deg, #0077BB, #00AAEE)", boxShadow: "0 4px 20px rgba(0,136,204,0.3)" }}>
+        <Button variant="outline" className="w-full border-white/30 text-white font-medium rounded-full">
           Стать партнером
           <ArrowRight className="w-5 h-5 ml-2" />
         </Button>
@@ -935,7 +940,7 @@ function SpecialOfferPopup() {
           className="block"
           data-testid="button-popup-cta"
         >
-          <Button className="w-full text-white font-bold py-4 text-lg animate-pulse-glow" style={{ background: "linear-gradient(135deg, #0077BB, #00AAEE)" }}>
+          <Button variant="outline" className="w-full border-white/30 text-white font-medium py-4 text-lg rounded-full">
             Стать партнером
             <ArrowRight className="w-5 h-5 ml-2" />
           </Button>
