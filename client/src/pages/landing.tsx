@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, lazy, Suspense } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { motion, useInView } from "framer-motion";
 import { 
@@ -34,7 +34,7 @@ import partnerBetcool from "@assets/img69400fda54fe8_1768417603836.png";
 import partnerHuhuBet from "@assets/img694005f195a65_1768417603836.png";
 import partner4rabet from "@assets/NPOpJLBugXCTJRBDe8jY2bWxoKEGmEpA4HtrjRVD_1768417603836.png";
 
-const CrystalScene = lazy(() => import("@/components/CrystalScene"));
+import CrystalScene from "@/components/CrystalScene";
 
 const REGISTER_URL = "https://primetrack.pro/register?ref=ADV-3BT52V85";
 const LOGIN_URL = "https://primetrack.pro/login";
@@ -992,9 +992,7 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen relative" style={{ background: "#001030" }}>
       <BlueBgDecorations />
-      <Suspense fallback={null}>
-        <CrystalScene />
-      </Suspense>
+      <CrystalScene />
       <Navigation />
       <HeroSection />
       <GlowingDivider />
