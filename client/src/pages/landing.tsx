@@ -96,11 +96,11 @@ function AnimatedCounter({ value, suffix = "", prefix = "", duration = 2 }: { va
 function BlueBgDecorations() {
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-      <div className="absolute top-0 left-1/4 w-[300px] md:w-[700px] h-[300px] md:h-[700px] bg-sky-400/8 rounded-full blur-[80px] md:blur-[180px]" />
-      <div className="absolute top-1/3 right-0 w-[250px] md:w-[500px] h-[250px] md:h-[500px] bg-blue-500/10 rounded-full blur-[80px] md:blur-[150px]" />
-      <div className="hidden md:block absolute bottom-1/4 left-0 w-[400px] h-[400px] bg-cyan-400/8 rounded-full blur-[120px]" />
-      <div className="hidden md:block absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-sky-600/6 rounded-full blur-[150px]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_rgba(0,20,60,0.5)_100%)]" />
+      <div className="absolute top-[10%] left-[15%] w-[200px] md:w-[500px] h-[200px] md:h-[500px] rounded-full blur-[60px] md:blur-[150px]" style={{ background: "radial-gradient(circle, rgba(0,140,220,0.15) 0%, rgba(0,100,200,0.05) 50%, transparent 70%)" }} />
+      <div className="absolute top-[40%] right-[5%] w-[180px] md:w-[450px] h-[180px] md:h-[450px] rounded-full blur-[60px] md:blur-[130px]" style={{ background: "radial-gradient(circle, rgba(0,180,255,0.12) 0%, rgba(0,120,210,0.04) 50%, transparent 70%)" }} />
+      <div className="hidden md:block absolute bottom-[20%] left-[5%] w-[400px] h-[400px] rounded-full blur-[120px]" style={{ background: "radial-gradient(circle, rgba(0,160,240,0.1) 0%, transparent 60%)" }} />
+      <div className="hidden md:block absolute bottom-[5%] right-[20%] w-[350px] h-[350px] rounded-full blur-[100px]" style={{ background: "radial-gradient(circle, rgba(60,180,255,0.08) 0%, transparent 60%)" }} />
+      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, transparent 0%, rgba(0,16,48,0.4) 100%)" }} />
     </div>
   );
 }
@@ -287,14 +287,14 @@ function HeroSection() {
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
         >
           <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" data-testid="button-hero-register">
-            <Button className="text-white font-semibold px-8 py-6 text-lg h-auto shadow-xl transition-all" style={{ background: "linear-gradient(135deg, #0077BB, #00AAEE)", boxShadow: "0 8px 30px rgba(0,136,204,0.4)" }}>
+            <Button className="text-white font-medium px-8 py-5 text-base h-auto rounded-full transition-all" style={{ background: "linear-gradient(135deg, #0077BB, #00AAEE)", boxShadow: "0 4px 20px rgba(0,136,204,0.35)" }}>
               Начать зарабатывать
-              <ArrowRight className="w-5 h-5 ml-2" />
+              <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </a>
           <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" data-testid="button-hero-telegram">
-            <Button variant="outline" className="border-white/30 text-white px-8 py-6 text-lg h-auto backdrop-blur-sm">
-              <SiTelegram className="w-5 h-5 mr-2 text-[#0088CC]" />
+            <Button variant="outline" className="border-white/20 text-white px-8 py-5 text-base h-auto rounded-full backdrop-blur-sm">
+              <SiTelegram className="w-4 h-4 mr-2 text-[#0088CC]" />
               Написать в Telegram
             </Button>
           </a>
@@ -493,9 +493,9 @@ function HowItWorksSection() {
 
         <AnimatedSection delay={0.6} className="text-center mt-12">
           <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" data-testid="button-how-it-works-cta">
-            <Button className="text-white font-semibold px-8 py-6 text-lg h-auto shadow-xl transition-all" style={{ background: "linear-gradient(135deg, #0077BB, #00AAEE)", boxShadow: "0 8px 30px rgba(0,136,204,0.4)" }}>
+            <Button className="text-white font-medium px-8 py-5 text-base h-auto rounded-full transition-all" style={{ background: "linear-gradient(135deg, #0077BB, #00AAEE)", boxShadow: "0 4px 20px rgba(0,136,204,0.35)" }}>
               Начать сейчас
-              <ArrowRight className="w-5 h-5 ml-2" />
+              <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </a>
         </AnimatedSection>
@@ -720,14 +720,14 @@ function CTASection() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" data-testid="button-cta-register">
-              <Button className="text-white font-semibold px-10 py-6 text-lg h-auto transition-all animate-pulse-glow" style={{ background: "linear-gradient(135deg, #0077BB, #00AAEE)", boxShadow: "0 8px 30px rgba(0,136,204,0.4)" }}>
+              <Button className="text-white font-medium px-10 py-5 text-base h-auto rounded-full transition-all animate-pulse-glow" style={{ background: "linear-gradient(135deg, #0077BB, #00AAEE)", boxShadow: "0 4px 20px rgba(0,136,204,0.35)" }}>
                 Стать партнером
-                <ArrowRight className="w-5 h-5 ml-2" />
+                <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </a>
             <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" data-testid="button-cta-telegram">
-              <Button variant="outline" className="border-white/30 text-white px-10 py-6 text-lg h-auto backdrop-blur-sm">
-                <SiTelegram className="w-5 h-5 mr-2 text-[#0088CC]" />
+              <Button variant="outline" className="border-white/20 text-white px-10 py-5 text-base h-auto rounded-full backdrop-blur-sm">
+                <SiTelegram className="w-4 h-4 mr-2 text-[#0088CC]" />
                 Telegram поддержка
               </Button>
             </a>
