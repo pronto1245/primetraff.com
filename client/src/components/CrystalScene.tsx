@@ -157,12 +157,14 @@ function Scene() {
       <pointLight position={[4, -2, 0]} intensity={0.4} color="#4dc9f6" distance={15} />
       <pointLight position={[0, 4, -3]} intensity={0.3} color="#66BBEE" distance={12} />
 
-      <CrystalStar position={[-5.5, 1.5, -2]} scale={1.8} rotationSpeed={0.25} color="#0088CC" />
-      <CrystalOctahedron position={[5.5, 0.5, -1]} scale={2.2} rotationSpeed={0.2} color="#0099DD" />
-      <CrystalDodecahedron position={[-3.5, -3, -3]} scale={1.4} rotationSpeed={0.15} color="#00AAEE" />
-      <CrystalTetrahedron position={[4, -2.5, -2]} scale={1.2} rotationSpeed={0.3} color="#4dc9f6" />
-      <CrystalStar position={[-6, -1.5, -4]} scale={0.8} rotationSpeed={0.35} color="#66BBEE" />
-      <CrystalOctahedron position={[6.5, 2.5, -3]} scale={1.0} rotationSpeed={0.18} color="#0088CC" />
+      <CrystalStar position={[-6, 2, -3]} scale={1.2} rotationSpeed={0.2} color="#0088CC" />
+      <CrystalOctahedron position={[6, 1, -2]} scale={1.5} rotationSpeed={0.15} color="#0099DD" />
+      <CrystalDodecahedron position={[-4, -3.5, -4]} scale={1.0} rotationSpeed={0.12} color="#00AAEE" />
+      <CrystalTetrahedron position={[5, -3, -3]} scale={0.9} rotationSpeed={0.22} color="#4dc9f6" />
+      <CrystalStar position={[-7, -1, -5]} scale={0.6} rotationSpeed={0.28} color="#66BBEE" />
+      <CrystalOctahedron position={[7, 3, -4]} scale={0.7} rotationSpeed={0.14} color="#0088CC" />
+      <CrystalTetrahedron position={[-5.5, 3.5, -5]} scale={0.5} rotationSpeed={0.18} color="#00BBFF" />
+      <CrystalDodecahedron position={[4.5, -1, -6]} scale={0.5} rotationSpeed={0.16} color="#0077BB" />
     </>
   );
 }

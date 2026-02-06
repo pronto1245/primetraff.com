@@ -223,12 +223,30 @@ function Navigation() {
   );
 }
 
+function GlowingOrb() {
+  return (
+    <div className="absolute inset-0 flex items-center justify-center pointer-events-none" style={{ top: "-5%" }}>
+      <div className="relative w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[650px] lg:h-[650px]">
+        <div className="absolute inset-0 rounded-full" style={{ background: "radial-gradient(circle, rgba(0,180,255,0.25) 0%, rgba(0,136,204,0.12) 30%, rgba(0,80,180,0.05) 55%, transparent 70%)" }} />
+        <div className="absolute inset-[15%] rounded-full" style={{ background: "radial-gradient(circle, rgba(100,200,255,0.2) 0%, rgba(0,150,220,0.08) 40%, transparent 70%)" }} />
+        <div className="absolute inset-[30%] rounded-full" style={{ background: "radial-gradient(circle, rgba(150,220,255,0.25) 0%, rgba(80,180,255,0.1) 40%, transparent 65%)" }} />
+        <div className="absolute inset-[42%] rounded-full" style={{ background: "radial-gradient(circle, rgba(200,240,255,0.35) 0%, rgba(100,200,255,0.12) 50%, transparent 70%)" }} />
+        <div className="absolute inset-0 rounded-full animate-[spin_30s_linear_infinite]" style={{ background: "conic-gradient(from 0deg, transparent 0%, rgba(0,180,255,0.06) 25%, transparent 50%, rgba(0,136,204,0.06) 75%, transparent 100%)" }} />
+        <div className="hidden md:block absolute inset-[-5%] rounded-full border border-white/[0.03]" />
+        <div className="hidden md:block absolute inset-[10%] rounded-full border border-white/[0.04]" />
+        <div className="hidden md:block absolute inset-[25%] rounded-full border border-white/[0.05]" />
+      </div>
+    </div>
+  );
+}
+
 function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
       <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, #001030 0%, #002060 30%, #0055AA 60%, #0088CC 100%)" }} />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(0,200,255,0.15),_transparent_60%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(0,100,200,0.2),_transparent_60%)]" />
+      <GlowingOrb />
       
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-32 text-center">
         <motion.div
@@ -256,7 +274,7 @@ function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-lg lg:text-xl text-white/60 max-w-3xl mx-auto mb-10 leading-relaxed"
+          className="text-lg lg:text-xl text-white/80 max-w-3xl mx-auto mb-10 leading-relaxed"
         >
           Присоединяйтесь к PrimeTraff — партнерской программе нового поколения. 
           Высокие ставки, моментальные выплаты, персональная поддержка 24/7.
@@ -299,7 +317,7 @@ function HeroSection() {
                 <div className={`text-2xl lg:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r ${stat.gradient} mb-1`} data-testid={`text-stat-value-${stat.id}`}>
                   <AnimatedCounter value={stat.value} prefix={stat.prefix || ""} suffix={stat.suffix} duration={2} />
                 </div>
-                <div className="text-sm text-white/50">{stat.label}</div>
+                <div className="text-sm text-white/70">{stat.label}</div>
               </div>
             </GlassCard>
           ))}
@@ -319,75 +337,69 @@ function FeaturesSection() {
       icon: Shield,
       title: "Без шейва",
       description: "Мы много лет работаем в gambling вертикали и знаем все боли рынка. Гарантируем, что шейва через нашу партнерскую сеть не будет.",
-      iconColor: "text-emerald-400",
-      bgGradient: "from-emerald-500/20 to-emerald-600/20",
+      color: "#10b981",
     },
     {
       icon: Globe,
       title: "Большой выбор офферов",
       description: "Все офферы, с которыми мы работаем, уже были пролиты нашей командой. Мы знаем что рекомендовать нашим партнерам.",
-      iconColor: "text-sky-400",
-      bgGradient: "from-sky-500/20 to-sky-600/20",
+      color: "#0088CC",
     },
     {
       icon: Users,
       title: "Помощь в заливах",
       description: "Мы тестируем связки и делимся ими с партнерами. Всё — от креатива до необходимых инструментов. Вам остается взять ссылку из ЛК.",
-      iconColor: "text-violet-400",
-      bgGradient: "from-violet-500/20 to-violet-600/20",
+      color: "#8b5cf6",
     },
     {
       icon: DollarSign,
       title: "Быстрые выплаты",
       description: "Стараемся максимально быстро выплачивать вознаграждение. Если у рекла нет претензий к трафику — средства будут на кошельке в кратчайший срок.",
-      iconColor: "text-amber-400",
-      bgGradient: "from-amber-500/20 to-amber-600/20",
+      color: "#f59e0b",
     },
     {
       icon: MessageCircle,
       title: "Приватный канал со связками",
       description: "Для проверенных партнеров есть закрытый канал с продуктом, креативами, таргетом, плейсментами — всё для профитной настройки пролива.",
-      iconColor: "text-pink-400",
-      bgGradient: "from-pink-500/20 to-pink-600/20",
+      color: "#ec4899",
     },
     {
       icon: BarChart3,
       title: "Полная аналитика",
       description: "Личный кабинет с детальной статистикой по всем показателям. Видишь каждый клик и депозит по своим subID в реальном времени.",
-      iconColor: "text-cyan-400",
-      bgGradient: "from-cyan-500/20 to-cyan-600/20",
+      color: "#06b6d4",
     },
   ];
 
   return (
     <section id="features" className="py-20 lg:py-32 relative overflow-hidden">
       <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #002060 0%, #001845 50%, #002060 100%)" }} />
-      <div className="hidden md:block absolute top-0 right-0 w-80 h-80 bg-sky-500/8 rounded-full blur-[100px]" />
-      <div className="hidden md:block absolute bottom-0 left-0 w-96 h-96 bg-blue-600/6 rounded-full blur-[120px]" />
+      <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-sky-500/8 rounded-full blur-[200px]" />
       
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         <AnimatedSection className="text-center mb-16">
           <h2 className="text-3xl lg:text-5xl font-bold text-white mb-4">
             Почему выбирают PrimeTraff
           </h2>
-          <p className="text-white/50 text-lg max-w-2xl mx-auto">
+          <p className="text-white/70 text-lg max-w-2xl mx-auto">
             Созданы арбитражниками для арбитражников. Знаем, что вам нужно.
           </p>
         </AnimatedSection>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 lg:gap-x-12 lg:gap-y-16 max-w-5xl mx-auto">
           {features.map((feature, i) => (
-            <AnimatedSection key={i} delay={i * 0.1}>
-              <GlassCard className="p-6 lg:p-8 h-full group">
+            <AnimatedSection key={i} delay={i * 0.08} className="text-center">
+              <div className="flex flex-col items-center">
                 <div 
-                  className={`w-14 h-14 rounded-xl bg-gradient-to-br ${feature.bgGradient} flex items-center justify-center mb-5 transition-all`}
+                  className="w-12 h-12 lg:w-14 lg:h-14 rounded-full flex items-center justify-center mb-4 lg:mb-5"
+                  style={{ backgroundColor: `${feature.color}20`, boxShadow: `0 0 25px ${feature.color}15` }}
                   data-testid={`card-feature-${i}`}
                 >
-                  <feature.icon className={`w-7 h-7 ${feature.iconColor}`} />
+                  <feature.icon className="w-5 h-5 lg:w-6 lg:h-6" style={{ color: feature.color }} />
                 </div>
-                <h3 className="text-xl font-semibold text-white mb-3">{feature.title}</h3>
-                <p className="text-white/50 leading-relaxed">{feature.description}</p>
-              </GlassCard>
+                <h3 className="text-base lg:text-lg font-semibold text-white mb-2">{feature.title}</h3>
+                <p className="text-sm text-white/70 leading-relaxed max-w-[260px]">{feature.description}</p>
+              </div>
             </AnimatedSection>
           ))}
         </div>
@@ -451,7 +463,7 @@ function HowItWorksSection() {
           <h2 className="text-3xl lg:text-5xl font-bold text-white mb-4">
             Как начать зарабатывать
           </h2>
-          <p className="text-white/50 text-lg max-w-2xl mx-auto">
+          <p className="text-white/70 text-lg max-w-2xl mx-auto">
             Простой старт за 5 минут. Никакой бюрократии.
           </p>
         </AnimatedSection>
@@ -472,7 +484,7 @@ function HowItWorksSection() {
                     </div>
                   </div>
                   <h3 className="text-xl font-semibold text-white mb-3">{step.title}</h3>
-                  <p className="text-white/50">{step.description}</p>
+                  <p className="text-white/70">{step.description}</p>
                 </div>
               </AnimatedSection>
             ))}
@@ -527,7 +539,7 @@ function TestimonialsSection() {
           <h2 className="text-3xl lg:text-5xl font-bold text-white mb-4">
             Что говорят партнеры
           </h2>
-          <p className="text-white/50 text-lg max-w-2xl mx-auto">
+          <p className="text-white/70 text-lg max-w-2xl mx-auto">
             Реальные отзывы от реальных арбитражников
           </p>
         </AnimatedSection>
@@ -542,7 +554,7 @@ function TestimonialsSection() {
                   </div>
                   <div>
                     <div className="font-semibold text-white">{testimonial.name}</div>
-                    <div className="text-sm text-white/40">{testimonial.role}</div>
+                    <div className="text-sm text-white/60">{testimonial.role}</div>
                   </div>
                 </div>
                 <div className="flex gap-1 mb-4">
@@ -550,7 +562,7 @@ function TestimonialsSection() {
                     <Star key={j} className="w-4 h-4 fill-amber-400 text-amber-400" />
                   ))}
                 </div>
-                <p className="text-white/60 leading-relaxed" data-testid={`card-testimonial-${i}`}>{testimonial.text}</p>
+                <p className="text-white/75 leading-relaxed" data-testid={`card-testimonial-${i}`}>{testimonial.text}</p>
               </GlassCard>
             </AnimatedSection>
           ))}
@@ -588,7 +600,7 @@ function PartnersSection() {
           <h2 className="text-3xl lg:text-5xl font-bold text-white mb-4">
             Наши партнеры
           </h2>
-          <p className="text-white/50 text-lg max-w-2xl mx-auto">
+          <p className="text-white/70 text-lg max-w-2xl mx-auto">
             Работаем с лучшими брендами индустрии
           </p>
         </AnimatedSection>
@@ -658,7 +670,7 @@ function FAQSection() {
           <h2 className="text-3xl lg:text-5xl font-bold text-white mb-4">
             Частые вопросы
           </h2>
-          <p className="text-white/50 text-lg">
+          <p className="text-white/70 text-lg">
             Не нашли ответ? Напишите нам в Telegram
           </p>
         </AnimatedSection>
@@ -677,7 +689,7 @@ function FAQSection() {
                 </button>
                 <div className={`overflow-hidden transition-all duration-200 ${openIndex === i ? "max-h-96" : "max-h-0"}`}>
                   <div className="px-6 pb-6">
-                    <p className="text-white/50 whitespace-pre-line leading-relaxed">{faq.answer}</p>
+                    <p className="text-white/70 whitespace-pre-line leading-relaxed">{faq.answer}</p>
                   </div>
                 </div>
               </GlassCard>
@@ -702,7 +714,7 @@ function CTASection() {
           <h2 className="text-3xl lg:text-5xl font-bold text-white mb-6">
             Готовы начать зарабатывать?
           </h2>
-          <p className="text-lg lg:text-xl text-white/50 mb-10 max-w-2xl mx-auto">
+          <p className="text-lg lg:text-xl text-white/75 mb-10 max-w-2xl mx-auto">
             Присоединяйтесь к PrimeTraff сегодня и получите доступ к лучшим офферам рынка
           </p>
 
@@ -721,7 +733,7 @@ function CTASection() {
             </a>
           </div>
 
-          <div className="mt-12 flex flex-wrap items-center justify-center gap-6 lg:gap-8 text-white/50">
+          <div className="mt-12 flex flex-wrap items-center justify-center gap-6 lg:gap-8 text-white/70">
             <div className="flex items-center gap-2">
               <CheckCircle className="w-5 h-5 text-amber-400" />
               <span>Без холдов</span>
@@ -774,14 +786,14 @@ function Footer() {
             </a>
             <a 
               href="mailto:support@primetraff.com" 
-              className="text-white/40 hover:text-sky-400 transition-colors"
+              className="text-white/60 hover:text-sky-400 transition-colors"
               data-testid="link-footer-email"
             >
               support@primetraff.com
             </a>
           </div>
 
-          <div className="text-white/30 text-sm">
+          <div className="text-white/50 text-sm">
             © 2026 PrimeTraff. Все права защищены.
           </div>
         </div>
@@ -888,25 +900,25 @@ function SpecialOfferPopup() {
           <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
             Специальное предложение
           </h3>
-          <p className="text-white/50">Успейте воспользоваться</p>
+          <p className="text-white/70">Успейте воспользоваться</p>
         </div>
 
         <div className="grid grid-cols-4 gap-2 md:gap-3 mb-6">
           <div className="bg-white/5 rounded-xl p-3 text-center border border-white/10">
             <div className="text-2xl md:text-3xl font-bold text-sky-400">{timeLeft.days}</div>
-            <div className="text-xs text-white/40 mt-1">дней</div>
+            <div className="text-xs text-white/60 mt-1">дней</div>
           </div>
           <div className="bg-white/5 rounded-xl p-3 text-center border border-white/10">
             <div className="text-2xl md:text-3xl font-bold text-sky-400">{String(timeLeft.hours).padStart(2, '0')}</div>
-            <div className="text-xs text-white/40 mt-1">часов</div>
+            <div className="text-xs text-white/60 mt-1">часов</div>
           </div>
           <div className="bg-white/5 rounded-xl p-3 text-center border border-white/10">
             <div className="text-2xl md:text-3xl font-bold text-sky-400">{String(timeLeft.minutes).padStart(2, '0')}</div>
-            <div className="text-xs text-white/40 mt-1">минут</div>
+            <div className="text-xs text-white/60 mt-1">минут</div>
           </div>
           <div className="bg-white/5 rounded-xl p-3 text-center border border-white/10">
             <div className="text-2xl md:text-3xl font-bold text-sky-400">{String(timeLeft.seconds).padStart(2, '0')}</div>
-            <div className="text-xs text-white/40 mt-1">секунд</div>
+            <div className="text-xs text-white/60 mt-1">секунд</div>
           </div>
         </div>
 
