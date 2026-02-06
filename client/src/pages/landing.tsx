@@ -680,24 +680,27 @@ function FAQSection() {
           </p>
         </AnimatedSection>
 
-        <div className="space-y-4">
+        <div className="space-y-3">
           {faqs.map((faq, i) => (
             <AnimatedSection key={i} delay={i * 0.1}>
-              <GlassCard className="overflow-visible" hover={false}>
+              <div className={`rounded-xl border transition-all duration-300 ${openIndex === i ? "bg-white/[0.05] border-white/12" : "bg-white/[0.03] border-white/8 hover:border-white/12"}`}>
                 <button
-                  className="w-full flex items-center justify-between p-6 text-left transition-colors"
+                  className="w-full flex items-center justify-between p-5 lg:p-6 text-left"
                   onClick={() => setOpenIndex(openIndex === i ? null : i)}
                   data-testid={`button-faq-${i}`}
                 >
-                  <span className="font-semibold text-white pr-4">{faq.question}</span>
-                  <ChevronDown className={`w-5 h-5 text-sky-400 flex-shrink-0 transition-transform duration-200 ${openIndex === i ? "rotate-180" : ""}`} />
+                  <span className="text-sm lg:text-[15px] font-medium text-white/90 pr-4">{faq.question}</span>
+                  <div className={`w-7 h-7 rounded-full border border-white/10 flex items-center justify-center flex-shrink-0 transition-all duration-200 ${openIndex === i ? "bg-white/10 rotate-180" : ""}`}>
+                    <ChevronDown className="w-3.5 h-3.5 text-white/50" />
+                  </div>
                 </button>
-                <div className={`overflow-hidden transition-all duration-200 ${openIndex === i ? "max-h-96" : "max-h-0"}`}>
-                  <div className="px-6 pb-6">
-                    <p className="text-white/70 whitespace-pre-line leading-relaxed">{faq.answer}</p>
+                <div className={`overflow-hidden transition-all duration-300 ${openIndex === i ? "max-h-96" : "max-h-0"}`}>
+                  <div className="px-5 lg:px-6 pb-5 lg:pb-6 pt-0">
+                    <div className="w-10 h-px bg-white/10 mb-4" />
+                    <p className="text-sm text-white/60 whitespace-pre-line leading-relaxed">{faq.answer}</p>
                   </div>
                 </div>
-              </GlassCard>
+              </div>
             </AnimatedSection>
           ))}
         </div>
