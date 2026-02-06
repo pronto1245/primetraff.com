@@ -1,0 +1,825 @@
+<html dir="ltr" lang="en-US" prefix="og: https://ogp.me/ns#" style="scroll-behavior: smooth;"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="profile" href="https://gmpg.org/xfn/11">
+
+    <title>About Us - Betatransfer</title>
+	<style>img:is([sizes="auto" i], [sizes^="auto," i]) { contain-intrinsic-size: 3000px 1500px }</style>
+	
+		<!-- All in One SEO 4.7.7 - aioseo.com -->
+	<meta name="description" content="About us Betatransfer was founded in 2016 as a crypto exchange service. As a beginning player in the market, we ourselves faced the problem of accepting payments. So we started to develop new products and analysed demand in the market. This is how Betatransfer was started. Now it's one of the leading services Betatransfer Group.">
+	<meta name="robots" content="noindex, nofollow, max-image-preview:large">
+	<link rel="canonical" href="https://betatransfer.io/about-us">
+	<meta name="generator" content="All in One SEO (AIOSEO) 4.7.7">
+		<meta property="og:locale" content="en_US">
+		<meta property="og:site_name" content="Betatransfer -">
+		<meta property="og:type" content="article">
+		<meta property="og:title" content="About Us - Betatransfer">
+		<meta property="og:description" content="About us Betatransfer was founded in 2016 as a crypto exchange service. As a beginning player in the market, we ourselves faced the problem of accepting payments. So we started to develop new products and analysed demand in the market. This is how Betatransfer was started. Now it's one of the leading services Betatransfer Group.">
+		<meta property="og:url" content="https://betatransfer.io/about-us">
+		<meta property="article:published_time" content="2024-12-12T10:06:32+00:00">
+		<meta property="article:modified_time" content="2025-01-29T20:24:06+00:00">
+		<meta name="twitter:card" content="summary_large_image">
+		<meta name="twitter:title" content="About Us - Betatransfer">
+		<meta name="twitter:description" content="About us Betatransfer was founded in 2016 as a crypto exchange service. As a beginning player in the market, we ourselves faced the problem of accepting payments. So we started to develop new products and analysed demand in the market. This is how Betatransfer was started. Now it's one of the leading services Betatransfer Group.">
+		<script src="https://embed.tawk.to/_s/v4/app/69802381f63/js/twk-main.js" charset="UTF-8" crossorigin="*"></script><script src="https://embed.tawk.to/_s/v4/app/69802381f63/js/twk-vendor.js" charset="UTF-8" crossorigin="*"></script><script src="https://embed.tawk.to/_s/v4/app/69802381f63/js/twk-chunk-vendors.js" charset="UTF-8" crossorigin="*"></script><script src="https://embed.tawk.to/_s/v4/app/69802381f63/js/twk-chunk-common.js" charset="UTF-8" crossorigin="*"></script><script src="https://embed.tawk.to/_s/v4/app/69802381f63/js/twk-runtime.js" charset="UTF-8" crossorigin="*"></script><script src="https://embed.tawk.to/_s/v4/app/69802381f63/js/twk-app.js" charset="UTF-8" crossorigin="*"></script><script async="" src="https://embed.tawk.to/5cf13687b534676f32acc689/1drr7brv5" charset="UTF-8" crossorigin="*"></script><script type="application/ld+json" class="aioseo-schema">
+			{"@context":"https:\/\/schema.org","@graph":[{"@type":"BreadcrumbList","@id":"https:\/\/betatransfer.io\/about-us#breadcrumblist","itemListElement":[{"@type":"ListItem","@id":"https:\/\/betatransfer.io\/#listItem","position":1,"name":"Home","item":"https:\/\/betatransfer.io\/","nextItem":{"@type":"ListItem","@id":"https:\/\/betatransfer.io\/about-us#listItem","name":"About Us"}},{"@type":"ListItem","@id":"https:\/\/betatransfer.io\/about-us#listItem","position":2,"name":"About Us","previousItem":{"@type":"ListItem","@id":"https:\/\/betatransfer.io\/#listItem","name":"Home"}}]},{"@type":"Organization","@id":"https:\/\/betatransfer.io\/#organization","name":"Betatransfer","url":"https:\/\/betatransfer.io\/"},{"@type":"WebPage","@id":"https:\/\/betatransfer.io\/about-us#webpage","url":"https:\/\/betatransfer.io\/about-us","name":"About Us - Betatransfer","description":"About us Betatransfer was founded in 2016 as a crypto exchange service. As a beginning player in the market, we ourselves faced the problem of accepting payments. So we started to develop new products and analysed demand in the market. This is how Betatransfer was started. Now it's one of the leading services Betatransfer Group.","inLanguage":"en-US","isPartOf":{"@id":"https:\/\/betatransfer.io\/#website"},"breadcrumb":{"@id":"https:\/\/betatransfer.io\/about-us#breadcrumblist"},"datePublished":"2024-12-12T10:06:32-02:00","dateModified":"2025-01-29T20:24:06-02:00"},{"@type":"WebSite","@id":"https:\/\/betatransfer.io\/#website","url":"https:\/\/betatransfer.io\/","name":"Betatransfer","inLanguage":"en-US","publisher":{"@id":"https:\/\/betatransfer.io\/#organization"}}]}
+		</script>
+		<!-- All in One SEO -->
+
+<link rel="dns-prefetch" href="//code.jquery.com">
+<link rel="alternate" type="application/rss+xml" title="Betatransfer » Feed" href="https://betatransfer.io/feed">
+<link rel="alternate" type="application/rss+xml" title="Betatransfer » Comments Feed" href="https://betatransfer.io/comments/feed">
+<script>
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15.0.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15.0.3\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/betatransfer.io\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.7.1"}};
+/*! This file is auto-generated */
+!function(i,n){var o,s,e;function c(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function p(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data),r=(e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0),new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data));return t.every(function(e,t){return e===r[t]})}function u(e,t,n){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\uddfa\ud83c\uddf3","\ud83c\uddfa\u200b\ud83c\uddf3")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!n(e,"\ud83d\udc26\u200d\u2b1b","\ud83d\udc26\u200b\u2b1b")}return!1}function f(e,t,n){var r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):i.createElement("canvas"),a=r.getContext("2d",{willReadFrequently:!0}),o=(a.textBaseline="top",a.font="600 32px Arial",{});return e.forEach(function(e){o[e]=t(a,e,n)}),o}function t(e){var t=i.createElement("script");t.src=e,t.defer=!0,i.head.appendChild(t)}"undefined"!=typeof Promise&&(o="wpEmojiSettingsSupports",s=["flag","emoji"],n.supports={everything:!0,everythingExceptFlag:!0},e=new Promise(function(e){i.addEventListener("DOMContentLoaded",e,{once:!0})}),new Promise(function(t){var n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(s),u.toString(),p.toString()].join(",")+"));",r=new Blob([e],{type:"text/javascript"}),a=new Worker(URL.createObjectURL(r),{name:"wpTestEmojiSupports"});return void(a.onmessage=function(e){c(n=e.data),a.terminate(),t(n)})}catch(e){}c(n=f(s,u,p))}t(n)}).then(function(e){for(var t in e)n.supports[t]=e[t],n.supports.everything=n.supports.everything&&n.supports[t],"flag"!==t&&(n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&n.supports[t]);n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&!n.supports.flag,n.DOMReady=!1,n.readyCallback=function(){n.DOMReady=!0}}).then(function(){return e}).then(function(){var e;n.supports.everything||(n.readyCallback(),(e=n.source||{}).concatemoji?t(e.concatemoji):e.wpemoji&&e.twemoji&&(t(e.twemoji),t(e.wpemoji)))}))}((window,document),window._wpemojiSettings);
+</script>
+<link rel="stylesheet" id="base_css-css" href="https://betatransfer.io/wp-content/themes/btkassa/assets/styles/base.css?ver=1.6.0" type="text/css" media="all">
+<style id="wp-emoji-styles-inline-css" type="text/css">
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+</style>
+<link rel="stylesheet" id="wp-block-library-css" href="https://betatransfer.io/wp-includes/css/dist/block-library/style.min.css?ver=6.7.1" type="text/css" media="all">
+<style id="classic-theme-styles-inline-css" type="text/css">
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id="global-styles-inline-css" type="text/css">
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+:root :where(.wp-block-pullquote){font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel="stylesheet" id="btkassa-style-css" href="https://betatransfer.io/wp-content/themes/btkassa/style.css?ver=1.6.0" type="text/css" media="all">
+<script src="https://betatransfer.io/wp-content/themes/btkassa/js/index.runtime.651c1e67.js?ver=1.6.0" id="index-runtime-nomodule-js" nomodule="" defer=""></script>
+<script src="https://betatransfer.io/wp-content/themes/btkassa/js/index.runtime.a5ce21e8.js?ver=1.6.0" id="index-runtime-module-js" type="module"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.js?ver=1.6.0" id="jquery-3.2.1-js"></script>
+<script src="https://betatransfer.io/wp-content/themes/btkassa/js/index.80fbf830.js?ver=1.6.0" id="index-80fbf830-js"></script>
+<script src="https://betatransfer.io/wp-content/themes/btkassa/js/index.6c9527a9.js?ver=1.6.0" id="index-6c9527a9-js"></script>
+<script src="https://betatransfer.io/wp-content/themes/btkassa/js/index.4cfc431c.js?ver=1.6.0" id="index-4cfc431c-js"></script>
+<script src="https://betatransfer.io/wp-content/themes/btkassa/js/index.31772fc4.js?ver=1.6.0" id="index-31772fc4-js"></script>
+<script src="https://betatransfer.io/wp-content/themes/btkassa/js/index.6a6a6957.js?ver=1.6.0" id="index-6a6a6957-module-js" type="module"></script>
+<script src="https://betatransfer.io/wp-content/themes/btkassa/js/index.8e1cb2ea.js?ver=1.6.0" id="index-8e1cb2ea-nomodule-js" nomodule="" defer=""></script>
+<link rel="https://api.w.org/" href="https://betatransfer.io/wp-json/"><link rel="alternate" title="JSON" type="application/json" href="https://betatransfer.io/wp-json/wp/v2/pages/191"><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://betatransfer.io/xmlrpc.php?rsd">
+<meta name="generator" content="WordPress 6.7.1">
+<link rel="shortlink" href="https://betatransfer.io/?p=191">
+<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://betatransfer.io/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fbetatransfer.io%2Fabout-us">
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="https://betatransfer.io/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fbetatransfer.io%2Fabout-us&amp;format=xml">
+<link rel="manifest" href="https://betatransfer.io/site.webmanifest">
+<link rel="icon" href="https://betatransfer.io/favicon.ico" type="image/x-icon">
+<link rel="icon" href="https://betatransfer.io/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="https://betatransfer.io/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="https://betatransfer.io/web-app-manifest-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="https://betatransfer.io/web-app-manifest-512x512.png">
+<link rel="icon" href="https://betatransfer.io/wp-content/uploads/2024/12/web-app-manifest-512x512-1-150x150.png" sizes="32x32">
+<link rel="icon" href="https://betatransfer.io/wp-content/uploads/2024/12/web-app-manifest-512x512-1-300x300.png" sizes="192x192">
+<link rel="apple-touch-icon" href="https://betatransfer.io/wp-content/uploads/2024/12/web-app-manifest-512x512-1-300x300.png">
+<meta name="msapplication-TileImage" content="https://betatransfer.io/wp-content/uploads/2024/12/web-app-manifest-512x512-1-300x300.png">
+    <script src="https://js.hcaptcha.com/1/api.js" async="" defer=""></script>
+<script charset="utf-8" src="https://embed.tawk.to/_s/v4/app/69802381f63/js/twk-chunk-2d0d2b7c.js"></script><script charset="utf-8" src="https://embed.tawk.to/_s/v4/app/69802381f63/js/twk-chunk-2d224aff.js"></script><script charset="utf-8" src="https://embed.tawk.to/_s/v4/app/69802381f63/js/twk-chunk-3ea2c7ce.js"></script><script charset="utf-8" src="https://embed.tawk.to/_s/v4/app/69802381f63/js/twk-chunk-2d0da3af.js"></script><script charset="utf-8" src="https://embed.tawk.to/_s/v4/app/69802381f63/js/twk-chunk-4fe9d5dd.js"></script><script charset="utf-8" src="https://embed.tawk.to/_s/v4/app/69802381f63/js/twk-chunk-7941cc06.js"></script><script charset="utf-8" src="https://embed.tawk.to/_s/v4/app/69802381f63/js/twk-chunk-6289ff8e.js"></script><script charset="utf-8" src="https://embed.tawk.to/_s/v4/app/69802381f63/js/twk-chunk-2d0c8092.js"></script><style type="text/css">#b0pcri74ude1770412980655 {outline:none !important;
+visibility:visible !important;
+resize:none !important;
+box-shadow:none !important;
+overflow:visible !important;
+background:none !important;
+opacity:1 !important;
+filter:alpha(opacity=100) !important;
+-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity 1}) !important;
+-mz-opacity:1 !important;
+-khtml-opacity:1 !important;
+top:auto !important;
+right:0px !important;
+bottom:0px !important;
+left:auto !important;
+position:fixed !important;
+border:0 !important;
+min-height:0px  !important;
+min-width:0px  !important;
+max-height:none  !important;
+max-width:none  !important;
+padding:0px !important;
+margin:0px !important;
+-moz-transition-property:none !important;
+-webkit-transition-property:none !important;
+-o-transition-property:none !important;
+transition-property:none !important;
+transform:none !important;
+-webkit-transform:none !important;
+-ms-transform:none !important;
+width:auto !important;
+height:auto  !important;
+display:none !important;
+z-index:2000000000 !important;
+background-color:transparent !important;
+cursor:none !important;
+float:none !important;
+border-radius:unset !important;
+pointer-events:auto !important;
+clip:auto !important;
+color-scheme:light !important;}#b0pcri74ude1770412980655.widget-hidden {display: none !important;}#b0pcri74ude1770412980655.widget-visible {display: block !important;}
+@media print{
+ #b0pcri74ude1770412980655.widget-visible { 
+display: none !important;
+ }
+}</style><style type="text/css">.tawk-button-hover[data-v-2fc2d95d]:focus,.tawk-button-hover[data-v-2fc2d95d]:hover{background-color:hsla(0,0%,100%,.2)!important;border-radius:5px!important}</style><style type="text/css">@keyframes tawkMaxOpen{0%{opacity:0;transform:translate(0, 30px);;}to{opacity:1;transform:translate(0, 0px);}}@-moz-keyframes tawkMaxOpen{0%{opacity:0;transform:translate(0, 30px);;}to{opacity:1;transform:translate(0, 0px);}}@-webkit-keyframes tawkMaxOpen{0%{opacity:0;transform:translate(0, 30px);;}to{opacity:1;transform:translate(0, 0px);}}#jt6klm0hn0q1770412980766.open{animation : tawkMaxOpen .25s ease!important;}@keyframes tawkMaxClose{from{opacity: 1;transform:translate(0, 0px);;}to{opacity: 0;transform:translate(0, 30px);;}}@-moz-keyframes tawkMaxClose{from{opacity: 1;transform:translate(0, 0px);;}to{opacity: 0;transform:translate(0, 30px);;}}@-webkit-keyframes tawkMaxClose{from{opacity: 1;transform:translate(0, 0px);;}to{opacity: 0;transform:translate(0, 30px);;}}#jt6klm0hn0q1770412980766.closed{animation: tawkMaxClose .25s ease!important}</style></head>
+<body class="about-us" style="">
+
+<div id="preloader" class="preloader" style="background: rgb(2, 29, 124); display: none;">
+    <div class="dws-progress-bar circular-progress-bar" style="height: 187px; width: 187px;"><div class="progress-percentage">100%</div><canvas height="187" width="187"></canvas></div>
+    <video autoplay="" loop="" muted="" playsinline="" role="presentation" preload="" class="preloader-video">
+        <source src="/wp-content/themes/btkassa/assets/video/Blue.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</div>
+
+<app-header>
+    <header class="header">
+        <sl-drawer label="Drawer" placement="top" no-header="" data-menu-drawer="desktop" class="desktop-menu-drawer drawer-placement-top header__mega-menu header__mega-menu--desktop">
+            <div class="container">
+                <div class="desktop-menu-drawer__top">
+                    <div class="menu">
+                        <h2 class="menu__heading">Payment products</h2> <a href="/payment-bot" class="hover-line menu__link menu__link--bigger"> <svg width="24" height="24" class="icon menu__icon">
+                                <use href="/wp-content/themes/btkassa/assets/sprite/sprite.svg#payment-bot"></use></svg> Payment bot </a> <a href="/routing" class="hover-line menu__link menu__link--bigger"> <svg width="24" height="24" class="icon menu__icon">
+                                <use href="/wp-content/themes/btkassa/assets/sprite/sprite.svg#routing"></use></svg> Routing </a> <a href="/localisation" class="hover-line menu__link menu__link--bigger"> <svg width="24" height="24" class="icon menu__icon">
+                                <use href="/wp-content/themes/btkassa/assets/sprite/sprite.svg#localisation"></use></svg> Localisation </a> <a href="/cascading" class="hover-line menu__link menu__link--bigger"> <svg width="24" height="24" class="icon menu__icon">
+                                <use href="/wp-content/themes/btkassa/assets/sprite/sprite.svg#cascading"></use></svg> Cascading </a> <a href="/crypto" class="hover-line menu__link menu__link--bigger"> <svg width="24" height="24" class="icon menu__icon">
+                                <use href="/wp-content/themes/btkassa/assets/sprite/sprite.svg#crypto"></use></svg> Crypto </a>
+                    </div>
+                    <div class="menu">
+                        <h2 class="menu__heading">Industries</h2> <a href="/betting" class="hover-line menu__link"> Betting </a> <a href="/gambling" class="hover-line menu__link"> Gambling </a> <a href="/investment" class="hover-line menu__link"> Investment </a> <a href="/dating" class="hover-line menu__link"> Dating </a> <a href="/soft" class="hover-line menu__link"> Soft </a> <a href="/crypto-industry" class="hover-line menu__link"> Crypto </a> <a href="/adult" class="hover-line menu__link"> Adult </a> <a href="/infoproducts" class="hover-line menu__link"> Infoproducts </a> <a href="/gaming" class="hover-line menu__link"> Gaming </a>
+                    </div>
+                    <div class="menu">
+                        <h2 class="menu__heading">Payment methods</h2> <a href="/acquiring" class="hover-line menu__link"> Acquiring </a> <a href="/alternative-methods" class="hover-line menu__link"> Alternative methods </a> <a href="/ewallets" class="hover-line menu__link"> Ewallets </a> <a href="/crypto-method" class="hover-line menu__link"> Crypto </a>
+                    </div>
+                    <hr class="desktop-menu-drawer__separator">
+                    <div class="menu">
+                        <h2 class="menu__heading">Help</h2> <a href="/how-to-integrate" class="hover-line menu__link"> How to integrate </a> <a href="/faq" class="hover-line menu__link"> FAQ </a> <a href="/сonnection-requirements" class="hover-line menu__link"> Connection requirements </a>
+                        <a href="https://docs.betatransfer.io/integration" class="hover-line menu__link"> For developers </a>
+                        <a href="https://docs.betatransfer.io" class="hover-line menu__link"> Documentation </a>
+                    </div>
+                    <div class="menu">
+                        <h2 class="menu__heading">About us</h2> <a href="/about-us" class="hover-line menu__link"> About company </a> <a href="/cases" class="hover-line menu__link"> Cases </a> <a href="/partner-program" class="hover-line menu__link"> Partner program </a> <a href="/charity" class="hover-line menu__link"> Charity </a>
+                    </div>
+                </div>
+                <div class="desktop-menu-drawer__bottom">
+                    <p id="menu-contacts" class="desktop-menu-drawer__contact-text">Any other questions?<br>Contact us!</p>
+                    <div role="group" aria-labelledby="menu-contacts" class="desktop-menu-drawer__contacts">
+                        <a href="mailto:support@betatransfer.io" class="desktop-menu-drawer__link hover-line"> <svg width="24" height="24" class="desktop-menu-drawer__icon icon">
+                        <use href="/wp-content/themes/btkassa/assets/sprite/sprite.svg#envelope-button"></use></svg> Email </a>
+                        <a href="https://t.me/betatransferio_connect_bot" class="desktop-menu-drawer__link hover-line"> <svg width="24" height="24" class="desktop-menu-drawer__icon icon">
+                        <use href="/wp-content/themes/btkassa/assets/sprite/sprite.svg#telegram-button"></use></svg> Telegram </a>
+                        <a href="https://api.whatsapp.com/send/?phone=447475621532&amp;text&amp;type=phone_number&amp;app_absent=0" class="desktop-menu-drawer__link hover-line"> <svg width="24" height="24" class="desktop-menu-drawer__icon icon">
+                        <use href="/wp-content/themes/btkassa/assets/sprite/sprite.svg#whatsapp-button"></use></svg> Whats App </a>
+                    </div>
+                </div>
+            </div>
+        </sl-drawer>
+        <sl-drawer label="Drawer" placement="top" no-header="" data-menu-drawer="mobile" class="drawer-placement-top header__mega-menu header__mega-menu--mobile mobile-menu-drawer">
+            <div class="container mobile-menu-drawer__container">
+
+                <nav class="mobile-menu-drawer__nav nav"><ul id="menu-menu" class="nav__list"><li class="nav__item">
+                            <sl-details class="nav__accordion">
+                                <div slot="summary" class="nav__button">BT</div>
+                                <ul class="nav__sublist">
+                                    <li class="nav__subitem">
+                                        <sl-details class="nav__accordion nav__accordion--child">
+                                            <div slot="summary" class="nav__button">Payment products</div>
+                                            <ul class="nav__sublist">
+                                                <li class="nav__subitem"> <a href="/payment-bot" class="nav__sublink"> <svg width="16" height="16" class="icon nav__icon">
+                                                            <use href="/wp-content/themes/btkassa/assets/sprite/sprite.svg#payment-bot"></use></svg> Payment bot </a> </li>
+                                                <li class="nav__subitem"> <a href="/routing" class="nav__sublink"> <svg width="16" height="16" class="icon nav__icon">
+                                                            <use href="/wp-content/themes/btkassa/assets/sprite/sprite.svg#routing"></use></svg> Routing </a> </li>
+                                                <li class="nav__subitem"> <a href="/localisation" class="nav__sublink"> <svg width="16" height="16" class="icon nav__icon">
+                                                            <use href="/wp-content/themes/btkassa/assets/sprite/sprite.svg#localisation"></use></svg> Localisation </a> </li>
+                                                <li class="nav__subitem"> <a href="/cascading" class="nav__sublink"> <svg width="16" height="16" class="icon nav__icon">
+                                                            <use href="/wp-content/themes/btkassa/assets/sprite/sprite.svg#cascading"></use></svg> Cascading </a> </li>
+                                                <li class="nav__subitem"> <a href="/crypto" class="nav__sublink"> <svg width="16" height="16" class="icon nav__icon">
+                                                            <use href="/wp-content/themes/btkassa/assets/sprite/sprite.svg#crypto"></use></svg> Crypto </a> </li>
+                                            </ul>
+                                        </sl-details>
+                                    </li>
+                                    <li class="nav__subitem">
+                                        <sl-details class="nav__accordion nav__accordion--child">
+                                            <div slot="summary" class="nav__button">Industries</div>
+                                            <ul class="nav__sublist">
+                                                <li class="nav__subitem"> <a href="/betting" class="nav__sublink"> Betting </a> </li>
+                                                <li class="nav__subitem"> <a href="/gambling" class="nav__sublink"> Gambling </a> </li>
+                                                <li class="nav__subitem"> <a href="/investment" class="nav__sublink"> Investment </a> </li>
+                                                <li class="nav__subitem"> <a href="/dating" class="nav__sublink"> Dating </a> </li>
+                                                <li class="nav__subitem"> <a href="/soft" class="nav__sublink"> Soft </a> </li>
+                                                <li class="nav__subitem"> <a href="/crypto-industry" class="nav__sublink"> Crypto </a> </li>
+                                                <li class="nav__subitem"> <a href="/adult" class="nav__sublink"> Adult </a> </li>
+                                                <li class="nav__subitem"> <a href="/infoproducts" class="nav__sublink"> Infoproducts </a> </li>
+                                                <li class="nav__subitem"> <a href="/gaming" class="nav__sublink"> Gaming </a> </li>
+                                            </ul>
+                                        </sl-details>
+                                    </li>
+                                    <li class="nav__subitem">
+                                        <sl-details class="nav__accordion nav__accordion--child">
+                                            <div slot="summary" class="nav__button">Payment methods</div>
+                                            <ul class="nav__sublist">
+                                                <li class="nav__subitem"> <a href="/acquiring" class="nav__sublink"> Acquiring </a> </li>
+                                                <li class="nav__subitem"> <a href="/alternative-methods" class="nav__sublink"> Alternative methods </a> </li>
+                                                <li class="nav__subitem"> <a href="/ewallets" class="nav__sublink"> Ewallets </a> </li>
+                                                <li class="nav__subitem"> <a href="/crypto-method" class="nav__sublink"> Crypto </a> </li>
+                                            </ul>
+                                        </sl-details>
+                                    </li>
+                                </ul>
+                            </sl-details>
+                        </li>
+<li class="nav__item"><a href="https://www.betatransfer.org" class="hover-line nav__button">EXCHANGER</a></li>
+<li class="nav__item"><a href="/ewallets" class="hover-line nav__button">WALLET</a></li>
+<li class="nav__item"><a href="/blog" class="hover-line nav__button">BLOG</a></li>
+<li class="nav__item"><sl-details class="nav__accordion"><div slot="summary" class="nav__button">HELP</div><button type="button" slot="trigger" class="hover-line nav__button">HELP<svg width="12" height="7" class="icon nav__icon nav__icon--chevron"><use href="https://betatransfer.io/wp-content/themes/btkassa/assets/sprite/sprite.svg#chevron"></use></svg></button><ul class="nav__sublist"><li class="nav__subitem"><a href="https://betatransfer.io/how-to-integrate" class="hover-line nav__sublink">How to integrate</a></li>
+<li class="nav__subitem"><a href="https://betatransfer.io/%d1%81onnection-requirements" class="hover-line nav__sublink">Сonnection requirements</a></li>
+<li class="nav__subitem"><a href="https://docs.betatransfer.io/integration" class="hover-line nav__sublink">For developers</a></li>
+<li class="nav__subitem"><a href="https://docs.betatransfer.io" class="hover-line nav__sublink">Documentation</a></li>
+</ul></sl-details></li>
+<li class="nav__item"><sl-details class="nav__accordion"><div slot="summary" class="nav__button">ABOUT US</div><button type="button" slot="trigger" class="hover-line nav__button">ABOUT US<svg width="12" height="7" class="icon nav__icon nav__icon--chevron"><use href="https://betatransfer.io/wp-content/themes/btkassa/assets/sprite/sprite.svg#chevron"></use></svg></button><ul class="nav__sublist"><li class="nav__subitem"><a href="https://betatransfer.io/about-us" class="hover-line nav__sublink">About company</a></li>
+<li class="nav__subitem"><a href="https://betatransfer.io/contacts" class="hover-line nav__sublink">Contacts</a></li>
+<li class="nav__subitem"><a href="https://betatransfer.io/cases" class="hover-line nav__sublink">Cases</a></li>
+<li class="nav__subitem"><a href="https://betatransfer.io/partner-program" class="hover-line nav__sublink">Partner program</a></li>
+<li class="nav__subitem"><a href="https://betatransfer.io/brand-materials" class="hover-line nav__sublink">Brand materials</a></li>
+<li class="nav__subitem"><a href="https://betatransfer.io/charity" class="hover-line nav__sublink">Charity</a></li>
+</ul></sl-details></li>
+</ul></nav><!--                <a href="/"> <img src="/wp-content/themes/btkassa/assets/images/r.svg"> </a>-->
+                <div class="mobile-menu-drawer__bottom">
+                    <p id="menu-contacts" class="mobile-menu-drawer__contact-text">Any other questions?<br>Contact us!</p>
+                    <div role="group" aria-labelledby="menu-contacts" class="mobile-menu-drawer__contacts">
+                        <a href="mailto:support@betatransfer.io" class="hover-line mobile-menu-drawer__link"> <svg width="24" height="24" class="icon mobile-menu-drawer__icon">
+                                <use href="/wp-content/themes/btkassa/assets/sprite/sprite.svg#envelope-button"></use></svg> <span>Email</span>
+                        </a>
+                        <a href="https://t.me/betatransferio_connect_bot" class="hover-line mobile-menu-drawer__link"> <svg width="24" height="24" class="icon mobile-menu-drawer__icon">
+                                <use href="/wp-content/themes/btkassa/assets/sprite/sprite.svg#telegram-button"></use></svg> <span>Telegram</span>
+                        </a>
+                        <a href="https://api.whatsapp.com/send/?phone=447475621532&amp;text&amp;type=phone_number&amp;app_absent=0" class="hover-line mobile-menu-drawer__link"> <svg width="24" height="24" class="icon mobile-menu-drawer__icon">
+                                <use href="/wp-content/themes/btkassa/assets/sprite/sprite.svg#whatsapp-button"></use></svg> <span>Whats App</span>
+                        </a> </div>
+                </div>
+            </div>
+        </sl-drawer> <a href="/" class="header__home-link"> <img src="/wp-content/themes/btkassa/assets/images/bt.svg" width="82" height="84" alt="bt kassa" class="header__logo"> </a>
+        <button type="button" aria-haspopup="dialog" aria-expanded="false" data-menu-drawer-toggle="mobile" class="header__burger"> <svg width="28" height="14" class="header__burger-icon-closed icon">
+                <use href="/wp-content/themes/btkassa/assets/sprite/sprite.svg#burger"></use></svg> <svg width="24" height="24" class="header__burger-icon-opened icon">
+                <use href="/wp-content/themes/btkassa/assets/sprite/sprite.svg#cross"></use></svg> </button>
+
+        <nav class="header__nav nav"><ul id="menu-menu-1" class="nav__list"><li class="nav__item"><button type="button" aria-haspopup="dialog" aria-expanded="false" data-menu-drawer-toggle="desktop" class="hover-line nav__button"><svg width="12" height="12" class="icon nav__icon nav__icon--closed"><use href="https://betatransfer.io/wp-content/themes/btkassa/assets/sprite/sprite.svg#menu-closed"></use></svg><svg width="22" height="4" class="icon nav__icon nav__icon--opened"><use href="https://betatransfer.io/wp-content/themes/btkassa/assets/sprite/sprite.svg#menu-opened"></use></svg>BT</button></li>
+<li class="nav__item"><a href="https://www.betatransfer.org" class="hover-line nav__link">EXCHANGER</a></li>
+<li class="nav__item"><a href="/ewallets" class="hover-line nav__link">WALLET</a></li>
+<li class="nav__item"><a href="/blog" class="hover-line nav__link">BLOG</a></li>
+<li class="nav__item"><sl-dropdown class="nav__dropdown" placement="bottom-start"><button type="button" slot="trigger" class="hover-line nav__button">HELP<svg width="12" height="7" class="icon nav__icon nav__icon--chevron"><use href="https://betatransfer.io/wp-content/themes/btkassa/assets/sprite/sprite.svg#chevron"></use></svg></button><ul class="nav__sublist"><li class="nav__subitem"><a href="https://betatransfer.io/how-to-integrate" class="hover-line nav__sublink">How to integrate</a></li>
+<li class="nav__subitem"><a href="https://betatransfer.io/%d1%81onnection-requirements" class="hover-line nav__sublink">Сonnection requirements</a></li>
+<li class="nav__subitem"><a href="https://docs.betatransfer.io/integration" class="hover-line nav__sublink">For developers</a></li>
+<li class="nav__subitem"><a href="https://docs.betatransfer.io" class="hover-line nav__sublink">Documentation</a></li>
+</ul></sl-dropdown></li>
+<li class="nav__item"><sl-dropdown class="nav__dropdown" placement="bottom-start"><button type="button" slot="trigger" class="hover-line nav__button">ABOUT US<svg width="12" height="7" class="icon nav__icon nav__icon--chevron"><use href="https://betatransfer.io/wp-content/themes/btkassa/assets/sprite/sprite.svg#chevron"></use></svg></button><ul class="nav__sublist"><li class="nav__subitem"><a href="https://betatransfer.io/about-us" class="hover-line nav__sublink">About company</a></li>
+<li class="nav__subitem"><a href="https://betatransfer.io/contacts" class="hover-line nav__sublink">Contacts</a></li>
+<li class="nav__subitem"><a href="https://betatransfer.io/cases" class="hover-line nav__sublink">Cases</a></li>
+<li class="nav__subitem"><a href="https://betatransfer.io/partner-program" class="hover-line nav__sublink">Partner program</a></li>
+<li class="nav__subitem"><a href="https://betatransfer.io/brand-materials" class="hover-line nav__sublink">Brand materials</a></li>
+<li class="nav__subitem"><a href="https://betatransfer.io/charity" class="hover-line nav__sublink">Charity</a></li>
+</ul></sl-dropdown></li>
+</ul></nav><!--        <div class="header__lang nav"> </div>-->
+        <a href="https://me.betatransfer.io/sign-in" class="button header__signup">
+            <img src="/wp-content/themes/btkassa/assets/images/singup-animation.gif" slot="icon" width="38" height="38" alt="" class="header__signup-animation" style="width: 2.0rem; height: 2.0rem;">
+            <span class="button__text" style="font-size: large;"> Sign In </span>
+        </a>
+    </header>
+</app-header>
+<canvas id="snowCanvas"></canvas>
+
+
+
+
+<!--<main class="page blog-page">-->
+<main class="default-class">
+    
+<!--    <div class="entry-content">-->
+          <div class="about-us__intro-section intro-section intro-section--full-height section">
+        <div class="container">
+            <hgroup class="intro-section__headings text-gradient"><h1 class="heading heading--level_1 intro-section__heading"> About us </h1>
+                <p class="intro-section__subheading">Betatransfer was founded in 2016 as a crypto exchange service.</p>
+            </hgroup>
+            <p class="intro-section__description">As a beginning player in the market, we ourselves faced the problem of
+                accepting payments. So we started to develop new products and analysed demand in the market. This is how
+                Betatransfer was started. Now it’s one of the leading services Betatransfer Group. Our payment
+                provider that accepts payments from almost all over the world.</p>
+            <button type="button" data-modal="contact" class="button intro-section__button"><span class="button__text"> Contact us </span>
+            </button>
+        </div>
+        <img decoding="async" src="/wp-content/themes/btkassa/assets/images/backgrounds/background01d.png" alt="" role="presentation" class="decorative intro-section__decorative-1"> <img decoding="async" src="/wp-content/themes/btkassa/assets/images/backgrounds/background01m.png" alt="" role="presentation" class="decorative intro-section__decorative-2"> <img decoding="async" src="/wp-content/themes/btkassa/assets/images/backgrounds/background28.png" alt="" role="presentation" class="about-us__decorative-1 decorative">
+        <video src="/wp-content/themes/btkassa/assets/video/home-intro.mp4" autoplay="" loop="" muted="" playsinline="" role="presentation" class="about-us__decorative-2 decorative"></video>
+        <video src="/wp-content/themes/btkassa/assets/video/home-intro.mp4" autoplay="" loop="" muted="" playsinline="" role="presentation" class="about-us__decorative-3 decorative"></video>
+    </div>
+    <div class="about-us__alternating-blocks-section alternating-blocks-section section">
+        <div class="container">
+            <div class="alternating-blocks alternating-blocks-section__blocks">
+                <article class="alternating-blocks__item"><h3 class="alternating-blocks__heading heading heading--level_2"> Our mission and vision </h3>
+                    <p class="alternating-blocks__text">Mission of Betatransfer is to make payment processing
+                        simple for clients. Traditionally, the high-risk merchant market is perceived as associated with
+                        opacity. We disagree. Our vision is to build a new culture in the market and minimize those very
+                        high risks everyone talks about.</p>
+                    <video src="/wp-content/themes/btkassa/assets/video/05_AboutUsOurMission.mp4" autoplay="" loop="" muted="" playsinline="" class="alternating-blocks__figure"></video>
+                </article>
+                <article class="alternating-blocks__item"><h3 class="alternating-blocks__heading heading heading--level_2"> Charity </h3>
+                    <p class="alternating-blocks__text">We are building not just a brand, but a socially active company.
+                        Our goal is to help wherever we can be of assistance and promote the idea of charity among our
+                        colleagues.</p>
+                    <video src="/wp-content/themes/btkassa/assets/video/05_AboutUsCharity.mp4" autoplay="" loop="" muted="" playsinline="" class="alternating-blocks__figure"></video>
+                </article>
+                <article class="alternating-blocks__item"><h3 class="alternating-blocks__heading heading heading--level_2"> Security Policy </h3>
+                    <p class="alternating-blocks__text">Security and privacy is our priority. Our products are PCI DSS
+                        compliant, which means they are safe for customers and business. We pay special attention to
+                        data and server protection. Our employees don’t have access to clients’ personal accounts and
+                        information.</p>
+                    <video src="/wp-content/themes/btkassa/assets/video/05_AboutUsSecurityPolicy.mp4" autoplay="" loop="" muted="" playsinline="" class="alternating-blocks__figure"></video>
+                </article>
+            </div>
+        </div>
+        <img decoding="async" src="/wp-content/themes/btkassa/assets/images/backgrounds/background29.png" alt="" role="presentation" class="about-us__decorative-4 decorative"> <img decoding="async" src="/wp-content/themes/btkassa/assets/images/backgrounds/background03.png" alt="" role="presentation" class="about-us__decorative-5 decorative"></div>
+    <section class="about-us__figure-card-columns-section figure-card-columns-section section">
+        <div class="container">
+            <hgroup class="figure-card-columns-section__headings"><h2 class="figure-card-columns-section__heading heading heading--level_2"> Our team </h2>
+                <p class="figure-card-columns-section__subheading">Betatransfer is a team of experts in various
+                    fields.</p></hgroup>
+            <div style="--justify:space-between" class="figure-card-columns figure-card-columns--medium figure-card-columns-section__columns">
+                <article class="figure-card figure-card--icon_small figure-card--vertical figure-card-columns__item">
+                    <img src="/wp-content/themes/btkassa/assets/images/figure21.png" loading="lazy" decoding="async" alt="" class="figure-card__icon">
+                    <hgroup class="figure-card__headings"><h3 class="figure-card__heading heading heading--level_6">
+                        Technical Department </h3>
+                        <p class="figure-card__text">Currently, the team of high-class programmers are actively working
+                            on the product, developing and adapting solutions according to our clients’ needs.</p>
+                    </hgroup>
+                </article>
+                <article class="figure-card figure-card--icon_small figure-card--vertical figure-card-columns__item">
+                    <img src="/wp-content/themes/btkassa/assets/images/figure22.png" loading="lazy" decoding="async" alt="" class="figure-card__icon">
+                    <hgroup class="figure-card__headings"><h3 class="figure-card__heading heading heading--level_6">
+                        Support Department </h3>
+                        <p class="figure-card__text">Our support service managers are not robots but real people who can
+                            quickly respond to customer queries.</p></hgroup>
+                </article>
+                <article class="figure-card figure-card--icon_small figure-card--vertical figure-card-columns__item">
+                    <img src="/wp-content/themes/btkassa/assets/images/figure23.png" loading="lazy" decoding="async" alt="" class="figure-card__icon">
+                    <hgroup class="figure-card__headings"><h3 class="figure-card__heading heading heading--level_6">
+                        Quality/Testing Department </h3>
+                        <p class="figure-card__text">Our youngest company department. The main task of specialists is
+                            the continuous improvement of conversion rates and the stability of payment solutions.</p>
+                    </hgroup>
+                </article>
+            </div>
+            <div style="--justify:space-evenly" class="figure-card-columns figure-card-columns--big figure-card-columns-section__columns">
+                <article class="figure-card figure-card--icon_small figure-card--vertical figure-card-columns__item">
+                    <img src="/wp-content/themes/btkassa/assets/images/figure24.png" loading="lazy" decoding="async" alt="" class="figure-card__icon">
+                    <hgroup class="figure-card__headings"><h3 class="figure-card__heading heading heading--level_6">
+                        Security<br>Service </h3>
+                        <p class="figure-card__text">Before starting any collaboration, all clients are complaints by
+                            our specialists. We must be confident that the cooperation will be effective and safe for
+                            both parties. The security service also engages white-hat hackers to test our solutions.</p>
+                    </hgroup>
+                </article>
+                <article class="figure-card figure-card--icon_small figure-card--vertical figure-card-columns__item">
+                    <img src="/wp-content/themes/btkassa/assets/images/figure25.png" loading="lazy" decoding="async" alt="" class="figure-card__icon">
+                    <hgroup class="figure-card__headings"><h3 class="figure-card__heading heading heading--level_6">
+                        Finance, Legal, Marketing, and Sales Departments </h3>
+                        <p class="figure-card__text">Over the years, we have formed a team of specialists in each of
+                            these areas. On the contact page you can find information on how to get in touch with each
+                            of our departments.</p></hgroup>
+                </article>
+            </div>
+        </div>
+        <img decoding="async" src="/wp-content/themes/btkassa/assets/images/backgrounds/background26.png" alt="" role="presentation" class="about-us__decorative-6 decorative"></section>
+
+<!-- .entry-content -->
+
+    <!--</article>-->
+
+
+
+
+    <aside id="contact" class="contact-form-section payment-bot__contact-form-section section">
+        <div class="contact-form contact-form-section__form container">
+            <hgroup class="contact-form__headings"><h2 class="contact-form__heading heading heading--level_2">We are in touch 24/7</h2>
+                <p class="contact-form__subheading">Any other questions? Contact us!</p></hgroup>
+            <div class="contact-form__links">
+                <a href="mailto:support@betatransfer.io" target="_blank" rel="noreferrer" class="button button--secondary contact-form__link">
+                    <svg width="24" height="24" class="button__icon icon">
+                        <use href="/wp-content/themes/btkassa/assets/sprite/sprite.svg#envelope-button"></use>
+                    </svg>
+                    <span class="button__text"> Email </span> </a>
+                <a href="https://t.me/betatransferio_connect_bot" target="_blank" rel="noreferrer" class="button button--secondary contact-form__link">
+                    <svg width="24" height="24" class="button__icon icon">
+                        <use href="/wp-content/themes/btkassa/assets/sprite/sprite.svg#telegram-button"></use>
+                    </svg>
+                    <span class="button__text"> Telegram </span> </a>
+                <a href="https://api.whatsapp.com/send/?phone=447475621532&amp;text&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noreferrer" class="button button--secondary contact-form__link">
+                    <svg width="24" height="24" class="button__icon icon">
+                        <use href="/wp-content/themes/btkassa/assets/sprite/sprite.svg#whatsapp-button"></use>
+                    </svg>
+                    <span class="button__text"> Whats App </span> </a></div>
+
+                            <p class="contact-form__text">Or feel the form below</p>
+            
+            <form id="contactFormMain" action="https://betatransfer.io/custom-contact-handler" method="post" class="contact-form__fields contact-form-section__form container">
+                <input type="hidden" name="url" value="https://betatransfer.io/about-us">
+                <div class="contact-form__field input"><input placeholder="Name" type="text" wrapper-class="contact-form__field" label="Name" name="user_name" id="user_name" autocomplete="name given-name" required="" class="input__field input__field--input"> <label for="name" class="input__label"> <span class="input__label-text">Name</span> <span aria-hidden="true" class="input__label-required">*</span> </label></div>
+                <div class="contact-form__field input"><input placeholder="Email / Telegram / Whats app" type="text" wrapper-class="contact-form__field" label="Email / Telegram / Whats app" name="user_contact" id="user_contact" autocomplete="email tel" required="" class="input__field input__field--input"> <label for="user_contact" class="input__label"> <span class="input__label-text">Email / Telegram / Whats app</span>
+                        <span aria-hidden="true" class="input__label-required">*</span> </label></div>
+                <div class="contact-form__field input"><textarea placeholder="Message" rows="6" type="textarea" wrapper-class="contact-form__field" label="Message" name="user_message" id="user_message" required="" class="input__field input__field--textarea"></textarea>
+                    <label for="user_message" class="input__label"> <span class="input__label-text">Message</span>
+                        <span aria-hidden="true" class="input__label-required">*</span> </label></div>
+
+                <div class="h-captcha" data-sitekey="7356c35a-2e08-4486-8e64-231c5a3ce070"><iframe src="https://newassets.hcaptcha.com/captcha/v1/2c63fabe8365479a688dd8d5a6b1263c01f7c731/static/hcaptcha.html#frame=checkbox&amp;id=08f1tylsybvc&amp;host=betatransfer.io&amp;sentry=true&amp;reportapi=https%3A%2F%2Faccounts.hcaptcha.com&amp;recaptchacompat=true&amp;custom=false&amp;hl=ru&amp;tplinks=on&amp;andint=off&amp;pstissuer=https%3A%2F%2Fpst-issuer.hcaptcha.com&amp;sitekey=7356c35a-2e08-4486-8e64-231c5a3ce070&amp;theme=light&amp;origin=https%3A%2F%2Fbetatransfer.io" tabindex="0" frameborder="0" scrolling="no" allow="private-state-token-redemption" title="Виджет с флажком для проверки безопасности hCaptcha" data-hcaptcha-widget-id="08f1tylsybvc" data-hcaptcha-response="" style="pointer-events: auto; background-color: rgba(255, 255, 255, 0); border-radius: 4px; width: 302px; height: 76px; overflow: hidden;"></iframe><textarea id="g-recaptcha-response-08f1tylsybvc" name="g-recaptcha-response" style="display: none;"></textarea><textarea id="h-captcha-response-08f1tylsybvc" name="h-captcha-response" style="display: none;"></textarea></div>
+                <button type="submit" id="submitButton" class="button contact-form__submit"><span class="button__text"> Send message </span></button>
+
+                <input type="hidden" name="action" value="submit_contact_form">
+                <input type="hidden" name="url" value="https://betatransfer.io/about-us">
+            </form>
+        </div>
+        <img src="/wp-content/themes/btkassa/assets/images/backgrounds/background02.png" alt="" role="presentation" class="contact-form-section__decorative-1 decorative"> <img src="/wp-content/themes/btkassa/assets/images/decorative29.png" alt="" role="presentation" class="contact-form-section__decorative-2 decorative" style="transform: translate(-100%, 0px) rotate(18.2703deg); translate: none; rotate: none; scale: none;">
+        <img src="/wp-content/themes/btkassa/assets/images/decorative29.png" alt="" role="presentation" class="contact-form-section__decorative-3 decorative" style="transform: translate(100%, 0px) rotate(-11.3102deg); translate: none; rotate: none; scale: none;">
+    </aside>
+
+
+    <app-contact-form-modal>
+        <sl-dialog class="contact-form-modal" label="">
+            <button type="button" slot="header-actions" data-modal-close="" aria-label="Close" class="contact-form-modal__close">
+                <svg width="30" height="30" class="icon">
+                    <use href="/wp-content/themes/btkassa/assets/sprite/sprite.svg#cross"></use>
+                </svg>
+            </button>
+            <div class="contact-form contact-form-section__form">
+                <hgroup class="contact-form__headings"><h2 class="contact-form__heading heading heading--level_2"> We are in touch 24/7 </h2>
+                    <p class="contact-form__subheading">Any other questions? Contact us!</p></hgroup>
+                <div class="contact-form__links"><a href="mailto:support@betatransfer.io" target="_blank" rel="noreferrer" class="button button--secondary contact-form__link">
+                        <svg width="24" height="24" class="button__icon icon">
+                            <use href="/wp-content/themes/btkassa/assets/sprite/sprite.svg#envelope-button"></use>
+                        </svg>
+                        <span class="button__text"> Email </span> </a> <a href="https://t.me/betatransferio_connect_bot" target="_blank" rel="noreferrer" class="button button--secondary contact-form__link">
+                        <svg width="24" height="24" class="button__icon icon">
+                            <use href="/wp-content/themes/btkassa/assets/sprite/sprite.svg#telegram-button"></use>
+                        </svg>
+                        <span class="button__text"> Telegram </span> </a> <a href="https://api.whatsapp.com/send/?phone=447475621532&amp;text&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noreferrer" class="button button--secondary contact-form__link">
+                        <svg width="24" height="24" class="button__icon icon">
+                            <use href="/wp-content/themes/btkassa/assets/sprite/sprite.svg#whatsapp-button"></use>
+                        </svg>
+                        <span class="button__text"> Whats App </span> </a></div>
+                <p class="contact-form__text">Or feel the form below</p>
+                <form id="modalForm" action="https://betatransfer.io/custom-contact-handler" method="post" class="contact-form__fields contact-form-section__form">
+                    <input type="hidden" name="url" value="https://betatransfer.io/about-us">
+
+
+                    <div class="contact-form__field input"><input placeholder="Name" type="text" wrapper-class="contact-form__field" label="Name" name="user_name" id="name" autocomplete="name given-name" required="" class="input__field input__field--input"> <label for="name" class="input__label"> <span class="input__label-text">Name</span>
+                            <span aria-hidden="true" class="input__label-required">*</span> </label></div>
+                    <div class="contact-form__field input"><input placeholder="Email / Telegram / Whats app" type="text" wrapper-class="contact-form__field" label="Email / Telegram / Whats app" name="user_contact" id="user_contact" autocomplete="email tel" required="" class="input__field input__field--input">
+                        <label for="user_contact" class="input__label"> <span class="input__label-text">Email / Telegram / Whats app</span>
+                            <span aria-hidden="true" class="input__label-required">*</span> </label></div>
+                    <div class="contact-form__field input"><textarea placeholder="Message" rows="6" type="textarea" wrapper-class="contact-form__field" label="Message" name="user_message" id="user_message" required="" class="input__field input__field--textarea"></textarea>
+                        <label for="user_message" class="input__label"> <span class="input__label-text">Message</span> <span aria-hidden="true" class="input__label-required">*</span>
+                        </label></div>
+
+                    <div class="h-captcha" data-sitekey="7356c35a-2e08-4486-8e64-231c5a3ce070"><iframe src="https://newassets.hcaptcha.com/captcha/v1/2c63fabe8365479a688dd8d5a6b1263c01f7c731/static/hcaptcha.html#frame=checkbox&amp;id=10pqmaux52n8f&amp;host=betatransfer.io&amp;sentry=true&amp;reportapi=https%3A%2F%2Faccounts.hcaptcha.com&amp;recaptchacompat=true&amp;custom=false&amp;hl=ru&amp;tplinks=on&amp;andint=off&amp;pstissuer=https%3A%2F%2Fpst-issuer.hcaptcha.com&amp;sitekey=7356c35a-2e08-4486-8e64-231c5a3ce070&amp;theme=light&amp;origin=https%3A%2F%2Fbetatransfer.io" tabindex="0" frameborder="0" scrolling="no" allow="private-state-token-redemption" title="Виджет с флажком для проверки безопасности hCaptcha" data-hcaptcha-widget-id="10pqmaux52n8f" data-hcaptcha-response="" style="pointer-events: auto; background-color: rgba(255, 255, 255, 0); border-radius: 4px; width: 302px; height: 76px; overflow: hidden;"></iframe><textarea id="g-recaptcha-response-10pqmaux52n8f" name="g-recaptcha-response" style="display: none;"></textarea><textarea id="h-captcha-response-10pqmaux52n8f" name="h-captcha-response" style="display: none;"></textarea></div>
+                    <button type="submit" id="modal_form_submit" class="button contact-form__submit"><span class="button__text"> Send message </span></button>
+                    <input type="hidden" name="action" value="submit_contact_form">
+                    <input type="hidden" name="url" value="https://betatransfer.io/about-us">
+                </form>
+            </div>
+        </sl-dialog>
+    </app-contact-form-modal>
+</main>
+
+<footer id="colophon" class="footer">
+    <div class="container footer__container">
+        <div class="footer__top">
+            <div class="footer__menus">
+                
+                <div class="menu">
+                    <h2 class="menu__heading">Payment Products</h2>
+                    <a href="/payment-bot" class="hover-line menu__link"> Payment bot </a>
+                    <a href="/routing" class="hover-line menu__link"> Routing </a> <a href="/cascading" class="hover-line menu__link"> Cascading </a> <a href="/localisation" class="hover-line menu__link"> Localisation </a> <a href="/crypto" class="hover-line menu__link"> Crypto </a>
+                </div>
+                <div class="menu">
+                    <h2 class="menu__heading">Industries</h2> <a href="/betting" class="hover-line menu__link"> Betting </a> <a href="/gambling" class="hover-line menu__link"> Gambling </a> <a href="/investment" class="hover-line menu__link"> Investment </a> <a href="/dating" class="hover-line menu__link"> Dating </a> <a href="/soft" class="hover-line menu__link"> Soft </a> <a href="/crypto-industry" class="hover-line menu__link"> Crypto </a> <a href="/adult" class="hover-line menu__link"> Adult </a> <a href="/infoproducts" class="hover-line menu__link"> Infoproducts </a> <a href="/gaming" class="hover-line menu__link"> Gaming </a>
+                </div>
+                <div class="menu">
+                    <h2 class="menu__heading">Payment methods</h2> <a href="/acquiring" class="hover-line menu__link"> Acquiring </a> <a href="/alternative-methods" class="hover-line menu__link"> Alternative
+                        methods </a> <a href="/ewallets" class="hover-line menu__link"> Ewallets </a> <a href="/crypto-method" class="hover-line menu__link"> Crypto </a>
+                </div>
+                <div class="menu">
+                    <h2 class="menu__heading">Help</h2> <a href="/how-to-integrate" class="hover-line menu__link"> How to integrate </a> <a href="/faq" class="hover-line menu__link"> FAQ </a> <a href="/сonnection-requirements" class="hover-line menu__link"> Connection
+                        requirements </a> <a href="https://docs.betatransfer.io/integration" class="hover-line menu__link"> For
+                        developers </a> <a href="https://docs.betatransfer.io" class="hover-line menu__link">
+                        Documentation </a>
+                </div>
+                <div class="menu">
+                    <h2 class="menu__heading">About us</h2> <a href="/about-us" class="hover-line menu__link"> About Company </a> <a href="/contacts" class="hover-line menu__link"> Contacts </a> <a href="/cases" class="hover-line menu__link"> Cases </a>  <a href="/partner-program" class="hover-line menu__link"> Partner program </a> <a href="/brand-materials" class="hover-line menu__link"> Brand materials </a> <a href="/charity" class="hover-line menu__link"> Charity </a>
+                </div>
+            </div>
+            <div class="footer__accordions">
+                <sl-details summary="Payment Products" class="footer__accordion">
+                    <div class="menu"><a href="/payment-bot" class="hover-line menu__link"> Payment
+                            bot </a> <a href="/routing" class="hover-line menu__link"> Routing </a> <a href="/cascading" class="hover-line menu__link"> Cascading </a> <a href="/localisation" class="hover-line menu__link"> Localisation </a> <a href="/crypto" class="hover-line menu__link"> Crypto </a></div>
+                </sl-details>
+                <sl-details summary="Industries" class="footer__accordion">
+                    <div class="menu"><a href="/betting" class="hover-line menu__link"> Betting </a> <a href="/gambling" class="hover-line menu__link"> Gambling </a> <a href="/investment" class="hover-line menu__link"> Investment </a> <a href="/dating" class="hover-line menu__link"> Dating </a> <a href="/soft" class="hover-line menu__link"> Soft </a> <a href="/crypto-industry" class="hover-line menu__link"> Crypto </a> <a href="/adult" class="hover-line menu__link"> Adult </a> <a href="/infoproducts" class="hover-line menu__link"> Infoproducts </a> <a href="/gaming" class="hover-line menu__link"> Gaming </a></div>
+                </sl-details>
+                <sl-details summary="Payment methods" class="footer__accordion">
+                    <div class="menu"><a href="/acquiring" class="hover-line menu__link"> Acquiring </a>
+                        <a href="/alternative-methods" class="hover-line menu__link"> Alternative
+                            methods </a> <a href="/ewallets" class="hover-line menu__link"> Ewallets </a>
+                        <a href="/crypto-method" class="hover-line menu__link"> Crypto </a></div>
+                </sl-details>
+                <sl-details summary="Help" class="footer__accordion">
+                    <div class="menu"><a href="/how-to-integrate" class="hover-line menu__link"> How to
+                            integrate </a> <a href="/faq" class="hover-line menu__link"> FAQ </a> <a href="/сonnection-requirements" class="hover-line menu__link"> Connection
+                            requirements </a>
+                        <a href="https://docs.betatransfer.io/integration" class="hover-line menu__link"> For
+                            developers </a>
+                        <a href="https://docs.betatransfer.io" class="hover-line menu__link">
+                            Documentation </a></div>
+                </sl-details>
+                <sl-details summary="About us" class="footer__accordion">
+                    <div class="menu"><a href="/about-us" class="hover-line menu__link"> About
+                            Company </a> <a href="/contacts" class="hover-line menu__link"> Contacts </a>
+                        <a href="/cases" class="hover-line menu__link"> Cases </a>  <a href="/partner-program" class="hover-line menu__link"> Partner
+                            program </a> <a href="/brand-materials" class="hover-line menu__link"> Brand
+                            materials </a> <a href="/charity" class="hover-line menu__link"> Charity </a>
+                    </div>
+                </sl-details>
+            </div>
+        </div>
+        <div class="footer__middle"><a href="/" class="footer__logo-link">
+                <img src="https://betatransfer.io/wp-content/themes/btkassa/assets/images/betatransfer.svg" width="143" height="30" loading="lazy" decoding="async" alt="Betatransfer." class="footer__logo"> </a>
+            <div role="group" aria-label="Payments" class="footer__payments payments">
+                <img src="https://betatransfer.io/wp-content/themes/btkassa/assets/images/mastercard.svg" width="48" height="48" loading="lazy" decoding="async" alt="Mastercard." class="payments__icon">
+                <img src="https://betatransfer.io/wp-content/themes/btkassa/assets/images/visa.svg" width="48" height="48" loading="lazy" decoding="async" alt="Visa." class="payments__icon">
+                <img src="https://betatransfer.io/wp-content/themes/btkassa/assets/images/pci.svg" width="48" height="48" loading="lazy" decoding="async" alt="PCI." class="payments__icon">
+            </div>
+            <div role="group" aria-label="Socials" class="footer__socials socials">
+                <a href="https://www.facebook.com/Betatransfer.kassa" target="_blank" rel="noreferrer" class="socials__link">
+                    <img src="https://betatransfer.io/wp-content/themes/btkassa/assets/images/facebook.svg" width="48" height="48" loading="lazy" decoding="async" alt="Facebook." class="socials__icon">
+                </a>
+                <a href="https://www.instagram.com/betatransfer.community" target="_blank" rel="noreferrer" class="socials__link">
+                    <img src="https://betatransfer.io/wp-content/themes/btkassa/assets/images/instagram.svg" width="48" height="48" loading="lazy" decoding="async" alt="Instagram." class="socials__icon">
+                </a>
+                <a href="https://www.youtube.com/channel/UC4L_LDKs3j-YhnFQTRGGkSg" target="_blank" rel="noreferrer" class="socials__link">
+                    <img src="https://betatransfer.io/wp-content/themes/btkassa/assets/images/youtube.svg" width="48" height="48" loading="lazy" decoding="async" alt="YouTube." class="socials__icon">
+                </a>
+                <a href="https://www.tiktok.com/@betatransfer.kassa" target="_blank" rel="noreferrer" class="socials__link">
+                    <img src="https://betatransfer.io/wp-content/themes/btkassa/assets/images/tiktok.svg" width="48" height="48" loading="lazy" decoding="async" alt="TikTok." class="socials__icon">
+                </a>
+                <a href="https://t.me/btrkassa" target="_blank" rel="noreferrer" class="socials__link">
+                    <img src="https://betatransfer.io/wp-content/themes/btkassa/assets/images/telegram.svg" width="48" height="48" loading="lazy" decoding="async" alt="Telegram." class="socials__icon">
+                </a>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <div class="footer__design-by">
+                <img src="https://betatransfer.io/wp-content/themes/btkassa/assets/images/footer_copyright.png" loading="lazy" alt="Copyright">
+            </div>
+            <div role="group" aria-label="Policies" class="footer__policies policies"><a href="/user-agreement" class="hover-line hover-line--reverse policies__link">User
+                    agreements</a> <a href="/aml-policy" class="hover-line hover-line--reverse policies__link">AML policy</a> <a href="/privacy-policy" class="hover-line hover-line--reverse policies__link">Privacy
+                    policy</a> <a href="/cookie-policy" class="hover-line hover-line--reverse policies__link">Cookie policy</a>
+            </div>
+        </div>
+    </div>
+    <!-- TrustBox script -->
+<!--    <script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>-->
+    <!-- End TrustBox script -->
+
+    <!-- TrustBox widget - Review Collector -->
+<!--    <div class="trustpilot-widget" data-locale="en-US" data-template-id="56278e9abfbbba0bdcd568bc" data-businessunit-id="59d9eddd0000ff0005ad1afb" data-style-height="52px" data-style-width="100%">-->
+<!--        <a href="https://www.trustpilot.com/review/betatransfer.net" target="_blank" rel="noopener">Trustpilot</a>-->
+<!--    </div>-->
+    <!-- End TrustBox widget -->
+</footer><!-- #colophon -->
+<!-- #page -->
+
+<button type="button" aria-label="Feedback" class="chat" onclick="Tawk_API.toggle();">
+    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="none" class="chat__icon" viewBox="0 0 64 64">
+        <circle cx="32" cy="32" r="31.5" class="chat__circle">
+        </circle>
+        <path d="M39 14.5H25q-10.5 0-10.5 10.5v22.75c0 .962.787 1.75 1.75 1.75H39q10.5 0 10.5-10.5V25q0-10.5-10.5-10.5M23.25 27.625h17.5M23.25 36.375H35.5" class="chat__path">
+        </path>
+    </svg>
+</button>
+
+
+<!--Start of Tawk.to Script (0.8.7)-->
+<script id="tawk-script" type="text/javascript">
+    window.onload = function () {
+        var Tawk_API = Tawk_API || {};
+                var Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement('script'), s0 = document.getElementsByTagName('script')[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/5cf13687b534676f32acc689/1drr7brv5';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+
+            if (window.Tawk_API) {
+                let isChatOpen = false;
+                // const tawkContainer = document.querySelector('.tawk-min-container');
+                // var button = document.querySelector('button.tawk-custom-color.tawk-custom-border-color.tawk-button.tawk-button-circle.tawk-button-large');
+                var button = document.querySelector('button.tawk-min-chat-icon');
+
+                if (button) {
+                    button.style.display = 'none';
+                }
+
+                Tawk_API.customStyle = {
+                    visibility: {
+                        desktop: {
+                            position: 'br',
+                            xOffset: '20px',
+                            yOffset: 50
+                        },
+                        mobile: {
+                            position: 'br',
+                            xOffset: 0,
+                            yOffset: 0
+                        },
+                        bubble: {
+                            rotate: '0deg',
+                            xOffset: -20,
+                            yOffset: 0
+                        }
+                    }
+                };
+            }
+
+            document.addEventListener("DOMContentLoaded", function () {
+                // const toggleChatButton = document.getElementById('custom-tawk-btn');
+                // Скрываем стандартный интерфейс
+                const tawkContainer = document.querySelector('.tawk-min-container');
+                if (tawkContainer) {
+                    tawkContainer.style.display = 'none';
+                }
+
+                // Функция для переключения виджета
+                const toggleChat = () => {
+                    window.Tawk_API.hideWidget();
+                    if (isChatOpen) {
+                        // Скрыть виджет
+                        window.Tawk_API.hideWidget();
+                        // toggleChatButton.textContent = 'Открыть чат'; // Изменяем текст на кнопке
+                    } else {
+                        // Показать и развернуть виджет
+                        window.Tawk_API.hideWidget();
+                        window.Tawk_API.maximize(); // Разворачиваем виджет
+                        // toggleChatButton.textContent = 'Закрыть чат'; // Изменяем текст на кнопке
+                    }
+                    isChatOpen = !isChatOpen; // Переключаем состояние
+                };
+
+                // Привязываем обработчик событий к кнопке
+                // toggleChatButton.addEventListener('click', toggleChat);
+
+                // Обработчик нажатия на кастомную кнопку
+                const customButton = document.getElementById('custom-tawk-button');
+                if (customButton) {
+                    customButton.addEventListener('click', function () {
+                        // Открытие виджета Tawk.io
+                        if (Tawk_API && Tawk_API.toggle) {
+                            Tawk_API.toggle(); // Переключает отображение чата
+                        } else {
+                            console.warn("Tawk API не инициализирован.");
+                        }
+                    });
+                }
+            });
+        })();
+
+        var def_tawk_bottom = "20px"; /*This is their default style that I want to change*/
+        var def_tawk_right = "16px"; /*This is their default style that I want to change*/
+        var customize_tawk = ""; /*Interval object*/
+
+        function customize_tawk_widget() {
+            // var cur_bottom = jQuery("iframe[title='chat widget']").eq(0).css('bottom'); /*Get the default style*/
+            // var cur_right = jQuery("iframe[title='chat widget']").eq(0).css('right'); /*Get the default style*/
+            // if(cur_bottom == def_tawk_bottom && cur_right == def_tawk_right){
+            //     /*Check if the default style exists then remove it and add my custom style*/
+            //     jQuery("iframe[title='chat widget']").eq(0).css({ 'right': '', 'bottom': '' });
+            //     jQuery("iframe[title='chat widget']").eq(0).addClass("chat__circle");
+            //     clearInterval(customize_tawk);
+            // }
+
+
+        }
+
+        /*Customize the widget as soon as the widget is loaded*/
+        Tawk_API = Tawk_API || {};
+        Tawk_API.onLoad = function () {
+            /*Only for mobile version*/
+            if (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent)) {
+                var customize_tawk = setInterval(customize_tawk_widget, 100);
+            }
+        };
+
+        /*Customize the widget as soon as the widget is minimized*/
+        Tawk_API = Tawk_API || {};
+        Tawk_API.onChatMinimized = function () {
+            /*Only for mobile version*/
+            if (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent)) {
+                var customize_tawk = setInterval(customize_tawk_widget, 100);
+            }
+        };
+
+    };
+
+</script><!--End of Tawk.to Script (0.8.7)--><script src="https://betatransfer.io/wp-content/themes/btkassa/js/snow.js?ver=1.6.0" id="snow-canvas-js"></script>
+
+
+<script>
+    (function () {
+        function initCookieBanner() {
+            const cookieBanner = document.getElementById('cookie-banner');
+            if (!cookieBanner) return;
+
+            if (document.cookie.includes('cookie_consent')) {
+                cookieBanner.style.display = 'none';
+                return;
+            }
+
+            const acceptButton = document.querySelector('.cookie__button--accept');
+            const rejectButton = document.querySelector('.cookie__button--reject');
+
+            if (acceptButton) {
+                acceptButton.addEventListener('click', function () {
+                    document.cookie = 'cookie_consent=accepted; path=/; max-age=34560000; Secure; SameSite=Lax';
+                    cookieBanner.style.display = 'none';
+                });
+            }
+
+            if (rejectButton) {
+                rejectButton.addEventListener('click', function () {
+                    document.cookie = 'cookie_consent=rejected; path=/; max-age=34560000; Secure; SameSite=Lax';
+                    cookieBanner.style.display = 'none';
+                });
+            }
+        }
+
+        function isSnowSeason() {
+            const now = new Date();
+            const month = now.getMonth(); // 0–11
+            const day = now.getDate();
+
+            // 23 декабря – 31 декабря
+            if (month === 11 && day >= 23) return true;
+
+            // январь и февраль до 27 числа
+            if (month === 0 && day <= 27) return true;
+
+            return false;
+        }
+
+        function initSnowCanvas() {
+            // return;
+            if (!isSnowSeason()) return;
+
+            if (typeof window._snowCanvas !== 'function') return;
+
+            const canvas = document.getElementById('snowCanvas');
+            if (!canvas) return;
+
+            window._snowCanvas({
+                el: document.getElementById("snowCanvas"),
+                snowColor: "#D3E5FF",
+                background: "transparent",
+                maxSpeed: 4,
+                minSpeed: 1,
+                width: "",
+                height: "",
+                amount: 120,
+                rMax: 4,
+                rMin: 1
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            initCookieBanner();
+        });
+
+        window.addEventListener('load', function () {
+            initSnowCanvas();
+        });
+
+    })();
+</script>
+
+
+
+
+
+<div style="background-color: rgb(255, 255, 255); border: 1px solid rgb(215, 215, 215); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 4px; border-radius: 4px; left: auto; top: -10000px; z-index: -2147483648; position: absolute; pointer-events: auto; transition: opacity 0.15s ease-out; opacity: 0; visibility: hidden;" aria-hidden="true"><div style="position: relative; z-index: 1;"><iframe src="https://newassets.hcaptcha.com/captcha/v1/2c63fabe8365479a688dd8d5a6b1263c01f7c731/static/hcaptcha.html#frame=challenge&amp;id=08f1tylsybvc&amp;host=betatransfer.io&amp;sentry=true&amp;reportapi=https%3A%2F%2Faccounts.hcaptcha.com&amp;recaptchacompat=true&amp;custom=false&amp;hl=ru&amp;tplinks=on&amp;andint=off&amp;pstissuer=https%3A%2F%2Fpst-issuer.hcaptcha.com&amp;sitekey=7356c35a-2e08-4486-8e64-231c5a3ce070&amp;theme=light&amp;origin=https%3A%2F%2Fbetatransfer.io" frameborder="0" scrolling="no" allow="private-state-token-redemption" title="Основное содержание испытания hCaptcha" style="border: 0px; z-index: 2000000000; position: relative;"></iframe></div><div style="width: 100%; height: 100%; position: fixed; pointer-events: none; top: 0px; left: 0px; z-index: 0; background-color: rgb(255, 255, 255); opacity: 0.05;"></div><div style="border-width: 11px; border-style: none; position: absolute; pointer-events: none; margin-top: -11px; z-index: 1; right: 100%;"><div style="border-width: 10px; border-style: solid; border-color: transparent rgb(255, 255, 255) transparent transparent; position: relative; top: 10px; z-index: 1;"></div><div style="border-width: 11px; border-style: solid; border-color: transparent rgb(215, 215, 215) transparent transparent; position: relative; top: -11px; z-index: 0;"></div></div></div><div style="background-color: rgb(255, 255, 255); border: 1px solid rgb(215, 215, 215); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 4px; border-radius: 4px; left: auto; top: -10000px; z-index: -2147483648; position: absolute; pointer-events: auto; transition: opacity 0.15s ease-out; opacity: 0; visibility: hidden;" aria-hidden="true"><div style="position: relative; z-index: 1;"><iframe src="https://newassets.hcaptcha.com/captcha/v1/2c63fabe8365479a688dd8d5a6b1263c01f7c731/static/hcaptcha.html#frame=challenge&amp;id=10pqmaux52n8f&amp;host=betatransfer.io&amp;sentry=true&amp;reportapi=https%3A%2F%2Faccounts.hcaptcha.com&amp;recaptchacompat=true&amp;custom=false&amp;hl=ru&amp;tplinks=on&amp;andint=off&amp;pstissuer=https%3A%2F%2Fpst-issuer.hcaptcha.com&amp;sitekey=7356c35a-2e08-4486-8e64-231c5a3ce070&amp;theme=light&amp;origin=https%3A%2F%2Fbetatransfer.io" frameborder="0" scrolling="no" allow="private-state-token-redemption" title="Основное содержание испытания hCaptcha" style="border: 0px; z-index: 2000000000; position: relative;"></iframe></div><div style="width: 100%; height: 100%; position: fixed; pointer-events: none; top: 0px; left: 0px; z-index: 0; background-color: rgb(255, 255, 255); opacity: 0.05;"></div><div style="border-width: 11px; border-style: none; position: absolute; pointer-events: none; margin-top: -11px; z-index: 1; right: 100%;"><div style="border-width: 10px; border-style: solid; border-color: transparent rgb(255, 255, 255) transparent transparent; position: relative; top: 10px; z-index: 1;"></div><div style="border-width: 11px; border-style: solid; border-color: transparent rgb(215, 215, 215) transparent transparent; position: relative; top: -11px; z-index: 0;"></div></div></div><div id="b0pcri74ude1770412980655" class="widget-hidden"><iframe src="about:blank" frameborder="0" scrolling="no" width="64px" height="60px" style="outline:none !important; visibility:visible !important; resize:none !important; box-shadow:none !important; overflow:visible !important; background:none !important; opacity:1 !important; filter:alpha(opacity=100) !important; -ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity 1}) !important; -mz-opacity:1 !important; -khtml-opacity:1 !important; top:auto !important; right:20px !important; bottom:20px !important; left:auto !important; position:fixed !important; border:0 !important; min-height:60px !important; min-width:64px !important; max-height:60px !important; max-width:64px !important; padding:0 !important; margin:0 !important; -moz-transition-property:none !important; -webkit-transition-property:none !important; -o-transition-property:none !important; transition-property:none !important; transform:none !important; -webkit-transform:none !important; -ms-transform:none !important; width:64px !important; height:60px !important; display:block !important; z-index:1000003 !important; background-color:transparent !important; cursor:none !important; float:none !important; border-radius:unset !important; pointer-events:auto !important; clip:auto !important; color-scheme:light !important;" id="dpfb2ger948g1770412980672" class="" title="chat widget" referrerpolicy="no-referrer-when-downgrade"></iframe><iframe srcdoc="&lt;html&gt;&lt;/html&gt;" frameborder="0" scrolling="no" width="350px" height="520px" style="outline:none !important; visibility:visible !important; resize:none !important; box-shadow:none !important; overflow:visible !important; background:none !important; opacity:1 !important; filter:alpha(opacity=100) !important; -ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity 1}) !important; -mz-opacity:1 !important; -khtml-opacity:1 !important; top:auto !important; right:20px !important; bottom:98px !important; left:auto !important; position:fixed !important; border:0 !important; min-height:520px !important; min-width:350px !important; max-height:520px !important; max-width:350px !important; padding:0 !important; margin:0 !important; -moz-transition-property:none !important; -webkit-transition-property:none !important; -o-transition-property:none !important; transition-property:none !important; transform:none !important; -webkit-transform:none !important; -ms-transform:none !important; width:350px !important; height:520px !important; display:none !important; z-index:1000002 !important; background-color:transparent !important; cursor:none !important; float:none !important; border-radius:18px !important; pointer-events:auto !important; clip:auto !important; color-scheme:light !important;" id="jt6klm0hn0q1770412980766" class="" title="chat widget" referrerpolicy="no-referrer-when-downgrade"></iframe><iframe src="about:blank" frameborder="0" scrolling="no" height="30px" style="outline:none !important; visibility:visible !important; resize:none !important; box-shadow:none !important; overflow:visible !important; background:none !important; opacity:1 !important; filter:alpha(opacity=100) !important; -ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity 1}) !important; -mz-opacity:1 !important; -khtml-opacity:1 !important; top:auto !important; right:20px !important; bottom:30px !important; left:auto !important; position:fixed !important; border:0 !important; min-height:45px !important; min-width:350px !important; max-height:45px !important; max-width:350px !important; padding:0 !important; margin:0 !important; -moz-transition-property:none !important; -webkit-transition-property:none !important; -o-transition-property:none !important; transition-property:none !important; transform:none !important; -webkit-transform:none !important; -ms-transform:none !important; width:350px !important; height:45px !important; display:none !important; z-index:1000002 !important; background-color:transparent !important; cursor:none !important; float:none !important; border-radius:unset !important; pointer-events:auto !important; clip:auto !important; color-scheme:light !important;" id="t63jcoq5a09s1770412980792" class="" title="chat widget" referrerpolicy="no-referrer-when-downgrade"></iframe><iframe src="about:blank" frameborder="0" scrolling="no" width="360px" height="45px" style="outline:none !important; visibility:visible !important; resize:none !important; box-shadow:none !important; overflow:visible !important; background:none !important; opacity:1 !important; filter:alpha(opacity=100) !important; -ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity 1}) !important; -mz-opacity:1 !important; -khtml-opacity:1 !important; top:auto !important; right:20px !important; bottom:90px; left:auto !important; position:fixed !important; border:0 !important; min-height:45px !important; min-width:360px !important; max-height:45px !important; max-width:360px !important; padding:0 !important; margin:0 !important; -moz-transition-property:none !important; -webkit-transition-property:none !important; -o-transition-property:none !important; transition-property:none !important; transform:none !important; -webkit-transform:none !important; -ms-transform:none !important; width:360px !important; height:45px !important; display:none !important; z-index:auto !important; background-color:transparent !important; cursor:none !important; float:none !important; border-radius:unset !important; pointer-events:auto !important; clip:auto !important; color-scheme:light !important;" id="o4scbin9tq2g1770412980699" class="" title="chat widget" referrerpolicy="no-referrer-when-downgrade"></iframe><div id="chat-bubble"></div></div></body></html>
