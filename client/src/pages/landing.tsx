@@ -1,6 +1,5 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { motion, useInView } from "framer-motion";
 import { 
   ChevronDown, 
@@ -12,7 +11,6 @@ import {
   DollarSign,
   MessageCircle,
   Globe,
-  TrendingUp,
   CheckCircle,
   Star,
   Menu,
@@ -20,7 +18,7 @@ import {
 } from "lucide-react";
 import { SiTelegram } from "react-icons/si";
 
-import primeTraffLogo from "@assets/generated_images/primetraff_affiliate_platform_logo.png";
+import primeTraffLogo from "@assets/generated_images/primetraff_blue_crystal_logo.png";
 
 import partnerMobilbahis from "@assets/Без_названия_(1)_1768417603829.jpeg";
 import partner1win from "@assets/Без_названия_(1)_1768417603829.png";
@@ -35,6 +33,8 @@ import partnerVegasSlot from "@assets/img69380f65d567f_1768417603836.png";
 import partnerBetcool from "@assets/img69400fda54fe8_1768417603836.png";
 import partnerHuhuBet from "@assets/img694005f195a65_1768417603836.png";
 import partner4rabet from "@assets/NPOpJLBugXCTJRBDe8jY2bWxoKEGmEpA4HtrjRVD_1768417603836.png";
+
+const CrystalScene = lazy(() => import("@/components/CrystalScene"));
 
 const REGISTER_URL = "https://primetrack.pro/register?ref=ADV-3BT52V85";
 const LOGIN_URL = "https://primetrack.pro/login";
@@ -93,36 +93,14 @@ function AnimatedCounter({ value, suffix = "", prefix = "", duration = 2 }: { va
   );
 }
 
-function FloatingShapes() {
+function BlueBgDecorations() {
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-      {/* Grid pattern - hidden on mobile for performance */}
-      <div 
-        className="absolute inset-0 opacity-[0.03] hidden md:block"
-        style={{
-          backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-          backgroundSize: '60px 60px'
-        }}
-      />
-      
-      {/* Gradient blobs - simplified on mobile */}
-      <div className="absolute top-0 left-1/4 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-emerald-500/10 rounded-full blur-[80px] md:blur-[150px]" />
-      <div className="absolute top-1/3 right-0 w-[250px] md:w-[500px] h-[250px] md:h-[500px] bg-cyan-500/10 rounded-full blur-[80px] md:blur-[150px]" />
-      <div className="hidden md:block absolute bottom-1/4 left-0 w-[400px] h-[400px] bg-violet-500/10 rounded-full blur-[120px]" />
-      <div className="hidden md:block absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-blue-500/8 rounded-full blur-[150px]" />
-      <div className="hidden md:block absolute top-2/3 left-1/2 w-[300px] h-[300px] bg-amber-500/5 rounded-full blur-[100px]" />
-      
-      {/* Vignette effect */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_rgba(2,6,23,0.4)_100%)]" />
-      
-      {/* Glowing accent lines - desktop only */}
-      <div className="hidden md:block absolute top-1/4 left-10 w-px h-32 bg-gradient-to-b from-transparent via-emerald-500/30 to-transparent" />
-      <div className="hidden md:block absolute top-1/3 right-20 w-px h-48 bg-gradient-to-b from-transparent via-emerald-400/25 to-transparent" />
-      <div className="hidden md:block absolute top-2/3 left-1/4 w-24 h-px bg-gradient-to-r from-transparent via-emerald-500/30 to-transparent" />
-      <div className="hidden md:block absolute bottom-1/4 right-1/3 w-32 h-px bg-gradient-to-r from-transparent via-cyan-500/25 to-transparent" />
-      <div className="hidden md:block absolute top-1/2 left-1/3 w-2 h-2 rounded-full bg-emerald-500/30" />
-      <div className="hidden md:block absolute top-1/4 right-1/4 w-1.5 h-1.5 rounded-full bg-cyan-400/30" />
-      <div className="hidden md:block absolute bottom-1/3 left-1/2 w-1 h-1 rounded-full bg-emerald-400/40" />
+      <div className="absolute top-0 left-1/4 w-[300px] md:w-[700px] h-[300px] md:h-[700px] bg-sky-400/8 rounded-full blur-[80px] md:blur-[180px]" />
+      <div className="absolute top-1/3 right-0 w-[250px] md:w-[500px] h-[250px] md:h-[500px] bg-blue-500/10 rounded-full blur-[80px] md:blur-[150px]" />
+      <div className="hidden md:block absolute bottom-1/4 left-0 w-[400px] h-[400px] bg-cyan-400/8 rounded-full blur-[120px]" />
+      <div className="hidden md:block absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-sky-600/6 rounded-full blur-[150px]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_rgba(0,20,60,0.5)_100%)]" />
     </div>
   );
 }
@@ -130,21 +108,19 @@ function FloatingShapes() {
 function GlowingDivider() {
   return (
     <div className="w-full py-4 flex items-center justify-center">
-      <div className="w-1/3 h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent" />
+      <div className="w-1/3 h-px bg-gradient-to-r from-transparent via-sky-400/40 to-transparent" />
     </div>
   );
 }
 
-function WaveDivider({ flip = false, color = "slate-900" }: { flip?: boolean; color?: string }) {
-  const fillColor = color === "slate-900" ? "#0f172a" : color === "slate-950" ? "#020617" : "#1e293b";
-  
+function WaveDivider({ flip = false }: { flip?: boolean }) {
   return (
     <div className={`w-full overflow-hidden ${flip ? "rotate-180" : ""}`}>
       <svg 
         viewBox="0 0 1200 120" 
         preserveAspectRatio="none" 
         className="w-full h-16 md:h-24"
-        style={{ fill: fillColor }}
+        style={{ fill: "rgba(0,80,160,0.15)" }}
       >
         <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25"></path>
         <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5"></path>
@@ -154,64 +130,17 @@ function WaveDivider({ flip = false, color = "slate-900" }: { flip?: boolean; co
   );
 }
 
-function GlassCard({ children, className = "", hover = true, tilt = true }: { children: React.ReactNode; className?: string; hover?: boolean; tilt?: boolean }) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const rafRef = useRef<number | null>(null);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768 || 'ontouchstart' in window);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!tilt || !cardRef.current || isMobile) return;
-    
-    if (rafRef.current) return;
-    
-    rafRef.current = requestAnimationFrame(() => {
-      if (!cardRef.current) return;
-      const card = cardRef.current;
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      
-      const rotateX = (y - centerY) / 10;
-      const rotateY = (centerX - x) / 10;
-      
-      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-      rafRef.current = null;
-    });
-  };
-
-  const handleMouseLeave = () => {
-    if (rafRef.current) {
-      cancelAnimationFrame(rafRef.current);
-      rafRef.current = null;
-    }
-    if (cardRef.current) {
-      cardRef.current.style.transform = "";
-    }
-  };
-
+function GlassCard({ children, className = "", hover = true }: { children: React.ReactNode; className?: string; hover?: boolean }) {
   return (
     <div 
-      ref={cardRef}
-      onMouseMove={isMobile ? undefined : handleMouseMove}
-      onMouseLeave={isMobile ? undefined : handleMouseLeave}
-      style={{ transition: "transform 0.15s ease-out" }}
       className={`
-        relative bg-slate-800/50 md:bg-slate-800/40 backdrop-blur-sm md:backdrop-blur-xl border border-slate-700/50 rounded-2xl
-        ${hover ? "md:hover:border-emerald-500/40 md:hover:bg-slate-800/60 md:hover:shadow-[0_0_30px_-5px_rgba(16,185,129,0.15)]" : ""}
+        relative bg-white/[0.06] backdrop-blur-sm md:backdrop-blur-xl border border-white/10 rounded-2xl
+        ${hover ? "md:hover:border-sky-400/30 md:hover:bg-white/[0.09] md:hover:shadow-[0_0_30px_-5px_rgba(0,136,204,0.15)]" : ""}
         transition-all duration-300
         ${className}
       `}
     >
-      <div className="hidden md:block absolute inset-0 rounded-2xl bg-gradient-to-br from-white/[0.03] to-transparent pointer-events-none" />
+      <div className="hidden md:block absolute inset-0 rounded-2xl bg-gradient-to-br from-white/[0.04] to-transparent pointer-events-none" />
       <div className="relative z-10">{children}</div>
     </div>
   );
@@ -228,33 +157,33 @@ function Navigation() {
   }, []);
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-slate-950/80 backdrop-blur-2xl border-b border-slate-800/50" : "bg-transparent"}`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-[#001a3a]/80 backdrop-blur-2xl border-b border-white/10" : "bg-transparent"}`}>
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           <a href="#" className="flex items-center gap-2" data-testid="link-logo">
-            <img src={primeTraffLogo} alt="PrimeTraff" className="w-8 h-8 rounded-lg shadow-lg shadow-emerald-500/20" />
+            <img src={primeTraffLogo} alt="PrimeTraff" className="w-8 h-8 rounded-lg" />
             <span className="text-xl font-bold text-white">PrimeTraff</span>
           </a>
 
           <div className="hidden md:flex items-center gap-8">
-            <a href="#features" className="text-slate-300 hover:text-white transition-colors" data-testid="link-features">Возможности</a>
-            <a href="#how-it-works" className="text-slate-300 hover:text-white transition-colors" data-testid="link-how-it-works">Как это работает</a>
-            <a href="#partners" className="text-slate-300 hover:text-white transition-colors" data-testid="link-partners">Партнеры</a>
-            <a href="#faq" className="text-slate-300 hover:text-white transition-colors" data-testid="link-faq">FAQ</a>
+            <a href="#features" className="text-white/70 hover:text-white transition-colors" data-testid="link-features">Возможности</a>
+            <a href="#how-it-works" className="text-white/70 hover:text-white transition-colors" data-testid="link-how-it-works">Как это работает</a>
+            <a href="#partners" className="text-white/70 hover:text-white transition-colors" data-testid="link-partners">Партнеры</a>
+            <a href="#faq" className="text-white/70 hover:text-white transition-colors" data-testid="link-faq">FAQ</a>
           </div>
 
           <div className="hidden md:flex items-center gap-4">
-            <a href={TELEGRAM_CHANNEL_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 bg-emerald-500/20 border border-emerald-500/40 hover:bg-emerald-500/30 transition-colors text-sm font-medium px-3 py-1.5 rounded-full" data-testid="link-telegram-channel-nav">
+            <a href={TELEGRAM_CHANNEL_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 border border-[#0088CC]/50 bg-[#0088CC]/10 transition-colors text-sm font-medium px-3 py-1.5 rounded-full" data-testid="link-telegram-channel-nav">
               <SiTelegram className="w-4 h-4 text-[#0088CC]" />
               <span className="text-white">Наш канал</span>
             </a>
             <a href={LOGIN_URL} target="_blank" rel="noopener noreferrer" data-testid="button-login-nav">
-              <Button variant="outline" className="border-slate-700 text-white hover:bg-slate-800 font-semibold px-6">
+              <Button variant="outline" className="border-white/30 text-white font-semibold px-6">
                 Вход
               </Button>
             </a>
             <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" data-testid="button-become-partner-nav">
-              <Button className="bg-emerald-500 hover:bg-emerald-400 text-white font-semibold px-6 shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/30 transition-all">
+              <Button className="text-white font-semibold px-6" style={{ background: "linear-gradient(135deg, #0077BB, #0099DD)" }}>
                 Стать партнером
               </Button>
             </a>
@@ -270,19 +199,19 @@ function Navigation() {
         </div>
 
         {mobileMenuOpen && (
-          <div className="md:hidden bg-slate-900/95 backdrop-blur-xl border-t border-slate-800 py-4">
+          <div className="md:hidden bg-[#001a3a]/95 backdrop-blur-xl border-t border-white/10 py-4">
             <div className="flex flex-col gap-4 px-4">
-              <a href="#features" className="text-slate-300 py-2" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-features">Возможности</a>
-              <a href="#how-it-works" className="text-slate-300 py-2" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-how-it-works">Как это работает</a>
-              <a href="#partners" className="text-slate-300 py-2" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-partners">Партнеры</a>
-              <a href="#faq" className="text-slate-300 py-2" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-faq">FAQ</a>
+              <a href="#features" className="text-white/70 py-2" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-features">Возможности</a>
+              <a href="#how-it-works" className="text-white/70 py-2" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-how-it-works">Как это работает</a>
+              <a href="#partners" className="text-white/70 py-2" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-partners">Партнеры</a>
+              <a href="#faq" className="text-white/70 py-2" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-faq">FAQ</a>
               <a href={LOGIN_URL} target="_blank" rel="noopener noreferrer" className="w-full" data-testid="button-login-mobile">
-                <Button variant="outline" className="w-full border-slate-700 text-white hover:bg-slate-800 font-semibold">
+                <Button variant="outline" className="w-full border-white/30 text-white font-semibold">
                   Вход
                 </Button>
               </a>
               <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" className="w-full" data-testid="button-become-partner-mobile">
-                <Button className="w-full bg-emerald-500 hover:bg-emerald-400 text-white font-semibold">
+                <Button className="w-full text-white font-semibold" style={{ background: "linear-gradient(135deg, #0077BB, #0099DD)" }}>
                   Стать партнером
                 </Button>
               </a>
@@ -297,20 +226,18 @@ function Navigation() {
 function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-emerald-950/20" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-emerald-600/15 via-transparent to-transparent" />
-      <div className="absolute top-20 left-10 w-96 h-96 bg-emerald-500/10 rounded-full blur-[100px]" />
-      <div className="absolute top-40 right-20 w-80 h-80 bg-emerald-400/8 rounded-full blur-[80px]" />
-      <div className="absolute bottom-20 left-1/3 w-64 h-64 bg-emerald-600/10 rounded-full blur-[60px]" />
+      <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, #001030 0%, #002060 30%, #0055AA 60%, #0088CC 100%)" }} />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(0,200,255,0.15),_transparent_60%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(0,100,200,0.2),_transparent_60%)]" />
       
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-32 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-white text-sm font-medium mb-8 backdrop-blur-sm"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white text-sm font-medium mb-8 backdrop-blur-sm"
         >
-          <Zap className="w-4 h-4" />
+          <Zap className="w-4 h-4 text-sky-300" />
           <span>Мгновенное одобрение</span>
         </motion.div>
 
@@ -322,14 +249,14 @@ function HeroSection() {
         >
           Превращай трафик в прибыль
           <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-emerald-500 to-cyan-400">без потолка заработка</span>
+          <span className="text-transparent bg-clip-text" style={{ backgroundImage: "linear-gradient(90deg, #60CFFF, #00AAEE, #0088CC)" }}>без потолка заработка</span>
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-lg lg:text-xl text-slate-400 max-w-3xl mx-auto mb-10 leading-relaxed"
+          className="text-lg lg:text-xl text-white/60 max-w-3xl mx-auto mb-10 leading-relaxed"
         >
           Присоединяйтесь к PrimeTraff — партнерской программе нового поколения. 
           Высокие ставки, моментальные выплаты, персональная поддержка 24/7.
@@ -342,13 +269,13 @@ function HeroSection() {
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
         >
           <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" data-testid="button-hero-register">
-            <Button className="bg-emerald-500 hover:bg-emerald-400 text-white font-semibold px-8 py-6 text-lg h-auto shadow-xl shadow-emerald-500/25 hover:shadow-emerald-500/40 transition-all">
+            <Button className="text-white font-semibold px-8 py-6 text-lg h-auto shadow-xl transition-all" style={{ background: "linear-gradient(135deg, #0077BB, #00AAEE)", boxShadow: "0 8px 30px rgba(0,136,204,0.4)" }}>
               Начать зарабатывать
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
           </a>
           <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" data-testid="button-hero-telegram">
-            <Button variant="outline" className="border-[#0088CC] text-white hover:bg-[#0088CC]/20 px-8 py-6 text-lg h-auto backdrop-blur-sm">
+            <Button variant="outline" className="border-white/30 text-white px-8 py-6 text-lg h-auto backdrop-blur-sm">
               <SiTelegram className="w-5 h-5 mr-2 text-[#0088CC]" />
               Написать в Telegram
             </Button>
@@ -364,15 +291,15 @@ function HeroSection() {
           {[
             { value: 500, suffix: "+", label: "Активных партнеров", id: "partners", gradient: "from-violet-400 to-purple-400" },
             { value: 2, prefix: "$", suffix: "M+", label: "Выплачено партнерам", id: "payouts", gradient: "from-amber-400 to-orange-400" },
-            { value: 24, suffix: "/7", label: "Поддержка онлайн", id: "support", gradient: "from-blue-400 to-cyan-400" },
+            { value: 24, suffix: "/7", label: "Поддержка онлайн", id: "support", gradient: "from-sky-300 to-cyan-400" },
             { value: 100, suffix: "%", label: "Честные выплаты", id: "honest", gradient: "from-emerald-400 to-green-400" },
           ].map((stat, i) => (
-            <GlassCard key={i} className="p-4 lg:p-6" hover={false} tilt={false}>
+            <GlassCard key={i} className="p-4 lg:p-6" hover={false}>
               <div className="text-center" data-testid={`stat-${stat.id}`}>
                 <div className={`text-2xl lg:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r ${stat.gradient} mb-1`} data-testid={`text-stat-value-${stat.id}`}>
                   <AnimatedCounter value={stat.value} prefix={stat.prefix || ""} suffix={stat.suffix} duration={2} />
                 </div>
-                <div className="text-sm text-slate-400">{stat.label}</div>
+                <div className="text-sm text-white/50">{stat.label}</div>
               </div>
             </GlassCard>
           ))}
@@ -380,7 +307,7 @@ function HeroSection() {
       </div>
 
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <ChevronDown className="w-6 h-6 text-slate-500" />
+        <ChevronDown className="w-6 h-6 text-white/40" />
       </div>
     </section>
   );
@@ -394,17 +321,13 @@ function FeaturesSection() {
       description: "Мы много лет работаем в gambling вертикали и знаем все боли рынка. Гарантируем, что шейва через нашу партнерскую сеть не будет.",
       iconColor: "text-emerald-400",
       bgGradient: "from-emerald-500/20 to-emerald-600/20",
-      bgGradientHover: "group-hover:from-emerald-500/30 group-hover:to-emerald-600/30",
-      borderColor: "border-emerald-500/10",
     },
     {
       icon: Globe,
       title: "Большой выбор офферов",
       description: "Все офферы, с которыми мы работаем, уже были пролиты нашей командой. Мы знаем что рекомендовать нашим партнерам.",
-      iconColor: "text-blue-400",
-      bgGradient: "from-blue-500/20 to-blue-600/20",
-      bgGradientHover: "group-hover:from-blue-500/30 group-hover:to-blue-600/30",
-      borderColor: "border-blue-500/10",
+      iconColor: "text-sky-400",
+      bgGradient: "from-sky-500/20 to-sky-600/20",
     },
     {
       icon: Users,
@@ -412,8 +335,6 @@ function FeaturesSection() {
       description: "Мы тестируем связки и делимся ими с партнерами. Всё — от креатива до необходимых инструментов. Вам остается взять ссылку из ЛК.",
       iconColor: "text-violet-400",
       bgGradient: "from-violet-500/20 to-violet-600/20",
-      bgGradientHover: "group-hover:from-violet-500/30 group-hover:to-violet-600/30",
-      borderColor: "border-violet-500/10",
     },
     {
       icon: DollarSign,
@@ -421,8 +342,6 @@ function FeaturesSection() {
       description: "Стараемся максимально быстро выплачивать вознаграждение. Если у рекла нет претензий к трафику — средства будут на кошельке в кратчайший срок.",
       iconColor: "text-amber-400",
       bgGradient: "from-amber-500/20 to-amber-600/20",
-      bgGradientHover: "group-hover:from-amber-500/30 group-hover:to-amber-600/30",
-      borderColor: "border-amber-500/10",
     },
     {
       icon: MessageCircle,
@@ -430,8 +349,6 @@ function FeaturesSection() {
       description: "Для проверенных партнеров есть закрытый канал с продуктом, креативами, таргетом, плейсментами — всё для профитной настройки пролива.",
       iconColor: "text-pink-400",
       bgGradient: "from-pink-500/20 to-pink-600/20",
-      bgGradientHover: "group-hover:from-pink-500/30 group-hover:to-pink-600/30",
-      borderColor: "border-pink-500/10",
     },
     {
       icon: BarChart3,
@@ -439,23 +356,21 @@ function FeaturesSection() {
       description: "Личный кабинет с детальной статистикой по всем показателям. Видишь каждый клик и депозит по своим subID в реальном времени.",
       iconColor: "text-cyan-400",
       bgGradient: "from-cyan-500/20 to-cyan-600/20",
-      bgGradientHover: "group-hover:from-cyan-500/30 group-hover:to-cyan-600/30",
-      borderColor: "border-cyan-500/10",
     },
   ];
 
   return (
-    <section id="features" className="py-20 lg:py-32 relative overflow-hidden bg-slate-900/30">
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900/50 to-slate-950" />
-      <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-500/8 rounded-full blur-[100px]" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-emerald-600/6 rounded-full blur-[120px]" />
+    <section id="features" className="py-20 lg:py-32 relative overflow-hidden">
+      <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #002060 0%, #001845 50%, #002060 100%)" }} />
+      <div className="hidden md:block absolute top-0 right-0 w-80 h-80 bg-sky-500/8 rounded-full blur-[100px]" />
+      <div className="hidden md:block absolute bottom-0 left-0 w-96 h-96 bg-blue-600/6 rounded-full blur-[120px]" />
       
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         <AnimatedSection className="text-center mb-16">
           <h2 className="text-3xl lg:text-5xl font-bold text-white mb-4">
             Почему выбирают PrimeTraff
           </h2>
-          <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+          <p className="text-white/50 text-lg max-w-2xl mx-auto">
             Созданы арбитражниками для арбитражников. Знаем, что вам нужно.
           </p>
         </AnimatedSection>
@@ -463,17 +378,15 @@ function FeaturesSection() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {features.map((feature, i) => (
             <AnimatedSection key={i} delay={i * 0.1}>
-              <GlassCard 
-                className="p-6 lg:p-8 h-full group"
-              >
+              <GlassCard className="p-6 lg:p-8 h-full group">
                 <div 
-                  className={`w-14 h-14 rounded-xl bg-gradient-to-br ${feature.bgGradient} flex items-center justify-center mb-5 ${feature.bgGradientHover} transition-all ${feature.borderColor}`}
+                  className={`w-14 h-14 rounded-xl bg-gradient-to-br ${feature.bgGradient} flex items-center justify-center mb-5 transition-all`}
                   data-testid={`card-feature-${i}`}
                 >
                   <feature.icon className={`w-7 h-7 ${feature.iconColor}`} />
                 </div>
                 <h3 className="text-xl font-semibold text-white mb-3">{feature.title}</h3>
-                <p className="text-slate-400 leading-relaxed">{feature.description}</p>
+                <p className="text-white/50 leading-relaxed">{feature.description}</p>
               </GlassCard>
             </AnimatedSection>
           ))}
@@ -492,7 +405,6 @@ function HowItWorksSection() {
       icon: Users,
       iconColor: "text-violet-400",
       bgGradient: "from-violet-500/20 to-violet-600/20",
-      borderColor: "border-violet-500/20",
       badgeGradient: "from-violet-500 to-violet-600",
       shadowColor: "shadow-violet-500/30",
     },
@@ -501,11 +413,10 @@ function HowItWorksSection() {
       title: "Получите офферы",
       description: "Выберите офферы и получите уникальные трекинговые ссылки.",
       icon: Globe,
-      iconColor: "text-blue-400",
-      bgGradient: "from-blue-500/20 to-blue-600/20",
-      borderColor: "border-blue-500/20",
-      badgeGradient: "from-blue-500 to-blue-600",
-      shadowColor: "shadow-blue-500/30",
+      iconColor: "text-sky-400",
+      bgGradient: "from-sky-500/20 to-sky-600/20",
+      badgeGradient: "from-sky-500 to-sky-600",
+      shadowColor: "shadow-sky-500/30",
     },
     {
       step: "03",
@@ -514,7 +425,6 @@ function HowItWorksSection() {
       icon: BarChart3,
       iconColor: "text-cyan-400",
       bgGradient: "from-cyan-500/20 to-cyan-600/20",
-      borderColor: "border-cyan-500/20",
       badgeGradient: "from-cyan-500 to-cyan-600",
       shadowColor: "shadow-cyan-500/30",
     },
@@ -525,37 +435,36 @@ function HowItWorksSection() {
       icon: DollarSign,
       iconColor: "text-amber-400",
       bgGradient: "from-amber-500/20 to-amber-600/20",
-      borderColor: "border-amber-500/20",
       badgeGradient: "from-amber-500 to-amber-600",
       shadowColor: "shadow-amber-500/30",
     },
   ];
 
   return (
-    <section id="how-it-works" className="py-20 lg:py-32 bg-slate-950 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-emerald-900/8 via-transparent to-transparent" />
-      <div className="absolute top-1/2 left-0 w-64 h-64 bg-cyan-500/5 rounded-full blur-[80px]" />
-      <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-emerald-500/5 rounded-full blur-[80px]" />
+    <section id="how-it-works" className="py-20 lg:py-32 relative overflow-hidden">
+      <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #001845 0%, #001535 50%, #001845 100%)" }} />
+      <div className="hidden md:block absolute top-1/2 left-0 w-64 h-64 bg-cyan-500/5 rounded-full blur-[80px]" />
+      <div className="hidden md:block absolute bottom-0 right-1/4 w-64 h-64 bg-sky-500/5 rounded-full blur-[80px]" />
       
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         <AnimatedSection className="text-center mb-16">
           <h2 className="text-3xl lg:text-5xl font-bold text-white mb-4">
             Как начать зарабатывать
           </h2>
-          <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+          <p className="text-white/50 text-lg max-w-2xl mx-auto">
             Простой старт за 5 минут. Никакой бюрократии.
           </p>
         </AnimatedSection>
 
         <div className="relative">
-          <div className="hidden lg:block absolute top-24 left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-transparent via-emerald-500/30 to-transparent" />
+          <div className="hidden lg:block absolute top-24 left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-transparent via-sky-400/30 to-transparent" />
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {steps.map((step, i) => (
               <AnimatedSection key={i} delay={i * 0.15} className="relative">
                 <div className="text-center">
                   <div className="relative inline-flex mb-6">
-                    <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${step.bgGradient} flex items-center justify-center ${step.borderColor} backdrop-blur-sm`}>
+                    <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${step.bgGradient} flex items-center justify-center backdrop-blur-sm`}>
                       <step.icon className={`w-8 h-8 ${step.iconColor}`} />
                     </div>
                     <div className={`absolute -top-2 -right-2 w-8 h-8 rounded-full bg-gradient-to-br ${step.badgeGradient} flex items-center justify-center text-white text-sm font-bold shadow-lg ${step.shadowColor}`}>
@@ -563,7 +472,7 @@ function HowItWorksSection() {
                     </div>
                   </div>
                   <h3 className="text-xl font-semibold text-white mb-3">{step.title}</h3>
-                  <p className="text-slate-400">{step.description}</p>
+                  <p className="text-white/50">{step.description}</p>
                 </div>
               </AnimatedSection>
             ))}
@@ -572,7 +481,7 @@ function HowItWorksSection() {
 
         <AnimatedSection delay={0.6} className="text-center mt-12">
           <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" data-testid="button-how-it-works-cta">
-            <Button className="bg-emerald-500 hover:bg-emerald-400 text-white font-semibold px-8 py-6 text-lg h-auto shadow-xl shadow-emerald-500/25 hover:shadow-emerald-500/40 transition-all">
+            <Button className="text-white font-semibold px-8 py-6 text-lg h-auto shadow-xl transition-all" style={{ background: "linear-gradient(135deg, #0077BB, #00AAEE)", boxShadow: "0 8px 30px rgba(0,136,204,0.4)" }}>
               Начать сейчас
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
@@ -610,16 +519,15 @@ function TestimonialsSection() {
 
   return (
     <section id="testimonials" className="py-20 lg:py-32 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900/30 to-slate-950" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-emerald-800/8 via-transparent to-transparent" />
-      <div className="absolute top-0 left-1/2 w-80 h-80 bg-emerald-500/6 rounded-full blur-[100px]" />
+      <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #001845 0%, #002060 50%, #001845 100%)" }} />
+      <div className="hidden md:block absolute top-0 left-1/2 w-80 h-80 bg-sky-500/6 rounded-full blur-[100px]" />
       
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         <AnimatedSection className="text-center mb-16">
           <h2 className="text-3xl lg:text-5xl font-bold text-white mb-4">
             Что говорят партнеры
           </h2>
-          <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+          <p className="text-white/50 text-lg max-w-2xl mx-auto">
             Реальные отзывы от реальных арбитражников
           </p>
         </AnimatedSection>
@@ -629,20 +537,20 @@ function TestimonialsSection() {
             <AnimatedSection key={i} delay={i * 0.1}>
               <GlassCard className="p-6 lg:p-8 h-full">
                 <div className="flex items-center gap-4 mb-4">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center text-white font-semibold shadow-lg shadow-emerald-500/20">
+                  <div className="w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold" style={{ background: "linear-gradient(135deg, #0077BB, #00CCFF)" }}>
                     {testimonial.avatar}
                   </div>
                   <div>
                     <div className="font-semibold text-white">{testimonial.name}</div>
-                    <div className="text-sm text-slate-400">{testimonial.role}</div>
+                    <div className="text-sm text-white/40">{testimonial.role}</div>
                   </div>
                 </div>
                 <div className="flex gap-1 mb-4">
                   {Array.from({ length: testimonial.rating }).map((_, j) => (
-                    <Star key={j} className="w-4 h-4 fill-emerald-400 text-emerald-400" />
+                    <Star key={j} className="w-4 h-4 fill-amber-400 text-amber-400" />
                   ))}
                 </div>
-                <p className="text-slate-300 leading-relaxed" data-testid={`card-testimonial-${i}`}>{testimonial.text}</p>
+                <p className="text-white/60 leading-relaxed" data-testid={`card-testimonial-${i}`}>{testimonial.text}</p>
               </GlassCard>
             </AnimatedSection>
           ))}
@@ -670,16 +578,17 @@ function PartnersSection() {
   ];
 
   return (
-    <section id="partners" className="py-20 lg:py-32 bg-slate-900/30 relative overflow-hidden">
-      <div className="absolute top-20 right-20 w-64 h-64 bg-emerald-500/6 rounded-full blur-[80px]" />
-      <div className="absolute bottom-20 left-20 w-64 h-64 bg-cyan-500/5 rounded-full blur-[80px]" />
+    <section id="partners" className="py-20 lg:py-32 relative overflow-hidden">
+      <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #002060 0%, #001845 50%, #002060 100%)" }} />
+      <div className="hidden md:block absolute top-20 right-20 w-64 h-64 bg-sky-500/6 rounded-full blur-[80px]" />
+      <div className="hidden md:block absolute bottom-20 left-20 w-64 h-64 bg-cyan-500/5 rounded-full blur-[80px]" />
       
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         <AnimatedSection className="text-center mb-16">
           <h2 className="text-3xl lg:text-5xl font-bold text-white mb-4">
             Наши партнеры
           </h2>
-          <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+          <p className="text-white/50 text-lg max-w-2xl mx-auto">
             Работаем с лучшими брендами индустрии
           </p>
         </AnimatedSection>
@@ -697,7 +606,7 @@ function PartnersSection() {
                 className="flex-shrink-0 w-48 md:w-56 lg:w-64 group"
                 data-testid={`card-partner-${i}`}
               >
-                <div className="relative aspect-video rounded-xl overflow-hidden bg-slate-800/30 border border-slate-700/30 hover:border-emerald-500/30 transition-all duration-300">
+                <div className="relative aspect-video rounded-xl overflow-hidden bg-white/5 border border-white/10 transition-all duration-300 md:hover:border-sky-400/30">
                   <img 
                     src={partner.img} 
                     alt={partner.name}
@@ -705,7 +614,7 @@ function PartnersSection() {
                     decoding="async"
                     className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-300"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-100 group-hover:opacity-0 transition-opacity" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#001030]/60 via-transparent to-transparent opacity-100 group-hover:opacity-0 transition-opacity" />
                 </div>
               </div>
             ))}
@@ -739,17 +648,17 @@ function FAQSection() {
   ];
 
   return (
-    <section id="faq" className="py-20 lg:py-32 relative overflow-hidden bg-slate-900/30">
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900/30 to-slate-950" />
-      <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-600/6 rounded-full blur-[80px]" />
-      <div className="absolute bottom-0 left-1/3 w-64 h-64 bg-cyan-500/5 rounded-full blur-[80px]" />
+    <section id="faq" className="py-20 lg:py-32 relative overflow-hidden">
+      <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #001845 0%, #001535 50%, #001845 100%)" }} />
+      <div className="hidden md:block absolute top-0 right-0 w-64 h-64 bg-blue-600/6 rounded-full blur-[80px]" />
+      <div className="hidden md:block absolute bottom-0 left-1/3 w-64 h-64 bg-cyan-500/5 rounded-full blur-[80px]" />
       
       <div className="relative z-10 max-w-3xl mx-auto px-6 lg:px-8">
         <AnimatedSection className="text-center mb-16">
           <h2 className="text-3xl lg:text-5xl font-bold text-white mb-4">
             Частые вопросы
           </h2>
-          <p className="text-slate-400 text-lg">
+          <p className="text-white/50 text-lg">
             Не нашли ответ? Напишите нам в Telegram
           </p>
         </AnimatedSection>
@@ -757,18 +666,18 @@ function FAQSection() {
         <div className="space-y-4">
           {faqs.map((faq, i) => (
             <AnimatedSection key={i} delay={i * 0.1}>
-              <GlassCard className="overflow-hidden" hover={false}>
+              <GlassCard className="overflow-visible" hover={false}>
                 <button
-                  className="w-full flex items-center justify-between p-6 text-left hover:bg-slate-800/30 transition-colors"
+                  className="w-full flex items-center justify-between p-6 text-left transition-colors"
                   onClick={() => setOpenIndex(openIndex === i ? null : i)}
                   data-testid={`button-faq-${i}`}
                 >
                   <span className="font-semibold text-white pr-4">{faq.question}</span>
-                  <ChevronDown className={`w-5 h-5 text-emerald-400 flex-shrink-0 transition-transform duration-200 ${openIndex === i ? "rotate-180" : ""}`} />
+                  <ChevronDown className={`w-5 h-5 text-sky-400 flex-shrink-0 transition-transform duration-200 ${openIndex === i ? "rotate-180" : ""}`} />
                 </button>
                 <div className={`overflow-hidden transition-all duration-200 ${openIndex === i ? "max-h-96" : "max-h-0"}`}>
                   <div className="px-6 pb-6">
-                    <p className="text-slate-400 whitespace-pre-line leading-relaxed">{faq.answer}</p>
+                    <p className="text-white/50 whitespace-pre-line leading-relaxed">{faq.answer}</p>
                   </div>
                 </div>
               </GlassCard>
@@ -783,36 +692,36 @@ function FAQSection() {
 function CTASection() {
   return (
     <section className="py-20 lg:py-32 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-emerald-950/20 to-slate-900" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-emerald-600/15 via-emerald-900/5 to-transparent" />
-      <div className="absolute top-10 left-10 w-96 h-96 bg-emerald-500/10 rounded-full blur-[100px]" />
-      <div className="absolute bottom-10 right-10 w-80 h-80 bg-cyan-500/8 rounded-full blur-[80px]" />
+      <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, #001030 0%, #003080 50%, #0055AA 100%)" }} />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(0,136,204,0.2),_transparent_60%)]" />
+      <div className="hidden md:block absolute top-10 left-10 w-96 h-96 bg-sky-500/10 rounded-full blur-[100px]" />
+      <div className="hidden md:block absolute bottom-10 right-10 w-80 h-80 bg-cyan-500/8 rounded-full blur-[80px]" />
       
       <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-8 text-center">
         <AnimatedSection>
           <h2 className="text-3xl lg:text-5xl font-bold text-white mb-6">
             Готовы начать зарабатывать?
           </h2>
-          <p className="text-lg lg:text-xl text-slate-400 mb-10 max-w-2xl mx-auto">
+          <p className="text-lg lg:text-xl text-white/50 mb-10 max-w-2xl mx-auto">
             Присоединяйтесь к PrimeTraff сегодня и получите доступ к лучшим офферам рынка
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" data-testid="button-cta-register">
-              <Button className="bg-emerald-500 hover:bg-emerald-400 text-white font-semibold px-10 py-6 text-lg h-auto animate-pulse-glow transition-all">
+              <Button className="text-white font-semibold px-10 py-6 text-lg h-auto transition-all animate-pulse-glow" style={{ background: "linear-gradient(135deg, #0077BB, #00AAEE)", boxShadow: "0 8px 30px rgba(0,136,204,0.4)" }}>
                 Стать партнером
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
             </a>
             <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" data-testid="button-cta-telegram">
-              <Button variant="outline" className="border-[#0088CC] text-white hover:bg-[#0088CC]/20 px-10 py-6 text-lg h-auto backdrop-blur-sm">
+              <Button variant="outline" className="border-white/30 text-white px-10 py-6 text-lg h-auto backdrop-blur-sm">
                 <SiTelegram className="w-5 h-5 mr-2 text-[#0088CC]" />
                 Telegram поддержка
               </Button>
             </a>
           </div>
 
-          <div className="mt-12 flex flex-wrap items-center justify-center gap-6 lg:gap-8 text-slate-400">
+          <div className="mt-12 flex flex-wrap items-center justify-center gap-6 lg:gap-8 text-white/50">
             <div className="flex items-center gap-2">
               <CheckCircle className="w-5 h-5 text-amber-400" />
               <span>Без холдов</span>
@@ -822,7 +731,7 @@ function CTASection() {
               <span>Быстрое одобрение</span>
             </div>
             <div className="flex items-center gap-2">
-              <CheckCircle className="w-5 h-5 text-blue-400" />
+              <CheckCircle className="w-5 h-5 text-sky-400" />
               <span>Поддержка 24/7</span>
             </div>
           </div>
@@ -834,20 +743,20 @@ function CTASection() {
 
 function Footer() {
   return (
-    <footer className="py-12 bg-slate-950 border-t border-slate-800/50">
+    <footer className="py-12 border-t border-white/10" style={{ background: "#001030" }}>
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2">
-            <img src={primeTraffLogo} alt="PrimeTraff" className="w-8 h-8 rounded-lg shadow-lg shadow-emerald-500/20" />
+            <img src={primeTraffLogo} alt="PrimeTraff" className="w-8 h-8 rounded-lg" />
             <span className="text-xl font-bold text-white">PrimeTraff</span>
           </div>
 
-          <div className="flex items-center gap-6">
+          <div className="flex items-center flex-wrap justify-center gap-6">
             <a 
               href={TELEGRAM_CHANNEL_URL} 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="flex items-center gap-2 bg-emerald-500/20 border border-emerald-500/40 hover:bg-emerald-500/30 transition-colors px-4 py-2 rounded-full font-medium"
+              className="flex items-center gap-2 bg-[#0088CC]/10 border border-[#0088CC]/30 transition-colors px-4 py-2 rounded-full font-medium"
               data-testid="link-footer-telegram-channel"
             >
               <SiTelegram className="w-5 h-5 text-[#0088CC]" />
@@ -857,7 +766,7 @@ function Footer() {
               href={TELEGRAM_URL} 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="flex items-center gap-2 text-[#0088CC] hover:text-[#0099DD] transition-colors"
+              className="flex items-center gap-2 text-[#0088CC] transition-colors"
               data-testid="link-footer-telegram"
             >
               <SiTelegram className="w-5 h-5" />
@@ -865,14 +774,14 @@ function Footer() {
             </a>
             <a 
               href="mailto:support@primetraff.com" 
-              className="text-slate-400 hover:text-emerald-400 transition-colors"
+              className="text-white/40 hover:text-sky-400 transition-colors"
               data-testid="link-footer-email"
             >
               support@primetraff.com
             </a>
           </div>
 
-          <div className="text-slate-500 text-sm">
+          <div className="text-white/30 text-sm">
             © 2026 PrimeTraff. Все права защищены.
           </div>
         </div>
@@ -883,9 +792,9 @@ function Footer() {
 
 function StickyCTA() {
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-slate-900/90 backdrop-blur-xl border-t border-slate-800/50 p-4 z-40 md:hidden">
+    <div className="fixed bottom-0 left-0 right-0 backdrop-blur-xl border-t border-white/10 p-4 z-40 md:hidden" style={{ background: "rgba(0,16,48,0.9)" }}>
       <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" className="block" data-testid="button-sticky-cta">
-        <Button className="w-full bg-emerald-500 hover:bg-emerald-400 text-white font-semibold py-3 shadow-lg shadow-emerald-500/20">
+        <Button className="w-full text-white font-semibold py-3" style={{ background: "linear-gradient(135deg, #0077BB, #00AAEE)", boxShadow: "0 4px 20px rgba(0,136,204,0.3)" }}>
           Стать партнером
           <ArrowRight className="w-5 h-5 ml-2" />
         </Button>
@@ -903,7 +812,6 @@ function SpecialOfferPopup() {
     seconds: 0
   });
 
-  // Show popup after 20 seconds
   useEffect(() => {
     const showTimer = setTimeout(() => {
       const dismissed = sessionStorage.getItem('offerDismissed');
@@ -915,7 +823,6 @@ function SpecialOfferPopup() {
     return () => clearTimeout(showTimer);
   }, []);
 
-  // Countdown timer - starts from 1 day
   useEffect(() => {
     const endTime = localStorage.getItem('offerEndTime');
     let targetTime: number;
@@ -923,7 +830,7 @@ function SpecialOfferPopup() {
     if (endTime) {
       targetTime = parseInt(endTime);
     } else {
-      targetTime = Date.now() + 24 * 60 * 60 * 1000; // 1 day from now
+      targetTime = Date.now() + 24 * 60 * 60 * 1000;
       localStorage.setItem('offerEndTime', targetTime.toString());
     }
 
@@ -964,54 +871,51 @@ function SpecialOfferPopup() {
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ type: "spring", duration: 0.5 }}
-        className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 border border-emerald-500/30 rounded-2xl p-6 md:p-8 max-w-md w-full shadow-2xl shadow-emerald-500/10"
+        className="relative border border-sky-400/30 rounded-2xl p-6 md:p-8 max-w-md w-full shadow-2xl"
+        style={{ background: "linear-gradient(135deg, #001545, #002060, #001545)" }}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Close button */}
         <button
           onClick={handleClose}
-          className="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors"
+          className="absolute top-4 right-4 text-white/40 hover:text-white transition-colors"
           data-testid="button-close-popup"
         >
           <X className="w-6 h-6" />
         </button>
 
-        {/* Header with alarm emoji */}
         <div className="text-center mb-6">
-          <span className="text-4xl mb-3 block">⏰</span>
-          <h3 className="text-xl md:text-2xl font-bold text-white">
-            Специальное предложение заканчивается через:
+          <Zap className="w-10 h-10 text-sky-400 mx-auto mb-3" />
+          <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
+            Специальное предложение
           </h3>
+          <p className="text-white/50">Успейте воспользоваться</p>
         </div>
 
-        {/* Countdown timer */}
         <div className="grid grid-cols-4 gap-2 md:gap-3 mb-6">
-          <div className="bg-slate-800/80 rounded-xl p-3 text-center border border-slate-700/50">
-            <div className="text-2xl md:text-3xl font-bold text-emerald-400">{timeLeft.days}</div>
-            <div className="text-xs text-slate-400 mt-1">дней</div>
+          <div className="bg-white/5 rounded-xl p-3 text-center border border-white/10">
+            <div className="text-2xl md:text-3xl font-bold text-sky-400">{timeLeft.days}</div>
+            <div className="text-xs text-white/40 mt-1">дней</div>
           </div>
-          <div className="bg-slate-800/80 rounded-xl p-3 text-center border border-slate-700/50">
-            <div className="text-2xl md:text-3xl font-bold text-emerald-400">{String(timeLeft.hours).padStart(2, '0')}</div>
-            <div className="text-xs text-slate-400 mt-1">часов</div>
+          <div className="bg-white/5 rounded-xl p-3 text-center border border-white/10">
+            <div className="text-2xl md:text-3xl font-bold text-sky-400">{String(timeLeft.hours).padStart(2, '0')}</div>
+            <div className="text-xs text-white/40 mt-1">часов</div>
           </div>
-          <div className="bg-slate-800/80 rounded-xl p-3 text-center border border-slate-700/50">
-            <div className="text-2xl md:text-3xl font-bold text-emerald-400">{String(timeLeft.minutes).padStart(2, '0')}</div>
-            <div className="text-xs text-slate-400 mt-1">минут</div>
+          <div className="bg-white/5 rounded-xl p-3 text-center border border-white/10">
+            <div className="text-2xl md:text-3xl font-bold text-sky-400">{String(timeLeft.minutes).padStart(2, '0')}</div>
+            <div className="text-xs text-white/40 mt-1">минут</div>
           </div>
-          <div className="bg-slate-800/80 rounded-xl p-3 text-center border border-slate-700/50">
-            <div className="text-2xl md:text-3xl font-bold text-emerald-400">{String(timeLeft.seconds).padStart(2, '0')}</div>
-            <div className="text-xs text-slate-400 mt-1">секунд</div>
+          <div className="bg-white/5 rounded-xl p-3 text-center border border-white/10">
+            <div className="text-2xl md:text-3xl font-bold text-sky-400">{String(timeLeft.seconds).padStart(2, '0')}</div>
+            <div className="text-xs text-white/40 mt-1">секунд</div>
           </div>
         </div>
 
-        {/* Bonus text */}
-        <div className="bg-gradient-to-r from-amber-500/20 to-orange-500/20 border border-amber-500/30 rounded-xl p-4 mb-6 text-center">
+        <div className="bg-amber-500/10 border border-amber-500/30 rounded-xl p-4 mb-6 text-center">
           <p className="text-lg md:text-xl font-semibold text-white">
             Бонус <span className="text-amber-400">200$</span> к первой выплате для новых партнеров
           </p>
         </div>
 
-        {/* CTA Button */}
         <a 
           href={REGISTER_URL} 
           target="_blank" 
@@ -1019,7 +923,7 @@ function SpecialOfferPopup() {
           className="block"
           data-testid="button-popup-cta"
         >
-          <Button className="w-full bg-emerald-500 hover:bg-emerald-400 text-white font-bold py-4 text-lg animate-pulse-glow">
+          <Button className="w-full text-white font-bold py-4 text-lg animate-pulse-glow" style={{ background: "linear-gradient(135deg, #0077BB, #00AAEE)" }}>
             Стать партнером
             <ArrowRight className="w-5 h-5 ml-2" />
           </Button>
@@ -1062,7 +966,8 @@ function ScrollToTop() {
       }}
       transition={{ duration: 0.2 }}
       onClick={scrollToTop}
-      className="fixed bottom-24 right-6 z-50 w-12 h-12 bg-emerald-500/90 hover:bg-emerald-400 text-white rounded-full shadow-lg shadow-emerald-500/30 flex items-center justify-center backdrop-blur-sm border border-emerald-400/30 transition-colors"
+      className="fixed bottom-24 right-6 z-50 w-12 h-12 text-white rounded-full shadow-lg flex items-center justify-center backdrop-blur-sm border border-sky-400/30 transition-colors"
+      style={{ background: "rgba(0,136,204,0.7)" }}
       data-testid="button-scroll-to-top"
       aria-label="Наверх"
     >
@@ -1073,24 +978,27 @@ function ScrollToTop() {
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-slate-950 relative">
-      <FloatingShapes />
+    <div className="min-h-screen relative" style={{ background: "#001030" }}>
+      <BlueBgDecorations />
+      <Suspense fallback={null}>
+        <CrystalScene />
+      </Suspense>
       <Navigation />
       <HeroSection />
       <GlowingDivider />
-      <WaveDivider color="slate-900" />
+      <WaveDivider />
       <FeaturesSection />
       <GlowingDivider />
-      <WaveDivider color="slate-950" flip />
+      <WaveDivider flip />
       <HowItWorksSection />
       <GlowingDivider />
-      <WaveDivider color="slate-900" />
+      <WaveDivider />
       <PartnersSection />
       <GlowingDivider />
       <TestimonialsSection />
       <FAQSection />
       <GlowingDivider />
-      <WaveDivider color="slate-800" flip />
+      <WaveDivider flip />
       <CTASection />
       <Footer />
       <StickyCTA />
