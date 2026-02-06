@@ -13,6 +13,15 @@
   }
 }
 
+@keyframes crystalSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 @keyframes pulse-glow {
   0%, 100% {
     box-shadow: 0 0 20px rgba(0, 136, 204, 0.4), 0 0 40px rgba(0, 136, 204, 0.2);
