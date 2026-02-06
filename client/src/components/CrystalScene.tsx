@@ -1,195 +1,214 @@
-import { useState, useEffect, useRef } from "react";
+import { useRef, useState, useEffect, useMemo } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import * as THREE from "three";
 
-function CrystalStar({ side, scrollY }: { side: "left" | "right"; scrollY: number }) {
-  const isLeft = side === "left";
-
-  const baseY = isLeft ? Math.sin(scrollY * 0.003) * 15 : Math.cos(scrollY * 0.0025) * 18;
-  const parallaxY = scrollY * (isLeft ? -0.08 : -0.06);
-  const floatX = isLeft ? Math.cos(scrollY * 0.002) * 8 : Math.sin(scrollY * 0.0018) * 10;
-
-  const spokes = 6;
-  const layers = 5;
-
-  return (
-    <div
-      className="absolute pointer-events-none"
-      style={{
-        [isLeft ? "left" : "right"]: "-2%",
-        top: isLeft ? "15%" : "10%",
-        width: isLeft ? 320 : 300,
-        height: isLeft ? 320 : 300,
-        transform: `translate(${floatX}px, ${baseY + parallaxY}px)`,
-        transition: "transform 0.12s ease-out",
-      }}
-    >
-      <div
-        className="relative w-full h-full"
-        style={{
-          animation: `crystalSpin ${isLeft ? 25 : 30}s linear infinite ${isLeft ? "" : "reverse"}`,
-        }}
-      >
-        {Array.from({ length: spokes }).map((_, i) => {
-          const angle = (360 / spokes) * i;
-          return (
-            <div
-              key={`spoke-${i}`}
-              className="absolute left-1/2 top-1/2"
-              style={{
-                width: 1,
-                height: "80%",
-                transform: `translate(-50%, -50%) rotate(${angle}deg)`,
-                background: `linear-gradient(to bottom, transparent 0%, rgba(0,170,255,0.6) 15%, rgba(80,200,255,0.8) 50%, rgba(0,170,255,0.6) 85%, transparent 100%)`,
-                boxShadow: "0 0 6px rgba(0,150,255,0.5), 0 0 12px rgba(0,120,255,0.2)",
-              }}
-            />
-          );
-        })}
-
-        {[0, 60, 120].map((angle, i) => (
-          <div
-            key={`tri-up-${i}`}
-            className="absolute left-1/2 top-1/2"
-            style={{
-              transform: `translate(-50%, -50%) rotate(${angle}deg)`,
-            }}
-          >
-            <div
-              style={{
-                width: 0,
-                height: 0,
-                borderLeft: "55px solid transparent",
-                borderRight: "55px solid transparent",
-                borderBottom: "95px solid rgba(0,140,255,0.07)",
-                transform: "translateY(-32px)",
-                filter: "drop-shadow(0 0 4px rgba(0,150,255,0.15))",
-              }}
-            />
-          </div>
-        ))}
-        {[30, 90, 150].map((angle, i) => (
-          <div
-            key={`tri-down-${i}`}
-            className="absolute left-1/2 top-1/2"
-            style={{
-              transform: `translate(-50%, -50%) rotate(${angle}deg) scaleY(-1)`,
-            }}
-          >
-            <div
-              style={{
-                width: 0,
-                height: 0,
-                borderLeft: "55px solid transparent",
-                borderRight: "55px solid transparent",
-                borderBottom: "95px solid rgba(0,120,230,0.06)",
-                transform: "translateY(-32px)",
-                filter: "drop-shadow(0 0 4px rgba(0,140,255,0.12))",
-              }}
-            />
-          </div>
-        ))}
-
-        {Array.from({ length: layers }).map((_, i) => {
-          const size = 90 - i * 15;
-          const rotation = i * 12;
-          const opacity = 0.3 - i * 0.04;
-          return (
-            <div
-              key={`hex-${i}`}
-              className="absolute left-1/2 top-1/2"
-              style={{
-                width: `${size}%`,
-                height: `${size}%`,
-                transform: `translate(-50%, -50%) rotate(${rotation}deg)`,
-                clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
-                border: `1px solid rgba(0,180,255,${opacity})`,
-                boxShadow: `inset 0 0 20px rgba(0,140,255,${opacity * 0.3}), 0 0 8px rgba(0,160,255,${opacity * 0.4})`,
-              }}
-            />
-          );
-        })}
-
-        {Array.from({ length: spokes }).map((_, i) => {
-          const angle = (360 / spokes) * i + 30;
-          return (
-            <div
-              key={`inner-spoke-${i}`}
-              className="absolute left-1/2 top-1/2"
-              style={{
-                width: 1,
-                height: "50%",
-                transform: `translate(-50%, -50%) rotate(${angle}deg)`,
-                background: `linear-gradient(to bottom, transparent 5%, rgba(100,210,255,0.35) 30%, rgba(100,210,255,0.35) 70%, transparent 95%)`,
-                boxShadow: "0 0 4px rgba(0,170,255,0.25)",
-              }}
-            />
-          );
-        })}
-
-        <div
-          className="absolute left-1/2 top-1/2"
-          style={{
-            width: 14,
-            height: 14,
-            transform: "translate(-50%, -50%)",
-            borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(180,230,255,0.9) 0%, rgba(0,170,255,0.5) 50%, transparent 70%)",
-            boxShadow: "0 0 15px rgba(0,170,255,0.7), 0 0 30px rgba(0,140,255,0.4), 0 0 50px rgba(0,100,220,0.2)",
-          }}
-        />
-
-        <div
-          className="absolute left-1/2 top-1/2"
-          style={{
-            width: "120%",
-            height: "120%",
-            transform: "translate(-50%, -50%)",
-            borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(0,140,255,0.1) 0%, transparent 50%)",
-            filter: "blur(15px)",
-          }}
-        />
-      </div>
-    </div>
-  );
-}
-
-export default function CrystalScene() {
-  const [isMobile, setIsMobile] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
-  const rafRef = useRef<number>(0);
-
+function useScrollRef() {
+  const scrollRef = useRef(0);
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768 || "ontouchstart" in window);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, []);
-
-  useEffect(() => {
-    if (isMobile) return;
     let ticking = false;
     const onScroll = () => {
       if (!ticking) {
-        rafRef.current = requestAnimationFrame(() => {
-          setScrollY(window.scrollY);
+        requestAnimationFrame(() => {
+          scrollRef.current = window.scrollY;
           ticking = false;
         });
         ticking = true;
       }
     };
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      cancelAnimationFrame(rafRef.current);
-    };
-  }, [isMobile]);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  return scrollRef;
+}
+
+function createStellatedIcosahedron(): THREE.BufferGeometry {
+  const t = (1 + Math.sqrt(5)) / 2;
+  const baseVerts: [number, number, number][] = [
+    [-1, t, 0], [1, t, 0], [-1, -t, 0], [1, -t, 0],
+    [0, -1, t], [0, 1, t], [0, -1, -t], [0, 1, -t],
+    [t, 0, -1], [t, 0, 1], [-t, 0, -1], [-t, 0, 1],
+  ];
+
+  const len = Math.sqrt(1 + t * t);
+  for (let i = 0; i < baseVerts.length; i++) {
+    baseVerts[i][0] /= len;
+    baseVerts[i][1] /= len;
+    baseVerts[i][2] /= len;
+  }
+
+  const icoFaces: [number, number, number][] = [
+    [0, 11, 5], [0, 5, 1], [0, 1, 7], [0, 7, 10], [0, 10, 11],
+    [1, 5, 9], [5, 11, 4], [11, 10, 2], [10, 7, 6], [7, 1, 8],
+    [3, 9, 4], [3, 4, 2], [3, 2, 6], [3, 6, 8], [3, 8, 9],
+    [4, 9, 5], [2, 4, 11], [6, 2, 10], [8, 6, 7], [9, 8, 1],
+  ];
+
+  const stellationHeight = 1.8;
+  const positions: number[] = [];
+
+  for (const [a, b, c] of icoFaces) {
+    const vA = new THREE.Vector3(...baseVerts[a]);
+    const vB = new THREE.Vector3(...baseVerts[b]);
+    const vC = new THREE.Vector3(...baseVerts[c]);
+
+    const center = new THREE.Vector3().add(vA).add(vB).add(vC).divideScalar(3);
+    const normal = center.clone().normalize();
+    const tip = normal.multiplyScalar(stellationHeight);
+
+    positions.push(
+      vA.x, vA.y, vA.z, vB.x, vB.y, vB.z, tip.x, tip.y, tip.z,
+      vB.x, vB.y, vB.z, vC.x, vC.y, vC.z, tip.x, tip.y, tip.z,
+      vC.x, vC.y, vC.z, vA.x, vA.y, vA.z, tip.x, tip.y, tip.z,
+    );
+  }
+
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
+  geometry.computeVertexNormals();
+  return geometry;
+}
+
+function StarCrystal({
+  position,
+  rotationSpeed,
+  scrollRef,
+  scrollMultiplier,
+}: {
+  position: [number, number, number];
+  rotationSpeed: number;
+  scrollRef: React.RefObject<number>;
+  scrollMultiplier: number;
+}) {
+  const groupRef = useRef<THREE.Group>(null);
+
+  const stellatedGeo = useMemo(() => createStellatedIcosahedron(), []);
+  const edgesGeo = useMemo(() => new THREE.EdgesGeometry(stellatedGeo, 12), [stellatedGeo]);
+
+  const glassMat = useMemo(
+    () =>
+      new THREE.MeshPhysicalMaterial({
+        color: new THREE.Color(0.15, 0.45, 0.9),
+        transparent: true,
+        opacity: 0.12,
+        roughness: 0.05,
+        metalness: 0.0,
+        clearcoat: 1.0,
+        clearcoatRoughness: 0.05,
+        side: THREE.DoubleSide,
+        depthWrite: false,
+      }),
+    []
+  );
+
+  const innerGlassMat = useMemo(
+    () =>
+      new THREE.MeshPhysicalMaterial({
+        color: new THREE.Color(0.2, 0.55, 1.0),
+        transparent: true,
+        opacity: 0.06,
+        roughness: 0.1,
+        side: THREE.DoubleSide,
+        depthWrite: false,
+      }),
+    []
+  );
+
+  const edgeMat = useMemo(
+    () =>
+      new THREE.LineBasicMaterial({
+        color: new THREE.Color(0.3, 0.75, 1.0),
+        transparent: true,
+        opacity: 0.65,
+      }),
+    []
+  );
+
+  const innerEdgeMat = useMemo(
+    () =>
+      new THREE.LineBasicMaterial({
+        color: new THREE.Color(0.5, 0.85, 1.0),
+        transparent: true,
+        opacity: 0.3,
+      }),
+    []
+  );
+
+  useFrame((state) => {
+    if (!groupRef.current) return;
+    const t = state.clock.elapsedTime;
+    const scroll = scrollRef.current ?? 0;
+    const sf = scroll * 0.001;
+
+    groupRef.current.rotation.y = t * rotationSpeed + sf * scrollMultiplier;
+    groupRef.current.rotation.x = t * rotationSpeed * 0.3 + Math.sin(t * 0.2) * 0.1;
+    groupRef.current.rotation.z = Math.sin(t * 0.15) * 0.05;
+
+    groupRef.current.position.y =
+      position[1] + Math.sin(t * 0.4) * 0.15 - sf * 0.5;
+    groupRef.current.position.x =
+      position[0] + Math.sin(t * 0.25) * 0.08;
+  });
+
+  return (
+    <group ref={groupRef} position={position}>
+      <mesh geometry={stellatedGeo} material={glassMat} />
+      <mesh geometry={stellatedGeo} material={innerGlassMat} scale={0.7} />
+      <lineSegments geometry={edgesGeo} material={edgeMat} />
+      <lineSegments geometry={edgesGeo} material={innerEdgeMat} scale={0.7} />
+      <pointLight color="#3399ff" intensity={2} distance={8} decay={2} />
+    </group>
+  );
+}
+
+function Scene() {
+  const scrollRef = useScrollRef();
+
+  return (
+    <>
+      <ambientLight intensity={0.2} color="#88bbff" />
+      <directionalLight position={[5, 5, 5]} intensity={0.5} color="#aaddff" />
+      <directionalLight position={[-5, -3, 3]} intensity={0.3} color="#6699cc" />
+      <pointLight position={[0, 0, 6]} intensity={0.4} color="#4488cc" distance={20} />
+
+      <StarCrystal
+        position={[-4.5, 0.5, 0]}
+        rotationSpeed={0.15}
+        scrollRef={scrollRef}
+        scrollMultiplier={0.5}
+      />
+      <StarCrystal
+        position={[4.5, 0, 0]}
+        rotationSpeed={-0.12}
+        scrollRef={scrollRef}
+        scrollMultiplier={0.4}
+      />
+    </>
+  );
+}
+
+export default function CrystalScene() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () =>
+      setIsMobile(window.innerWidth < 768 || "ontouchstart" in window);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   if (isMobile) return null;
 
   return (
-    <div className="fixed inset-0 z-[1] pointer-events-none overflow-hidden">
-      <CrystalStar side="left" scrollY={scrollY} />
-      <CrystalStar side="right" scrollY={scrollY} />
+    <div className="fixed inset-0 z-[1] pointer-events-none">
+      <Canvas
+        camera={{ position: [0, 0, 10], fov: 45 }}
+        dpr={[1, 1.5]}
+        gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
+        style={{ background: "transparent" }}
+      >
+        <Scene />
+      </Canvas>
     </div>
   );
 }

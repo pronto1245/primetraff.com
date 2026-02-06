@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, Suspense } from "react";
 import { Button } from "@/components/ui/button";
 import { motion, useInView } from "framer-motion";
 import { 
@@ -992,7 +992,9 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen relative" style={{ background: "#001030" }}>
       <BlueBgDecorations />
-      <CrystalScene />
+      <Suspense fallback={null}>
+        <CrystalScene />
+      </Suspense>
       <Navigation />
       <HeroSection />
       <GlowingDivider />
