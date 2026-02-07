@@ -20,9 +20,12 @@ import {
   LineChart,
   Rocket,
   KeyRound,
-  Mail
+  Mail,
+  Languages
 } from "lucide-react";
 import { SiTelegram } from "react-icons/si";
+import { useLang } from "@/lib/language-context";
+import { translations, t } from "@/lib/i18n";
 
 import primeTraffLogo from "@assets/generated_images/primetraff_blue_crystal_logo.png";
 
@@ -296,6 +299,7 @@ function GlassCard({ children, className = "", hover = true }: { children: React
 function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { lang, toggleLang } = useLang();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -313,53 +317,70 @@ function Navigation() {
           </a>
 
           <div className="hidden md:flex items-center gap-8">
-            <a href="#features" className="text-white/70 hover:text-white transition-colors" data-testid="link-features">Возможности</a>
-            <a href="#how-it-works" className="text-white/70 hover:text-white transition-colors" data-testid="link-how-it-works">Как это работает</a>
-            <a href="#partners" className="text-white/70 hover:text-white transition-colors" data-testid="link-partners">Партнеры</a>
-            <a href="#faq" className="text-white/70 hover:text-white transition-colors" data-testid="link-faq">FAQ</a>
+            <a href="#features" className="text-white/70 hover:text-white transition-colors" data-testid="link-features">{t(translations.nav.features, lang)}</a>
+            <a href="#how-it-works" className="text-white/70 hover:text-white transition-colors" data-testid="link-how-it-works">{t(translations.nav.howItWorks, lang)}</a>
+            <a href="#partners" className="text-white/70 hover:text-white transition-colors" data-testid="link-partners">{t(translations.nav.partners, lang)}</a>
+            <a href="#faq" className="text-white/70 hover:text-white transition-colors" data-testid="link-faq">{t(translations.nav.faq, lang)}</a>
           </div>
 
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-3">
+            <button
+              onClick={toggleLang}
+              className="flex items-center gap-1.5 border border-white/20 bg-white/5 text-sm font-semibold px-3 py-1.5 rounded-full transition-colors hover:border-white/30 hover:bg-white/10"
+              data-testid="button-lang-toggle"
+            >
+              <Languages className="w-3.5 h-3.5 text-white/60" />
+              <span className="text-white/90 uppercase">{lang === "ru" ? "EN" : "RU"}</span>
+            </button>
             <a href={TELEGRAM_CHANNEL_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 border border-[#0088CC]/50 bg-[#0088CC]/10 transition-colors text-sm font-medium px-3 py-1.5 rounded-full" data-testid="link-telegram-channel-nav">
               <SiTelegram className="w-4 h-4 text-[#0088CC]" />
-              <span className="text-white">Наш канал</span>
+              <span className="text-white">{t(translations.nav.ourChannel, lang)}</span>
             </a>
             <a href={LOGIN_URL} target="_blank" rel="noopener noreferrer" data-testid="button-login-nav">
               <Button variant="outline" className="border-white/25 text-white/80 font-medium px-5 rounded-full">
-                Вход
+                {t(translations.nav.login, lang)}
               </Button>
             </a>
             <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" data-testid="button-become-partner-nav">
               <Button variant="outline" className="border-white/30 text-white font-medium px-5 rounded-full">
-                Стать партнером
+                {t(translations.nav.becomePartner, lang)}
               </Button>
             </a>
           </div>
 
-          <button 
-            className="md:hidden text-white p-2"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            data-testid="button-mobile-menu"
-          >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+          <div className="flex items-center gap-2 md:hidden">
+            <button
+              onClick={toggleLang}
+              className="flex items-center gap-1 border border-white/20 bg-white/5 text-sm font-semibold px-2.5 py-1.5 rounded-full"
+              data-testid="button-lang-toggle-mobile"
+            >
+              <span className="text-white/90 uppercase text-xs">{lang === "ru" ? "EN" : "RU"}</span>
+            </button>
+            <button 
+              className="text-white p-2"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              data-testid="button-mobile-menu"
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
 
         {mobileMenuOpen && (
           <div className="md:hidden bg-[#001a3a]/95 backdrop-blur-xl border-t border-white/10 py-4">
             <div className="flex flex-col gap-4 px-4">
-              <a href="#features" className="text-white/70 py-3 min-h-[44px] flex items-center" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-features">Возможности</a>
-              <a href="#how-it-works" className="text-white/70 py-3 min-h-[44px] flex items-center" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-how-it-works">Как это работает</a>
-              <a href="#partners" className="text-white/70 py-3 min-h-[44px] flex items-center" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-partners">Партнеры</a>
-              <a href="#faq" className="text-white/70 py-3 min-h-[44px] flex items-center" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-faq">FAQ</a>
+              <a href="#features" className="text-white/70 py-3 min-h-[44px] flex items-center" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-features">{t(translations.nav.features, lang)}</a>
+              <a href="#how-it-works" className="text-white/70 py-3 min-h-[44px] flex items-center" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-how-it-works">{t(translations.nav.howItWorks, lang)}</a>
+              <a href="#partners" className="text-white/70 py-3 min-h-[44px] flex items-center" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-partners">{t(translations.nav.partners, lang)}</a>
+              <a href="#faq" className="text-white/70 py-3 min-h-[44px] flex items-center" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-faq">{t(translations.nav.faq, lang)}</a>
               <a href={LOGIN_URL} target="_blank" rel="noopener noreferrer" className="w-full" data-testid="button-login-mobile">
                 <Button variant="outline" className="w-full border-white/25 text-white/80 font-medium rounded-full">
-                  Вход
+                  {t(translations.nav.login, lang)}
                 </Button>
               </a>
               <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" className="w-full" data-testid="button-become-partner-mobile">
                 <Button variant="outline" className="w-full border-white/30 text-white font-medium rounded-full">
-                  Стать партнером
+                  {t(translations.nav.becomePartner, lang)}
                 </Button>
               </a>
             </div>
@@ -411,6 +432,10 @@ function DecorBadge({ text, rotation, className, delay = 0, color = "sky" }: { t
 }
 
 function HeroSection() {
+  const { lang } = useLang();
+
+  const mobileBadges = ["CPA / RS / Hybrid", "Gambling x Betting", t(translations.hero.badges.geo, lang), t(translations.hero.badges.partners, lang)];
+
   return (
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
       <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, #001030 0%, #002060 30%, #0055AA 60%, #0088CC 100%)" }} />
@@ -446,22 +471,21 @@ function HeroSection() {
               transition={{ duration: 0.5, delay: 0.25 }}
               className="text-base lg:text-lg text-white/70 max-w-md mt-6 mb-8 leading-relaxed"
             >
-              Партнерская программа нового поколения.
-              Высокие ставки, моментальные выплаты, поддержка 24/7.
+              {t(translations.hero.subtitle, lang)}
             </motion.p>
 
             <div className="relative mt-2 mb-8 h-[180px] md:h-[200px] lg:h-[160px] hidden md:block">
               <DecorBadge text="CPA / RS / Hybrid" rotation={-6} className="top-0 left-0" delay={0.3} color="sky" />
               <DecorBadge text="Gambling x Betting" rotation={4} className="top-2 left-[220px] lg:left-[260px]" delay={0.4} color="amber" />
-              <DecorBadge text="70+ ГЕО" rotation={-3} className="top-[70px] left-[60px]" delay={0.5} color="emerald" />
-              <DecorBadge text="500+ Партнеров" rotation={5} className="top-[65px] left-[220px] lg:left-[240px]" delay={0.55} color="violet" />
-              <DecorBadge text="Мгновенные выплаты" rotation={-2} className="top-[120px] left-[20px]" delay={0.6} color="cyan" />
+              <DecorBadge text={t(translations.hero.badges.geo, lang)} rotation={-3} className="top-[70px] left-[60px]" delay={0.5} color="emerald" />
+              <DecorBadge text={t(translations.hero.badges.partners, lang)} rotation={5} className="top-[65px] left-[220px] lg:left-[240px]" delay={0.55} color="violet" />
+              <DecorBadge text={t(translations.hero.badges.payouts, lang)} rotation={-2} className="top-[120px] left-[20px]" delay={0.6} color="cyan" />
             </div>
 
             <div className="flex md:hidden flex-wrap gap-2 mb-8 mt-4">
-              {["CPA / RS / Hybrid", "Gambling x Betting", "70+ ГЕО", "500+ Партнеров"].map((t, i) => (
+              {mobileBadges.map((badge, i) => (
                 <motion.div key={i} initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.4, delay: 0.3 + i * 0.1 }}>
-                  <div className="px-3 py-1.5 rounded-full border border-sky-400/30 bg-sky-500/15 text-sky-200 text-xs font-bold tracking-wider uppercase backdrop-blur-sm">{t}</div>
+                  <div className="px-3 py-1.5 rounded-full border border-sky-400/30 bg-sky-500/15 text-sky-200 text-xs font-bold tracking-wider uppercase backdrop-blur-sm">{badge}</div>
                 </motion.div>
               ))}
             </div>
@@ -475,13 +499,13 @@ function HeroSection() {
           >
             <a href={LOGIN_URL} target="_blank" rel="noopener noreferrer" data-testid="button-hero-login" className="block">
               <div className="group relative border-2 border-white/20 rounded-2xl px-10 py-8 lg:px-12 lg:py-10 text-center transition-all duration-300 cursor-pointer" style={{ background: "rgba(255,255,255,0.04)" }}>
-                <span className="text-white font-bold text-lg lg:text-xl tracking-wide uppercase">Вход</span>
+                <span className="text-white font-bold text-lg lg:text-xl tracking-wide uppercase">{t(translations.hero.loginBtn, lang)}</span>
                 <ArrowRight className="w-5 h-5 text-white/60 inline-block ml-3" />
               </div>
             </a>
             <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" data-testid="button-hero-register" className="block">
               <div className="group relative border-2 border-sky-400/30 rounded-2xl px-10 py-8 lg:px-12 lg:py-10 text-center transition-all duration-300 cursor-pointer" style={{ background: "rgba(0,136,204,0.12)" }}>
-                <span className="text-white font-bold text-lg lg:text-xl tracking-wide uppercase">Регистрация</span>
+                <span className="text-white font-bold text-lg lg:text-xl tracking-wide uppercase">{t(translations.hero.registerBtn, lang)}</span>
               </div>
             </a>
             <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" data-testid="button-hero-telegram" className="block">
@@ -500,10 +524,10 @@ function HeroSection() {
           className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6 max-w-5xl mt-12 lg:mt-16"
         >
           {[
-            { value: 500, suffix: "+", label: "Активных партнеров", id: "partners", color: "#a78bfa", borderColor: "rgba(167,139,250,0.25)", icon: Users },
-            { value: 2, prefix: "$", suffix: "M+", label: "Выплачено партнерам", id: "payouts", color: "#fbbf24", borderColor: "rgba(251,191,36,0.25)", icon: DollarSign },
-            { value: 24, suffix: "/7", label: "Поддержка онлайн", id: "support", color: "#38bdf8", borderColor: "rgba(56,189,248,0.25)", icon: MessageCircle },
-            { value: 100, suffix: "%", label: "Честные выплаты", id: "honest", color: "#34d399", borderColor: "rgba(52,211,153,0.25)", icon: Shield },
+            { value: 500, suffix: "+", label: t(translations.hero.stats.partners, lang), id: "partners", color: "#a78bfa", borderColor: "rgba(167,139,250,0.25)", icon: Users },
+            { value: 2, prefix: "$", suffix: "M+", label: t(translations.hero.stats.payouts, lang), id: "payouts", color: "#fbbf24", borderColor: "rgba(251,191,36,0.25)", icon: DollarSign },
+            { value: 24, suffix: "/7", label: t(translations.hero.stats.support, lang), id: "support", color: "#38bdf8", borderColor: "rgba(56,189,248,0.25)", icon: MessageCircle },
+            { value: 100, suffix: "%", label: t(translations.hero.stats.honest, lang), id: "honest", color: "#34d399", borderColor: "rgba(52,211,153,0.25)", icon: Shield },
           ].map((stat, i) => (
             <motion.div
               key={i}
@@ -547,56 +571,31 @@ function HolographicIcon({ icon: Icon, color, glowColor }: { icon: any; color: s
 }
 
 function FeaturesSection() {
-  const features = [
-    {
-      title: "Без шейва",
-      description: "Мы много лет работаем в gambling вертикали и знаем все боли рынка. Гарантируем, что шейва через нашу партнерскую сеть не будет. Честность — наш главный принцип.",
-      icon: Shield,
-      color: "#38bdf8",
-      glowColor: "rgba(56,189,248,0.4)",
-      badge: { shape: "circle" as const, label: "TRUST", sublabel: "100%" },
-    },
-    {
-      title: "Большой выбор офферов",
-      description: "Все офферы, с которыми мы работаем, уже были пролиты нашей командой. Мы знаем что рекомендовать нашим партнерам для максимального профита.",
-      icon: Briefcase,
-      color: "#a78bfa",
-      glowColor: "rgba(167,139,250,0.4)",
-      badge: { shape: "hexagon" as const, label: "500+", sublabel: "ОФФЕРОВ" },
-    },
-    {
-      title: "Помощь в заливах",
-      description: "Мы тестируем связки и делимся ими с партнерами. Всё — от креатива до необходимых инструментов. Вам остается взять ссылку из ЛК и начать лить.",
-      icon: Rocket,
-      color: "#22d3ee",
-      glowColor: "rgba(34,211,238,0.4)",
-      badge: { shape: "diamond" as const, label: "BOOST", sublabel: "СВЯЗКИ" },
-    },
-    {
-      title: "Быстрые выплаты",
-      description: "Стараемся максимально быстро выплачивать вознаграждение. Если у рекла нет претензий к трафику — средства будут на кошельке в кратчайший срок.",
-      icon: Zap,
-      color: "#fbbf24",
-      glowColor: "rgba(251,191,36,0.4)",
-      badge: { shape: "shield" as const, label: "FAST", sublabel: "PAY" },
-    },
-    {
-      title: "Приватный канал со связками",
-      description: "Для проверенных партнеров есть закрытый канал с продуктом, креативами, таргетом, плейсментами — всё для профитной настройки пролива.",
-      icon: KeyRound,
-      color: "#f472b6",
-      glowColor: "rgba(244,114,182,0.4)",
-      badge: { shape: "octagon" as const, label: "VIP", sublabel: "ACCESS" },
-    },
-    {
-      title: "Полная аналитика",
-      description: "Личный кабинет с детальной статистикой по всем показателям. Видишь каждый клик и депозит по своим subID в реальном времени.",
-      icon: LineChart,
-      color: "#34d399",
-      glowColor: "rgba(52,211,153,0.4)",
-      badge: { shape: "square" as const, label: "DATA", sublabel: "LIVE" },
-    },
+  const { lang } = useLang();
+
+  const badgeSublabels = [
+    { ru: "100%", en: "100%" },
+    { ru: "ОФФЕРОВ", en: "OFFERS" },
+    { ru: "СВЯЗКИ", en: "FUNNELS" },
+    { ru: "PAY", en: "PAY" },
+    { ru: "ACCESS", en: "ACCESS" },
+    { ru: "LIVE", en: "LIVE" },
   ];
+
+  const featuresMeta = [
+    { icon: Shield, color: "#38bdf8", glowColor: "rgba(56,189,248,0.4)", badge: { shape: "circle" as const, label: "TRUST", sublabel: t(badgeSublabels[0], lang) } },
+    { icon: Briefcase, color: "#a78bfa", glowColor: "rgba(167,139,250,0.4)", badge: { shape: "hexagon" as const, label: "500+", sublabel: t(badgeSublabels[1], lang) } },
+    { icon: Rocket, color: "#22d3ee", glowColor: "rgba(34,211,238,0.4)", badge: { shape: "diamond" as const, label: "BOOST", sublabel: t(badgeSublabels[2], lang) } },
+    { icon: Zap, color: "#fbbf24", glowColor: "rgba(251,191,36,0.4)", badge: { shape: "shield" as const, label: "FAST", sublabel: t(badgeSublabels[3], lang) } },
+    { icon: KeyRound, color: "#f472b6", glowColor: "rgba(244,114,182,0.4)", badge: { shape: "octagon" as const, label: "VIP", sublabel: t(badgeSublabels[4], lang) } },
+    { icon: LineChart, color: "#34d399", glowColor: "rgba(52,211,153,0.4)", badge: { shape: "square" as const, label: "DATA", sublabel: t(badgeSublabels[5], lang) } },
+  ];
+
+  const features = translations.features.items.map((item, i) => ({
+    title: t(item.title, lang),
+    description: t(item.description, lang),
+    ...featuresMeta[i],
+  }));
 
   const [activeIdx, setActiveIdx] = useState(0);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -630,10 +629,10 @@ function FeaturesSection() {
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         <AnimatedSection className="text-center mb-12 lg:mb-16">
           <h2 className="text-3xl lg:text-5xl font-bold text-white mb-4">
-            Почему выбирают PrimeTraff
+            {t(translations.features.title, lang)}
           </h2>
           <p className="text-white/60 text-lg max-w-2xl mx-auto">
-            Созданы арбитражниками для арбитражников. Знаем, что вам нужно.
+            {t(translations.features.subtitle, lang)}
           </p>
         </AnimatedSection>
 
@@ -798,44 +797,20 @@ function FeaturesSection() {
 }
 
 function HowItWorksSection() {
-  const steps = [
-    {
-      step: "01",
-      title: "Регистрация",
-      description: "Заполните форму за 2 минуты. Мгновенное одобрение для опытных арбитражников.",
-      icon: Users,
-      color: "#a78bfa",
-      glowColor: "rgba(167,139,250,0.4)",
-      badgeGradient: "from-violet-500 to-violet-600",
-    },
-    {
-      step: "02",
-      title: "Получите офферы",
-      description: "Выберите офферы и получите уникальные трекинговые ссылки.",
-      icon: Globe,
-      color: "#38bdf8",
-      glowColor: "rgba(56,189,248,0.4)",
-      badgeGradient: "from-sky-500 to-sky-600",
-    },
-    {
-      step: "03",
-      title: "Лейте трафик",
-      description: "Запускайте рекламные кампании и отслеживайте результаты в реальном времени.",
-      icon: BarChart3,
-      color: "#22d3ee",
-      glowColor: "rgba(34,211,238,0.4)",
-      badgeGradient: "from-cyan-500 to-cyan-600",
-    },
-    {
-      step: "04",
-      title: "Получайте выплаты",
-      description: "Выводите заработок ежедневно. Без холдов для проверенных партнеров.",
-      icon: DollarSign,
-      color: "#fbbf24",
-      glowColor: "rgba(251,191,36,0.4)",
-      badgeGradient: "from-amber-500 to-amber-600",
-    },
+  const { lang } = useLang();
+
+  const stepsMeta = [
+    { step: "01", icon: Users, color: "#a78bfa", glowColor: "rgba(167,139,250,0.4)", badgeGradient: "from-violet-500 to-violet-600" },
+    { step: "02", icon: Globe, color: "#38bdf8", glowColor: "rgba(56,189,248,0.4)", badgeGradient: "from-sky-500 to-sky-600" },
+    { step: "03", icon: BarChart3, color: "#22d3ee", glowColor: "rgba(34,211,238,0.4)", badgeGradient: "from-cyan-500 to-cyan-600" },
+    { step: "04", icon: DollarSign, color: "#fbbf24", glowColor: "rgba(251,191,36,0.4)", badgeGradient: "from-amber-500 to-amber-600" },
   ];
+
+  const steps = translations.howItWorks.steps.map((item, i) => ({
+    title: t(item.title, lang),
+    description: t(item.description, lang),
+    ...stepsMeta[i],
+  }));
 
   return (
     <section id="how-it-works" className="py-20 lg:py-32 relative overflow-hidden">
@@ -847,10 +822,10 @@ function HowItWorksSection() {
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         <AnimatedSection className="text-center mb-16">
           <h2 className="text-3xl lg:text-5xl font-bold text-white mb-4">
-            Как начать зарабатывать
+            {t(translations.howItWorks.title, lang)}
           </h2>
           <p className="text-white/70 text-lg max-w-2xl mx-auto">
-            Простой старт за 5 минут. Никакой бюрократии.
+            {t(translations.howItWorks.subtitle, lang)}
           </p>
         </AnimatedSection>
 
@@ -917,7 +892,7 @@ function HowItWorksSection() {
         <AnimatedSection delay={0.6} className="text-center mt-12">
           <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" data-testid="button-how-it-works-cta">
             <Button variant="outline" className="border-white/25 text-white font-medium px-8 h-auto py-3 rounded-full backdrop-blur-sm">
-              Начать сейчас
+              {t(translations.howItWorks.cta, lang)}
               <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </a>
@@ -928,64 +903,15 @@ function HowItWorksSection() {
 }
 
 function TestimonialsSection() {
-  const testimonials = [
-    {
-      name: "Алексей К.",
-      role: "Media Buyer",
-      avatar: "А",
-      text: "Перешёл с другой партнёрки 3 месяца назад. Ставки реально выше, выплаты как часы. Менеджер всегда на связи, помогает с оптимизацией.",
-      rating: 5,
-    },
-    {
-      name: "Дмитрий В.",
-      role: "Арбитражник",
-      avatar: "Д",
-      text: "Работаю с PrimeTraff уже полгода. Лучшая аналитика из всех партнёрок, что видел. Постбеки летят мгновенно, статистика точная.",
-      rating: 5,
-    },
-    {
-      name: "Мария С.",
-      role: "Team Lead",
-      avatar: "М",
-      text: "Наша команда из 5 человек полностью перешла на PrimeTraff. Удобно работать, все данные в одном месте. Поддержка отвечает за минуты.",
-      rating: 5,
-    },
-    {
-      name: "Игорь Л.",
-      role: "Solo Арбитражник",
-      avatar: "И",
-      text: "Лью на Tier-1 гео уже год через PrimeTraff. CR выше на 15-20% по сравнению с конкурентами. Эксклюзивные офферы реально конвертят.",
-      rating: 5,
-    },
-    {
-      name: "Екатерина Р.",
-      role: "Affiliate Manager",
-      avatar: "Е",
-      text: "Как менеджер партнёрской программы, ценю прозрачность PrimeTraff. Детальная статистика, честные выплаты, никаких шейвов. Рекомендую всем.",
-      rating: 5,
-    },
-    {
-      name: "Сергей Н.",
-      role: "Media Buyer",
-      avatar: "С",
-      text: "Начал с тестовых объёмов, сейчас лью по 500+ лидов в день. Масштабировался без проблем, техподдержка помогла с настройкой трекера.",
-      rating: 5,
-    },
-    {
-      name: "Олег Т.",
-      role: "Team Lead",
-      avatar: "О",
-      text: "Работаем командой из 8 человек. PrimeTraff дал персонального менеджера, индивидуальные условия и приоритетные выплаты. Топовый сервис.",
-      rating: 5,
-    },
-    {
-      name: "Анна П.",
-      role: "Арбитражник",
-      avatar: "А",
-      text: "Пробовала 4 партнёрки за последний год. PrimeTraff — единственная, где не было проблем с выплатами. Всё чётко и в срок, без задержек.",
-      rating: 5,
-    },
-  ];
+  const { lang } = useLang();
+
+  const testimonials = translations.testimonials.items.map((item) => ({
+    name: t(item.name, lang),
+    role: t(item.role, lang),
+    avatar: t(item.avatar, lang),
+    text: t(item.text, lang),
+    rating: 5,
+  }));
 
   const colors = [
     { border: "rgba(167,139,250,0.2)", glow: "rgba(167,139,250,0.06)" },
@@ -1006,10 +932,10 @@ function TestimonialsSection() {
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         <AnimatedSection className="text-center mb-16">
           <h2 className="text-3xl lg:text-5xl font-bold text-white mb-4">
-            Что говорят партнеры
+            {t(translations.testimonials.title, lang)}
           </h2>
           <p className="text-white/70 text-lg max-w-2xl mx-auto">
-            Реальные отзывы от реальных арбитражников
+            {t(translations.testimonials.subtitle, lang)}
           </p>
         </AnimatedSection>
       </div>
@@ -1075,6 +1001,7 @@ function TestimonialsSection() {
 }
 
 function PartnersSection() {
+  const { lang } = useLang();
   const logoMap: Record<string, string> = {
     "SpinAura": logoSpinAura,
     "Elonbet": logoElonbet,
@@ -1163,10 +1090,10 @@ function PartnersSection() {
       <div className="relative z-10 max-w-full">
         <AnimatedSection className="text-center mb-12 lg:mb-16 px-6 lg:px-8">
           <h2 className="text-3xl lg:text-5xl font-bold text-white mb-4">
-            Наши партнеры
+            {t(translations.partnersSection.title, lang)}
           </h2>
           <p className="text-white/70 text-lg max-w-2xl mx-auto">
-            Работаем с лучшими брендами индустрии
+            {t(translations.partnersSection.subtitle, lang)}
           </p>
         </AnimatedSection>
 
@@ -1193,26 +1120,13 @@ function PartnersSection() {
 }
 
 function FAQSection() {
+  const { lang } = useLang();
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  const faqs = [
-    {
-      question: "Предоставляете ли вы готовую воронку для пролива?",
-      answer: "Да, в нее входит: готовое PWA-приложение с настроенными PUSH-уведомлениями + конвертящие креативы + инструкция по запуску",
-    },
-    {
-      question: "Возможно ли получить индивидуальные условия по выплатам?",
-      answer: "Да, активным веб-мастерам мы идем навстречу и готовы предоставлять индивидуальные условия для дополнительного удобства",
-    },
-    {
-      question: "У меня нет трекера, что делать?",
-      answer: "Мы предоставим вам полностью бесплатный трекер с интуитивным интерфейсом, где вы сможете настроить все необходимые параметры, отслеживать конверсии в реальном времени и оптимизировать свои кампании для максимальной эффективности",
-    },
-    {
-      question: "В каких случаях трафик не соответствует минимальным требованиям компании?",
-      answer: "Трафик не соответствует минимальным требованиям компании в случае:\n1. Относится к запрещенным видам трафика\n2. Не соответствует заявленному источнику\n3. Количество повторных депозитов не менее 50% от количества первых\n4. Процент дубликатов свыше 10% от всех привлеченных игроков",
-    },
-  ];
+  const faqs = translations.faq.items.map((item) => ({
+    question: t(item.question, lang),
+    answer: t(item.answer, lang),
+  }));
 
   return (
     <section id="faq" className="py-20 lg:py-32 relative overflow-hidden">
@@ -1223,10 +1137,10 @@ function FAQSection() {
       <div className="relative z-10 max-w-3xl mx-auto px-6 lg:px-8">
         <AnimatedSection className="text-center mb-16">
           <h2 className="text-3xl lg:text-5xl font-bold text-white mb-4">
-            Частые вопросы
+            {t(translations.faq.title, lang)}
           </h2>
           <p className="text-white/70 text-lg">
-            Не нашли ответ? Напишите нам в Telegram
+            {t(translations.faq.subtitle, lang)}
           </p>
         </AnimatedSection>
 
@@ -1267,6 +1181,7 @@ function FAQSection() {
 }
 
 function CTASection() {
+  const { lang } = useLang();
   return (
     <section className="py-24 lg:py-36 relative overflow-hidden">
       <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, #001030 0%, #002060 40%, #003080 70%, #0055AA 100%)" }} />
@@ -1291,37 +1206,37 @@ function CTASection() {
         <AnimatedSection>
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-emerald-400/20 bg-emerald-400/5 mb-8">
             <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-emerald-400 text-sm font-medium">Регистрация открыта</span>
+            <span className="text-emerald-400 text-sm font-medium">{t(translations.cta.registrationOpen, lang)}</span>
           </div>
 
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-            Готовы начать<br />
-            <span className="bg-gradient-to-r from-sky-400 via-cyan-300 to-blue-400 bg-clip-text text-transparent">зарабатывать?</span>
+            {t(translations.cta.title1, lang)}<br />
+            <span className="bg-gradient-to-r from-sky-400 via-cyan-300 to-blue-400 bg-clip-text text-transparent">{t(translations.cta.title2, lang)}</span>
           </h2>
           <p className="text-lg lg:text-xl text-white/70 mb-12 max-w-2xl mx-auto leading-relaxed">
-            Присоединяйтесь к PrimeTraff сегодня и получите доступ к лучшим офферам рынка
+            {t(translations.cta.subtitle, lang)}
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14">
             <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" data-testid="button-cta-register">
               <Button variant="outline" className="border-white/30 text-white font-semibold px-12 h-auto py-4 rounded-full backdrop-blur-sm transition-all text-base hover:border-white/50 hover:bg-white/5">
-                Стать партнером
+                {t(translations.cta.becomePartner, lang)}
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
             </a>
             <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" data-testid="button-cta-telegram">
               <Button variant="outline" className="border-white/15 text-white/80 px-12 h-auto py-4 rounded-full backdrop-blur-sm text-base">
                 <SiTelegram className="w-5 h-5 mr-2 text-[#0088CC]" />
-                Telegram поддержка
+                {t(translations.cta.telegramSupport, lang)}
               </Button>
             </a>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-xl mx-auto">
             {[
-              { icon: <CheckCircle className="w-5 h-5" />, text: "Без холдов", color: "#fbbf24" },
-              { icon: <CheckCircle className="w-5 h-5" />, text: "Быстрое одобрение", color: "#a78bfa" },
-              { icon: <CheckCircle className="w-5 h-5" />, text: "Поддержка 24/7", color: "#38bdf8" },
+              { icon: <CheckCircle className="w-5 h-5" />, text: t(translations.cta.noHolds, lang), color: "#fbbf24" },
+              { icon: <CheckCircle className="w-5 h-5" />, text: t(translations.cta.fastApproval, lang), color: "#a78bfa" },
+              { icon: <CheckCircle className="w-5 h-5" />, text: t(translations.cta.support247, lang), color: "#38bdf8" },
             ].map((item, i) => (
               <div key={i} className="flex items-center justify-center gap-2.5 px-4 py-3 rounded-xl bg-white/[0.04] border border-white/[0.06]">
                 <span style={{ color: item.color }}>{item.icon}</span>
@@ -1336,6 +1251,7 @@ function CTASection() {
 }
 
 function Footer() {
+  const { lang } = useLang();
   return (
     <footer className="relative z-10 pt-16 pb-24 md:pb-8" style={{ background: "#001030" }}>
       <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(0,136,204,0.3), transparent)" }} />
@@ -1348,7 +1264,7 @@ function Footer() {
               <span className="text-xl font-bold text-white">PrimeTraff</span>
             </div>
             <p className="text-sm text-white/50 leading-relaxed mb-6">
-              Премиум партнерская сеть для iGaming вертикали с лучшими офферами и условиями.
+              {t(translations.footer.description, lang)}
             </p>
             <div className="flex items-center gap-3">
               <a href={TELEGRAM_CHANNEL_URL} target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-lg bg-white/[0.05] border border-white/[0.08] flex items-center justify-center text-white/50 hover:text-[#0088CC] hover:border-[#0088CC]/30 transition-colors" data-testid="link-footer-tg-icon">
@@ -1361,13 +1277,13 @@ function Footer() {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold text-white/80 uppercase tracking-wider mb-4">Партнерам</h4>
+            <h4 className="text-sm font-semibold text-white/80 uppercase tracking-wider mb-4">{t(translations.footer.forPartners, lang)}</h4>
             <ul className="space-y-2.5">
               {[
-                { label: "Регистрация", href: REGISTER_URL, external: true },
-                { label: "Возможности", href: "#features", external: false },
-                { label: "Как это работает", href: "#how-it-works", external: false },
-                { label: "Отзывы", href: "#testimonials", external: false },
+                { label: t(translations.footer.registration, lang), href: REGISTER_URL, external: true },
+                { label: t(translations.footer.features, lang), href: "#features", external: false },
+                { label: t(translations.footer.howItWorks, lang), href: "#how-it-works", external: false },
+                { label: t(translations.footer.reviews, lang), href: "#testimonials", external: false },
               ].map((item) => (
                 <li key={item.label}>
                   <a href={item.href} {...(item.external ? { target: "_blank", rel: "noopener noreferrer" } : {})} className="text-sm text-white/45 hover:text-white/80 transition-colors" data-testid={`link-footer-${item.label}`}>{item.label}</a>
@@ -1377,13 +1293,13 @@ function Footer() {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold text-white/80 uppercase tracking-wider mb-4">Навигация</h4>
+            <h4 className="text-sm font-semibold text-white/80 uppercase tracking-wider mb-4">{t(translations.footer.navigation, lang)}</h4>
             <ul className="space-y-2.5">
               {[
-                { label: "Партнеры", href: "#partners", external: false },
+                { label: t(translations.footer.partnersLink, lang), href: "#partners", external: false },
                 { label: "FAQ", href: "#faq", external: false },
-                { label: "Войти", href: LOGIN_URL, external: true },
-                { label: "Стать партнером", href: REGISTER_URL, external: true },
+                { label: t(translations.footer.loginLink, lang), href: LOGIN_URL, external: true },
+                { label: t(translations.footer.becomePartner, lang), href: REGISTER_URL, external: true },
               ].map((item) => (
                 <li key={item.label}>
                   <a href={item.href} {...(item.external ? { target: "_blank", rel: "noopener noreferrer" } : {})} className="text-sm text-white/45 hover:text-white/80 transition-colors cursor-pointer" data-testid={`link-footer-${item.label}`}>{item.label}</a>
@@ -1393,18 +1309,18 @@ function Footer() {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold text-white/80 uppercase tracking-wider mb-4">Поддержка</h4>
+            <h4 className="text-sm font-semibold text-white/80 uppercase tracking-wider mb-4">{t(translations.footer.support, lang)}</h4>
             <ul className="space-y-2.5">
               <li>
                 <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-white/45 hover:text-[#0088CC] transition-colors" data-testid="link-footer-telegram">
                   <SiTelegram className="w-3.5 h-3.5" />
-                  Telegram чат
+                  {t(translations.footer.telegramChat, lang)}
                 </a>
               </li>
               <li>
                 <a href={TELEGRAM_CHANNEL_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-white/45 hover:text-[#0088CC] transition-colors" data-testid="link-footer-telegram-channel">
                   <SiTelegram className="w-3.5 h-3.5" />
-                  Наш канал
+                  {t(translations.footer.ourChannel, lang)}
                 </a>
               </li>
               <li>
@@ -1419,11 +1335,11 @@ function Footer() {
         <div className="h-px bg-white/[0.06] mb-6" />
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="text-white/35 text-xs">
-            © 2026 PrimeTraff. Все права защищены.
+            © 2026 PrimeTraff. {t(translations.footer.allRights, lang)}
           </div>
           <div className="flex items-center gap-4 text-xs text-white/35">
-            <a href="#" className="hover:text-white/60 transition-colors cursor-pointer" data-testid="link-footer-privacy">Политика конфиденциальности</a>
-            <a href="#" className="hover:text-white/60 transition-colors cursor-pointer" data-testid="link-footer-terms">Условия использования</a>
+            <a href="#" className="hover:text-white/60 transition-colors cursor-pointer" data-testid="link-footer-privacy">{t(translations.footer.privacy, lang)}</a>
+            <a href="#" className="hover:text-white/60 transition-colors cursor-pointer" data-testid="link-footer-terms">{t(translations.footer.terms, lang)}</a>
           </div>
         </div>
       </div>
@@ -1432,11 +1348,12 @@ function Footer() {
 }
 
 function StickyCTA() {
+  const { lang } = useLang();
   return (
     <div className="fixed bottom-0 left-0 right-0 backdrop-blur-xl border-t border-white/10 p-4 z-40 md:hidden" style={{ background: "rgba(0,16,48,0.9)" }}>
       <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" className="block" data-testid="button-sticky-cta">
         <Button variant="outline" className="w-full border-white/30 text-white font-medium rounded-full">
-          Стать партнером
+          {t(translations.stickyCta.becomePartner, lang)}
           <ArrowRight className="w-5 h-5 ml-2" />
         </Button>
       </a>
@@ -1445,6 +1362,7 @@ function StickyCTA() {
 }
 
 function SpecialOfferPopup() {
+  const { lang } = useLang();
   const [isVisible, setIsVisible] = useState(false);
   const [timeLeft, setTimeLeft] = useState({
     days: 1,
@@ -1527,33 +1445,33 @@ function SpecialOfferPopup() {
         <div className="text-center mb-6">
           <Zap className="w-10 h-10 text-sky-400 mx-auto mb-3" />
           <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
-            Специальное предложение
+            {t(translations.popup.specialOffer, lang)}
           </h3>
-          <p className="text-white/70">Успейте воспользоваться</p>
+          <p className="text-white/70">{t(translations.popup.hurryUp, lang)}</p>
         </div>
 
         <div className="grid grid-cols-4 gap-2 md:gap-3 mb-6">
           <div className="bg-white/5 rounded-xl p-3 text-center border border-white/10">
             <div className="text-2xl md:text-3xl font-bold text-sky-400">{timeLeft.days}</div>
-            <div className="text-xs text-white/60 mt-1">дней</div>
+            <div className="text-xs text-white/60 mt-1">{t(translations.popup.days, lang)}</div>
           </div>
           <div className="bg-white/5 rounded-xl p-3 text-center border border-white/10">
             <div className="text-2xl md:text-3xl font-bold text-sky-400">{String(timeLeft.hours).padStart(2, '0')}</div>
-            <div className="text-xs text-white/60 mt-1">часов</div>
+            <div className="text-xs text-white/60 mt-1">{t(translations.popup.hours, lang)}</div>
           </div>
           <div className="bg-white/5 rounded-xl p-3 text-center border border-white/10">
             <div className="text-2xl md:text-3xl font-bold text-sky-400">{String(timeLeft.minutes).padStart(2, '0')}</div>
-            <div className="text-xs text-white/60 mt-1">минут</div>
+            <div className="text-xs text-white/60 mt-1">{t(translations.popup.minutes, lang)}</div>
           </div>
           <div className="bg-white/5 rounded-xl p-3 text-center border border-white/10">
             <div className="text-2xl md:text-3xl font-bold text-sky-400">{String(timeLeft.seconds).padStart(2, '0')}</div>
-            <div className="text-xs text-white/60 mt-1">секунд</div>
+            <div className="text-xs text-white/60 mt-1">{t(translations.popup.seconds, lang)}</div>
           </div>
         </div>
 
         <div className="bg-amber-500/10 border border-amber-500/30 rounded-xl p-4 mb-6 text-center">
           <p className="text-lg md:text-xl font-semibold text-white">
-            Бонус <span className="text-amber-400">200$</span> к первой выплате для новых партнеров
+            {t(translations.popup.bonusText, lang)} <span className="text-amber-400">200$</span> {t(translations.popup.bonusDesc, lang)}
           </p>
         </div>
 
@@ -1565,7 +1483,7 @@ function SpecialOfferPopup() {
           data-testid="button-popup-cta"
         >
           <Button variant="outline" className="w-full border-white/30 text-white font-medium py-4 text-lg rounded-full">
-            Стать партнером
+            {t(translations.popup.becomePartner, lang)}
             <ArrowRight className="w-5 h-5 ml-2" />
           </Button>
         </a>
@@ -1575,6 +1493,7 @@ function SpecialOfferPopup() {
 }
 
 function ScrollToTop() {
+  const { lang } = useLang();
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -1610,7 +1529,7 @@ function ScrollToTop() {
       className="fixed bottom-28 md:bottom-8 right-6 z-50 w-12 h-12 text-white rounded-full shadow-lg flex items-center justify-center backdrop-blur-sm border border-sky-400/30 transition-colors"
       style={{ background: "rgba(0,136,204,0.7)" }}
       data-testid="button-scroll-to-top"
-      aria-label="Наверх"
+      aria-label={t(translations.scrollToTop, lang)}
     >
       <ChevronDown className="w-6 h-6 rotate-180" />
     </motion.button>

@@ -80,8 +80,8 @@ export const translations = {
     cta: { ru: "Начать сейчас", en: "Start Now" },
   },
   testimonials: {
-    title: { ru: "Отзывы партнеров", en: "Partner Reviews" },
-    subtitle: { ru: "Что говорят наши партнеры о работе с PrimeTraff", en: "What our partners say about working with PrimeTraff" },
+    title: { ru: "Что говорят партнеры", en: "What Partners Say" },
+    subtitle: { ru: "Реальные отзывы от реальных арбитражников", en: "Real reviews from real affiliates" },
     items: [
       { name: { ru: "Алексей К.", en: "Alex K." }, role: { ru: "Media Buyer", en: "Media Buyer" }, avatar: { ru: "А", en: "A" }, text: { ru: "Перешёл с другой партнёрки 3 месяца назад. Ставки реально выше, выплаты как часы. Менеджер всегда на связи, помогает с оптимизацией.", en: "Switched from another network 3 months ago. Rates are really higher, payouts run like clockwork. Manager is always available, helps with optimization." } },
       { name: { ru: "Дмитрий В.", en: "Dmitry V." }, role: { ru: "Арбитражник", en: "Affiliate" }, avatar: { ru: "Д", en: "D" }, text: { ru: "Работаю с PrimeTraff уже полгода. Лучшая аналитика из всех партнёрок, что видел. Постбеки летят мгновенно, статистика точная.", en: "Working with PrimeTraff for 6 months now. Best analytics I've seen across all networks. Postbacks are instant, stats are accurate." } },
