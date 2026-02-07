@@ -19,7 +19,8 @@ import {
   Briefcase,
   LineChart,
   Rocket,
-  KeyRound
+  KeyRound,
+  Mail
 } from "lucide-react";
 import { SiTelegram } from "react-icons/si";
 
@@ -1320,46 +1321,83 @@ function CTASection() {
 
 function Footer() {
   return (
-    <footer className="py-12 border-t border-white/10" style={{ background: "#001030" }}>
+    <footer className="relative pt-16 pb-8" style={{ background: "#001030" }}>
+      <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(0,136,204,0.3), transparent)" }} />
+
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-2">
-            <img src={primeTraffLogo} alt="PrimeTraff" className="w-8 h-8 rounded-lg" />
-            <span className="text-xl font-bold text-white">PrimeTraff</span>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+          <div className="md:col-span-1">
+            <div className="flex items-center gap-2.5 mb-4">
+              <img src={primeTraffLogo} alt="PrimeTraff" className="w-9 h-9 rounded-lg" />
+              <span className="text-xl font-bold text-white">PrimeTraff</span>
+            </div>
+            <p className="text-sm text-white/50 leading-relaxed mb-6">
+              Премиум партнерская сеть для iGaming вертикали с лучшими офферами и условиями.
+            </p>
+            <div className="flex items-center gap-3">
+              <a href={TELEGRAM_CHANNEL_URL} target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-lg bg-white/[0.05] border border-white/[0.08] flex items-center justify-center text-white/50 hover:text-[#0088CC] hover:border-[#0088CC]/30 transition-colors" data-testid="link-footer-tg-icon">
+                <SiTelegram className="w-4 h-4" />
+              </a>
+              <a href="mailto:support@primetraff.com" className="w-9 h-9 rounded-lg bg-white/[0.05] border border-white/[0.08] flex items-center justify-center text-white/50 hover:text-sky-400 hover:border-sky-400/30 transition-colors" data-testid="link-footer-email-icon">
+                <Mail className="w-4 h-4" />
+              </a>
+            </div>
           </div>
 
-          <div className="flex items-center flex-wrap justify-center gap-6">
-            <a 
-              href={TELEGRAM_CHANNEL_URL} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="flex items-center gap-2 bg-[#0088CC]/10 border border-[#0088CC]/30 transition-colors px-4 py-2 rounded-full font-medium"
-              data-testid="link-footer-telegram-channel"
-            >
-              <SiTelegram className="w-5 h-5 text-[#0088CC]" />
-              <span className="text-white">Наш канал</span>
-            </a>
-            <a 
-              href={TELEGRAM_URL} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="flex items-center gap-2 text-[#0088CC] transition-colors"
-              data-testid="link-footer-telegram"
-            >
-              <SiTelegram className="w-5 h-5" />
-              <span>Поддержка</span>
-            </a>
-            <a 
-              href="mailto:support@primetraff.com" 
-              className="text-white/60 hover:text-sky-400 transition-colors"
-              data-testid="link-footer-email"
-            >
-              support@primetraff.com
-            </a>
+          <div>
+            <h4 className="text-sm font-semibold text-white/80 uppercase tracking-wider mb-4">Партнерам</h4>
+            <ul className="space-y-2.5">
+              {["Регистрация", "Офферы", "Статистика", "Выплаты"].map((item) => (
+                <li key={item}>
+                  <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" className="text-sm text-white/45 hover:text-white/80 transition-colors" data-testid={`link-footer-${item}`}>{item}</a>
+                </li>
+              ))}
+            </ul>
           </div>
 
-          <div className="text-white/50 text-sm">
+          <div>
+            <h4 className="text-sm font-semibold text-white/80 uppercase tracking-wider mb-4">Компания</h4>
+            <ul className="space-y-2.5">
+              {["О нас", "Блог", "Вакансии", "Контакты"].map((item) => (
+                <li key={item}>
+                  <span className="text-sm text-white/45 cursor-default" data-testid={`text-footer-${item}`}>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-sm font-semibold text-white/80 uppercase tracking-wider mb-4">Поддержка</h4>
+            <ul className="space-y-2.5">
+              <li>
+                <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-white/45 hover:text-[#0088CC] transition-colors" data-testid="link-footer-telegram">
+                  <SiTelegram className="w-3.5 h-3.5" />
+                  Telegram чат
+                </a>
+              </li>
+              <li>
+                <a href={TELEGRAM_CHANNEL_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-white/45 hover:text-[#0088CC] transition-colors" data-testid="link-footer-telegram-channel">
+                  <SiTelegram className="w-3.5 h-3.5" />
+                  Наш канал
+                </a>
+              </li>
+              <li>
+                <a href="mailto:support@primetraff.com" className="text-sm text-white/45 hover:text-sky-400 transition-colors" data-testid="link-footer-email">
+                  support@primetraff.com
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="h-px bg-white/[0.06] mb-6" />
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="text-white/35 text-xs">
             © 2026 PrimeTraff. Все права защищены.
+          </div>
+          <div className="flex items-center gap-4 text-xs text-white/35">
+            <span>Политика конфиденциальности</span>
+            <span>Условия использования</span>
           </div>
         </div>
       </div>
