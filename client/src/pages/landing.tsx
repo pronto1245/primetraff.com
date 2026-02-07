@@ -1251,49 +1251,66 @@ function FAQSection() {
 
 function CTASection() {
   return (
-    <section className="py-20 lg:py-32 relative overflow-hidden">
-      <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, #001030 0%, #003080 50%, #0055AA 100%)" }} />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(0,136,204,0.2),_transparent_60%)]" />
+    <section className="py-24 lg:py-36 relative overflow-hidden">
+      <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, #001030 0%, #002060 40%, #003080 70%, #0055AA 100%)" }} />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(0,136,204,0.25),_transparent_55%)]" />
       <div className="hidden md:block absolute top-10 left-10 w-96 h-96 bg-sky-500/10 rounded-full blur-[100px]" />
       <div className="hidden md:block absolute bottom-10 right-10 w-80 h-80 bg-cyan-500/8 rounded-full blur-[80px]" />
-      
+      <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full" style={{ background: "radial-gradient(circle, rgba(0,136,204,0.12), transparent 70%)" }} />
+
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(3)].map((_, i) => (
+          <div key={i} className="absolute rounded-full border border-white/[0.04]" style={{
+            width: `${400 + i * 200}px`,
+            height: `${400 + i * 200}px`,
+            left: "50%",
+            top: "50%",
+            transform: "translate(-50%, -50%)",
+          }} />
+        ))}
+      </div>
+
       <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-8 text-center">
         <AnimatedSection>
-          <h2 className="text-3xl lg:text-5xl font-bold text-white mb-6">
-            Готовы начать зарабатывать?
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-emerald-400/20 bg-emerald-400/5 mb-8">
+            <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="text-emerald-400 text-sm font-medium">Регистрация открыта</span>
+          </div>
+
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+            Готовы начать<br />
+            <span className="bg-gradient-to-r from-sky-400 via-cyan-300 to-blue-400 bg-clip-text text-transparent">зарабатывать?</span>
           </h2>
-          <p className="text-lg lg:text-xl text-white/75 mb-10 max-w-2xl mx-auto">
+          <p className="text-lg lg:text-xl text-white/70 mb-12 max-w-2xl mx-auto leading-relaxed">
             Присоединяйтесь к PrimeTraff сегодня и получите доступ к лучшим офферам рынка
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14">
             <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" data-testid="button-cta-register">
-              <Button variant="outline" className="border-white/30 text-white font-medium px-10 h-auto py-3 rounded-full backdrop-blur-sm transition-all hover:border-white/50 hover:bg-white/5">
+              <Button variant="outline" className="border-white/30 text-white font-semibold px-12 h-auto py-4 rounded-full backdrop-blur-sm transition-all text-base hover:border-white/50 hover:bg-white/5">
                 Стать партнером
-                <ArrowRight className="w-4 h-4 ml-2" />
+                <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
             </a>
             <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" data-testid="button-cta-telegram">
-              <Button variant="outline" className="border-white/15 text-white/80 px-10 h-auto py-3 rounded-full backdrop-blur-sm">
-                <SiTelegram className="w-4 h-4 mr-2 text-[#0088CC]" />
+              <Button variant="outline" className="border-white/15 text-white/80 px-12 h-auto py-4 rounded-full backdrop-blur-sm text-base">
+                <SiTelegram className="w-5 h-5 mr-2 text-[#0088CC]" />
                 Telegram поддержка
               </Button>
             </a>
           </div>
 
-          <div className="mt-12 flex flex-wrap items-center justify-center gap-6 lg:gap-8 text-white/70">
-            <div className="flex items-center gap-2">
-              <CheckCircle className="w-5 h-5 text-amber-400" />
-              <span>Без холдов</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle className="w-5 h-5 text-violet-400" />
-              <span>Быстрое одобрение</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle className="w-5 h-5 text-sky-400" />
-              <span>Поддержка 24/7</span>
-            </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-xl mx-auto">
+            {[
+              { icon: <CheckCircle className="w-5 h-5" />, text: "Без холдов", color: "#fbbf24" },
+              { icon: <CheckCircle className="w-5 h-5" />, text: "Быстрое одобрение", color: "#a78bfa" },
+              { icon: <CheckCircle className="w-5 h-5" />, text: "Поддержка 24/7", color: "#38bdf8" },
+            ].map((item, i) => (
+              <div key={i} className="flex items-center justify-center gap-2.5 px-4 py-3 rounded-xl bg-white/[0.04] border border-white/[0.06]">
+                <span style={{ color: item.color }}>{item.icon}</span>
+                <span className="text-white/80 text-sm font-medium">{item.text}</span>
+              </div>
+            ))}
           </div>
         </AnimatedSection>
       </div>
