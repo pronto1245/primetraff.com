@@ -1,4 +1,4 @@
-import { useRef, useMemo, useState, useEffect } from "react";
+import { useRef, useMemo, useState, useEffect, useCallback } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
@@ -11,15 +11,12 @@ const LINE_COLORS = [
   "#55EEFF", "#66FFEE", "#00FFCC", "#22EEDD", "#33FFEE",
 ];
 
-function ZigZagLines({ scrollY }: { scrollY: number }) {
+function WaveStrip({ scrollUnits }: { scrollUnits: React.MutableRefObject<number> }) {
   const tRef = useRef(0);
   const lineCount = 30;
-  const segmentsPerLeg = 60;
-  const legCount = 8;
-  const totalSegments = segmentsPerLeg * legCount;
-  const legHeight = 7;
-  const xLeft = -12;
-  const xRight = 12;
+  const segments = 200;
+
+  const totalHeight = 60;
 
   const lines = useMemo(() => {
     const result: {
@@ -27,16 +24,18 @@ function ZigZagLines({ scrollY }: { scrollY: number }) {
       line: THREE.Line;
       spreadOffset: number;
       phase: number;
+      zBase: number;
     }[] = [];
 
     for (let i = 0; i < lineCount; i++) {
       const frac = (i / (lineCount - 1)) - 0.5;
-      const spreadOffset = frac * 2.5;
-      const phase = (i / lineCount) * Math.PI * 0.8;
+      const spreadOffset = frac * 3;
+      const phase = (i / lineCount) * Math.PI * 0.6;
+      const zBase = -1.5 + (Math.random() - 0.5) * 1.2;
 
       const points: THREE.Vector3[] = [];
-      for (let s = 0; s <= totalSegments; s++) {
-        points.push(new THREE.Vector3(0, 0, -1.5 + (Math.random() - 0.5) * 1.0));
+      for (let s = 0; s <= segments; s++) {
+        points.push(new THREE.Vector3(0, 0, zBase));
       }
 
       const geo = new THREE.BufferGeometry().setFromPoints(points);
@@ -48,51 +47,34 @@ function ZigZagLines({ scrollY }: { scrollY: number }) {
       });
       const line = new THREE.Line(geo, mat);
 
-      result.push({ geometry: geo, line, spreadOffset, phase });
+      result.push({ geometry: geo, line, spreadOffset, phase, zBase });
     }
     return result;
-  }, [lineCount, totalSegments]);
+  }, []);
 
   useFrame((_, dt) => {
     tRef.current += dt * 0.4;
+    const scroll = scrollUnits.current;
 
     for (const l of lines) {
       const pos = l.geometry.attributes.position as THREE.BufferAttribute;
       const arr = pos.array as Float32Array;
 
-      for (let s = 0; s <= totalSegments; s++) {
-        const leg = Math.floor(s / segmentsPerLeg);
-        const legFrac = (s % segmentsPerLeg) / segmentsPerLeg;
-        const goingRight = leg % 2 === 0;
+      for (let s = 0; s <= segments; s++) {
+        const t = s / segments;
+        const y = -t * totalHeight;
 
-        const yBase = -(leg * legHeight + legFrac * legHeight);
+        const sineX = Math.sin(t * Math.PI * 2.5) * 8;
 
-        let xBase: number;
-        if (goingRight) {
-          xBase = xRight + (xLeft - xRight) * legFrac;
-        } else {
-          xBase = xLeft + (xRight - xLeft) * legFrac;
-        }
+        const envelope = Math.sin(t * Math.PI);
+        const wave1 = Math.sin(t * Math.PI * 5 + tRef.current + l.phase) * 0.5 * envelope;
+        const wave2 = Math.sin(t * Math.PI * 3 + tRef.current * 0.6 + l.phase * 1.3) * 0.3 * envelope;
 
-        const globalFrac = s / totalSegments;
-        const envelope = Math.sin(globalFrac * Math.PI);
-        const localEnvelope = Math.sin(legFrac * Math.PI);
-        const env = Math.max(envelope, localEnvelope * 0.5);
+        const perpWave = wave1 + wave2;
 
-        const dx = goingRight ? -1 : 1;
-        const dy = -1;
-        const len = Math.sqrt(dx * dx + dy * dy);
-        const perpX = -dy / len;
-        const perpY = dx / len;
-
-        const wave1 = Math.sin(legFrac * Math.PI * 4 + tRef.current + l.phase + leg * 1.5) * 0.5 * env;
-        const wave2 = Math.sin(legFrac * Math.PI * 2.5 + tRef.current * 0.6 + l.phase * 1.3 + leg) * 0.3 * env;
-        const wave3 = Math.sin(legFrac * Math.PI * 6 + tRef.current * 1.2 + l.phase * 0.7 + leg * 2) * 0.12 * env;
-        const totalWave = wave1 + wave2 + wave3;
-
-        arr[s * 3] = xBase + perpX * (totalWave + l.spreadOffset * 0.3);
-        arr[s * 3 + 1] = yBase + perpY * totalWave + l.spreadOffset * 0.15;
-        arr[s * 3 + 2] = -1.5 + Math.sin(legFrac * Math.PI * 3 + tRef.current * 0.3 + l.phase + leg) * 0.2 * env;
+        arr[s * 3] = sineX + l.spreadOffset + perpWave * 0.5;
+        arr[s * 3 + 1] = y + scroll + perpWave * 0.3;
+        arr[s * 3 + 2] = l.zBase + Math.sin(t * Math.PI * 3 + tRef.current * 0.3 + l.phase) * 0.3 * envelope;
       }
 
       pos.needsUpdate = true;
@@ -100,7 +82,7 @@ function ZigZagLines({ scrollY }: { scrollY: number }) {
   });
 
   return (
-    <group position={[0, -scrollY, 0]}>
+    <group>
       {lines.map((l, i) => (
         <primitive key={i} object={l.line} />
       ))}
@@ -108,43 +90,23 @@ function ZigZagLines({ scrollY }: { scrollY: number }) {
   );
 }
 
-function ScrollTracker({ onScroll }: { onScroll: (y: number) => void }) {
+function WaveLinesScene() {
+  const scrollRef = useRef(0);
+
   useFrame(() => {
     if (typeof window !== "undefined") {
       const scrollPx = window.scrollY;
       const viewH = window.innerHeight;
       const unitsPerScreen = 7;
-      onScroll((scrollPx / viewH) * unitsPerScreen);
+      scrollRef.current = (scrollPx / viewH) * unitsPerScreen;
     }
   });
-  return null;
-}
-
-function WaveLinesScene() {
-  const scrollRef = useRef(0);
 
   return (
     <>
-      <ScrollTracker onScroll={(y) => { scrollRef.current = y; }} />
-      <InnerScene scrollRef={scrollRef} />
+      <WaveStrip scrollUnits={scrollRef} />
       <ambientLight intensity={0.1} />
     </>
-  );
-}
-
-function InnerScene({ scrollRef }: { scrollRef: React.MutableRefObject<number> }) {
-  const groupRef = useRef<THREE.Group>(null);
-
-  useFrame(() => {
-    if (groupRef.current) {
-      groupRef.current.position.y = scrollRef.current;
-    }
-  });
-
-  return (
-    <group ref={groupRef}>
-      <ZigZagLines scrollY={0} />
-    </group>
   );
 }
 
