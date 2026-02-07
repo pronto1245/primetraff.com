@@ -753,7 +753,7 @@ function HowItWorksSection() {
                   <ArrowRight className="w-5 h-5 text-sky-400/40" />
                 </div>
 
-                <div className="relative border border-white/10 rounded-2xl p-6 lg:p-8 text-center transition-all duration-300" style={{ background: "rgba(255,255,255,0.03)" }} data-testid={`card-step-${i}`}>
+                <div className="relative border border-white/10 rounded-2xl p-6 lg:p-8 text-center transition-all duration-300 h-full" style={{ background: "rgba(255,255,255,0.03)" }} data-testid={`card-step-${i}`}>
                   <div className="absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300" style={{ background: `radial-gradient(circle at 50% 0%, ${step.glowColor.replace("0.4", "0.08")}, transparent 70%)` }} />
                   
                   <div className="relative mb-5">
