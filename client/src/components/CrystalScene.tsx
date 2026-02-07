@@ -117,8 +117,8 @@ function WaveLinesScene() {
     <>
       <WaveBundle
         lineCount={30}
-        startX={-9} startY={7}
-        endX={9} endY={-7}
+        startX={9} startY={7}
+        endX={-9} endY={-7}
         baseSpread={2.5}
         speedMul={1}
         phaseBase={0}
