@@ -403,20 +403,19 @@ function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="mb-4 lg:mb-6"
+              className="mb-2 lg:mb-3"
             >
-              <span className="text-white/60 text-sm lg:text-base font-semibold tracking-[0.25em] uppercase">Affiliate Network</span>
+              <span className="text-white/50 text-base md:text-lg lg:text-xl font-medium tracking-[0.3em] uppercase">Affiliate Network</span>
             </motion.div>
 
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-6xl md:text-7xl lg:text-[6.5rem] xl:text-[7.5rem] font-black text-white leading-[0.9] tracking-tight mb-4"
+              className="text-[4.5rem] md:text-[7rem] lg:text-[9rem] xl:text-[11rem] font-black text-white leading-[0.85] tracking-tighter mb-4"
+              style={{ fontFamily: "'Inter', sans-serif", fontStretch: "condensed" }}
             >
-              PRIME
-              <br />
-              <span className="text-transparent bg-clip-text" style={{ backgroundImage: "linear-gradient(90deg, #60CFFF, #00AAEE, #0077DD)" }}>TRAFF</span>
+              PRIME<span className="text-transparent bg-clip-text" style={{ backgroundImage: "linear-gradient(90deg, #60CFFF, #00AAEE, #0077DD)" }}>TRAFF</span>
             </motion.h1>
 
             <motion.p
