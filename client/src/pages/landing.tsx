@@ -480,22 +480,33 @@ function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.6 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6 max-w-4xl mt-12 lg:mt-16"
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6 max-w-5xl mt-12 lg:mt-16"
         >
           {[
-            { value: 500, suffix: "+", label: "Активных партнеров", id: "partners", gradient: "from-violet-400 to-purple-400" },
-            { value: 2, prefix: "$", suffix: "M+", label: "Выплачено партнерам", id: "payouts", gradient: "from-amber-400 to-orange-400" },
-            { value: 24, suffix: "/7", label: "Поддержка онлайн", id: "support", gradient: "from-sky-300 to-cyan-400" },
-            { value: 100, suffix: "%", label: "Честные выплаты", id: "honest", gradient: "from-emerald-400 to-green-400" },
+            { value: 500, suffix: "+", label: "Активных партнеров", id: "partners", color: "#a78bfa", borderColor: "rgba(167,139,250,0.25)", icon: Users },
+            { value: 2, prefix: "$", suffix: "M+", label: "Выплачено партнерам", id: "payouts", color: "#fbbf24", borderColor: "rgba(251,191,36,0.25)", icon: DollarSign },
+            { value: 24, suffix: "/7", label: "Поддержка онлайн", id: "support", color: "#38bdf8", borderColor: "rgba(56,189,248,0.25)", icon: MessageCircle },
+            { value: 100, suffix: "%", label: "Честные выплаты", id: "honest", color: "#34d399", borderColor: "rgba(52,211,153,0.25)", icon: Shield },
           ].map((stat, i) => (
-            <GlassCard key={i} className="p-4 lg:p-6" hover={false}>
-              <div className="text-center" data-testid={`stat-${stat.id}`}>
-                <div className={`text-2xl lg:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r ${stat.gradient} mb-1`} data-testid={`text-stat-value-${stat.id}`}>
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.7 + i * 0.1 }}
+              className="relative rounded-2xl p-5 lg:p-7 overflow-hidden group"
+              style={{ background: "rgba(255,255,255,0.04)", border: `1px solid ${stat.borderColor}` }}
+            >
+              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: `radial-gradient(circle at 50% 0%, ${stat.color}12, transparent 70%)` }} />
+              <div className="absolute top-2 right-2 opacity-[0.07]">
+                <stat.icon className="w-16 h-16 lg:w-20 lg:h-20" style={{ color: stat.color }} />
+              </div>
+              <div className="relative z-10 text-center" data-testid={`stat-${stat.id}`}>
+                <div className="text-3xl lg:text-5xl font-black mb-1" style={{ color: stat.color, textShadow: `0 0 30px ${stat.color}40` }} data-testid={`text-stat-value-${stat.id}`}>
                   <AnimatedCounter value={stat.value} prefix={stat.prefix || ""} suffix={stat.suffix} duration={2} />
                 </div>
-                <div className="text-sm text-white/70">{stat.label}</div>
+                <div className="text-sm lg:text-base text-white/60 font-medium">{stat.label}</div>
               </div>
-            </GlassCard>
+            </motion.div>
           ))}
         </motion.div>
       </div>
@@ -830,32 +841,59 @@ function HowItWorksSection() {
           <div className="hidden lg:block absolute top-1/2 left-[5%] right-[5%] -translate-y-1/2 h-[2px]" style={{ background: "linear-gradient(90deg, transparent, rgba(0,136,204,0.3) 15%, rgba(56,189,248,0.25) 50%, rgba(167,139,250,0.2) 85%, transparent)" }} />
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-4">
-            {steps.map((step, i) => (
-              <AnimatedSection key={i} delay={i * 0.15} className="relative">
-                <div className="hidden lg:flex absolute top-1/2 -translate-y-1/2 -right-4 z-20 items-center justify-center" style={{ display: i === steps.length - 1 ? "none" : undefined }}>
-                  <ArrowRight className="w-5 h-5 text-sky-400/40" />
-                </div>
-
-                <div className="relative border border-white/10 rounded-2xl p-6 lg:p-8 text-center transition-all duration-300 h-full" style={{ background: "rgba(255,255,255,0.03)" }} data-testid={`card-step-${i}`}>
-                  <div className="absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300" style={{ background: `radial-gradient(circle at 50% 0%, ${step.glowColor.replace("0.4", "0.08")}, transparent 70%)` }} />
-                  
-                  <div className="relative mb-5">
-                    <span className="text-4xl lg:text-5xl font-black text-transparent bg-clip-text" style={{ backgroundImage: `linear-gradient(135deg, ${step.color}, ${step.color}88)` }}>
-                      {step.step}
-                    </span>
-                  </div>
-
-                  <div className="relative inline-flex mb-5">
-                    <div className="w-14 h-14 lg:w-16 lg:h-16 rounded-full border border-white/10 flex items-center justify-center" style={{ background: `radial-gradient(circle, ${step.color}20, transparent 70%)` }}>
-                      <step.icon className="w-6 h-6 lg:w-7 lg:h-7" style={{ color: step.color, filter: `drop-shadow(0 0 6px ${step.glowColor})` }} />
+            {steps.map((step, i) => {
+              const borderStyles = [
+                { borderRadius: "24px 8px 24px 8px" },
+                { borderRadius: "8px 24px 8px 24px" },
+                { borderRadius: "24px 24px 8px 8px" },
+                { borderRadius: "8px 8px 24px 24px" },
+              ];
+              const decorPositions = [
+                "top-3 left-3",
+                "top-3 right-3",
+                "bottom-3 left-3",
+                "bottom-3 right-3",
+              ];
+              return (
+                <AnimatedSection key={i} delay={i * 0.15} className="relative">
+                  <div className="hidden lg:flex absolute top-1/2 -translate-y-1/2 -right-4 z-20 items-center justify-center" style={{ display: i === steps.length - 1 ? "none" : undefined }}>
+                    <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center" style={{ background: "rgba(255,255,255,0.03)" }}>
+                      <ArrowRight className="w-4 h-4" style={{ color: step.color }} />
                     </div>
                   </div>
 
-                  <h3 className="text-xl lg:text-2xl font-bold text-white mb-3">{step.title}</h3>
-                  <p className="text-base lg:text-lg text-white/60 leading-relaxed">{step.description}</p>
-                </div>
-              </AnimatedSection>
-            ))}
+                  <div className="relative p-6 lg:p-8 text-center transition-all duration-300 h-full group overflow-hidden" style={{ background: "rgba(255,255,255,0.03)", border: `1px solid ${step.color}20`, ...borderStyles[i] }} data-testid={`card-step-${i}`}>
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: `radial-gradient(circle at 50% 0%, ${step.color}10, transparent 70%)` }} />
+
+                    <div className={`absolute ${decorPositions[i]} w-12 h-12 rounded-full opacity-[0.06]`} style={{ background: step.color }} />
+                    <div className="absolute top-0 left-0 right-0 h-px" style={{ background: `linear-gradient(90deg, transparent, ${step.color}30, transparent)` }} />
+
+                    <div className="relative mb-4 inline-flex items-center gap-3">
+                      <span className="text-5xl lg:text-6xl font-black" style={{ color: step.color, opacity: 0.15 }}>
+                        {step.step}
+                      </span>
+                    </div>
+
+                    <div className="relative inline-flex mb-5">
+                      <div className="w-16 h-16 lg:w-18 lg:h-18 flex items-center justify-center relative">
+                        <div className="absolute inset-0 rounded-full border border-dashed animate-[spin_20s_linear_infinite]" style={{ borderColor: `${step.color}25` }} />
+                        <div className="absolute inset-2 rounded-full border" style={{ borderColor: `${step.color}15` }} />
+                        <step.icon className="w-7 h-7 lg:w-8 lg:h-8 relative z-10" style={{ color: step.color, filter: `drop-shadow(0 0 8px ${step.glowColor})` }} />
+                      </div>
+                    </div>
+
+                    <h3 className="text-xl lg:text-2xl font-bold text-white mb-3">{step.title}</h3>
+                    <p className="text-base lg:text-lg text-white/55 leading-relaxed">{step.description}</p>
+
+                    <div className="mt-5 flex items-center justify-center gap-1.5">
+                      {Array.from({ length: 4 }).map((_, j) => (
+                        <div key={j} className="w-1.5 h-1.5 rounded-full" style={{ background: j <= i ? step.color : "rgba(255,255,255,0.1)" }} />
+                      ))}
+                    </div>
+                  </div>
+                </AnimatedSection>
+              );
+            })}
           </div>
         </div>
 
