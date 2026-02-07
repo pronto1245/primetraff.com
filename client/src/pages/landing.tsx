@@ -77,6 +77,7 @@ import logoJugabet from "@assets/Без_названия_(28)_1770453809648.png"
 
 import logoVegas from "@assets/img69380f65d567f_1770453920456.png";
 import logoBr4bet from "@assets/zQAzTcUzmpmD09fPheuQwWO7Jqm0FxinQatFQkwy_1770453920459.jpg";
+import logoWinhero2 from "@assets/Без_названия_(32)_1770454010355.png";
 
 import CrystalScene from "@/components/CrystalScene";
 
@@ -755,6 +756,7 @@ function PartnersSection() {
     "Jugabet": logoJugabet,
     "Vegas": logoVegas,
     "Br4bet": logoBr4bet,
+    "Winhero": logoWinhero2,
   };
 
   const topRow = [
