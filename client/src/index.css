@@ -41,6 +41,23 @@
   50% { opacity: 1; transform: scale(1); }
 }
 
+@keyframes testimonial-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-testimonial-scroll {
+  animation: testimonial-scroll 60s linear infinite;
+}
+
+.animate-testimonial-scroll:hover {
+  animation-play-state: paused;
+}
+
 @keyframes float-up {
   0% { transform: translateY(0) translateX(0); opacity: 0; }
   10% { opacity: 0.8; }

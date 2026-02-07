@@ -812,7 +812,52 @@ function TestimonialsSection() {
       text: "Наша команда из 5 человек полностью перешла на PrimeTraff. Удобно работать, все данные в одном месте. Поддержка отвечает за минуты.",
       rating: 5,
     },
+    {
+      name: "Игорь Л.",
+      role: "Solo Арбитражник",
+      avatar: "И",
+      text: "Лью на Tier-1 гео уже год через PrimeTraff. CR выше на 15-20% по сравнению с конкурентами. Эксклюзивные офферы реально конвертят.",
+      rating: 5,
+    },
+    {
+      name: "Екатерина Р.",
+      role: "Affiliate Manager",
+      avatar: "Е",
+      text: "Как менеджер партнёрской программы, ценю прозрачность PrimeTraff. Детальная статистика, честные выплаты, никаких шейвов. Рекомендую всем.",
+      rating: 5,
+    },
+    {
+      name: "Сергей Н.",
+      role: "Media Buyer",
+      avatar: "С",
+      text: "Начал с тестовых объёмов, сейчас лью по 500+ лидов в день. Масштабировался без проблем, техподдержка помогла с настройкой трекера.",
+      rating: 5,
+    },
+    {
+      name: "Олег Т.",
+      role: "Team Lead",
+      avatar: "О",
+      text: "Работаем командой из 8 человек. PrimeTraff дал персонального менеджера, индивидуальные условия и приоритетные выплаты. Топовый сервис.",
+      rating: 5,
+    },
+    {
+      name: "Анна П.",
+      role: "Арбитражник",
+      avatar: "А",
+      text: "Пробовала 4 партнёрки за последний год. PrimeTraff — единственная, где не было проблем с выплатами. Всё чётко и в срок, без задержек.",
+      rating: 5,
+    },
   ];
+
+  const colors = [
+    { border: "rgba(167,139,250,0.2)", glow: "rgba(167,139,250,0.06)" },
+    { border: "rgba(56,189,248,0.2)", glow: "rgba(56,189,248,0.06)" },
+    { border: "rgba(34,211,238,0.2)", glow: "rgba(34,211,238,0.06)" },
+    { border: "rgba(251,191,36,0.2)", glow: "rgba(251,191,36,0.06)" },
+    { border: "rgba(129,140,248,0.2)", glow: "rgba(129,140,248,0.06)" },
+  ];
+
+  const doubled = [...testimonials, ...testimonials];
 
   return (
     <section id="testimonials" className="py-20 lg:py-32 relative overflow-hidden">
@@ -829,24 +874,33 @@ function TestimonialsSection() {
             Реальные отзывы от реальных арбитражников
           </p>
         </AnimatedSection>
+      </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {testimonials.map((testimonial, i) => {
-            const colors = [
-              { border: "rgba(167,139,250,0.2)", glow: "rgba(167,139,250,0.06)" },
-              { border: "rgba(56,189,248,0.2)", glow: "rgba(56,189,248,0.06)" },
-              { border: "rgba(34,211,238,0.2)", glow: "rgba(34,211,238,0.06)" },
-            ];
+      <div className="relative">
+        <div className="absolute left-0 top-0 bottom-0 w-24 lg:w-40 z-10" style={{ background: "linear-gradient(90deg, #001845, transparent)" }} />
+        <div className="absolute right-0 top-0 bottom-0 w-24 lg:w-40 z-10" style={{ background: "linear-gradient(270deg, #001845, transparent)" }} />
+
+        <div className="flex gap-6 animate-testimonial-scroll">
+          {doubled.map((testimonial, i) => {
             const c = colors[i % colors.length];
             return (
-              <AnimatedSection key={i} delay={i * 0.1}>
+              <div key={i} className="flex-shrink-0 w-[340px] lg:w-[400px]">
                 <div className="relative rounded-2xl p-8 lg:p-10 h-full transition-all duration-300" style={{ background: "rgba(255,255,255,0.04)", border: `1px solid ${c.border}` }} data-testid={`card-testimonial-${i}`}>
                   <div className="absolute inset-0 rounded-2xl" style={{ background: `radial-gradient(circle at 50% 0%, ${c.glow}, transparent 60%)` }} />
 
                   <div className="relative">
-                    <div className="flex gap-1 mb-6">
+                    <div className="flex gap-1.5 mb-5">
                       {Array.from({ length: testimonial.rating }).map((_, j) => (
-                        <Star key={j} className="w-5 h-5 fill-amber-400 text-amber-400" />
+                        <svg key={j} className="w-5 h-5" viewBox="0 0 20 20" fill="none">
+                          <defs>
+                            <linearGradient id={`star-grad-${i}-${j}`} x1="0%" y1="0%" x2="100%" y2="100%">
+                              <stop offset="0%" stopColor="#fde68a" />
+                              <stop offset="50%" stopColor="#f59e0b" />
+                              <stop offset="100%" stopColor="#d97706" />
+                            </linearGradient>
+                          </defs>
+                          <path d="M10 1.5l2.47 5.01 5.53.8-4 3.9.94 5.5L10 14.26 5.06 16.7l.94-5.5-4-3.9 5.53-.8L10 1.5z" fill={`url(#star-grad-${i}-${j})`} stroke="#f59e0b" strokeWidth="0.5" />
+                        </svg>
                       ))}
                     </div>
 
@@ -865,7 +919,7 @@ function TestimonialsSection() {
                     </div>
                   </div>
                 </div>
-              </AnimatedSection>
+              </div>
             );
           })}
         </div>
