@@ -526,6 +526,7 @@ function FeaturesSection() {
       icon: Shield,
       color: "#38bdf8",
       glowColor: "rgba(56,189,248,0.4)",
+      badge: { shape: "circle" as const, label: "TRUST", sublabel: "100%" },
     },
     {
       title: "Большой выбор офферов",
@@ -533,6 +534,7 @@ function FeaturesSection() {
       icon: Briefcase,
       color: "#a78bfa",
       glowColor: "rgba(167,139,250,0.4)",
+      badge: { shape: "hexagon" as const, label: "500+", sublabel: "ОФФЕРОВ" },
     },
     {
       title: "Помощь в заливах",
@@ -540,6 +542,7 @@ function FeaturesSection() {
       icon: Rocket,
       color: "#22d3ee",
       glowColor: "rgba(34,211,238,0.4)",
+      badge: { shape: "diamond" as const, label: "BOOST", sublabel: "СВЯЗКИ" },
     },
     {
       title: "Быстрые выплаты",
@@ -547,6 +550,7 @@ function FeaturesSection() {
       icon: Zap,
       color: "#fbbf24",
       glowColor: "rgba(251,191,36,0.4)",
+      badge: { shape: "shield" as const, label: "FAST", sublabel: "PAY" },
     },
     {
       title: "Приватный канал со связками",
@@ -554,6 +558,7 @@ function FeaturesSection() {
       icon: KeyRound,
       color: "#f472b6",
       glowColor: "rgba(244,114,182,0.4)",
+      badge: { shape: "octagon" as const, label: "VIP", sublabel: "ACCESS" },
     },
     {
       title: "Полная аналитика",
@@ -561,6 +566,7 @@ function FeaturesSection() {
       icon: LineChart,
       color: "#34d399",
       glowColor: "rgba(52,211,153,0.4)",
+      badge: { shape: "square" as const, label: "DATA", sublabel: "LIVE" },
     },
   ];
 
@@ -669,35 +675,78 @@ function FeaturesSection() {
                   <motion.div
                     key={`decor-${activeIdx}`}
                     initial={{ opacity: 0, rotate: -20, scale: 0.7 }}
-                    animate={{ opacity: 1, rotate: -12, scale: 1 }}
+                    animate={{ opacity: 1, rotate: current.badge.shape === "diamond" ? 45 : current.badge.shape === "shield" ? -5 : -12, scale: 1 }}
                     transition={{ duration: 0.5, delay: 0.25 }}
                     className="relative"
                   >
-                    <div className="w-[150px] h-[150px] lg:w-[180px] lg:h-[180px] rounded-full flex items-center justify-center relative" style={{ background: "conic-gradient(from 0deg, rgba(0,136,204,0.25), rgba(56,189,248,0.15), rgba(167,139,250,0.2), rgba(251,191,36,0.15), rgba(0,136,204,0.25))" }}>
-                      <div className="absolute inset-[3px] rounded-full" style={{ background: "linear-gradient(135deg, rgba(0,24,69,0.95), rgba(0,32,96,0.95))" }} />
-                      <div className="absolute inset-3 rounded-full border border-dashed border-sky-400/20 animate-[spin_15s_linear_infinite]" />
-                      <div className="absolute inset-6 rounded-full border border-violet-400/15 animate-[spin_25s_linear_infinite_reverse]" />
-                      <span className="text-[10px] lg:text-xs font-bold tracking-[0.15em] uppercase text-transparent bg-clip-text relative z-10" style={{ backgroundImage: "linear-gradient(135deg, #38bdf8, #a78bfa, #fbbf24)" }}>
-                        Преимущества
-                      </span>
-                    </div>
-                    <div className="absolute -top-3 -right-3 w-6 h-6 rounded-full bg-sky-400/50 blur-md" />
-                    <div className="absolute -bottom-2 -left-2 w-5 h-5 rounded-full bg-violet-400/40 blur-md" />
-                    <div className="absolute top-1/2 -right-4 w-3 h-3 rounded-full bg-amber-400/40 blur-sm" />
-                  </motion.div>
-                </div>
-
-                <div className="hidden md:block absolute top-6 right-8 lg:top-8 lg:right-12 pointer-events-none">
-                  <motion.div
-                    key={`dots-${activeIdx}`}
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.35 }}
-                    className="flex gap-2"
-                  >
-                    <div className="w-2 h-2 rounded-full bg-sky-400/50" />
-                    <div className="w-2 h-2 rounded-full bg-violet-400/40" />
-                    <div className="w-2 h-2 rounded-full bg-amber-400/35" />
+                    {current.badge.shape === "circle" && (
+                      <div className="w-[140px] h-[140px] lg:w-[170px] lg:h-[170px] rounded-full flex flex-col items-center justify-center relative" style={{ background: `conic-gradient(from 0deg, ${current.color}40, transparent, ${current.color}30, transparent, ${current.color}40)` }}>
+                        <div className="absolute inset-[3px] rounded-full" style={{ background: "linear-gradient(135deg, rgba(0,24,69,0.95), rgba(0,32,96,0.95))" }} />
+                        <div className="absolute inset-3 rounded-full border border-dashed animate-[spin_15s_linear_infinite]" style={{ borderColor: `${current.color}30` }} />
+                        <div className="absolute inset-6 rounded-full border animate-[spin_25s_linear_infinite_reverse]" style={{ borderColor: `${current.color}15` }} />
+                        <span className="text-lg lg:text-xl font-black relative z-10" style={{ color: current.color }}>{current.badge.label}</span>
+                        <span className="text-[10px] lg:text-xs font-bold tracking-wider relative z-10" style={{ color: `${current.color}99` }}>{current.badge.sublabel}</span>
+                      </div>
+                    )}
+                    {current.badge.shape === "hexagon" && (
+                      <svg className="w-[140px] h-[155px] lg:w-[170px] lg:h-[185px]" viewBox="0 0 170 185">
+                        <defs>
+                          <linearGradient id="hex-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stopColor={current.color} stopOpacity="0.3" />
+                            <stop offset="100%" stopColor={current.color} stopOpacity="0.1" />
+                          </linearGradient>
+                        </defs>
+                        <polygon points="85,5 160,47 160,138 85,180 10,138 10,47" fill="url(#hex-grad)" stroke={current.color} strokeWidth="1.5" strokeOpacity="0.3" />
+                        <polygon points="85,20 145,55 145,130 85,165 25,130 25,55" fill="none" stroke={current.color} strokeWidth="0.8" strokeOpacity="0.15" strokeDasharray="4 3" />
+                        <text x="85" y="85" textAnchor="middle" fill={current.color} fontSize="28" fontWeight="900">{current.badge.label}</text>
+                        <text x="85" y="110" textAnchor="middle" fill={current.color} fillOpacity="0.6" fontSize="12" fontWeight="700" letterSpacing="2">{current.badge.sublabel}</text>
+                      </svg>
+                    )}
+                    {current.badge.shape === "diamond" && (
+                      <div className="w-[120px] h-[120px] lg:w-[150px] lg:h-[150px] flex flex-col items-center justify-center relative" style={{ background: `linear-gradient(135deg, ${current.color}25, ${current.color}08)`, border: `1.5px solid ${current.color}30`, borderRadius: "16px" }}>
+                        <div className="absolute inset-3 border border-dashed" style={{ borderColor: `${current.color}20`, borderRadius: "12px" }} />
+                        <span className="text-base lg:text-lg font-black relative z-10" style={{ color: current.color, transform: "rotate(-45deg)" }}>{current.badge.label}</span>
+                        <span className="text-[9px] lg:text-[10px] font-bold tracking-wider relative z-10" style={{ color: `${current.color}80`, transform: "rotate(-45deg)" }}>{current.badge.sublabel}</span>
+                      </div>
+                    )}
+                    {current.badge.shape === "shield" && (
+                      <svg className="w-[130px] h-[155px] lg:w-[160px] lg:h-[185px]" viewBox="0 0 160 185">
+                        <defs>
+                          <linearGradient id="shield-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stopColor={current.color} stopOpacity="0.3" />
+                            <stop offset="100%" stopColor={current.color} stopOpacity="0.08" />
+                          </linearGradient>
+                        </defs>
+                        <path d="M80,10 L150,40 L145,120 L80,175 L15,120 L10,40 Z" fill="url(#shield-grad)" stroke={current.color} strokeWidth="1.5" strokeOpacity="0.3" />
+                        <path d="M80,28 L135,52 L131,112 L80,158 L29,112 L25,52 Z" fill="none" stroke={current.color} strokeWidth="0.8" strokeOpacity="0.15" strokeDasharray="5 3" />
+                        <text x="80" y="88" textAnchor="middle" fill={current.color} fontSize="26" fontWeight="900">{current.badge.label}</text>
+                        <text x="80" y="112" textAnchor="middle" fill={current.color} fillOpacity="0.6" fontSize="14" fontWeight="700" letterSpacing="2">{current.badge.sublabel}</text>
+                      </svg>
+                    )}
+                    {current.badge.shape === "octagon" && (
+                      <svg className="w-[145px] h-[145px] lg:w-[175px] lg:h-[175px]" viewBox="0 0 175 175">
+                        <defs>
+                          <linearGradient id="oct-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stopColor={current.color} stopOpacity="0.3" />
+                            <stop offset="100%" stopColor={current.color} stopOpacity="0.08" />
+                          </linearGradient>
+                        </defs>
+                        <polygon points="55,5 120,5 170,55 170,120 120,170 55,170 5,120 5,55" fill="url(#oct-grad)" stroke={current.color} strokeWidth="1.5" strokeOpacity="0.3" />
+                        <polygon points="60,18 115,18 157,60 157,115 115,157 60,157 18,115 18,60" fill="none" stroke={current.color} strokeWidth="0.8" strokeOpacity="0.15" strokeDasharray="4 3" />
+                        <text x="87" y="82" textAnchor="middle" fill={current.color} fontSize="32" fontWeight="900">{current.badge.label}</text>
+                        <text x="87" y="108" textAnchor="middle" fill={current.color} fillOpacity="0.6" fontSize="12" fontWeight="700" letterSpacing="2">{current.badge.sublabel}</text>
+                      </svg>
+                    )}
+                    {current.badge.shape === "square" && (
+                      <div className="w-[135px] h-[135px] lg:w-[165px] lg:h-[165px] rounded-2xl flex flex-col items-center justify-center relative" style={{ background: `linear-gradient(135deg, ${current.color}20, ${current.color}08)`, border: `1.5px solid ${current.color}25` }}>
+                        <div className="absolute inset-3 rounded-xl border border-dashed" style={{ borderColor: `${current.color}18` }} />
+                        <div className="absolute inset-6 rounded-lg border" style={{ borderColor: `${current.color}10` }} />
+                        <span className="text-lg lg:text-xl font-black relative z-10" style={{ color: current.color }}>{current.badge.label}</span>
+                        <span className="text-[10px] lg:text-xs font-bold tracking-wider relative z-10" style={{ color: `${current.color}80` }}>{current.badge.sublabel}</span>
+                      </div>
+                    )}
+                    <div className="absolute -top-3 -right-3 w-6 h-6 rounded-full blur-md" style={{ background: `${current.color}50` }} />
+                    <div className="absolute -bottom-2 -left-2 w-5 h-5 rounded-full blur-md" style={{ background: `${current.color}40` }} />
                   </motion.div>
                 </div>
               </div>
