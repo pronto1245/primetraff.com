@@ -20,6 +20,14 @@ import { SiTelegram } from "react-icons/si";
 
 import primeTraffLogo from "@assets/generated_images/primetraff_blue_crystal_logo.png";
 
+import logoSpinAura from "@assets/Без_названия_(21)_1770453425632.jpeg";
+import logoElonbet from "@assets/Без_названия_(31)_1770453425635.png";
+import logoMagneticslots from "@assets/Без_названия_(30)_1770453425635.png";
+import logoSpinMillion from "@assets/img69525e9bc7f63_1770453425635.png";
+import logoPrestige from "@assets/img695261fc58a0d_1770453425636.png";
+import logoWinAirlines from "@assets/Без_названия_(29)_1770453425635.png";
+import logoYYYCasino from "@assets/Без_названия_(20)_1770453425635.jpeg";
+import logoFatPirate from "@assets/Без_названия_(19)_1770453425635.jpeg";
 
 import CrystalScene from "@/components/CrystalScene";
 
@@ -649,6 +657,17 @@ function TestimonialsSection() {
 }
 
 function PartnersSection() {
+  const logoMap: Record<string, string> = {
+    "SpinAura": logoSpinAura,
+    "Elonbet": logoElonbet,
+    "Magneticslots": logoMagneticslots,
+    "Spin Million": logoSpinMillion,
+    "Prestige": logoPrestige,
+    "WinAirlines": logoWinAirlines,
+    "YYY Casino": logoYYYCasino,
+    "FatPirate": logoFatPirate,
+  };
+
   const topRow = [
     "SpinAura", "Elonbet", "Magneticslots", "Spin Million", "Prestige",
     "WinAirlines", "YYY Casino", "FatPirate", "Jugabet", "Br4bet",
@@ -663,6 +682,18 @@ function PartnersSection() {
     "Vegas", "Booi", "7Slots", "Vavada", "Slott", "Twin", "Leon",
     "XON Bet", "BruceBet", "MrBet", "Spincity", "1 WIN",
   ];
+
+  const PartnerPill = ({ name, idx, prefix }: { name: string; idx: number; prefix: string }) => {
+    const logo = logoMap[name];
+    return (
+      <div className="flex-shrink-0 flex items-center gap-2.5 px-4 lg:px-5 py-2 lg:py-2.5 rounded-full border border-white/10 bg-white/[0.04]" data-testid={`text-partner-${prefix}-${idx}`}>
+        {logo && (
+          <img src={logo} alt={name} className="w-6 h-6 rounded-md object-cover flex-shrink-0" />
+        )}
+        <span className="text-white/80 text-sm lg:text-base font-medium whitespace-nowrap">{name}</span>
+      </div>
+    );
+  };
 
   return (
     <section id="partners" className="py-20 lg:py-32 relative overflow-hidden">
@@ -680,23 +711,19 @@ function PartnersSection() {
           </p>
         </AnimatedSection>
 
-        <div className="space-y-6 lg:space-y-8">
+        <div className="space-y-5 lg:space-y-6">
           <div className="overflow-hidden" style={{ maskImage: "linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%)", WebkitMaskImage: "linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%)" }}>
-            <div className="flex gap-4 lg:gap-6" style={{ animation: "scroll-rtl 40s linear infinite", width: "max-content" }}>
+            <div className="flex gap-3 lg:gap-4" style={{ animation: "scroll-rtl 40s linear infinite", width: "max-content" }}>
               {[...topRow, ...topRow].map((name, i) => (
-                <div key={i} className="flex-shrink-0 px-5 lg:px-7 py-2.5 lg:py-3 rounded-full border border-white/10 bg-white/[0.04]" data-testid={`text-partner-top-${i}`}>
-                  <span className="text-white/80 text-sm lg:text-base font-medium whitespace-nowrap">{name}</span>
-                </div>
+                <PartnerPill key={i} name={name} idx={i} prefix="top" />
               ))}
             </div>
           </div>
 
           <div className="overflow-hidden" style={{ maskImage: "linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%)", WebkitMaskImage: "linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%)" }}>
-            <div className="flex gap-4 lg:gap-6" style={{ animation: "scroll-ltr 45s linear infinite", width: "max-content" }}>
+            <div className="flex gap-3 lg:gap-4" style={{ animation: "scroll-ltr 45s linear infinite", width: "max-content" }}>
               {[...bottomRow, ...bottomRow].map((name, i) => (
-                <div key={i} className="flex-shrink-0 px-5 lg:px-7 py-2.5 lg:py-3 rounded-full border border-white/10 bg-white/[0.04]" data-testid={`text-partner-bottom-${i}`}>
-                  <span className="text-white/80 text-sm lg:text-base font-medium whitespace-nowrap">{name}</span>
-                </div>
+                <PartnerPill key={i} name={name} idx={i} prefix="bottom" />
               ))}
             </div>
           </div>
