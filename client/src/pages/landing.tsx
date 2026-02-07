@@ -20,19 +20,6 @@ import { SiTelegram } from "react-icons/si";
 
 import primeTraffLogo from "@assets/generated_images/primetraff_blue_crystal_logo.png";
 
-import partnerMobilbahis from "@assets/Без_названия_(1)_1768417603829.jpeg";
-import partner1win from "@assets/Без_названия_(1)_1768417603829.png";
-import partnerRooster from "@assets/Без_названия_(2)_1768417603829.jpeg";
-import partnerMrBet from "@assets/Без_названия_(2)_1768417603830.png";
-import partnerWinhero from "@assets/Без_названия_(3)_1768417603830.png";
-import partnerCorgiBet from "@assets/Без_названия_(4)_1768417603835.png";
-import partnerLeon from "@assets/Без_названия_1768417603835.jpeg";
-import partnerBettilt from "@assets/img66fbf43306cac_1768417603836.png";
-import partnerSportaza from "@assets/img689b36cf850ac_1768417603836.png";
-import partnerVegasSlot from "@assets/img69380f65d567f_1768417603836.png";
-import partnerBetcool from "@assets/img69400fda54fe8_1768417603836.png";
-import partnerHuhuBet from "@assets/img694005f195a65_1768417603836.png";
-import partner4rabet from "@assets/NPOpJLBugXCTJRBDe8jY2bWxoKEGmEpA4HtrjRVD_1768417603836.png";
 
 import CrystalScene from "@/components/CrystalScene";
 
@@ -662,20 +649,19 @@ function TestimonialsSection() {
 }
 
 function PartnersSection() {
-  const partners = [
-    { img: partner1win, name: "1win" },
-    { img: partnerMobilbahis, name: "Mobilbahis" },
-    { img: partnerRooster, name: "Rooster.bet" },
-    { img: partnerMrBet, name: "Mr Bet" },
-    { img: partnerWinhero, name: "Winhero" },
-    { img: partnerCorgiBet, name: "CorgiBet" },
-    { img: partnerLeon, name: "Leon" },
-    { img: partnerBettilt, name: "Bettilt" },
-    { img: partnerSportaza, name: "Sportaza" },
-    { img: partnerVegasSlot, name: "Vegas Slot" },
-    { img: partnerBetcool, name: "Betcool" },
-    { img: partnerHuhuBet, name: "HuhuBet" },
-    { img: partner4rabet, name: "4rabet" },
+  const topRow = [
+    "SpinAura", "Elonbet", "Magneticslots", "Spin Million", "Prestige",
+    "WinAirlines", "YYY Casino", "FatPirate", "Jugabet", "Br4bet",
+    "1xCasino", "1GO", "Legzo", "Melbet", "Monro", "Lex", "Slotuna",
+    "Corgibet", "VulkanSpiele", "Slotoro", "Verdecasino", "Izzi",
+    "Vulkan.bet", "HitNSpin",
+  ];
+
+  const bottomRow = [
+    "Awintura", "Gizbo", "Irwin", "Starda", "Flagman", "Bets10",
+    "Martin", "Beef", "SlotLair", "LuckyWave", "Amonbet", "Playfortuna",
+    "Vegas", "Booi", "7Slots", "Vavada", "Slott", "Twin", "Leon",
+    "XON Bet", "BruceBet", "MrBet", "Spincity", "1 WIN",
   ];
 
   return (
@@ -684,8 +670,8 @@ function PartnersSection() {
       <div className="hidden md:block absolute top-20 right-20 w-64 h-64 bg-sky-500/6 rounded-full blur-[80px]" />
       <div className="hidden md:block absolute bottom-20 left-20 w-64 h-64 bg-cyan-500/5 rounded-full blur-[80px]" />
       
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
-        <AnimatedSection className="text-center mb-16">
+      <div className="relative z-10 max-w-full">
+        <AnimatedSection className="text-center mb-12 lg:mb-16 px-6 lg:px-8">
           <h2 className="text-3xl lg:text-5xl font-bold text-white mb-4">
             Наши партнеры
           </h2>
@@ -694,31 +680,25 @@ function PartnersSection() {
           </p>
         </AnimatedSection>
 
-        <div className="overflow-hidden">
-          <div 
-            className="flex gap-6"
-            style={{
-              animation: "scroll 30s linear infinite",
-            }}
-          >
-            {[...partners, ...partners].map((partner, i) => (
-              <div 
-                key={i}
-                className="flex-shrink-0 w-48 md:w-56 lg:w-64 group"
-                data-testid={`card-partner-${i}`}
-              >
-                <div className="relative aspect-video rounded-xl overflow-hidden bg-white/5 border border-white/10 transition-all duration-300 md:hover:border-sky-400/30">
-                  <img 
-                    src={partner.img} 
-                    alt={partner.name}
-                    loading="lazy"
-                    decoding="async"
-                    className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-300"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#001030]/60 via-transparent to-transparent opacity-100 group-hover:opacity-0 transition-opacity" />
+        <div className="space-y-6 lg:space-y-8">
+          <div className="overflow-hidden" style={{ maskImage: "linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%)", WebkitMaskImage: "linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%)" }}>
+            <div className="flex gap-4 lg:gap-6" style={{ animation: "scroll-rtl 40s linear infinite", width: "max-content" }}>
+              {[...topRow, ...topRow].map((name, i) => (
+                <div key={i} className="flex-shrink-0 px-5 lg:px-7 py-2.5 lg:py-3 rounded-full border border-white/10 bg-white/[0.04]" data-testid={`text-partner-top-${i}`}>
+                  <span className="text-white/80 text-sm lg:text-base font-medium whitespace-nowrap">{name}</span>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+          </div>
+
+          <div className="overflow-hidden" style={{ maskImage: "linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%)", WebkitMaskImage: "linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%)" }}>
+            <div className="flex gap-4 lg:gap-6" style={{ animation: "scroll-ltr 45s linear infinite", width: "max-content" }}>
+              {[...bottomRow, ...bottomRow].map((name, i) => (
+                <div key={i} className="flex-shrink-0 px-5 lg:px-7 py-2.5 lg:py-3 rounded-full border border-white/10 bg-white/[0.04]" data-testid={`text-partner-bottom-${i}`}>
+                  <span className="text-white/80 text-sm lg:text-base font-medium whitespace-nowrap">{name}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
