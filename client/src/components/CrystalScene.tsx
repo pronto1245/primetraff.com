@@ -2,272 +2,197 @@ import { useRef, useMemo, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
-function GlowingTorus({
-  position,
-  scale,
-  rotSpeed,
+function WavyRibbon({
+  yPos,
+  zPos,
   color,
-  tubeRadius,
-  scrollMul,
+  opacity,
+  speed,
+  direction,
+  amplitude,
+  frequency,
+  ribbonWidth,
+  phaseOffset,
 }: {
-  position: [number, number, number];
-  scale: number;
-  rotSpeed: [number, number, number];
+  yPos: number;
+  zPos: number;
   color: string;
-  tubeRadius: number;
-  scrollMul: number;
+  opacity: number;
+  speed: number;
+  direction: 1 | -1;
+  amplitude: number;
+  frequency: number;
+  ribbonWidth: number;
+  phaseOffset: number;
 }) {
-  const ref = useRef<THREE.Group>(null);
-  const baseY = position[1];
-  const curY = useRef(baseY);
-  const t = useRef(Math.random() * 100);
+  const meshRef = useRef<THREE.Mesh>(null);
+  const t = useRef(phaseOffset);
 
-  const geo = useMemo(() => new THREE.TorusGeometry(1, tubeRadius, 24, 64), [tubeRadius]);
+  const segments = 120;
+  const length = 16;
 
-  useFrame((_, dt) => {
-    if (!ref.current) return;
-    t.current += dt;
-    ref.current.rotation.x += rotSpeed[0] * dt;
-    ref.current.rotation.y += rotSpeed[1] * dt;
-    ref.current.rotation.z += rotSpeed[2] * dt;
+  const geometry = useMemo(() => {
+    const geo = new THREE.BufferGeometry();
+    const vertices = new Float32Array((segments + 1) * 2 * 3);
+    const indices: number[] = [];
 
-    const scroll = typeof window !== "undefined" ? window.scrollY : 0;
-    const target = baseY - scroll * scrollMul * 0.001 + Math.sin(t.current * 0.3) * 0.15;
-    curY.current += (target - curY.current) * 0.04;
-    ref.current.position.y = curY.current;
-  });
+    for (let i = 0; i <= segments; i++) {
+      const x = (i / segments) * length - length / 2;
+      const topIdx = i * 2;
+      const botIdx = i * 2 + 1;
 
-  return (
-    <group ref={ref} position={position} scale={scale}>
-      <mesh geometry={geo}>
-        <meshStandardMaterial
-          color={color}
-          emissive={color}
-          emissiveIntensity={1.5}
-          transparent
-          opacity={0.6}
-          side={THREE.DoubleSide}
-          metalness={0.6}
-          roughness={0.2}
-        />
-      </mesh>
-      <mesh geometry={geo} scale={1.15}>
-        <meshStandardMaterial
-          color={color}
-          emissive={color}
-          emissiveIntensity={0.8}
-          transparent
-          opacity={0.12}
-          side={THREE.DoubleSide}
-        />
-      </mesh>
-    </group>
-  );
-}
+      vertices[topIdx * 3] = x;
+      vertices[topIdx * 3 + 1] = ribbonWidth / 2;
+      vertices[topIdx * 3 + 2] = 0;
 
-function WireframeSphere({
-  position,
-  scale,
-  rotSpeed,
-  color,
-  scrollMul,
-}: {
-  position: [number, number, number];
-  scale: number;
-  rotSpeed: [number, number, number];
-  color: string;
-  scrollMul: number;
-}) {
-  const ref = useRef<THREE.Group>(null);
-  const baseY = position[1];
-  const curY = useRef(baseY);
-  const t = useRef(Math.random() * 100);
+      vertices[botIdx * 3] = x;
+      vertices[botIdx * 3 + 1] = -ribbonWidth / 2;
+      vertices[botIdx * 3 + 2] = 0;
 
-  const geo = useMemo(() => new THREE.IcosahedronGeometry(1, 1), []);
-  const edges = useMemo(() => new THREE.EdgesGeometry(geo), [geo]);
-
-  useFrame((_, dt) => {
-    if (!ref.current) return;
-    t.current += dt;
-    ref.current.rotation.x += rotSpeed[0] * dt;
-    ref.current.rotation.y += rotSpeed[1] * dt;
-    ref.current.rotation.z += rotSpeed[2] * dt;
-
-    const scroll = typeof window !== "undefined" ? window.scrollY : 0;
-    const target = baseY - scroll * scrollMul * 0.001 + Math.sin(t.current * 0.35) * 0.2;
-    curY.current += (target - curY.current) * 0.04;
-    ref.current.position.y = curY.current;
-  });
-
-  return (
-    <group ref={ref} position={position} scale={scale}>
-      <lineSegments geometry={edges}>
-        <lineBasicMaterial color={color} transparent opacity={0.5} />
-      </lineSegments>
-      <mesh geometry={geo}>
-        <meshStandardMaterial
-          color={color}
-          emissive={color}
-          emissiveIntensity={0.6}
-          transparent
-          opacity={0.08}
-          side={THREE.DoubleSide}
-        />
-      </mesh>
-    </group>
-  );
-}
-
-function FloatingHexagon({
-  position,
-  scale,
-  rotSpeed,
-  color,
-  scrollMul,
-}: {
-  position: [number, number, number];
-  scale: number;
-  rotSpeed: [number, number, number];
-  color: string;
-  scrollMul: number;
-}) {
-  const ref = useRef<THREE.Group>(null);
-  const baseY = position[1];
-  const curY = useRef(baseY);
-  const t = useRef(Math.random() * 100);
-
-  const geo = useMemo(() => {
-    const shape = new THREE.Shape();
-    const sides = 6;
-    for (let i = 0; i <= sides; i++) {
-      const angle = (i / sides) * Math.PI * 2 - Math.PI / 2;
-      const x = Math.cos(angle);
-      const y = Math.sin(angle);
-      if (i === 0) shape.moveTo(x, y);
-      else shape.lineTo(x, y);
+      if (i < segments) {
+        const a = topIdx;
+        const b = botIdx;
+        const c = topIdx + 2;
+        const d = botIdx + 2;
+        indices.push(a, b, c);
+        indices.push(b, d, c);
+      }
     }
-    return new THREE.ExtrudeGeometry(shape, { depth: 0.06, bevelEnabled: true, bevelThickness: 0.02, bevelSize: 0.02, bevelSegments: 1 });
-  }, []);
 
-  const edges = useMemo(() => new THREE.EdgesGeometry(geo, 15), [geo]);
+    geo.setAttribute("position", new THREE.BufferAttribute(vertices, 3));
+    geo.setIndex(indices);
+    geo.computeVertexNormals();
+    return geo;
+  }, [segments, length, ribbonWidth]);
 
   useFrame((_, dt) => {
-    if (!ref.current) return;
-    t.current += dt;
-    ref.current.rotation.x += rotSpeed[0] * dt;
-    ref.current.rotation.y += rotSpeed[1] * dt;
-    ref.current.rotation.z += rotSpeed[2] * dt;
+    if (!meshRef.current) return;
+    t.current += dt * speed * direction;
 
-    const scroll = typeof window !== "undefined" ? window.scrollY : 0;
-    const target = baseY - scroll * scrollMul * 0.001 + Math.sin(t.current * 0.25) * 0.18;
-    curY.current += (target - curY.current) * 0.04;
-    ref.current.position.y = curY.current;
+    const pos = geometry.attributes.position as THREE.BufferAttribute;
+    const arr = pos.array as Float32Array;
+
+    for (let i = 0; i <= segments; i++) {
+      const x = (i / segments) * length - length / 2;
+      const wave = Math.sin(x * frequency + t.current) * amplitude;
+      const wave2 = Math.sin(x * frequency * 0.6 + t.current * 0.7 + 1.5) * amplitude * 0.3;
+      const y = wave + wave2;
+
+      const topIdx = i * 2;
+      const botIdx = i * 2 + 1;
+
+      arr[topIdx * 3 + 1] = y + ribbonWidth / 2;
+      arr[topIdx * 3 + 2] = Math.cos(x * frequency * 0.8 + t.current * 0.5) * amplitude * 0.4;
+
+      arr[botIdx * 3 + 1] = y - ribbonWidth / 2;
+      arr[botIdx * 3 + 2] = Math.cos(x * frequency * 0.8 + t.current * 0.5) * amplitude * 0.4;
+    }
+
+    pos.needsUpdate = true;
+    geometry.computeVertexNormals();
   });
 
   return (
-    <group ref={ref} position={position} scale={scale}>
-      <mesh geometry={geo}>
-        <meshStandardMaterial
-          color={color}
-          emissive={color}
-          emissiveIntensity={1.2}
-          transparent
-          opacity={0.25}
-          side={THREE.DoubleSide}
-          metalness={0.5}
-          roughness={0.3}
-        />
-      </mesh>
-      <lineSegments geometry={edges}>
-        <lineBasicMaterial color={color} transparent opacity={0.6} />
-      </lineSegments>
-    </group>
+    <mesh ref={meshRef} geometry={geometry} position={[0, yPos, zPos]}>
+      <meshStandardMaterial
+        color={color}
+        emissive={color}
+        emissiveIntensity={1.8}
+        transparent
+        opacity={opacity}
+        side={THREE.DoubleSide}
+        metalness={0.7}
+        roughness={0.2}
+      />
+    </mesh>
   );
 }
 
-function OrbitRing({
-  position,
-  scale,
-  rotSpeed,
+function WavyLineRibbon({
+  yPos,
+  zPos,
   color,
-  scrollMul,
+  opacity,
+  speed,
+  direction,
+  amplitude,
+  frequency,
+  phaseOffset,
 }: {
-  position: [number, number, number];
-  scale: number;
-  rotSpeed: [number, number, number];
+  yPos: number;
+  zPos: number;
   color: string;
-  scrollMul: number;
+  opacity: number;
+  speed: number;
+  direction: 1 | -1;
+  amplitude: number;
+  frequency: number;
+  phaseOffset: number;
 }) {
-  const ref = useRef<THREE.Group>(null);
-  const baseY = position[1];
-  const curY = useRef(baseY);
-  const t = useRef(Math.random() * 100);
+  const groupRef = useRef<THREE.Group>(null);
+  const t = useRef(phaseOffset);
 
-  const ringGeo = useMemo(() => new THREE.TorusGeometry(1, 0.015, 8, 80), []);
-  const dotGeo = useMemo(() => new THREE.SphereGeometry(0.06, 12, 12), []);
+  const segments = 150;
+  const length = 18;
+
+  const geometry = useMemo(() => {
+    const points: THREE.Vector3[] = [];
+    for (let i = 0; i <= segments; i++) {
+      const x = (i / segments) * length - length / 2;
+      points.push(new THREE.Vector3(x, 0, 0));
+    }
+    return new THREE.BufferGeometry().setFromPoints(points);
+  }, [segments, length]);
+
+  const material = useMemo(() => new THREE.LineBasicMaterial({ color, transparent: true, opacity }), [color, opacity]);
+
+  const lineObj = useMemo(() => {
+    const l = new THREE.Line(geometry, material);
+    return l;
+  }, [geometry, material]);
 
   useFrame((_, dt) => {
-    if (!ref.current) return;
-    t.current += dt;
-    ref.current.rotation.x += rotSpeed[0] * dt;
-    ref.current.rotation.y += rotSpeed[1] * dt;
-    ref.current.rotation.z += rotSpeed[2] * dt;
+    if (!groupRef.current) return;
+    t.current += dt * speed * direction;
 
-    const scroll = typeof window !== "undefined" ? window.scrollY : 0;
-    const target = baseY - scroll * scrollMul * 0.001 + Math.sin(t.current * 0.2) * 0.12;
-    curY.current += (target - curY.current) * 0.04;
-    ref.current.position.y = curY.current;
+    const pos = geometry.attributes.position as THREE.BufferAttribute;
+    const arr = pos.array as Float32Array;
+
+    for (let i = 0; i <= segments; i++) {
+      const x = (i / segments) * length - length / 2;
+      arr[i * 3 + 1] = Math.sin(x * frequency + t.current) * amplitude
+        + Math.sin(x * frequency * 1.8 + t.current * 1.3 + 2.0) * amplitude * 0.25;
+      arr[i * 3 + 2] = Math.cos(x * frequency * 0.7 + t.current * 0.6) * amplitude * 0.5;
+    }
+
+    pos.needsUpdate = true;
   });
 
   return (
-    <group ref={ref} position={position} scale={scale}>
-      <mesh geometry={ringGeo}>
-        <meshStandardMaterial
-          color={color}
-          emissive={color}
-          emissiveIntensity={2.0}
-          transparent
-          opacity={0.45}
-          metalness={0.8}
-          roughness={0.1}
-        />
-      </mesh>
-      <mesh geometry={dotGeo} position={[1, 0, 0]}>
-        <meshStandardMaterial
-          color="#ffffff"
-          emissive={color}
-          emissiveIntensity={3.0}
-          transparent
-          opacity={0.9}
-        />
-      </mesh>
+    <group ref={groupRef} position={[0, yPos, zPos]}>
+      <primitive object={lineObj} />
     </group>
   );
 }
 
-function TechScene() {
+function RibbonScene() {
   return (
     <>
-      <GlowingTorus position={[4.5, 2.0, -1.5]} scale={0.55} rotSpeed={[0.2, 0.35, 0.05]} color="#0099FF" tubeRadius={0.08} scrollMul={0.8} />
-      <GlowingTorus position={[-4.0, -1.5, -2]} scale={0.4} rotSpeed={[-0.15, 0.25, 0.1]} color="#00CCFF" tubeRadius={0.06} scrollMul={1.0} />
-      <GlowingTorus position={[2.0, -5.5, -1]} scale={0.35} rotSpeed={[0.1, -0.2, 0.15]} color="#0088DD" tubeRadius={0.1} scrollMul={0.6} />
+      <WavyRibbon yPos={3.0} zPos={-2} color="#0088DD" opacity={0.25} speed={0.8} direction={1} amplitude={0.5} frequency={0.8} ribbonWidth={0.06} phaseOffset={0} />
+      <WavyRibbon yPos={1.5} zPos={-1.5} color="#00AAFF" opacity={0.2} speed={0.6} direction={-1} amplitude={0.6} frequency={0.6} ribbonWidth={0.04} phaseOffset={2} />
+      <WavyRibbon yPos={-0.5} zPos={-2.5} color="#0077CC" opacity={0.18} speed={0.9} direction={1} amplitude={0.45} frequency={0.9} ribbonWidth={0.05} phaseOffset={4} />
+      <WavyRibbon yPos={-2.5} zPos={-1} color="#00BBFF" opacity={0.22} speed={0.7} direction={-1} amplitude={0.55} frequency={0.7} ribbonWidth={0.04} phaseOffset={1} />
+      <WavyRibbon yPos={-4.5} zPos={-2} color="#0099EE" opacity={0.15} speed={0.5} direction={1} amplitude={0.4} frequency={1.0} ribbonWidth={0.03} phaseOffset={3} />
 
-      <WireframeSphere position={[-3.5, 2.5, -2.5]} scale={0.7} rotSpeed={[0.08, 0.12, 0.05]} color="#60CFFF" scrollMul={0.5} />
-      <WireframeSphere position={[3.0, -3.0, -2]} scale={0.5} rotSpeed={[-0.1, 0.08, 0.12]} color="#40BFFF" scrollMul={0.9} />
-      <WireframeSphere position={[0.5, 4.0, -3]} scale={0.35} rotSpeed={[0.06, -0.1, 0.08]} color="#80DFFF" scrollMul={0.4} />
+      <WavyLineRibbon yPos={2.2} zPos={-1} color="#60CFFF" opacity={0.35} speed={1.0} direction={-1} amplitude={0.4} frequency={0.9} phaseOffset={0.5} />
+      <WavyLineRibbon yPos={0.3} zPos={-3} color="#40BFFF" opacity={0.25} speed={0.7} direction={1} amplitude={0.5} frequency={0.7} phaseOffset={2.5} />
+      <WavyLineRibbon yPos={-1.8} zPos={-1.5} color="#80DFFF" opacity={0.3} speed={0.85} direction={-1} amplitude={0.35} frequency={1.1} phaseOffset={1.5} />
+      <WavyLineRibbon yPos={-3.8} zPos={-2.5} color="#00CCFF" opacity={0.2} speed={0.6} direction={1} amplitude={0.45} frequency={0.8} phaseOffset={3.5} />
+      <WavyLineRibbon yPos={4.2} zPos={-2} color="#0099FF" opacity={0.28} speed={0.75} direction={1} amplitude={0.3} frequency={1.0} phaseOffset={5} />
 
-      <FloatingHexagon position={[5.0, -0.5, -1.8]} scale={0.35} rotSpeed={[0.1, 0.2, 0.08]} color="#00BBFF" scrollMul={0.7} />
-      <FloatingHexagon position={[-5.0, -4.0, -1.5]} scale={0.3} rotSpeed={[-0.08, 0.15, 0.12]} color="#0099FF" scrollMul={0.8} />
-      <FloatingHexagon position={[-1.5, -7.0, -2]} scale={0.25} rotSpeed={[0.12, -0.1, 0.06]} color="#60CFFF" scrollMul={0.5} />
-
-      <OrbitRing position={[-2.0, 0.5, -1]} scale={0.6} rotSpeed={[0.3, 0.15, 0.1]} color="#00AAEE" scrollMul={0.6} />
-      <OrbitRing position={[1.5, -6.0, -2]} scale={0.45} rotSpeed={[-0.2, 0.25, 0.08]} color="#0099FF" scrollMul={0.9} />
-      <OrbitRing position={[4.0, 3.5, -2.5]} scale={0.3} rotSpeed={[0.15, -0.18, 0.12]} color="#60CFFF" scrollMul={0.4} />
-
-      <ambientLight intensity={0.3} />
-      <pointLight position={[5, 3, 4]} intensity={1.0} color="#0099FF" distance={25} />
-      <pointLight position={[-5, -2, 3]} intensity={0.7} color="#00CCFF" distance={20} />
-      <pointLight position={[0, 5, 2]} intensity={0.5} color="#60CFFF" distance={15} />
+      <ambientLight intensity={0.2} />
+      <pointLight position={[5, 3, 4]} intensity={0.6} color="#0099FF" distance={20} />
+      <pointLight position={[-5, -2, 3]} intensity={0.4} color="#00CCFF" distance={15} />
     </>
   );
 }
@@ -284,12 +209,12 @@ export default function CrystalScene() {
   return (
     <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 1 }}>
       <Canvas
-        camera={{ position: [0, 0, 7], fov: 50 }}
+        camera={{ position: [0, 0, 6], fov: 55 }}
         gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
         dpr={[1, 1.5]}
         style={{ background: "transparent" }}
       >
-        <TechScene />
+        <RibbonScene />
       </Canvas>
     </div>
   );
