@@ -631,7 +631,7 @@ function FeaturesSection() {
                   {current.description}
                 </motion.p>
 
-                <div className="hidden md:block absolute bottom-6 right-6 lg:bottom-8 lg:right-8 pointer-events-none">
+                <div className="hidden md:block absolute bottom-4 right-4 lg:bottom-6 lg:right-6 pointer-events-none">
                   <motion.div
                     key={`decor-${activeIdx}`}
                     initial={{ opacity: 0, rotate: -20, scale: 0.7 }}
@@ -639,30 +639,31 @@ function FeaturesSection() {
                     transition={{ duration: 0.5, delay: 0.25 }}
                     className="relative"
                   >
-                    <div className="w-[140px] h-[140px] lg:w-[170px] lg:h-[170px] rounded-full border-2 border-white/10 flex items-center justify-center relative">
-                      <div className="absolute inset-0 rounded-full" style={{ background: "radial-gradient(circle, rgba(0,136,204,0.15) 0%, transparent 70%)" }} />
-                      <div className="absolute inset-2 rounded-full border border-white/[0.06]" />
-                      <div className="absolute inset-4 rounded-full border border-dashed border-white/[0.08] animate-[spin_20s_linear_infinite]" />
-                      <span className="text-[10px] lg:text-xs font-bold tracking-[0.2em] uppercase text-white/40 rotate-[-12deg]">
+                    <div className="w-[150px] h-[150px] lg:w-[180px] lg:h-[180px] rounded-full flex items-center justify-center relative" style={{ background: "conic-gradient(from 0deg, rgba(0,136,204,0.25), rgba(56,189,248,0.15), rgba(167,139,250,0.2), rgba(251,191,36,0.15), rgba(0,136,204,0.25))" }}>
+                      <div className="absolute inset-[3px] rounded-full" style={{ background: "linear-gradient(135deg, rgba(0,24,69,0.95), rgba(0,32,96,0.95))" }} />
+                      <div className="absolute inset-3 rounded-full border border-dashed border-sky-400/20 animate-[spin_15s_linear_infinite]" />
+                      <div className="absolute inset-6 rounded-full border border-violet-400/15 animate-[spin_25s_linear_infinite_reverse]" />
+                      <span className="text-[10px] lg:text-xs font-bold tracking-[0.15em] uppercase text-transparent bg-clip-text relative z-10" style={{ backgroundImage: "linear-gradient(135deg, #38bdf8, #a78bfa, #fbbf24)" }}>
                         Преимущества
                       </span>
                     </div>
-                    <div className="absolute -top-2 -right-2 w-4 h-4 rounded-full bg-sky-400/40 blur-sm" />
-                    <div className="absolute -bottom-1 -left-1 w-3 h-3 rounded-full bg-cyan-400/30 blur-sm" />
+                    <div className="absolute -top-3 -right-3 w-6 h-6 rounded-full bg-sky-400/50 blur-md" />
+                    <div className="absolute -bottom-2 -left-2 w-5 h-5 rounded-full bg-violet-400/40 blur-md" />
+                    <div className="absolute top-1/2 -right-4 w-3 h-3 rounded-full bg-amber-400/40 blur-sm" />
                   </motion.div>
                 </div>
 
-                <div className="hidden md:block absolute top-4 right-16 lg:top-6 lg:right-20 pointer-events-none">
+                <div className="hidden md:block absolute top-6 right-8 lg:top-8 lg:right-12 pointer-events-none">
                   <motion.div
                     key={`dots-${activeIdx}`}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.6, delay: 0.3 }}
-                    className="flex gap-1.5"
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.35 }}
+                    className="flex gap-2"
                   >
-                    {[...Array(3)].map((_, i) => (
-                      <div key={i} className="w-1.5 h-1.5 rounded-full bg-sky-400/30" style={{ animationDelay: `${i * 0.3}s` }} />
-                    ))}
+                    <div className="w-2 h-2 rounded-full bg-sky-400/50" />
+                    <div className="w-2 h-2 rounded-full bg-violet-400/40" />
+                    <div className="w-2 h-2 rounded-full bg-amber-400/35" />
                   </motion.div>
                 </div>
               </div>
