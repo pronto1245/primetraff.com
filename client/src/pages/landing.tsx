@@ -415,7 +415,7 @@ function HeroSection() {
               className="text-[4.5rem] md:text-[7rem] lg:text-[9rem] xl:text-[11rem] font-black text-white leading-[0.85] tracking-tighter mb-4"
               style={{ fontFamily: "'Inter', sans-serif", fontStretch: "condensed" }}
             >
-              PRIME<span className="text-transparent bg-clip-text" style={{ backgroundImage: "linear-gradient(90deg, #60CFFF, #00AAEE, #0077DD)" }}>TRAFF</span>
+              <span className="text-white/30">i</span>GAMING
             </motion.h1>
 
             <motion.p
