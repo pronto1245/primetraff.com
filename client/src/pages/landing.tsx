@@ -157,8 +157,22 @@ function BlueBgDecorations() {
   );
 }
 
+function useIsMobile(breakpoint = 768) {
+  const [mobile, setMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth < breakpoint);
+  useEffect(() => {
+    let timeout: ReturnType<typeof setTimeout>;
+    const handler = () => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => setMobile(window.innerWidth < breakpoint), 300);
+    };
+    window.addEventListener("resize", handler);
+    return () => { window.removeEventListener("resize", handler); clearTimeout(timeout); };
+  }, [breakpoint]);
+  return mobile;
+}
+
 function SparkleParticles() {
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const isMobile = useIsMobile();
   const particles = useMemo(() => 
     Array.from({ length: isMobile ? 12 : 40 }, (_, i) => ({
       left: `${Math.random() * 100}%`,
@@ -167,7 +181,7 @@ function SparkleParticles() {
       delay: Math.random() * 6,
       duration: 2.5 + Math.random() * 3.5,
       opacity: 0.5 + Math.random() * 0.5,
-    })), []
+    })), [isMobile]
   );
 
   return (
@@ -192,7 +206,7 @@ function SparkleParticles() {
 }
 
 function FloatingDots() {
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const isMobile = useIsMobile();
   const dots = useMemo(() =>
     Array.from({ length: isMobile ? 6 : 18 }, (_, i) => ({
       left: `${3 + Math.random() * 94}%`,
@@ -200,7 +214,7 @@ function FloatingDots() {
       delay: Math.random() * 12,
       duration: 12 + Math.random() * 16,
       opacity: 0.5 + Math.random() * 0.5,
-    })), []
+    })), [isMobile]
   );
 
   return (
