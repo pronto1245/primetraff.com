@@ -1363,20 +1363,30 @@ function Footer() {
           <div>
             <h4 className="text-sm font-semibold text-white/80 uppercase tracking-wider mb-4">Партнерам</h4>
             <ul className="space-y-2.5">
-              {["Регистрация", "Офферы", "Статистика", "Выплаты"].map((item) => (
-                <li key={item}>
-                  <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" className="text-sm text-white/45 hover:text-white/80 transition-colors" data-testid={`link-footer-${item}`}>{item}</a>
+              {[
+                { label: "Регистрация", href: REGISTER_URL, external: true },
+                { label: "Возможности", href: "#features", external: false },
+                { label: "Как это работает", href: "#how-it-works", external: false },
+                { label: "Отзывы", href: "#testimonials", external: false },
+              ].map((item) => (
+                <li key={item.label}>
+                  <a href={item.href} {...(item.external ? { target: "_blank", rel: "noopener noreferrer" } : {})} className="text-sm text-white/45 hover:text-white/80 transition-colors" data-testid={`link-footer-${item.label}`}>{item.label}</a>
                 </li>
               ))}
             </ul>
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold text-white/80 uppercase tracking-wider mb-4">Компания</h4>
+            <h4 className="text-sm font-semibold text-white/80 uppercase tracking-wider mb-4">Навигация</h4>
             <ul className="space-y-2.5">
-              {["О нас", "Блог", "Вакансии", "Контакты"].map((item) => (
-                <li key={item}>
-                  <span className="text-sm text-white/45 cursor-default" data-testid={`text-footer-${item}`}>{item}</span>
+              {[
+                { label: "Партнеры", href: "#partners" },
+                { label: "FAQ", href: "#faq" },
+                { label: "Войти", href: LOGIN_URL, external: true },
+                { label: "Стать партнером", href: REGISTER_URL, external: true },
+              ].map((item) => (
+                <li key={item.label}>
+                  <a href={item.href} {...("external" in item && item.external ? { target: "_blank", rel: "noopener noreferrer" } : {})} className="text-sm text-white/45 hover:text-white/80 transition-colors" data-testid={`link-footer-${item.label}`}>{item.label}</a>
                 </li>
               ))}
             </ul>
