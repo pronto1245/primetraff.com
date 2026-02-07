@@ -781,7 +781,7 @@ function PartnersSection() {
         {logo && (
           <img src={logo} alt={name} className="w-6 h-6 rounded-md object-cover flex-shrink-0" />
         )}
-        <span className="text-white/80 text-sm lg:text-base font-medium whitespace-nowrap">{name}</span>
+        <span className="text-white/80 text-sm lg:text-base font-semibold whitespace-nowrap">{name}</span>
       </div>
     );
   };

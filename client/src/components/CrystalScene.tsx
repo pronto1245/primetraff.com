@@ -129,15 +129,26 @@ function WaveLinesScene() {
   );
 }
 
+function WebGLCheck() {
+  try {
+    const c = document.createElement("canvas");
+    return !!(c.getContext("webgl2") || c.getContext("webgl") || c.getContext("experimental-webgl"));
+  } catch {
+    return false;
+  }
+}
+
 export default function CrystalScene() {
   const [isMobile, setIsMobile] = useState(false);
+  const [hasWebGL, setHasWebGL] = useState(true);
   useEffect(() => {
     const c = () => setIsMobile(window.innerWidth < 768);
     c();
     window.addEventListener("resize", c);
+    setHasWebGL(WebGLCheck());
     return () => window.removeEventListener("resize", c);
   }, []);
-  if (isMobile) return null;
+  if (isMobile || !hasWebGL) return null;
   return (
     <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 1 }}>
       <Canvas
@@ -145,6 +156,7 @@ export default function CrystalScene() {
         gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
         dpr={[1, 1.5]}
         style={{ background: "transparent" }}
+        onCreated={() => {}}
       >
         <WaveLinesScene />
       </Canvas>
