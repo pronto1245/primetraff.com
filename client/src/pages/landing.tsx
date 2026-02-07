@@ -365,71 +365,118 @@ function GlowingOrb() {
   );
 }
 
+function DecorBadge({ text, rotation, className, delay = 0, color = "sky" }: { text: string; rotation: number; className?: string; delay?: number; color?: string }) {
+  const colors: Record<string, string> = {
+    sky: "bg-sky-500/20 border-sky-400/40 text-sky-200",
+    cyan: "bg-cyan-500/20 border-cyan-400/40 text-cyan-200",
+    amber: "bg-amber-500/20 border-amber-400/40 text-amber-200",
+    emerald: "bg-emerald-500/20 border-emerald-400/40 text-emerald-200",
+    violet: "bg-violet-500/20 border-violet-400/40 text-violet-200",
+  };
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.7 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5, delay }}
+      className={`absolute ${className}`}
+      style={{ transform: `rotate(${rotation}deg)` }}
+    >
+      <div className={`px-4 py-1.5 lg:px-5 lg:py-2 rounded-full border text-xs lg:text-sm font-bold tracking-wider uppercase backdrop-blur-sm whitespace-nowrap ${colors[color]}`}>
+        {text}
+      </div>
+    </motion.div>
+  );
+}
+
 function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+    <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
       <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, #001030 0%, #002060 30%, #0055AA 60%, #0088CC 100%)" }} />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(0,200,255,0.15),_transparent_60%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(0,100,200,0.2),_transparent_60%)]" />
       <GlowingOrb />
       
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-32 text-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-28 w-full">
+        <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
+          <div className="flex-1 relative">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="mb-4 lg:mb-6"
+            >
+              <span className="text-white/60 text-sm lg:text-base font-semibold tracking-[0.25em] uppercase">Affiliate Network</span>
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-6xl md:text-7xl lg:text-[6.5rem] xl:text-[7.5rem] font-black text-white leading-[0.9] tracking-tight mb-4"
+            >
+              PRIME
+              <br />
+              <span className="text-transparent bg-clip-text" style={{ backgroundImage: "linear-gradient(90deg, #60CFFF, #00AAEE, #0077DD)" }}>TRAFF</span>
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.25 }}
+              className="text-base lg:text-lg text-white/70 max-w-md mt-6 mb-8 leading-relaxed"
+            >
+              Партнерская программа нового поколения.
+              Высокие ставки, моментальные выплаты, поддержка 24/7.
+            </motion.p>
+
+            <div className="relative mt-2 mb-8 h-[180px] md:h-[200px] lg:h-[160px] hidden md:block">
+              <DecorBadge text="CPA / RS / Hybrid" rotation={-6} className="top-0 left-0" delay={0.3} color="sky" />
+              <DecorBadge text="Gambling x Betting" rotation={4} className="top-2 left-[220px] lg:left-[260px]" delay={0.4} color="amber" />
+              <DecorBadge text="70+ ГЕО" rotation={-3} className="top-[70px] left-[60px]" delay={0.5} color="emerald" />
+              <DecorBadge text="500+ Партнеров" rotation={5} className="top-[65px] left-[220px] lg:left-[240px]" delay={0.55} color="violet" />
+              <DecorBadge text="Мгновенные выплаты" rotation={-2} className="top-[120px] left-[20px]" delay={0.6} color="cyan" />
+            </div>
+
+            <div className="flex md:hidden flex-wrap gap-2 mb-8 mt-4">
+              {["CPA / RS / Hybrid", "Gambling x Betting", "70+ ГЕО", "500+ Партнеров"].map((t, i) => (
+                <motion.div key={i} initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.4, delay: 0.3 + i * 0.1 }}>
+                  <div className="px-3 py-1.5 rounded-full border border-sky-400/30 bg-sky-500/15 text-sky-200 text-xs font-bold tracking-wider uppercase backdrop-blur-sm">{t}</div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="flex flex-col gap-4 lg:gap-5 w-full lg:w-auto lg:min-w-[260px]"
+          >
+            <a href={LOGIN_URL} target="_blank" rel="noopener noreferrer" data-testid="button-hero-login" className="block">
+              <div className="group relative border-2 border-white/20 rounded-2xl px-10 py-8 lg:px-12 lg:py-10 text-center transition-all duration-300 cursor-pointer" style={{ background: "rgba(255,255,255,0.04)" }}>
+                <span className="text-white font-bold text-lg lg:text-xl tracking-wide uppercase">Вход</span>
+                <ArrowRight className="w-5 h-5 text-white/60 inline-block ml-3" />
+              </div>
+            </a>
+            <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" data-testid="button-hero-register" className="block">
+              <div className="group relative border-2 border-sky-400/30 rounded-2xl px-10 py-8 lg:px-12 lg:py-10 text-center transition-all duration-300 cursor-pointer" style={{ background: "rgba(0,136,204,0.12)" }}>
+                <span className="text-white font-bold text-lg lg:text-xl tracking-wide uppercase">Регистрация</span>
+              </div>
+            </a>
+            <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" data-testid="button-hero-telegram" className="block">
+              <div className="group relative border-2 border-[#0088CC]/30 rounded-2xl px-10 py-5 lg:px-12 lg:py-6 text-center transition-all duration-300 cursor-pointer flex items-center justify-center gap-3" style={{ background: "rgba(0,136,204,0.08)" }}>
+                <SiTelegram className="w-5 h-5 text-[#0088CC]" />
+                <span className="text-white/80 font-semibold text-base lg:text-lg">Telegram</span>
+              </div>
+            </a>
+          </motion.div>
+        </div>
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white text-sm font-medium mb-8 backdrop-blur-sm"
-        >
-          <Zap className="w-4 h-4 text-sky-300" />
-          <span>Мгновенное одобрение</span>
-        </motion.div>
-
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-4xl md:text-5xl lg:text-7xl font-bold text-white leading-tight mb-6"
-        >
-          Превращай трафик в прибыль
-          <br />
-          <span className="text-transparent bg-clip-text" style={{ backgroundImage: "linear-gradient(90deg, #60CFFF, #00AAEE, #0088CC)" }}>без потолка заработка</span>
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-lg lg:text-xl text-white/80 max-w-3xl mx-auto mb-10 leading-relaxed"
-        >
-          Присоединяйтесь к PrimeTraff — партнерской программе нового поколения. 
-          Высокие ставки, моментальные выплаты, персональная поддержка 24/7.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
-        >
-          <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" data-testid="button-hero-register">
-            <Button variant="outline" className="border-white/30 text-white font-medium px-8 h-auto py-3 rounded-full backdrop-blur-sm transition-all hover:border-white/50 hover:bg-white/5">
-              Начать зарабатывать
-              <ArrowRight className="w-4 h-4 ml-2" />
-            </Button>
-          </a>
-          <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" data-testid="button-hero-telegram">
-            <Button variant="outline" className="border-white/15 text-white/80 px-8 h-auto py-3 rounded-full backdrop-blur-sm">
-              <SiTelegram className="w-4 h-4 mr-2 text-[#0088CC]" />
-              Написать в Telegram
-            </Button>
-          </a>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6 max-w-4xl mx-auto"
+          transition={{ duration: 0.5, delay: 0.6 }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6 max-w-4xl mt-12 lg:mt-16"
         >
           {[
             { value: 500, suffix: "+", label: "Активных партнеров", id: "partners", gradient: "from-violet-400 to-purple-400" },
