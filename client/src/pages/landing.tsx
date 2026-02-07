@@ -75,6 +75,9 @@ import logoFlagman2 from "@assets/Без_названия_(26)_1770453809647.png
 import logoGizbo2 from "@assets/Без_названия_(27)_1770453809647.png";
 import logoJugabet from "@assets/Без_названия_(28)_1770453809648.png";
 
+import logoVegas from "@assets/img69380f65d567f_1770453920456.png";
+import logoBr4bet from "@assets/zQAzTcUzmpmD09fPheuQwWO7Jqm0FxinQatFQkwy_1770453920459.jpg";
+
 import CrystalScene from "@/components/CrystalScene";
 
 const REGISTER_URL = "https://primetrack.pro/register?ref=ADV-3BT52V85";
@@ -750,6 +753,8 @@ function PartnersSection() {
     "Monro": logoMonro,
     "Melbet": logoMelbet,
     "Jugabet": logoJugabet,
+    "Vegas": logoVegas,
+    "Br4bet": logoBr4bet,
   };
 
   const topRow = [
