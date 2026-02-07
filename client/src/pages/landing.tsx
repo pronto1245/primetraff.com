@@ -412,7 +412,7 @@ function HeroSection() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-[4.5rem] md:text-[7rem] lg:text-[9rem] xl:text-[11rem] font-black text-white leading-[0.85] tracking-tighter mb-4"
+              className="text-[5.5rem] md:text-[8.5rem] lg:text-[11rem] xl:text-[13rem] font-black text-white leading-[0.85] tracking-tighter mb-4"
               style={{ fontFamily: "'Inter', sans-serif", fontStretch: "condensed" }}
             >
               <span className="text-white/30">i</span>GAMING
