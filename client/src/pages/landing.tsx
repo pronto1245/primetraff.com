@@ -1004,10 +1004,15 @@ function TestimonialsSection() {
         <div className="flex gap-6 animate-testimonial-scroll">
           {doubled.map((testimonial, i) => {
             const c = colors[i % colors.length];
+            const accentColor = c.border.replace("0.2", "1");
             return (
               <div key={i} className="flex-shrink-0 w-[340px] lg:w-[400px]">
                 <div className="relative rounded-2xl p-8 lg:p-10 h-full transition-all duration-300" style={{ background: "rgba(255,255,255,0.04)", border: `1px solid ${c.border}` }} data-testid={`card-testimonial-${i}`}>
                   <div className="absolute inset-0 rounded-2xl" style={{ background: `radial-gradient(circle at 50% 0%, ${c.glow}, transparent 60%)` }} />
+
+                  <div className="absolute top-6 right-6 text-5xl lg:text-6xl font-serif leading-none opacity-[0.08]" style={{ color: accentColor }}>
+                    &ldquo;
+                  </div>
 
                   <div className="relative">
                     <div className="flex gap-1.5 mb-5">
@@ -1030,12 +1035,15 @@ function TestimonialsSection() {
                     </p>
 
                     <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-full flex items-center justify-center text-white text-lg font-semibold border border-white/15" style={{ background: `linear-gradient(135deg, ${c.border.replace("0.2", "0.4")}, ${c.border.replace("0.2", "0.15")})` }}>
-                        {testimonial.avatar}
+                      <div className="relative">
+                        <div className="absolute -inset-1 rounded-full opacity-60" style={{ background: `conic-gradient(from 0deg, ${accentColor}, transparent, ${accentColor})` }} />
+                        <div className="relative w-12 h-12 rounded-full flex items-center justify-center text-white text-lg font-bold" style={{ background: `linear-gradient(135deg, ${c.border.replace("0.2", "0.5")}, ${c.border.replace("0.2", "0.2")})`, border: "2px solid rgba(0,16,48,1)" }}>
+                          {testimonial.avatar}
+                        </div>
                       </div>
                       <div>
-                        <div className="font-semibold text-white text-base">{testimonial.name}</div>
-                        <div className="text-sm text-white/50">{testimonial.role}</div>
+                        <div className="font-bold text-white text-base">{testimonial.name}</div>
+                        <div className="text-sm font-medium" style={{ color: accentColor.replace("1)", "0.7)") }}>{testimonial.role}</div>
                       </div>
                     </div>
                   </div>
@@ -1206,28 +1214,35 @@ function FAQSection() {
         </AnimatedSection>
 
         <div className="space-y-3">
-          {faqs.map((faq, i) => (
-            <AnimatedSection key={i} delay={i * 0.1}>
-              <div className={`rounded-xl border transition-all duration-300 ${openIndex === i ? "bg-white/[0.05] border-white/12" : "bg-white/[0.03] border-white/8 hover:border-white/12"}`}>
-                <button
-                  className="w-full flex items-center justify-between p-5 lg:p-6 text-left"
-                  onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                  data-testid={`button-faq-${i}`}
-                >
-                  <span className="text-sm lg:text-[15px] font-medium text-white/90 pr-4">{faq.question}</span>
-                  <div className={`w-7 h-7 rounded-full border border-white/10 flex items-center justify-center flex-shrink-0 transition-all duration-200 ${openIndex === i ? "bg-white/10 rotate-180" : ""}`}>
-                    <ChevronDown className="w-3.5 h-3.5 text-white/50" />
-                  </div>
-                </button>
-                <div className={`overflow-hidden transition-all duration-300 ${openIndex === i ? "max-h-96" : "max-h-0"}`}>
-                  <div className="px-5 lg:px-6 pb-5 lg:pb-6 pt-0">
-                    <div className="w-10 h-px bg-white/10 mb-4" />
-                    <p className="text-sm text-white/60 whitespace-pre-line leading-relaxed">{faq.answer}</p>
+          {faqs.map((faq, i) => {
+            const accentColors = ["#38bdf8", "#a78bfa", "#22d3ee", "#fbbf24"];
+            const accent = accentColors[i % accentColors.length];
+            return (
+              <AnimatedSection key={i} delay={i * 0.1}>
+                <div className={`rounded-xl border transition-all duration-300 ${openIndex === i ? "bg-white/[0.05]" : "bg-white/[0.03]"}`} style={{ borderColor: openIndex === i ? `${accent}30` : "rgba(255,255,255,0.08)" }}>
+                  <button
+                    className="w-full flex items-center gap-4 p-5 lg:p-6 text-left"
+                    onClick={() => setOpenIndex(openIndex === i ? null : i)}
+                    data-testid={`button-faq-${i}`}
+                  >
+                    <span className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold" style={{ background: openIndex === i ? `${accent}20` : "rgba(255,255,255,0.05)", color: openIndex === i ? accent : "rgba(255,255,255,0.4)" }}>
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="flex-1 text-base lg:text-lg font-medium text-white/90">{faq.question}</span>
+                    <div className={`w-7 h-7 rounded-full border flex items-center justify-center flex-shrink-0 transition-all duration-200 ${openIndex === i ? "rotate-180" : ""}`} style={{ borderColor: openIndex === i ? `${accent}30` : "rgba(255,255,255,0.1)", background: openIndex === i ? `${accent}15` : "transparent" }}>
+                      <ChevronDown className="w-3.5 h-3.5" style={{ color: openIndex === i ? accent : "rgba(255,255,255,0.5)" }} />
+                    </div>
+                  </button>
+                  <div className={`overflow-hidden transition-all duration-300 ${openIndex === i ? "max-h-96" : "max-h-0"}`}>
+                    <div className="px-5 lg:px-6 pb-5 lg:pb-6 pt-0 pl-[4.5rem]">
+                      <div className="w-12 h-px mb-4" style={{ background: `linear-gradient(90deg, ${accent}40, transparent)` }} />
+                      <p className="text-sm lg:text-base text-white/60 whitespace-pre-line leading-relaxed">{faq.answer}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </AnimatedSection>
-          ))}
+              </AnimatedSection>
+            );
+          })}
         </div>
       </div>
     </section>
