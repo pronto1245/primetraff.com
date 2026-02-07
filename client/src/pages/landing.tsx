@@ -29,6 +29,27 @@ import logoWinAirlines from "@assets/Без_названия_(29)_1770453425635.
 import logoYYYCasino from "@assets/Без_названия_(20)_1770453425635.jpeg";
 import logoFatPirate from "@assets/Без_названия_(19)_1770453425635.jpeg";
 
+import logo1WIN from "@assets/Без_названия_(1)_1770453702150.png";
+import logoMrBet from "@assets/Без_названия_(2)_1770453702153.png";
+import logoSpincity from "@assets/Без_названия_(3)_1770453702153.jpeg";
+import logoWinhero from "@assets/Без_названия_(3)_1770453702153.png";
+import logoXONBet from "@assets/Без_названия_(4)_1770453702154.jpeg";
+import logoCorgibet from "@assets/Без_названия_(4)_1770453702154.png";
+import logoLeon from "@assets/Без_названия_(5)_1770453702154.jpeg";
+import logoBruceBet from "@assets/Без_названия_(5)_1770453702154.png";
+import logoVavada from "@assets/Без_названия_(6)_1770453702154.jpeg";
+import logoTwin from "@assets/Без_названия_(6)_1770453702155.png";
+import logo7Slots from "@assets/Без_названия_(7)_1770453702155.jpeg";
+import logoSlott from "@assets/Без_названия_(7)_1770453702155.png";
+import logoBooi from "@assets/Без_названия_(8)_1770453702155.jpeg";
+import logoAmonbet from "@assets/Без_названия_(8)_1770453702155.png";
+import logoPlayfortuna from "@assets/Без_названия_(9)_1770453702155.jpeg";
+import logoLuckyWave from "@assets/Без_названия_(10)_1770453702155.jpeg";
+import logoSlotLair from "@assets/Без_названия_(10)_1770453702155.png";
+import logoBeef from "@assets/Без_названия_(11)_1770453702156.jpeg";
+import logoFlagman from "@assets/Без_названия_(11)_1770453702156.png";
+import logoMartin from "@assets/Без_названия_(12)_1770453702156.jpeg";
+
 import CrystalScene from "@/components/CrystalScene";
 
 const REGISTER_URL = "https://primetrack.pro/register?ref=ADV-3BT52V85";
@@ -666,6 +687,25 @@ function PartnersSection() {
     "WinAirlines": logoWinAirlines,
     "YYY Casino": logoYYYCasino,
     "FatPirate": logoFatPirate,
+    "1 WIN": logo1WIN,
+    "MrBet": logoMrBet,
+    "Spincity": logoSpincity,
+    "XON Bet": logoXONBet,
+    "Corgibet": logoCorgibet,
+    "Leon": logoLeon,
+    "BruceBet": logoBruceBet,
+    "Vavada": logoVavada,
+    "Twin": logoTwin,
+    "7Slots": logo7Slots,
+    "Slott": logoSlott,
+    "Booi": logoBooi,
+    "Amonbet": logoAmonbet,
+    "Playfortuna": logoPlayfortuna,
+    "LuckyWave": logoLuckyWave,
+    "SlotLair": logoSlotLair,
+    "Beef": logoBeef,
+    "Flagman": logoFlagman,
+    "Martin": logoMartin,
   };
 
   const topRow = [
