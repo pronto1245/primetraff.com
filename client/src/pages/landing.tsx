@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useRef, useMemo, Suspense } from "react";
 import { Button } from "@/components/ui/button";
 import { motion, useInView } from "framer-motion";
 import { 
@@ -34,6 +34,7 @@ import partnerBetcool from "@assets/img69400fda54fe8_1768417603836.png";
 import partnerHuhuBet from "@assets/img694005f195a65_1768417603836.png";
 import partner4rabet from "@assets/NPOpJLBugXCTJRBDe8jY2bWxoKEGmEpA4HtrjRVD_1768417603836.png";
 
+import CrystalScene from "@/components/CrystalScene";
 
 const REGISTER_URL = "https://primetrack.pro/register?ref=ADV-3BT52V85";
 const LOGIN_URL = "https://primetrack.pro/login";
@@ -1086,6 +1087,9 @@ export default function LandingPage() {
       <BlueBgDecorations />
       <SparkleParticles />
       <FloatingDots />
+      <Suspense fallback={null}>
+        <CrystalScene />
+      </Suspense>
       <Navigation />
       <HeroSection />
       <GlowingDivider />
