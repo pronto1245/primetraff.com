@@ -14,7 +14,12 @@ import {
   CheckCircle,
   Star,
   Menu,
-  X
+  X,
+  Lock,
+  Briefcase,
+  LineChart,
+  Rocket,
+  KeyRound
 } from "lucide-react";
 import { SiTelegram } from "react-icons/si";
 
@@ -518,26 +523,44 @@ function FeaturesSection() {
     {
       title: "Без шейва",
       description: "Мы много лет работаем в gambling вертикали и знаем все боли рынка. Гарантируем, что шейва через нашу партнерскую сеть не будет. Честность — наш главный принцип.",
+      icon: Shield,
+      color: "#38bdf8",
+      glowColor: "rgba(56,189,248,0.4)",
     },
     {
       title: "Большой выбор офферов",
       description: "Все офферы, с которыми мы работаем, уже были пролиты нашей командой. Мы знаем что рекомендовать нашим партнерам для максимального профита.",
+      icon: Briefcase,
+      color: "#a78bfa",
+      glowColor: "rgba(167,139,250,0.4)",
     },
     {
       title: "Помощь в заливах",
       description: "Мы тестируем связки и делимся ими с партнерами. Всё — от креатива до необходимых инструментов. Вам остается взять ссылку из ЛК и начать лить.",
+      icon: Rocket,
+      color: "#22d3ee",
+      glowColor: "rgba(34,211,238,0.4)",
     },
     {
       title: "Быстрые выплаты",
       description: "Стараемся максимально быстро выплачивать вознаграждение. Если у рекла нет претензий к трафику — средства будут на кошельке в кратчайший срок.",
+      icon: Zap,
+      color: "#fbbf24",
+      glowColor: "rgba(251,191,36,0.4)",
     },
     {
       title: "Приватный канал со связками",
       description: "Для проверенных партнеров есть закрытый канал с продуктом, креативами, таргетом, плейсментами — всё для профитной настройки пролива.",
+      icon: KeyRound,
+      color: "#f472b6",
+      glowColor: "rgba(244,114,182,0.4)",
     },
     {
       title: "Полная аналитика",
       description: "Личный кабинет с детальной статистикой по всем показателям. Видишь каждый клик и депозит по своим subID в реальном времени.",
+      icon: LineChart,
+      color: "#34d399",
+      glowColor: "rgba(52,211,153,0.4)",
     },
   ];
 
@@ -600,12 +623,23 @@ function FeaturesSection() {
             <div className="flex flex-col md:flex-row min-h-[380px] lg:min-h-[440px]">
               <div className="flex-shrink-0 p-8 lg:p-12 flex flex-col justify-center md:w-[40%] md:border-r md:border-dashed md:border-white/10">
                 <motion.div
+                  key={`icon-${activeIdx}`}
+                  initial={{ opacity: 0, scale: 0.6 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.4 }}
+                  className="mb-4"
+                >
+                  <div className="w-16 h-16 lg:w-20 lg:h-20 rounded-2xl border border-white/10 flex items-center justify-center" style={{ background: `radial-gradient(circle, ${current.color}15, transparent 70%)` }}>
+                    <current.icon className="w-8 h-8 lg:w-10 lg:h-10" style={{ color: current.color, filter: `drop-shadow(0 0 8px ${current.glowColor})` }} />
+                  </div>
+                </motion.div>
+                <motion.div
                   key={`num-${activeIdx}`}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4 }}
+                  transition={{ duration: 0.4, delay: 0.05 }}
                 >
-                  <span className="text-5xl lg:text-7xl font-black text-transparent bg-clip-text" style={{ backgroundImage: "linear-gradient(135deg, #0088CC, #00BBFF)" }}>
+                  <span className="text-5xl lg:text-7xl font-black text-transparent bg-clip-text" style={{ backgroundImage: `linear-gradient(135deg, ${current.color}, ${current.color}88)` }}>
                     {String(activeIdx + 1).padStart(2, "0")}
                   </span>
                 </motion.div>
