@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo, Suspense } from "react";
+import { useState, useEffect, useRef, useMemo, Suspense, lazy } from "react";
 import { Button } from "@/components/ui/button";
 import { motion, useInView } from "framer-motion";
 import { 
@@ -85,7 +85,7 @@ import logoVegas from "@assets/img69380f65d567f_1770453920456.png";
 import logoBr4bet from "@assets/zQAzTcUzmpmD09fPheuQwWO7Jqm0FxinQatFQkwy_1770453920459.jpg";
 import logoWinhero2 from "@assets/Без_названия_(32)_1770454010355.png";
 
-import CrystalScene from "@/components/CrystalScene";
+const CrystalScene = lazy(() => import("@/components/CrystalScene"));
 
 const REGISTER_URL = "https://primetrack.pro/register?ref=ADV-3BT52V85";
 const LOGIN_URL = "https://primetrack.pro/login";
@@ -308,7 +308,7 @@ function Navigation() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           <a href="#" className="flex items-center gap-2" data-testid="link-logo">
-            <img src={primeTraffLogo} alt="PrimeTraff" className="w-8 h-8 rounded-lg" />
+            <img src={primeTraffLogo} alt="PrimeTraff" className="w-8 h-8 rounded-lg" width={32} height={32} />
             <span className="text-xl font-bold text-white">PrimeTraff</span>
           </a>
 
@@ -348,10 +348,10 @@ function Navigation() {
         {mobileMenuOpen && (
           <div className="md:hidden bg-[#001a3a]/95 backdrop-blur-xl border-t border-white/10 py-4">
             <div className="flex flex-col gap-4 px-4">
-              <a href="#features" className="text-white/70 py-2" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-features">Возможности</a>
-              <a href="#how-it-works" className="text-white/70 py-2" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-how-it-works">Как это работает</a>
-              <a href="#partners" className="text-white/70 py-2" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-partners">Партнеры</a>
-              <a href="#faq" className="text-white/70 py-2" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-faq">FAQ</a>
+              <a href="#features" className="text-white/70 py-3 min-h-[44px] flex items-center" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-features">Возможности</a>
+              <a href="#how-it-works" className="text-white/70 py-3 min-h-[44px] flex items-center" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-how-it-works">Как это работает</a>
+              <a href="#partners" className="text-white/70 py-3 min-h-[44px] flex items-center" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-partners">Партнеры</a>
+              <a href="#faq" className="text-white/70 py-3 min-h-[44px] flex items-center" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-faq">FAQ</a>
               <a href={LOGIN_URL} target="_blank" rel="noopener noreferrer" className="w-full" data-testid="button-login-mobile">
                 <Button variant="outline" className="w-full border-white/25 text-white/80 font-medium rounded-full">
                   Вход
@@ -1147,7 +1147,7 @@ function PartnersSection() {
     return (
       <div className="flex-shrink-0 flex items-center gap-2.5 px-4 lg:px-5 py-2 lg:py-2.5 rounded-full border border-white/10 bg-white/[0.04]" data-testid={`text-partner-${prefix}-${idx}`}>
         {logo && (
-          <img src={logo} alt={name} className="w-6 h-6 rounded-md object-cover flex-shrink-0" />
+          <img src={logo} alt={name} className="w-6 h-6 rounded-md object-cover flex-shrink-0" loading="lazy" decoding="async" width={24} height={24} />
         )}
         <span className="text-white/80 text-sm lg:text-base font-semibold whitespace-nowrap">{name}</span>
       </div>
@@ -1344,7 +1344,7 @@ function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
           <div className="md:col-span-1">
             <div className="flex items-center gap-2.5 mb-4">
-              <img src={primeTraffLogo} alt="PrimeTraff" className="w-9 h-9 rounded-lg" />
+              <img src={primeTraffLogo} alt="PrimeTraff" className="w-9 h-9 rounded-lg" loading="lazy" decoding="async" width={36} height={36} />
               <span className="text-xl font-bold text-white">PrimeTraff</span>
             </div>
             <p className="text-sm text-white/50 leading-relaxed mb-6">
@@ -1607,7 +1607,7 @@ function ScrollToTop() {
       }}
       transition={{ duration: 0.2 }}
       onClick={scrollToTop}
-      className="fixed bottom-24 right-6 z-50 w-12 h-12 text-white rounded-full shadow-lg flex items-center justify-center backdrop-blur-sm border border-sky-400/30 transition-colors"
+      className="fixed bottom-28 md:bottom-8 right-6 z-50 w-12 h-12 text-white rounded-full shadow-lg flex items-center justify-center backdrop-blur-sm border border-sky-400/30 transition-colors"
       style={{ background: "rgba(0,136,204,0.7)" }}
       data-testid="button-scroll-to-top"
       aria-label="Наверх"

@@ -82,6 +82,20 @@ Preferred communication style: Simple, everyday language.
 - **connect-pg-simple**: PostgreSQL session store
 - **passport / passport-local**: Authentication (configured but not implemented)
 
+### Performance Optimizations
+- **Compression**: gzip compression via `compression` middleware on Express
+- **Font Loading**: Only Inter font loaded (removed 20+ unused Google Font families)
+- **Image Lazy Loading**: All partner logos use `loading="lazy"`, `decoding="async"`, explicit `width`/`height`
+- **Code Splitting**: CrystalScene (Three.js) loaded via `React.lazy()` + `Suspense`
+- **CSS**: `scroll-behavior: smooth`, `content-visibility: auto` on images, `text-size-adjust`
+- **DNS Prefetch**: Pre-resolved external domains (primetrack.pro, t.me)
+
+### SEO
+- **Meta Tags**: Full OG, Twitter Card, theme-color, apple-touch-icon
+- **Structured Data**: JSON-LD for Organization, WebSite, FAQPage schemas
+- **Canonical URL**: https://primetraff.com/
+- **Analytics**: GTM and Yandex Metrica placeholders ready
+
 ### Other Services (Available for Integration)
 - **Stripe**: Payment processing
 - **Nodemailer**: Email sending
