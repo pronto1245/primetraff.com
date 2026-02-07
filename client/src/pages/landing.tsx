@@ -516,58 +516,62 @@ function HolographicIcon({ icon: Icon, color, glowColor }: { icon: any; color: s
 function FeaturesSection() {
   const features = [
     {
-      icon: Shield,
       title: "Без шейва",
-      description: "Мы много лет работаем в gambling вертикали и знаем все боли рынка. Гарантируем, что шейва через нашу партнерскую сеть не будет.",
-      color: "#34d399",
-      glowColor: "rgba(52,211,153,0.4)",
+      description: "Мы много лет работаем в gambling вертикали и знаем все боли рынка. Гарантируем, что шейва через нашу партнерскую сеть не будет. Честность — наш главный принцип.",
     },
     {
-      icon: Globe,
       title: "Большой выбор офферов",
-      description: "Все офферы, с которыми мы работаем, уже были пролиты нашей командой. Мы знаем что рекомендовать нашим партнерам.",
-      color: "#38bdf8",
-      glowColor: "rgba(56,189,248,0.4)",
+      description: "Все офферы, с которыми мы работаем, уже были пролиты нашей командой. Мы знаем что рекомендовать нашим партнерам для максимального профита.",
     },
     {
-      icon: Users,
       title: "Помощь в заливах",
-      description: "Мы тестируем связки и делимся ими с партнерами. Всё — от креатива до необходимых инструментов. Вам остается взять ссылку из ЛК.",
-      color: "#a78bfa",
-      glowColor: "rgba(167,139,250,0.4)",
+      description: "Мы тестируем связки и делимся ими с партнерами. Всё — от креатива до необходимых инструментов. Вам остается взять ссылку из ЛК и начать лить.",
     },
     {
-      icon: DollarSign,
       title: "Быстрые выплаты",
       description: "Стараемся максимально быстро выплачивать вознаграждение. Если у рекла нет претензий к трафику — средства будут на кошельке в кратчайший срок.",
-      color: "#fbbf24",
-      glowColor: "rgba(251,191,36,0.4)",
     },
     {
-      icon: MessageCircle,
       title: "Приватный канал со связками",
       description: "Для проверенных партнеров есть закрытый канал с продуктом, креативами, таргетом, плейсментами — всё для профитной настройки пролива.",
-      color: "#f472b6",
-      glowColor: "rgba(244,114,182,0.4)",
     },
     {
-      icon: BarChart3,
       title: "Полная аналитика",
       description: "Личный кабинет с детальной статистикой по всем показателям. Видишь каждый клик и депозит по своим subID в реальном времени.",
-      color: "#22d3ee",
-      glowColor: "rgba(34,211,238,0.4)",
     },
   ];
+
+  const [activeIdx, setActiveIdx] = useState(0);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const startAuto = () => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    intervalRef.current = setInterval(() => {
+      setActiveIdx(prev => (prev + 1) % features.length);
+    }, 5000);
+  };
+
+  useEffect(() => {
+    startAuto();
+    return () => { if (intervalRef.current) clearInterval(intervalRef.current); };
+  }, []);
+
+  const goTo = (idx: number) => {
+    setActiveIdx(idx);
+    startAuto();
+  };
+  const goPrev = () => goTo((activeIdx - 1 + features.length) % features.length);
+  const goNext = () => goTo((activeIdx + 1) % features.length);
+
+  const current = features[activeIdx];
 
   return (
     <section id="features" className="py-20 lg:py-32 relative overflow-hidden">
       <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #002060 0%, #001845 50%, #002060 100%)" }} />
       <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full blur-[200px]" style={{ background: "radial-gradient(circle, rgba(0,140,220,0.12) 0%, transparent 70%)" }} />
-      <div className="hidden md:block absolute top-[20%] right-[10%] w-[300px] h-[300px] rounded-full blur-[120px]" style={{ background: "radial-gradient(circle, rgba(0,200,255,0.08) 0%, transparent 70%)" }} />
-      <div className="hidden md:block absolute bottom-[20%] left-[10%] w-[250px] h-[250px] rounded-full blur-[100px]" style={{ background: "radial-gradient(circle, rgba(60,180,255,0.06) 0%, transparent 70%)" }} />
       
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
-        <AnimatedSection className="text-center mb-16">
+        <AnimatedSection className="text-center mb-12 lg:mb-16">
           <h2 className="text-3xl lg:text-5xl font-bold text-white mb-4">
             Почему выбирают PrimeTraff
           </h2>
@@ -576,16 +580,70 @@ function FeaturesSection() {
           </p>
         </AnimatedSection>
 
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 lg:gap-x-12 lg:gap-y-16 max-w-5xl mx-auto">
-          {features.map((feature, i) => (
-            <AnimatedSection key={i} delay={i * 0.08} className="text-center">
-              <div className="flex flex-col items-center" data-testid={`card-feature-${i}`}>
-                <HolographicIcon icon={feature.icon} color={feature.color} glowColor={feature.glowColor} />
-                <h3 className="text-base lg:text-lg font-semibold text-white mb-2">{feature.title}</h3>
-                <p className="text-sm text-white/60 leading-relaxed max-w-[260px]">{feature.description}</p>
+        <div className="relative max-w-5xl mx-auto">
+          <button
+            onClick={goPrev}
+            className="absolute left-0 lg:-left-16 top-1/2 -translate-y-1/2 z-20 w-10 h-10 lg:w-12 lg:h-12 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm flex items-center justify-center transition-all"
+            data-testid="button-features-prev"
+          >
+            <ChevronDown className="w-5 h-5 text-white/70 rotate-90" />
+          </button>
+          <button
+            onClick={goNext}
+            className="absolute right-0 lg:-right-16 top-1/2 -translate-y-1/2 z-20 w-10 h-10 lg:w-12 lg:h-12 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm flex items-center justify-center transition-all"
+            data-testid="button-features-next"
+          >
+            <ChevronDown className="w-5 h-5 text-white/70 -rotate-90" />
+          </button>
+
+          <div className="border border-white/10 rounded-2xl bg-white/[0.03] backdrop-blur-sm overflow-hidden mx-8 lg:mx-0" data-testid={`card-feature-${activeIdx}`}>
+            <div className="flex flex-col md:flex-row min-h-[320px] lg:min-h-[360px]">
+              <div className="flex-shrink-0 p-8 lg:p-12 flex flex-col justify-center md:w-[40%] md:border-r md:border-dashed md:border-white/10">
+                <motion.div
+                  key={`num-${activeIdx}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4 }}
+                >
+                  <span className="text-5xl lg:text-7xl font-black text-transparent bg-clip-text" style={{ backgroundImage: "linear-gradient(135deg, #0088CC, #00BBFF)" }}>
+                    {String(activeIdx + 1).padStart(2, "0")}
+                  </span>
+                </motion.div>
+                <motion.h3
+                  key={`title-${activeIdx}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.1 }}
+                  className="text-2xl lg:text-3xl xl:text-4xl font-black text-white uppercase leading-tight mt-4"
+                >
+                  {current.title}
+                </motion.h3>
               </div>
-            </AnimatedSection>
-          ))}
+
+              <div className="flex-1 p-8 lg:p-12 flex items-center">
+                <motion.p
+                  key={`desc-${activeIdx}`}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.15 }}
+                  className="text-base lg:text-lg text-white/70 leading-relaxed"
+                >
+                  {current.description}
+                </motion.p>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-center gap-2 mt-8">
+            {features.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => goTo(i)}
+                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${i === activeIdx ? "bg-sky-400 w-6" : "bg-white/20"}`}
+                data-testid={`button-features-dot-${i}`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
