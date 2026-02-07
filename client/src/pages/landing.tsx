@@ -597,7 +597,7 @@ function FeaturesSection() {
           </button>
 
           <div className="border border-white/10 rounded-2xl bg-white/[0.03] backdrop-blur-sm overflow-hidden mx-8 lg:mx-0" data-testid={`card-feature-${activeIdx}`}>
-            <div className="flex flex-col md:flex-row min-h-[320px] lg:min-h-[360px]">
+            <div className="flex flex-col md:flex-row min-h-[380px] lg:min-h-[440px]">
               <div className="flex-shrink-0 p-8 lg:p-12 flex flex-col justify-center md:w-[40%] md:border-r md:border-dashed md:border-white/10">
                 <motion.div
                   key={`num-${activeIdx}`}
@@ -620,13 +620,13 @@ function FeaturesSection() {
                 </motion.h3>
               </div>
 
-              <div className="flex-1 p-8 lg:p-12 flex items-center">
+              <div className="flex-1 p-8 lg:p-14 flex items-center">
                 <motion.p
                   key={`desc-${activeIdx}`}
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: 0.15 }}
-                  className="text-base lg:text-lg text-white/70 leading-relaxed"
+                  className="text-lg lg:text-xl xl:text-2xl text-white/70 leading-relaxed"
                 >
                   {current.description}
                 </motion.p>
