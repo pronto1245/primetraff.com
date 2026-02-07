@@ -345,19 +345,20 @@ function HeroSection() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="text-4xl md:text-5xl lg:text-7xl font-bold text-white leading-tight mb-6"
         >
-          Превращай трафик в прибыль
+          Партнерская сеть
           <br />
-          <span className="text-transparent bg-clip-text" style={{ backgroundImage: "linear-gradient(90deg, #60CFFF, #00AAEE, #0088CC)" }}>без потолка заработка</span>
+          для <span className="text-transparent bg-clip-text" style={{ backgroundImage: "linear-gradient(90deg, #60CFFF, #00AAEE, #0088CC)" }}>арбитража трафика</span>
+          <br />
+          <span className="text-white/90">в gambling</span>
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-lg lg:text-xl text-white/80 max-w-3xl mx-auto mb-10 leading-relaxed"
+          className="text-lg lg:text-xl text-white/60 max-w-3xl mx-auto mb-10 leading-relaxed"
         >
-          Присоединяйтесь к PrimeTraff — партнерской программе нового поколения. 
-          Высокие ставки, моментальные выплаты, персональная поддержка 24/7.
+          Высокие ставки, честные выплаты без холдов, готовые связки и персональная поддержка 24/7. Всё что нужно для профитного залива.
         </motion.p>
 
         <motion.div
@@ -425,73 +426,62 @@ function HolographicIcon({ icon: Icon, color, glowColor }: { icon: any; color: s
 function FeaturesSection() {
   const features = [
     {
-      icon: Shield,
+      num: "01",
       title: "Без шейва",
-      description: "Мы много лет работаем в gambling вертикали и знаем все боли рынка. Гарантируем, что шейва через нашу партнерскую сеть не будет.",
-      color: "#34d399",
-      glowColor: "rgba(52,211,153,0.4)",
+      description: "Гарантируем честную работу. Никакого шейва — это наше главное правило.",
+      accent: true,
     },
     {
-      icon: Globe,
+      num: "02",
       title: "Большой выбор офферов",
-      description: "Все офферы, с которыми мы работаем, уже были пролиты нашей командой. Мы знаем что рекомендовать нашим партнерам.",
-      color: "#38bdf8",
-      glowColor: "rgba(56,189,248,0.4)",
+      description: "Все офферы пролиты нашей командой. Рекомендуем лучшее для профита.",
     },
     {
-      icon: Users,
+      num: "03",
       title: "Помощь в заливах",
-      description: "Мы тестируем связки и делимся ими с партнерами. Всё — от креатива до необходимых инструментов. Вам остается взять ссылку из ЛК.",
-      color: "#a78bfa",
-      glowColor: "rgba(167,139,250,0.4)",
+      description: "Готовые связки, креативы и инструменты. Берите ссылку из ЛК и лейте.",
     },
     {
-      icon: DollarSign,
+      num: "04",
       title: "Быстрые выплаты",
-      description: "Стараемся максимально быстро выплачивать вознаграждение. Если у рекла нет претензий к трафику — средства будут на кошельке в кратчайший срок.",
-      color: "#fbbf24",
-      glowColor: "rgba(251,191,36,0.4)",
-    },
-    {
-      icon: MessageCircle,
-      title: "Приватный канал со связками",
-      description: "Для проверенных партнеров есть закрытый канал с продуктом, креативами, таргетом, плейсментами — всё для профитной настройки пролива.",
-      color: "#f472b6",
-      glowColor: "rgba(244,114,182,0.4)",
-    },
-    {
-      icon: BarChart3,
-      title: "Полная аналитика",
-      description: "Личный кабинет с детальной статистикой по всем показателям. Видишь каждый клик и депозит по своим subID в реальном времени.",
-      color: "#22d3ee",
-      glowColor: "rgba(34,211,238,0.4)",
+      description: "Выплаты в кратчайший срок. Без холдов для проверенных партнеров.",
     },
   ];
 
   return (
-    <section id="features" className="py-20 lg:py-32 relative overflow-hidden">
-      <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #002060 0%, #001845 50%, #002060 100%)" }} />
-      <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full blur-[200px]" style={{ background: "radial-gradient(circle, rgba(0,140,220,0.12) 0%, transparent 70%)" }} />
-      <div className="hidden md:block absolute top-[20%] right-[10%] w-[300px] h-[300px] rounded-full blur-[120px]" style={{ background: "radial-gradient(circle, rgba(0,200,255,0.08) 0%, transparent 70%)" }} />
-      <div className="hidden md:block absolute bottom-[20%] left-[10%] w-[250px] h-[250px] rounded-full blur-[100px]" style={{ background: "radial-gradient(circle, rgba(60,180,255,0.06) 0%, transparent 70%)" }} />
+    <section id="features" className="py-20 lg:py-28 relative overflow-hidden">
+      <div className="absolute inset-0" style={{ background: "#001030" }} />
       
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
-        <AnimatedSection className="text-center mb-16">
-          <h2 className="text-3xl lg:text-5xl font-bold text-white mb-4">
-            Почему выбирают PrimeTraff
+      <div className="relative z-10 max-w-5xl mx-auto px-6 lg:px-8">
+        <AnimatedSection className="text-center mb-14">
+          <h2 className="text-3xl lg:text-5xl font-bold text-white mb-3">
+            Почему выбирают <span className="text-transparent bg-clip-text" style={{ backgroundImage: "linear-gradient(90deg, #60CFFF, #0088CC)" }}>PrimeTraff</span>
           </h2>
-          <p className="text-white/60 text-lg max-w-2xl mx-auto">
-            Созданы арбитражниками для арбитражников. Знаем, что вам нужно.
+          <p className="text-white/40 text-lg">
+            Созданы арбитражниками для арбитражников
           </p>
         </AnimatedSection>
 
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 lg:gap-x-12 lg:gap-y-16 max-w-5xl mx-auto">
+        <div className="grid grid-cols-2 gap-3">
           {features.map((feature, i) => (
-            <AnimatedSection key={i} delay={i * 0.08} className="text-center">
-              <div className="flex flex-col items-center" data-testid={`card-feature-${i}`}>
-                <HolographicIcon icon={feature.icon} color={feature.color} glowColor={feature.glowColor} />
-                <h3 className="text-base lg:text-lg font-semibold text-white mb-2">{feature.title}</h3>
-                <p className="text-sm text-white/60 leading-relaxed max-w-[260px]">{feature.description}</p>
+            <AnimatedSection key={i} delay={i * 0.1}>
+              <div 
+                className={`relative rounded-lg p-5 lg:p-6 h-full border ${
+                  feature.accent 
+                    ? "border-sky-500/40" 
+                    : "border-white/[0.07]"
+                }`}
+                style={{ background: feature.accent ? "rgba(0,136,204,0.06)" : "rgba(255,255,255,0.025)" }}
+                data-testid={`card-feature-${i}`}
+              >
+                {feature.accent && (
+                  <div className="absolute left-0 top-3 bottom-3 w-[3px] rounded-full" style={{ background: "linear-gradient(180deg, #0088CC, #60CFFF)" }} />
+                )}
+                <div className={`text-5xl lg:text-6xl font-bold mb-3 leading-none ${feature.accent ? "text-sky-400" : "text-white/[0.08]"}`}>
+                  {feature.num}
+                </div>
+                <h3 className="text-base lg:text-lg font-semibold text-white mb-1.5">{feature.title}</h3>
+                <p className="text-sm text-white/40 leading-relaxed">{feature.description}</p>
               </div>
             </AnimatedSection>
           ))}
@@ -504,82 +494,68 @@ function FeaturesSection() {
 function HowItWorksSection() {
   const steps = [
     {
-      step: "01",
+      num: "01",
       title: "Регистрация",
       description: "Заполните форму за 2 минуты. Мгновенное одобрение для опытных арбитражников.",
       icon: Users,
-      color: "#a78bfa",
-      glowColor: "rgba(167,139,250,0.4)",
-      badgeGradient: "from-violet-500 to-violet-600",
     },
     {
-      step: "02",
+      num: "02",
       title: "Получите офферы",
-      description: "Выберите офферы и получите уникальные трекинговые ссылки.",
+      description: "Выберите офферы из каталога и получите уникальные трекинговые ссылки.",
       icon: Globe,
-      color: "#38bdf8",
-      glowColor: "rgba(56,189,248,0.4)",
-      badgeGradient: "from-sky-500 to-sky-600",
     },
     {
-      step: "03",
+      num: "03",
       title: "Лейте трафик",
       description: "Запускайте рекламные кампании и отслеживайте результаты в реальном времени.",
       icon: BarChart3,
-      color: "#22d3ee",
-      glowColor: "rgba(34,211,238,0.4)",
-      badgeGradient: "from-cyan-500 to-cyan-600",
     },
     {
-      step: "04",
+      num: "04",
       title: "Получайте выплаты",
       description: "Выводите заработок ежедневно. Без холдов для проверенных партнеров.",
       icon: DollarSign,
-      color: "#fbbf24",
-      glowColor: "rgba(251,191,36,0.4)",
-      badgeGradient: "from-amber-500 to-amber-600",
     },
   ];
 
   return (
     <section id="how-it-works" className="py-20 lg:py-32 relative overflow-hidden">
       <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #001845 0%, #001535 50%, #001845 100%)" }} />
-      <div className="hidden md:block absolute top-1/2 left-0 w-80 h-80 rounded-full blur-[100px]" style={{ background: "radial-gradient(circle, rgba(0,200,255,0.1) 0%, transparent 70%)" }} />
-      <div className="hidden md:block absolute bottom-0 right-1/4 w-80 h-80 rounded-full blur-[100px]" style={{ background: "radial-gradient(circle, rgba(0,140,220,0.08) 0%, transparent 70%)" }} />
-      <div className="hidden md:block absolute top-[30%] right-[5%] w-64 h-64 rounded-full blur-[80px]" style={{ background: "radial-gradient(circle, rgba(60,180,255,0.06) 0%, transparent 70%)" }} />
+      <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[180px]" style={{ background: "radial-gradient(circle, rgba(0,140,220,0.1) 0%, transparent 70%)" }} />
       
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         <AnimatedSection className="text-center mb-16">
           <h2 className="text-3xl lg:text-5xl font-bold text-white mb-4">
-            Как начать зарабатывать
+            Как начать <span className="text-transparent bg-clip-text" style={{ backgroundImage: "linear-gradient(90deg, #60CFFF, #0088CC)" }}>зарабатывать</span>
           </h2>
-          <p className="text-white/70 text-lg max-w-2xl mx-auto">
+          <p className="text-white/50 text-lg max-w-2xl mx-auto">
             Простой старт за 5 минут. Никакой бюрократии.
           </p>
         </AnimatedSection>
 
         <div className="relative">
-          <div className="hidden lg:block absolute top-12 left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-transparent via-sky-400/20 to-transparent" />
+          <div className="hidden lg:block absolute top-[52px] left-[calc(12.5%+20px)] right-[calc(12.5%+20px)] h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(0,136,204,0.3) 20%, rgba(0,136,204,0.3) 80%, transparent)" }} />
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
             {steps.map((step, i) => (
-              <AnimatedSection key={i} delay={i * 0.15} className="relative">
-                <div className="text-center">
-                  <div className="relative inline-flex mb-6">
-                    <HolographicIcon icon={step.icon} color={step.color} glowColor={step.glowColor} />
-                    <div className={`absolute -top-1 -right-1 w-7 h-7 rounded-full bg-gradient-to-br ${step.badgeGradient} flex items-center justify-center text-white text-xs font-bold shadow-lg`}>
-                      {i + 1}
+              <AnimatedSection key={i} delay={i * 0.12}>
+                <div className="relative border border-white/8 bg-white/[0.03] rounded-xl p-5 lg:p-6 h-full hover:border-white/15 transition-all duration-300" data-testid={`card-step-${i}`}>
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="text-2xl lg:text-3xl font-bold text-sky-400/50">{step.num}</span>
+                    <div className="w-8 h-8 rounded-lg bg-sky-400/10 border border-sky-400/20 flex items-center justify-center">
+                      <step.icon className="w-4 h-4 text-sky-400" />
                     </div>
                   </div>
-                  <h3 className="text-xl font-semibold text-white mb-3">{step.title}</h3>
-                  <p className="text-white/60">{step.description}</p>
+                  <h3 className="text-base lg:text-lg font-semibold text-white mb-2">{step.title}</h3>
+                  <p className="text-sm text-white/50 leading-relaxed">{step.description}</p>
                 </div>
               </AnimatedSection>
             ))}
           </div>
         </div>
 
-        <AnimatedSection delay={0.6} className="text-center mt-12">
+        <AnimatedSection delay={0.5} className="text-center mt-12">
           <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" data-testid="button-how-it-works-cta">
             <Button variant="outline" className="border-white/25 text-white font-medium px-8 h-auto py-3 rounded-full backdrop-blur-sm">
               Начать сейчас
