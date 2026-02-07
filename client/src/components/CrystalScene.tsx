@@ -139,16 +139,41 @@ function WebGLCheck() {
 }
 
 export default function CrystalScene() {
-  const [isMobile, setIsMobile] = useState(false);
-  const [hasWebGL, setHasWebGL] = useState(true);
+  const [shouldRender, setShouldRender] = useState(false);
+  const resizeTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const initialCheck = useRef(false);
+
   useEffect(() => {
-    const c = () => setIsMobile(window.innerWidth < 768);
-    c();
-    window.addEventListener("resize", c);
-    setHasWebGL(WebGLCheck());
-    return () => window.removeEventListener("resize", c);
+    const checkDesktop = () => window.innerWidth >= 768 && window.innerHeight >= 500;
+
+    if (!initialCheck.current) {
+      initialCheck.current = true;
+      if (checkDesktop() && WebGLCheck()) {
+        setShouldRender(true);
+      }
+    }
+
+    const handleResize = () => {
+      if (resizeTimeout.current) clearTimeout(resizeTimeout.current);
+      resizeTimeout.current = setTimeout(() => {
+        const isDesktop = checkDesktop();
+        setShouldRender(prev => {
+          if (!isDesktop && prev) return false;
+          if (isDesktop && !prev && WebGLCheck()) return true;
+          return prev;
+        });
+      }, 500);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      if (resizeTimeout.current) clearTimeout(resizeTimeout.current);
+    };
   }, []);
-  if (isMobile || !hasWebGL) return null;
+
+  if (!shouldRender) return null;
+
   return (
     <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 1 }}>
       <Canvas

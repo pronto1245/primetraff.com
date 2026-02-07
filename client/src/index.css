@@ -268,3 +268,16 @@
     inset: -1px;
   }
 }
+
+@media (max-width: 767px) {
+  .animate-testimonial-scroll {
+    animation-duration: 25s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-testimonial-scroll,
+  .animate-pulse-glow {
+    animation: none;
+  }
+}

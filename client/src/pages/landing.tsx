@@ -158,8 +158,9 @@ function BlueBgDecorations() {
 }
 
 function SparkleParticles() {
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
   const particles = useMemo(() => 
-    Array.from({ length: 40 }, (_, i) => ({
+    Array.from({ length: isMobile ? 12 : 40 }, (_, i) => ({
       left: `${Math.random() * 100}%`,
       top: `${Math.random() * 100}%`,
       size: 2 + Math.random() * 4,
@@ -191,8 +192,9 @@ function SparkleParticles() {
 }
 
 function FloatingDots() {
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
   const dots = useMemo(() =>
-    Array.from({ length: 18 }, (_, i) => ({
+    Array.from({ length: isMobile ? 6 : 18 }, (_, i) => ({
       left: `${3 + Math.random() * 94}%`,
       size: 3 + Math.random() * 4,
       delay: Math.random() * 12,
