@@ -2,99 +2,103 @@ import { useRef, useMemo, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
-const COLORS = [
-  "#0099FF", "#00CCFF", "#00DDFF", "#0077CC", "#60CFFF",
-  "#A855F7", "#8B5CF6", "#EC4899", "#F59E0B", "#10B981",
-  "#22D3EE", "#06B6D4", "#FF6B35", "#3B82F6", "#14B8A6",
-  "#6366F1", "#F472B6", "#34D399", "#FBBF24", "#38BDF8",
+const LINE_COLORS = [
+  "#00DDFF", "#00CCEE", "#00BBDD", "#00AACC", "#0099BB",
+  "#0088AA", "#007799", "#006688", "#00BBFF", "#00EECC",
+  "#00DDAA", "#00CC99", "#00FFDD", "#00EEBB", "#00DDBB",
+  "#22CCDD", "#11BBCC", "#00AABB", "#33DDEE", "#44EEFF",
+  "#00FFE0", "#00EED0", "#00DDC0", "#00CCB0", "#00BBA0",
+  "#55EEFF", "#66FFEE", "#00FFCC", "#22EEDD", "#33FFEE",
 ];
 
-function DiagonalHairBundle({
-  count,
-  fromCorner,
-  toCorner,
-  spread,
-  direction,
-  speedBase,
-  waveAmpBase,
+function WaveBundle({
+  lineCount,
+  startX,
+  startY,
+  endX,
+  endY,
+  baseSpread,
+  speedMul,
+  phaseBase,
 }: {
-  count: number;
-  fromCorner: [number, number];
-  toCorner: [number, number];
-  spread: number;
-  direction: 1 | -1;
-  speedBase: number;
-  waveAmpBase: number;
+  lineCount: number;
+  startX: number;
+  startY: number;
+  endX: number;
+  endY: number;
+  baseSpread: number;
+  speedMul: number;
+  phaseBase: number;
 }) {
-  const segments = 80;
-  const tRef = useRef(Math.random() * 20);
+  const segments = 120;
+  const tRef = useRef(phaseBase);
 
-  const dx = toCorner[0] - fromCorner[0];
-  const dy = toCorner[1] - fromCorner[1];
-  const len = Math.sqrt(dx * dx + dy * dy);
-  const perpX = -dy / len;
-  const perpY = dx / len;
+  const dx = endX - startX;
+  const dy = endY - startY;
+  const length = Math.sqrt(dx * dx + dy * dy);
+  const perpX = -dy / length;
+  const perpY = dx / length;
 
   const lines = useMemo(() => {
     const result: {
       geometry: THREE.BufferGeometry;
       line: THREE.Line;
-      offset: number;
-      zOff: number;
-      waveAmp: number;
-      waveFreq: number;
-      speed: number;
+      spreadOffset: number;
       phase: number;
+      zOff: number;
     }[] = [];
 
-    for (let i = 0; i < count; i++) {
-      const offset = ((i / (count - 1)) - 0.5) * spread;
-      const zOff = -1 - Math.random() * 2;
+    for (let i = 0; i < lineCount; i++) {
+      const frac = lineCount === 1 ? 0 : (i / (lineCount - 1)) - 0.5;
+      const spreadOffset = frac * baseSpread;
+      const zOff = -1.5 + (Math.random() - 0.5) * 1.5;
+      const phase = (i / lineCount) * Math.PI * 0.8;
+
       const points: THREE.Vector3[] = [];
       for (let s = 0; s <= segments; s++) {
-        const frac = s / segments;
-        const bx = fromCorner[0] + dx * frac + perpX * offset;
-        const by = fromCorner[1] + dy * frac + perpY * offset;
-        points.push(new THREE.Vector3(bx, by, zOff));
+        const t = s / segments;
+        const x = startX + dx * t + perpX * spreadOffset;
+        const y = startY + dy * t + perpY * spreadOffset;
+        points.push(new THREE.Vector3(x, y, zOff));
       }
+
       const geo = new THREE.BufferGeometry().setFromPoints(points);
-      const color = COLORS[i % COLORS.length];
+      const color = LINE_COLORS[i % LINE_COLORS.length];
       const mat = new THREE.LineBasicMaterial({
         color,
         transparent: true,
-        opacity: 0.12 + Math.random() * 0.18,
+        opacity: 0.18 + Math.random() * 0.15,
       });
       const line = new THREE.Line(geo, mat);
-      result.push({
-        geometry: geo,
-        line,
-        offset,
-        zOff,
-        waveAmp: waveAmpBase * (0.6 + Math.random() * 0.8),
-        waveFreq: 2 + Math.random() * 3,
-        speed: speedBase * (0.5 + Math.random() * 1.0),
-        phase: Math.random() * Math.PI * 2,
-      });
+
+      result.push({ geometry: geo, line, spreadOffset, phase, zOff });
     }
     return result;
-  }, [count, fromCorner, toCorner, spread, speedBase, waveAmpBase, dx, dy, perpX, perpY, segments]);
+  }, [lineCount, startX, startY, endX, endY, baseSpread, perpX, perpY, dx, dy, segments]);
 
   useFrame((_, dt) => {
-    tRef.current += dt;
+    tRef.current += dt * 0.4 * speedMul;
+
     for (const l of lines) {
       const pos = l.geometry.attributes.position as THREE.BufferAttribute;
       const arr = pos.array as Float32Array;
-      const time = tRef.current * l.speed * direction;
+
       for (let s = 0; s <= segments; s++) {
-        const frac = s / segments;
-        const bx = fromCorner[0] + dx * frac + perpX * l.offset;
-        const by = fromCorner[1] + dy * frac + perpY * l.offset;
-        const wave = Math.sin(frac * Math.PI * l.waveFreq + time + l.phase) * l.waveAmp;
-        const wave2 = Math.sin(frac * Math.PI * l.waveFreq * 1.7 + time * 0.6 + l.phase + 2) * l.waveAmp * 0.25;
-        arr[s * 3] = bx + perpX * (wave + wave2);
-        arr[s * 3 + 1] = by + perpY * (wave + wave2);
-        arr[s * 3 + 2] = l.zOff + Math.sin(frac * Math.PI * 2.5 + time * 0.35) * l.waveAmp * 0.4;
+        const t = s / segments;
+        const baseX = startX + dx * t + perpX * l.spreadOffset;
+        const baseY = startY + dy * t + perpY * l.spreadOffset;
+
+        const envelope = Math.sin(t * Math.PI);
+        const wave1 = Math.sin(t * Math.PI * 4 + tRef.current + l.phase) * 0.6 * envelope;
+        const wave2 = Math.sin(t * Math.PI * 2.5 + tRef.current * 0.6 + l.phase * 1.3) * 0.35 * envelope;
+        const wave3 = Math.sin(t * Math.PI * 6 + tRef.current * 1.2 + l.phase * 0.7) * 0.15 * envelope;
+        const totalWave = wave1 + wave2 + wave3;
+
+        arr[s * 3] = baseX + perpX * totalWave;
+        arr[s * 3 + 1] = baseY + perpY * totalWave;
+        arr[s * 3 + 2] = l.zOff + Math.sin(t * Math.PI * 3 + tRef.current * 0.3 + l.phase) * 0.2 * envelope;
       }
+
       pos.needsUpdate = true;
     }
   });
@@ -108,45 +112,27 @@ function DiagonalHairBundle({
   );
 }
 
-function HairFieldScene() {
+function WaveLinesScene() {
   return (
     <>
-      <DiagonalHairBundle
-        count={35}
-        fromCorner={[-8, 6]}
-        toCorner={[8, -6]}
-        spread={3}
-        direction={1}
-        speedBase={0.7}
-        waveAmpBase={0.2}
+      <WaveBundle
+        lineCount={30}
+        startX={-9} startY={7}
+        endX={9} endY={-7}
+        baseSpread={2.5}
+        speedMul={1}
+        phaseBase={0}
       />
-      <DiagonalHairBundle
-        count={35}
-        fromCorner={[8, 6]}
-        toCorner={[-8, -6]}
-        spread={3}
-        direction={-1}
-        speedBase={0.6}
-        waveAmpBase={0.25}
+
+      <WaveBundle
+        lineCount={30}
+        startX={9} startY={7}
+        endX={-9} endY={-7}
+        baseSpread={2.5}
+        speedMul={-0.8}
+        phaseBase={3}
       />
-      <DiagonalHairBundle
-        count={20}
-        fromCorner={[-8, 3]}
-        toCorner={[8, -9]}
-        spread={2}
-        direction={1}
-        speedBase={0.5}
-        waveAmpBase={0.18}
-      />
-      <DiagonalHairBundle
-        count={20}
-        fromCorner={[8, 3]}
-        toCorner={[-8, -9]}
-        spread={2}
-        direction={-1}
-        speedBase={0.55}
-        waveAmpBase={0.22}
-      />
+
       <ambientLight intensity={0.1} />
     </>
   );
@@ -164,12 +150,12 @@ export default function CrystalScene() {
   return (
     <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 1 }}>
       <Canvas
-        camera={{ position: [0, 0, 6], fov: 55 }}
+        camera={{ position: [0, 0, 8], fov: 50 }}
         gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
         dpr={[1, 1.5]}
         style={{ background: "transparent" }}
       >
-        <HairFieldScene />
+        <WaveLinesScene />
       </Canvas>
     </div>
   );
