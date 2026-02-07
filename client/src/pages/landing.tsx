@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, Suspense } from "react";
+import { useState, useEffect, useRef, useMemo, Suspense } from "react";
 import { Button } from "@/components/ui/button";
 import { motion, useInView } from "framer-motion";
 import { 
@@ -96,12 +96,90 @@ function AnimatedCounter({ value, suffix = "", prefix = "", duration = 2 }: { va
 function BlueBgDecorations() {
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-      <div className="absolute top-[10%] left-[15%] w-[200px] md:w-[500px] h-[200px] md:h-[500px] rounded-full blur-[60px] md:blur-[150px]" style={{ background: "radial-gradient(circle, rgba(0,140,220,0.15) 0%, rgba(0,100,200,0.05) 50%, transparent 70%)" }} />
-      <div className="absolute top-[40%] right-[5%] w-[180px] md:w-[450px] h-[180px] md:h-[450px] rounded-full blur-[60px] md:blur-[130px]" style={{ background: "radial-gradient(circle, rgba(0,180,255,0.12) 0%, rgba(0,120,210,0.04) 50%, transparent 70%)" }} />
-      <div className="hidden md:block absolute bottom-[20%] left-[5%] w-[400px] h-[400px] rounded-full blur-[120px]" style={{ background: "radial-gradient(circle, rgba(0,160,240,0.1) 0%, transparent 60%)" }} />
-      <div className="hidden md:block absolute bottom-[5%] right-[20%] w-[350px] h-[350px] rounded-full blur-[100px]" style={{ background: "radial-gradient(circle, rgba(60,180,255,0.08) 0%, transparent 60%)" }} />
+      <div className="absolute top-[10%] left-[15%] w-[200px] md:w-[500px] h-[200px] md:h-[500px] rounded-full blur-[60px] md:blur-[150px]" style={{ background: "radial-gradient(circle, rgba(0,140,220,0.18) 0%, rgba(0,100,200,0.06) 50%, transparent 70%)" }} />
+      <div className="absolute top-[40%] right-[5%] w-[180px] md:w-[450px] h-[180px] md:h-[450px] rounded-full blur-[60px] md:blur-[130px]" style={{ background: "radial-gradient(circle, rgba(0,180,255,0.15) 0%, rgba(0,120,210,0.05) 50%, transparent 70%)" }} />
+      <div className="hidden md:block absolute bottom-[20%] left-[5%] w-[400px] h-[400px] rounded-full blur-[120px]" style={{ background: "radial-gradient(circle, rgba(0,160,240,0.12) 0%, transparent 60%)" }} />
+      <div className="hidden md:block absolute bottom-[5%] right-[20%] w-[350px] h-[350px] rounded-full blur-[100px]" style={{ background: "radial-gradient(circle, rgba(60,180,255,0.1) 0%, transparent 60%)" }} />
+      <div className="hidden md:block absolute top-[60%] left-[40%] w-[300px] h-[300px] rounded-full blur-[100px]" style={{ background: "radial-gradient(circle, rgba(0,200,255,0.08) 0%, transparent 60%)" }} />
       <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, transparent 0%, rgba(0,16,48,0.4) 100%)" }} />
     </div>
+  );
+}
+
+function SparkleParticles() {
+  const particles = useMemo(() => 
+    Array.from({ length: 30 }, (_, i) => ({
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+      size: 1.5 + Math.random() * 2.5,
+      delay: Math.random() * 8,
+      duration: 3 + Math.random() * 4,
+      opacity: 0.3 + Math.random() * 0.5,
+    })), []
+  );
+
+  return (
+    <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+      {particles.map((p, i) => (
+        <div
+          key={i}
+          className="absolute rounded-full"
+          style={{
+            left: p.left,
+            top: p.top,
+            width: p.size,
+            height: p.size,
+            background: `radial-gradient(circle, rgba(150,220,255,${p.opacity}) 0%, rgba(0,180,255,${p.opacity * 0.3}) 60%, transparent 100%)`,
+            boxShadow: `0 0 ${p.size * 3}px rgba(100,200,255,${p.opacity * 0.4})`,
+            animation: `sparkle ${p.duration}s ease-in-out ${p.delay}s infinite`,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
+function FloatingDots() {
+  const dots = useMemo(() =>
+    Array.from({ length: 12 }, (_, i) => ({
+      left: `${5 + Math.random() * 90}%`,
+      size: 2 + Math.random() * 3,
+      delay: Math.random() * 15,
+      duration: 15 + Math.random() * 20,
+      opacity: 0.4 + Math.random() * 0.4,
+    })), []
+  );
+
+  return (
+    <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+      {dots.map((d, i) => (
+        <div
+          key={i}
+          className="absolute bottom-0 rounded-full"
+          style={{
+            left: d.left,
+            width: d.size,
+            height: d.size,
+            background: `rgba(100,200,255,${d.opacity})`,
+            boxShadow: `0 0 ${d.size * 4}px rgba(0,180,255,${d.opacity * 0.5})`,
+            animation: `float-up ${d.duration}s linear ${d.delay}s infinite`,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
+function GridOverlay() {
+  return (
+    <div className="fixed inset-0 pointer-events-none z-0 hidden md:block" style={{
+      backgroundImage: `
+        linear-gradient(rgba(100,200,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(100,200,255,0.04) 1px, transparent 1px)
+      `,
+      backgroundSize: "80px 80px",
+      animation: "grid-pulse 8s ease-in-out infinite",
+    }} />
   );
 }
 
@@ -391,7 +469,9 @@ function FeaturesSection() {
   return (
     <section id="features" className="py-20 lg:py-32 relative overflow-hidden">
       <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #002060 0%, #001845 50%, #002060 100%)" }} />
-      <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-sky-500/8 rounded-full blur-[200px]" />
+      <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full blur-[200px]" style={{ background: "radial-gradient(circle, rgba(0,140,220,0.12) 0%, transparent 70%)" }} />
+      <div className="hidden md:block absolute top-[20%] right-[10%] w-[300px] h-[300px] rounded-full blur-[120px]" style={{ background: "radial-gradient(circle, rgba(0,200,255,0.08) 0%, transparent 70%)" }} />
+      <div className="hidden md:block absolute bottom-[20%] left-[10%] w-[250px] h-[250px] rounded-full blur-[100px]" style={{ background: "radial-gradient(circle, rgba(60,180,255,0.06) 0%, transparent 70%)" }} />
       
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         <AnimatedSection className="text-center mb-16">
@@ -462,8 +542,9 @@ function HowItWorksSection() {
   return (
     <section id="how-it-works" className="py-20 lg:py-32 relative overflow-hidden">
       <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #001845 0%, #001535 50%, #001845 100%)" }} />
-      <div className="hidden md:block absolute top-1/2 left-0 w-64 h-64 bg-cyan-500/5 rounded-full blur-[80px]" />
-      <div className="hidden md:block absolute bottom-0 right-1/4 w-64 h-64 bg-sky-500/5 rounded-full blur-[80px]" />
+      <div className="hidden md:block absolute top-1/2 left-0 w-80 h-80 rounded-full blur-[100px]" style={{ background: "radial-gradient(circle, rgba(0,200,255,0.1) 0%, transparent 70%)" }} />
+      <div className="hidden md:block absolute bottom-0 right-1/4 w-80 h-80 rounded-full blur-[100px]" style={{ background: "radial-gradient(circle, rgba(0,140,220,0.08) 0%, transparent 70%)" }} />
+      <div className="hidden md:block absolute top-[30%] right-[5%] w-64 h-64 rounded-full blur-[80px]" style={{ background: "radial-gradient(circle, rgba(60,180,255,0.06) 0%, transparent 70%)" }} />
       
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         <AnimatedSection className="text-center mb-16">
@@ -537,7 +618,8 @@ function TestimonialsSection() {
   return (
     <section id="testimonials" className="py-20 lg:py-32 relative overflow-hidden">
       <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #001845 0%, #002060 50%, #001845 100%)" }} />
-      <div className="hidden md:block absolute top-0 left-1/2 w-80 h-80 bg-sky-500/6 rounded-full blur-[100px]" />
+      <div className="hidden md:block absolute top-0 left-1/2 w-96 h-96 rounded-full blur-[120px]" style={{ background: "radial-gradient(circle, rgba(0,160,240,0.1) 0%, transparent 70%)" }} />
+      <div className="hidden md:block absolute bottom-[20%] right-[15%] w-64 h-64 rounded-full blur-[80px]" style={{ background: "radial-gradient(circle, rgba(0,200,255,0.07) 0%, transparent 70%)" }} />
       
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         <AnimatedSection className="text-center mb-16">
@@ -999,7 +1081,10 @@ function ScrollToTop() {
 export default function LandingPage() {
   return (
     <div className="min-h-screen relative" style={{ background: "#001030" }}>
+      <GridOverlay />
       <BlueBgDecorations />
+      <SparkleParticles />
+      <FloatingDots />
       <Suspense fallback={null}>
         <CrystalScene />
       </Suspense>

@@ -2,172 +2,173 @@ import { useRef, useMemo, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
-function createFourPointStarGeometry(outerRadius: number, innerRadius: number, depth: number): THREE.BufferGeometry {
+function createFourPointStar(outer: number, inner: number, depth: number): THREE.BufferGeometry {
   const shape = new THREE.Shape();
-  const points = 4;
-  for (let i = 0; i < points * 2; i++) {
-    const angle = (i * Math.PI) / points - Math.PI / 2;
-    const r = i % 2 === 0 ? outerRadius : innerRadius;
-    const x = Math.cos(angle) * r;
-    const y = Math.sin(angle) * r;
-    if (i === 0) shape.moveTo(x, y);
-    else shape.lineTo(x, y);
+  const pts = 4;
+  for (let i = 0; i < pts * 2; i++) {
+    const angle = (i * Math.PI) / pts - Math.PI / 2;
+    const r = i % 2 === 0 ? outer : inner;
+    if (i === 0) shape.moveTo(Math.cos(angle) * r, Math.sin(angle) * r);
+    else shape.lineTo(Math.cos(angle) * r, Math.sin(angle) * r);
   }
   shape.closePath();
-
-  const extrudeSettings = {
-    depth,
-    bevelEnabled: true,
-    bevelThickness: depth * 0.3,
-    bevelSize: depth * 0.2,
-    bevelSegments: 2,
-  };
-
-  return new THREE.ExtrudeGeometry(shape, extrudeSettings);
+  return new THREE.ExtrudeGeometry(shape, { depth, bevelEnabled: true, bevelThickness: depth * 0.4, bevelSize: depth * 0.3, bevelSegments: 3 });
 }
 
-function createSixPointStarGeometry(outerRadius: number, innerRadius: number, depth: number): THREE.BufferGeometry {
+function createSixPointStar(outer: number, inner: number, depth: number): THREE.BufferGeometry {
   const shape = new THREE.Shape();
-  const points = 6;
-  for (let i = 0; i < points * 2; i++) {
-    const angle = (i * Math.PI) / points - Math.PI / 2;
-    const r = i % 2 === 0 ? outerRadius : innerRadius;
-    const x = Math.cos(angle) * r;
-    const y = Math.sin(angle) * r;
-    if (i === 0) shape.moveTo(x, y);
-    else shape.lineTo(x, y);
+  const pts = 6;
+  for (let i = 0; i < pts * 2; i++) {
+    const angle = (i * Math.PI) / pts - Math.PI / 2;
+    const r = i % 2 === 0 ? outer : inner;
+    if (i === 0) shape.moveTo(Math.cos(angle) * r, Math.sin(angle) * r);
+    else shape.lineTo(Math.cos(angle) * r, Math.sin(angle) * r);
   }
   shape.closePath();
+  return new THREE.ExtrudeGeometry(shape, { depth, bevelEnabled: true, bevelThickness: depth * 0.3, bevelSize: depth * 0.2, bevelSegments: 3 });
+}
 
-  const extrudeSettings = {
-    depth,
-    bevelEnabled: true,
-    bevelThickness: depth * 0.25,
-    bevelSize: depth * 0.15,
-    bevelSegments: 2,
-  };
-
-  return new THREE.ExtrudeGeometry(shape, extrudeSettings);
+function createDiamondStar(size: number, depth: number): THREE.BufferGeometry {
+  const shape = new THREE.Shape();
+  shape.moveTo(0, size);
+  shape.lineTo(size * 0.25, size * 0.25);
+  shape.lineTo(size, 0);
+  shape.lineTo(size * 0.25, -size * 0.25);
+  shape.lineTo(0, -size);
+  shape.lineTo(-size * 0.25, -size * 0.25);
+  shape.lineTo(-size, 0);
+  shape.lineTo(-size * 0.25, size * 0.25);
+  shape.closePath();
+  return new THREE.ExtrudeGeometry(shape, { depth, bevelEnabled: true, bevelThickness: depth * 0.5, bevelSize: depth * 0.4, bevelSegments: 2 });
 }
 
 function GlowingStar({
   geometry,
   position,
   scale,
-  rotationSpeed,
+  rotSpeed,
   color,
-  emissiveIntensity,
+  emissive,
   opacity,
-  scrollFactor,
+  scrollMul,
 }: {
   geometry: THREE.BufferGeometry;
   position: [number, number, number];
   scale: number;
-  rotationSpeed: [number, number, number];
+  rotSpeed: [number, number, number];
   color: string;
-  emissiveIntensity: number;
+  emissive: number;
   opacity: number;
-  scrollFactor: number;
+  scrollMul: number;
 }) {
-  const groupRef = useRef<THREE.Group>(null);
-  const targetY = useRef(position[1]);
-  const currentY = useRef(position[1]);
+  const ref = useRef<THREE.Group>(null);
   const baseY = position[1];
-  const time = useRef(Math.random() * 100);
+  const curY = useRef(baseY);
+  const t = useRef(Math.random() * 100);
 
-  useFrame((_, delta) => {
-    if (!groupRef.current) return;
-    time.current += delta;
+  const edges = useMemo(() => new THREE.EdgesGeometry(geometry, 15), [geometry]);
 
-    groupRef.current.rotation.x += rotationSpeed[0] * delta;
-    groupRef.current.rotation.y += rotationSpeed[1] * delta;
-    groupRef.current.rotation.z += rotationSpeed[2] * delta;
+  useFrame((_, dt) => {
+    if (!ref.current) return;
+    t.current += dt;
+    ref.current.rotation.x += rotSpeed[0] * dt;
+    ref.current.rotation.y += rotSpeed[1] * dt;
+    ref.current.rotation.z += rotSpeed[2] * dt;
 
-    const scrollOffset = (typeof window !== "undefined" ? window.scrollY : 0) * scrollFactor * 0.001;
-    targetY.current = baseY - scrollOffset + Math.sin(time.current * 0.5) * 0.15;
-    currentY.current += (targetY.current - currentY.current) * 0.05;
-    groupRef.current.position.y = currentY.current;
+    const scroll = typeof window !== "undefined" ? window.scrollY : 0;
+    const target = baseY - scroll * scrollMul * 0.001 + Math.sin(t.current * 0.4) * 0.2;
+    curY.current += (target - curY.current) * 0.04;
+    ref.current.position.y = curY.current;
   });
 
-  const edgesGeo = useMemo(() => new THREE.EdgesGeometry(geometry, 20), [geometry]);
-
   return (
-    <group ref={groupRef} position={position} scale={scale}>
+    <group ref={ref} position={position} scale={scale}>
       <mesh geometry={geometry}>
         <meshStandardMaterial
           color={color}
           emissive={color}
-          emissiveIntensity={emissiveIntensity}
+          emissiveIntensity={emissive}
           transparent
           opacity={opacity}
           side={THREE.DoubleSide}
-          metalness={0.3}
-          roughness={0.4}
+          metalness={0.4}
+          roughness={0.3}
         />
       </mesh>
-
-      <lineSegments geometry={edgesGeo}>
-        <lineBasicMaterial color="#ffffff" transparent opacity={opacity * 0.5} />
+      <mesh geometry={geometry} scale={1.08}>
+        <meshStandardMaterial
+          color={color}
+          emissive={color}
+          emissiveIntensity={emissive * 0.3}
+          transparent
+          opacity={opacity * 0.15}
+          side={THREE.DoubleSide}
+        />
+      </mesh>
+      <lineSegments geometry={edges}>
+        <lineBasicMaterial color="#ffffff" transparent opacity={opacity * 0.7} />
       </lineSegments>
     </group>
   );
 }
 
 function StarField() {
-  const fourPointGeo = useMemo(() => createFourPointStarGeometry(1, 0.35, 0.12), []);
-  const sixPointGeo = useMemo(() => createSixPointStarGeometry(1, 0.5, 0.1), []);
-  const fourPointSmall = useMemo(() => createFourPointStarGeometry(1, 0.3, 0.08), []);
+  const star4 = useMemo(() => createFourPointStar(1, 0.32, 0.15), []);
+  const star6 = useMemo(() => createSixPointStar(1, 0.48, 0.12), []);
+  const diamond = useMemo(() => createDiamondStar(1, 0.1), []);
+  const star4sm = useMemo(() => createFourPointStar(1, 0.28, 0.1), []);
 
   const stars = useMemo(() => [
-    { geo: fourPointGeo, pos: [4.2, 1.5, -2] as [number, number, number], scale: 0.12, rot: [0.2, 0.3, 0.1] as [number, number, number], color: "#60CFFF", emissive: 0.8, opacity: 0.5, scroll: 0.6 },
-    { geo: sixPointGeo, pos: [-4.5, 0.8, -1.5] as [number, number, number], scale: 0.1, rot: [0.15, -0.2, 0.12] as [number, number, number], color: "#00AAEE", emissive: 0.6, opacity: 0.4, scroll: 0.9 },
-    { geo: fourPointSmall, pos: [3.0, -2.5, -1] as [number, number, number], scale: 0.07, rot: [-0.1, 0.25, 0.15] as [number, number, number], color: "#80DFFF", emissive: 1.0, opacity: 0.35, scroll: 1.1 },
-    { geo: sixPointGeo, pos: [-3.2, -3.0, -2.5] as [number, number, number], scale: 0.08, rot: [0.18, 0.12, -0.08] as [number, number, number], color: "#40BFFF", emissive: 0.7, opacity: 0.3, scroll: 0.7 },
-    { geo: fourPointGeo, pos: [1.5, 2.5, -3] as [number, number, number], scale: 0.06, rot: [0.12, -0.15, 0.2] as [number, number, number], color: "#60CFFF", emissive: 0.5, opacity: 0.25, scroll: 0.5 },
-    { geo: fourPointSmall, pos: [-1.8, 3.0, -2] as [number, number, number], scale: 0.05, rot: [-0.18, 0.22, 0.1] as [number, number, number], color: "#00CCFF", emissive: 0.9, opacity: 0.3, scroll: 0.8 },
-    { geo: sixPointGeo, pos: [5.0, -0.5, -3] as [number, number, number], scale: 0.055, rot: [0.1, 0.18, -0.12] as [number, number, number], color: "#80DFFF", emissive: 0.6, opacity: 0.2, scroll: 1.0 },
-    { geo: fourPointGeo, pos: [-5.2, -1.5, -2] as [number, number, number], scale: 0.065, rot: [0.14, -0.1, 0.16] as [number, number, number], color: "#60CFFF", emissive: 0.7, opacity: 0.25, scroll: 0.4 },
-  ], [fourPointGeo, sixPointGeo, fourPointSmall]);
+    { geo: star4, pos: [4.0, 1.8, -1] as [number, number, number], scale: 0.28, rot: [0.15, 0.25, 0.08] as [number, number, number], color: "#60CFFF", em: 1.2, op: 0.65, sc: 0.7 },
+    { geo: star6, pos: [-4.2, 1.0, -0.8] as [number, number, number], scale: 0.22, rot: [0.12, -0.18, 0.1] as [number, number, number], color: "#00BBFF", em: 1.0, op: 0.55, sc: 1.0 },
+    { geo: diamond, pos: [3.5, -2.0, -1.5] as [number, number, number], scale: 0.18, rot: [-0.1, 0.2, 0.15] as [number, number, number], color: "#80DFFF", em: 1.4, op: 0.5, sc: 1.2 },
+    { geo: star4sm, pos: [-3.8, -2.8, -2] as [number, number, number], scale: 0.15, rot: [0.18, 0.1, -0.12] as [number, number, number], color: "#40BFFF", em: 0.9, op: 0.45, sc: 0.6 },
+    { geo: star6, pos: [1.2, 3.0, -2.5] as [number, number, number], scale: 0.14, rot: [0.1, -0.14, 0.18] as [number, number, number], color: "#60CFFF", em: 0.8, op: 0.35, sc: 0.5 },
+    { geo: diamond, pos: [-1.5, 3.5, -1.8] as [number, number, number], scale: 0.12, rot: [-0.15, 0.2, 0.08] as [number, number, number], color: "#00CCFF", em: 1.1, op: 0.4, sc: 0.8 },
+    { geo: star4, pos: [5.5, -0.2, -2.5] as [number, number, number], scale: 0.1, rot: [0.08, 0.15, -0.1] as [number, number, number], color: "#80DFFF", em: 0.7, op: 0.3, sc: 0.9 },
+    { geo: star4sm, pos: [-5.5, -1.2, -1.5] as [number, number, number], scale: 0.13, rot: [0.12, -0.08, 0.14] as [number, number, number], color: "#60CFFF", em: 1.0, op: 0.4, sc: 0.4 },
+    { geo: star6, pos: [0.3, -4.0, -2] as [number, number, number], scale: 0.16, rot: [0.14, 0.16, 0.06] as [number, number, number], color: "#00AAEE", em: 0.9, op: 0.4, sc: 1.1 },
+    { geo: diamond, pos: [-2.5, -5.0, -1] as [number, number, number], scale: 0.11, rot: [-0.12, 0.18, 0.1] as [number, number, number], color: "#40BFFF", em: 1.3, op: 0.35, sc: 0.7 },
+    { geo: star4, pos: [2.8, -6.5, -2.5] as [number, number, number], scale: 0.2, rot: [0.1, -0.12, 0.08] as [number, number, number], color: "#60CFFF", em: 1.1, op: 0.5, sc: 0.8 },
+    { geo: star4sm, pos: [-4.5, -7.0, -1.5] as [number, number, number], scale: 0.09, rot: [0.16, 0.14, -0.06] as [number, number, number], color: "#80DFFF", em: 0.8, op: 0.3, sc: 0.6 },
+  ], [star4, star6, diamond, star4sm]);
 
   return (
     <>
-      {stars.map((star, i) => (
+      {stars.map((s, i) => (
         <GlowingStar
           key={i}
-          geometry={star.geo}
-          position={star.pos}
-          scale={star.scale}
-          rotationSpeed={star.rot}
-          color={star.color}
-          emissiveIntensity={star.emissive}
-          opacity={star.opacity}
-          scrollFactor={star.scroll}
+          geometry={s.geo}
+          position={s.pos}
+          scale={s.scale}
+          rotSpeed={s.rot}
+          color={s.color}
+          emissive={s.em}
+          opacity={s.op}
+          scrollMul={s.sc}
         />
       ))}
-
-      <ambientLight intensity={0.4} />
-      <pointLight position={[5, 3, 3]} intensity={0.4} color="#60CFFF" distance={15} />
-      <pointLight position={[-4, -2, 2]} intensity={0.3} color="#00AAEE" distance={12} />
+      <ambientLight intensity={0.5} />
+      <pointLight position={[5, 3, 4]} intensity={0.8} color="#60CFFF" distance={20} />
+      <pointLight position={[-5, -2, 3]} intensity={0.5} color="#00AAEE" distance={15} />
+      <pointLight position={[0, 5, 2]} intensity={0.4} color="#80DFFF" distance={12} />
     </>
   );
 }
 
 export default function CrystalScene() {
   const [isMobile, setIsMobile] = useState(false);
-
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
+    const c = () => setIsMobile(window.innerWidth < 768);
+    c();
+    window.addEventListener("resize", c);
+    return () => window.removeEventListener("resize", c);
   }, []);
-
   if (isMobile) return null;
-
   return (
     <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 1 }}>
       <Canvas
-        camera={{ position: [0, 0, 6], fov: 50 }}
+        camera={{ position: [0, 0, 7], fov: 50 }}
         gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
         dpr={[1, 1.5]}
         style={{ background: "transparent" }}
