@@ -831,27 +831,43 @@ function TestimonialsSection() {
         </AnimatedSection>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {testimonials.map((testimonial, i) => (
-            <AnimatedSection key={i} delay={i * 0.1}>
-              <div className="relative bg-white/[0.04] border border-white/8 rounded-xl p-6 lg:p-8 h-full transition-all duration-300">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-10 h-10 rounded-full flex items-center justify-center text-white/90 text-sm font-medium border border-white/15" style={{ background: "rgba(0,136,204,0.15)" }}>
-                    {testimonial.avatar}
-                  </div>
-                  <div>
-                    <div className="font-medium text-white text-sm">{testimonial.name}</div>
-                    <div className="text-xs text-white/50">{testimonial.role}</div>
+          {testimonials.map((testimonial, i) => {
+            const colors = [
+              { border: "rgba(167,139,250,0.2)", glow: "rgba(167,139,250,0.06)" },
+              { border: "rgba(56,189,248,0.2)", glow: "rgba(56,189,248,0.06)" },
+              { border: "rgba(34,211,238,0.2)", glow: "rgba(34,211,238,0.06)" },
+            ];
+            const c = colors[i % colors.length];
+            return (
+              <AnimatedSection key={i} delay={i * 0.1}>
+                <div className="relative rounded-2xl p-8 lg:p-10 h-full transition-all duration-300" style={{ background: "rgba(255,255,255,0.04)", border: `1px solid ${c.border}` }} data-testid={`card-testimonial-${i}`}>
+                  <div className="absolute inset-0 rounded-2xl" style={{ background: `radial-gradient(circle at 50% 0%, ${c.glow}, transparent 60%)` }} />
+
+                  <div className="relative">
+                    <div className="flex gap-1 mb-6">
+                      {Array.from({ length: testimonial.rating }).map((_, j) => (
+                        <Star key={j} className="w-5 h-5 fill-amber-400 text-amber-400" />
+                      ))}
+                    </div>
+
+                    <p className="text-lg lg:text-xl text-white/75 leading-relaxed mb-8 italic">
+                      &ldquo;{testimonial.text}&rdquo;
+                    </p>
+
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-full flex items-center justify-center text-white text-lg font-semibold border border-white/15" style={{ background: `linear-gradient(135deg, ${c.border.replace("0.2", "0.4")}, ${c.border.replace("0.2", "0.15")})` }}>
+                        {testimonial.avatar}
+                      </div>
+                      <div>
+                        <div className="font-semibold text-white text-base">{testimonial.name}</div>
+                        <div className="text-sm text-white/50">{testimonial.role}</div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div className="flex gap-0.5 mb-4">
-                  {Array.from({ length: testimonial.rating }).map((_, j) => (
-                    <Star key={j} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                  ))}
-                </div>
-                <p className="text-sm text-white/65 leading-relaxed" data-testid={`card-testimonial-${i}`}>{testimonial.text}</p>
-              </div>
-            </AnimatedSection>
-          ))}
+              </AnimatedSection>
+            );
+          })}
         </div>
       </div>
     </section>
