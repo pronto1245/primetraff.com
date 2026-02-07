@@ -66,6 +66,15 @@ import logoSpinanía from "@assets/Без_названия_(18)_1770453751830.pn
 import logoVerdecasino from "@assets/Без_названия_(19)_1770453751830.png";
 import logoSlotoro from "@assets/Без_названия_(20)_1770453751830.png";
 
+import logoVulkanSpiele from "@assets/Без_названия_(21)_1770453809642.png";
+import logoCorgibet2 from "@assets/Без_названия_(22)_1770453809646.png";
+import logoLex from "@assets/Без_названия_(23)_1770453809647.png";
+import logoMonro from "@assets/Без_названия_(24)_1770453809647.png";
+import logoMelbet from "@assets/Без_названия_(25)_1770453809648.png";
+import logoFlagman2 from "@assets/Без_названия_(26)_1770453809647.png";
+import logoGizbo2 from "@assets/Без_названия_(27)_1770453809647.png";
+import logoJugabet from "@assets/Без_названия_(28)_1770453809648.png";
+
 import CrystalScene from "@/components/CrystalScene";
 
 const REGISTER_URL = "https://primetrack.pro/register?ref=ADV-3BT52V85";
@@ -736,6 +745,11 @@ function PartnersSection() {
     "1xCasino": logo1xCasino,
     "Verdecasino": logoVerdecasino,
     "Slotoro": logoSlotoro,
+    "VulkanSpiele": logoVulkanSpiele,
+    "Lex": logoLex,
+    "Monro": logoMonro,
+    "Melbet": logoMelbet,
+    "Jugabet": logoJugabet,
   };
 
   const topRow = [
