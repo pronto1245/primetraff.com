@@ -108,13 +108,13 @@ function BlueBgDecorations() {
 
 function SparkleParticles() {
   const particles = useMemo(() => 
-    Array.from({ length: 30 }, (_, i) => ({
+    Array.from({ length: 40 }, (_, i) => ({
       left: `${Math.random() * 100}%`,
       top: `${Math.random() * 100}%`,
-      size: 1.5 + Math.random() * 2.5,
-      delay: Math.random() * 8,
-      duration: 3 + Math.random() * 4,
-      opacity: 0.3 + Math.random() * 0.5,
+      size: 2 + Math.random() * 4,
+      delay: Math.random() * 6,
+      duration: 2.5 + Math.random() * 3.5,
+      opacity: 0.5 + Math.random() * 0.5,
     })), []
   );
 
@@ -129,8 +129,8 @@ function SparkleParticles() {
             top: p.top,
             width: p.size,
             height: p.size,
-            background: `radial-gradient(circle, rgba(150,220,255,${p.opacity}) 0%, rgba(0,180,255,${p.opacity * 0.3}) 60%, transparent 100%)`,
-            boxShadow: `0 0 ${p.size * 3}px rgba(100,200,255,${p.opacity * 0.4})`,
+            background: `radial-gradient(circle, rgba(180,230,255,${p.opacity}) 0%, rgba(0,180,255,${p.opacity * 0.4}) 50%, transparent 100%)`,
+            boxShadow: `0 0 ${p.size * 5}px rgba(100,200,255,${p.opacity * 0.6}), 0 0 ${p.size * 10}px rgba(0,150,255,${p.opacity * 0.2})`,
             animation: `sparkle ${p.duration}s ease-in-out ${p.delay}s infinite`,
           }}
         />
@@ -141,12 +141,12 @@ function SparkleParticles() {
 
 function FloatingDots() {
   const dots = useMemo(() =>
-    Array.from({ length: 12 }, (_, i) => ({
-      left: `${5 + Math.random() * 90}%`,
-      size: 2 + Math.random() * 3,
-      delay: Math.random() * 15,
-      duration: 15 + Math.random() * 20,
-      opacity: 0.4 + Math.random() * 0.4,
+    Array.from({ length: 18 }, (_, i) => ({
+      left: `${3 + Math.random() * 94}%`,
+      size: 3 + Math.random() * 4,
+      delay: Math.random() * 12,
+      duration: 12 + Math.random() * 16,
+      opacity: 0.5 + Math.random() * 0.5,
     })), []
   );
 
@@ -160,8 +160,8 @@ function FloatingDots() {
             left: d.left,
             width: d.size,
             height: d.size,
-            background: `rgba(100,200,255,${d.opacity})`,
-            boxShadow: `0 0 ${d.size * 4}px rgba(0,180,255,${d.opacity * 0.5})`,
+            background: `radial-gradient(circle, rgba(140,220,255,${d.opacity}) 0%, rgba(0,160,255,${d.opacity * 0.4}) 70%, transparent 100%)`,
+            boxShadow: `0 0 ${d.size * 6}px rgba(0,180,255,${d.opacity * 0.6}), 0 0 ${d.size * 12}px rgba(0,120,255,${d.opacity * 0.2})`,
             animation: `float-up ${d.duration}s linear ${d.delay}s infinite`,
           }}
         />
@@ -174,11 +174,13 @@ function GridOverlay() {
   return (
     <div className="fixed inset-0 pointer-events-none z-0 hidden md:block" style={{
       backgroundImage: `
-        linear-gradient(rgba(100,200,255,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(100,200,255,0.04) 1px, transparent 1px)
+        linear-gradient(rgba(80,180,255,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(80,180,255,0.06) 1px, transparent 1px)
       `,
-      backgroundSize: "80px 80px",
-      animation: "grid-pulse 8s ease-in-out infinite",
+      backgroundSize: "60px 60px",
+      animation: "grid-pulse 6s ease-in-out infinite",
+      maskImage: "radial-gradient(ellipse 80% 60% at 50% 40%, black 0%, transparent 100%)",
+      WebkitMaskImage: "radial-gradient(ellipse 80% 60% at 50% 40%, black 0%, transparent 100%)",
     }} />
   );
 }
