@@ -50,6 +50,22 @@ import logoBeef from "@assets/Без_названия_(11)_1770453702156.jpeg";
 import logoFlagman from "@assets/Без_названия_(11)_1770453702156.png";
 import logoMartin from "@assets/Без_названия_(12)_1770453702156.jpeg";
 
+import logoStarda from "@assets/Без_названия_(12)_1770453751817.png";
+import logoBets10 from "@assets/Без_названия_(13)_1770453751827.jpeg";
+import logoIrwin from "@assets/Без_названия_(13)_1770453751827.png";
+import logoIzzi from "@assets/Без_названия_(14)_1770453751828.jpeg";
+import logoGizbo from "@assets/Без_названия_(14)_1770453751828.png";
+import logoSlotuna from "@assets/Без_названия_(15)_1770453751828.jpeg";
+import logoAwintura from "@assets/Без_названия_(15)_1770453751829.png";
+import logoLegzo from "@assets/Без_названия_(16)_1770453751829.jpeg";
+import logoHitNSpin from "@assets/Без_названия_(16)_1770453751829.png";
+import logo1GO from "@assets/Без_названия_(17)_1770453751830.jpeg";
+import logoVulkanBet from "@assets/Без_названия_(17)_1770453751830.png";
+import logo1xCasino from "@assets/Без_названия_(18)_1770453751830.jpeg";
+import logoSpinanía from "@assets/Без_названия_(18)_1770453751830.png";
+import logoVerdecasino from "@assets/Без_названия_(19)_1770453751830.png";
+import logoSlotoro from "@assets/Без_названия_(20)_1770453751830.png";
+
 import CrystalScene from "@/components/CrystalScene";
 
 const REGISTER_URL = "https://primetrack.pro/register?ref=ADV-3BT52V85";
@@ -706,6 +722,20 @@ function PartnersSection() {
     "Beef": logoBeef,
     "Flagman": logoFlagman,
     "Martin": logoMartin,
+    "Starda": logoStarda,
+    "Bets10": logoBets10,
+    "Irwin": logoIrwin,
+    "Izzi": logoIzzi,
+    "Gizbo": logoGizbo,
+    "Slotuna": logoSlotuna,
+    "Awintura": logoAwintura,
+    "Legzo": logoLegzo,
+    "HitNSpin": logoHitNSpin,
+    "1GO": logo1GO,
+    "Vulkan.bet": logoVulkanBet,
+    "1xCasino": logo1xCasino,
+    "Verdecasino": logoVerdecasino,
+    "Slotoro": logoSlotoro,
   };
 
   const topRow = [
