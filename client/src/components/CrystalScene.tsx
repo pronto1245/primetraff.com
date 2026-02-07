@@ -180,7 +180,7 @@ export default function CrystalScene() {
         camera={{ position: [0, 0, 8], fov: 50 }}
         gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
         dpr={[1, 1.5]}
-        style={{ background: "transparent" }}
+        style={{ background: "transparent", pointerEvents: "none" }}
         onCreated={() => {}}
       >
         <WaveLinesScene />

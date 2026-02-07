@@ -1337,10 +1337,10 @@ function CTASection() {
 
 function Footer() {
   return (
-    <footer className="relative pt-16 pb-8 pb-24 md:pb-8" style={{ background: "#001030" }}>
+    <footer className="relative z-10 pt-16 pb-24 md:pb-8" style={{ background: "#001030" }}>
       <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(0,136,204,0.3), transparent)" }} />
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 pointer-events-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
           <div className="md:col-span-1">
             <div className="flex items-center gap-2.5 mb-4">
