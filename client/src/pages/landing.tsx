@@ -1337,7 +1337,7 @@ function CTASection() {
 
 function Footer() {
   return (
-    <footer className="relative pt-16 pb-8" style={{ background: "#001030" }}>
+    <footer className="relative pt-16 pb-8 pb-24 md:pb-8" style={{ background: "#001030" }}>
       <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(0,136,204,0.3), transparent)" }} />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -1380,13 +1380,13 @@ function Footer() {
             <h4 className="text-sm font-semibold text-white/80 uppercase tracking-wider mb-4">Навигация</h4>
             <ul className="space-y-2.5">
               {[
-                { label: "Партнеры", href: "#partners" },
-                { label: "FAQ", href: "#faq" },
+                { label: "Партнеры", href: "#partners", external: false },
+                { label: "FAQ", href: "#faq", external: false },
                 { label: "Войти", href: LOGIN_URL, external: true },
                 { label: "Стать партнером", href: REGISTER_URL, external: true },
               ].map((item) => (
                 <li key={item.label}>
-                  <a href={item.href} {...("external" in item && item.external ? { target: "_blank", rel: "noopener noreferrer" } : {})} className="text-sm text-white/45 hover:text-white/80 transition-colors" data-testid={`link-footer-${item.label}`}>{item.label}</a>
+                  <a href={item.href} {...(item.external ? { target: "_blank", rel: "noopener noreferrer" } : {})} className="text-sm text-white/45 hover:text-white/80 transition-colors cursor-pointer" data-testid={`link-footer-${item.label}`}>{item.label}</a>
                 </li>
               ))}
             </ul>
@@ -1422,8 +1422,8 @@ function Footer() {
             © 2026 PrimeTraff. Все права защищены.
           </div>
           <div className="flex items-center gap-4 text-xs text-white/35">
-            <span>Политика конфиденциальности</span>
-            <span>Условия использования</span>
+            <a href="#" className="hover:text-white/60 transition-colors cursor-pointer" data-testid="link-footer-privacy">Политика конфиденциальности</a>
+            <a href="#" className="hover:text-white/60 transition-colors cursor-pointer" data-testid="link-footer-terms">Условия использования</a>
           </div>
         </div>
       </div>
