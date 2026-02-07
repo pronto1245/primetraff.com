@@ -744,20 +744,32 @@ function HowItWorksSection() {
         </AnimatedSection>
 
         <div className="relative">
-          <div className="hidden lg:block absolute top-12 left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-transparent via-sky-400/20 to-transparent" />
+          <div className="hidden lg:block absolute top-1/2 left-[5%] right-[5%] -translate-y-1/2 h-[2px]" style={{ background: "linear-gradient(90deg, transparent, rgba(0,136,204,0.3) 15%, rgba(56,189,248,0.25) 50%, rgba(167,139,250,0.2) 85%, transparent)" }} />
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-4">
             {steps.map((step, i) => (
               <AnimatedSection key={i} delay={i * 0.15} className="relative">
-                <div className="text-center">
-                  <div className="relative inline-flex mb-6">
-                    <HolographicIcon icon={step.icon} color={step.color} glowColor={step.glowColor} />
-                    <div className={`absolute -top-1 -right-1 w-7 h-7 rounded-full bg-gradient-to-br ${step.badgeGradient} flex items-center justify-center text-white text-xs font-bold shadow-lg`}>
-                      {i + 1}
+                <div className="hidden lg:flex absolute top-1/2 -translate-y-1/2 -right-4 z-20 items-center justify-center" style={{ display: i === steps.length - 1 ? "none" : undefined }}>
+                  <ArrowRight className="w-5 h-5 text-sky-400/40" />
+                </div>
+
+                <div className="relative border border-white/10 rounded-2xl p-6 lg:p-8 text-center transition-all duration-300" style={{ background: "rgba(255,255,255,0.03)" }} data-testid={`card-step-${i}`}>
+                  <div className="absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300" style={{ background: `radial-gradient(circle at 50% 0%, ${step.glowColor.replace("0.4", "0.08")}, transparent 70%)` }} />
+                  
+                  <div className="relative mb-5">
+                    <span className="text-4xl lg:text-5xl font-black text-transparent bg-clip-text" style={{ backgroundImage: `linear-gradient(135deg, ${step.color}, ${step.color}88)` }}>
+                      {step.step}
+                    </span>
+                  </div>
+
+                  <div className="relative inline-flex mb-5">
+                    <div className="w-14 h-14 lg:w-16 lg:h-16 rounded-full border border-white/10 flex items-center justify-center" style={{ background: `radial-gradient(circle, ${step.color}20, transparent 70%)` }}>
+                      <step.icon className="w-6 h-6 lg:w-7 lg:h-7" style={{ color: step.color, filter: `drop-shadow(0 0 6px ${step.glowColor})` }} />
                     </div>
                   </div>
-                  <h3 className="text-xl font-semibold text-white mb-3">{step.title}</h3>
-                  <p className="text-white/60">{step.description}</p>
+
+                  <h3 className="text-xl lg:text-2xl font-bold text-white mb-3">{step.title}</h3>
+                  <p className="text-base lg:text-lg text-white/60 leading-relaxed">{step.description}</p>
                 </div>
               </AnimatedSection>
             ))}
