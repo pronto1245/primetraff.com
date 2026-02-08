@@ -311,7 +311,7 @@ function Navigation() {
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-[#001a3a]/80 backdrop-blur-2xl border-b border-white/10" : "bg-transparent"}`}>
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
-          <a href="#" className="flex items-center gap-2" data-testid="link-logo">
+          <a href="#" className="flex items-center gap-2 -ml-6" data-testid="link-logo">
             <img src={primeTraffLogo} alt="PrimeTraff" className="h-44 w-auto" width={853} height={171} />
           </a>
 
