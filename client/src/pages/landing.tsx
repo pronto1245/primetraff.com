@@ -1258,8 +1258,8 @@ function Footer() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8 pointer-events-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
           <div className="md:col-span-1">
-            <div className="mb-4 relative" style={{ height: "2.5rem" }}>
-              <img src={primeTraffLogo} alt="PrimeTraff" className="h-32 w-auto absolute" loading="lazy" decoding="async" width={640} height={128} style={{ top: "-4rem", left: "-1.5rem" }} />
+            <div className="mb-4 relative h-5">
+              <img src={primeTraffLogo} alt="PrimeTraff" className="h-32 w-auto absolute" loading="lazy" decoding="async" width={640} height={128} style={{ top: "-3.5rem", left: "-1.5rem" }} />
             </div>
             <p className="text-sm text-white/50 leading-relaxed mb-6">
               {t(translations.footer.description, lang)}
