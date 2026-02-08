@@ -27,7 +27,7 @@ import { SiTelegram } from "react-icons/si";
 import { useLang } from "@/lib/language-context";
 import { translations, t } from "@/lib/i18n";
 
-import primeTraffLogo from "@assets/generated_images/primetraff_blue_crystal_logo.png";
+import primeTraffLogo from "@assets/IMG_9022_1770529061025.png";
 
 import logoSpinAura from "@assets/Без_названия_(21)_1770453425632.jpeg";
 import logoElonbet from "@assets/Без_названия_(31)_1770453425635.png";
@@ -312,8 +312,7 @@ function Navigation() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           <a href="#" className="flex items-center gap-2" data-testid="link-logo">
-            <img src={primeTraffLogo} alt="PrimeTraff" className="w-8 h-8 rounded-lg" width={32} height={32} />
-            <span className="text-xl font-bold text-white">PrimeTraff</span>
+            <img src={primeTraffLogo} alt="PrimeTraff" className="h-8 w-auto" width={160} height={32} />
           </a>
 
           <div className="hidden md:flex items-center gap-8">
@@ -1260,8 +1259,7 @@ function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
           <div className="md:col-span-1">
             <div className="flex items-center gap-2.5 mb-4">
-              <img src={primeTraffLogo} alt="PrimeTraff" className="w-9 h-9 rounded-lg" loading="lazy" decoding="async" width={36} height={36} />
-              <span className="text-xl font-bold text-white">PrimeTraff</span>
+              <img src={primeTraffLogo} alt="PrimeTraff" className="h-9 w-auto" loading="lazy" decoding="async" width={180} height={36} />
             </div>
             <p className="text-sm text-white/50 leading-relaxed mb-6">
               {t(translations.footer.description, lang)}
