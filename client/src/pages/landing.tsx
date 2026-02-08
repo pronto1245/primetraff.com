@@ -1443,70 +1443,89 @@ function SpecialOfferPopup() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      style={{ background: "rgba(0,8,24,0.75)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)" }}
       onClick={handleClose}
     >
       <motion.div
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ type: "spring", duration: 0.5 }}
-        className="relative border border-sky-400/30 rounded-2xl p-6 md:p-8 max-w-md w-full shadow-2xl"
-        style={{ background: "linear-gradient(135deg, #001545, #002060, #001545)" }}
+        initial={{ scale: 0.95, opacity: 0, y: 20 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        transition={{ type: "spring", damping: 25, stiffness: 300 }}
+        className="relative max-w-[420px] w-full overflow-hidden"
+        style={{
+          background: "linear-gradient(160deg, rgba(0,24,69,0.95) 0%, rgba(0,32,96,0.95) 50%, rgba(0,20,60,0.95) 100%)",
+          borderRadius: "16px",
+          border: "1px solid rgba(0,136,204,0.2)",
+          boxShadow: "0 0 80px rgba(0,120,200,0.15), 0 25px 60px rgba(0,0,0,0.4)",
+        }}
         onClick={(e) => e.stopPropagation()}
       >
-        <button
-          onClick={handleClose}
-          className="absolute top-4 right-4 text-white/40 hover:text-white transition-colors"
-          data-testid="button-close-popup"
-        >
-          <X className="w-6 h-6" />
-        </button>
+        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 30% 0%, rgba(0,140,220,0.12) 0%, transparent 60%)" }} />
+        <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(0,180,255,0.4), transparent)" }} />
 
-        <div className="text-center mb-6">
-          <Zap className="w-10 h-10 text-sky-400 mx-auto mb-3" />
-          <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
-            {t(translations.popup.specialOffer, lang)}
-          </h3>
-          <p className="text-white/70">{t(translations.popup.hurryUp, lang)}</p>
+        <div className="relative p-7 md:p-8">
+          <button
+            onClick={handleClose}
+            className="absolute top-5 right-5 text-white/30 hover:text-white/70 transition-colors"
+            data-testid="button-close-popup"
+          >
+            <X className="w-5 h-5" />
+          </button>
+
+          <div className="mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-4" style={{ background: "rgba(0,140,220,0.12)", border: "1px solid rgba(0,140,220,0.2)" }}>
+              <Zap className="w-3.5 h-3.5 text-sky-400" />
+              <span className="text-xs font-medium text-sky-300 tracking-wide uppercase">
+                {t(translations.popup.specialOffer, lang)}
+              </span>
+            </div>
+            <h3 className="text-xl md:text-2xl font-bold text-white leading-tight mb-2">
+              {t(translations.popup.hurryUp, lang)}
+            </h3>
+          </div>
+
+          <div className="flex gap-2.5 mb-6">
+            {[
+              { value: timeLeft.days, label: t(translations.popup.days, lang) },
+              { value: String(timeLeft.hours).padStart(2, '0'), label: t(translations.popup.hours, lang) },
+              { value: String(timeLeft.minutes).padStart(2, '0'), label: t(translations.popup.minutes, lang) },
+              { value: String(timeLeft.seconds).padStart(2, '0'), label: t(translations.popup.seconds, lang) },
+            ].map((item, i) => (
+              <div key={i} className="flex-1 text-center py-3 rounded-lg" style={{ background: "rgba(0,120,200,0.08)", border: "1px solid rgba(0,120,200,0.15)" }}>
+                <div className="text-xl md:text-2xl font-semibold text-white tabular-nums">{item.value}</div>
+                <div className="text-[10px] text-white/40 mt-0.5 uppercase tracking-wider">{item.label}</div>
+              </div>
+            ))}
+          </div>
+
+          <div className="rounded-lg p-4 mb-6" style={{ background: "rgba(0,140,220,0.06)", border: "1px solid rgba(0,140,220,0.15)" }}>
+            <p className="text-sm md:text-base text-white/80 text-center leading-relaxed">
+              {t(translations.popup.bonusText, lang)}{" "}
+              <span className="font-semibold text-white">200$</span>{" "}
+              {t(translations.popup.bonusDesc, lang)}
+            </p>
+          </div>
+
+          <a 
+            href={REGISTER_URL} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="block group"
+            data-testid="button-popup-cta"
+          >
+            <div
+              className="w-full text-center py-3.5 rounded-lg font-medium text-sm text-white transition-all duration-200"
+              style={{
+                background: "linear-gradient(135deg, #0088CC 0%, #006AA8 100%)",
+                border: "1px solid rgba(0,160,240,0.3)",
+                boxShadow: "0 0 20px rgba(0,120,200,0.2)",
+              }}
+            >
+              {t(translations.popup.becomePartner, lang)}
+              <ArrowRight className="w-4 h-4 ml-1.5 inline-block" />
+            </div>
+          </a>
         </div>
-
-        <div className="grid grid-cols-4 gap-2 md:gap-3 mb-6">
-          <div className="bg-white/5 rounded-xl p-3 text-center border border-white/10">
-            <div className="text-2xl md:text-3xl font-bold text-sky-400">{timeLeft.days}</div>
-            <div className="text-xs text-white/60 mt-1">{t(translations.popup.days, lang)}</div>
-          </div>
-          <div className="bg-white/5 rounded-xl p-3 text-center border border-white/10">
-            <div className="text-2xl md:text-3xl font-bold text-sky-400">{String(timeLeft.hours).padStart(2, '0')}</div>
-            <div className="text-xs text-white/60 mt-1">{t(translations.popup.hours, lang)}</div>
-          </div>
-          <div className="bg-white/5 rounded-xl p-3 text-center border border-white/10">
-            <div className="text-2xl md:text-3xl font-bold text-sky-400">{String(timeLeft.minutes).padStart(2, '0')}</div>
-            <div className="text-xs text-white/60 mt-1">{t(translations.popup.minutes, lang)}</div>
-          </div>
-          <div className="bg-white/5 rounded-xl p-3 text-center border border-white/10">
-            <div className="text-2xl md:text-3xl font-bold text-sky-400">{String(timeLeft.seconds).padStart(2, '0')}</div>
-            <div className="text-xs text-white/60 mt-1">{t(translations.popup.seconds, lang)}</div>
-          </div>
-        </div>
-
-        <div className="bg-amber-500/10 border border-amber-500/30 rounded-xl p-4 mb-6 text-center">
-          <p className="text-lg md:text-xl font-semibold text-white">
-            {t(translations.popup.bonusText, lang)} <span className="text-amber-400">200$</span> {t(translations.popup.bonusDesc, lang)}
-          </p>
-        </div>
-
-        <a 
-          href={REGISTER_URL} 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="block"
-          data-testid="button-popup-cta"
-        >
-          <Button variant="outline" className="w-full border-white/30 text-white font-medium py-4 text-lg rounded-full">
-            {t(translations.popup.becomePartner, lang)}
-            <ArrowRight className="w-5 h-5 ml-2" />
-          </Button>
-        </a>
       </motion.div>
     </motion.div>
   );
