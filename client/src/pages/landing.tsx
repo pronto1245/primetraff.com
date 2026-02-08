@@ -147,14 +147,37 @@ function AnimatedCounter({ value, suffix = "", prefix = "", duration = 2 }: { va
   );
 }
 
+function useIsTouchDevice() {
+  const [isTouch] = useState(() => {
+    if (typeof window === "undefined" || typeof navigator === "undefined") return true;
+    if ("ontouchstart" in window) return true;
+    if ("maxTouchPoints" in navigator && navigator.maxTouchPoints > 0) return true;
+    if (window.matchMedia && window.matchMedia("(pointer: coarse)").matches) return true;
+    const ua = navigator.userAgent || "";
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|Tablet/i.test(ua)) return true;
+    if (/Macintosh/i.test(ua) && "ontouchend" in document) return true;
+    return false;
+  });
+  return isTouch;
+}
+
 function BlueBgDecorations() {
+  const isTouch = useIsTouchDevice();
+  if (isTouch) {
+    return (
+      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 30% 30%, rgba(0,100,200,0.12) 0%, transparent 60%)" }} />
+        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, transparent 0%, rgba(0,16,48,0.4) 100%)" }} />
+      </div>
+    );
+  }
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-      <div className="absolute top-[10%] left-[15%] w-[200px] md:w-[500px] h-[200px] md:h-[500px] rounded-full blur-[60px] md:blur-[150px]" style={{ background: "radial-gradient(circle, rgba(0,140,220,0.18) 0%, rgba(0,100,200,0.06) 50%, transparent 70%)" }} />
-      <div className="absolute top-[40%] right-[5%] w-[180px] md:w-[450px] h-[180px] md:h-[450px] rounded-full blur-[60px] md:blur-[130px]" style={{ background: "radial-gradient(circle, rgba(0,180,255,0.15) 0%, rgba(0,120,210,0.05) 50%, transparent 70%)" }} />
-      <div className="hidden md:block absolute bottom-[20%] left-[5%] w-[400px] h-[400px] rounded-full blur-[120px]" style={{ background: "radial-gradient(circle, rgba(0,160,240,0.12) 0%, transparent 60%)" }} />
-      <div className="hidden md:block absolute bottom-[5%] right-[20%] w-[350px] h-[350px] rounded-full blur-[100px]" style={{ background: "radial-gradient(circle, rgba(60,180,255,0.1) 0%, transparent 60%)" }} />
-      <div className="hidden md:block absolute top-[60%] left-[40%] w-[300px] h-[300px] rounded-full blur-[100px]" style={{ background: "radial-gradient(circle, rgba(0,200,255,0.08) 0%, transparent 60%)" }} />
+      <div className="absolute top-[10%] left-[15%] w-[500px] h-[500px] rounded-full blur-[150px]" style={{ background: "radial-gradient(circle, rgba(0,140,220,0.18) 0%, rgba(0,100,200,0.06) 50%, transparent 70%)" }} />
+      <div className="absolute top-[40%] right-[5%] w-[450px] h-[450px] rounded-full blur-[130px]" style={{ background: "radial-gradient(circle, rgba(0,180,255,0.15) 0%, rgba(0,120,210,0.05) 50%, transparent 70%)" }} />
+      <div className="absolute bottom-[20%] left-[5%] w-[400px] h-[400px] rounded-full blur-[120px]" style={{ background: "radial-gradient(circle, rgba(0,160,240,0.12) 0%, transparent 60%)" }} />
+      <div className="absolute bottom-[5%] right-[20%] w-[350px] h-[350px] rounded-full blur-[100px]" style={{ background: "radial-gradient(circle, rgba(60,180,255,0.1) 0%, transparent 60%)" }} />
+      <div className="absolute top-[60%] left-[40%] w-[300px] h-[300px] rounded-full blur-[100px]" style={{ background: "radial-gradient(circle, rgba(0,200,255,0.08) 0%, transparent 60%)" }} />
       <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, transparent 0%, rgba(0,16,48,0.4) 100%)" }} />
     </div>
   );
@@ -163,29 +186,25 @@ function BlueBgDecorations() {
 function useIsMobile(breakpoint = 768) {
   const [mobile, setMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth < breakpoint);
   useEffect(() => {
-    let timeout: ReturnType<typeof setTimeout>;
-    const handler = () => {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => setMobile(window.innerWidth < breakpoint), 300);
-    };
-    window.addEventListener("resize", handler);
-    return () => { window.removeEventListener("resize", handler); clearTimeout(timeout); };
+    const handler = () => setMobile(window.innerWidth < breakpoint);
+    window.addEventListener("orientationchange", handler);
+    return () => window.removeEventListener("orientationchange", handler);
   }, [breakpoint]);
   return mobile;
 }
 
 function SparkleParticles() {
-  const isMobile = useIsMobile();
-  const particles = useMemo(() => 
-    Array.from({ length: isMobile ? 12 : 40 }, (_, i) => ({
-      left: `${Math.random() * 100}%`,
-      top: `${Math.random() * 100}%`,
-      size: 2 + Math.random() * 4,
-      delay: Math.random() * 6,
-      duration: 2.5 + Math.random() * 3.5,
-      opacity: 0.5 + Math.random() * 0.5,
-    })), [isMobile]
-  );
+  const isTouch = useIsTouchDevice();
+  if (isTouch) return null;
+
+  const particles = Array.from({ length: 40 }, (_, i) => ({
+    left: `${Math.random() * 100}%`,
+    top: `${Math.random() * 100}%`,
+    size: 2 + Math.random() * 4,
+    delay: Math.random() * 6,
+    duration: 2.5 + Math.random() * 3.5,
+    opacity: 0.5 + Math.random() * 0.5,
+  }));
 
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
@@ -209,16 +228,16 @@ function SparkleParticles() {
 }
 
 function FloatingDots() {
-  const isMobile = useIsMobile();
-  const dots = useMemo(() =>
-    Array.from({ length: isMobile ? 6 : 18 }, (_, i) => ({
-      left: `${3 + Math.random() * 94}%`,
-      size: 3 + Math.random() * 4,
-      delay: Math.random() * 12,
-      duration: 12 + Math.random() * 16,
-      opacity: 0.5 + Math.random() * 0.5,
-    })), [isMobile]
-  );
+  const isTouch = useIsTouchDevice();
+  if (isTouch) return null;
+
+  const dots = Array.from({ length: 18 }, (_, i) => ({
+    left: `${3 + Math.random() * 94}%`,
+    size: 3 + Math.random() * 4,
+    delay: Math.random() * 12,
+    duration: 12 + Math.random() * 16,
+    opacity: 0.5 + Math.random() * 0.5,
+  }));
 
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
@@ -241,8 +260,11 @@ function FloatingDots() {
 }
 
 function GridOverlay() {
+  const isTouch = useIsTouchDevice();
+  if (isTouch) return null;
+
   return (
-    <div className="fixed inset-0 pointer-events-none z-0 hidden md:block" style={{
+    <div className="fixed inset-0 pointer-events-none z-0" style={{
       backgroundImage: `
         linear-gradient(rgba(80,180,255,0.06) 1px, transparent 1px),
         linear-gradient(90deg, rgba(80,180,255,0.06) 1px, transparent 1px)

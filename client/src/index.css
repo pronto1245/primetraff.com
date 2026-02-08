@@ -50,6 +50,7 @@
 
 .animate-testimonial-scroll {
   animation: testimonial-scroll 35s linear infinite;
+  will-change: transform;
 }
 
 .animate-testimonial-scroll:hover {
@@ -280,6 +281,17 @@
 @media (max-width: 767px) {
   .animate-testimonial-scroll {
     animation-duration: 25s;
+  }
+}
+
+@media (pointer: coarse) {
+  .animate-testimonial-scroll {
+    animation-duration: 30s;
+    will-change: auto;
+  }
+  [style*="scroll-rtl"],
+  [style*="scroll-ltr"] {
+    will-change: auto !important;
   }
 }
 
