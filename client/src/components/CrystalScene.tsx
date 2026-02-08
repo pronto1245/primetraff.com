@@ -138,38 +138,26 @@ function WebGLCheck() {
   }
 }
 
+function isMobileDevice() {
+  if (typeof navigator === "undefined") return true;
+  const ua = navigator.userAgent || "";
+  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua)) return true;
+  if ("maxTouchPoints" in navigator && navigator.maxTouchPoints > 2) return true;
+  if ("ontouchstart" in window && window.innerWidth < 1024) return true;
+  return false;
+}
+
 export default function CrystalScene() {
   const [shouldRender, setShouldRender] = useState(false);
-  const resizeTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const initialCheck = useRef(false);
 
   useEffect(() => {
-    const checkDesktop = () => window.innerWidth >= 768 && window.innerHeight >= 500;
-
-    if (!initialCheck.current) {
-      initialCheck.current = true;
-      if (checkDesktop() && WebGLCheck()) {
-        setShouldRender(true);
-      }
+    if (isMobileDevice()) {
+      setShouldRender(false);
+      return;
     }
-
-    const handleResize = () => {
-      if (resizeTimeout.current) clearTimeout(resizeTimeout.current);
-      resizeTimeout.current = setTimeout(() => {
-        const isDesktop = checkDesktop();
-        setShouldRender(prev => {
-          if (!isDesktop && prev) return false;
-          if (isDesktop && !prev && WebGLCheck()) return true;
-          return prev;
-        });
-      }, 500);
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      if (resizeTimeout.current) clearTimeout(resizeTimeout.current);
-    };
+    if (window.innerWidth >= 768 && window.innerHeight >= 500 && WebGLCheck()) {
+      setShouldRender(true);
+    }
   }, []);
 
   if (!shouldRender) return null;
