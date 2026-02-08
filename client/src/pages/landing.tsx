@@ -312,7 +312,7 @@ function Navigation() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           <a href="#" className="flex items-center gap-2" data-testid="link-logo">
-            <img src={primeTraffLogo} alt="PrimeTraff" className="h-8 w-auto" width={160} height={32} />
+            <img src={primeTraffLogo} alt="PrimeTraff" className="h-16 w-auto" width={320} height={64} />
           </a>
 
           <div className="hidden md:flex items-center gap-8">
@@ -1259,7 +1259,7 @@ function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
           <div className="md:col-span-1">
             <div className="flex items-center gap-2.5 mb-4">
-              <img src={primeTraffLogo} alt="PrimeTraff" className="h-9 w-auto" loading="lazy" decoding="async" width={180} height={36} />
+              <img src={primeTraffLogo} alt="PrimeTraff" className="h-[4.5rem] w-auto" loading="lazy" decoding="async" width={360} height={72} />
             </div>
             <p className="text-sm text-white/50 leading-relaxed mb-6">
               {t(translations.footer.description, lang)}
