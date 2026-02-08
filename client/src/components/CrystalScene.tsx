@@ -138,12 +138,14 @@ function WebGLCheck() {
   }
 }
 
-function isMobileDevice() {
-  if (typeof navigator === "undefined") return true;
+function isMobileOrTablet() {
+  if (typeof navigator === "undefined" || typeof window === "undefined") return true;
+  if ("ontouchstart" in window) return true;
+  if ("maxTouchPoints" in navigator && navigator.maxTouchPoints > 0) return true;
   const ua = navigator.userAgent || "";
-  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua)) return true;
-  if ("maxTouchPoints" in navigator && navigator.maxTouchPoints > 2) return true;
-  if ("ontouchstart" in window && window.innerWidth < 1024) return true;
+  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|Tablet/i.test(ua)) return true;
+  if (/Macintosh/i.test(ua) && "ontouchend" in document) return true;
+  if (window.matchMedia && window.matchMedia("(pointer: coarse)").matches) return true;
   return false;
 }
 
@@ -151,10 +153,7 @@ export default function CrystalScene() {
   const [shouldRender, setShouldRender] = useState(false);
 
   useEffect(() => {
-    if (isMobileDevice()) {
-      setShouldRender(false);
-      return;
-    }
+    if (isMobileOrTablet()) return;
     if (window.innerWidth >= 768 && window.innerHeight >= 500 && WebGLCheck()) {
       setShouldRender(true);
     }
