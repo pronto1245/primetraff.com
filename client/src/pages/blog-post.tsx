@@ -134,11 +134,12 @@ export default function BlogPostPage() {
           </h1>
 
           {post.coverImage && (
-            <div className="rounded-xl overflow-hidden mb-10 border border-white/[0.1]">
+            <div className="blog-cover-wide rounded-xl overflow-hidden mb-10 border border-white/[0.1]">
               <img
                 src={post.coverImage}
                 alt={title}
-                className="w-full h-auto object-cover"
+                className="w-full object-cover"
+                style={{ aspectRatio: "21/9" }}
                 loading="lazy"
                 decoding="async"
               />
