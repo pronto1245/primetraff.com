@@ -2,9 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import { Link, useParams } from "wouter";
 import { useLang } from "@/lib/language-context";
 import { translations, t } from "@/lib/i18n";
-import { ArrowLeft, Calendar, Languages } from "lucide-react";
+import { ArrowLeft, Calendar } from "lucide-react";
 import type { BlogPost } from "@shared/schema";
-import primeTraffLogo from "@assets/IMG_9022_1770529061025.png";
+import BlogNavigation from "@/components/blog-navigation";
 
 const CATEGORIES = [
   { key: "basics", label: translations.blog.categories.basics },
@@ -13,40 +13,6 @@ const CATEGORIES = [
   { key: "trends", label: translations.blog.categories.trends },
   { key: "news", label: translations.blog.categories.news },
 ];
-
-function BlogPostNavigation() {
-  const { lang, toggleLang } = useLang();
-
-  return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#001a3a]/80 backdrop-blur-2xl border-b border-white/10">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 lg:h-20">
-          <Link href="/" className="flex items-center gap-2 -ml-10" data-testid="link-blogpost-logo">
-            <img src={primeTraffLogo} alt="PrimeTraff" className="h-44 w-auto" width={853} height={171} />
-          </Link>
-
-          <div className="hidden md:flex items-center gap-8">
-            <Link href="/" className="text-white/70 hover:text-white transition-colors" data-testid="link-blogpost-home">
-              {lang === "ru" ? "Главная" : "Home"}
-            </Link>
-            <Link href="/blog" className="text-white/70 hover:text-white transition-colors" data-testid="link-blogpost-blog">
-              {t(translations.blog.nav, lang)}
-            </Link>
-          </div>
-
-          <button
-            onClick={toggleLang}
-            className="flex items-center gap-1.5 border border-white/20 bg-white/5 text-sm font-semibold px-3 py-1.5 rounded-full transition-colors hover:border-white/30 hover:bg-white/10"
-            data-testid="button-blogpost-lang-toggle"
-          >
-            <Languages className="w-3.5 h-3.5 text-white/60" />
-            <span className="text-white/90 uppercase">{lang === "ru" ? "EN" : "RU"}</span>
-          </button>
-        </div>
-      </div>
-    </nav>
-  );
-}
 
 export default function BlogPostPage() {
   const { lang } = useLang();
@@ -59,7 +25,7 @@ export default function BlogPostPage() {
   if (isLoading) {
     return (
       <div className="min-h-screen" style={{ background: "linear-gradient(180deg, #001030 0%, #001845 50%, #001030 100%)" }}>
-        <BlogPostNavigation />
+        <BlogNavigation />
         <div className="pt-28 pb-20 max-w-3xl mx-auto px-6 lg:px-8">
           <div className="animate-pulse space-y-6">
             <div className="h-8 bg-white/[0.05] rounded w-2/3" />
@@ -78,7 +44,7 @@ export default function BlogPostPage() {
   if (error || !post) {
     return (
       <div className="min-h-screen flex items-center justify-center" style={{ background: "linear-gradient(180deg, #001030 0%, #001845 50%, #001030 100%)" }}>
-        <BlogPostNavigation />
+        <BlogNavigation />
         <div className="text-center">
           <p className="text-white/50 text-lg mb-4">{lang === "ru" ? "Статья не найдена" : "Article not found"}</p>
           <Link href="/blog" className="text-sky-400 hover:text-sky-300 transition-colors" data-testid="link-back-to-blog-error">
@@ -95,7 +61,7 @@ export default function BlogPostPage() {
 
   return (
     <div className="min-h-screen" style={{ background: "linear-gradient(180deg, #001030 0%, #001845 50%, #001030 100%)" }}>
-      <BlogPostNavigation />
+      <BlogNavigation />
 
       <div className="pt-24 lg:pt-28 pb-20">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
