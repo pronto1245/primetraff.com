@@ -354,6 +354,90 @@
   display: none;
 }
 
+.primetraff-banner {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 24px 32px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #0a1628 0%, #0d2847 50%, #0f3060 100%);
+  border: 1px solid rgba(255,255,255,0.08);
+  margin: 32px 0;
+}
+.primetraff-banner__logo {
+  flex-shrink: 0;
+}
+.primetraff-banner__logo img {
+  height: 56px;
+  width: auto;
+  border: none !important;
+  margin: 0 !important;
+}
+.primetraff-banner__actions {
+  display: flex;
+  gap: 12px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+.primetraff-banner__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none !important;
+  color: #fff !important;
+  background: linear-gradient(135deg, #e84530 0%, #d63020 100%);
+  border: none;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+}
+.primetraff-banner__btn:hover {
+  opacity: 0.88;
+}
+.primetraff-banner__btn--outline {
+  background: transparent;
+  border: 2px solid rgba(232,69,48,0.6);
+  color: #ff6b56 !important;
+}
+.primetraff-banner__btn--outline:hover {
+  border-color: rgba(232,69,48,0.9);
+}
+@media (max-width: 640px) {
+  .primetraff-banner {
+    flex-direction: column;
+    padding: 20px;
+    gap: 16px;
+    text-align: center;
+  }
+  .primetraff-banner__actions {
+    margin-left: 0;
+    width: 100%;
+    justify-content: center;
+  }
+  .primetraff-banner__btn {
+    padding: 10px 20px;
+    font-size: 13px;
+  }
+}
+
+.prose .primetraff-banner {
+  max-width: none;
+}
+.prose .primetraff-banner a {
+  text-decoration: none !important;
+  color: #fff !important;
+}
+.prose .primetraff-banner img {
+  margin: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
