@@ -8,16 +8,16 @@ import type { BlogPost } from "@shared/schema";
 import BlogNavigation from "@/components/blog-navigation";
 
 const CATEGORIES = [
-  { key: "basics", label: translations.blog.categories.basics, icon: BookOpen, color: "violet", active: "bg-violet-500/20 border-violet-400/30 text-violet-200 shadow-[0_0_20px_rgba(167,139,250,0.15)]", iconActive: "text-violet-300", iconIdle: "text-violet-400/30" },
-  { key: "beginner", label: translations.blog.categories.beginner, icon: GraduationCap, color: "emerald", active: "bg-emerald-500/20 border-emerald-400/30 text-emerald-200 shadow-[0_0_20px_rgba(52,211,153,0.15)]", iconActive: "text-emerald-300", iconIdle: "text-emerald-400/30" },
-  { key: "traffic", label: translations.blog.categories.traffic, icon: Globe, color: "amber", active: "bg-amber-500/20 border-amber-400/30 text-amber-200 shadow-[0_0_20px_rgba(251,191,36,0.15)]", iconActive: "text-amber-300", iconIdle: "text-amber-400/30" },
-  { key: "trends", label: translations.blog.categories.trends, icon: TrendingUp, color: "cyan", active: "bg-cyan-500/20 border-cyan-400/30 text-cyan-200 shadow-[0_0_20px_rgba(34,211,238,0.15)]", iconActive: "text-cyan-300", iconIdle: "text-cyan-400/30" },
-  { key: "news", label: translations.blog.categories.news, icon: Newspaper, color: "rose", active: "bg-rose-500/20 border-rose-400/30 text-rose-200 shadow-[0_0_20px_rgba(251,113,133,0.15)]", iconActive: "text-rose-300", iconIdle: "text-rose-400/30" },
+  { key: "basics", label: translations.blog.categories.basics, icon: BookOpen, gradient: "from-violet-500 to-purple-600", activeBg: "bg-gradient-to-r from-violet-500/25 to-purple-600/20", activeBorder: "border-violet-400/40", activeText: "text-violet-100", activeShadow: "shadow-[0_0_25px_rgba(139,92,246,0.3)]", iconActive: "text-violet-200", iconIdle: "text-violet-400/40", hoverBg: "hover:bg-violet-500/10" },
+  { key: "beginner", label: translations.blog.categories.beginner, icon: GraduationCap, gradient: "from-emerald-500 to-teal-600", activeBg: "bg-gradient-to-r from-emerald-500/25 to-teal-600/20", activeBorder: "border-emerald-400/40", activeText: "text-emerald-100", activeShadow: "shadow-[0_0_25px_rgba(52,211,153,0.3)]", iconActive: "text-emerald-200", iconIdle: "text-emerald-400/40", hoverBg: "hover:bg-emerald-500/10" },
+  { key: "traffic", label: translations.blog.categories.traffic, icon: Globe, gradient: "from-amber-500 to-orange-600", activeBg: "bg-gradient-to-r from-amber-500/25 to-orange-600/20", activeBorder: "border-amber-400/40", activeText: "text-amber-100", activeShadow: "shadow-[0_0_25px_rgba(251,191,36,0.3)]", iconActive: "text-amber-200", iconIdle: "text-amber-400/40", hoverBg: "hover:bg-amber-500/10" },
+  { key: "trends", label: translations.blog.categories.trends, icon: TrendingUp, gradient: "from-cyan-500 to-blue-600", activeBg: "bg-gradient-to-r from-cyan-500/25 to-blue-600/20", activeBorder: "border-cyan-400/40", activeText: "text-cyan-100", activeShadow: "shadow-[0_0_25px_rgba(34,211,238,0.3)]", iconActive: "text-cyan-200", iconIdle: "text-cyan-400/40", hoverBg: "hover:bg-cyan-500/10" },
+  { key: "news", label: translations.blog.categories.news, icon: Newspaper, gradient: "from-rose-500 to-pink-600", activeBg: "bg-gradient-to-r from-rose-500/25 to-pink-600/20", activeBorder: "border-rose-400/40", activeText: "text-rose-100", activeShadow: "shadow-[0_0_25px_rgba(251,113,133,0.3)]", iconActive: "text-rose-200", iconIdle: "text-rose-400/40", hoverBg: "hover:bg-rose-500/10" },
 ];
 
 export default function BlogPage() {
   const { lang } = useLang();
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const [activeCategory, setActiveCategory] = useState<string | null>("basics");
 
   const { data: posts = [], isLoading } = useQuery<BlogPost[]>({
     queryKey: ["/api/blog"],
@@ -50,7 +50,7 @@ export default function BlogPage() {
             </div>
 
             <div className="mb-10 overflow-x-auto no-scrollbar">
-              <div className="flex gap-2 p-1.5 rounded-2xl bg-white/[0.06] border border-white/[0.12] backdrop-blur-sm" data-testid="blog-category-tabs">
+              <div className="flex gap-2.5 p-2 rounded-2xl bg-white/[0.04] border border-white/[0.08] backdrop-blur-xl" data-testid="blog-category-tabs">
                 {CATEGORIES.map((cat) => {
                   const Icon = cat.icon;
                   const isActive = activeCategory === cat.key;
@@ -58,15 +58,18 @@ export default function BlogPage() {
                     <button
                       key={cat.key}
                       onClick={() => setActiveCategory(activeCategory === cat.key ? null : cat.key)}
-                      className={`flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium whitespace-nowrap transition-all duration-300 border ${
+                      className={`relative flex-1 flex items-center justify-center gap-2.5 px-5 py-3 rounded-xl text-sm font-semibold whitespace-nowrap transition-all duration-300 border ${
                         isActive
-                          ? cat.active
-                          : "text-white/50 hover:text-white/80 hover:bg-white/[0.06] border-transparent"
+                          ? `${cat.activeBg} ${cat.activeBorder} ${cat.activeText} ${cat.activeShadow}`
+                          : `text-white/40 ${cat.hoverBg} hover:text-white/70 border-transparent hover:border-white/[0.08]`
                       }`}
                       data-testid={`button-category-${cat.key}`}
                     >
-                      <Icon className={`w-4 h-4 ${isActive ? cat.iconActive : cat.iconIdle}`} />
-                      {t(cat.label, lang)}
+                      {isActive && (
+                        <span className={`absolute inset-0 rounded-xl bg-gradient-to-r ${cat.gradient} opacity-[0.08]`} />
+                      )}
+                      <Icon className={`w-4 h-4 relative z-10 transition-all duration-300 ${isActive ? `${cat.iconActive} drop-shadow-sm` : cat.iconIdle}`} />
+                      <span className="relative z-10">{t(cat.label, lang)}</span>
                     </button>
                   );
                 })}
