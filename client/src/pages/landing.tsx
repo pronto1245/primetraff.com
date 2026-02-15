@@ -409,7 +409,7 @@ function DecorBadge({ text, rotation, className, delay = 0, color = "sky" }: { t
       className={`absolute ${className}`}
       style={{ transform: `rotate(${rotation}deg)` }}
     >
-      <div className={`px-4 py-1.5 lg:px-5 lg:py-2 rounded-full border text-xs lg:text-sm font-bold tracking-wider uppercase backdrop-blur-sm whitespace-nowrap ${colors[color]}`}>
+      <div className={`px-4 py-1.5 lg:px-5 lg:py-2 rounded-full border text-sm lg:text-base font-bold tracking-wider uppercase backdrop-blur-sm whitespace-nowrap ${colors[color]}`}>
         {text}
       </div>
     </motion.div>
@@ -419,7 +419,7 @@ function DecorBadge({ text, rotation, className, delay = 0, color = "sky" }: { t
 function HeroSection() {
   const { lang } = useLang();
 
-  const mobileBadges = ["CPA / RS / Hybrid", "Gambling x Betting", t(translations.hero.badges.geo, lang), t(translations.hero.badges.partners, lang)];
+  const mobileBadges = ["CPA / RS / Hybrid", "Gambling x Betting", t(translations.hero.badges.geo, lang), t(translations.hero.badges.partners, lang), t(translations.hero.badges.payouts, lang)];
 
   return (
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
@@ -470,7 +470,7 @@ function HeroSection() {
             <div className="flex md:hidden flex-wrap gap-2 mb-8 mt-4">
               {mobileBadges.map((badge, i) => (
                 <motion.div key={i} initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.4, delay: 0.3 + i * 0.1 }}>
-                  <div className="px-3 py-1.5 rounded-full border border-sky-400/30 bg-sky-500/15 text-sky-200 text-xs font-bold tracking-wider uppercase backdrop-blur-sm">{badge}</div>
+                  <div className="px-3 py-1.5 rounded-full border border-sky-400/30 bg-sky-500/15 text-sky-200 text-sm font-bold tracking-wider uppercase backdrop-blur-sm">{badge}</div>
                 </motion.div>
               ))}
             </div>
