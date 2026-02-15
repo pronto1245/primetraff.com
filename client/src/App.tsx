@@ -6,10 +6,10 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { LanguageProvider } from "@/lib/language-context";
 import { lazy, Suspense } from "react";
 import NotFound from "@/pages/not-found";
+import LandingPage from "@/pages/landing";
+import BlogPage from "@/pages/blog";
+import BlogPostPage from "@/pages/blog-post";
 
-const LandingPage = lazy(() => import("@/pages/landing"));
-const BlogPage = lazy(() => import("@/pages/blog"));
-const BlogPostPage = lazy(() => import("@/pages/blog-post"));
 const BlogAdminPage = lazy(() => import("@/pages/blog-admin"));
 
 function PageLoader() {
@@ -56,15 +56,17 @@ function PageLoader() {
 
 function Router() {
   return (
-    <Suspense fallback={<PageLoader />}>
-      <Switch>
-        <Route path="/" component={LandingPage} />
-        <Route path="/blog" component={BlogPage} />
-        <Route path="/blog/:slug" component={BlogPostPage} />
-        <Route path="/admin/blog" component={BlogAdminPage} />
-        <Route component={NotFound} />
-      </Switch>
-    </Suspense>
+    <Switch>
+      <Route path="/" component={LandingPage} />
+      <Route path="/blog" component={BlogPage} />
+      <Route path="/blog/:slug" component={BlogPostPage} />
+      <Route path="/admin/blog">
+        <Suspense fallback={<PageLoader />}>
+          <BlogAdminPage />
+        </Suspense>
+      </Route>
+      <Route component={NotFound} />
+    </Switch>
   );
 }
 
