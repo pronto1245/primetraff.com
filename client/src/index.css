@@ -362,7 +362,7 @@
   border: 2px solid rgba(0,136,204,0.25);
   margin: 32px 0;
   padding: 0;
-  height: 88px;
+  height: 100px;
 }
 .primetraff-banner__glow {
   position: absolute;
@@ -391,7 +391,7 @@
   align-items: center;
 }
 .primetraff-banner__logo img {
-  height: 72px;
+  height: 82px;
   width: auto;
   border: none !important;
   margin: 0 !important;
