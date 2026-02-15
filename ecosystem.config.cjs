@@ -8,7 +8,7 @@ module.exports = {
         NODE_ENV: "production",
         PORT: 4000,
         ADMIN_PASSWORD: "primetraff2026",
-        DATABASE_URL: "postgresql://neondb_owner:YOUR_PASSWORD@ep-dawn-moon-a2ic9090-pooler.eu-central-1.aws.neon.tech/neondb?sslmode=require"
+        DATABASE_URL: "postgresql://neondb_owner:npg_dFG0fkbHjqn3@ep-dawn-moon-a2ic9090-pooler.eu-central-1.aws.neon.tech/neondb?sslmode=require"
       },
       max_restarts: 10,
       restart_delay: 3000,
