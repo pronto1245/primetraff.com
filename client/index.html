@@ -105,12 +105,14 @@
     }
     </script>
 
-    <!-- Google Tag Manager - Replace GTM-XXXXXX with your GTM ID -->
+    <!-- Google Tag Manager - Uncomment and replace GTM-XXXXXX with your GTM ID -->
+    <!--
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-XXXXXX');</script>
+    -->
     <!-- End Google Tag Manager -->
     
     <!-- Yandex.Metrica counter - Uncomment and replace 12345678 with your Metrica ID -->
@@ -142,12 +144,22 @@
     <link rel="dns-prefetch" href="https://t.me">
   </head>
   <body>
-    <!-- Google Tag Manager (noscript) - Replace GTM-XXXXXX with your GTM ID -->
+    <!-- Google Tag Manager (noscript) - Uncomment and replace GTM-XXXXXX with your GTM ID -->
+    <!--
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXX"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    -->
     <!-- End Google Tag Manager (noscript) -->
     
-    <div id="root"></div>
+    <div id="root">
+      <div id="initial-loader" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#001030;z-index:99999;">
+        <svg width="48" height="48" viewBox="0 0 48 48" style="animation:spin 1s linear infinite;">
+          <circle cx="24" cy="24" r="20" stroke="rgba(0,136,204,0.3)" stroke-width="4" fill="none"/>
+          <circle cx="24" cy="24" r="20" stroke="#0088CC" stroke-width="4" fill="none" stroke-dasharray="80 50" stroke-linecap="round"/>
+        </svg>
+        <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
