@@ -8,7 +8,6 @@ import type { BlogPost } from "@shared/schema";
 import BlogNavigation from "@/components/blog-navigation";
 
 const CATEGORIES = [
-  { key: "all", label: translations.blog.allCategories, icon: LayoutGrid, color: "sky", active: "bg-sky-500/20 border-sky-400/30 text-sky-200 shadow-[0_0_20px_rgba(56,189,248,0.15)]", iconActive: "text-sky-300", iconIdle: "text-sky-400/30" },
   { key: "basics", label: translations.blog.categories.basics, icon: BookOpen, color: "violet", active: "bg-violet-500/20 border-violet-400/30 text-violet-200 shadow-[0_0_20px_rgba(167,139,250,0.15)]", iconActive: "text-violet-300", iconIdle: "text-violet-400/30" },
   { key: "beginner", label: translations.blog.categories.beginner, icon: GraduationCap, color: "emerald", active: "bg-emerald-500/20 border-emerald-400/30 text-emerald-200 shadow-[0_0_20px_rgba(52,211,153,0.15)]", iconActive: "text-emerald-300", iconIdle: "text-emerald-400/30" },
   { key: "traffic", label: translations.blog.categories.traffic, icon: Globe, color: "amber", active: "bg-amber-500/20 border-amber-400/30 text-amber-200 shadow-[0_0_20px_rgba(251,191,36,0.15)]", iconActive: "text-amber-300", iconIdle: "text-amber-400/30" },
@@ -18,13 +17,13 @@ const CATEGORIES = [
 
 export default function BlogPage() {
   const { lang } = useLang();
-  const [activeCategory, setActiveCategory] = useState("all");
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
   const { data: posts = [], isLoading } = useQuery<BlogPost[]>({
     queryKey: ["/api/blog"],
   });
 
-  const filteredPosts = activeCategory === "all"
+  const filteredPosts = activeCategory === null
     ? posts
     : posts.filter((p) => p.category === activeCategory);
 
@@ -58,7 +57,7 @@ export default function BlogPage() {
                   return (
                     <button
                       key={cat.key}
-                      onClick={() => setActiveCategory(cat.key)}
+                      onClick={() => setActiveCategory(activeCategory === cat.key ? null : cat.key)}
                       className={`flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium whitespace-nowrap transition-all duration-300 border ${
                         isActive
                           ? cat.active
