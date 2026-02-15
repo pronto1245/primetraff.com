@@ -7,7 +7,7 @@ import path from "path";
 import { randomUUID } from "crypto";
 import fs from "fs";
 
-const uploadsDir = path.join(process.cwd(), "client", "public", "uploads");
+const uploadsDir = path.join(process.cwd(), "uploads");
 if (!fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir, { recursive: true });
 }
