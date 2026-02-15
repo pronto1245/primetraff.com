@@ -1,0 +1,96 @@
+c/assets/img69525e9bc7f63_1770453425635-DT41vIiw.png                           47.56 kB
+../dist/public/assets/img695261fc58a0d_1770453425636-DMB0U3ji.png                           99.03 kB
+../dist/public/assets/img69380f65d567f_1770453920456-b7nd5KvK.png                          123.07 kB
+../dist/public/assets/IMG_9022_1770529061025-BiMRff1h.png                                  160.06 kB
+../dist/public/assets/blog-admin-CQ7DNbul.css                                               24.24 kB │ gzip:   3.62 kB
+../dist/public/assets/index-D-BcRo1h.css                                                   128.97 kB │ gzip:  20.33 kB
+../dist/public/assets/blog-admin-C1G1Jtb3.js                                               230.84 kB │ gzip:  68.83 kB
+../dist/public/assets/index-DzRBInt_.js                                                    589.36 kB │ gzip: 227.48 kB
+../dist/public/assets/CrystalScene-MCsryv0u.js                                             856.93 kB │ gzip: 232.10 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 14.71s
+building server...
+
+  dist/index.cjs  1.1mb ⚠️
+
+⚡ Done in 231ms
+Use --update-env to update environment variables
+[PM2] Applying action restartProcessId on app [primetraff](ids: [ 2 ])
+[PM2] [primetraff](2) ✓
+┌────┬────────────────────┬──────────┬──────┬───────────┬──────────┬──────────┐
+│ id │ name               │ mode     │ ↺    │ status    │ cpu      │ memory   │
+├────┼────────────────────┼──────────┼──────┼───────────┼──────────┼──────────┤
+│ 0  │ primetrack         │ fork     │ 67   │ online    │ 0%       │ 263.7mb  │
+│ 2  │ primetraff         │ fork     │ 4    │ online    │ 0%       │ 18.3mb   │
+└────┴────────────────────┴──────────┴──────┴───────────┴──────────┴──────────┘
+[root@v742573 primetraff.com]# pm2 logs primetraff --lines 30
+[TAILING] Tailing last 30 lines for [primetraff] process (change the value with --lines option)
+/root/.pm2/logs/primetraff-error.log last 30 lines:
+2|primetra |     at doListen (node:net:2139:7)
+2|primetra |     at process.processTicksAndRejections (node:internal/process/task_queues:83:21) {
+2|primetra |   code: 'EADDRINUSE',
+2|primetra |   errno: -98,
+2|primetra |   syscall: 'listen',
+2|primetra |   address: '0.0.0.0',
+2|primetra |   port: 4000
+2|primetra | }
+2|primetra | Error: listen EADDRINUSE: address already in use 0.0.0.0:4000
+2|primetra |     at Server.setupListenHandle [as _listen2] (node:net:1908:16)
+2|primetra |     at listenInCluster (node:net:1965:12)
+2|primetra |     at doListen (node:net:2139:7)
+2|primetra |     at process.processTicksAndRejections (node:internal/process/task_queues:83:21) {
+2|primetra |   code: 'EADDRINUSE',
+2|primetra |   errno: -98,
+2|primetra |   syscall: 'listen',
+2|primetra |   address: '0.0.0.0',
+2|primetra |   port: 4000
+2|primetra | }
+2|primetra | Error: listen EADDRINUSE: address already in use 0.0.0.0:4000
+2|primetra |     at Server.setupListenHandle [as _listen2] (node:net:1908:16)
+2|primetra |     at listenInCluster (node:net:1965:12)
+2|primetra |     at doListen (node:net:2139:7)
+2|primetra |     at process.processTicksAndRejections (node:internal/process/task_queues:83:21) {
+2|primetra |   code: 'EADDRINUSE',
+2|primetra |   errno: -98,
+2|primetra |   syscall: 'listen',
+2|primetra |   address: '0.0.0.0',
+2|primetra |   port: 4000
+2|primetra | }
+
+/root/.pm2/logs/primetraff-out.log last 30 lines:
+2|primetra | 10:42:21 AM [express] POST /api/auth/session 200 in 12ms
+2|primetra | 5:16:47 AM [express] GET /api/.env 200 in 1ms
+2|primetra | 5:16:58 AM [express] GET /api/.git/config 200 in 2ms
+2|primetra | 12:14:50 PM [express] serving on port 4000
+2|primetra | 1:22:52 PM [express] serving on port 4000
+2|primetra | 1:26:17 PM [express] GET /api/blog-admin 500 in 22ms :: {"error":""}
+2|primetra | 1:26:19 PM [express] GET /api/blog-admin 500 in 3ms :: {"error":""}
+2|primetra | 1:26:20 PM [express] GET /api/blog-admin 500 in 2ms :: {"error":""}
+2|primetra | 1:26:20 PM [express] GET /api/blog-admin 500 in 4ms :: {"error":""}
+2|primetra | 1:26:20 PM [express] GET /api/blog-admin 500 in 2ms :: {"error":""}
+2|primetra | 1:26:21 PM [express] GET /api/blog-admin 500 in 3ms :: {"error":""}
+2|primetra | 1:26:21 PM [express] GET /api/blog-admin 500 in 3ms :: {"error":""}
+2|primetra | 1:26:21 PM [express] GET /api/blog-admin 500 in 3ms :: {"error":""}
+2|primetra | 1:26:22 PM [express] GET /api/blog-admin 500 in 3ms :: {"error":""}
+2|primetra | 1:26:25 PM [express] GET /api/blog-admin 500 in 2ms :: {"error":""}
+2|primetra | 1:27:38 PM [express] serving on port 4000
+2|primetra | 1:32:21 PM [express] serving on port 4000
+2|primetra | 1:32:49 PM [express] GET /api/blog-admin 200 in 1447ms :: []
+2|primetra | 1:32:50 PM [express] GET /api/blog-admin 304 in 43ms :: []
+2|primetra | 1:33:38 PM [express] serving on port 4000
+2|primetra | 1:34:28 PM [express] GET /api/blog-admin 304 in 389ms :: []
+2|primetra | 1:34:28 PM [express] GET /api/blog-admin 304 in 43ms :: []
+2|primetra | 1:37:19 PM [express] serving on port 4000
+2|primetra | 1:39:38 PM [express] serving on port 4000
+2|primetra | 1:39:48 PM [express] GET /api/blog-admin 304 in 1506ms :: []
+2|primetra | 1:39:48 PM [express] GET /api/blog-admin 304 in 40ms :: []
+2|primetra | Using PostgreSQL database storage
+2|primetra | 1:42:17 PM [express] serving on port 4000
+2|primetra | 1:42:41 PM [express] GET /api/blog-admin 304 in 379ms :: []
+2|primetra | 1:42:41 PM [express] GET /api/blog-admin 304 in 43ms :: []
+
+
