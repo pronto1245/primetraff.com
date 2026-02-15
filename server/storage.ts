@@ -51,8 +51,6 @@ class MemStorage implements IStorage {
       createdAt: new Date(),
       isPublished: insert.isPublished ?? true,
       coverImage: insert.coverImage ?? null,
-      metaDescription: insert.metaDescription ?? null,
-      metaDescriptionEn: insert.metaDescriptionEn ?? null,
     } as BlogPost;
     this.posts.set(post.id, post);
     return post;
