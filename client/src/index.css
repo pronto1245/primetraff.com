@@ -446,8 +446,15 @@
   }
 }
 
-.prose .primetraff-banner {
+.prose .primetraff-banner,
+.primetraff-banner {
   max-width: none;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 16px;
+  max-width: min(900px, calc(100vw - 32px));
 }
 .prose .primetraff-banner a {
   text-decoration: none !important;
