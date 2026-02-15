@@ -10,13 +10,16 @@ const LOGIN_URL = "https://primetrack.pro/login";
 const REGISTER_URL = "https://primetrack.pro/register?ref=ADV-3BT52V85";
 
 function renderBannerHtml(lang: string): string {
-  const loginText = lang === "ru" ? "ВХОД &rarr;" : "LOGIN &rarr;";
+  const loginText = lang === "ru" ? "ВХОД" : "LOGIN";
   const registerText = lang === "ru" ? "РЕГИСТРАЦИЯ" : "REGISTER";
   return `<div class="primetraff-banner" data-testid="banner-primetraff">
-    <div class="primetraff-banner__logo"><img src="/primetraff-logo.png" alt="PrimeTraff" /></div>
-    <div class="primetraff-banner__actions">
-      <a class="primetraff-banner__btn" href="${LOGIN_URL}" target="_blank" rel="noopener noreferrer">${loginText}</a>
-      <a class="primetraff-banner__btn" href="${REGISTER_URL}" target="_blank" rel="noopener noreferrer">${registerText}</a>
+    <div class="primetraff-banner__glow"></div>
+    <div class="primetraff-banner__inner">
+      <div class="primetraff-banner__logo"><img src="/primetraff-logo.png" alt="PrimeTraff" /></div>
+      <div class="primetraff-banner__actions">
+        <a class="primetraff-banner__btn primetraff-banner__btn--login" href="${LOGIN_URL}" target="_blank" rel="noopener noreferrer">${loginText} <span class="primetraff-banner__arrow">&rarr;</span></a>
+        <a class="primetraff-banner__btn primetraff-banner__btn--register" href="${REGISTER_URL}" target="_blank" rel="noopener noreferrer">${registerText}</a>
+      </div>
     </div>
   </div>`;
 }

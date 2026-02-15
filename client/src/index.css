@@ -355,61 +355,83 @@
 }
 
 .primetraff-banner {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #001030 0%, #002060 40%, #0055AA 80%, #0077BB 100%);
+  border: 2px solid rgba(0,136,204,0.25);
+  margin: 32px 0;
+  padding: 0;
+}
+.primetraff-banner__glow {
+  position: absolute;
+  top: -40%;
+  right: -10%;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,180,255,0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+.primetraff-banner__inner {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 24px;
-  padding: 24px 32px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #0a1628 0%, #0d2847 50%, #0f3060 100%);
-  border: 1px solid rgba(255,255,255,0.08);
-  margin: 32px 0;
+  padding: 20px 28px;
 }
 .primetraff-banner__logo {
   flex-shrink: 0;
 }
 .primetraff-banner__logo img {
-  height: 56px;
+  height: 44px;
   width: auto;
   border: none !important;
   margin: 0 !important;
+  border-radius: 0 !important;
 }
 .primetraff-banner__actions {
   display: flex;
   gap: 12px;
-  margin-left: auto;
   flex-shrink: 0;
 }
 .primetraff-banner__btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 28px;
-  border-radius: 8px;
+  padding: 10px 24px;
+  border-radius: 12px;
   font-weight: 700;
   font-size: 14px;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   text-decoration: none !important;
   color: #fff !important;
-  background: linear-gradient(135deg, #e84530 0%, #d63020 100%);
-  border: none;
-  transition: opacity 0.2s;
   white-space: nowrap;
+  transition: all 0.2s;
 }
-.primetraff-banner__btn--outline {
-  background: transparent;
-  border: 2px solid rgba(232,69,48,0.6);
-  color: #ff6b56 !important;
+.primetraff-banner__btn--login {
+  background: rgba(255,255,255,0.04);
+  border: 2px solid rgba(255,255,255,0.2);
+}
+.primetraff-banner__btn--register {
+  background: rgba(0,136,204,0.12);
+  border: 2px solid rgba(0,170,230,0.3);
+}
+.primetraff-banner__arrow {
+  margin-left: 8px;
+  opacity: 0.6;
 }
 @media (max-width: 640px) {
-  .primetraff-banner {
+  .primetraff-banner__inner {
     flex-direction: column;
     padding: 20px;
     gap: 16px;
     text-align: center;
   }
   .primetraff-banner__actions {
-    margin-left: 0;
     width: 100%;
     justify-content: center;
   }
@@ -425,6 +447,7 @@
 .prose .primetraff-banner a {
   text-decoration: none !important;
   color: #fff !important;
+  font-weight: 700 !important;
 }
 .prose .primetraff-banner img {
   margin: 0 !important;
