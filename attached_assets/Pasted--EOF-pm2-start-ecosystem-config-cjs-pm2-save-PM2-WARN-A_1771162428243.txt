@@ -1,0 +1,75 @@
+};
+EOF
+pm2 start ecosystem.config.cjs && pm2 save
+[PM2][WARN] Applications primetraff not running, starting...
+[PM2] App [primetraff] launched (1 instances)
+┌────┬────────────────────┬──────────┬──────┬───────────┬──────────┬──────────┐
+│ id │ name               │ mode     │ ↺    │ status    │ cpu      │ memory   │
+├────┼────────────────────┼──────────┼──────┼───────────┼──────────┼──────────┤
+│ 0  │ primetrack         │ fork     │ 67   │ online    │ 0%       │ 264.2mb  │
+│ 2  │ primetraff         │ fork     │ 0    │ online    │ 0%       │ 18.1mb   │
+└────┴────────────────────┴──────────┴──────┴───────────┴──────────┴──────────┘
+[PM2] Saving current process list...
+[PM2] Successfully saved in /root/.pm2/dump.pm2
+[root@v742573 primetraff.com]# cd /var/www/primetraff.com && git pull origin main && npm run build && pm2 restart primetraff
+From https://github.com/pronto1245/primetraff.com
+ * branch            main       -> FETCH_HEAD
+Already up to date.
+
+> rest-express@1.0.0 build
+> tsx script/build.ts
+
+building client...
+vite v7.3.0 building client environment for production...
+transforming (5) src/App.tsx
+A PostCSS plugin did not pass the `from` option to `postcss.parse`. This may cause imported assets to be incorrectly transformed. If you've recently added a PostCSS plugin that raised this warning, please contact the package author to fix the issue.
+✓ 2809 modules transformed.
+../dist/public/assets/Без_названия_(8)_1770453702155-BUSyT1Xs.png                            4.40 kB
+../dist/public/assets/Без_названия_(6)_1770453702154-psJ2Z745.jpeg                           4.57 kB
+../dist/public/assets/Без_названия_(11)_1770453702156-DMewyxFL.jpeg                          4.69 kB
+../dist/public/assets/Без_названия_(21)_1770453425632-D3_mGOuJ.jpeg                          4.83 kB
+../dist/public/assets/Без_названия_(15)_1770453751828-Cg7pu4cr.jpeg                          4.86 kB
+../dist/public/assets/Без_названия_(19)_1770453751830-rBZvUOf8.png                           4.98 kB
+../dist/public/assets/Без_названия_(16)_1770453751829-DOKrdQen.png                           5.03 kB
+../dist/public/assets/Без_названия_(28)_1770453809648-CxImHb9W.png                           5.39 kB
+../dist/public/assets/Без_названия_(9)_1770453702155-ChrOJ-kf.jpeg                           5.46 kB
+../dist/public/assets/Без_названия_(4)_1770453702154-DJc3wMwR.jpeg                           5.51 kB
+../dist/public/assets/Без_названия_(3)_1770453702153-CUawZHLJ.jpeg                           5.66 kB
+../dist/public/assets/Без_названия_(18)_1770453751830-rv9OKBvz.jpeg                          5.78 kB
+../dist/public/assets/Без_названия_(8)_1770453702155-CcTMFdz2.jpeg                           5.87 kB
+../dist/public/assets/Без_названия_(5)_1770453702154-CWh5JaRZ.png                            6.18 kB
+../dist/public/assets/Без_названия_(20)_1770453425635-BuDWvmxp.jpeg                          7.75 kB
+../dist/public/assets/Без_названия_(19)_1770453425635-B0gP6ZWH.jpeg                          8.15 kB
+../dist/public/index.html                                                                    9.33 kB │ gzip:   3.38 kB
+../dist/public/assets/Без_названия_(7)_1770453702155-DiE6h6Jz.png                           12.81 kB
+../dist/public/assets/zQAzTcUzmpmD09fPheuQwWO7Jqm0FxinQatFQkwy_1770453920459-C8Ki0llq.jpg   17.36 kB
+../dist/public/assets/img69525e9bc7f63_1770453425635-DT41vIiw.png                           47.56 kB
+../dist/public/assets/img695261fc58a0d_1770453425636-DMB0U3ji.png                           99.03 kB
+../dist/public/assets/img69380f65d567f_1770453920456-b7nd5KvK.png                          123.07 kB
+../dist/public/assets/IMG_9022_1770529061025-BiMRff1h.png                                  160.06 kB
+../dist/public/assets/blog-admin-CQ7DNbul.css                                               24.24 kB │ gzip:   3.62 kB
+../dist/public/assets/index-D-BcRo1h.css                                                   128.97 kB │ gzip:  20.33 kB
+../dist/public/assets/blog-admin-C1G1Jtb3.js                                               230.84 kB │ gzip:  68.83 kB
+../dist/public/assets/index-DzRBInt_.js                                                    589.36 kB │ gzip: 227.48 kB
+../dist/public/assets/CrystalScene-MCsryv0u.js                                             856.93 kB │ gzip: 232.10 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 14.26s
+building server...
+
+  dist/index.cjs  1.1mb ⚠️
+
+⚡ Done in 224ms
+Use --update-env to update environment variables
+[PM2] Applying action restartProcessId on app [primetraff](ids: [ 2 ])
+[PM2] [primetraff](2) ✓
+┌────┬────────────────────┬──────────┬──────┬───────────┬──────────┬──────────┐
+│ id │ name               │ mode     │ ↺    │ status    │ cpu      │ memory   │
+├────┼────────────────────┼──────────┼──────┼───────────┼──────────┼──────────┤
+│ 0  │ primetrack         │ fork     │ 67   │ online    │ 0%       │ 264.5mb  │
+│ 2  │ primetraff         │ fork     │ 1    │ online    │ 0%       │ 19.3mb   │
+└────┴────────────────────┴──────────┴──────┴───────────┴──────────┴──────────┘
+[root@v742573 primetraff.com]# 
