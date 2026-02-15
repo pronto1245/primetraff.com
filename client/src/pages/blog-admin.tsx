@@ -372,11 +372,14 @@ function PostEditor({ password, post, onClose }: { password: string; post: BlogP
         headers: { "x-admin-password": password },
         body: fd,
       });
-      if (!res.ok) throw new Error("Upload failed");
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(`Upload failed: ${res.status} ${text}`);
+      }
       const data = await res.json();
       setForm((f) => ({ ...f, coverImage: data.url }));
-    } catch (e) {
-      alert("Ошибка загрузки изображения");
+    } catch (e: any) {
+      alert("Ошибка загрузки: " + (e.message || "Неизвестная ошибка"));
     }
     setUploading(false);
   };
