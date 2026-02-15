@@ -6,7 +6,7 @@ import multer from "multer";
 import path from "path";
 import { randomUUID } from "crypto";
 import fs from "fs";
-import { translate } from "@vitalets/google-translate-api";
+import translate from "google-translate-api-x";
 import { parse as parseHtml } from "node-html-parser";
 
 function sanitizeHtml(html: string): string {
@@ -149,7 +149,7 @@ export async function registerRoutes(
     if (!text || !text.trim()) return text;
     const MAX_CHUNK = 4500;
     if (text.length <= MAX_CHUNK) {
-      const result = await translate(text, { from, to });
+      const result = await translate(text, { from, to, forceBatch: true });
       return result.text;
     }
     const sentences = text.match(/[^.!?]+[.!?]+|[^.!?]+$/g) || [text];
@@ -166,7 +166,7 @@ export async function registerRoutes(
     if (current) chunks.push(current);
     const translated: string[] = [];
     for (const chunk of chunks) {
-      const result = await translate(chunk, { from, to });
+      const result = await translate(chunk, { from, to, forceBatch: true });
       translated.push(result.text);
     }
     return translated.join("");

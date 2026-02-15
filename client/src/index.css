@@ -362,7 +362,7 @@
   border: 2px solid rgba(0,136,204,0.25);
   margin: 32px 0;
   padding: 0;
-  height: 100px;
+  min-height: 100px;
 }
 .primetraff-banner__glow {
   position: absolute;
@@ -430,11 +430,18 @@
   opacity: 0.6;
 }
 @media (max-width: 640px) {
+  .primetraff-banner {
+    min-height: auto;
+  }
   .primetraff-banner__inner {
     flex-direction: column;
-    padding: 20px;
-    gap: 16px;
+    padding: 16px 20px;
+    gap: 12px;
     text-align: center;
+  }
+  .primetraff-banner__logo img {
+    height: 80px;
+    margin: 0 auto !important;
   }
   .primetraff-banner__actions {
     width: 100%;
