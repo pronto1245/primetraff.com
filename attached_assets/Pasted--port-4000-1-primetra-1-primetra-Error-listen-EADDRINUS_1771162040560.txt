@@ -1,0 +1,110 @@
+|   port: 4000
+1|primetra | }
+1|primetra | Error: listen EADDRINUSE: address already in use 0.0.0.0:4000
+1|primetra |     at Server.setupListenHandle [as _listen2] (node:net:1908:16)
+1|primetra |     at listenInCluster (node:net:1965:12)
+1|primetra |     at doListen (node:net:2139:7)
+1|primetra |     at process.processTicksAndRejections (node:internal/process/task_queues:83:21) {
+1|primetra |   code: 'EADDRINUSE',
+1|primetra |   errno: -98,
+1|primetra |   syscall: 'listen',
+1|primetra |   address: '0.0.0.0',
+1|primetra |   port: 4000
+1|primetra | }
+
+^C
+[root@v742573 ~]# pm2 stop primetraff
+kill $(lsof -t -i:4000) 2>/dev/null
+pm2 start primetraff
+[PM2] Applying action stopProcessId on app [primetraff](ids: [ 1 ])
+[PM2] [primetraff](1) ✓
+┌────┬────────────────────┬──────────┬──────┬───────────┬──────────┬──────────┐
+│ id │ name               │ mode     │ ↺    │ status    │ cpu      │ memory   │
+├────┼────────────────────┼──────────┼──────┼───────────┼──────────┼──────────┤
+│ 0  │ primetrack         │ fork     │ 67   │ online    │ 0%       │ 264.9mb  │
+│ 1  │ primetraff         │ fork     │ 167  │ stopped   │ 0%       │ 0b       │
+└────┴────────────────────┴──────────┴──────┴───────────┴──────────┴──────────┘
+[PM2] Applying action restartProcessId on app [primetraff](ids: [ 1 ])
+[PM2] [primetraff](1) ✓
+[PM2] Process successfully started
+┌────┬────────────────────┬──────────┬──────┬───────────┬──────────┬──────────┐
+│ id │ name               │ mode     │ ↺    │ status    │ cpu      │ memory   │
+├────┼────────────────────┼──────────┼──────┼───────────┼──────────┼──────────┤
+│ 0  │ primetrack         │ fork     │ 67   │ online    │ 0%       │ 265.4mb  │
+│ 1  │ primetraff         │ fork     │ 167  │ online    │ 0%       │ 14.4mb   │
+└────┴────────────────────┴──────────┴──────┴───────────┴──────────┴──────────┘
+[root@v742573 ~]# ss -tlnp | grep 4000
+LISTEN 0      511          0.0.0.0:4000      0.0.0.0:*    users:(("node /var/www/p",pid=2819744,fd=20))                                           
+[root@v742573 ~]# [root@v742573 ~]# ss -tlnp | grep 4000
+LISTEN 0      511          0.0.0.0:4000      0.0.0.0:*    users:(("node /var/www/p",pid=2819744,fd=20))                                           
+[root@v742573 ~]# ss -tlnp | grep 3000
+-bash: [root@v742573: command not found
+-bash: syntax error near unexpected token `('
+-bash: [root@v742573: command not found
+[root@v742573 ~]# ss -tlnp | grep 3000
+LISTEN 0      511          0.0.0.0:3000      0.0.0.0:*    users:(("node /var/www/p",pid=2670149,fd=21))                                           
+[root@v742573 ~]# nginx -t && systemctl restart nginx
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+[root@v742573 ~]# pm2 env 1 | grep ADMIN_PASSWORD
+[root@v742573 ~]# pm2 show primetraff
+ Describing process with id 1 - name primetraff 
+┌───────────────────┬────────────────────────────────────────┐
+│ status            │ online                                 │
+│ name              │ primetraff                             │
+│ namespace         │ default                                │
+│ version           │ 1.0.0                                  │
+│ restarts          │ 167                                    │
+│ uptime            │ 4m                                     │
+│ script path       │ /var/www/primetraff.com/dist/index.cjs │
+│ script args       │ N/A                                    │
+│ error log path    │ /root/.pm2/logs/primetraff-error.log   │
+│ out log path      │ /root/.pm2/logs/primetraff-out.log     │
+│ pid path          │ /root/.pm2/pids/primetraff-1.pid       │
+│ interpreter       │ /usr/bin/node                          │
+│ interpreter args  │ N/A                                    │
+│ script id         │ 1                                      │
+│ exec cwd          │ /var/www/primetraff.com                │
+│ exec mode         │ fork_mode                              │
+│ node.js version   │ 20.20.0                                │
+│ node env          │ N/A                                    │
+│ watch & reload    │ ✘                                      │
+│ unstable restarts │ 0                                      │
+│ created at        │ 2026-02-15T13:22:52.100Z               │
+└───────────────────┴────────────────────────────────────────┘
+ Actions available 
+┌────────────────────────┐
+│ km:heapdump            │
+│ km:cpu:profiling:start │
+│ km:cpu:profiling:stop  │
+│ km:heap:sampling:start │
+│ km:heap:sampling:stop  │
+└────────────────────────┘
+ Trigger via: pm2 trigger primetraff <action_name>
+
+ Code metrics value 
+┌────────────────────────┬──────────────┐
+│ Used Heap Size         │ 13.14 MiB    │
+│ Heap Usage             │ 86.26 %      │
+│ Heap Size              │ 15.24 MiB    │
+│ Event Loop Latency p95 │ 1.30 ms      │
+│ Event Loop Latency     │ 0.35 ms      │
+│ Active handles         │ 4            │
+│ Active requests        │ 0            │
+│ HTTP                   │ 0.11 req/min │
+│ HTTP P95 Latency       │ 26 ms        │
+│ HTTP Mean Latency      │ 3 ms         │
+└────────────────────────┴──────────────┘
+ Divergent env variables from local env 
+┌────────────────┬─────────────────────────────────────┐
+│ PWD            │ /var/www/primetraff.com             │
+│ SSH_CONNECTION │ 85.94.17.34 51144 185.179.191.12 22 │
+│ XDG_SESSION_ID │ 94                                  │
+│ SSH_CLIENT     │ 85.94.17.34 51144 22                │
+└────────────────┴─────────────────────────────────────┘
+
+ Add your own code metrics: http://bit.ly/code-metrics
+ Use `pm2 logs primetraff [--lines 1000]` to display logs
+ Use `pm2 env 1` to display environment variables
+ Use `pm2 monit` to monitor CPU and Memory usage primetraff
+[root@v742573 ~]# 
