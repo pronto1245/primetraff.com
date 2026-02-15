@@ -396,16 +396,10 @@
   transition: opacity 0.2s;
   white-space: nowrap;
 }
-.primetraff-banner__btn:hover {
-  opacity: 0.88;
-}
 .primetraff-banner__btn--outline {
   background: transparent;
   border: 2px solid rgba(232,69,48,0.6);
   color: #ff6b56 !important;
-}
-.primetraff-banner__btn--outline:hover {
-  border-color: rgba(232,69,48,0.9);
 }
 @media (max-width: 640px) {
   .primetraff-banner {

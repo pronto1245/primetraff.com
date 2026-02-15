@@ -6,6 +6,26 @@ import { ArrowLeft, Calendar } from "lucide-react";
 import type { BlogPost } from "@shared/schema";
 import BlogNavigation from "@/components/blog-navigation";
 
+const LOGIN_URL = "https://primetrack.pro/login";
+const REGISTER_URL = "https://primetrack.pro/register?ref=ADV-3BT52V85";
+
+function renderBannerHtml(lang: string): string {
+  const loginText = lang === "ru" ? "ВХОД &rarr;" : "LOGIN &rarr;";
+  const registerText = lang === "ru" ? "РЕГИСТРАЦИЯ" : "REGISTER";
+  return `<div class="primetraff-banner" data-testid="banner-primetraff">
+    <div class="primetraff-banner__logo"><img src="/primetraff-logo.png" alt="PrimeTraff" /></div>
+    <div class="primetraff-banner__actions">
+      <a class="primetraff-banner__btn" href="${LOGIN_URL}" target="_blank" rel="noopener noreferrer">${loginText}</a>
+      <a class="primetraff-banner__btn" href="${REGISTER_URL}" target="_blank" rel="noopener noreferrer">${registerText}</a>
+    </div>
+  </div>`;
+}
+
+function processContent(html: string, lang: string): string {
+  return html.replace(/<p>\s*\[BANNER\]\s*<\/p>/g, renderBannerHtml(lang))
+             .replace(/\[BANNER\]/g, renderBannerHtml(lang));
+}
+
 const CATEGORIES = [
   { key: "basics", label: translations.blog.categories.basics },
   { key: "beginner", label: translations.blog.categories.beginner },
@@ -71,7 +91,8 @@ export default function BlogPostPage() {
   }
 
   const title = lang === "ru" ? post.titleRu : post.titleEn;
-  const content = lang === "ru" ? post.contentRu : post.contentEn;
+  const rawContent = lang === "ru" ? post.contentRu : post.contentEn;
+  const content = processContent(rawContent, lang);
   const catLabel = CATEGORIES.find(c => c.key === post.category);
 
   return (

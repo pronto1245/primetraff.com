@@ -23,14 +23,7 @@ import type { BlogPost, InsertBlogPost } from "@shared/schema";
 import ReactQuill from "react-quill-new";
 import "react-quill-new/dist/quill.snow.css";
 
-const LOGIN_URL = "https://primetrack.pro/login";
-const REGISTER_URL = "https://primetrack.pro/register?ref=ADV-3BT52V85";
-
-function buildBannerHtml(lang: "ru" | "en"): string {
-  const loginText = lang === "ru" ? "ВХОД →" : "LOGIN →";
-  const registerText = lang === "ru" ? "РЕГИСТРАЦИЯ" : "REGISTER";
-  return `<div class="primetraff-banner" data-testid="banner-primetraff"><div class="primetraff-banner__logo"><img src="/primetraff-logo.png" alt="PrimeTraff" /></div><div class="primetraff-banner__actions"><a class="primetraff-banner__btn" href="${LOGIN_URL}" target="_blank" rel="noopener noreferrer">${loginText}</a><a class="primetraff-banner__btn" href="${REGISTER_URL}" target="_blank" rel="noopener noreferrer">${registerText}</a></div></div>`;
-}
+const BANNER_MARKER = "[BANNER]";
 
 const CATEGORIES = [
   { key: "basics", label: "Основные понятия" },
@@ -302,6 +295,22 @@ function PostList({ password, onEdit, onCreate }: { password: string; onEdit: (p
 
 function PostEditor({ password, post, onClose }: { password: string; post: BlogPost | null; onClose: () => void }) {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const quillRuRef = useRef<ReactQuill>(null);
+  const quillEnRef = useRef<ReactQuill>(null);
+
+  const insertBanner = (editorRef: React.RefObject<ReactQuill | null>, field: "contentRu" | "contentEn") => {
+    const editor = editorRef.current?.getEditor();
+    if (editor) {
+      const range = editor.getSelection(true);
+      const idx = range ? range.index : editor.getLength() - 1;
+      editor.insertText(idx, "\n");
+      editor.insertText(idx + 1, BANNER_MARKER);
+      editor.insertText(idx + 1 + BANNER_MARKER.length, "\n");
+    } else {
+      setForm((f) => ({ ...f, [field]: f[field] + `<p>${BANNER_MARKER}</p>` }));
+    }
+  };
+
   const [form, setForm] = useState({
     slug: post?.slug || "",
     category: post?.category || "basics",
@@ -568,7 +577,7 @@ function PostEditor({ password, post, onClose }: { password: string; post: BlogP
                 variant="outline"
                 size="sm"
                 className="border-white/15 text-white/60 text-xs"
-                onClick={() => updateField("contentRu", form.contentRu + buildBannerHtml("ru"))}
+                onClick={() => insertBanner(quillRuRef, "contentRu")}
                 data-testid="button-insert-banner-ru"
               >
                 <LayoutTemplate className="w-3.5 h-3.5 mr-1.5" />
@@ -577,6 +586,7 @@ function PostEditor({ password, post, onClose }: { password: string; post: BlogP
             </div>
             <div className="blog-editor-dark">
               <ReactQuill
+                ref={quillRuRef}
                 value={form.contentRu}
                 onChange={(v) => updateField("contentRu", v)}
                 modules={quillModules}
@@ -594,7 +604,7 @@ function PostEditor({ password, post, onClose }: { password: string; post: BlogP
                 variant="outline"
                 size="sm"
                 className="border-white/15 text-white/60 text-xs"
-                onClick={() => updateField("contentEn", form.contentEn + buildBannerHtml("en"))}
+                onClick={() => insertBanner(quillEnRef, "contentEn")}
                 data-testid="button-insert-banner-en"
               >
                 <LayoutTemplate className="w-3.5 h-3.5 mr-1.5" />
@@ -603,6 +613,7 @@ function PostEditor({ password, post, onClose }: { password: string; post: BlogP
             </div>
             <div className="blog-editor-dark">
               <ReactQuill
+                ref={quillEnRef}
                 value={form.contentEn}
                 onChange={(v) => updateField("contentEn", v)}
                 modules={quillModules}
