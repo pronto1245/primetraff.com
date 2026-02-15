@@ -40,10 +40,15 @@ const quillModules = {
     [{ list: "ordered" }, { list: "bullet" }],
     ["blockquote", "code-block"],
     ["link", "image"],
-    [{ color: [] }, { background: [] }],
     ["clean"],
   ],
 };
+
+const quillFormats = [
+  "header", "bold", "italic", "underline", "strike",
+  "list", "blockquote", "code-block",
+  "link", "image",
+];
 
 function slugify(text: string): string {
   return text
@@ -593,6 +598,7 @@ function PostEditor({ password, post, onClose }: { password: string; post: BlogP
                 value={form.contentRu}
                 onChange={(v) => updateField("contentRu", v)}
                 modules={quillModules}
+                formats={quillFormats}
                 theme="snow"
                 placeholder="Напишите содержание статьи на русском..."
                 data-testid="editor-content-ru"
@@ -620,6 +626,7 @@ function PostEditor({ password, post, onClose }: { password: string; post: BlogP
                 value={form.contentEn}
                 onChange={(v) => updateField("contentEn", v)}
                 modules={quillModules}
+                formats={quillFormats}
                 theme="snow"
                 placeholder="Write article content in English..."
                 data-testid="editor-content-en"

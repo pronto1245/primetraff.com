@@ -7,6 +7,31 @@ import path from "path";
 import { randomUUID } from "crypto";
 import fs from "fs";
 
+function sanitizeHtml(html: string): string {
+  if (!html) return html;
+  let result = html;
+  result = result.replace(/&amp;nbsp;/gi, " ");
+  result = result.replace(/&nbsp;/gi, " ");
+  result = result.replace(/\u00A0/g, " ");
+  result = result.replace(/\s+style\s*=\s*"[^"]*"/gi, "");
+  result = result.replace(/\s+style\s*=\s*'[^']*'/gi, "");
+  result = result.replace(/<span[^>]*>([\s\S]*?)<\/span>/gi, "$1");
+  result = result.replace(/<span[^>]*>([\s\S]*?)<\/span>/gi, "$1");
+  const bannerPh = "___BANNER_PH___";
+  result = result.replace(/\[BANNER\]/g, bannerPh);
+  result = result.replace(/<p>\s*<\/p>/g, "");
+  result = result.replace(new RegExp(bannerPh, "g"), "[BANNER]");
+  result = result.replace(/(?!<pre[^>]*>|<code[^>]*>) {2,}/g, " ");
+  return result.trim();
+}
+
+function sanitizePostContent(body: any): any {
+  const sanitized = { ...body };
+  if (sanitized.contentRu) sanitized.contentRu = sanitizeHtml(sanitized.contentRu);
+  if (sanitized.contentEn) sanitized.contentEn = sanitizeHtml(sanitized.contentEn);
+  return sanitized;
+}
+
 const uploadsDir = path.join(process.cwd(), "uploads");
 if (!fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir, { recursive: true });
@@ -69,7 +94,8 @@ export async function registerRoutes(
 
   app.post("/api/blog", checkAdmin, async (req, res) => {
     try {
-      const parsed = insertBlogPostSchema.parse(req.body);
+      const sanitized = sanitizePostContent(req.body);
+      const parsed = insertBlogPostSchema.parse(sanitized);
       const post = await storage.createBlogPost(parsed);
       res.status(201).json(post);
     } catch (e: any) {
@@ -79,8 +105,9 @@ export async function registerRoutes(
 
   app.patch("/api/blog/:id", checkAdmin, async (req, res) => {
     try {
+      const sanitized = sanitizePostContent(req.body);
       const updateSchema = insertBlogPostSchema.partial();
-      const parsed = updateSchema.parse(req.body);
+      const parsed = updateSchema.parse(sanitized);
       const post = await storage.updateBlogPost(req.params.id, parsed);
       if (!post) return res.status(404).json({ error: "Post not found" });
       res.json(post);

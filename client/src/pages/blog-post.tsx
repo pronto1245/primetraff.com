@@ -36,9 +36,27 @@ function groupConsecutiveImages(html: string): string {
   );
 }
 
+function sanitizeContentHtml(html: string): string {
+  let result = html;
+  result = result.replace(/&amp;nbsp;/gi, " ");
+  result = result.replace(/&nbsp;/gi, " ");
+  result = result.replace(/\u00A0/g, " ");
+  result = result.replace(/\s+style\s*=\s*"[^"]*"/gi, "");
+  result = result.replace(/\s+style\s*=\s*'[^']*'/gi, "");
+  result = result.replace(/<span[^>]*>([\s\S]*?)<\/span>/gi, "$1");
+  result = result.replace(/<span[^>]*>([\s\S]*?)<\/span>/gi, "$1");
+  const bannerPh = "___BANNER_PH___";
+  result = result.replace(/\[BANNER\]/g, bannerPh);
+  result = result.replace(/<p>\s*<\/p>/g, "");
+  result = result.replace(new RegExp(bannerPh, "g"), "[BANNER]");
+  result = result.replace(/ {2,}/g, " ");
+  return result;
+}
+
 function processContent(html: string, lang: string): string {
-  let result = html.replace(/<p>\s*\[BANNER\]\s*<\/p>/g, renderBannerHtml(lang))
-                   .replace(/\[BANNER\]/g, renderBannerHtml(lang));
+  let result = sanitizeContentHtml(html);
+  result = result.replace(/<p>\s*\[BANNER\]\s*<\/p>/g, renderBannerHtml(lang))
+                 .replace(/\[BANNER\]/g, renderBannerHtml(lang));
   result = groupConsecutiveImages(result);
   return result;
 }
