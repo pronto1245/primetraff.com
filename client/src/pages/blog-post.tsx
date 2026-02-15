@@ -135,7 +135,7 @@ export default function BlogPostPage() {
       <BlogNavigation />
 
       <div className="pt-24 lg:pt-28 pb-20">
-        <div className="max-w-3xl mx-auto px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <Link
             href="/blog"
             className="inline-flex items-center gap-1.5 text-sm text-white/40 hover:text-white/70 transition-colors mb-8"
