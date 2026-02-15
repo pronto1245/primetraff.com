@@ -1,0 +1,82 @@
+e requests        │ 0            │
+│ HTTP                   │ 0.11 req/min │
+│ HTTP P95 Latency       │ 26 ms        │
+│ HTTP Mean Latency      │ 3 ms         │
+└────────────────────────┴──────────────┘
+ Divergent env variables from local env 
+┌────────────────┬─────────────────────────────────────┐
+│ PWD            │ /var/www/primetraff.com             │
+│ SSH_CONNECTION │ 85.94.17.34 51144 185.179.191.12 22 │
+│ XDG_SESSION_ID │ 94                                  │
+│ SSH_CLIENT     │ 85.94.17.34 51144 22                │
+└────────────────┴─────────────────────────────────────┘
+
+ Add your own code metrics: http://bit.ly/code-metrics
+ Use `pm2 logs primetraff [--lines 1000]` to display logs
+ Use `pm2 env 1` to display environment variables
+ Use `pm2 monit` to monitor CPU and Memory usage primetraff
+[root@v742573 ~]# pm2 stop primetraff
+ADMIN_PASSWORD=primetraff2026 pm2 start /var/www/primetraff.com/dist/index.cjs --name primetraff
+[PM2] Applying action stopProcessId on app [primetraff](ids: [ 1 ])
+[PM2] [primetraff](1) ✓
+┌────┬────────────────────┬──────────┬──────┬───────────┬──────────┬──────────┐
+│ id │ name               │ mode     │ ↺    │ status    │ cpu      │ memory   │
+├────┼────────────────────┼──────────┼──────┼───────────┼──────────┼──────────┤
+│ 0  │ primetrack         │ fork     │ 67   │ online    │ 0%       │ 264.3mb  │
+│ 1  │ primetraff         │ fork     │ 167  │ stopped   │ 0%       │ 0b       │
+└────┴────────────────────┴──────────┴──────┴───────────┴──────────┴──────────┘
+[PM2] Applying action restartProcessId on app [primetraff](ids: [ 1 ])
+[PM2] [primetraff](1) ✓
+[PM2] Process successfully started
+┌────┬────────────────────┬──────────┬──────┬───────────┬──────────┬──────────┐
+│ id │ name               │ mode     │ ↺    │ status    │ cpu      │ memory   │
+├────┼────────────────────┼──────────┼──────┼───────────┼──────────┼──────────┤
+│ 0  │ primetrack         │ fork     │ 67   │ online    │ 0%       │ 264.0mb  │
+│ 1  │ primetraff         │ fork     │ 167  │ online    │ 0%       │ 18.3mb   │
+└────┴────────────────────┴──────────┴──────┴───────────┴──────────┴──────────┘
+[root@v742573 ~]# cat /var/www/primetraff.com/.env 2>/dev/null; echo "---"; pm2 env 1
+---
+namespace: default
+km_link: false
+vizion_running: false
+NODE_APP_INSTANCE: 0
+PORT: 4000
+SHELL: /bin/bash
+HISTCONTROL: ignoredups
+HISTSIZE: 1000
+HOSTNAME: v742573.ip.webhost1.net
+PWD: /var/www/primetraff.com
+LOGNAME: root
+XDG_SESSION_TYPE: tty
+MOTD_SHOWN: pam
+HOME: /root
+LANG: en_US.UTF-8
+LS_COLORS: rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=01;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=01;36:*.au=01;36:*.flac=01;36:*.m4a=01;36:*.mid=01;36:*.midi=01;36:*.mka=01;36:*.mp3=01;36:*.mpc=01;36:*.ogg=01;36:*.ra=01;36:*.wav=01;36:*.oga=01;36:*.opus=01;36:*.spx=01;36:*.xspf=01;36:
+SSH_CONNECTION: 85.94.17.34 51144 185.179.191.12 22
+XDG_SESSION_CLASS: user
+TERM: xterm-256color
+LESSOPEN: ||/usr/bin/lesspipe.sh %s
+USER: root
+SHLVL: 1
+XDG_SESSION_ID: 94
+XDG_RUNTIME_DIR: /run/user/0
+SSH_CLIENT: 85.94.17.34 51144 22
+DEBUGINFOD_URLS: https://debuginfod.centos.org/ 
+DOCKER_HOST: unix:///run/podman/podman.sock
+DEBUGINFOD_IMA_CERT_PATH: /etc/keys/ima:
+which_declare: declare -f
+PATH: /root/.local/bin:/root/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
+DBUS_SESSION_BUS_ADDRESS: unix:path=/run/user/0/bus
+MAIL: /var/spool/mail/root
+SSH_TTY: /dev/pts/0
+OLDPWD: /var/www/primetraff.com
+BASH_FUNC_which%%: () {  ( alias;
+ eval ${which_declare} ) | /usr/bin/which --tty-only --read-alias --read-functions --show-tilde --show-dot $@
+}
+_: /usr/bin/pm2
+PM2_USAGE: CLI
+PM2_HOME: /root/.pm2
+unique_id: 146c5dbd-e5b9-4d91-9cf6-ef39717050c3
+version: 1.0.0
+node_version: 20.20.0
+[root@v742573 ~]# 
