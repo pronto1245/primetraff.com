@@ -6,6 +6,8 @@ import multer from "multer";
 import path from "path";
 import { randomUUID } from "crypto";
 import fs from "fs";
+import { translate } from "@vitalets/google-translate-api";
+import { parse as parseHtml } from "node-html-parser";
 
 function sanitizeHtml(html: string): string {
   if (!html) return html;
@@ -140,6 +142,89 @@ export async function registerRoutes(
       res.json(posts);
     } catch (e: any) {
       res.status(500).json({ error: e.message });
+    }
+  });
+
+  async function translateText(text: string, from: string, to: string): Promise<string> {
+    if (!text || !text.trim()) return text;
+    const MAX_CHUNK = 4500;
+    if (text.length <= MAX_CHUNK) {
+      const result = await translate(text, { from, to });
+      return result.text;
+    }
+    const sentences = text.match(/[^.!?]+[.!?]+|[^.!?]+$/g) || [text];
+    const chunks: string[] = [];
+    let current = "";
+    for (const s of sentences) {
+      if ((current + s).length > MAX_CHUNK && current) {
+        chunks.push(current);
+        current = s;
+      } else {
+        current += s;
+      }
+    }
+    if (current) chunks.push(current);
+    const translated: string[] = [];
+    for (const chunk of chunks) {
+      const result = await translate(chunk, { from, to });
+      translated.push(result.text);
+    }
+    return translated.join("");
+  }
+
+  async function translateHtml(html: string, from: string, to: string): Promise<string> {
+    if (!html || !html.trim()) return html;
+    const bannerPh = "XBNRX";
+    let processed = html.replace(/\[BANNER\]/g, bannerPh);
+    const root = parseHtml(processed, { comment: true });
+    const textNodes: { node: any; original: string }[] = [];
+    function collectText(node: any) {
+      if (node.nodeType === 3) {
+        const txt = node.rawText.trim();
+        if (txt && txt !== bannerPh) {
+          textNodes.push({ node, original: node.rawText });
+        }
+      }
+      if (node.childNodes) {
+        for (const child of node.childNodes) {
+          collectText(child);
+        }
+      }
+    }
+    collectText(root);
+    for (const tn of textNodes) {
+      try {
+        const trimmed = tn.original.trim();
+        if (!trimmed) continue;
+        const translated = await translateText(trimmed, from, to);
+        const leading = tn.original.match(/^\s*/)?.[0] || "";
+        const trailing = tn.original.match(/\s*$/)?.[0] || "";
+        tn.node.rawText = leading + translated.trim() + trailing;
+      } catch {
+        // keep original on failure
+      }
+    }
+    let result = root.toString();
+    result = result.replace(new RegExp(bannerPh, "g"), "[BANNER]");
+    return result;
+  }
+
+  app.post("/api/translate", checkAdmin, async (req, res) => {
+    try {
+      const { direction, title, excerpt, content } = req.body;
+      if (!direction || !["ru2en", "en2ru"].includes(direction)) {
+        return res.status(400).json({ error: "Invalid direction. Use 'ru2en' or 'en2ru'" });
+      }
+      const from = direction === "ru2en" ? "ru" : "en";
+      const to = direction === "ru2en" ? "en" : "ru";
+      const results: any = {};
+      if (title) results.title = await translateText(title, from, to);
+      if (excerpt) results.excerpt = await translateText(excerpt, from, to);
+      if (content) results.content = await translateHtml(content, from, to);
+      res.json(results);
+    } catch (e: any) {
+      console.error("Translation error:", e.message);
+      res.status(500).json({ error: "Ошибка перевода: " + (e.message || "Попробуйте позже") });
     }
   });
 

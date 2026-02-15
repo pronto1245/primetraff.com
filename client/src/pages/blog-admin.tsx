@@ -18,6 +18,8 @@ import {
   CheckCircle2,
   AlertCircle,
   LayoutTemplate,
+  Languages,
+  Loader2,
 } from "lucide-react";
 import type { BlogPost, InsertBlogPost } from "@shared/schema";
 import ReactQuill from "react-quill-new";
@@ -367,6 +369,59 @@ function PostEditor({ password, post, onClose }: { password: string; post: BlogP
     },
   });
 
+  const [translating, setTranslating] = useState(false);
+  const [translateError, setTranslateError] = useState("");
+
+  const handleTranslate = async () => {
+    const hasRu = form.titleRu && form.contentRu;
+    const hasEn = form.titleEn && form.contentEn;
+
+    if (!hasRu && !hasEn) {
+      setTranslateError("Заполните хотя бы одну языковую версию (заголовок + контент)");
+      return;
+    }
+
+    const direction = hasRu ? "ru2en" : "en2ru";
+    const sourceTitle = direction === "ru2en" ? form.titleRu : form.titleEn;
+    const sourceExcerpt = direction === "ru2en" ? form.excerptRu : form.excerptEn;
+    const sourceContent = direction === "ru2en" ? form.contentRu : form.contentEn;
+
+    const targetTitle = direction === "ru2en" ? form.titleEn : form.titleRu;
+    const targetContent = direction === "ru2en" ? form.contentEn : form.contentRu;
+
+    if (targetTitle && targetContent) {
+      if (!confirm(direction === "ru2en"
+        ? "Английская версия уже заполнена. Перезаписать?"
+        : "Русская версия уже заполнена. Перезаписать?"
+      )) return;
+    }
+
+    setTranslating(true);
+    setTranslateError("");
+    try {
+      const res = await fetch("/api/translate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "x-admin-password": password },
+        body: JSON.stringify({ direction, title: sourceTitle, excerpt: sourceExcerpt, content: sourceContent }),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || `Ошибка перевода (${res.status})`);
+      }
+      const data = await res.json();
+      setForm((f) => {
+        if (direction === "ru2en") {
+          return { ...f, titleEn: data.title || f.titleEn, excerptEn: data.excerpt || f.excerptEn, contentEn: data.content || f.contentEn };
+        } else {
+          return { ...f, titleRu: data.title || f.titleRu, excerptRu: data.excerpt || f.excerptRu, contentRu: data.content || f.contentRu };
+        }
+      });
+    } catch (e: any) {
+      setTranslateError(e.message || "Ошибка перевода");
+    }
+    setTranslating(false);
+  };
+
   const handleUpload = async (file: File) => {
     setUploading(true);
     try {
@@ -416,7 +471,7 @@ function PostEditor({ password, post, onClose }: { password: string; post: BlogP
               <p className="text-white/35 text-sm mt-0.5">Заполните все поля на русском и английском</p>
             </div>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 flex-wrap">
             <label className="flex items-center gap-2 text-sm text-white/60 cursor-pointer select-none" title="Отметьте чтобы статья появилась на сайте">
               <input
                 type="checkbox"
@@ -427,6 +482,16 @@ function PostEditor({ password, post, onClose }: { password: string; post: BlogP
               />
               Опубликовать сразу
             </label>
+            <Button
+              variant="outline"
+              onClick={handleTranslate}
+              disabled={translating}
+              className="border-white/15 text-white/70"
+              data-testid="button-translate"
+            >
+              {translating ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Languages className="w-4 h-4 mr-2" />}
+              {translating ? "Перевод..." : "Перевести"}
+            </Button>
             <Button
               onClick={() => saveMutation.mutate()}
               disabled={saveMutation.isPending || !canSave}
@@ -449,6 +514,13 @@ function PostEditor({ password, post, onClose }: { password: string; post: BlogP
           <div className="mb-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-300 text-sm flex items-center gap-2">
             <AlertCircle className="w-4 h-4 flex-shrink-0" />
             {saveError}
+          </div>
+        )}
+
+        {translateError && (
+          <div className="mb-4 p-3 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-300 text-sm flex items-center gap-2">
+            <AlertCircle className="w-4 h-4 flex-shrink-0" />
+            {translateError}
           </div>
         )}
 
