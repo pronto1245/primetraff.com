@@ -50,7 +50,7 @@ export default function BlogPage() {
               </p>
             </div>
 
-            <div className="flex items-center justify-center mb-10 overflow-x-auto no-scrollbar">
+            <div className="mb-10 overflow-x-auto no-scrollbar">
               <div className="flex gap-2 p-1.5 rounded-2xl bg-white/[0.06] border border-white/[0.12] backdrop-blur-sm" data-testid="blog-category-tabs">
                 {CATEGORIES.map((cat) => {
                   const Icon = cat.icon;
@@ -59,7 +59,7 @@ export default function BlogPage() {
                     <button
                       key={cat.key}
                       onClick={() => setActiveCategory(cat.key)}
-                      className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium whitespace-nowrap transition-all duration-300 border ${
+                      className={`flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium whitespace-nowrap transition-all duration-300 border ${
                         isActive
                           ? cat.active
                           : "text-white/50 hover:text-white/80 hover:bg-white/[0.06] border-transparent"
