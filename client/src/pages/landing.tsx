@@ -306,6 +306,7 @@ function Navigation() {
             <a href="#how-it-works" className="text-white/70 hover:text-white transition-colors" data-testid="link-how-it-works">{t(translations.nav.howItWorks, lang)}</a>
             <a href="#partners" className="text-white/70 hover:text-white transition-colors" data-testid="link-partners">{t(translations.nav.partners, lang)}</a>
             <a href="#faq" className="text-white/70 hover:text-white transition-colors" data-testid="link-faq">{t(translations.nav.faq, lang)}</a>
+            <a href="/blog" className="text-white/70 hover:text-white transition-colors" data-testid="link-blog">{t(translations.blog.nav, lang)}</a>
           </div>
 
           <div className="hidden md:flex items-center gap-3">
@@ -358,6 +359,7 @@ function Navigation() {
               <a href="#how-it-works" className="text-white/70 py-3 min-h-[44px] flex items-center" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-how-it-works">{t(translations.nav.howItWorks, lang)}</a>
               <a href="#partners" className="text-white/70 py-3 min-h-[44px] flex items-center" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-partners">{t(translations.nav.partners, lang)}</a>
               <a href="#faq" className="text-white/70 py-3 min-h-[44px] flex items-center" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-faq">{t(translations.nav.faq, lang)}</a>
+              <a href="/blog" className="text-white/70 py-3 min-h-[44px] flex items-center" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-blog">{t(translations.blog.nav, lang)}</a>
               <a href={LOGIN_URL} target="_blank" rel="noopener noreferrer" className="w-full" data-testid="button-login-mobile">
                 <Button variant="outline" className="w-full border-white/25 text-white/80 font-medium rounded-full">
                   {t(translations.nav.login, lang)}

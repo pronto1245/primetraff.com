@@ -163,6 +163,22 @@ export const translations = {
     becomePartner: { ru: "Стать партнером", en: "Become a Partner" },
   },
   scrollToTop: { ru: "Наверх", en: "Back to top" },
+  blog: {
+    title: { ru: "Блог", en: "Blog" },
+    subtitle: { ru: "Полезные материалы для арбитражников", en: "Useful materials for affiliates" },
+    allCategories: { ru: "Все", en: "All" },
+    readMore: { ru: "Читать", en: "Read" },
+    backToBlog: { ru: "Назад в блог", en: "Back to Blog" },
+    noPosts: { ru: "Пока нет статей в этой категории", en: "No articles in this category yet" },
+    categories: {
+      basics: { ru: "Основные понятия", en: "Basic Concepts" },
+      beginner: { ru: "Новичку", en: "For Beginners" },
+      traffic: { ru: "Источники трафика", en: "Traffic Sources" },
+      trends: { ru: "iGaming Тренды", en: "iGaming Trends" },
+      news: { ru: "Новости", en: "News" },
+    },
+    nav: { ru: "Блог", en: "Blog" },
+  },
 } as const;
 
 export type Translations = typeof translations;
