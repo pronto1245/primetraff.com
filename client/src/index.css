@@ -362,7 +362,7 @@
   border: 2px solid rgba(0,136,204,0.25);
   margin: 32px 0;
   padding: 0;
-  min-height: 100px;
+  height: 100px;
 }
 .primetraff-banner__glow {
   position: absolute;
@@ -430,26 +430,22 @@
   opacity: 0.6;
 }
 @media (max-width: 640px) {
-  .primetraff-banner {
-    min-height: auto;
-  }
   .primetraff-banner__inner {
-    flex-direction: column;
-    padding: 16px 20px;
-    gap: 12px;
-    text-align: center;
+    padding: 0 12px;
+    gap: 8px;
   }
   .primetraff-banner__logo img {
-    height: 80px;
-    margin: 0 auto !important;
+    height: 70px;
+    margin: 0 0 0 -8px !important;
   }
   .primetraff-banner__actions {
-    width: 100%;
-    justify-content: center;
+    gap: 6px;
   }
   .primetraff-banner__btn {
-    padding: 10px 20px;
-    font-size: 13px;
+    padding: 6px 10px;
+    font-size: 10px;
+    border-radius: 8px;
+    letter-spacing: 0.03em;
   }
 }
 
