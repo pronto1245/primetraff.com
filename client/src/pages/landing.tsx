@@ -9,7 +9,6 @@ import {
   BarChart3, 
   Users, 
   DollarSign,
-  MessageCircle,
   Globe,
   CheckCircle,
   Star,
@@ -109,41 +108,6 @@ function AnimatedSection({ children, className = "", delay = 0 }: { children: Re
     >
       {children}
     </motion.div>
-  );
-}
-
-function AnimatedCounter({ value, suffix = "", prefix = "", duration = 2 }: { value: number; suffix?: string; prefix?: string; duration?: number }) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
-  const [count, setCount] = useState(0);
-  
-  useEffect(() => {
-    if (!isInView) return;
-    
-    let startTime: number;
-    let animationFrame: number;
-    
-    const animate = (timestamp: number) => {
-      if (!startTime) startTime = timestamp;
-      const progress = Math.min((timestamp - startTime) / (duration * 1000), 1);
-      
-      const easeOut = 1 - Math.pow(1 - progress, 3);
-      setCount(Math.floor(easeOut * value));
-      
-      if (progress < 1) {
-        animationFrame = requestAnimationFrame(animate);
-      }
-    };
-    
-    animationFrame = requestAnimationFrame(animate);
-    
-    return () => cancelAnimationFrame(animationFrame);
-  }, [isInView, value, duration]);
-  
-  return (
-    <span ref={ref}>
-      {prefix}{count.toLocaleString()}{suffix}
-    </span>
   );
 }
 
@@ -464,7 +428,7 @@ function HeroSection() {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(0,100,200,0.2),_transparent_60%)]" />
       <GlowingOrb />
       
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-28 w-full">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-24 lg:py-32 w-full">
         <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
           <div className="flex-1 relative">
             <motion.div
@@ -538,39 +502,14 @@ function HeroSection() {
           </motion.div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.6 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6 max-w-5xl mt-12 lg:mt-16"
+          className="text-white/30 text-sm md:text-base mt-16 lg:mt-20 max-w-lg tracking-wide"
         >
-          {[
-            { value: 500, suffix: "+", label: t(translations.hero.stats.partners, lang), id: "partners", color: "#a78bfa", borderColor: "rgba(167,139,250,0.25)", icon: Users },
-            { value: 2, prefix: "$", suffix: "M+", label: t(translations.hero.stats.payouts, lang), id: "payouts", color: "#fbbf24", borderColor: "rgba(251,191,36,0.25)", icon: DollarSign },
-            { value: 24, suffix: "/7", label: t(translations.hero.stats.support, lang), id: "support", color: "#38bdf8", borderColor: "rgba(56,189,248,0.25)", icon: MessageCircle },
-            { value: 100, suffix: "%", label: t(translations.hero.stats.honest, lang), id: "honest", color: "#34d399", borderColor: "rgba(52,211,153,0.25)", icon: Shield },
-          ].map((stat, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.7 + i * 0.1 }}
-              className="relative rounded-2xl p-5 lg:p-7 overflow-hidden group"
-              style={{ background: "rgba(255,255,255,0.04)", border: `1px solid ${stat.borderColor}` }}
-            >
-              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: `radial-gradient(circle at 50% 0%, ${stat.color}12, transparent 70%)` }} />
-              <div className="absolute top-2 right-2 opacity-[0.07]">
-                <stat.icon className="w-16 h-16 lg:w-20 lg:h-20" style={{ color: stat.color }} />
-              </div>
-              <div className="relative z-10 text-center" data-testid={`stat-${stat.id}`}>
-                <div className="text-3xl lg:text-5xl font-black mb-1" style={{ color: stat.color, textShadow: `0 0 30px ${stat.color}40` }} data-testid={`text-stat-value-${stat.id}`}>
-                  <AnimatedCounter value={stat.value} prefix={stat.prefix || ""} suffix={stat.suffix} duration={2} />
-                </div>
-                <div className="text-sm lg:text-base text-white/60 font-medium">{stat.label}</div>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+          {t({ ru: "CPA \u00b7 RevShare \u00b7 Hybrid \u2014 Gambling & Betting", en: "CPA \u00b7 RevShare \u00b7 Hybrid \u2014 Gambling & Betting" }, lang)}
+        </motion.p>
       </div>
 
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
