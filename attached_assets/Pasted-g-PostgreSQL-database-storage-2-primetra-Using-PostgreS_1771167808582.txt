@@ -1,0 +1,44 @@
+g PostgreSQL database storage
+2|primetra | Using PostgreSQL database storage
+2|primetra | Using PostgreSQL database storage
+2|primetra | Using PostgreSQL database storage
+2|primetra | Using PostgreSQL database storage
+2|primetra | Using PostgreSQL database storage
+2|primetra | Using PostgreSQL database storage
+2|primetra | Using PostgreSQL database storage
+2|primetra | Using PostgreSQL database storage
+2|primetra | Using PostgreSQL database storage
+
+/root/.pm2/logs/primetraff-error.log last 30 lines:
+2|primetra | - /var/www/primetraff.com/dist/index.cjs
+2|primetra |     at Module._resolveFilename (node:internal/modules/cjs/loader:1207:15)
+2|primetra |     at Hook._require.Module.require (/usr/lib/node_modules/pm2/node_modules/require-in-the-middle/index.js:81:25)
+2|primetra |     at require (node:internal/modules/helpers:182:18)
+2|primetra |     at Object.<anonymous> (/var/www/primetraff.com/dist/index.cjs:72:102503)
+2|primetra |     at Module._compile (node:internal/modules/cjs/loader:1521:14)
+2|primetra |     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
+2|primetra |     at Module.load (node:internal/modules/cjs/loader:1266:32)
+2|primetra |     at Module._load (node:internal/modules/cjs/loader:1091:12)
+2|primetra |     at cjsLoader (node:internal/modules/esm/translators:298:15)
+2|primetra |     at ModuleWrap.<anonymous> (node:internal/modules/esm/translators:240:7) {
+2|primetra |   code: 'MODULE_NOT_FOUND',
+2|primetra |   requireStack: [ '/var/www/primetraff.com/dist/index.cjs' ]
+2|primetra | }
+2|primetra | Error: Cannot find module '@vitalets/google-translate-api'
+2|primetra | Require stack:
+2|primetra | - /var/www/primetraff.com/dist/index.cjs
+2|primetra |     at Module._resolveFilename (node:internal/modules/cjs/loader:1207:15)
+2|primetra |     at Hook._require.Module.require (/usr/lib/node_modules/pm2/node_modules/require-in-the-middle/index.js:81:25)
+2|primetra |     at require (node:internal/modules/helpers:182:18)
+2|primetra |     at Object.<anonymous> (/var/www/primetraff.com/dist/index.cjs:72:102503)
+2|primetra |     at Module._compile (node:internal/modules/cjs/loader:1521:14)
+2|primetra |     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
+2|primetra |     at Module.load (node:internal/modules/cjs/loader:1266:32)
+2|primetra |     at Module._load (node:internal/modules/cjs/loader:1091:12)
+2|primetra |     at cjsLoader (node:internal/modules/esm/translators:298:15)
+2|primetra |     at ModuleWrap.<anonymous> (node:internal/modules/esm/translators:240:7) {
+2|primetra |   code: 'MODULE_NOT_FOUND',
+2|primetra |   requireStack: [ '/var/www/primetraff.com/dist/index.cjs' ]
+2|primetra | }
+
+[root@v742573 primetraff.com]# 
