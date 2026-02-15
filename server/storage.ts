@@ -1,5 +1,7 @@
-import { type User, type InsertUser, type BlogPost, type InsertBlogPost } from "@shared/schema";
-import { randomUUID } from "crypto";
+import { type User, type InsertUser, type BlogPost, type InsertBlogPost, users, blogPosts } from "@shared/schema";
+import { drizzle } from "drizzle-orm/node-postgres";
+import { eq, desc, and } from "drizzle-orm";
+import pg from "pg";
 
 export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
@@ -14,77 +16,64 @@ export interface IStorage {
   deleteBlogPost(id: string): Promise<boolean>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<string, User>;
-  private posts: Map<string, BlogPost>;
+const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL! });
+const db = drizzle(pool);
 
-  constructor() {
-    this.users = new Map();
-    this.posts = new Map();
-  }
-
+export class DatabaseStorage implements IStorage {
   async getUser(id: string): Promise<User | undefined> {
-    return this.users.get(id);
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user;
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
+    const [user] = await db.select().from(users).where(eq(users.username, username));
+    return user;
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const id = randomUUID();
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
+    const [user] = await db.insert(users).values(insertUser).returning();
     return user;
   }
 
   async listBlogPosts(opts?: { category?: string; publishedOnly?: boolean }): Promise<BlogPost[]> {
-    let posts = Array.from(this.posts.values());
+    const conditions = [];
     if (opts?.category) {
-      posts = posts.filter(p => p.category === opts.category);
+      conditions.push(eq(blogPosts.category, opts.category));
     }
-    if (opts?.publishedOnly) {
-      posts = posts.filter(p => p.isPublished);
+    if (opts?.publishedOnly !== false) {
+      conditions.push(eq(blogPosts.isPublished, true));
     }
-    posts.sort((a, b) => (b.createdAt?.getTime() || 0) - (a.createdAt?.getTime() || 0));
-    return posts;
+    const query = db.select().from(blogPosts).orderBy(desc(blogPosts.createdAt));
+    if (conditions.length > 0) {
+      return query.where(and(...conditions));
+    }
+    return query;
   }
 
   async getBlogPostBySlug(slug: string): Promise<BlogPost | undefined> {
-    return Array.from(this.posts.values()).find(p => p.slug === slug);
+    const [post] = await db.select().from(blogPosts).where(eq(blogPosts.slug, slug));
+    return post;
   }
 
   async getBlogPostById(id: string): Promise<BlogPost | undefined> {
-    return this.posts.get(id);
+    const [post] = await db.select().from(blogPosts).where(eq(blogPosts.id, id));
+    return post;
   }
 
   async createBlogPost(insert: InsertBlogPost): Promise<BlogPost> {
-    const id = randomUUID();
-    const post: BlogPost = {
-      ...insert,
-      id,
-      coverImage: insert.coverImage || null,
-      isPublished: insert.isPublished ?? false,
-      publishedAt: insert.publishedAt || null,
-      createdAt: new Date(),
-    };
-    this.posts.set(id, post);
+    const [post] = await db.insert(blogPosts).values(insert).returning();
     return post;
   }
 
   async updateBlogPost(id: string, update: Partial<InsertBlogPost>): Promise<BlogPost | undefined> {
-    const existing = this.posts.get(id);
-    if (!existing) return undefined;
-    const updated: BlogPost = { ...existing, ...update };
-    this.posts.set(id, updated);
-    return updated;
+    const [post] = await db.update(blogPosts).set(update).where(eq(blogPosts.id, id)).returning();
+    return post;
   }
 
   async deleteBlogPost(id: string): Promise<boolean> {
-    return this.posts.delete(id);
+    const result = await db.delete(blogPosts).where(eq(blogPosts.id, id)).returning();
+    return result.length > 0;
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();

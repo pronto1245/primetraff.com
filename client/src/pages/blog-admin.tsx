@@ -1,8 +1,7 @@
 import { useState, useRef } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { queryClient, apiRequest } from "@/lib/queryClient";
+import { queryClient } from "@/lib/queryClient";
 import { Button } from "@/components/ui/button";
-import { useLang } from "@/lib/language-context";
 import { Link } from "wouter";
 import {
   Plus,
@@ -15,7 +14,9 @@ import {
   Save,
   X,
   LogIn,
-  Image as ImageIcon,
+  ExternalLink,
+  CheckCircle2,
+  AlertCircle,
 } from "lucide-react";
 import type { BlogPost, InsertBlogPost } from "@shared/schema";
 import ReactQuill from "react-quill-new";
@@ -55,29 +56,49 @@ export default function BlogAdminPage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [editing, setEditing] = useState<BlogPost | null>(null);
   const [isCreating, setIsCreating] = useState(false);
+  const [loginError, setLoginError] = useState(false);
 
-  const handleLogin = () => {
-    localStorage.setItem("adminPassword", password);
-    setIsLoggedIn(true);
+  const handleLogin = async () => {
+    try {
+      const res = await fetch("/api/blog-admin", {
+        headers: { "x-admin-password": password },
+      });
+      if (res.ok) {
+        localStorage.setItem("adminPassword", password);
+        setIsLoggedIn(true);
+        setLoginError(false);
+      } else {
+        setLoginError(true);
+      }
+    } catch {
+      setLoginError(true);
+    }
   };
 
   if (!isLoggedIn) {
     return (
       <div className="min-h-screen flex items-center justify-center" style={{ background: "linear-gradient(180deg, #001030 0%, #001845 50%, #001030 100%)" }}>
         <div className="w-full max-w-sm p-8 rounded-xl border border-white/10 bg-white/[0.04]">
-          <h2 className="text-xl font-bold text-white mb-6 text-center" data-testid="text-admin-login-title">Blog Admin</h2>
+          <h2 className="text-xl font-bold text-white mb-2 text-center" data-testid="text-admin-login-title">Админ-панель блога</h2>
+          <p className="text-white/40 text-sm text-center mb-6">Введите пароль для доступа</p>
+          {loginError && (
+            <div className="mb-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-300 text-sm flex items-center gap-2">
+              <AlertCircle className="w-4 h-4 flex-shrink-0" />
+              Неверный пароль
+            </div>
+          )}
           <input
             type="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Admin password"
+            onChange={(e) => { setPassword(e.target.value); setLoginError(false); }}
+            placeholder="Пароль"
             className="w-full px-4 py-3 rounded-lg bg-white/[0.06] border border-white/10 text-white placeholder:text-white/30 mb-4 outline-none focus:border-sky-400/40"
             onKeyDown={(e) => e.key === "Enter" && handleLogin()}
             data-testid="input-admin-password"
           />
           <Button onClick={handleLogin} className="w-full" data-testid="button-admin-login">
             <LogIn className="w-4 h-4 mr-2" />
-            Login
+            Войти
           </Button>
         </div>
       </div>
@@ -117,17 +138,21 @@ function PostList({ password, onEdit, onCreate }: { password: string; onEdit: (p
 
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {
-      await fetch(`/api/blog/${id}`, {
+      const res = await fetch(`/api/blog/${id}`, {
         method: "DELETE",
         headers: { "x-admin-password": password },
       });
+      if (!res.ok) throw new Error("Ошибка удаления");
     },
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["/api/blog-admin"] }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/blog-admin"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/blog"] });
+    },
   });
 
   const togglePublish = useMutation({
     mutationFn: async ({ id, isPublished }: { id: string; isPublished: boolean }) => {
-      await fetch(`/api/blog/${id}`, {
+      const res = await fetch(`/api/blog/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -138,8 +163,15 @@ function PostList({ password, onEdit, onCreate }: { password: string; onEdit: (p
           publishedAt: !isPublished ? new Date().toISOString() : null,
         }),
       });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || "Ошибка публикации");
+      }
     },
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["/api/blog-admin"] }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/blog-admin"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/blog"] });
+    },
   });
 
   return (
@@ -148,22 +180,35 @@ function PostList({ password, onEdit, onCreate }: { password: string; onEdit: (p
         <div className="flex items-center justify-between mb-8 flex-wrap gap-4">
           <div className="flex items-center gap-4">
             <Link href="/blog" data-testid="link-admin-back-to-blog">
-              <Button variant="ghost" size="icon" className="text-white/50 hover:text-white">
+              <Button variant="ghost" size="icon" className="text-white/50">
                 <ArrowLeft className="w-5 h-5" />
               </Button>
             </Link>
-            <h1 className="text-2xl font-bold text-white" data-testid="text-admin-title">Blog Admin</h1>
+            <div>
+              <h1 className="text-2xl font-bold text-white" data-testid="text-admin-title">Управление блогом</h1>
+              <p className="text-white/40 text-sm mt-0.5">Создавайте и публикуйте статьи</p>
+            </div>
           </div>
           <Button onClick={onCreate} data-testid="button-admin-create-post">
             <Plus className="w-4 h-4 mr-2" />
-            New Post
+            Новая статья
           </Button>
         </div>
 
+        {togglePublish.error && (
+          <div className="mb-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-300 text-sm flex items-center gap-2">
+            <AlertCircle className="w-4 h-4 flex-shrink-0" />
+            {(togglePublish.error as Error).message}
+          </div>
+        )}
+
         {isLoading ? (
-          <div className="text-white/40 text-center py-20">Loading...</div>
+          <div className="text-white/40 text-center py-20">Загрузка...</div>
         ) : posts.length === 0 ? (
-          <div className="text-white/40 text-center py-20" data-testid="text-admin-no-posts">No posts yet</div>
+          <div className="text-center py-20">
+            <p className="text-white/40 text-lg mb-2" data-testid="text-admin-no-posts">Статей пока нет</p>
+            <p className="text-white/25 text-sm">Нажмите «Новая статья» чтобы создать первую</p>
+          </div>
         ) : (
           <div className="space-y-3">
             {posts.map((post) => (
@@ -181,17 +226,34 @@ function PostList({ password, onEdit, onCreate }: { password: string; onEdit: (p
                     <span className="text-xs text-sky-400/60 px-2 py-0.5 rounded bg-sky-400/10">
                       {CATEGORIES.find(c => c.key === post.category)?.label || post.category}
                     </span>
-                    <span className={`text-xs px-2 py-0.5 rounded ${post.isPublished ? "text-emerald-400/80 bg-emerald-400/10" : "text-white/30 bg-white/5"}`}>
-                      {post.isPublished ? "Published" : "Draft"}
+                    <span className={`text-xs px-2 py-0.5 rounded flex items-center gap-1 ${post.isPublished ? "text-emerald-400/80 bg-emerald-400/10" : "text-amber-400/60 bg-amber-400/10"}`}>
+                      {post.isPublished ? (
+                        <><CheckCircle2 className="w-3 h-3" /> Опубликовано</>
+                      ) : (
+                        <><AlertCircle className="w-3 h-3" /> Черновик</>
+                      )}
                     </span>
+                    {post.publishedAt && (
+                      <span className="text-xs text-white/25">
+                        {new Date(post.publishedAt).toLocaleDateString("ru-RU", { day: "numeric", month: "short", year: "numeric" })}
+                      </span>
+                    )}
                   </div>
                 </div>
                 <div className="flex items-center gap-2 flex-shrink-0">
+                  {post.isPublished && (
+                    <a href={`/blog/${post.slug}`} target="_blank" rel="noopener noreferrer" data-testid={`link-view-post-${post.id}`}>
+                      <Button variant="ghost" size="icon" className="text-white/40">
+                        <ExternalLink className="w-4 h-4" />
+                      </Button>
+                    </a>
+                  )}
                   <Button
                     variant="ghost"
                     size="icon"
                     onClick={() => togglePublish.mutate({ id: post.id, isPublished: post.isPublished })}
-                    className="text-white/40 hover:text-white"
+                    className={post.isPublished ? "text-emerald-400/60" : "text-amber-400/60"}
+                    title={post.isPublished ? "Снять с публикации" : "Опубликовать"}
                     data-testid={`button-toggle-publish-${post.id}`}
                   >
                     {post.isPublished ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -200,7 +262,8 @@ function PostList({ password, onEdit, onCreate }: { password: string; onEdit: (p
                     variant="ghost"
                     size="icon"
                     onClick={() => onEdit(post)}
-                    className="text-white/40 hover:text-white"
+                    className="text-white/40"
+                    title="Редактировать"
                     data-testid={`button-edit-post-${post.id}`}
                   >
                     <Edit className="w-4 h-4" />
@@ -209,9 +272,10 @@ function PostList({ password, onEdit, onCreate }: { password: string; onEdit: (p
                     variant="ghost"
                     size="icon"
                     onClick={() => {
-                      if (confirm("Delete this post?")) deleteMutation.mutate(post.id);
+                      if (confirm("Удалить эту статью?")) deleteMutation.mutate(post.id);
                     }}
-                    className="text-white/40 hover:text-red-400"
+                    className="text-white/40"
+                    title="Удалить"
                     data-testid={`button-delete-post-${post.id}`}
                   >
                     <Trash2 className="w-4 h-4" />
@@ -241,31 +305,41 @@ function PostEditor({ password, post, onClose }: { password: string; post: BlogP
     isPublished: post?.isPublished || false,
   });
   const [uploading, setUploading] = useState(false);
+  const [saveSuccess, setSaveSuccess] = useState(false);
+  const [saveError, setSaveError] = useState("");
 
   const saveMutation = useMutation({
     mutationFn: async () => {
       const body = {
         ...form,
-        publishedAt: form.isPublished ? (post?.publishedAt || new Date().toISOString()) : null,
+        publishedAt: form.isPublished ? (post?.publishedAt ? new Date(post.publishedAt).toISOString() : new Date().toISOString()) : null,
       };
-      if (post) {
-        await fetch(`/api/blog/${post.id}`, {
-          method: "PATCH",
-          headers: { "Content-Type": "application/json", "x-admin-password": password },
-          body: JSON.stringify(body),
-        });
-      } else {
-        await fetch("/api/blog", {
-          method: "POST",
-          headers: { "Content-Type": "application/json", "x-admin-password": password },
-          body: JSON.stringify(body),
-        });
+
+      const url = post ? `/api/blog/${post.id}` : "/api/blog";
+      const method = post ? "PATCH" : "POST";
+
+      const res = await fetch(url, {
+        method,
+        headers: { "Content-Type": "application/json", "x-admin-password": password },
+        body: JSON.stringify(body),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || `Ошибка сохранения (${res.status})`);
       }
+      return res.json();
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/blog-admin"] });
       queryClient.invalidateQueries({ queryKey: ["/api/blog"] });
-      onClose();
+      setSaveSuccess(true);
+      setSaveError("");
+      setTimeout(() => onClose(), 800);
+    },
+    onError: (err: Error) => {
+      setSaveError(err.message);
+      setSaveSuccess(false);
     },
   });
 
@@ -283,7 +357,7 @@ function PostEditor({ password, post, onClose }: { password: string; post: BlogP
       const data = await res.json();
       setForm((f) => ({ ...f, coverImage: data.url }));
     } catch (e) {
-      alert("Upload failed");
+      alert("Ошибка загрузки изображения");
     }
     setUploading(false);
   };
@@ -298,20 +372,25 @@ function PostEditor({ password, post, onClose }: { password: string; post: BlogP
     });
   };
 
+  const canSave = form.slug && form.titleRu && form.titleEn && form.excerptRu && form.excerptEn && form.contentRu && form.contentEn;
+
   return (
     <div className="min-h-screen" style={{ background: "linear-gradient(180deg, #001030 0%, #001845 50%, #001030 100%)" }}>
       <div className="max-w-5xl mx-auto px-6 py-10">
-        <div className="flex items-center justify-between mb-8 flex-wrap gap-4">
+        <div className="flex items-center justify-between mb-6 flex-wrap gap-4">
           <div className="flex items-center gap-4">
-            <Button variant="ghost" size="icon" onClick={onClose} className="text-white/50 hover:text-white" data-testid="button-editor-close">
+            <Button variant="ghost" size="icon" onClick={onClose} className="text-white/50" data-testid="button-editor-close">
               <ArrowLeft className="w-5 h-5" />
             </Button>
-            <h1 className="text-xl font-bold text-white" data-testid="text-editor-title">
-              {post ? "Edit Post" : "New Post"}
-            </h1>
+            <div>
+              <h1 className="text-xl font-bold text-white" data-testid="text-editor-title">
+                {post ? "Редактирование статьи" : "Новая статья"}
+              </h1>
+              <p className="text-white/35 text-sm mt-0.5">Заполните все поля на русском и английском</p>
+            </div>
           </div>
           <div className="flex items-center gap-3">
-            <label className="flex items-center gap-2 text-sm text-white/60 cursor-pointer">
+            <label className="flex items-center gap-2 text-sm text-white/60 cursor-pointer select-none" title="Отметьте чтобы статья появилась на сайте">
               <input
                 type="checkbox"
                 checked={form.isPublished}
@@ -319,29 +398,44 @@ function PostEditor({ password, post, onClose }: { password: string; post: BlogP
                 className="rounded"
                 data-testid="input-is-published"
               />
-              Publish
+              Опубликовать сразу
             </label>
             <Button
               onClick={() => saveMutation.mutate()}
-              disabled={saveMutation.isPending}
+              disabled={saveMutation.isPending || !canSave}
               data-testid="button-save-post"
             >
               <Save className="w-4 h-4 mr-2" />
-              {saveMutation.isPending ? "Saving..." : "Save"}
+              {saveMutation.isPending ? "Сохранение..." : "Сохранить"}
             </Button>
           </div>
         </div>
 
-        {saveMutation.error && (
-          <div className="mb-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-300 text-sm" data-testid="text-save-error">
-            {(saveMutation.error as Error).message}
+        {saveSuccess && (
+          <div className="mb-4 p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-sm flex items-center gap-2">
+            <CheckCircle2 className="w-4 h-4 flex-shrink-0" />
+            Статья сохранена успешно!
+          </div>
+        )}
+
+        {saveError && (
+          <div className="mb-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-300 text-sm flex items-center gap-2">
+            <AlertCircle className="w-4 h-4 flex-shrink-0" />
+            {saveError}
+          </div>
+        )}
+
+        {!canSave && !saveMutation.isPending && (
+          <div className="mb-4 p-3 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-300 text-sm flex items-center gap-2">
+            <AlertCircle className="w-4 h-4 flex-shrink-0" />
+            Заполните все обязательные поля (slug, заголовки, описания, контент на обоих языках)
           </div>
         )}
 
         <div className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm text-white/50 mb-1.5">Category</label>
+              <label className="block text-sm text-white/50 mb-1.5">Категория</label>
               <select
                 value={form.category}
                 onChange={(e) => updateField("category", e.target.value)}
@@ -354,19 +448,19 @@ function PostEditor({ password, post, onClose }: { password: string; post: BlogP
               </select>
             </div>
             <div>
-              <label className="block text-sm text-white/50 mb-1.5">Slug</label>
+              <label className="block text-sm text-white/50 mb-1.5">URL-адрес (slug) <span className="text-white/25">— генерируется из заголовка</span></label>
               <input
                 value={form.slug}
                 onChange={(e) => updateField("slug", e.target.value)}
                 className="w-full px-4 py-2.5 rounded-lg bg-white/[0.06] border border-white/10 text-white placeholder:text-white/20 outline-none focus:border-sky-400/40"
-                placeholder="my-article-slug"
+                placeholder="moya-statya"
                 data-testid="input-slug"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm text-white/50 mb-1.5">Cover Image</label>
+            <label className="block text-sm text-white/50 mb-1.5">Обложка</label>
             <div className="flex items-center gap-3 flex-wrap">
               {form.coverImage && (
                 <div className="relative">
@@ -396,9 +490,9 @@ function PostEditor({ password, post, onClose }: { password: string; post: BlogP
                 data-testid="button-upload-cover"
               >
                 <Upload className="w-4 h-4 mr-2" />
-                {uploading ? "Uploading..." : "Upload Image"}
+                {uploading ? "Загрузка..." : "Загрузить картинку"}
               </Button>
-              <span className="text-xs text-white/30">or paste URL:</span>
+              <span className="text-xs text-white/30">или вставьте ссылку:</span>
               <input
                 value={form.coverImage}
                 onChange={(e) => updateField("coverImage", e.target.value)}
@@ -411,22 +505,22 @@ function PostEditor({ password, post, onClose }: { password: string; post: BlogP
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm text-white/50 mb-1.5">Title (RU)</label>
+              <label className="block text-sm text-white/50 mb-1.5">Заголовок (RU) <span className="text-red-400">*</span></label>
               <input
                 value={form.titleRu}
                 onChange={(e) => updateField("titleRu", e.target.value)}
                 className="w-full px-4 py-2.5 rounded-lg bg-white/[0.06] border border-white/10 text-white placeholder:text-white/20 outline-none focus:border-sky-400/40"
-                placeholder="Заголовок статьи"
+                placeholder="Заголовок статьи на русском"
                 data-testid="input-title-ru"
               />
             </div>
             <div>
-              <label className="block text-sm text-white/50 mb-1.5">Title (EN)</label>
+              <label className="block text-sm text-white/50 mb-1.5">Заголовок (EN) <span className="text-red-400">*</span></label>
               <input
                 value={form.titleEn}
                 onChange={(e) => updateField("titleEn", e.target.value)}
                 className="w-full px-4 py-2.5 rounded-lg bg-white/[0.06] border border-white/10 text-white placeholder:text-white/20 outline-none focus:border-sky-400/40"
-                placeholder="Article title"
+                placeholder="Article title in English"
                 data-testid="input-title-en"
               />
             </div>
@@ -434,52 +528,52 @@ function PostEditor({ password, post, onClose }: { password: string; post: BlogP
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm text-white/50 mb-1.5">Excerpt (RU)</label>
+              <label className="block text-sm text-white/50 mb-1.5">Краткое описание (RU) <span className="text-red-400">*</span></label>
               <textarea
                 value={form.excerptRu}
                 onChange={(e) => updateField("excerptRu", e.target.value)}
                 rows={3}
                 className="w-full px-4 py-2.5 rounded-lg bg-white/[0.06] border border-white/10 text-white placeholder:text-white/20 outline-none focus:border-sky-400/40 resize-none"
-                placeholder="Краткое описание"
+                placeholder="Краткое описание для превью"
                 data-testid="input-excerpt-ru"
               />
             </div>
             <div>
-              <label className="block text-sm text-white/50 mb-1.5">Excerpt (EN)</label>
+              <label className="block text-sm text-white/50 mb-1.5">Краткое описание (EN) <span className="text-red-400">*</span></label>
               <textarea
                 value={form.excerptEn}
                 onChange={(e) => updateField("excerptEn", e.target.value)}
                 rows={3}
                 className="w-full px-4 py-2.5 rounded-lg bg-white/[0.06] border border-white/10 text-white placeholder:text-white/20 outline-none focus:border-sky-400/40 resize-none"
-                placeholder="Short description"
+                placeholder="Short description for preview"
                 data-testid="input-excerpt-en"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm text-white/50 mb-1.5">Content (RU)</label>
+            <label className="block text-sm text-white/50 mb-1.5">Содержание статьи (RU) <span className="text-red-400">*</span></label>
             <div className="blog-editor-dark">
               <ReactQuill
                 value={form.contentRu}
                 onChange={(v) => updateField("contentRu", v)}
                 modules={quillModules}
                 theme="snow"
-                placeholder="Содержание статьи..."
+                placeholder="Напишите содержание статьи на русском..."
                 data-testid="editor-content-ru"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm text-white/50 mb-1.5">Content (EN)</label>
+            <label className="block text-sm text-white/50 mb-1.5">Содержание статьи (EN) <span className="text-red-400">*</span></label>
             <div className="blog-editor-dark">
               <ReactQuill
                 value={form.contentEn}
                 onChange={(v) => updateField("contentEn", v)}
                 modules={quillModules}
                 theme="snow"
-                placeholder="Article content..."
+                placeholder="Write article content in English..."
                 data-testid="editor-content-en"
               />
             </div>

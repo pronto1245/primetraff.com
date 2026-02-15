@@ -33,7 +33,16 @@ export const blogPosts = pgTable("blog_posts", {
   createdAt: timestamp("created_at").notNull().default(sql`now()`),
 });
 
-export const insertBlogPostSchema = createInsertSchema(blogPosts).omit({
+const datePreprocess = (val: unknown) => {
+  if (val === null || val === undefined) return val;
+  if (val instanceof Date) return val;
+  if (typeof val === "string") return new Date(val);
+  return val;
+};
+
+export const insertBlogPostSchema = createInsertSchema(blogPosts, {
+  publishedAt: z.preprocess(datePreprocess, z.date().nullable().optional()),
+}).omit({
   id: true,
   createdAt: true,
 });
