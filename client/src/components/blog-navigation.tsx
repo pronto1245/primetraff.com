@@ -23,16 +23,15 @@ export default function BlogNavigation() {
             <img src={primeTraffLogo} alt="PrimeTraff" className="h-44 w-auto" width={853} height={171} />
           </Link>
 
-          <div className="hidden md:flex items-center gap-8">
-            <Link href="/" className="text-white/70 hover:text-white transition-colors" data-testid="link-blog-home">
-              {lang === "ru" ? "Главная" : "Home"}
-            </Link>
-            <Link href="/blog" className="text-white transition-colors font-medium" data-testid="link-blog-blog">
-              {t(translations.blog.nav, lang)}
-            </Link>
+          <div className="hidden lg:flex items-center gap-6">
+            <a href="/#features" className="text-white/70 hover:text-white transition-colors text-sm" data-testid="link-blog-features">{t(translations.nav.features, lang)}</a>
+            <a href="/#how-it-works" className="text-white/70 hover:text-white transition-colors text-sm" data-testid="link-blog-how-it-works">{t(translations.nav.howItWorks, lang)}</a>
+            <a href="/#partners" className="text-white/70 hover:text-white transition-colors text-sm" data-testid="link-blog-partners">{t(translations.nav.partners, lang)}</a>
+            <a href="/#faq" className="text-white/70 hover:text-white transition-colors text-sm" data-testid="link-blog-faq">{t(translations.nav.faq, lang)}</a>
+            <Link href="/blog" className="text-white transition-colors text-sm font-medium" data-testid="link-blog-blog">{t(translations.blog.nav, lang)}</Link>
           </div>
 
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-3">
             <button
               onClick={toggleLang}
               className="flex items-center gap-1.5 border border-white/20 bg-white/5 text-sm font-semibold px-3 py-1.5 rounded-full transition-colors hover:border-white/30 hover:bg-white/10"
@@ -57,7 +56,7 @@ export default function BlogNavigation() {
             </a>
           </div>
 
-          <div className="flex items-center gap-2 md:hidden">
+          <div className="flex items-center gap-2 lg:hidden">
             <button
               onClick={toggleLang}
               className="flex items-center gap-1 border border-white/20 bg-white/5 text-sm font-semibold px-2.5 py-1.5 rounded-full"
@@ -76,14 +75,17 @@ export default function BlogNavigation() {
         </div>
 
         {mobileMenuOpen && (
-          <div className="md:hidden bg-[#001a3a]/95 backdrop-blur-xl border-t border-white/10 py-4">
+          <div className="lg:hidden bg-[#001a3a]/95 backdrop-blur-xl border-t border-white/10 py-4">
             <div className="flex flex-col gap-4 px-4">
-              <Link href="/" className="text-white/70 py-3 min-h-[44px] flex items-center" onClick={() => setMobileMenuOpen(false)} data-testid="link-blog-mobile-home">
-                {lang === "ru" ? "Главная" : "Home"}
-              </Link>
-              <Link href="/blog" className="text-white py-3 min-h-[44px] flex items-center font-medium" onClick={() => setMobileMenuOpen(false)} data-testid="link-blog-mobile-blog">
-                {t(translations.blog.nav, lang)}
-              </Link>
+              <a href="/#features" className="text-white/70 py-3 min-h-[44px] flex items-center" onClick={() => setMobileMenuOpen(false)} data-testid="link-blog-mobile-features">{t(translations.nav.features, lang)}</a>
+              <a href="/#how-it-works" className="text-white/70 py-3 min-h-[44px] flex items-center" onClick={() => setMobileMenuOpen(false)} data-testid="link-blog-mobile-how-it-works">{t(translations.nav.howItWorks, lang)}</a>
+              <a href="/#partners" className="text-white/70 py-3 min-h-[44px] flex items-center" onClick={() => setMobileMenuOpen(false)} data-testid="link-blog-mobile-partners">{t(translations.nav.partners, lang)}</a>
+              <a href="/#faq" className="text-white/70 py-3 min-h-[44px] flex items-center" onClick={() => setMobileMenuOpen(false)} data-testid="link-blog-mobile-faq">{t(translations.nav.faq, lang)}</a>
+              <Link href="/blog" className="text-white py-3 min-h-[44px] flex items-center font-medium" onClick={() => setMobileMenuOpen(false)} data-testid="link-blog-mobile-blog">{t(translations.blog.nav, lang)}</Link>
+              <a href={TELEGRAM_CHANNEL_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-white/70 py-3 min-h-[44px]" data-testid="link-blog-mobile-telegram">
+                <SiTelegram className="w-4 h-4 text-[#0088CC]" />
+                {t(translations.nav.ourChannel, lang)}
+              </a>
               <a href={LOGIN_URL} target="_blank" rel="noopener noreferrer" className="w-full" data-testid="button-blog-login-mobile">
                 <Button variant="outline" className="w-full border-white/25 text-white/80 font-medium rounded-full">
                   {t(translations.nav.login, lang)}

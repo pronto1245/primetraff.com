@@ -14,6 +14,19 @@ const CATEGORIES = [
   { key: "news", label: translations.blog.categories.news },
 ];
 
+function BlogBackground({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="min-h-screen relative overflow-hidden">
+      <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, #001030 0%, #002060 30%, #0055AA 60%, #0088CC 100%)" }} />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(0,200,255,0.15),_transparent_60%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(0,100,200,0.2),_transparent_60%)]" />
+      <div className="hidden md:block absolute top-[20%] left-[10%] w-[500px] h-[500px] rounded-full blur-[200px] pointer-events-none" style={{ background: "radial-gradient(circle, rgba(0,140,220,0.12) 0%, transparent 70%)" }} />
+      <div className="hidden md:block absolute bottom-[10%] right-[5%] w-[400px] h-[400px] rounded-full blur-[180px] pointer-events-none" style={{ background: "radial-gradient(circle, rgba(0,180,255,0.08) 0%, transparent 70%)" }} />
+      <div className="relative z-10">{children}</div>
+    </div>
+  );
+}
+
 export default function BlogPostPage() {
   const { lang } = useLang();
   const params = useParams<{ slug: string }>();
@@ -24,34 +37,36 @@ export default function BlogPostPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen" style={{ background: "linear-gradient(180deg, #001030 0%, #001845 50%, #001030 100%)" }}>
+      <BlogBackground>
         <BlogNavigation />
         <div className="pt-28 pb-20 max-w-3xl mx-auto px-6 lg:px-8">
           <div className="animate-pulse space-y-6">
-            <div className="h-8 bg-white/[0.05] rounded w-2/3" />
-            <div className="h-64 bg-white/[0.05] rounded-xl" />
+            <div className="h-8 bg-white/[0.06] rounded w-2/3" />
+            <div className="h-64 bg-white/[0.06] rounded-xl" />
             <div className="space-y-3">
-              <div className="h-4 bg-white/[0.05] rounded w-full" />
-              <div className="h-4 bg-white/[0.05] rounded w-5/6" />
-              <div className="h-4 bg-white/[0.05] rounded w-4/6" />
+              <div className="h-4 bg-white/[0.06] rounded w-full" />
+              <div className="h-4 bg-white/[0.06] rounded w-5/6" />
+              <div className="h-4 bg-white/[0.06] rounded w-4/6" />
             </div>
           </div>
         </div>
-      </div>
+      </BlogBackground>
     );
   }
 
   if (error || !post) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{ background: "linear-gradient(180deg, #001030 0%, #001845 50%, #001030 100%)" }}>
+      <BlogBackground>
         <BlogNavigation />
-        <div className="text-center">
-          <p className="text-white/50 text-lg mb-4">{lang === "ru" ? "Статья не найдена" : "Article not found"}</p>
-          <Link href="/blog" className="text-sky-400 hover:text-sky-300 transition-colors" data-testid="link-back-to-blog-error">
-            {t(translations.blog.backToBlog, lang)}
-          </Link>
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <p className="text-white/50 text-lg mb-4">{lang === "ru" ? "Статья не найдена" : "Article not found"}</p>
+            <Link href="/blog" className="text-sky-400 hover:text-sky-300 transition-colors" data-testid="link-back-to-blog-error">
+              {t(translations.blog.backToBlog, lang)}
+            </Link>
+          </div>
         </div>
-      </div>
+      </BlogBackground>
     );
   }
 
@@ -60,7 +75,7 @@ export default function BlogPostPage() {
   const catLabel = CATEGORIES.find(c => c.key === post.category);
 
   return (
-    <div className="min-h-screen" style={{ background: "linear-gradient(180deg, #001030 0%, #001845 50%, #001030 100%)" }}>
+    <BlogBackground>
       <BlogNavigation />
 
       <div className="pt-24 lg:pt-28 pb-20">
@@ -74,14 +89,14 @@ export default function BlogPostPage() {
             {t(translations.blog.backToBlog, lang)}
           </Link>
 
-          <div className="flex items-center gap-3 mb-5">
+          <div className="flex items-center gap-3 mb-5 flex-wrap">
             {catLabel && (
-              <span className="text-xs font-medium text-sky-400/80 px-2.5 py-1 rounded-full bg-sky-400/10 border border-sky-400/20">
+              <span className="text-xs font-medium text-sky-300 px-2.5 py-1 rounded-full bg-sky-400/15 border border-sky-400/25">
                 {t(catLabel.label, lang)}
               </span>
             )}
             {post.publishedAt && (
-              <span className="flex items-center gap-1 text-xs text-white/30">
+              <span className="flex items-center gap-1 text-xs text-white/35">
                 <Calendar className="w-3 h-3" />
                 {new Date(post.publishedAt).toLocaleDateString(lang === "ru" ? "ru-RU" : "en-US", {
                   day: "numeric", month: "long", year: "numeric"
@@ -95,7 +110,7 @@ export default function BlogPostPage() {
           </h1>
 
           {post.coverImage && (
-            <div className="rounded-xl overflow-hidden mb-10 border border-white/[0.08]">
+            <div className="rounded-xl overflow-hidden mb-10 border border-white/[0.1]">
               <img
                 src={post.coverImage}
                 alt={title}
@@ -125,7 +140,7 @@ export default function BlogPostPage() {
         </div>
       </div>
 
-      <footer className="relative z-10 py-8 border-t border-white/[0.06]" style={{ background: "#001030" }}>
+      <footer className="py-8 border-t border-white/[0.08]">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="text-white/35 text-xs">
             © 2026 PrimeTraff. {t(translations.footer.allRights, lang)}
@@ -135,6 +150,6 @@ export default function BlogPostPage() {
           </Link>
         </div>
       </footer>
-    </div>
+    </BlogBackground>
   );
 }
