@@ -24,9 +24,23 @@ function renderBannerHtml(lang: string): string {
   </div>`;
 }
 
+function groupConsecutiveImages(html: string): string {
+  return html.replace(
+    /(<p>\s*<img\s[^>]*>\s*<\/p>\s*){2,}/gi,
+    (match) => {
+      const imgs = match.match(/<img\s[^>]*>/gi);
+      if (!imgs || imgs.length < 2) return match;
+      const wrapped = imgs.map(img => `<div class="blog-gallery__item">${img}</div>`).join("");
+      return `<div class="blog-gallery blog-gallery--${Math.min(imgs.length, 4)}">${wrapped}</div>`;
+    }
+  );
+}
+
 function processContent(html: string, lang: string): string {
-  return html.replace(/<p>\s*\[BANNER\]\s*<\/p>/g, renderBannerHtml(lang))
-             .replace(/\[BANNER\]/g, renderBannerHtml(lang));
+  let result = html.replace(/<p>\s*\[BANNER\]\s*<\/p>/g, renderBannerHtml(lang))
+                   .replace(/\[BANNER\]/g, renderBannerHtml(lang));
+  result = groupConsecutiveImages(result);
+  return result;
 }
 
 const CATEGORIES = [
