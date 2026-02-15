@@ -454,7 +454,7 @@
   left: 50%;
   transform: translateX(-50%);
   border-radius: 16px;
-  max-width: min(900px, calc(100vw - 32px));
+  max-width: min(1060px, calc(100vw - 32px));
 }
 .prose .primetraff-banner a {
   text-decoration: none !important;
