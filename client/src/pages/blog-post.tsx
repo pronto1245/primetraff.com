@@ -46,17 +46,44 @@ function sanitizeContentHtml(html: string): string {
   result = result.replace(/<span[^>]*>([\s\S]*?)<\/span>/gi, "$1");
   result = result.replace(/<span[^>]*>([\s\S]*?)<\/span>/gi, "$1");
   const bannerPh = "___BANNER_PH___";
+  const tableParts: string[] = [];
+  result = result.replace(/\[TABLE\]([\s\S]*?)\[\/TABLE\]/g, (_, data) => {
+    tableParts.push(data);
+    return `___TABLE_PH_${tableParts.length - 1}___`;
+  });
   result = result.replace(/\[BANNER\]/g, bannerPh);
   result = result.replace(/<p>\s*<\/p>/g, "");
   result = result.replace(new RegExp(bannerPh, "g"), "[BANNER]");
+  tableParts.forEach((data, i) => {
+    result = result.replace(`___TABLE_PH_${i}___`, `[TABLE]${data}[/TABLE]`);
+  });
   result = result.replace(/ {2,}/g, " ");
   return result;
+}
+
+function escapeHtml(text: string): string {
+  return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+}
+
+function renderTableHtml(tableData: string): string {
+  const rows = tableData.split(";;").map(r => r.trim()).filter(Boolean);
+  if (rows.length < 2) return "";
+  const headers = rows[0].split("|").map(h => escapeHtml(h.trim()));
+  const bodyRows = rows.slice(1);
+  const thCells = headers.map(h => `<th>${h}</th>`).join("");
+  const trRows = bodyRows.map(row => {
+    const cells = row.split("|").map(c => escapeHtml(c.trim()));
+    return `<tr>${cells.map((c, i) => `<td${i === 0 ? ' class="blog-table__label"' : ""}>${c}</td>`).join("")}</tr>`;
+  }).join("");
+  return `<div class="blog-table-wrap"><table class="blog-table"><thead><tr>${thCells}</tr></thead><tbody>${trRows}</tbody></table></div>`;
 }
 
 function processContent(html: string, lang: string): string {
   let result = sanitizeContentHtml(html);
   result = result.replace(/<p>\s*\[BANNER\]\s*<\/p>/g, renderBannerHtml(lang))
                  .replace(/\[BANNER\]/g, renderBannerHtml(lang));
+  result = result.replace(/<p>\s*\[TABLE\]([\s\S]*?)\[\/TABLE\]\s*<\/p>/g, (_, data) => renderTableHtml(data));
+  result = result.replace(/\[TABLE\]([\s\S]*?)\[\/TABLE\]/g, (_, data) => renderTableHtml(data));
   result = groupConsecutiveImages(result);
   return result;
 }

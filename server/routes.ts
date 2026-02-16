@@ -20,9 +20,17 @@ function sanitizeHtml(html: string): string {
   result = result.replace(/<span[^>]*>([\s\S]*?)<\/span>/gi, "$1");
   result = result.replace(/<span[^>]*>([\s\S]*?)<\/span>/gi, "$1");
   const bannerPh = "___BANNER_PH___";
+  const tablePhs: string[] = [];
+  result = result.replace(/\[TABLE\]([\s\S]*?)\[\/TABLE\]/g, (_, data) => {
+    tablePhs.push(data);
+    return `___TABLE_PH_${tablePhs.length - 1}___`;
+  });
   result = result.replace(/\[BANNER\]/g, bannerPh);
   result = result.replace(/<p>\s*<\/p>/g, "");
   result = result.replace(new RegExp(bannerPh, "g"), "[BANNER]");
+  tablePhs.forEach((data, i) => {
+    result = result.replace(`___TABLE_PH_${i}___`, `[TABLE]${data}[/TABLE]`);
+  });
   result = result.replace(/(?!<pre[^>]*>|<code[^>]*>) {2,}/g, " ");
   return result.trim();
 }
@@ -175,13 +183,36 @@ export async function registerRoutes(
   async function translateHtml(html: string, from: string, to: string): Promise<string> {
     if (!html || !html.trim()) return html;
     const bannerPh = "XBNRX";
-    let processed = html.replace(/\[BANNER\]/g, bannerPh);
+    const tableParts: string[] = [];
+    let processed = html.replace(/\[TABLE\]([\s\S]*?)\[\/TABLE\]/g, (_, data) => {
+      tableParts.push(data);
+      return `XTBLX${tableParts.length - 1}XTBLX`;
+    });
+    for (let i = 0; i < tableParts.length; i++) {
+      const rows = tableParts[i].split(";;");
+      const translatedRows: string[] = [];
+      for (const row of rows) {
+        const cells = row.split("|");
+        const translatedCells: string[] = [];
+        for (const cell of cells) {
+          const trimmed = cell.trim();
+          if (!trimmed) { translatedCells.push(cell); continue; }
+          try {
+            const t = await translateText(trimmed, from, to);
+            translatedCells.push(t.trim());
+          } catch { translatedCells.push(cell); }
+        }
+        translatedRows.push(translatedCells.join("|"));
+      }
+      tableParts[i] = translatedRows.join(";;");
+    }
+    processed = processed.replace(/\[BANNER\]/g, bannerPh);
     const root = parseHtml(processed, { comment: true });
     const textNodes: { node: any; original: string }[] = [];
     function collectText(node: any) {
       if (node.nodeType === 3) {
         const txt = node.rawText.trim();
-        if (txt && txt !== bannerPh) {
+        if (txt && txt !== bannerPh && !txt.match(/^XTBLX\d+XTBLX$/)) {
           textNodes.push({ node, original: node.rawText });
         }
       }
@@ -206,6 +237,9 @@ export async function registerRoutes(
     }
     let result = root.toString();
     result = result.replace(new RegExp(bannerPh, "g"), "[BANNER]");
+    tableParts.forEach((data, i) => {
+      result = result.replace(`XTBLX${i}XTBLX`, `[TABLE]${data}[/TABLE]`);
+    });
     return result;
   }
 

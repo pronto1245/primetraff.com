@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useCallback } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { queryClient } from "@/lib/queryClient";
 import { Button } from "@/components/ui/button";
@@ -20,6 +20,7 @@ import {
   LayoutTemplate,
   Languages,
   Loader2,
+  Table,
 } from "lucide-react";
 import type { BlogPost, InsertBlogPost } from "@shared/schema";
 import ReactQuill from "react-quill-new";
@@ -36,20 +37,26 @@ const CATEGORIES = [
 ];
 
 const quillModules = {
-  toolbar: [
-    [{ header: [1, 2, 3, false] }],
-    ["bold", "italic", "underline", "strike"],
-    [{ list: "ordered" }, { list: "bullet" }],
-    ["blockquote", "code-block"],
-    ["link", "image"],
-    ["clean"],
-  ],
+  toolbar: {
+    container: [
+      [{ header: [1, 2, 3, false] }],
+      ["bold", "italic", "underline", "strike"],
+      [{ list: "ordered" }, { list: "bullet" }],
+      ["blockquote", "code-block"],
+      ["link", "image"],
+      ["clean"],
+    ],
+  },
+  clipboard: {
+    matchVisual: false,
+  },
 };
 
 const quillFormats = [
   "header", "bold", "italic", "underline", "strike",
   "list", "blockquote", "code-block",
   "link", "image",
+  "color", "background", "align",
 ];
 
 function slugify(text: string): string {
@@ -316,6 +323,60 @@ function PostEditor({ password, post, onClose }: { password: string; post: BlogP
     } else {
       setForm((f) => ({ ...f, [field]: f[field] + `<p>${BANNER_MARKER}</p>` }));
     }
+  };
+
+  const [tableModal, setTableModal] = useState<{ field: "contentRu" | "contentEn"; editorRef: React.RefObject<ReactQuill | null> } | null>(null);
+  const [tableRows, setTableRows] = useState(3);
+  const [tableCols, setTableCols] = useState(4);
+  const [tableData, setTableData] = useState<string[][]>([]);
+
+  const openTableModal = (editorRef: React.RefObject<ReactQuill | null>, field: "contentRu" | "contentEn") => {
+    const r = 3, c = 4;
+    setTableRows(r);
+    setTableCols(c);
+    setTableData(Array.from({ length: r + 1 }, () => Array(c).fill("")));
+    setTableModal({ field, editorRef });
+  };
+
+  const insertTable = () => {
+    if (!tableModal) return;
+    const marker = tableData.map(row => row.join("|")).join(";;");
+    const text = `[TABLE]${marker}[/TABLE]`;
+    const editor = tableModal.editorRef.current?.getEditor();
+    if (editor) {
+      const range = editor.getSelection(true);
+      const idx = range ? range.index : editor.getLength() - 1;
+      editor.insertText(idx, "\n");
+      editor.insertText(idx + 1, text);
+      editor.insertText(idx + 1 + text.length, "\n");
+    } else {
+      setForm((f) => ({ ...f, [tableModal.field]: f[tableModal.field] + `<p>${text}</p>` }));
+    }
+    setTableModal(null);
+  };
+
+  const updateTableCell = (row: number, col: number, value: string) => {
+    setTableData(prev => {
+      const copy = prev.map(r => [...r]);
+      copy[row][col] = value;
+      return copy;
+    });
+  };
+
+  const adjustTableSize = (newRows: number, newCols: number) => {
+    setTableRows(newRows);
+    setTableCols(newCols);
+    setTableData(prev => {
+      const result: string[][] = [];
+      for (let r = 0; r <= newRows; r++) {
+        const row: string[] = [];
+        for (let c = 0; c < newCols; c++) {
+          row.push(prev[r]?.[c] || "");
+        }
+        result.push(row);
+      }
+      return result;
+    });
   };
 
   const [form, setForm] = useState({
@@ -653,16 +714,28 @@ function PostEditor({ password, post, onClose }: { password: string; post: BlogP
           <div>
             <div className="flex items-center justify-between mb-1.5 flex-wrap gap-2">
               <label className="block text-sm text-white/50">Содержание статьи (RU) <span className="text-red-400">*</span></label>
-              <Button
-                variant="outline"
-                size="sm"
-                className="border-white/15 text-white/60 text-xs"
-                onClick={() => insertBanner(quillRuRef, "contentRu")}
-                data-testid="button-insert-banner-ru"
-              >
-                <LayoutTemplate className="w-3.5 h-3.5 mr-1.5" />
-                Вставить баннер
-              </Button>
+              <div className="flex gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="border-white/15 text-white/60 text-xs"
+                  onClick={() => openTableModal(quillRuRef, "contentRu")}
+                  data-testid="button-insert-table-ru"
+                >
+                  <Table className="w-3.5 h-3.5 mr-1.5" />
+                  Таблица
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="border-white/15 text-white/60 text-xs"
+                  onClick={() => insertBanner(quillRuRef, "contentRu")}
+                  data-testid="button-insert-banner-ru"
+                >
+                  <LayoutTemplate className="w-3.5 h-3.5 mr-1.5" />
+                  Баннер
+                </Button>
+              </div>
             </div>
             <div className="blog-editor-dark">
               <ReactQuill
@@ -681,16 +754,28 @@ function PostEditor({ password, post, onClose }: { password: string; post: BlogP
           <div>
             <div className="flex items-center justify-between mb-1.5 flex-wrap gap-2">
               <label className="block text-sm text-white/50">Содержание статьи (EN) <span className="text-red-400">*</span></label>
-              <Button
-                variant="outline"
-                size="sm"
-                className="border-white/15 text-white/60 text-xs"
-                onClick={() => insertBanner(quillEnRef, "contentEn")}
-                data-testid="button-insert-banner-en"
-              >
-                <LayoutTemplate className="w-3.5 h-3.5 mr-1.5" />
-                Insert banner
-              </Button>
+              <div className="flex gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="border-white/15 text-white/60 text-xs"
+                  onClick={() => openTableModal(quillEnRef, "contentEn")}
+                  data-testid="button-insert-table-en"
+                >
+                  <Table className="w-3.5 h-3.5 mr-1.5" />
+                  Table
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="border-white/15 text-white/60 text-xs"
+                  onClick={() => insertBanner(quillEnRef, "contentEn")}
+                  data-testid="button-insert-banner-en"
+                >
+                  <LayoutTemplate className="w-3.5 h-3.5 mr-1.5" />
+                  Banner
+                </Button>
+              </div>
             </div>
             <div className="blog-editor-dark">
               <ReactQuill
@@ -707,6 +792,93 @@ function PostEditor({ password, post, onClose }: { password: string; post: BlogP
           </div>
         </div>
       </div>
+
+      {tableModal && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={() => setTableModal(null)}>
+          <div className="bg-[#0a1a35] border border-white/15 rounded-xl p-6 w-full max-w-2xl max-h-[80vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-bold text-white">Вставить таблицу</h3>
+              <Button variant="ghost" size="icon" onClick={() => setTableModal(null)} className="text-white/50" data-testid="button-close-table-modal">
+                <X className="w-4 h-4" />
+              </Button>
+            </div>
+
+            <div className="flex gap-4 mb-4">
+              <div>
+                <label className="text-xs text-white/50 block mb-1">Строки (без заголовка)</label>
+                <input
+                  type="number"
+                  min={1}
+                  max={20}
+                  value={tableRows}
+                  onChange={e => adjustTableSize(Math.max(1, parseInt(e.target.value) || 1), tableCols)}
+                  className="w-20 bg-white/5 border border-white/15 rounded px-2 py-1 text-white text-sm"
+                  data-testid="input-table-rows"
+                />
+              </div>
+              <div>
+                <label className="text-xs text-white/50 block mb-1">Столбцы</label>
+                <input
+                  type="number"
+                  min={2}
+                  max={10}
+                  value={tableCols}
+                  onChange={e => adjustTableSize(tableRows, Math.max(2, parseInt(e.target.value) || 2))}
+                  className="w-20 bg-white/5 border border-white/15 rounded px-2 py-1 text-white text-sm"
+                  data-testid="input-table-cols"
+                />
+              </div>
+            </div>
+
+            <div className="overflow-x-auto mb-4">
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr>
+                    {tableData[0]?.map((cell, ci) => (
+                      <th key={ci} className="p-1">
+                        <input
+                          value={cell}
+                          onChange={e => updateTableCell(0, ci, e.target.value)}
+                          placeholder={`Заголовок ${ci + 1}`}
+                          className="w-full bg-white/10 border border-white/20 rounded px-2 py-1.5 text-white text-sm font-semibold placeholder:text-white/30"
+                          data-testid={`input-table-header-${ci}`}
+                        />
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {tableData.slice(1).map((row, ri) => (
+                    <tr key={ri}>
+                      {row.map((cell, ci) => (
+                        <td key={ci} className="p-1">
+                          <input
+                            value={cell}
+                            onChange={e => updateTableCell(ri + 1, ci, e.target.value)}
+                            placeholder={ci === 0 ? `Параметр ${ri + 1}` : ""}
+                            className="w-full bg-white/5 border border-white/10 rounded px-2 py-1.5 text-white/80 text-sm placeholder:text-white/20"
+                            data-testid={`input-table-cell-${ri}-${ci}`}
+                          />
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <div className="flex justify-end gap-2">
+              <Button variant="outline" size="sm" onClick={() => setTableModal(null)} className="border-white/15 text-white/60" data-testid="button-cancel-table">
+                Отмена
+              </Button>
+              <Button size="sm" onClick={insertTable} data-testid="button-confirm-table">
+                <Table className="w-3.5 h-3.5 mr-1.5" />
+                Вставить
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
