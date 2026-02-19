@@ -763,29 +763,6 @@ function FeaturesSection() {
   );
 }
 
-function CountUpNumber({ target, color, isInView }: { target: string; color: string; isInView: boolean }) {
-  const [display, setDisplay] = useState("00");
-  const num = parseInt(target);
-  useEffect(() => {
-    if (!isInView) return;
-    let frame = 0;
-    const totalFrames = 30;
-    const timer = setInterval(() => {
-      frame++;
-      const progress = frame / totalFrames;
-      const eased = 1 - Math.pow(1 - progress, 3);
-      const current = Math.round(eased * num);
-      setDisplay(String(current).padStart(2, "0"));
-      if (frame >= totalFrames) clearInterval(timer);
-    }, 33);
-    return () => clearInterval(timer);
-  }, [isInView, num]);
-  return (
-    <span className="text-5xl lg:text-6xl font-black" style={{ color, opacity: 0.15 }}>
-      {display}
-    </span>
-  );
-}
 
 function HowItWorksSection() {
   const { lang } = useLang();
@@ -863,7 +840,7 @@ function HowItWorksSection() {
                     <div className="absolute top-0 left-0 right-0 h-px" style={{ background: `linear-gradient(90deg, transparent, ${step.color}30, transparent)` }} />
 
                     <div className="relative mb-4 inline-flex items-center gap-3">
-                      <CountUpNumber target={step.step} color={step.color} isInView={isInView} />
+                      <span className="text-5xl lg:text-6xl font-black" style={{ color: step.color, opacity: 0.15 }}>{step.step}</span>
                     </div>
 
                     <div className="relative inline-flex mb-5">
