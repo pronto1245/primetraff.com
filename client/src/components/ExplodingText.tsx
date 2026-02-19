@@ -164,8 +164,9 @@ export default function ExplodingText({ onAnimationEnd, targetRef }: Props) {
         if (hasText) {
           const tileCX = curX + cw / 2;
           const tileCY = curY + rh / 2;
-          const angle = Math.atan2(tileCY - textCY, tileCX - textCX) + (Math.random() - 0.5) * 1.0;
-          const dist = 250 + Math.random() * 600;
+          const angle = Math.atan2(tileCY - textCY, tileCX - textCX) + (Math.random() - 0.5) * 0.8;
+          const screenDiag = Math.sqrt(w * w + h * h);
+          const dist = screenDiag * 0.5 + Math.random() * screenDiag * 0.6;
           const distFromCenter = Math.sqrt((tileCX - textCX) ** 2 + (tileCY - textCY) ** 2);
           const maxDist = Math.sqrt((maxTX - minTX) ** 2 + (maxTY - minTY) ** 2) / 2 || 200;
 
@@ -177,7 +178,7 @@ export default function ExplodingText({ onAnimationEnd, targetRef }: Props) {
             scatterX: tileCX + Math.cos(angle) * dist,
             scatterY: tileCY + Math.sin(angle) * dist,
             rotation: 0,
-            scatterRotation: (Math.random() - 0.5) * Math.PI * 3,
+            scatterRotation: (Math.random() - 0.5) * Math.PI * 4,
             delay: Math.min(0.2, (distFromCenter / maxDist) * 0.2),
             alpha: 1,
           });
@@ -220,12 +221,13 @@ export default function ExplodingText({ onAnimationEnd, targetRef }: Props) {
     const P_EXPLODE = 0.5;
     const P_HOLD = 0.2;
     const P_ASSEMBLE = 2.2;
-    const P_SETTLE = 0.6;
+    const P_SETTLE = 0.8;
     const TOTAL = P_ZOOM + P_SPIN + P_EXPLODE + P_HOLD + P_ASSEMBLE + P_SETTLE;
 
     const start = performance.now();
     let shakeX = 0, shakeY = 0;
     let flashAlpha = 0;
+    let completionSparked = false;
 
     function easeOut3(t: number) { return 1 - (1 - t) ** 3; }
     function easeOut4(t: number) { return 1 - (1 - t) ** 4; }
@@ -363,6 +365,33 @@ export default function ExplodingText({ onAnimationEnd, targetRef }: Props) {
       ctx.restore();
     }
 
+    function drawLightSweep(t: number) {
+      if (t <= 0 || t >= 1) return;
+      const sweepX = minTX + (maxTX - minTX + 120) * t - 60;
+      ctx.save();
+      const grad = ctx.createLinearGradient(sweepX - 60, 0, sweepX + 60, 0);
+      grad.addColorStop(0, "rgba(200,230,255,0)");
+      grad.addColorStop(0.4, `rgba(200,230,255,${0.35 * (1 - Math.abs(t - 0.5) * 2)})`);
+      grad.addColorStop(0.5, `rgba(255,255,255,${0.5 * (1 - Math.abs(t - 0.5) * 2)})`);
+      grad.addColorStop(0.6, `rgba(200,230,255,${0.35 * (1 - Math.abs(t - 0.5) * 2)})`);
+      grad.addColorStop(1, "rgba(200,230,255,0)");
+      ctx.globalCompositeOperation = "lighter";
+      ctx.fillStyle = grad;
+      ctx.fillRect(minTX - 10, minTY - 10, maxTX - minTX + 20, maxTY - minTY + 20);
+      ctx.restore();
+    }
+
+    function drawGlowPulse(strength: number) {
+      if (strength <= 0.01) return;
+      ctx.save();
+      ctx.globalCompositeOperation = "lighter";
+      ctx.shadowColor = `rgba(100,180,255,${0.6 * strength})`;
+      ctx.shadowBlur = 20 * strength;
+      ctx.globalAlpha = 0.15 * strength;
+      ctx.drawImage(textCanvas, 0, 0);
+      ctx.restore();
+    }
+
     function scatterTiles(t: number) {
       for (const tile of tiles) {
         tile.prevX = tile.x;
@@ -476,6 +505,16 @@ export default function ExplodingText({ onAnimationEnd, targetRef }: Props) {
         drawMesh(meshStrength);
         drawSparks();
 
+        if (t > 0.85) {
+          const completionT = (t - 0.85) / 0.15;
+          const pulse = Math.sin(completionT * Math.PI) * 0.8;
+          drawGlowPulse(pulse);
+          if (completionT < 0.3 && !completionSparked) {
+            completionSparked = true;
+            spawnSparks(mobile ? 15 : 40);
+          }
+        }
+
       } else {
         const t = (el - e5) / P_SETTLE;
         shakeX = 0; shakeY = 0;
@@ -485,8 +524,16 @@ export default function ExplodingText({ onAnimationEnd, targetRef }: Props) {
         }
         drawTiles(false);
 
-        const meshFade = 1 - easeIn2(Math.min(t, 1));
+        const meshFade = 1 - easeIn2(Math.min(t * 1.5, 1));
         if (meshFade > 0.01) drawMesh(meshFade);
+
+        const sweepT = easeIO2(Math.min(t / 0.7, 1));
+        drawLightSweep(sweepT);
+
+        const glowT = Math.sin(Math.min(t, 1) * Math.PI) * 0.6;
+        drawGlowPulse(glowT);
+
+        drawSparks();
       }
 
       ctx.restore();
