@@ -7,12 +7,15 @@ interface Shard {
   originY: number;
   scatterX: number;
   scatterY: number;
+  w: number;
+  h: number;
+  baseAngle: number;
   rotation: number;
   scatterRotation: number;
   alpha: number;
   color: string;
   delay: number;
-  vertices: { x: number; y: number }[];
+  type: "small" | "medium" | "large";
 }
 
 interface TriEdge {
@@ -27,18 +30,6 @@ function isMobileOrTablet() {
   if (/Macintosh/i.test(ua) && "ontouchend" in document) return true;
   if (window.matchMedia?.("(pointer: coarse)")?.matches) return true;
   return false;
-}
-
-function makeGlassVertices(size: number): { x: number; y: number }[] {
-  const sides = 3 + Math.floor(Math.random() * 3);
-  const verts: { x: number; y: number }[] = [];
-  const baseAngle = Math.random() * Math.PI * 2;
-  for (let i = 0; i < sides; i++) {
-    const angle = baseAngle + (i / sides) * Math.PI * 2 + (Math.random() - 0.5) * 0.6;
-    const r = size * (0.5 + Math.random() * 0.5);
-    verts.push({ x: Math.cos(angle) * r, y: Math.sin(angle) * r });
-  }
-  return verts;
 }
 
 export default function ExplodingText({
@@ -74,7 +65,6 @@ export default function ExplodingText({
     const fontSize = Math.min(w * 0.22, h * 0.55);
     ctx.font = `900 ${fontSize}px Inter, Arial, sans-serif`;
     ctx.textBaseline = "middle";
-    ctx.textAlign = "center";
 
     const offscreen = document.createElement("canvas");
     offscreen.width = Math.ceil(w);
@@ -82,7 +72,6 @@ export default function ExplodingText({
     const offCtx = offscreen.getContext("2d")!;
     offCtx.font = `900 ${fontSize}px Inter, Arial, sans-serif`;
     offCtx.textBaseline = "middle";
-    offCtx.textAlign = "center";
 
     const iText = "i";
     const gamingText = "GAMING";
@@ -99,7 +88,7 @@ export default function ExplodingText({
 
     const imgData = offCtx.getImageData(0, 0, Math.ceil(w), Math.ceil(h));
     const mobile = isMobileOrTablet();
-    const gridStep = mobile ? 18 : 12;
+    const gridStep = mobile ? 10 : 6;
     const shards: Shard[] = [];
 
     for (let py = 0; py < h; py += gridStep) {
@@ -112,13 +101,29 @@ export default function ExplodingText({
           const b = imgData.data[idx + 2];
 
           const angleFromCenter = Math.atan2(py - centerY, px - centerX);
-          const spread = angleFromCenter + (Math.random() - 0.5) * 0.8;
-          const dist = 300 + Math.random() * 900;
-
-          const shardSize = gridStep * (0.8 + Math.random() * 1.2);
+          const spread = angleFromCenter + (Math.random() - 0.5) * 0.9;
+          const dist = 250 + Math.random() * 800;
 
           const distFromCenter = Math.sqrt((px - centerX) ** 2 + (py - centerY) ** 2);
           const maxDist = Math.sqrt(centerX ** 2 + centerY ** 2);
+
+          const rnd = Math.random();
+          let type: "small" | "medium" | "large";
+          let shardW: number, shardH: number;
+
+          if (rnd < 0.5) {
+            type = "small";
+            shardW = 2 + Math.random() * 4;
+            shardH = 1 + Math.random() * 2;
+          } else if (rnd < 0.85) {
+            type = "medium";
+            shardW = 5 + Math.random() * 10;
+            shardH = 1.5 + Math.random() * 3;
+          } else {
+            type = "large";
+            shardW = 12 + Math.random() * 18;
+            shardH = 2 + Math.random() * 4;
+          }
 
           shards.push({
             x: px,
@@ -127,19 +132,22 @@ export default function ExplodingText({
             originY: py,
             scatterX: px + Math.cos(spread) * dist,
             scatterY: py + Math.sin(spread) * dist,
+            w: shardW,
+            h: shardH,
+            baseAngle: (Math.random() - 0.5) * Math.PI,
             rotation: 0,
             scatterRotation: (Math.random() - 0.5) * Math.PI * 5,
             alpha: a / 255,
             color: `${r},${g},${b}`,
             delay: (distFromCenter / maxDist) * 0.12,
-            vertices: makeGlassVertices(shardSize),
+            type,
           });
         }
       }
     }
 
     const meshEdges: TriEdge[] = [];
-    const meshStep = Math.max(2, Math.floor(shards.length / 350));
+    const meshStep = Math.max(3, Math.floor(shards.length / 350));
     const meshIndices: number[] = [];
     for (let i = 0; i < shards.length; i += meshStep) {
       meshIndices.push(i);
@@ -194,17 +202,20 @@ export default function ExplodingText({
     }
 
     function drawShard(s: Shard, globalAlpha: number) {
-      if (s.vertices.length < 3) return;
       ctx.save();
       ctx.translate(s.x, s.y);
-      ctx.rotate(s.rotation);
+      ctx.rotate(s.rotation + s.baseAngle);
       ctx.globalAlpha = s.alpha * globalAlpha;
       ctx.fillStyle = `rgb(${s.color})`;
+
       ctx.beginPath();
-      ctx.moveTo(s.vertices[0].x, s.vertices[0].y);
-      for (let i = 1; i < s.vertices.length; i++) {
-        ctx.lineTo(s.vertices[i].x, s.vertices[i].y);
-      }
+      const hw = s.w / 2;
+      const hh = s.h / 2;
+      ctx.moveTo(-hw, -hh);
+      ctx.lineTo(hw * 0.8, -hh * 0.6);
+      ctx.lineTo(hw, hh * 0.4);
+      ctx.lineTo(hw * 0.3, hh);
+      ctx.lineTo(-hw * 0.7, hh * 0.8);
       ctx.closePath();
       ctx.fill();
       ctx.restore();
@@ -214,7 +225,7 @@ export default function ExplodingText({
       if (progress <= 0) return;
       ctx.save();
       ctx.strokeStyle = `rgba(180,220,255,${0.2 * progress * globalAlpha})`;
-      ctx.lineWidth = 0.8;
+      ctx.lineWidth = 0.7;
       for (const edge of meshEdges) {
         const pa = shards[edge.a];
         const pb = shards[edge.b];
@@ -222,7 +233,7 @@ export default function ExplodingText({
         const dx = pa.x - pb.x;
         const dy = pa.y - pb.y;
         const d = Math.sqrt(dx * dx + dy * dy);
-        if (d < 180) {
+        if (d < 160) {
           ctx.beginPath();
           ctx.moveTo(pa.x, pa.y);
           ctx.lineTo(pb.x, pb.y);
@@ -230,13 +241,13 @@ export default function ExplodingText({
         }
       }
 
-      ctx.fillStyle = `rgba(200,230,255,${0.35 * progress * globalAlpha})`;
+      ctx.fillStyle = `rgba(200,230,255,${0.3 * progress * globalAlpha})`;
       for (let i = 0; i < meshIndices.length; i++) {
         const pi = meshIndices[i];
         const p = shards[pi];
         if (!p) continue;
         ctx.beginPath();
-        ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, 1.5, 0, Math.PI * 2);
         ctx.fill();
       }
       ctx.restore();
