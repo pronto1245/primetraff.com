@@ -1,19 +1,18 @@
 import { useRef, useEffect, useState, useCallback } from "react";
 
-interface Particle {
+interface Shard {
   x: number;
   y: number;
   originX: number;
   originY: number;
   scatterX: number;
   scatterY: number;
-  w: number;
-  h: number;
   rotation: number;
   scatterRotation: number;
   alpha: number;
   color: string;
   delay: number;
+  vertices: { x: number; y: number }[];
 }
 
 interface TriEdge {
@@ -28,6 +27,18 @@ function isMobileOrTablet() {
   if (/Macintosh/i.test(ua) && "ontouchend" in document) return true;
   if (window.matchMedia?.("(pointer: coarse)")?.matches) return true;
   return false;
+}
+
+function makeGlassVertices(size: number): { x: number; y: number }[] {
+  const sides = 3 + Math.floor(Math.random() * 3);
+  const verts: { x: number; y: number }[] = [];
+  const baseAngle = Math.random() * Math.PI * 2;
+  for (let i = 0; i < sides; i++) {
+    const angle = baseAngle + (i / sides) * Math.PI * 2 + (Math.random() - 0.5) * 0.6;
+    const r = size * (0.5 + Math.random() * 0.5);
+    verts.push({ x: Math.cos(angle) * r, y: Math.sin(angle) * r });
+  }
+  return verts;
 }
 
 export default function ExplodingText({
@@ -88,8 +99,8 @@ export default function ExplodingText({
 
     const imgData = offCtx.getImageData(0, 0, Math.ceil(w), Math.ceil(h));
     const mobile = isMobileOrTablet();
-    const gridStep = mobile ? 10 : 5;
-    const particles: Particle[] = [];
+    const gridStep = mobile ? 18 : 12;
+    const shards: Shard[] = [];
 
     for (let py = 0; py < h; py += gridStep) {
       for (let px = 0; px < w; px += gridStep) {
@@ -104,52 +115,50 @@ export default function ExplodingText({
           const spread = angleFromCenter + (Math.random() - 0.5) * 0.8;
           const dist = 300 + Math.random() * 900;
 
-          const shardW = gridStep * (0.5 + Math.random() * 0.9);
-          const shardH = gridStep * (0.2 + Math.random() * 0.5);
+          const shardSize = gridStep * (0.8 + Math.random() * 1.2);
 
           const distFromCenter = Math.sqrt((px - centerX) ** 2 + (py - centerY) ** 2);
           const maxDist = Math.sqrt(centerX ** 2 + centerY ** 2);
 
-          particles.push({
+          shards.push({
             x: px,
             y: py,
             originX: px,
             originY: py,
             scatterX: px + Math.cos(spread) * dist,
             scatterY: py + Math.sin(spread) * dist,
-            w: shardW,
-            h: shardH,
             rotation: 0,
-            scatterRotation: (Math.random() - 0.5) * Math.PI * 6,
+            scatterRotation: (Math.random() - 0.5) * Math.PI * 5,
             alpha: a / 255,
             color: `${r},${g},${b}`,
             delay: (distFromCenter / maxDist) * 0.12,
+            vertices: makeGlassVertices(shardSize),
           });
         }
       }
     }
 
     const meshEdges: TriEdge[] = [];
-    const meshStep = Math.max(4, Math.floor(particles.length / 400));
-    const meshParticles: number[] = [];
-    for (let i = 0; i < particles.length; i += meshStep) {
-      meshParticles.push(i);
+    const meshStep = Math.max(2, Math.floor(shards.length / 350));
+    const meshIndices: number[] = [];
+    for (let i = 0; i < shards.length; i += meshStep) {
+      meshIndices.push(i);
     }
-    for (let i = 0; i < meshParticles.length; i++) {
-      const pi = meshParticles[i];
-      let closest1 = -1, closest2 = -1;
+    for (let i = 0; i < meshIndices.length; i++) {
+      const pi = meshIndices[i];
+      let c1 = -1, c2 = -1;
       let d1 = Infinity, d2 = Infinity;
-      for (let j = 0; j < meshParticles.length; j++) {
+      for (let j = 0; j < meshIndices.length; j++) {
         if (i === j) continue;
-        const pj = meshParticles[j];
-        const dx = particles[pi].originX - particles[pj].originX;
-        const dy = particles[pi].originY - particles[pj].originY;
+        const pj = meshIndices[j];
+        const dx = shards[pi].originX - shards[pj].originX;
+        const dy = shards[pi].originY - shards[pj].originY;
         const d = dx * dx + dy * dy;
-        if (d < d1) { d2 = d1; closest2 = closest1; d1 = d; closest1 = pj; }
-        else if (d < d2) { d2 = d; closest2 = pj; }
+        if (d < d1) { d2 = d1; c2 = c1; d1 = d; c1 = pj; }
+        else if (d < d2) { d2 = d; c2 = pj; }
       }
-      if (closest1 >= 0) meshEdges.push({ a: pi, b: closest1 });
-      if (closest2 >= 0) meshEdges.push({ a: pi, b: closest2 });
+      if (c1 >= 0) meshEdges.push({ a: pi, b: c1 });
+      if (c2 >= 0) meshEdges.push({ a: pi, b: c2 });
     }
 
     const PHASE1_ZOOM = 0.8;
@@ -184,29 +193,36 @@ export default function ExplodingText({
       ctx.restore();
     }
 
-    function drawParticle(p: Particle, globalAlpha: number) {
+    function drawShard(s: Shard, globalAlpha: number) {
+      if (s.vertices.length < 3) return;
       ctx.save();
-      ctx.translate(p.x, p.y);
-      ctx.rotate(p.rotation);
-      ctx.globalAlpha = p.alpha * globalAlpha;
-      ctx.fillStyle = `rgb(${p.color})`;
-      ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+      ctx.translate(s.x, s.y);
+      ctx.rotate(s.rotation);
+      ctx.globalAlpha = s.alpha * globalAlpha;
+      ctx.fillStyle = `rgb(${s.color})`;
+      ctx.beginPath();
+      ctx.moveTo(s.vertices[0].x, s.vertices[0].y);
+      for (let i = 1; i < s.vertices.length; i++) {
+        ctx.lineTo(s.vertices[i].x, s.vertices[i].y);
+      }
+      ctx.closePath();
+      ctx.fill();
       ctx.restore();
     }
 
     function drawMesh(progress: number, globalAlpha: number) {
       if (progress <= 0) return;
       ctx.save();
-      ctx.strokeStyle = `rgba(180,220,255,${0.18 * progress * globalAlpha})`;
-      ctx.lineWidth = 0.7;
+      ctx.strokeStyle = `rgba(180,220,255,${0.2 * progress * globalAlpha})`;
+      ctx.lineWidth = 0.8;
       for (const edge of meshEdges) {
-        const pa = particles[edge.a];
-        const pb = particles[edge.b];
+        const pa = shards[edge.a];
+        const pb = shards[edge.b];
         if (!pa || !pb) continue;
         const dx = pa.x - pb.x;
         const dy = pa.y - pb.y;
         const d = Math.sqrt(dx * dx + dy * dy);
-        if (d < 150) {
+        if (d < 180) {
           ctx.beginPath();
           ctx.moveTo(pa.x, pa.y);
           ctx.lineTo(pb.x, pb.y);
@@ -214,13 +230,13 @@ export default function ExplodingText({
         }
       }
 
-      ctx.fillStyle = `rgba(200,230,255,${0.3 * progress * globalAlpha})`;
-      for (let i = 0; i < meshParticles.length; i++) {
-        const pi = meshParticles[i];
-        const p = particles[pi];
+      ctx.fillStyle = `rgba(200,230,255,${0.35 * progress * globalAlpha})`;
+      for (let i = 0; i < meshIndices.length; i++) {
+        const pi = meshIndices[i];
+        const p = shards[pi];
         if (!p) continue;
         ctx.beginPath();
-        ctx.arc(p.x, p.y, 1.8, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
         ctx.fill();
       }
       ctx.restore();
@@ -261,13 +277,13 @@ export default function ExplodingText({
       } else if (elapsed < t3End) {
         const t = (elapsed - t2End) / PHASE3_EXPLODE;
 
-        for (const p of particles) {
-          const pt = Math.min(1, Math.max(0, (t - p.delay * 2) / (1 - p.delay * 2)));
+        for (const s of shards) {
+          const pt = Math.min(1, Math.max(0, (t - s.delay * 2) / (1 - s.delay * 2)));
           const pe = easeInQuad(pt);
-          p.x = p.originX + (p.scatterX - p.originX) * pe;
-          p.y = p.originY + (p.scatterY - p.originY) * pe;
-          p.rotation = p.scatterRotation * pe;
-          drawParticle(p, 1.0);
+          s.x = s.originX + (s.scatterX - s.originX) * pe;
+          s.y = s.originY + (s.scatterY - s.originY) * pe;
+          s.rotation = s.scatterRotation * pe;
+          drawShard(s, 1.0);
         }
 
         const textFade = 1.0 - easeInQuad(Math.min(t * 3, 1));
@@ -276,24 +292,24 @@ export default function ExplodingText({
         }
 
       } else if (elapsed < t4End) {
-        for (const p of particles) {
-          p.x = p.scatterX;
-          p.y = p.scatterY;
-          p.rotation = p.scatterRotation;
-          drawParticle(p, 0.8);
+        for (const s of shards) {
+          s.x = s.scatterX;
+          s.y = s.scatterY;
+          s.rotation = s.scatterRotation;
+          drawShard(s, 0.8);
         }
 
       } else if (elapsed < t5End) {
         const t = (elapsed - t4End) / PHASE5_ASSEMBLE;
         const eased = easeOutCubic(t);
 
-        for (const p of particles) {
-          const pt = Math.min(1, Math.max(0, (t - p.delay) / (1 - p.delay)));
+        for (const s of shards) {
+          const pt = Math.min(1, Math.max(0, (t - s.delay) / (1 - s.delay)));
           const pe = easeOutCubic(pt);
-          p.x = p.scatterX + (p.originX - p.scatterX) * pe;
-          p.y = p.scatterY + (p.originY - p.scatterY) * pe;
-          p.rotation = p.scatterRotation * (1 - pe);
-          drawParticle(p, 1.0);
+          s.x = s.scatterX + (s.originX - s.scatterX) * pe;
+          s.y = s.scatterY + (s.originY - s.scatterY) * pe;
+          s.rotation = s.scatterRotation * (1 - pe);
+          drawShard(s, 1.0);
         }
 
         drawMesh(eased, 1.0);
@@ -302,11 +318,11 @@ export default function ExplodingText({
         const t = (elapsed - t5End) / PHASE6_SETTLE;
         const meshFade = 1.0 - easeInQuad(t);
 
-        for (const p of particles) {
-          p.x = p.originX;
-          p.y = p.originY;
-          p.rotation = 0;
-          drawParticle(p, 1.0);
+        for (const s of shards) {
+          s.x = s.originX;
+          s.y = s.originY;
+          s.rotation = 0;
+          drawShard(s, 1.0);
         }
 
         drawMesh(meshFade, 1.0);
