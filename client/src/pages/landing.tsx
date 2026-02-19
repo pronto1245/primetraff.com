@@ -619,7 +619,7 @@ function FeaturesSection() {
             <ChevronDown className="w-5 h-5 text-white/70 -rotate-90" />
           </button>
 
-          <div className="border border-white/10 rounded-2xl bg-white/[0.03] backdrop-blur-sm overflow-hidden mx-8 lg:mx-0" data-testid={`card-feature-${activeIdx}`}>
+          <div className="border border-white/10 rounded-2xl bg-white/[0.03] backdrop-blur-sm overflow-hidden mx-8 lg:mx-0 feature-card-hover" style={{ boxShadow: `0 0 30px ${current.color}10, 0 0 60px ${current.color}05` }} data-testid={`card-feature-${activeIdx}`}>
             <div className="flex flex-col md:flex-row min-h-[380px] lg:min-h-[440px]">
               <div className="flex-shrink-0 p-8 lg:p-12 flex flex-col justify-center md:w-[40%] md:border-r md:border-dashed md:border-white/10">
                 <motion.div
@@ -629,8 +629,8 @@ function FeaturesSection() {
                   transition={{ duration: 0.4 }}
                   className="mb-4"
                 >
-                  <div className="w-16 h-16 lg:w-20 lg:h-20 rounded-2xl border border-white/10 flex items-center justify-center" style={{ background: `radial-gradient(circle, ${current.color}15, transparent 70%)` }}>
-                    <current.icon className="w-8 h-8 lg:w-10 lg:h-10" style={{ color: current.color, filter: `drop-shadow(0 0 8px ${current.glowColor})` }} />
+                  <div className="w-16 h-16 lg:w-20 lg:h-20 rounded-2xl border border-white/10 flex items-center justify-center transition-shadow duration-500" style={{ background: `radial-gradient(circle, ${current.color}15, transparent 70%)`, boxShadow: `0 0 20px ${current.color}15` }}>
+                    <current.icon className="w-8 h-8 lg:w-10 lg:h-10" style={{ color: current.color, filter: `drop-shadow(0 0 12px ${current.glowColor})` }} />
                   </div>
                 </motion.div>
                 <motion.div
@@ -763,8 +763,34 @@ function FeaturesSection() {
   );
 }
 
+function CountUpNumber({ target, color, isInView }: { target: string; color: string; isInView: boolean }) {
+  const [display, setDisplay] = useState("00");
+  const num = parseInt(target);
+  useEffect(() => {
+    if (!isInView) return;
+    let frame = 0;
+    const totalFrames = 30;
+    const timer = setInterval(() => {
+      frame++;
+      const progress = frame / totalFrames;
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.round(eased * num);
+      setDisplay(String(current).padStart(2, "0"));
+      if (frame >= totalFrames) clearInterval(timer);
+    }, 33);
+    return () => clearInterval(timer);
+  }, [isInView, num]);
+  return (
+    <span className="text-5xl lg:text-6xl font-black" style={{ color, opacity: 0.15 }}>
+      {display}
+    </span>
+  );
+}
+
 function HowItWorksSection() {
   const { lang } = useLang();
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   const stepsMeta = [
     { step: "01", icon: Users, color: "#a78bfa", glowColor: "rgba(167,139,250,0.4)", badgeGradient: "from-violet-500 to-violet-600" },
@@ -780,7 +806,7 @@ function HowItWorksSection() {
   }));
 
   return (
-    <section id="how-it-works" className="py-20 lg:py-32 relative overflow-hidden">
+    <section id="how-it-works" className="py-20 lg:py-32 relative overflow-hidden" ref={sectionRef}>
       <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #001845 0%, #001535 50%, #001845 100%)" }} />
       <div className="hidden md:block absolute top-1/2 left-0 w-80 h-80 rounded-full blur-[100px]" style={{ background: "radial-gradient(circle, rgba(0,200,255,0.1) 0%, transparent 70%)" }} />
       <div className="hidden md:block absolute bottom-0 right-1/4 w-80 h-80 rounded-full blur-[100px]" style={{ background: "radial-gradient(circle, rgba(0,140,220,0.08) 0%, transparent 70%)" }} />
@@ -797,7 +823,16 @@ function HowItWorksSection() {
         </AnimatedSection>
 
         <div className="relative">
-          <div className="hidden lg:block absolute top-1/2 left-[5%] right-[5%] -translate-y-1/2 h-[2px]" style={{ background: "linear-gradient(90deg, transparent, rgba(0,136,204,0.3) 15%, rgba(56,189,248,0.25) 50%, rgba(167,139,250,0.2) 85%, transparent)" }} />
+          <div className="hidden lg:block absolute top-1/2 left-[5%] right-[5%] -translate-y-1/2 h-[2px] overflow-hidden">
+            <div
+              className="h-full"
+              style={{
+                background: "linear-gradient(90deg, transparent, rgba(0,136,204,0.3) 15%, rgba(56,189,248,0.25) 50%, rgba(167,139,250,0.2) 85%, transparent)",
+                width: isInView ? "100%" : "0%",
+                transition: "width 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+              }}
+            />
+          </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-4">
             {steps.map((step, i) => {
@@ -821,16 +856,14 @@ function HowItWorksSection() {
                     </div>
                   </div>
 
-                  <div className="relative p-6 lg:p-8 text-center transition-all duration-300 h-full group overflow-hidden" style={{ background: "rgba(255,255,255,0.03)", border: `1px solid ${step.color}20`, ...borderStyles[i] }} data-testid={`card-step-${i}`}>
+                  <div className="relative p-6 lg:p-8 text-center h-full group overflow-hidden how-step-hover" style={{ background: "rgba(255,255,255,0.03)", border: `1px solid ${step.color}20`, ...borderStyles[i] }} data-testid={`card-step-${i}`}>
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: `radial-gradient(circle at 50% 0%, ${step.color}10, transparent 70%)` }} />
 
                     <div className={`absolute ${decorPositions[i]} w-12 h-12 rounded-full opacity-[0.06]`} style={{ background: step.color }} />
                     <div className="absolute top-0 left-0 right-0 h-px" style={{ background: `linear-gradient(90deg, transparent, ${step.color}30, transparent)` }} />
 
                     <div className="relative mb-4 inline-flex items-center gap-3">
-                      <span className="text-5xl lg:text-6xl font-black" style={{ color: step.color, opacity: 0.15 }}>
-                        {step.step}
-                      </span>
+                      <CountUpNumber target={step.step} color={step.color} isInView={isInView} />
                     </div>
 
                     <div className="relative inline-flex mb-5">
@@ -846,7 +879,7 @@ function HowItWorksSection() {
 
                     <div className="mt-5 flex items-center justify-center gap-1.5">
                       {Array.from({ length: 4 }).map((_, j) => (
-                        <div key={j} className="w-1.5 h-1.5 rounded-full" style={{ background: j <= i ? step.color : "rgba(255,255,255,0.1)" }} />
+                        <div key={j} className="w-1.5 h-1.5 rounded-full transition-all duration-500" style={{ background: j <= i ? step.color : "rgba(255,255,255,0.1)", boxShadow: j <= i ? `0 0 6px ${step.color}40` : "none" }} />
                       ))}
                     </div>
                   </div>
@@ -871,6 +904,8 @@ function HowItWorksSection() {
 
 function TestimonialsSection() {
   const { lang } = useLang();
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-50px" });
 
   const testimonials = translations.testimonials.items.map((item) => ({
     name: t(item.name, lang),
@@ -891,7 +926,7 @@ function TestimonialsSection() {
   const doubled = [...testimonials, ...testimonials];
 
   return (
-    <section id="testimonials" className="py-20 lg:py-32 relative overflow-hidden">
+    <section id="testimonials" className="py-20 lg:py-32 relative overflow-hidden" ref={sectionRef}>
       <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #001845 0%, #002060 50%, #001845 100%)" }} />
       <div className="hidden md:block absolute top-0 left-1/2 w-96 h-96 rounded-full blur-[120px]" style={{ background: "radial-gradient(circle, rgba(0,160,240,0.1) 0%, transparent 70%)" }} />
       <div className="hidden md:block absolute bottom-[20%] right-[15%] w-64 h-64 rounded-full blur-[80px]" style={{ background: "radial-gradient(circle, rgba(0,200,255,0.07) 0%, transparent 70%)" }} />
@@ -917,7 +952,7 @@ function TestimonialsSection() {
             const accentColor = c.border.replace("0.2", "1");
             return (
               <div key={i} className="flex-shrink-0 w-[340px] lg:w-[400px]">
-                <div className="relative rounded-2xl p-8 lg:p-10 h-full transition-all duration-300" style={{ background: "rgba(255,255,255,0.04)", border: `1px solid ${c.border}` }} data-testid={`card-testimonial-${i}`}>
+                <div className="relative rounded-2xl p-8 lg:p-10 h-full testimonial-glass" style={{ background: "rgba(255,255,255,0.04)", border: `1px solid ${c.border}`, boxShadow: `inset 0 1px 0 rgba(255,255,255,0.06)` }} data-testid={`card-testimonial-${i}`}>
                   <div className="absolute inset-0 rounded-2xl" style={{ background: `radial-gradient(circle at 50% 0%, ${c.glow}, transparent 60%)` }} />
 
                   <div className="absolute top-6 right-6 text-5xl lg:text-6xl font-serif leading-none opacity-[0.08]" style={{ color: accentColor }}>
@@ -927,7 +962,7 @@ function TestimonialsSection() {
                   <div className="relative">
                     <div className="flex gap-1.5 mb-5">
                       {Array.from({ length: testimonial.rating }).map((_, j) => (
-                        <svg key={j} className="w-5 h-5" viewBox="0 0 20 20" fill="none">
+                        <svg key={j} className={`w-5 h-5 ${isInView ? "animate-star-pop" : "opacity-0"}`} style={{ animationDelay: `${i * 0.15 + j * 0.08}s` }} viewBox="0 0 20 20" fill="none">
                           <defs>
                             <linearGradient id={`star-grad-${i}-${j}`} x1="0%" y1="0%" x2="100%" y2="100%">
                               <stop offset="0%" stopColor="#fde68a" />
@@ -1039,7 +1074,7 @@ function PartnersSection() {
   const PartnerPill = ({ name, idx, prefix }: { name: string; idx: number; prefix: string }) => {
     const logo = logoMap[name];
     return (
-      <div className="flex-shrink-0 flex items-center gap-2.5 px-4 lg:px-5 py-2 lg:py-2.5 rounded-full border border-white/10 bg-white/[0.04]" data-testid={`text-partner-${prefix}-${idx}`}>
+      <div className="flex-shrink-0 flex items-center gap-2.5 px-4 lg:px-5 py-2 lg:py-2.5 rounded-full border border-white/10 bg-white/[0.04] partner-pill-hover" data-testid={`text-partner-${prefix}-${idx}`}>
         {logo && (
           <img src={logo} alt={name} className="w-6 h-6 rounded-md object-cover flex-shrink-0" loading="lazy" decoding="async" width={24} height={24} />
         )}
@@ -1117,21 +1152,21 @@ function FAQSection() {
             const accent = accentColors[i % accentColors.length];
             return (
               <AnimatedSection key={i} delay={i * 0.1}>
-                <div className={`rounded-xl border transition-all duration-300 ${openIndex === i ? "bg-white/[0.05]" : "bg-white/[0.03]"}`} style={{ borderColor: openIndex === i ? `${accent}30` : "rgba(255,255,255,0.08)" }}>
+                <div className={`rounded-xl border transition-all duration-300 ${openIndex === i ? "bg-white/[0.05]" : "bg-white/[0.03]"}`} style={{ borderColor: openIndex === i ? `${accent}30` : "rgba(255,255,255,0.08)", boxShadow: openIndex === i ? `0 0 20px ${accent}08` : "none" }}>
                   <button
                     className="w-full flex items-center gap-4 p-5 lg:p-6 text-left"
                     onClick={() => setOpenIndex(openIndex === i ? null : i)}
                     data-testid={`button-faq-${i}`}
                   >
-                    <span className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold" style={{ background: openIndex === i ? `${accent}20` : "rgba(255,255,255,0.05)", color: openIndex === i ? accent : "rgba(255,255,255,0.4)" }}>
+                    <span className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold transition-all duration-300" style={{ background: openIndex === i ? `${accent}20` : "rgba(255,255,255,0.05)", color: openIndex === i ? accent : "rgba(255,255,255,0.4)" }}>
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <span className="flex-1 text-base lg:text-lg font-medium text-white/90">{faq.question}</span>
-                    <div className={`w-7 h-7 rounded-full border flex items-center justify-center flex-shrink-0 transition-all duration-200 ${openIndex === i ? "rotate-180" : ""}`} style={{ borderColor: openIndex === i ? `${accent}30` : "rgba(255,255,255,0.1)", background: openIndex === i ? `${accent}15` : "transparent" }}>
+                    <div className={`w-7 h-7 rounded-full border flex items-center justify-center flex-shrink-0 faq-icon-rotate`} style={{ borderColor: openIndex === i ? `${accent}30` : "rgba(255,255,255,0.1)", background: openIndex === i ? `${accent}15` : "transparent", transform: openIndex === i ? "rotate(180deg)" : "rotate(0deg)" }}>
                       <ChevronDown className="w-3.5 h-3.5" style={{ color: openIndex === i ? accent : "rgba(255,255,255,0.5)" }} />
                     </div>
                   </button>
-                  <div className={`overflow-hidden transition-all duration-300 ${openIndex === i ? "max-h-96" : "max-h-0"}`}>
+                  <div className={`overflow-hidden faq-item-answer ${openIndex === i ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}>
                     <div className="px-5 lg:px-6 pb-5 lg:pb-6 pt-0 pl-[4.5rem]">
                       <div className="w-12 h-px mb-4" style={{ background: `linear-gradient(90deg, ${accent}40, transparent)` }} />
                       <p className="text-sm lg:text-base text-white/60 whitespace-pre-line leading-relaxed">{faq.answer}</p>
@@ -1149,6 +1184,14 @@ function FAQSection() {
 
 function CTASection() {
   const { lang } = useLang();
+  const ctaParticles = useMemo(() => Array.from({ length: 12 }, (_, i) => ({
+    left: `${Math.random() * 100}%`,
+    delay: `${Math.random() * 6}s`,
+    duration: `${4 + Math.random() * 4}s`,
+    size: `${2 + Math.random() * 3}px`,
+    opacity: 0.15 + Math.random() * 0.25,
+  })), []);
+
   return (
     <section className="py-24 lg:py-36 relative overflow-hidden">
       <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, #001030 0%, #002060 40%, #003080 70%, #0055AA 100%)" }} />
@@ -1167,6 +1210,21 @@ function CTASection() {
             transform: "translate(-50%, -50%)",
           }} />
         ))}
+        {ctaParticles.map((p, i) => (
+          <div
+            key={`cta-p-${i}`}
+            className="absolute rounded-full"
+            style={{
+              left: p.left,
+              bottom: "-10px",
+              width: p.size,
+              height: p.size,
+              background: `rgba(56,189,248,${p.opacity})`,
+              animation: `cta-particle-float ${p.duration} ${p.delay} linear infinite`,
+              willChange: "transform, opacity",
+            }}
+          />
+        ))}
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-8 text-center">
@@ -1178,7 +1236,7 @@ function CTASection() {
 
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
             {t(translations.cta.title1, lang)}<br />
-            <span className="bg-gradient-to-r from-sky-400 via-cyan-300 to-blue-400 bg-clip-text text-transparent">{t(translations.cta.title2, lang)}</span>
+            <span className="bg-clip-text text-transparent cta-shimmer-text" style={{ backgroundImage: "linear-gradient(90deg, #38bdf8, #67e8f9, #a78bfa, #67e8f9, #38bdf8)" }}>{t(translations.cta.title2, lang)}</span>
           </h2>
           <p className="text-lg lg:text-xl text-white/70 mb-12 max-w-2xl mx-auto leading-relaxed">
             {t(translations.cta.subtitle, lang)}
@@ -1186,7 +1244,7 @@ function CTASection() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14">
             <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" data-testid="button-cta-register">
-              <Button variant="outline" className="border-white/30 text-white font-semibold px-12 h-auto py-4 rounded-full backdrop-blur-sm transition-all text-base hover:border-white/50 hover:bg-white/5">
+              <Button variant="outline" className="border-white/30 text-white font-semibold px-12 h-auto py-4 rounded-full backdrop-blur-sm transition-all text-base cta-btn-glow">
                 {t(translations.cta.becomePartner, lang)}
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
