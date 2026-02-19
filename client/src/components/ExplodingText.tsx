@@ -9,6 +9,8 @@ interface Tile {
   originY: number;
   x: number;
   y: number;
+  prevX: number;
+  prevY: number;
   scatterX: number;
   scatterY: number;
   rotation: number;
@@ -16,20 +18,14 @@ interface Tile {
   delay: number;
 }
 
-interface DecoShard {
-  originX: number;
-  originY: number;
+interface Spark {
   x: number;
   y: number;
-  scatterX: number;
-  scatterY: number;
-  w: number;
-  h: number;
-  baseAngle: number;
-  rotation: number;
-  scatterRotation: number;
-  alpha: number;
-  delay: number;
+  vx: number;
+  vy: number;
+  life: number;
+  maxLife: number;
+  size: number;
 }
 
 interface MeshEdge {
@@ -68,8 +64,8 @@ export default function ExplodingText({ onAnimationEnd }: { onAnimationEnd: () =
 
     const w = vw;
     const h = vh;
-    const cx = w / 2;
-    const cy = h / 2;
+    const centerX = w / 2;
+    const centerY = h / 2;
     const mobile = isMobile();
     const fontSize = Math.min(w * 0.22, h * 0.55);
 
@@ -77,19 +73,17 @@ export default function ExplodingText({ onAnimationEnd }: { onAnimationEnd: () =
     textCanvas.width = Math.ceil(w);
     textCanvas.height = Math.ceil(h);
     const tCtx = textCanvas.getContext("2d")!;
-
     tCtx.font = `900 ${fontSize}px Inter, Arial, sans-serif`;
     tCtx.textBaseline = "middle";
     tCtx.textAlign = "left";
     const iW = tCtx.measureText("i").width;
     const gW = tCtx.measureText("GAMING").width;
     const totalW = iW + gW;
-    const textX = cx - totalW / 2;
-
+    const textStartX = centerX - totalW / 2;
     tCtx.fillStyle = "rgba(255,255,255,0.3)";
-    tCtx.fillText("i", textX, cy);
+    tCtx.fillText("i", textStartX, centerY);
     tCtx.fillStyle = "#ffffff";
-    tCtx.fillText("GAMING", textX + iW, cy);
+    tCtx.fillText("GAMING", textStartX + iW, centerY);
 
     const imgData = tCtx.getImageData(0, 0, Math.ceil(w), Math.ceil(h));
     const pixels = imgData.data;
@@ -105,25 +99,25 @@ export default function ExplodingText({ onAnimationEnd }: { onAnimationEnd: () =
         }
       }
     }
-    minTX = Math.max(0, minTX - 4);
-    minTY = Math.max(0, minTY - 4);
-    maxTX = Math.min(w, maxTX + 4);
-    maxTY = Math.min(h, maxTY + 4);
+    minTX = Math.max(0, minTX - 2);
+    minTY = Math.max(0, minTY - 2);
+    maxTX = Math.min(w, maxTX + 2);
+    maxTY = Math.min(h, maxTY + 2);
 
-    const baseTile = mobile ? 18 : 22;
+    const baseTile = mobile ? 20 : 24;
     const tiles: Tile[] = [];
 
     const colWidths: number[] = [];
     let cx2 = minTX;
     while (cx2 < maxTX) {
-      const tw = baseTile + Math.floor((Math.random() - 0.5) * 10);
+      const tw = baseTile + Math.floor((Math.random() - 0.5) * 12);
       colWidths.push(Math.min(tw, maxTX - cx2));
       cx2 += tw;
     }
     const rowHeights: number[] = [];
     let cy2 = minTY;
     while (cy2 < maxTY) {
-      const th = baseTile + Math.floor((Math.random() - 0.5) * 8);
+      const th = baseTile + Math.floor((Math.random() - 0.5) * 10);
       rowHeights.push(Math.min(th, maxTY - cy2));
       cy2 += th;
     }
@@ -134,41 +128,27 @@ export default function ExplodingText({ onAnimationEnd }: { onAnimationEnd: () =
       let curX = minTX;
       for (let ci = 0; ci < colWidths.length; ci++) {
         const cw = colWidths[ci];
-
         let hasText = false;
-        const checkStep = 3;
-        for (let sy = curY; sy < curY + rh && !hasText; sy += checkStep) {
-          for (let sx = curX; sx < curX + cw && !hasText; sx += checkStep) {
+        for (let sy = curY; sy < curY + rh && !hasText; sy += 3) {
+          for (let sx = curX; sx < curX + cw && !hasText; sx += 3) {
             const idx = (Math.floor(sy) * Math.ceil(w) + Math.floor(sx)) * 4;
-            if (idx >= 0 && idx < pixels.length && pixels[idx + 3] > 30) {
-              hasText = true;
-            }
+            if (idx >= 0 && idx < pixels.length && pixels[idx + 3] > 30) hasText = true;
           }
         }
 
         if (hasText) {
           const tileCX = curX + cw / 2;
           const tileCY = curY + rh / 2;
-          const angle = Math.atan2(tileCY - cy, tileCX - cx) + (Math.random() - 0.5) * 1.0;
+          const angle = Math.atan2(tileCY - centerY, tileCX - centerX) + (Math.random() - 0.5) * 0.8;
           const dist = 300 + Math.random() * 700;
-          const distFromCenter = Math.sqrt((tileCX - cx) ** 2 + (tileCY - cy) ** 2);
-          const maxDist = Math.sqrt(cx * cx + cy * cy);
-
-          const bleed = 1;
-          const sX = Math.max(0, curX - bleed);
-          const sY = Math.max(0, curY - bleed);
-          const sW = Math.min(cw + bleed * 2, w - sX);
-          const sH = Math.min(rh + bleed * 2, h - sY);
+          const distFromCenter = Math.sqrt((tileCX - centerX) ** 2 + (tileCY - centerY) ** 2);
+          const maxDist = Math.sqrt(centerX ** 2 + centerY ** 2);
 
           tiles.push({
-            srcX: sX,
-            srcY: sY,
-            w: sW,
-            h: sH,
-            originX: sX + sW / 2,
-            originY: sY + sH / 2,
-            x: sX + sW / 2,
-            y: sY + sH / 2,
+            srcX: curX, srcY: curY, w: cw, h: rh,
+            originX: curX + cw / 2, originY: curY + rh / 2,
+            x: curX + cw / 2, y: curY + rh / 2,
+            prevX: curX + cw / 2, prevY: curY + rh / 2,
             scatterX: tileCX + Math.cos(angle) * dist,
             scatterY: tileCY + Math.sin(angle) * dist,
             rotation: 0,
@@ -188,36 +168,11 @@ export default function ExplodingText({ onAnimationEnd }: { onAnimationEnd: () =
       return;
     }
 
-    const decos: DecoShard[] = [];
-    const decoCount = mobile ? 100 : 250;
-    for (let i = 0; i < decoCount; i++) {
-      const src = tiles[Math.floor(Math.random() * tiles.length)];
-      if (!src) continue;
-      const angle = Math.random() * Math.PI * 2;
-      const dist = 200 + Math.random() * 900;
-      const r = Math.random();
-      let dw: number, dh: number;
-      if (r < 0.4) { dw = 3 + Math.random() * 8; dh = 1 + Math.random() * 3; }
-      else if (r < 0.8) { dw = 8 + Math.random() * 18; dh = 2 + Math.random() * 4; }
-      else { dw = 18 + Math.random() * 25; dh = 2 + Math.random() * 5; }
-      decos.push({
-        originX: src.originX,
-        originY: src.originY,
-        x: src.originX,
-        y: src.originY,
-        scatterX: src.originX + Math.cos(angle) * dist,
-        scatterY: src.originY + Math.sin(angle) * dist,
-        w: dw, h: dh,
-        baseAngle: Math.random() * Math.PI,
-        rotation: 0,
-        scatterRotation: (Math.random() - 0.5) * Math.PI * 6,
-        alpha: 0.5 + Math.random() * 0.5,
-        delay: Math.random() * 0.2,
-      });
-    }
+    const sparks: Spark[] = [];
+    const maxSparks = mobile ? 120 : 350;
 
     const meshEdges: MeshEdge[] = [];
-    const meshStep = Math.max(3, Math.floor(tiles.length / 200));
+    const meshStep = Math.max(3, Math.floor(tiles.length / 180));
     const meshPts: number[] = [];
     for (let i = 0; i < tiles.length; i += meshStep) meshPts.push(i);
     for (let i = 0; i < meshPts.length; i++) {
@@ -236,73 +191,132 @@ export default function ExplodingText({ onAnimationEnd }: { onAnimationEnd: () =
 
     const P_ZOOM = 0.6;
     const P_SPIN = 1.0;
-    const P_EXPLODE = 0.5;
-    const P_HOLD = 0.3;
-    const P_ASSEMBLE = 1.8;
+    const P_EXPLODE = 0.55;
+    const P_HOLD = 0.25;
+    const P_ASSEMBLE = 2.0;
     const P_MESH_FADE = 0.5;
     const TOTAL = P_ZOOM + P_SPIN + P_EXPLODE + P_HOLD + P_ASSEMBLE + P_MESH_FADE;
 
     const start = performance.now();
+    let shakeX = 0, shakeY = 0;
+    let flashAlpha = 0;
 
     function easeOut3(t: number) { return 1 - (1 - t) ** 3; }
+    function easeOut4(t: number) { return 1 - (1 - t) ** 4; }
     function easeIn2(t: number) { return t * t; }
+    function easeIn3(t: number) { return t * t * t; }
     function easeIO2(t: number) { return t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2; }
-    function easeIO3(t: number) { return t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2; }
+    function easeIO3(t: number) { return t < 0.5 ? 4 * t ** 3 : 1 - (-2 * t + 2) ** 3 / 2; }
 
     function drawSolidText(scale: number, rot: number, alpha: number) {
       ctx.save();
       ctx.globalAlpha = alpha;
-      ctx.translate(cx, cy);
+      ctx.translate(centerX, centerY);
       ctx.rotate(rot);
       ctx.scale(scale, scale);
-      ctx.translate(-cx, -cy);
+      ctx.translate(-centerX, -centerY);
       ctx.drawImage(textCanvas, 0, 0);
       ctx.restore();
     }
 
-    function drawTiles(alpha: number) {
-      ctx.save();
-      ctx.globalAlpha = alpha;
-      for (const t of tiles) {
+    function drawTiles(alpha: number, showStreaks: boolean) {
+      for (const tile of tiles) {
+        if (showStreaks) {
+          const dx = tile.x - tile.prevX;
+          const dy = tile.y - tile.prevY;
+          const speed = Math.sqrt(dx * dx + dy * dy);
+          if (speed > 4) {
+            ctx.save();
+            ctx.globalAlpha = Math.min(0.25, speed * 0.008) * alpha;
+            ctx.strokeStyle = "rgba(180,220,255,1)";
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(tile.x, tile.y);
+            ctx.lineTo(tile.x - dx * 1.2, tile.y - dy * 1.2);
+            ctx.stroke();
+            ctx.restore();
+          }
+        }
+
         ctx.save();
-        ctx.translate(t.x, t.y);
-        ctx.rotate(t.rotation);
-        ctx.drawImage(textCanvas, t.srcX, t.srcY, t.w, t.h, -t.w / 2, -t.h / 2, t.w, t.h);
+        ctx.translate(tile.x, tile.y);
+        ctx.rotate(tile.rotation);
+        ctx.globalAlpha = alpha;
+        ctx.drawImage(textCanvas, tile.srcX, tile.srcY, tile.w, tile.h, -tile.w / 2, -tile.h / 2, tile.w, tile.h);
+
+        if (Math.abs(tile.rotation) > 0.01) {
+          ctx.strokeStyle = `rgba(120,180,255,${0.12 * alpha})`;
+          ctx.lineWidth = 0.5;
+          ctx.strokeRect(-tile.w / 2, -tile.h / 2, tile.w, tile.h);
+        }
+
         ctx.restore();
       }
-      ctx.restore();
     }
 
-    function drawDecos(alpha: number) {
-      if (alpha <= 0) return;
-      for (const d of decos) {
+    function updateSparks(dt: number) {
+      for (let i = sparks.length - 1; i >= 0; i--) {
+        const s = sparks[i];
+        s.x += s.vx * dt;
+        s.y += s.vy * dt;
+        s.vy += 60 * dt;
+        s.vx *= 0.98;
+        s.life -= dt;
+        if (s.life <= 0) sparks.splice(i, 1);
+      }
+    }
+
+    function spawnSparks(count: number) {
+      for (let i = 0; i < count && sparks.length < maxSparks; i++) {
+        const src = tiles[Math.floor(Math.random() * tiles.length)];
+        const angle = Math.random() * Math.PI * 2;
+        const speed = 80 + Math.random() * 400;
+        sparks.push({
+          x: src.x, y: src.y,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          life: 0.3 + Math.random() * 0.7,
+          maxLife: 0.3 + Math.random() * 0.7,
+          size: 1 + Math.random() * 2,
+        });
+      }
+    }
+
+    function drawSparks() {
+      for (const s of sparks) {
+        const lr = s.life / s.maxLife;
         ctx.save();
-        ctx.translate(d.x, d.y);
-        ctx.rotate(d.rotation + d.baseAngle);
-        ctx.globalAlpha = d.alpha * alpha;
-        ctx.fillStyle = "#fff";
-        ctx.fillRect(-d.w / 2, -d.h / 2, d.w, d.h);
+        ctx.globalAlpha = lr * 0.8;
+        ctx.fillStyle = "#ddeeff";
+        ctx.shadowColor = "rgba(150,200,255,0.6)";
+        ctx.shadowBlur = 4;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.size * lr, 0, Math.PI * 2);
+        ctx.fill();
         ctx.restore();
       }
     }
 
     function drawMesh(strength: number) {
-      if (strength <= 0) return;
+      if (strength <= 0.01) return;
       ctx.save();
-      ctx.strokeStyle = `rgba(150,200,255,${0.25 * strength})`;
-      ctx.lineWidth = 0.8;
+      ctx.strokeStyle = `rgba(100,170,255,${0.18 * strength})`;
+      ctx.lineWidth = 0.5;
+      ctx.shadowColor = `rgba(80,150,255,${0.15 * strength})`;
+      ctx.shadowBlur = 3;
       for (const e of meshEdges) {
         const a = tiles[e.a], b = tiles[e.b];
         if (!a || !b) continue;
         const dx = a.x - b.x, dy = a.y - b.y;
-        if (Math.sqrt(dx * dx + dy * dy) < 180) {
+        if (Math.sqrt(dx * dx + dy * dy) < 140) {
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
           ctx.lineTo(b.x, b.y);
           ctx.stroke();
         }
       }
-      ctx.fillStyle = `rgba(180,220,255,${0.35 * strength})`;
+      ctx.shadowBlur = 0;
+      ctx.fillStyle = `rgba(140,200,255,${0.35 * strength})`;
       for (const idx of meshPts) {
         const p = tiles[idx];
         if (!p) continue;
@@ -313,10 +327,24 @@ export default function ExplodingText({ onAnimationEnd }: { onAnimationEnd: () =
       ctx.restore();
     }
 
+    function drawFlash() {
+      if (flashAlpha <= 0.01) return;
+      ctx.save();
+      const g = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, Math.max(w, h) * 0.6);
+      g.addColorStop(0, `rgba(220,240,255,${flashAlpha})`);
+      g.addColorStop(0.4, `rgba(100,180,255,${flashAlpha * 0.4})`);
+      g.addColorStop(1, "rgba(50,100,200,0)");
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, w, h);
+      ctx.restore();
+    }
+
     function scatterTiles(t: number) {
       for (const tile of tiles) {
+        tile.prevX = tile.x;
+        tile.prevY = tile.y;
         const pt = Math.max(0, Math.min(1, (t - tile.delay * 1.5) / (1 - tile.delay * 1.5)));
-        const e = easeIn2(pt);
+        const e = easeIn3(pt);
         tile.x = tile.originX + (tile.scatterX - tile.originX) * e;
         tile.y = tile.originY + (tile.scatterY - tile.originY) * e;
         tile.rotation = tile.scatterRotation * e;
@@ -325,40 +353,31 @@ export default function ExplodingText({ onAnimationEnd }: { onAnimationEnd: () =
 
     function assembleTiles(t: number) {
       for (const tile of tiles) {
+        tile.prevX = tile.x;
+        tile.prevY = tile.y;
         const pt = Math.max(0, Math.min(1, (t - tile.delay) / (1 - tile.delay)));
-        const e = easeOut3(pt);
+        const e = easeOut4(pt);
         tile.x = tile.scatterX + (tile.originX - tile.scatterX) * e;
         tile.y = tile.scatterY + (tile.originY - tile.scatterY) * e;
         tile.rotation = tile.scatterRotation * (1 - e);
       }
     }
 
-    function scatterDecos(t: number) {
-      for (const d of decos) {
-        const pt = Math.max(0, Math.min(1, (t - d.delay) / (1 - d.delay)));
-        const e = easeIn2(pt);
-        d.x = d.originX + (d.scatterX - d.originX) * e;
-        d.y = d.originY + (d.scatterY - d.originY) * e;
-        d.rotation = d.scatterRotation * e;
-      }
-    }
-
-    function assembleDecos(t: number) {
-      for (const d of decos) {
-        const pt = Math.max(0, Math.min(1, (t - d.delay) / (1 - d.delay)));
-        const e = easeOut3(pt);
-        d.x = d.scatterX + (d.originX - d.scatterX) * e;
-        d.y = d.scatterY + (d.originY - d.scatterY) * e;
-        d.rotation = d.scatterRotation * (1 - e);
-      }
-    }
+    let prevTime = start;
 
     function frame() {
-      const el = (performance.now() - start) / 1000;
-      ctx.clearRect(0, 0, w, h);
+      const now = performance.now();
+      const dt = Math.min((now - prevTime) / 1000, 0.05);
+      prevTime = now;
+      const el = (now - start) / 1000;
+
+      ctx.save();
+      ctx.translate(shakeX, shakeY);
+      ctx.clearRect(-10, -10, w + 20, h + 20);
 
       if (el >= TOTAL) {
-        drawSolidText(1, 0, 1);
+        drawTiles(1.0, false);
+        ctx.restore();
         cancelAnimationFrame(animRef.current);
         setFadingOut(true);
         setTimeout(() => { setIsActive(false); onAnimationEnd(); }, 400);
@@ -371,10 +390,13 @@ export default function ExplodingText({ onAnimationEnd }: { onAnimationEnd: () =
       const e4 = e3 + P_HOLD;
       const e5 = e4 + P_ASSEMBLE;
 
+      updateSparks(dt);
+
       if (el < e1) {
         const t = el / P_ZOOM;
         const scale = 5.0 - 3.0 * easeIO2(t);
-        drawSolidText(scale, 0, 0.4 + 0.6 * t);
+        drawSolidText(scale, 0, 0.3 + 0.7 * t);
+        shakeX = 0; shakeY = 0; flashAlpha = 0;
 
       } else if (el < e2) {
         const t = (el - e1) / P_SPIN;
@@ -382,51 +404,61 @@ export default function ExplodingText({ onAnimationEnd }: { onAnimationEnd: () =
         const scale = 2.0 - 1.0 * e;
         const rot = e * Math.PI * 2;
         drawSolidText(scale, rot, 1.0);
+        shakeX = 0; shakeY = 0;
+        if (t > 0.95) flashAlpha = easeIn2((t - 0.95) / 0.05) * 0.5;
 
       } else if (el < e3) {
         const t = (el - e2) / P_EXPLODE;
         scatterTiles(t);
-        scatterDecos(t);
 
-        const solidFade = 1 - easeIn2(Math.min(t * 4, 1));
+        flashAlpha = Math.max(0, 0.5 * (1 - t * 3));
+        const shakeDecay = Math.max(0, 1 - t * 4);
+        shakeX = (Math.random() - 0.5) * 5 * shakeDecay;
+        shakeY = (Math.random() - 0.5) * 5 * shakeDecay;
+
+        const solidFade = 1 - easeIn2(Math.min(t * 6, 1));
         if (solidFade > 0.01) drawSolidText(1, 0, solidFade);
 
-        drawTiles(1.0);
-        drawDecos(1.0);
+        drawTiles(1.0, true);
+        if (t < 0.25) spawnSparks(mobile ? 6 : 15);
+        drawSparks();
+        drawFlash();
 
       } else if (el < e4) {
+        shakeX = 0; shakeY = 0; flashAlpha = 0;
         for (const tile of tiles) {
+          tile.prevX = tile.x; tile.prevY = tile.y;
           tile.x = tile.scatterX; tile.y = tile.scatterY; tile.rotation = tile.scatterRotation;
         }
-        for (const d of decos) {
-          d.x = d.scatterX; d.y = d.scatterY; d.rotation = d.scatterRotation;
-        }
-        drawTiles(0.85);
-        drawDecos(0.85);
+        drawTiles(0.85, false);
+        drawSparks();
 
       } else if (el < e5) {
         const t = (el - e4) / P_ASSEMBLE;
         assembleTiles(t);
-        assembleDecos(t);
+        shakeX = 0; shakeY = 0;
 
-        const decoFade = 1 - easeIn2(Math.max(0, (t - 0.4) / 0.6));
-        const meshStrength = easeOut3(Math.min(t * 1.5, 1));
+        const meshIn = easeOut3(Math.min(t * 1.5, 1));
+        const meshOut = easeIn2(Math.max(0, (t - 0.7) / 0.3));
+        const meshStrength = meshIn * (1 - meshOut);
 
-        drawTiles(1.0);
-        drawDecos(decoFade);
-        drawMesh(meshStrength * (1 - easeIn2(Math.max(0, (t - 0.8) / 0.2))));
+        drawTiles(1.0, t < 0.6);
+        drawMesh(meshStrength);
+        drawSparks();
 
       } else {
         const t = (el - e5) / P_MESH_FADE;
+        const meshFade = 1 - easeIn2(Math.min(t, 1));
+        shakeX = 0; shakeY = 0;
+
         for (const tile of tiles) {
           tile.x = tile.originX; tile.y = tile.originY; tile.rotation = 0;
         }
-
-        const meshFade = 1 - easeIn2(Math.min(t, 1));
-        drawTiles(1.0);
+        drawTiles(1.0, false);
         if (meshFade > 0.01) drawMesh(meshFade);
       }
 
+      ctx.restore();
       animRef.current = requestAnimationFrame(frame);
     }
 
