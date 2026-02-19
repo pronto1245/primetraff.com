@@ -419,7 +419,7 @@ function DecorBadge({ text, rotation, className, delay = 0, color = "sky" }: { t
   );
 }
 
-function HeroSection({ textAnimDone }: { textAnimDone: boolean }) {
+function HeroSection({ textAnimDone, h1Ref }: { textAnimDone: boolean; h1Ref?: React.RefObject<HTMLHeadingElement> }) {
   const { lang } = useLang();
   const isTouch = useIsTouchDevice();
 
@@ -446,9 +446,10 @@ function HeroSection({ textAnimDone }: { textAnimDone: boolean }) {
 
             <div className="relative">
               <motion.h1
+                ref={h1Ref as any}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: textAnimDone || isTouch ? 1 : 0 }}
-                transition={{ duration: 0.4, ease: "easeOut" }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
                 className="text-[5.5rem] md:text-[8.5rem] lg:text-[11rem] xl:text-[13rem] font-black text-white leading-[0.85] tracking-tighter mb-4"
                 style={{ fontFamily: "'Inter', sans-serif", fontStretch: "condensed" }}
               >
@@ -1523,11 +1524,12 @@ function ScrollToTop() {
 export default function LandingPage() {
   const [textAnimDone, setTextAnimDone] = useState(false);
   const isTouch = useIsTouchDevice();
+  const h1Ref = useRef<HTMLHeadingElement>(null);
 
   return (
     <div className="min-h-screen relative" style={{ background: "#001030" }}>
       {!isTouch && !textAnimDone && (
-        <ExplodingText onAnimationEnd={() => setTextAnimDone(true)} />
+        <ExplodingText onAnimationEnd={() => setTextAnimDone(true)} targetRef={h1Ref} />
       )}
       <GridOverlay />
       <BlueBgDecorations />
@@ -1537,7 +1539,7 @@ export default function LandingPage() {
         <CrystalScene />
       </Suspense>
       <Navigation />
-      <HeroSection textAnimDone={textAnimDone || isTouch} />
+      <HeroSection textAnimDone={textAnimDone || isTouch} h1Ref={h1Ref} />
       <GlowingDivider />
       <WaveDivider />
       <FeaturesSection />
