@@ -25,6 +25,7 @@ import {
 import { SiTelegram } from "react-icons/si";
 import { useLang } from "@/lib/language-context";
 import { translations, t } from "@/lib/i18n";
+import ExplodingText from "@/components/ExplodingText";
 
 import primeTraffLogo from "@assets/IMG_9022_1770529061025.png";
 
@@ -87,7 +88,7 @@ import logoVegas from "@assets/img69380f65d567f_1770453920456.png";
 import logoBr4bet from "@assets/zQAzTcUzmpmD09fPheuQwWO7Jqm0FxinQatFQkwy_1770453920459.jpg";
 import logoWinhero2 from "@assets/Без_названия_(32)_1770454010355.png";
 
-const ParticleText = lazy(() => import("@/components/ParticleText"));
+const CrystalScene = lazy(() => import("@/components/CrystalScene"));
 
 const REGISTER_URL = "https://primetrack.pro/register?ref=ADV-3BT52V85";
 const LOGIN_URL = "https://primetrack.pro/login";
@@ -420,6 +421,8 @@ function DecorBadge({ text, rotation, className, delay = 0, color = "sky" }: { t
 
 function HeroSection() {
   const { lang } = useLang();
+  const [textAnimDone, setTextAnimDone] = useState(false);
+  const isTouch = useIsTouchDevice();
 
   const mobileBadges = ["CPA / RS / Hybrid", "Gambling x Betting", t(translations.hero.badges.geo, lang), t(translations.hero.badges.partners, lang), t(translations.hero.badges.payouts, lang)];
 
@@ -442,15 +445,20 @@ function HeroSection() {
               <span className="text-white/50 text-base md:text-lg lg:text-xl font-medium tracking-[0.3em] uppercase">Affiliate Network</span>
             </motion.div>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-[5.5rem] md:text-[8.5rem] lg:text-[11rem] xl:text-[13rem] font-black text-white leading-[0.85] tracking-tighter mb-4"
-              style={{ fontFamily: "'Inter', sans-serif", fontStretch: "condensed" }}
-            >
-              <span className="text-white/30">i</span>GAMING
-            </motion.h1>
+            <div className="relative">
+              <motion.h1
+                initial={{ opacity: isTouch ? 0 : 0 }}
+                animate={{ opacity: textAnimDone || isTouch ? 1 : 0 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+                className="text-[5.5rem] md:text-[8.5rem] lg:text-[11rem] xl:text-[13rem] font-black text-white leading-[0.85] tracking-tighter mb-4"
+                style={{ fontFamily: "'Inter', sans-serif", fontStretch: "condensed" }}
+              >
+                <span className="text-white/30">i</span>GAMING
+              </motion.h1>
+              {!isTouch && !textAnimDone && (
+                <ExplodingText onAnimationEnd={() => setTextAnimDone(true)} />
+              )}
+            </div>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -1524,7 +1532,7 @@ export default function LandingPage() {
       <SparkleParticles />
       <FloatingDots />
       <Suspense fallback={null}>
-        <ParticleText />
+        <CrystalScene />
       </Suspense>
       <Navigation />
       <HeroSection />
