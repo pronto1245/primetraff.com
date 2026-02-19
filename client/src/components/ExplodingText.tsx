@@ -201,10 +201,11 @@ export default function ExplodingText({
       ctx.restore();
     }
 
-    function drawShard(s: Shard, globalAlpha: number) {
+    function drawShard(s: Shard, globalAlpha: number, scaleMul: number = 1) {
       ctx.save();
       ctx.translate(s.x, s.y);
       ctx.rotate(s.rotation + s.baseAngle);
+      ctx.scale(scaleMul, scaleMul);
       ctx.globalAlpha = s.alpha * globalAlpha;
       ctx.fillStyle = `rgb(${s.color})`;
 
@@ -320,7 +321,9 @@ export default function ExplodingText({
           s.x = s.scatterX + (s.originX - s.scatterX) * pe;
           s.y = s.scatterY + (s.originY - s.scatterY) * pe;
           s.rotation = s.scatterRotation * (1 - pe);
-          drawShard(s, 1.0);
+          const nearEnd = Math.max(0, (pe - 0.7) / 0.3);
+          const growScale = 1.0 + nearEnd * 0.3;
+          drawShard(s, 1.0, growScale);
         }
 
         drawMesh(eased, 1.0);
@@ -328,23 +331,20 @@ export default function ExplodingText({
       } else {
         const t = (elapsed - t5End) / PHASE6_MERGE;
         const eased = easeInOutQuad(Math.min(t, 1));
+        const meshFade = 1.0 - easeInQuad(Math.min(t * 2, 1));
 
-        const shardAlpha = 1.0 - eased;
-        const textAlpha = eased;
-        const meshFade = 1.0 - easeInQuad(Math.min(t * 1.5, 1));
+        const growScale = 1.0 + eased * 2.5;
 
         for (const s of shards) {
           s.x = s.originX;
           s.y = s.originY;
           s.rotation = 0;
-          drawShard(s, shardAlpha);
+          drawShard(s, 1.0, growScale);
         }
 
         if (meshFade > 0) {
           drawMesh(meshFade, 1.0);
         }
-
-        drawTextScaled(1.0, 0, textAlpha);
       }
 
       animRef.current = requestAnimationFrame(frame);
