@@ -87,7 +87,7 @@ import logoVegas from "@assets/img69380f65d567f_1770453920456.png";
 import logoBr4bet from "@assets/zQAzTcUzmpmD09fPheuQwWO7Jqm0FxinQatFQkwy_1770453920459.jpg";
 import logoWinhero2 from "@assets/Без_названия_(32)_1770454010355.png";
 
-const CrystalScene = lazy(() => import("@/components/CrystalScene"));
+const ParticleText = lazy(() => import("@/components/ParticleText"));
 
 const REGISTER_URL = "https://primetrack.pro/register?ref=ADV-3BT52V85";
 const LOGIN_URL = "https://primetrack.pro/login";
@@ -1524,7 +1524,7 @@ export default function LandingPage() {
       <SparkleParticles />
       <FloatingDots />
       <Suspense fallback={null}>
-        <CrystalScene />
+        <ParticleText />
       </Suspense>
       <Navigation />
       <HeroSection />
