@@ -1,4 +1,5 @@
-import { useState, useEffect, useRef, useMemo, Suspense, lazy } from "react";
+import { useState, useEffect, useRef, useMemo, useCallback, Suspense, lazy } from "react";
+import ExplodingText from "@/components/ExplodingText";
 import { Button } from "@/components/ui/button";
 import { motion, useInView } from "framer-motion";
 import { 
@@ -420,6 +421,9 @@ function DecorBadge({ text, rotation, className, delay = 0, color = "sky" }: { t
 
 function HeroSection() {
   const { lang } = useLang();
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const [showExplode, setShowExplode] = useState(true);
+  const handleAnimEnd = useCallback(() => setShowExplode(false), []);
 
   const mobileBadges = ["CPA / RS / Hybrid", "Gambling x Betting", t(translations.hero.badges.geo, lang), t(translations.hero.badges.partners, lang), t(translations.hero.badges.payouts, lang)];
 
@@ -429,6 +433,8 @@ function HeroSection() {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(0,200,255,0.15),_transparent_60%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(0,100,200,0.2),_transparent_60%)]" />
       <GlowingOrb />
+
+      {showExplode && <ExplodingText onAnimationEnd={handleAnimEnd} targetRef={headingRef} />}
       
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-24 lg:py-32 w-full">
         <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
@@ -444,8 +450,9 @@ function HeroSection() {
 
             <div className="relative">
               <motion.h1
+                ref={headingRef}
                 initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
+                animate={{ opacity: showExplode ? 0 : 1 }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
                 className="text-[5.5rem] md:text-[8.5rem] lg:text-[11rem] xl:text-[13rem] font-black text-white leading-[0.85] tracking-tighter mb-4"
                 style={{ fontFamily: "'Inter', sans-serif", fontStretch: "condensed" }}
