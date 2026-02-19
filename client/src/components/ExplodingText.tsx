@@ -122,11 +122,8 @@ export default function ExplodingText({ onAnimationEnd, targetRef }: Props) {
     maxTX = Math.min(w, maxTX + 2);
     maxTY = Math.min(h, maxTY + 2);
 
-    const textW = maxTX - minTX;
-    const textH = maxTY - minTY;
-
     const edgePoints: { x: number; y: number }[] = [];
-    const step = mobile ? 6 : 4;
+    const step = mobile ? 5 : 3;
     for (let y = minTY; y <= maxTY; y += step) {
       for (let x = minTX; x <= maxTX; x += step) {
         const idx = (Math.floor(y) * canvasW + Math.floor(x)) * 4;
@@ -146,20 +143,20 @@ export default function ExplodingText({ onAnimationEnd, targetRef }: Props) {
     }
 
     const meshPoints: MeshPoint[] = [];
-    const meshSpacing = mobile ? 25 : 18;
+    const meshSpacing = mobile ? 22 : 15;
     for (let y = minTY; y <= maxTY; y += meshSpacing) {
       for (let x = minTX; x <= maxTX; x += meshSpacing) {
         const idx = (Math.floor(y) * canvasW + Math.floor(x)) * 4;
         if (idx >= 0 && idx < pixels.length && pixels[idx + 3] > 20) {
           meshPoints.push({
-            x: x + (Math.random() - 0.5) * meshSpacing * 0.3,
-            y: y + (Math.random() - 0.5) * meshSpacing * 0.3,
+            x: x + (Math.random() - 0.5) * meshSpacing * 0.25,
+            y: y + (Math.random() - 0.5) * meshSpacing * 0.25,
             ox: x, oy: y,
           });
         }
       }
     }
-    for (let i = 0; i < edgePoints.length; i += 3) {
+    for (let i = 0; i < edgePoints.length; i += 2) {
       meshPoints.push({
         x: edgePoints[i].x,
         y: edgePoints[i].y,
@@ -169,7 +166,7 @@ export default function ExplodingText({ onAnimationEnd, targetRef }: Props) {
     }
 
     const meshTriangles: MeshTriangle[] = [];
-    const maxMeshDist = meshSpacing * 2.5;
+    const maxMeshDist = meshSpacing * 2.2;
     for (let i = 0; i < meshPoints.length; i++) {
       const dists: { idx: number; d: number }[] = [];
       for (let j = 0; j < meshPoints.length; j++) {
@@ -180,8 +177,8 @@ export default function ExplodingText({ onAnimationEnd, targetRef }: Props) {
         if (d < maxMeshDist) dists.push({ idx: j, d });
       }
       dists.sort((a, b) => a.d - b.d);
-      for (let k = 0; k < Math.min(dists.length - 1, 3); k++) {
-        for (let l = k + 1; l < Math.min(dists.length, 4); l++) {
+      for (let k = 0; k < Math.min(dists.length - 1, 4); k++) {
+        for (let l = k + 1; l < Math.min(dists.length, 5); l++) {
           const a = i, b = dists[k].idx, c = dists[l].idx;
           const key = [a, b, c].sort((x, y) => x - y).join(",");
           const exists = meshTriangles.some(t => {
@@ -194,26 +191,48 @@ export default function ExplodingText({ onAnimationEnd, targetRef }: Props) {
     }
 
     const particles: Particle[] = [];
-    const maxParticles = mobile ? 150 : 400;
+    const maxParticles = mobile ? 200 : 600;
 
-    function spawnEdgeParticles(count: number, speed: number) {
+    function spawnEdgeParticles(count: number, speed: number, sizeMultiplier = 1) {
       for (let i = 0; i < count && particles.length < maxParticles; i++) {
         const ep = edgePoints[Math.floor(Math.random() * edgePoints.length)];
         if (!ep) continue;
-        const angle = Math.atan2(ep.y - textCY, ep.x - textCX) + (Math.random() - 0.5) * 1.2;
-        const spd = speed * (0.5 + Math.random());
+        const angle = Math.atan2(ep.y - textCY, ep.x - textCX) + (Math.random() - 0.5) * 1.0;
+        const spd = speed * (0.4 + Math.random() * 0.8);
+        const size = sizeMultiplier * (Math.random() > 0.7 ? 1.5 : 1);
         particles.push({
-          x: ep.x,
-          y: ep.y,
+          x: ep.x + (Math.random() - 0.5) * 4,
+          y: ep.y + (Math.random() - 0.5) * 4,
           vx: Math.cos(angle) * spd,
           vy: Math.sin(angle) * spd,
           rotation: Math.random() * Math.PI * 2,
-          rotSpeed: (Math.random() - 0.5) * 8,
-          w: 2 + Math.random() * 5,
-          h: 1 + Math.random() * 3,
+          rotSpeed: (Math.random() - 0.5) * 10,
+          w: (2 + Math.random() * 6) * size,
+          h: (1 + Math.random() * 3) * size,
+          life: 2.0 + Math.random() * 3.5,
+          maxLife: 2.0 + Math.random() * 3.5,
+          alpha: 0.5 + Math.random() * 0.5,
+        });
+      }
+    }
+
+    function spawnScatterParticles(count: number) {
+      for (let i = 0; i < count && particles.length < maxParticles; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const dist = 50 + Math.random() * 200;
+        const spd = 30 + Math.random() * 80;
+        particles.push({
+          x: textCX + Math.cos(angle) * dist,
+          y: textCY + Math.sin(angle) * dist,
+          vx: Math.cos(angle) * spd * (0.3 + Math.random() * 0.7),
+          vy: Math.sin(angle) * spd * (0.3 + Math.random() * 0.7) - 20,
+          rotation: Math.random() * Math.PI * 2,
+          rotSpeed: (Math.random() - 0.5) * 6,
+          w: 1 + Math.random() * 4,
+          h: 1 + Math.random() * 2,
           life: 1.5 + Math.random() * 2.5,
           maxLife: 1.5 + Math.random() * 2.5,
-          alpha: 0.6 + Math.random() * 0.4,
+          alpha: 0.3 + Math.random() * 0.4,
         });
       }
     }
@@ -223,8 +242,8 @@ export default function ExplodingText({ onAnimationEnd, targetRef }: Props) {
         const p = particles[i];
         p.x += p.vx * dt;
         p.y += p.vy * dt;
-        p.vy += 15 * dt;
-        p.vx *= 0.995;
+        p.vy += 8 * dt;
+        p.vx *= 0.997;
         p.rotation += p.rotSpeed * dt;
         p.life -= dt;
         if (p.life <= 0) particles.splice(i, 1);
@@ -248,10 +267,9 @@ export default function ExplodingText({ onAnimationEnd, targetRef }: Props) {
     function drawMesh(strength: number) {
       if (strength <= 0.01) return;
       ctx.save();
-      ctx.globalAlpha = strength;
 
-      ctx.strokeStyle = `rgba(200,220,255,${0.25 * strength})`;
-      ctx.lineWidth = 0.8;
+      ctx.strokeStyle = `rgba(180,210,255,${0.35 * strength})`;
+      ctx.lineWidth = 1.0;
       for (const tri of meshTriangles) {
         const a = meshPoints[tri.a], b = meshPoints[tri.b], c = meshPoints[tri.c];
         if (!a || !b || !c) continue;
@@ -263,10 +281,10 @@ export default function ExplodingText({ onAnimationEnd, targetRef }: Props) {
         ctx.stroke();
       }
 
-      ctx.fillStyle = `rgba(200,230,255,${0.5 * strength})`;
+      ctx.fillStyle = `rgba(200,230,255,${0.6 * strength})`;
       for (const p of meshPoints) {
         ctx.beginPath();
-        ctx.arc(p.x, p.y, 1.5, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, 1.8, 0, Math.PI * 2);
         ctx.fill();
       }
 
@@ -285,15 +303,16 @@ export default function ExplodingText({ onAnimationEnd, targetRef }: Props) {
 
     const P_APPEAR = 0.3;
     const P_ROTATE = 1.2;
-    const P_MESH = 0.6;
-    const P_EXPLODE = 0.8;
-    const P_FLOAT = 2.0;
-    const P_FADE = 0.6;
+    const P_MESH = 0.5;
+    const P_EXPLODE = 1.0;
+    const P_FLOAT = 2.5;
+    const P_FADE = 0.8;
     const TOTAL = P_APPEAR + P_ROTATE + P_MESH + P_EXPLODE + P_FLOAT + P_FADE;
 
     const start = performance.now();
     let prevTime = start;
     let particlesBurst = false;
+    let burstWave2 = false;
 
     function easeOut3(t: number) { return 1 - (1 - t) ** 3; }
     function easeIO2(t: number) { return t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2; }
@@ -340,16 +359,19 @@ export default function ExplodingText({ onAnimationEnd, targetRef }: Props) {
       } else if (el < e4) {
         const t = (el - e3) / P_EXPLODE;
         drawSolidText(1, 1);
-
-        const meshStrength = 1.0;
-        drawMesh(meshStrength);
+        drawMesh(1.0);
 
         if (!particlesBurst) {
           particlesBurst = true;
-          spawnEdgeParticles(mobile ? 80 : 250, mobile ? 80 : 150);
+          spawnEdgeParticles(mobile ? 100 : 350, mobile ? 100 : 180, 1.2);
+          spawnScatterParticles(mobile ? 30 : 80);
         }
-        if (t < 0.5) {
-          spawnEdgeParticles(mobile ? 3 : 8, mobile ? 50 : 100);
+        if (t > 0.3 && !burstWave2) {
+          burstWave2 = true;
+          spawnEdgeParticles(mobile ? 50 : 150, mobile ? 60 : 120, 0.8);
+        }
+        if (t < 0.6) {
+          spawnEdgeParticles(mobile ? 2 : 5, mobile ? 40 : 80);
         }
 
         drawParticles();
@@ -357,14 +379,19 @@ export default function ExplodingText({ onAnimationEnd, targetRef }: Props) {
         const t = (el - e4) / P_FLOAT;
         drawSolidText(1, 1);
 
-        const meshFade = 1 - easeOut3(Math.min(t * 1.5, 1)) * 0.3;
+        const meshFade = 1 - easeOut3(Math.min(t * 0.8, 1)) * 0.2;
         drawMesh(meshFade);
+
+        if (t < 0.3) {
+          spawnEdgeParticles(mobile ? 1 : 3, mobile ? 30 : 60);
+        }
+
         drawParticles();
       } else {
         const t = (el - e5) / P_FADE;
         drawSolidText(1, 1);
 
-        const meshFade = Math.max(0, 0.7 * (1 - easeOut3(t)));
+        const meshFade = Math.max(0, 0.8 * (1 - easeOut3(t)));
         drawMesh(meshFade);
         drawParticles();
       }
