@@ -166,8 +166,8 @@ export default function ExplodingText({
     const PHASE3_EXPLODE = 0.5;
     const PHASE4_HOLD = 0.3;
     const PHASE5_ASSEMBLE = 1.6;
-    const PHASE6_SETTLE = 0.5;
-    const TOTAL = PHASE1_ZOOM + PHASE2_SHRINK_SPIN + PHASE3_EXPLODE + PHASE4_HOLD + PHASE5_ASSEMBLE + PHASE6_SETTLE;
+    const PHASE6_MERGE = 1.2;
+    const TOTAL = PHASE1_ZOOM + PHASE2_SHRINK_SPIN + PHASE3_EXPLODE + PHASE4_HOLD + PHASE5_ASSEMBLE + PHASE6_MERGE;
 
     const startTime = performance.now();
 
@@ -315,17 +315,25 @@ export default function ExplodingText({
         drawMesh(eased, 1.0);
 
       } else {
-        const t = (elapsed - t5End) / PHASE6_SETTLE;
-        const meshFade = 1.0 - easeInQuad(t);
+        const t = (elapsed - t5End) / PHASE6_MERGE;
+        const eased = easeInOutQuad(Math.min(t, 1));
+
+        const shardAlpha = 1.0 - eased;
+        const textAlpha = eased;
+        const meshFade = 1.0 - easeInQuad(Math.min(t * 1.5, 1));
 
         for (const s of shards) {
           s.x = s.originX;
           s.y = s.originY;
           s.rotation = 0;
-          drawShard(s, 1.0);
+          drawShard(s, shardAlpha);
         }
 
-        drawMesh(meshFade, 1.0);
+        if (meshFade > 0) {
+          drawMesh(meshFade, 1.0);
+        }
+
+        drawTextScaled(1.0, 0, textAlpha);
       }
 
       animRef.current = requestAnimationFrame(frame);
