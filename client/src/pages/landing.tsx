@@ -1316,13 +1316,13 @@ function Footer() {
                   support@primetraff.com
                 </a>
               </li>
-              <li className="pt-2 flex flex-col gap-2">
-                <a href="https://t.me/primetraff_mediabot" target="_blank" rel="noopener noreferrer" data-testid="button-footer-uniqualizer" className="flex items-center gap-2 text-sm font-semibold text-white bg-[#0088CC]/20 border border-[#0088CC]/40 hover:bg-[#0088CC]/30 hover:border-[#0088CC]/70 transition-all px-4 py-2 rounded-lg">
-                  <SiTelegram className="w-3.5 h-3.5 text-[#0088CC]" />
+              <li>
+                <a href="https://t.me/primetraff_mediabot" target="_blank" rel="noopener noreferrer" data-testid="link-footer-uniqualizer" className="text-sm text-white/45 hover:text-sky-400 transition-colors">
                   Уникализатор
                 </a>
-                <a href="https://t.me/primetraff_mediabot" target="_blank" rel="noopener noreferrer" data-testid="button-footer-2fa" className="flex items-center gap-2 text-sm font-semibold text-white bg-[#0088CC]/20 border border-[#0088CC]/40 hover:bg-[#0088CC]/30 hover:border-[#0088CC]/70 transition-all px-4 py-2 rounded-lg">
-                  <SiTelegram className="w-3.5 h-3.5 text-[#0088CC]" />
+              </li>
+              <li>
+                <a href="https://t.me/primetraff_mediabot" target="_blank" rel="noopener noreferrer" data-testid="link-footer-2fa" className="text-sm text-white/45 hover:text-sky-400 transition-colors">
                   2FA Генератор
                 </a>
               </li>
