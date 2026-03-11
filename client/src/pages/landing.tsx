@@ -323,7 +323,7 @@ function Navigation() {
               <span className="text-white">{t(translations.nav.ourChannel, lang)}</span>
             </a>
             <a href="https://t.me/primetraff_mediabot" target="_blank" rel="noopener noreferrer" data-testid="button-uniqualizer-nav">
-              <Button className="bg-[#0088CC] hover:bg-[#006fa8] text-white font-semibold px-5 rounded-full border-0">
+              <Button variant="outline" className="border-white/30 text-white font-medium px-5 rounded-full">
                 Уникализатор
               </Button>
             </a>
