@@ -355,14 +355,9 @@ function Navigation() {
               <a href="#partners" className="text-white/70 py-3 min-h-[44px] flex items-center" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-partners">{t(translations.nav.partners, lang)}</a>
               <a href="#faq" className="text-white/70 py-3 min-h-[44px] flex items-center" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-faq">{t(translations.nav.faq, lang)}</a>
               <a href="/blog" className="text-white/70 py-3 min-h-[44px] flex items-center" onClick={() => setMobileMenuOpen(false)} data-testid="link-mobile-blog">{t(translations.blog.nav, lang)}</a>
-              <a href={LOGIN_URL} target="_blank" rel="noopener noreferrer" className="w-full" data-testid="button-login-mobile">
-                <Button variant="outline" className="w-full border-white/25 text-white/80 font-medium rounded-full">
-                  {t(translations.nav.login, lang)}
-                </Button>
-              </a>
-              <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" className="w-full" data-testid="button-become-partner-mobile">
-                <Button variant="outline" className="w-full border-white/30 text-white font-medium rounded-full">
-                  {t(translations.nav.becomePartner, lang)}
+              <a href="https://t.me/primetraff_mediabot" target="_blank" rel="noopener noreferrer" className="w-full" data-testid="button-uniqualizer-mobile">
+                <Button className="w-full bg-[#0088CC] hover:bg-[#006fa8] text-white font-semibold rounded-full border-0">
+                  Уникализатор
                 </Button>
               </a>
             </div>
@@ -481,10 +476,15 @@ function HeroSection() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex flex-col gap-4 lg:gap-5 w-full lg:w-auto lg:min-w-[260px]"
           >
-            <a href="https://t.me/primetraff_mediabot" target="_blank" rel="noopener noreferrer" data-testid="button-hero-uniqualizer" className="block">
-              <div className="group relative border-2 border-sky-400/50 rounded-2xl px-10 py-8 lg:px-12 lg:py-10 text-center transition-all duration-300 cursor-pointer hover:border-sky-400 hover:scale-[1.02]" style={{ background: "rgba(0,136,204,0.15)" }}>
-                <SiTelegram className="w-6 h-6 text-[#0088CC] inline-block mr-3 mb-1" />
-                <span className="text-white font-bold text-lg lg:text-xl tracking-wide uppercase">Уникализатор</span>
+            <a href={LOGIN_URL} target="_blank" rel="noopener noreferrer" data-testid="button-hero-login" className="block">
+              <div className="group relative border-2 border-white/20 rounded-2xl px-10 py-8 lg:px-12 lg:py-10 text-center transition-all duration-300 cursor-pointer" style={{ background: "rgba(255,255,255,0.04)" }}>
+                <span className="text-white font-bold text-lg lg:text-xl tracking-wide uppercase">{t(translations.hero.loginBtn, lang)}</span>
+                <ArrowRight className="w-5 h-5 text-white/60 inline-block ml-3" />
+              </div>
+            </a>
+            <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" data-testid="button-hero-register" className="block">
+              <div className="group relative border-2 border-sky-400/30 rounded-2xl px-10 py-8 lg:px-12 lg:py-10 text-center transition-all duration-300 cursor-pointer" style={{ background: "rgba(0,136,204,0.12)" }}>
+                <span className="text-white font-bold text-lg lg:text-xl tracking-wide uppercase">{t(translations.hero.registerBtn, lang)}</span>
               </div>
             </a>
             <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" data-testid="button-hero-telegram" className="block">
@@ -1314,6 +1314,16 @@ function Footer() {
               <li>
                 <a href="mailto:support@primetraff.com" className="text-sm text-white/45 hover:text-sky-400 transition-colors" data-testid="link-footer-email">
                   support@primetraff.com
+                </a>
+              </li>
+              <li className="pt-2 flex flex-col gap-2">
+                <a href="https://t.me/primetraff_mediabot" target="_blank" rel="noopener noreferrer" data-testid="button-footer-uniqualizer" className="flex items-center gap-2 text-sm font-semibold text-white bg-[#0088CC]/20 border border-[#0088CC]/40 hover:bg-[#0088CC]/30 hover:border-[#0088CC]/70 transition-all px-4 py-2 rounded-lg">
+                  <SiTelegram className="w-3.5 h-3.5 text-[#0088CC]" />
+                  Уникализатор
+                </a>
+                <a href="https://t.me/primetraff_mediabot" target="_blank" rel="noopener noreferrer" data-testid="button-footer-2fa" className="flex items-center gap-2 text-sm font-semibold text-white bg-[#0088CC]/20 border border-[#0088CC]/40 hover:bg-[#0088CC]/30 hover:border-[#0088CC]/70 transition-all px-4 py-2 rounded-lg">
+                  <SiTelegram className="w-3.5 h-3.5 text-[#0088CC]" />
+                  2FA Генератор
                 </a>
               </li>
             </ul>
