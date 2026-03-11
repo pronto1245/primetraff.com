@@ -322,14 +322,9 @@ function Navigation() {
               <SiTelegram className="w-4 h-4 text-[#0088CC]" />
               <span className="text-white">{t(translations.nav.ourChannel, lang)}</span>
             </a>
-            <a href={LOGIN_URL} target="_blank" rel="noopener noreferrer" data-testid="button-login-nav">
-              <Button variant="outline" className="border-white/25 text-white/80 font-medium px-5 rounded-full">
-                {t(translations.nav.login, lang)}
-              </Button>
-            </a>
-            <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" data-testid="button-become-partner-nav">
-              <Button variant="outline" className="border-white/30 text-white font-medium px-5 rounded-full">
-                {t(translations.nav.becomePartner, lang)}
+            <a href="https://t.me/primetraff_mediabot" target="_blank" rel="noopener noreferrer" data-testid="button-uniqualizer-nav">
+              <Button className="bg-[#0088CC] hover:bg-[#006fa8] text-white font-semibold px-5 rounded-full border-0">
+                Уникализатор
               </Button>
             </a>
           </div>
@@ -486,15 +481,10 @@ function HeroSection() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex flex-col gap-4 lg:gap-5 w-full lg:w-auto lg:min-w-[260px]"
           >
-            <a href={LOGIN_URL} target="_blank" rel="noopener noreferrer" data-testid="button-hero-login" className="block">
-              <div className="group relative border-2 border-white/20 rounded-2xl px-10 py-8 lg:px-12 lg:py-10 text-center transition-all duration-300 cursor-pointer" style={{ background: "rgba(255,255,255,0.04)" }}>
-                <span className="text-white font-bold text-lg lg:text-xl tracking-wide uppercase">{t(translations.hero.loginBtn, lang)}</span>
-                <ArrowRight className="w-5 h-5 text-white/60 inline-block ml-3" />
-              </div>
-            </a>
-            <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" data-testid="button-hero-register" className="block">
-              <div className="group relative border-2 border-sky-400/30 rounded-2xl px-10 py-8 lg:px-12 lg:py-10 text-center transition-all duration-300 cursor-pointer" style={{ background: "rgba(0,136,204,0.12)" }}>
-                <span className="text-white font-bold text-lg lg:text-xl tracking-wide uppercase">{t(translations.hero.registerBtn, lang)}</span>
+            <a href="https://t.me/primetraff_mediabot" target="_blank" rel="noopener noreferrer" data-testid="button-hero-uniqualizer" className="block">
+              <div className="group relative border-2 border-sky-400/50 rounded-2xl px-10 py-8 lg:px-12 lg:py-10 text-center transition-all duration-300 cursor-pointer hover:border-sky-400 hover:scale-[1.02]" style={{ background: "rgba(0,136,204,0.15)" }}>
+                <SiTelegram className="w-6 h-6 text-[#0088CC] inline-block mr-3 mb-1" />
+                <span className="text-white font-bold text-lg lg:text-xl tracking-wide uppercase">Уникализатор</span>
               </div>
             </a>
             <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" data-testid="button-hero-telegram" className="block">
