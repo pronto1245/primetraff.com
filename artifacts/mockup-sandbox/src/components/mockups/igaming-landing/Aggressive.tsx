@@ -239,23 +239,6 @@ export function Aggressive() {
         </div>
       </div>
 
-      {/* ── STATS ── */}
-      <section style={{ padding: '80px 24px', background: '#080810', position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(0,255,136,0.02) 1px, transparent 1px)', backgroundSize: '1px 60px', pointerEvents: 'none' }} />
-        <div style={{ maxWidth: 1280, margin: '0 auto' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 2, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)', transform: 'skewX(-4deg)', overflow: 'hidden' }}>
-            {[
-              { icon: TrendingUp, num: 500, suffix: '+', label: 'Прямых офферов' },
-              { icon: Globe, num: 150, suffix: '+', label: 'Гео покрытие' },
-              { icon: DollarSign, num: 50000, suffix: '+', label: 'Выплат / месяц' },
-            ].map((item, i) => (
-              <div key={i} style={{ padding: '48px 32px', borderRight: i < 2 ? '1px solid rgba(255,255,255,0.05)' : 'none' }}>
-                <CounterCard {...item} />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ── FEATURES ── */}
       <section id="benefits" style={{ padding: '100px 24px', position: 'relative' }}>
