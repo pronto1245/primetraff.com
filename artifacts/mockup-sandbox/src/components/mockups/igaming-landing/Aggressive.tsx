@@ -152,11 +152,11 @@ export function Aggressive() {
         <div style={{ position: 'absolute', top: '20%', left: '5%', width: 500, height: 500, borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,255,136,0.08) 0%, transparent 70%)', pointerEvents: 'none', animation: 'glow-pulse 4s ease-in-out infinite' }} />
         <div style={{ position: 'absolute', bottom: '10%', right: '5%', width: 400, height: 400, borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,136,255,0.08) 0%, transparent 70%)', pointerEvents: 'none', animation: 'glow-pulse 5s ease-in-out infinite 1s' }} />
         {/* floating card symbols */}
-        <FloatingSymbol symbol="♠" style={{ top: '15%', right: '12%', fontSize: '8rem', color: 'rgba(0,255,136,0.06)', animation: 'float1 7s ease-in-out infinite' }} />
-        <FloatingSymbol symbol="♥" style={{ top: '55%', right: '8%', fontSize: '6rem', color: 'rgba(255,60,60,0.05)', animation: 'float2 9s ease-in-out infinite' }} />
-        <FloatingSymbol symbol="♣" style={{ top: '70%', left: '8%', fontSize: '7rem', color: 'rgba(0,255,136,0.05)', animation: 'float3 8s ease-in-out infinite' }} />
-        <FloatingSymbol symbol="♦" style={{ top: '25%', left: '3%', fontSize: '5rem', color: 'rgba(255,180,0,0.05)', animation: 'float1 6s ease-in-out infinite 2s' }} />
-        <FloatingSymbol symbol="7" style={{ top: '40%', right: '20%', fontSize: '12rem', color: 'rgba(0,255,136,0.03)', animation: 'float2 10s ease-in-out infinite' }} />
+        <FloatingSymbol symbol="♠" style={{ top: '15%', right: '12%', fontSize: '8rem', color: 'rgba(0,255,136,0.22)', animation: 'float1 7s ease-in-out infinite' }} />
+        <FloatingSymbol symbol="♥" style={{ top: '55%', right: '8%', fontSize: '6rem', color: 'rgba(255,60,60,0.18)', animation: 'float2 9s ease-in-out infinite' }} />
+        <FloatingSymbol symbol="♣" style={{ top: '70%', left: '8%', fontSize: '7rem', color: 'rgba(0,255,136,0.18)', animation: 'float3 8s ease-in-out infinite' }} />
+        <FloatingSymbol symbol="♦" style={{ top: '25%', left: '3%', fontSize: '5rem', color: 'rgba(255,180,0,0.18)', animation: 'float1 6s ease-in-out infinite 2s' }} />
+        <FloatingSymbol symbol="7" style={{ top: '40%', right: '20%', fontSize: '12rem', color: 'rgba(0,255,136,0.10)', animation: 'float2 10s ease-in-out infinite' }} />
 
         <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 10, width: '100%' }}>
           {/* badge */}
