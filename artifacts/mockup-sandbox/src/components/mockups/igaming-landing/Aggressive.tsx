@@ -243,7 +243,7 @@ export function Aggressive() {
             </h2>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 2 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 2 }}>
             {features.map(({ icon: Icon, title, desc }, i) => (
               <div key={i} className="card-glow"
                 onMouseEnter={() => setHoveredFeature(i)}
