@@ -85,6 +85,11 @@ export function Aggressive() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap');
         @keyframes ticker { from { transform: translateX(0) } to { transform: translateX(-50%) } }
+        @keyframes marquee-left  { from { transform: translateX(0) }    to { transform: translateX(-50%) } }
+        @keyframes marquee-right { from { transform: translateX(-50%) } to { transform: translateX(0) } }
+        .marquee-left  { display:flex; width:max-content; animation: marquee-left  22s linear infinite; }
+        .marquee-right { display:flex; width:max-content; animation: marquee-right 22s linear infinite; }
+        .marquee-left:hover, .marquee-right:hover { animation-play-state:paused; }
         @keyframes float1 { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-20px) rotate(5deg)} }
         @keyframes float2 { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(15px) rotate(-4deg)} }
         @keyframes float3 { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-12px) rotate(8deg)} }
@@ -311,19 +316,70 @@ export function Aggressive() {
       </section>
 
       {/* ── PARTNERS ── */}
-      <section id="partners" style={{ padding: '80px 24px', textAlign: 'center' }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto' }}>
-          <p style={{ color: '#374151', fontWeight: 800, fontSize: 11, letterSpacing: 4, textTransform: 'uppercase', marginBottom: 48 }}>Нам доверяют лидеры рынка</p>
-          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '20px 60px', filter: 'grayscale(1)', opacity: 0.35 }}
-            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.filter = 'grayscale(0)'; (e.currentTarget as HTMLElement).style.opacity = '0.8'; }}
-            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.filter = 'grayscale(1)'; (e.currentTarget as HTMLElement).style.opacity = '0.35'; }}>
-            {['VULKAN', 'PIN-UP', '1WIN', 'STAKE', 'N1', 'GG.BET', 'VAVADA', '1XBET'].map(n => (
-              <span key={n} style={{ fontFamily: "'Barlow Condensed',sans-serif", fontSize: 32, fontWeight: 900, letterSpacing: 3, textTransform: 'uppercase', cursor: 'default', transition: 'color .2s' }}
-                onMouseEnter={e => (e.currentTarget.style.color = '#00FF88')}
-                onMouseLeave={e => (e.currentTarget.style.color = '#fff')}>{n}</span>
-            ))}
-          </div>
-        </div>
+      <section id="partners" style={{ padding: '80px 0', overflow: 'hidden' }}>
+        <p style={{ color: '#374151', fontWeight: 800, fontSize: 11, letterSpacing: 4, textTransform: 'uppercase', textAlign: 'center', marginBottom: 48 }}>Нам доверяют лидеры рынка</p>
+
+        {(() => {
+          const row1 = [
+            { name: 'VULKAN',   domain: 'vulkanvegas.com' },
+            { name: 'PIN-UP',   domain: 'pinup.casino' },
+            { name: '1WIN',     domain: '1win.pro' },
+            { name: 'STAKE',    domain: 'stake.com' },
+            { name: 'N1 CASINO',domain: 'n1casino.com' },
+            { name: 'GG.BET',   domain: 'gg.bet' },
+            { name: 'VAVADA',   domain: 'vavada.com' },
+            { name: '1XBET',    domain: '1xbet.com' },
+            { name: 'BETBOOM',  domain: 'betboom.ru' },
+            { name: 'LEON',     domain: 'leon.bet' },
+          ];
+          const row2 = [
+            { name: 'MOSTBET',  domain: 'mostbet.com' },
+            { name: 'MELBET',   domain: 'melbet.com' },
+            { name: 'PARIMATCH',domain: 'parimatch.com' },
+            { name: 'IZZI',     domain: 'izzicasino.com' },
+            { name: 'FRESH',    domain: 'fresh.casino' },
+            { name: 'JET',      domain: 'jet.casino' },
+            { name: 'RIOBET',   domain: 'riobet.com' },
+            { name: 'COLUMBUS', domain: 'columbuscasino.com' },
+            { name: 'BOOI',     domain: 'booi.com' },
+            { name: 'KENT',     domain: 'kent.casino' },
+          ];
+
+          const BrandItem = ({ name, domain }: { name: string; domain: string }) => (
+            <div
+              onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.opacity = '1'; (el.querySelector('span') as HTMLElement).style.color = '#00FF88'; }}
+              onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.opacity = '0.35'; (el.querySelector('span') as HTMLElement).style.color = 'rgba(255,255,255,0.9)'; }}
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '0 36px', flexShrink: 0, cursor: 'default', opacity: 0.35, transition: 'opacity .3s' }}>
+              <img
+                src={`https://www.google.com/s2/favicons?domain=${domain}&sz=32`}
+                alt={name}
+                width={24}
+                height={24}
+                style={{ borderRadius: 4, flexShrink: 0 }}
+              />
+              <span style={{ fontFamily: "'Barlow Condensed',sans-serif", fontSize: 22, fontWeight: 900, letterSpacing: 3, textTransform: 'uppercase', color: 'rgba(255,255,255,0.9)', whiteSpace: 'nowrap', transition: 'color .3s' }}>
+                {name}
+              </span>
+            </div>
+          );
+
+          return (
+            <>
+              {/* Row 1 — scrolls left */}
+              <div style={{ overflow: 'hidden', marginBottom: 20, maskImage: 'linear-gradient(90deg, transparent, black 8%, black 92%, transparent)', WebkitMaskImage: 'linear-gradient(90deg, transparent, black 8%, black 92%, transparent)' }}>
+                <div className="marquee-left" style={{ alignItems: 'center' }}>
+                  {[...row1, ...row1].map((b, i) => <BrandItem key={i} {...b} />)}
+                </div>
+              </div>
+              {/* Row 2 — scrolls right */}
+              <div style={{ overflow: 'hidden', maskImage: 'linear-gradient(90deg, transparent, black 8%, black 92%, transparent)', WebkitMaskImage: 'linear-gradient(90deg, transparent, black 8%, black 92%, transparent)' }}>
+                <div className="marquee-right" style={{ alignItems: 'center' }}>
+                  {[...row2, ...row2].map((b, i) => <BrandItem key={i} {...b} />)}
+                </div>
+              </div>
+            </>
+          );
+        })()}
       </section>
 
       {/* ── CTA ── */}
