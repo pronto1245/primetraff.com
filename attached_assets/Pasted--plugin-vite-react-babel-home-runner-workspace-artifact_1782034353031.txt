@@ -1,0 +1,28 @@
+[plugin:vite:react-babel] /home/runner/workspace/artifacts/mockup-sandbox/src/components/mockups/igaming-landing/Aggressive.tsx: Expecting Unicode escape sequence \uXXXX. (59:23)
+  62 |             <div className="w-10 h-10 bg-[#00FF88] rounded flex items-center justify-center transform -skew-x-12 box-glow">
+/home/runner/workspace/artifacts/mockup-sandbox/src/components/mockups/igaming-landing/Aggressive.tsx:59:23
+57 |  
+58 |        {/* Navigation */}
+59 |        <nav className={\`fixed top-0 w-full z-50 transition-all duration-300 \${isScrolled ? 'bg-[#0A0A0F]/90 backdrop...
+   |                         ^
+60 |          <div className="container mx-auto px-6 flex items-center justify-between">
+61 |            <div className="flex items-center gap-2">
+    at constructor (/home/runner/workspace/artifacts/mockup-sandbox/node_modules/@babel/parser/lib/index.js:365:19)
+    at TypeScriptParserMixin.raise (/home/runner/workspace/artifacts/mockup-sandbox/node_modules/@babel/parser/lib/index.js:6616:19)
+    at TypeScriptParserMixin.readWord1 (/home/runner/workspace/artifacts/mockup-sandbox/node_modules/@babel/parser/lib/index.js:6576:16)
+    at TypeScriptParserMixin.readWord (/home/runner/workspace/artifacts/mockup-sandbox/node_modules/@babel/parser/lib/index.js:6596:23)
+    at TypeScriptParserMixin.getTokenFromCode (/home/runner/workspace/artifacts/mockup-sandbox/node_modules/@babel/parser/lib/index.js:6315:14)
+    at TypeScriptParserMixin.getTokenFromCode (/home/runner/workspace/artifacts/mockup-sandbox/node_modules/@babel/parser/lib/index.js:4809:11)
+    at TypeScriptParserMixin.getTokenFromCode (/home/runner/workspace/artifacts/mockup-sandbox/node_modules/@babel/parser/lib/index.js:10004:11)
+    at TypeScriptParserMixin.nextToken (/home/runner/workspace/artifacts/mockup-sandbox/node_modules/@babel/parser/lib/index.js:5799:10)
+    at TypeScriptParserMixin.next (/home/runner/workspace/artifacts/mockup-sandbox/node_modules/@babel/parser/lib/index.js:5709:10)
+    at TypeScriptParserMixin.jsxParseAttributeValue (/home/runner/workspace/artifacts/mockup-sandbox/node_modules/@babel/parser/lib/index.js:4615:14)
+    at TypeScriptParserMixin.jsxParseAttribute (/home/runner/workspace/artifacts/mockup-sandbox/node_modules/@babel/parser/lib/index.js:4665:38)
+    at TypeScriptParserMixin.jsxParseOpeningElementAfterName (/home/runner/workspace/artifacts/mockup-sandbox/node_modules/@babel/parser/lib/index.js:4679:28)
+    at TypeScriptParserMixin.jsxParseOpeningElementAfterName (/home/runner/workspace/artifacts/mockup-sandbox/node_modules/@babel/parser/lib/index.js:10060:18)
+    at TypeScriptParserMixin.jsxParseOpeningElementAt (/home/runner/workspace/artifacts/mockup-sandbox/node_modules/@babel/parser/lib/index.js:4674:17)
+    at TypeScriptParserMixin.jsxParseElementAt (/home/runner/workspace/artifacts/mockup-sandbox/node_modules/@babel/parser/lib/index.js:4698:33)
+    at TypeScriptParserMixin.jsxParseElementAt (/home/runner/workspace/artifacts/mockup-sandbox/node_modules/@babel/parser/lib/index.js:4710:32)
+    at TypeScriptParserMixin.jsxParseElement (/home/runner/workspace/artifacts/mockup-sandbox/node_modules/@babel/parser/lib/index.js:4761:17)
+    at TypeScriptParserMixin.parseExprAtom (/home/runner/workspace/artifacts/mockup-sandbox/node_modules/@babel/parser/lib/index.js:4771:19)
+    at TypeScriptParserMixin.parseExprSubscripts (/home/runner/workspace/artifacts/mockup-

@@ -1,0 +1,14 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "aMkEH66RFuPpzdeY7k1XF"
+uri = "file://artifacts/mockup-sandbox/public/images/hero-aggressive.png"
+type = "image"
+title = "Neon abstract dark iGaming background"
+
+[[generated]]
+id = "8yXRiDtTMZjv4vX8tpDLr"
+uri = "file://artifacts/mockup-sandbox/public/images/chips-aggressive.png"
+type = "image"
+title = "Neon affiliate marketing chips"
