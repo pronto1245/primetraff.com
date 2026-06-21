@@ -62,12 +62,12 @@ export function Aggressive() {
   }, []);
 
   const features = [
-    { icon: TrendingUp, title: 'Топовые ставки', desc: 'Эксклюзивные CPA до $300 и RevShare до 45% — со старта без вопросов.' },
-    { icon: DollarSign, title: 'Выплата день в день', desc: 'Crypto, Capitalist, карты, Wire. Задержек нет — это наш стандарт.' },
-    { icon: Headset, title: 'Менеджер 24/7', desc: 'Личный менеджер по связкам, конверту и апруву — не бот, живой человек.' },
-    { icon: Shield, title: 'Нет шейва', desc: 'Реалтайм статистика, честные условия. Зарабатываешь ты — зарабатываем мы.' },
-    { icon: Globe, title: '150+ ГЕО', desc: 'Tier 1, Tier 2, СНГ — покрываем всё. Находим офферы под любой источник.' },
-    { icon: Star, title: 'Закрытые офферы', desc: 'Приватные ставки и закрытые бренды только для партнёров сети.' },
+    { icon: TrendingUp, anim: 'anim-bounce', title: 'Топовые ставки', desc: 'Эксклюзивные CPA до $300 и RevShare до 45% — со старта без вопросов.' },
+    { icon: DollarSign, anim: 'anim-spin', title: 'Выплата день в день', desc: 'Crypto, Capitalist, карты, Wire. Задержек нет — это наш стандарт.' },
+    { icon: Headset, anim: 'anim-shake', title: 'Менеджер 24/7', desc: 'Личный менеджер по связкам, конверту и апруву — не бот, живой человек.' },
+    { icon: Shield, anim: 'anim-pulse', title: 'Нет шейва', desc: 'Реалтайм статистика, честные условия. Зарабатываешь ты — зарабатываем мы.' },
+    { icon: Globe, anim: 'anim-globe', title: '150+ ГЕО', desc: 'Tier 1, Tier 2, СНГ — покрываем всё. Находим офферы под любой источник.' },
+    { icon: Star, anim: 'anim-star', title: 'Закрытые офферы', desc: 'Приватные ставки и закрытые бренды только для партнёров сети.' },
   ];
 
   const offers = [
@@ -90,6 +90,30 @@ export function Aggressive() {
         @keyframes float3 { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-12px) rotate(8deg)} }
         @keyframes glow-pulse { 0%,100%{opacity:.6} 50%{opacity:1} }
         @keyframes scan { 0%{transform:translateY(-100%)} 100%{transform:translateY(400%)} }
+
+        @keyframes icon-bounce-up { 0%,100%{transform:translateY(0) scale(1)} 40%{transform:translateY(-8px) scale(1.15)} 60%{transform:translateY(-4px) scale(1.08)} }
+        @keyframes icon-spin-glow { 0%{transform:rotate(0deg) scale(1);filter:drop-shadow(0 0 4px #00FF88)} 50%{transform:rotate(180deg) scale(1.2);filter:drop-shadow(0 0 14px #00FF88)} 100%{transform:rotate(360deg) scale(1);filter:drop-shadow(0 0 4px #00FF88)} }
+        @keyframes icon-shake { 0%,100%{transform:rotate(0deg) scale(1)} 15%{transform:rotate(-12deg) scale(1.1)} 30%{transform:rotate(12deg) scale(1.1)} 45%{transform:rotate(-8deg) scale(1.05)} 60%{transform:rotate(8deg) scale(1.05)} 75%{transform:rotate(-4deg)} }
+        @keyframes icon-shield-pulse { 0%,100%{transform:scale(1);filter:drop-shadow(0 0 3px #00FF88)} 50%{transform:scale(1.25);filter:drop-shadow(0 0 18px #00FF88) drop-shadow(0 0 40px rgba(0,255,136,0.5))} }
+        @keyframes icon-globe-spin { 0%{transform:rotateY(0deg) scale(1)} 50%{transform:rotateY(180deg) scale(1.15)} 100%{transform:rotateY(360deg) scale(1)} }
+        @keyframes icon-star-burst { 0%,100%{transform:rotate(0deg) scale(1);filter:drop-shadow(0 0 4px #FFB700)} 25%{transform:rotate(72deg) scale(1.3);filter:drop-shadow(0 0 20px #FFB700)} 50%{transform:rotate(144deg) scale(1.1);filter:drop-shadow(0 0 10px #FFB700)} 75%{transform:rotate(216deg) scale(1.25);filter:drop-shadow(0 0 16px #FFB700)} }
+
+        .icon-wrap { display:flex; align-items:center; justify-content:center; width:56px; height:56px; border-radius:12px; background:rgba(0,255,136,0.08); border:1px solid rgba(0,255,136,0.2); margin-bottom:24px; transition:background .3s, border-color .3s; }
+        .icon-wrap:hover { background:rgba(0,255,136,0.18); border-color:rgba(0,255,136,0.6); box-shadow:0 0 24px rgba(0,255,136,0.25); }
+        .icon-wrap.hovered .anim-bounce { animation: icon-bounce-up .7s ease-in-out infinite; }
+        .icon-wrap.hovered .anim-spin { animation: icon-spin-glow 1s ease-in-out infinite; }
+        .icon-wrap.hovered .anim-shake { animation: icon-shake .6s ease-in-out infinite; }
+        .icon-wrap.hovered .anim-pulse { animation: icon-shield-pulse .9s ease-in-out infinite; }
+        .icon-wrap.hovered .anim-globe { animation: icon-globe-spin 1.2s ease-in-out infinite; }
+        .icon-wrap.hovered .anim-star { animation: icon-star-burst .8s ease-in-out infinite; }
+
+        .anim-bounce { transition: transform .3s; }
+        .anim-spin   { transition: transform .3s; }
+        .anim-shake  { transition: transform .3s; }
+        .anim-pulse  { transition: transform .3s; }
+        .anim-globe  { transition: transform .3s; }
+        .anim-star   { transition: transform .3s; filter:drop-shadow(0 0 4px #FFB700); }
+
         .ticker-inner { display:flex; gap:0; animation: ticker 30s linear infinite; width:max-content; }
         .ticker-inner:hover { animation-play-state:paused; }
         .skewbtn { transform:skewX(-12deg); display:inline-flex; align-items:center; }
@@ -244,14 +268,14 @@ export function Aggressive() {
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 2 }}>
-            {features.map(({ icon: Icon, title, desc }, i) => (
+            {features.map(({ icon: Icon, anim, title, desc }, i) => (
               <div key={i} className="card-glow"
                 onMouseEnter={() => setHoveredFeature(i)}
                 onMouseLeave={() => setHoveredFeature(null)}
                 style={{ padding: '40px 32px', background: hoveredFeature === i ? '#0D0D18' : '#0A0A12', border: '1px solid rgba(255,255,255,0.05)', transition: 'all .3s', cursor: 'default', position: 'relative', overflow: 'hidden' }}>
-                {hoveredFeature === i && <div style={{ position: 'absolute', top: 0, right: 0, width: 120, height: 120, borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,255,136,0.1), transparent 70%)', pointerEvents: 'none' }} />}
-                <div style={{ width: 48, height: 48, borderRadius: 10, background: 'rgba(0,255,136,0.08)', border: '1px solid rgba(0,255,136,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 24, transition: 'transform .3s', transform: hoveredFeature === i ? 'scale(1.1)' : 'scale(1)' }}>
-                  <Icon size={22} color="#00FF88" />
+                {hoveredFeature === i && <div style={{ position: 'absolute', top: 0, right: 0, width: 120, height: 120, borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,255,136,0.12), transparent 70%)', pointerEvents: 'none' }} />}
+                <div className={`icon-wrap${hoveredFeature === i ? ' hovered' : ''}`}>
+                  <Icon size={24} color={anim === 'anim-star' ? '#FFB700' : '#00FF88'} className={anim} />
                 </div>
                 <h3 style={{ fontFamily: "'Barlow Condensed',sans-serif", fontSize: 24, fontWeight: 900, textTransform: 'uppercase', marginBottom: 12, letterSpacing: 1 }}>{title}</h3>
                 <p style={{ fontSize: 14, color: '#6b7280', lineHeight: 1.7 }}>{desc}</p>
