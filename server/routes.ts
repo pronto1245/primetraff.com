@@ -66,7 +66,11 @@ const upload = multer({
   },
 });
 
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "primetraff2026";
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
+if (!ADMIN_PASSWORD) {
+  console.error("FATAL: ADMIN_PASSWORD environment variable is not set. Refusing to start.");
+  process.exit(1);
+}
 
 function checkAdmin(req: any, res: any, next: any) {
   const authHeader = req.headers["x-admin-password"];

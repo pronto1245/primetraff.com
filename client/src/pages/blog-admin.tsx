@@ -339,7 +339,8 @@ function PostEditor({ password, post, onClose }: { password: string; post: BlogP
   const quillModulesRu = useRef(makeQuillModules(makeImageHandler(quillRuRef)));
   const quillModulesEn = useRef(makeQuillModules(makeImageHandler(quillEnRef)));
 
-  // Находит base64-картинки в HTML, загружает их на сервер, возвращает HTML с URL-ами
+  // Находит base64-картинки в HTML, загружает их на сервер, возвращает HTML с URL-ами.
+  // Бросает ошибку если хотя бы одна картинка не смогла загрузиться — чтобы не отправлять base64 на сервер.
   const uploadBase64Images = useCallback(async (html: string): Promise<string> => {
     const regex = /<img[^>]+src="(data:image\/[^;]+;base64,[^"]+)"[^>]*>/g;
     const matches = [...html.matchAll(regex)];
@@ -347,6 +348,7 @@ function PostEditor({ password, post, onClose }: { password: string; post: BlogP
     let result = html;
     for (const match of matches) {
       const dataUrl = match[1];
+      let uploaded = false;
       try {
         const res = await fetch(dataUrl);
         const blob = await res.blob();
@@ -358,8 +360,12 @@ function PostEditor({ password, post, onClose }: { password: string; post: BlogP
         if (uploadRes.ok) {
           const { url } = await uploadRes.json();
           result = result.replace(dataUrl, url);
+          uploaded = true;
         }
-      } catch { /* оставляем как есть */ }
+      } catch { /* ошибка ниже */ }
+      if (!uploaded) {
+        throw new Error("Не удалось загрузить изображение на сервер. Попробуйте вставить картинку заново через кнопку в редакторе.");
+      }
     }
     return result;
   }, [password]);
