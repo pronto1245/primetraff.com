@@ -36,21 +36,22 @@ const CATEGORIES = [
   { key: "news", label: "Новости" },
 ];
 
-const quillModules = {
-  toolbar: {
-    container: [
-      [{ header: [1, 2, 3, false] }],
-      ["bold", "italic", "underline", "strike"],
-      [{ list: "ordered" }, { list: "bullet" }],
-      ["blockquote", "code-block"],
-      ["link", "image"],
-      ["clean"],
-    ],
-  },
-  clipboard: {
-    matchVisual: false,
-  },
-};
+function makeQuillModules(imageHandler: () => void) {
+  return {
+    toolbar: {
+      container: [
+        [{ header: [1, 2, 3, false] }],
+        ["bold", "italic", "underline", "strike"],
+        [{ list: "ordered" }, { list: "bullet" }],
+        ["blockquote", "code-block"],
+        ["link", "image"],
+        ["clean"],
+      ],
+      handlers: { image: imageHandler },
+    },
+    clipboard: { matchVisual: false },
+  };
+}
 
 const quillFormats = [
   "header", "bold", "italic", "underline", "strike",
@@ -311,6 +312,34 @@ function PostEditor({ password, post, onClose }: { password: string; post: BlogP
   const fileInputRef = useRef<HTMLInputElement>(null);
   const quillRuRef = useRef<ReactQuill>(null);
   const quillEnRef = useRef<ReactQuill>(null);
+  const activeEditorRef = useRef<React.RefObject<ReactQuill | null>>(quillRuRef);
+
+  const uploadImageFromFile = useCallback(async (file: File, editorRef: React.RefObject<ReactQuill | null>) => {
+    const fd = new FormData();
+    fd.append("image", file);
+    const res = await fetch("/api/upload", { method: "POST", headers: { "x-admin-password": password }, body: fd });
+    if (!res.ok) return;
+    const { url } = await res.json();
+    const editor = editorRef.current?.getEditor();
+    if (editor) {
+      const range = editor.getSelection(true);
+      editor.insertEmbed(range ? range.index : editor.getLength(), "image", url);
+    }
+  }, [password]);
+
+  const makeImageHandler = useCallback((editorRef: React.RefObject<ReactQuill | null>) => () => {
+    const input = document.createElement("input");
+    input.setAttribute("type", "file");
+    input.setAttribute("accept", "image/*");
+    input.click();
+    input.onchange = async () => {
+      const file = input.files?.[0];
+      if (file) await uploadImageFromFile(file, editorRef);
+    };
+  }, [uploadImageFromFile]);
+
+  const quillModulesRu = useRef(makeQuillModules(makeImageHandler(quillRuRef)));
+  const quillModulesEn = useRef(makeQuillModules(makeImageHandler(quillEnRef)));
 
   const insertBanner = (editorRef: React.RefObject<ReactQuill | null>, field: "contentRu" | "contentEn") => {
     const editor = editorRef.current?.getEditor();
@@ -742,7 +771,7 @@ function PostEditor({ password, post, onClose }: { password: string; post: BlogP
                 ref={quillRuRef}
                 value={form.contentRu}
                 onChange={(v) => updateField("contentRu", v)}
-                modules={quillModules}
+                modules={quillModulesRu.current}
                 formats={quillFormats}
                 theme="snow"
                 placeholder="Напишите содержание статьи на русском..."
@@ -782,7 +811,7 @@ function PostEditor({ password, post, onClose }: { password: string; post: BlogP
                 ref={quillEnRef}
                 value={form.contentEn}
                 onChange={(v) => updateField("contentEn", v)}
-                modules={quillModules}
+                modules={quillModulesEn.current}
                 formats={quillFormats}
                 theme="snow"
                 placeholder="Write article content in English..."
