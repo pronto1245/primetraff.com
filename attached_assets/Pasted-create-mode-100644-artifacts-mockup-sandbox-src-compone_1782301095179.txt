@@ -1,0 +1,92 @@
+create mode 100644 artifacts/mockup-sandbox/src/components/ui/select.tsx
+ create mode 100644 artifacts/mockup-sandbox/src/components/ui/separator.tsx
+ create mode 100644 artifacts/mockup-sandbox/src/components/ui/sheet.tsx
+ create mode 100644 artifacts/mockup-sandbox/src/components/ui/sidebar.tsx
+ create mode 100644 artifacts/mockup-sandbox/src/components/ui/skeleton.tsx
+ create mode 100644 artifacts/mockup-sandbox/src/components/ui/slider.tsx
+ create mode 100644 artifacts/mockup-sandbox/src/components/ui/sonner.tsx
+ create mode 100644 artifacts/mockup-sandbox/src/components/ui/spinner.tsx
+ create mode 100644 artifacts/mockup-sandbox/src/components/ui/switch.tsx
+ create mode 100644 artifacts/mockup-sandbox/src/components/ui/table.tsx
+ create mode 100644 artifacts/mockup-sandbox/src/components/ui/tabs.tsx
+ create mode 100644 artifacts/mockup-sandbox/src/components/ui/textarea.tsx
+ create mode 100644 artifacts/mockup-sandbox/src/components/ui/toast.tsx
+ create mode 100644 artifacts/mockup-sandbox/src/components/ui/toaster.tsx
+ create mode 100644 artifacts/mockup-sandbox/src/components/ui/toggle-group.tsx
+ create mode 100644 artifacts/mockup-sandbox/src/components/ui/toggle.tsx
+ create mode 100644 artifacts/mockup-sandbox/src/components/ui/tooltip.tsx
+ create mode 100644 artifacts/mockup-sandbox/src/hooks/use-mobile.tsx
+ create mode 100644 artifacts/mockup-sandbox/src/hooks/use-toast.ts
+ create mode 100644 artifacts/mockup-sandbox/src/index.css
+ create mode 100644 artifacts/mockup-sandbox/src/lib/utils.ts
+ create mode 100644 artifacts/mockup-sandbox/src/main.tsx
+ create mode 100644 artifacts/mockup-sandbox/tsconfig.json
+ create mode 100644 artifacts/mockup-sandbox/vite.config.ts
+ create mode 100644 attached_assets/Pasted--plugin-vite-react-babel-home-runner-workspace-artifact_1782034353031.txt
+
+> rest-express@1.0.0 build
+> tsx script/build.ts
+
+building client...
+vite v7.3.0 building client environment for production...
+transforming (1) src/main.tsxBrowserslist: browsers data (caniuse-lite) is 8 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+transforming (5) src/App.tsx
+A PostCSS plugin did not pass the `from` option to `postcss.parse`. This may cause imported assets to be incorrectly transformed. If you've recently added a PostCSS plugin that raised this warning, please contact the package author to fix the issue.
+✓ 2809 modules transformed.
+../dist/public/assets/Без_названия_(8)_1770453702155-BUSyT1Xs.png                            4.40 kB
+../dist/public/assets/Без_названия_(6)_1770453702154-psJ2Z745.jpeg                           4.57 kB
+../dist/public/assets/Без_названия_(11)_1770453702156-DMewyxFL.jpeg                          4.69 kB
+../dist/public/assets/Без_названия_(21)_1770453425632-D3_mGOuJ.jpeg                          4.83 kB
+../dist/public/assets/Без_названия_(15)_1770453751828-Cg7pu4cr.jpeg                          4.86 kB
+../dist/public/assets/Без_названия_(19)_1770453751830-rBZvUOf8.png                           4.98 kB
+../dist/public/assets/Без_названия_(16)_1770453751829-DOKrdQen.png                           5.03 kB
+../dist/public/assets/Без_названия_(28)_1770453809648-CxImHb9W.png                           5.39 kB
+../dist/public/assets/Без_названия_(9)_1770453702155-ChrOJ-kf.jpeg                           5.46 kB
+../dist/public/assets/Без_названия_(4)_1770453702154-DJc3wMwR.jpeg                           5.51 kB
+../dist/public/assets/Без_названия_(3)_1770453702153-CUawZHLJ.jpeg                           5.66 kB
+../dist/public/assets/Без_названия_(18)_1770453751830-rv9OKBvz.jpeg                          5.78 kB
+../dist/public/assets/Без_названия_(8)_1770453702155-CcTMFdz2.jpeg                           5.87 kB
+../dist/public/assets/Без_названия_(5)_1770453702154-CWh5JaRZ.png                            6.18 kB
+../dist/public/assets/Без_названия_(20)_1770453425635-BuDWvmxp.jpeg                          7.75 kB
+../dist/public/assets/Без_названия_(19)_1770453425635-B0gP6ZWH.jpeg                          8.15 kB
+../dist/public/index.html                                                                    9.33 kB │ gzip:   3.38 kB
+../dist/public/assets/Без_названия_(7)_1770453702155-DiE6h6Jz.png                           12.81 kB
+../dist/public/assets/zQAzTcUzmpmD09fPheuQwWO7Jqm0FxinQatFQkwy_1770453920459-C8Ki0llq.jpg   17.36 kB
+../dist/public/assets/img69525e9bc7f63_1770453425635-DT41vIiw.png                           47.56 kB
+../dist/public/assets/img695261fc58a0d_1770453425636-DMB0U3ji.png                           99.03 kB
+../dist/public/assets/img69380f65d567f_1770453920456-b7nd5KvK.png                          123.07 kB
+../dist/public/assets/IMG_9022_1770529061025-BiMRff1h.png                                  160.06 kB
+../dist/public/assets/blog-admin-CQ7DNbul.css                                               24.24 kB │ gzip:   3.62 kB
+../dist/public/assets/index-BEmc4mhq.css                                                   134.90 kB │ gzip:  21.51 kB
+../dist/public/assets/blog-admin-D3PqZwHF.js                                               237.05 kB │ gzip:  70.42 kB
+../dist/public/assets/index-BM5IwzYp.js                                                    592.55 kB │ gzip: 228.69 kB
+../dist/public/assets/CrystalScene-DI5vgCUy.js                                             856.93 kB │ gzip: 232.10 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 18.20s
+building server...
+
+  dist/index.cjs  1.1mb ⚠️
+
+⚡ Done in 451ms
+npm notice
+npm notice New major version of npm available! 10.8.2 -> 11.17.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.17.0
+npm notice To update run: npm install -g npm@11.17.0
+npm notice
+Use --update-env to update environment variables
+[PM2] Applying action restartProcessId on app [primetraff](ids: [ 2 ])
+[PM2] [primetraff](2) ✓
+┌────┬──────────────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
+│ id │ name             │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+├────┼──────────────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
+│ 19 │ primetrack       │ default     │ 1.0.0   │ fork    │ 3045779  │ 30h    │ 32   │ online    │ 0%       │ 342.5mb  │ root     │ disabled │
+│ 2  │ primetraff       │ default     │ 1.0.0   │ fork    │ 99944    │ 0s     │ 51   │ online    │ 0%       │ 16.6mb   │ root     │ disabled │
+│ 11 │ telegramm-bot    │ default     │ 1.0.0   │ fork    │ 1223102  │ 53D    │ 9    │ online    │ 7.7%     │ 106.8mb  │ root     │ disabled │
+└────┴──────────────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+[root@v742573 primetraff.com]# 
