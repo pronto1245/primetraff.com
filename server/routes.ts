@@ -153,31 +153,43 @@ export async function registerRoutes(
     }
   });
 
-  async function translateText(text: string, from: string, to: string): Promise<string> {
-    if (!text || !text.trim()) return text;
-    const MAX_CHUNK = 4500;
-    if (text.length <= MAX_CHUNK) {
-      const result = await translate(text, { from, to, forceBatch: true });
-      return result.text;
-    }
-    const sentences = text.match(/[^.!?]+[.!?]+|[^.!?]+$/g) || [text];
-    const chunks: string[] = [];
-    let current = "";
-    for (const s of sentences) {
-      if ((current + s).length > MAX_CHUNK && current) {
-        chunks.push(current);
-        current = s;
+  const SEP = " |||SPLIT||| ";
+  const MAX_BATCH = 4000;
+
+  async function translateBatch(texts: string[], from: string, to: string): Promise<string[]> {
+    if (texts.length === 0) return [];
+    // Split into groups that fit within MAX_BATCH chars
+    const groups: string[][] = [];
+    let current: string[] = [];
+    let currentLen = 0;
+    for (const t of texts) {
+      if (currentLen + t.length + SEP.length > MAX_BATCH && current.length > 0) {
+        groups.push(current);
+        current = [t];
+        currentLen = t.length;
       } else {
-        current += s;
+        current.push(t);
+        currentLen += t.length + SEP.length;
       }
     }
-    if (current) chunks.push(current);
-    const translated: string[] = [];
-    for (const chunk of chunks) {
-      const result = await translate(chunk, { from, to, forceBatch: true });
-      translated.push(result.text);
+    if (current.length) groups.push(current);
+
+    const results: string[] = [];
+    for (const group of groups) {
+      const joined = group.join(SEP);
+      const res = await translate(joined, { from, to, forceBatch: false });
+      const parts = res.text.split(/\s*\|\|\|SPLIT\|\|\|\s*/);
+      for (let i = 0; i < group.length; i++) {
+        results.push(parts[i] !== undefined ? parts[i] : group[i]);
+      }
     }
-    return translated.join("");
+    return results;
+  }
+
+  async function translateText(text: string, from: string, to: string): Promise<string> {
+    if (!text || !text.trim()) return text;
+    const [result] = await translateBatch([text], from, to);
+    return result ?? text;
   }
 
   async function translateHtml(html: string, from: string, to: string): Promise<string> {
@@ -188,24 +200,23 @@ export async function registerRoutes(
       tableParts.push(data);
       return `XTBLX${tableParts.length - 1}XTBLX`;
     });
+
+    // Translate table cells in batch
     for (let i = 0; i < tableParts.length; i++) {
       const rows = tableParts[i].split(";;");
-      const translatedRows: string[] = [];
-      for (const row of rows) {
-        const cells = row.split("|");
-        const translatedCells: string[] = [];
-        for (const cell of cells) {
-          const trimmed = cell.trim();
-          if (!trimmed) { translatedCells.push(cell); continue; }
-          try {
-            const t = await translateText(trimmed, from, to);
-            translatedCells.push(t.trim());
-          } catch { translatedCells.push(cell); }
-        }
-        translatedRows.push(translatedCells.join("|"));
-      }
-      tableParts[i] = translatedRows.join(";;");
+      const allCells: string[] = [];
+      const cellMap: { r: number; c: number }[] = [];
+      rows.forEach((row, r) => {
+        row.split("|").forEach((cell, c) => {
+          if (cell.trim()) { allCells.push(cell.trim()); cellMap.push({ r, c }); }
+        });
+      });
+      const translated = await translateBatch(allCells, from, to);
+      const rowArrays = rows.map(r => r.split("|"));
+      cellMap.forEach(({ r, c }, idx) => { rowArrays[r][c] = translated[idx] ?? rowArrays[r][c]; });
+      tableParts[i] = rowArrays.map(r => r.join("|")).join(";;");
     }
+
     processed = processed.replace(/\[BANNER\]/g, bannerPh);
     const root = parseHtml(processed, { comment: true });
     const textNodes: { node: any; original: string }[] = [];
@@ -216,25 +227,19 @@ export async function registerRoutes(
           textNodes.push({ node, original: node.rawText });
         }
       }
-      if (node.childNodes) {
-        for (const child of node.childNodes) {
-          collectText(child);
-        }
-      }
+      if (node.childNodes) for (const child of node.childNodes) collectText(child);
     }
     collectText(root);
-    for (const tn of textNodes) {
-      try {
-        const trimmed = tn.original.trim();
-        if (!trimmed) continue;
-        const translated = await translateText(trimmed, from, to);
-        const leading = tn.original.match(/^\s*/)?.[0] || "";
-        const trailing = tn.original.match(/\s*$/)?.[0] || "";
-        tn.node.rawText = leading + translated.trim() + trailing;
-      } catch {
-        // keep original on failure
-      }
-    }
+
+    // Translate all text nodes in batch
+    const originals = textNodes.map(tn => tn.original.trim());
+    const translatedNodes = await translateBatch(originals, from, to);
+    textNodes.forEach((tn, idx) => {
+      const leading = tn.original.match(/^\s*/)?.[0] || "";
+      const trailing = tn.original.match(/\s*$/)?.[0] || "";
+      tn.node.rawText = leading + (translatedNodes[idx] ?? tn.original.trim()) + trailing;
+    });
+
     let result = root.toString();
     result = result.replace(new RegExp(bannerPh, "g"), "[BANNER]");
     tableParts.forEach((data, i) => {
