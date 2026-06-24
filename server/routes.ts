@@ -153,36 +153,79 @@ export async function registerRoutes(
     }
   });
 
-  const SEP = " |||SPLIT||| ";
-  const MAX_BATCH = 4000;
+  const MAX_SEGMENT = 4000; // max chars per single segment before chunking
+  const MAX_BATCH_CHARS = 4500; // max chars per batch group sent to API
 
+  // Translate a single possibly-long text with sentence chunking as safety net
+  async function translateSingle(text: string, from: string, to: string): Promise<string> {
+    if (text.length <= MAX_SEGMENT) {
+      const r = await translate(text, { from, to, forceBatch: false });
+      return r.text;
+    }
+    // Split into sentence chunks
+    const sentences = text.match(/[^.!?]+[.!?]+|[^.!?]+$/g) || [text];
+    const chunks: string[] = [];
+    let cur = "";
+    for (const s of sentences) {
+      if ((cur + s).length > MAX_SEGMENT && cur) { chunks.push(cur); cur = s; }
+      else cur += s;
+    }
+    if (cur) chunks.push(cur);
+    const parts = await Promise.all(chunks.map(c => translate(c, { from, to, forceBatch: false }).then(r => r.text).catch(() => c)));
+    return parts.join("");
+  }
+
+  // Translate many short texts efficiently using opaque ID markers (immune to translation)
+  // Each segment is wrapped as: ⟨TX_<id>⟩text⟨/TX_<id>⟩ — angled brackets rarely survive translation intact,
+  // so we map by ID found in output rather than relying on split position.
   async function translateBatch(texts: string[], from: string, to: string): Promise<string[]> {
     if (texts.length === 0) return [];
-    // Split into groups that fit within MAX_BATCH chars
-    const groups: string[][] = [];
-    let current: string[] = [];
-    let currentLen = 0;
-    for (const t of texts) {
-      if (currentLen + t.length + SEP.length > MAX_BATCH && current.length > 0) {
-        groups.push(current);
-        current = [t];
-        currentLen = t.length;
-      } else {
-        current.push(t);
-        currentLen += t.length + SEP.length;
-      }
-    }
-    if (current.length) groups.push(current);
 
-    const results: string[] = [];
+    // Separate long texts (translate individually) from short ones (batch)
+    const results: string[] = new Array(texts.length).fill("");
+    const shortIndices: number[] = [];
+    const longIndices: number[] = [];
+    texts.forEach((t, i) => (t.length > MAX_SEGMENT ? longIndices : shortIndices).push(i));
+
+    // Translate long texts individually (with chunking), isolated failures preserved
+    await Promise.all(longIndices.map(async i => {
+      try { results[i] = await translateSingle(texts[i], from, to); }
+      catch { results[i] = texts[i]; }
+    }));
+
+    if (shortIndices.length === 0) return results;
+
+    // Group short texts into batches by char budget
+    const groups: number[][] = [];
+    let curGroup: number[] = [];
+    let curLen = 0;
+    for (const i of shortIndices) {
+      const segLen = texts[i].length + 20; // +20 for marker overhead
+      if (curLen + segLen > MAX_BATCH_CHARS && curGroup.length > 0) {
+        groups.push(curGroup); curGroup = [i]; curLen = segLen;
+      } else { curGroup.push(i); curLen += segLen; }
+    }
+    if (curGroup.length) groups.push(curGroup);
+
+    // Translate each group; on failure fall back to originals per group (not whole batch)
     for (const group of groups) {
-      const joined = group.join(SEP);
-      const res = await translate(joined, { from, to, forceBatch: false });
-      const parts = res.text.split(/\s*\|\|\|SPLIT\|\|\|\s*/);
-      for (let i = 0; i < group.length; i++) {
-        results.push(parts[i] !== undefined ? parts[i] : group[i]);
+      try {
+        const id = () => Math.random().toString(36).slice(2, 8);
+        const markers = group.map(() => id());
+        const tagged = group.map((gi, k) => `TX${markers[k]}BX${texts[gi]}TX${markers[k]}EX`).join(" ");
+        const res = await translate(tagged, { from, to, forceBatch: false });
+        const translated = res.text;
+        group.forEach((gi, k) => {
+          const rx = new RegExp(`TX${markers[k]}BX([\\s\\S]*?)TX${markers[k]}EX`);
+          const m = translated.match(rx);
+          results[gi] = m ? m[1].trim() : texts[gi];
+        });
+      } catch {
+        // Per-group failure: keep originals
+        group.forEach(gi => { results[gi] = texts[gi]; });
       }
     }
+
     return results;
   }
 
@@ -201,7 +244,7 @@ export async function registerRoutes(
       return `XTBLX${tableParts.length - 1}XTBLX`;
     });
 
-    // Translate table cells in batch
+    // Translate table cells in batch with per-cell fallback
     for (let i = 0; i < tableParts.length; i++) {
       const rows = tableParts[i].split(";;");
       const allCells: string[] = [];
@@ -231,7 +274,7 @@ export async function registerRoutes(
     }
     collectText(root);
 
-    // Translate all text nodes in batch
+    // Batch-translate all nodes; each node has individual fallback via marker system
     const originals = textNodes.map(tn => tn.original.trim());
     const translatedNodes = await translateBatch(originals, from, to);
     textNodes.forEach((tn, idx) => {
