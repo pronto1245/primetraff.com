@@ -312,8 +312,6 @@ function PostEditor({ password, post, onClose }: { password: string; post: BlogP
   const fileInputRef = useRef<HTMLInputElement>(null);
   const quillRuRef = useRef<ReactQuill>(null);
   const quillEnRef = useRef<ReactQuill>(null);
-  const activeEditorRef = useRef<React.RefObject<ReactQuill | null>>(quillRuRef);
-
   const uploadImageFromFile = useCallback(async (file: File, editorRef: React.RefObject<ReactQuill | null>) => {
     const fd = new FormData();
     fd.append("image", file);
@@ -340,6 +338,31 @@ function PostEditor({ password, post, onClose }: { password: string; post: BlogP
 
   const quillModulesRu = useRef(makeQuillModules(makeImageHandler(quillRuRef)));
   const quillModulesEn = useRef(makeQuillModules(makeImageHandler(quillEnRef)));
+
+  // Находит base64-картинки в HTML, загружает их на сервер, возвращает HTML с URL-ами
+  const uploadBase64Images = useCallback(async (html: string): Promise<string> => {
+    const regex = /<img[^>]+src="(data:image\/[^;]+;base64,[^"]+)"[^>]*>/g;
+    const matches = [...html.matchAll(regex)];
+    if (matches.length === 0) return html;
+    let result = html;
+    for (const match of matches) {
+      const dataUrl = match[1];
+      try {
+        const res = await fetch(dataUrl);
+        const blob = await res.blob();
+        const ext = blob.type.split("/")[1] || "png";
+        const file = new File([blob], `image.${ext}`, { type: blob.type });
+        const fd = new FormData();
+        fd.append("image", file);
+        const uploadRes = await fetch("/api/upload", { method: "POST", headers: { "x-admin-password": password }, body: fd });
+        if (uploadRes.ok) {
+          const { url } = await uploadRes.json();
+          result = result.replace(dataUrl, url);
+        }
+      } catch { /* оставляем как есть */ }
+    }
+    return result;
+  }, [password]);
 
   const insertBanner = (editorRef: React.RefObject<ReactQuill | null>, field: "contentRu" | "contentEn") => {
     const editor = editorRef.current?.getEditor();
@@ -426,8 +449,12 @@ function PostEditor({ password, post, onClose }: { password: string; post: BlogP
 
   const saveMutation = useMutation({
     mutationFn: async () => {
+      const contentRu = await uploadBase64Images(form.contentRu || "");
+      const contentEn = await uploadBase64Images(form.contentEn || "");
       const body = {
         ...form,
+        contentRu,
+        contentEn,
         publishedAt: form.isPublished ? (post?.publishedAt ? new Date(post.publishedAt).toISOString() : new Date().toISOString()) : null,
       };
 
