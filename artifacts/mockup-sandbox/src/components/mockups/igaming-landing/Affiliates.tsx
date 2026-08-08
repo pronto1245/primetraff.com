@@ -22,6 +22,12 @@ export function Affiliates() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;700;900&family=Comforter&display=swap');
         ::-webkit-scrollbar { display: none; }
+        .btn-fill { position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.07); }
+        .btn-fill span { position: relative; z-index: 1; }
+        .btn-fill::before { content: ''; position: absolute; inset: 0; background: #2563eb; transform: translateX(-101%); transition: transform .45s cubic-bezier(.22,1,.36,1); }
+        .btn-fill:hover::before { transform: translateX(0); }
+        .btn-primary { background: #3b82f6; border-color: #3b82f6; }
+        .btn-ghost:hover { border-color: #2563eb; }
       `}</style>
 
       {/* Шапка — как на главной, fixed */}
@@ -99,13 +105,13 @@ export function Affiliates() {
 
           {/* Кнопки Регистрация / Вход — сразу под текстом, с отступом от краёв */}
           <div className="w-full flex items-center justify-between" style={{ marginTop: 'clamp(40px, 7vh, 72px)', padding: '0 clamp(40px, 10vw, 160px)' }}>
-            <button className="rounded-full text-white uppercase cursor-pointer hover:bg-white/15 transition-colors"
-              style={{ fontFamily: FONT, fontSize: 'clamp(11px, 1vw, 14px)', letterSpacing: '0.12em', padding: 'clamp(14px, 1.6vh, 18px) 0', width: 'clamp(160px, 15vw, 220px)', background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.15)' }}>
-              Регистрация
+            <button className="btn-fill btn-primary rounded-full text-white uppercase cursor-pointer"
+              style={{ fontFamily: FONT, fontSize: 'clamp(11px, 1vw, 14px)', letterSpacing: '0.12em', padding: 'clamp(14px, 1.6vh, 18px) 0', width: 'clamp(160px, 15vw, 220px)' }}>
+              <span>Регистрация</span>
             </button>
-            <button className="rounded-full text-white uppercase cursor-pointer hover:bg-white/15 transition-colors"
-              style={{ fontFamily: FONT, fontSize: 'clamp(11px, 1vw, 14px)', letterSpacing: '0.12em', padding: 'clamp(14px, 1.6vh, 18px) 0', width: 'clamp(160px, 15vw, 220px)', background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.15)' }}>
-              Вход
+            <button className="btn-fill btn-ghost rounded-full text-white uppercase cursor-pointer"
+              style={{ fontFamily: FONT, fontSize: 'clamp(11px, 1vw, 14px)', letterSpacing: '0.12em', padding: 'clamp(14px, 1.6vh, 18px) 0', width: 'clamp(160px, 15vw, 220px)' }}>
+              <span>Вход</span>
             </button>
           </div>
         </div>
