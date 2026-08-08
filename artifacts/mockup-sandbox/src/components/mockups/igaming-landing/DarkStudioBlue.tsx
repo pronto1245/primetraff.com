@@ -92,7 +92,7 @@ export function DarkStudioBlue() {
         {/* Бургер-меню — панель справа, шапка остаётся видимой (z-50 > z-40) */}
         <div className="fixed top-0 right-0 bottom-0 z-40 flex flex-col justify-center"
           style={{
-            width: 'clamp(300px, 34vw, 480px)',
+            width: 'clamp(340px, 42vw, 580px)',
             background: '#0a0a0c',
             borderLeft: '1px solid rgba(255,255,255,0.08)',
             transform: menuOpen ? 'translateX(0)' : 'translateX(100%)',
