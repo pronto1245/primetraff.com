@@ -92,11 +92,11 @@ export function Affiliates() {
             <div className="uppercase text-zinc-400" style={{ fontSize: 'clamp(11px, 1.1vw, 15px)', letterSpacing: '0.35em', fontWeight: 300, marginBottom: 'clamp(14px, 2vh, 24px)' }}>
               Primetraff.com
             </div>
-            <div className="uppercase font-black text-white leading-none" style={{ fontSize: 'clamp(36px, 5.5vw, 76px)', letterSpacing: '0.02em' }}>
+            <div className="uppercase font-black text-white leading-none" style={{ fontSize: 'clamp(48px, 8.2vw, 118px)', letterSpacing: '0.02em' }}>
               Affiliates
             </div>
           </div>
-          <div className="uppercase text-white" style={{ fontSize: 'clamp(11px, 1.1vw, 15px)', letterSpacing: '0.06em', lineHeight: 1.9, fontWeight: 400, maxWidth: 920 }}>
+          <div className="uppercase text-white" style={{ fontSize: 'clamp(13px, 1.35vw, 19px)', letterSpacing: '0.06em', lineHeight: 1.9, fontWeight: 400, maxWidth: 920 }}>
             <p>Мы глубоко понимаем принципы работы и экономику аффилейтов — независимо от источника трафика.</p>
             <p>Приватные сделки, защита от скама и компетентная команда менеджеров — это не дополнительные преимущества, а базовый уровень, который мы считаем обязательным.</p>
             <p>Наша задача — создать условия, в которых аффилейт может спокойно масштабироваться, понимать экономику своих кампаний и быть уверенным, что его интересы защищены.</p>
