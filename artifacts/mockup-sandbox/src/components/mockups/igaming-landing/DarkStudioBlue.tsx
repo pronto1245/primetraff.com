@@ -77,6 +77,18 @@ export function DarkStudioBlue() {
           </div>
         </div>
 
+        {/* Затемнение + размытие сайта при открытом меню */}
+        <div onClick={() => setMenuOpen(false)}
+          className="fixed inset-0 z-30"
+          style={{
+            background: 'rgba(0,0,0,0.55)',
+            backdropFilter: 'blur(10px)',
+            WebkitBackdropFilter: 'blur(10px)',
+            opacity: menuOpen ? 1 : 0,
+            pointerEvents: menuOpen ? 'auto' : 'none',
+            transition: 'opacity .5s ease',
+          }} />
+
         {/* Бургер-меню — панель справа, шапка остаётся видимой (z-50 > z-40) */}
         <div className="fixed top-0 right-0 bottom-0 z-40 flex flex-col justify-center"
           style={{
