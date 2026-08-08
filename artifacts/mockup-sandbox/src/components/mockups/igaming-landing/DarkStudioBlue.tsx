@@ -87,6 +87,16 @@ export function DarkStudioBlue() {
           </button>
         </div>
       </div>
+
+      {/* Bottom corners */}
+      <div className="absolute bottom-0 left-0 right-0 z-20 flex items-end justify-between px-10 pb-8 pointer-events-none">
+        <div className="text-left uppercase tracking-[0.15em] text-white text-[13px] leading-relaxed font-medium" style={{ fontFamily: "'Inter',sans-serif" }}>
+          Где трафик превращается<br />в партнёрство.
+        </div>
+        <div className="text-right uppercase tracking-[0.15em] text-white text-[13px] leading-relaxed font-medium" style={{ fontFamily: "'Inter',sans-serif" }}>
+          Работаем для вас<br />с 2025 года
+        </div>
+      </div>
     </div>
   );
 }
