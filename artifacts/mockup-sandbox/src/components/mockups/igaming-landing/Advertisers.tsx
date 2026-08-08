@@ -117,26 +117,26 @@ export function Advertisers() {
       </section>
 
       {/* ===== ПОЧЕМУ ВЫБИРАЮТ НАС ===== */}
-      <section className="relative bg-black" style={{ padding: `clamp(70px, 10vh, 130px) ${PAD} clamp(20px, 3vh, 32px)` }}>
+      <section className="relative bg-black flex flex-col justify-between" style={{ height: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} clamp(16px, 2.5vh, 28px)`, overflow: 'hidden' }}>
         <div className="flex flex-col items-center text-center">
           <div className="uppercase text-zinc-400" style={{ fontSize: 'clamp(11px, 1.1vw, 15px)', letterSpacing: '0.35em', fontWeight: 300, marginBottom: 'clamp(14px, 2vh, 24px)' }}>
             Почему
           </div>
-          <div className="uppercase font-black text-white leading-none" style={{ fontSize: 'clamp(34px, 5.2vw, 76px)', letterSpacing: '0.02em', marginBottom: 'clamp(36px, 6vh, 64px)' }}>
+          <div className="uppercase font-black text-white leading-none" style={{ fontSize: 'clamp(30px, 4.4vw, 62px)', letterSpacing: '0.02em', marginBottom: 'clamp(22px, 3.5vh, 40px)' }}>
             Выбирают нас
           </div>
-          <div className="uppercase text-white" style={{ fontSize: 'clamp(12px, 1.2vw, 17px)', letterSpacing: '0.06em', lineHeight: 1.9, fontWeight: 400, maxWidth: 1160 }}>
+          <div className="uppercase text-white" style={{ fontSize: 'clamp(11px, 1.05vw, 15px)', letterSpacing: '0.06em', lineHeight: 1.75, fontWeight: 400, maxWidth: 1160 }}>
             <p>Наш фокус — не количество подключённых аффилейтов, а качество партнёрства и трафика.</p>
-            <p style={{ marginTop: 'clamp(18px, 3vh, 28px)' }}>
+            <p style={{ marginTop: 'clamp(12px, 2vh, 20px)' }}>
               Мы несём ответственность за результат и придерживаемся принципиальной позиции в отношении невалидного трафика: сомнительные источники не допускаются, а качество каждого потока контролируется на протяжении всей работы. По отзывам наших рекламодателей, за время работы мы сформировали одни из лучших показателей качества трафика на рынке.
             </p>
-            <p style={{ marginTop: 'clamp(18px, 3vh, 28px)' }}>
+            <p style={{ marginTop: 'clamp(12px, 2vh, 20px)' }}>
               При этом наша главная задача — максимизировать ваш доход: находить сильные источники, создавать для них лучшие условия и масштабировать то, что действительно приносит результат.
             </p>
           </div>
 
           {/* Отзывы */}
-          <div className="uppercase font-black text-white" style={{ fontSize: 'clamp(16px, 1.8vw, 26px)', letterSpacing: '0.06em', marginTop: 'clamp(60px, 9vh, 110px)', marginBottom: 'clamp(28px, 4vh, 48px)' }}>
+          <div className="uppercase font-black text-white" style={{ fontSize: 'clamp(16px, 1.8vw, 26px)', letterSpacing: '0.06em', marginTop: 'clamp(28px, 4.5vh, 52px)', marginBottom: 'clamp(16px, 2.5vh, 30px)' }}>
             Отзывы о работе с нами
           </div>
         </div>
@@ -148,7 +148,7 @@ export function Advertisers() {
           <div className="adv-marquee" style={{ gap: 'clamp(14px, 1.6vw, 24px)', padding: '4px 0' }}>
             {[...REVIEWS, ...REVIEWS].map((r, i) => (
               <div key={i} className="flex-shrink-0 rounded-2xl text-left"
-                style={{ width: 'clamp(280px, 26vw, 380px)', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', padding: 'clamp(20px, 2vw, 30px)' }}>
+                style={{ width: 'clamp(340px, 34vw, 520px)', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', padding: 'clamp(20px, 2vw, 30px)' }}>
                 <div className="uppercase font-bold text-white" style={{ fontSize: 'clamp(13px, 1.2vw, 17px)', letterSpacing: TRACK, marginBottom: 'clamp(10px, 1.4vh, 16px)' }}>{r.name}</div>
                 <div className="text-zinc-300" style={{ fontSize: 'clamp(11px, 0.95vw, 13px)', lineHeight: 1.7, fontWeight: 300 }}>{r.text}</div>
               </div>
@@ -157,7 +157,7 @@ export function Advertisers() {
         </div>
 
         {/* Футер */}
-        <div className="relative z-10 w-full" style={{ marginTop: 'clamp(60px, 9vh, 110px)' }}>
+        <div className="relative z-10 w-full" style={{ marginTop: 'clamp(20px, 3vh, 36px)' }}>
           <div className="w-full flex items-center justify-between">
             <div className="flex items-center gap-3">
               {['T', 'I'].map(l => (
