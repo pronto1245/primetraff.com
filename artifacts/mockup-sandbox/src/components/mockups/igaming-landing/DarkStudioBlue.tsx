@@ -1,4 +1,4 @@
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Zap } from 'lucide-react';
 import bgImage from './assets/dsb-bg.png';
 
 export function DarkStudioBlue() {
@@ -21,6 +21,29 @@ export function DarkStudioBlue() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
         <div className="absolute inset-0 bg-black/20 mix-blend-multiply"></div>
+      </div>
+
+      {/* Header — logo left, lang + burger right */}
+      <div className="absolute top-0 left-0 right-0 z-20 flex items-center justify-between px-10 py-8">
+        {/* Logo */}
+        <div className="flex items-center gap-2.5">
+          <Zap className="w-6 h-6 text-blue-500" fill="currentColor" />
+          <div className="flex flex-col leading-none text-left">
+            <span className="font-bold tracking-[0.18em] text-[15px] uppercase" style={{ fontFamily: "'Inter',sans-serif" }}>PrimeTraff</span>
+            <span className="text-[8px] tracking-[0.3em] uppercase text-zinc-400 mt-1">Affiliate Network</span>
+          </div>
+        </div>
+        {/* Lang + burger */}
+        <div className="flex items-center gap-8">
+          <div className="font-['Space_Mono'] text-sm tracking-widest">
+            <span className="text-white font-bold cursor-pointer">RU</span>
+            <span className="text-zinc-600 ml-2 cursor-pointer hover:text-white transition-colors">EN</span>
+          </div>
+          <button className="flex flex-col gap-[5px] cursor-pointer bg-transparent border-none p-0 group">
+            <span className="block w-8 h-[2px] bg-white transition-all group-hover:w-6"></span>
+            <span className="block w-8 h-[2px] bg-white transition-all"></span>
+          </button>
+        </div>
       </div>
 
       {/* Content */}
