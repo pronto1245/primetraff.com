@@ -1,4 +1,5 @@
-import { ArrowRight, Zap } from 'lucide-react';
+import { useState } from 'react';
+import { ArrowRight, X, Zap } from 'lucide-react';
 import bgImage from './assets/dsb-bg.png';
 
 /* ============================================================
@@ -21,6 +22,7 @@ const PAD   = 'clamp(20px, 3vw, 48px)';
    Компонент
    ============================================================ */
 export function DarkStudioBlue() {
+  const [menuOpen, setMenuOpen] = useState(false);
 
 
   return (
@@ -61,12 +63,45 @@ export function DarkStudioBlue() {
               <span className="text-white cursor-pointer">RU</span>
               <span className="text-zinc-500 ml-2 cursor-pointer hover:text-white transition-colors">EN</span>
             </div>
-            <button className="flex flex-col gap-[6px] cursor-pointer bg-transparent border-none p-0">
-              <span className="block h-[2px] bg-white" style={{ width: 'clamp(28px, 2.5vw, 40px)' }} />
-              <span className="block h-[2px] bg-white" style={{ width: 'clamp(28px, 2.5vw, 40px)' }} />
-              <span className="block h-[2px] bg-white" style={{ width: 'clamp(28px, 2.5vw, 40px)' }} />
+            <button onClick={() => setMenuOpen(o => !o)} className="cursor-pointer bg-transparent border-none p-0">
+              {menuOpen ? (
+                <X className="text-white" style={{ width: 'clamp(28px, 2.5vw, 40px)', height: 'clamp(28px, 2.5vw, 40px)' }} strokeWidth={1.5} />
+              ) : (
+                <span className="flex flex-col gap-[6px]">
+                  <span className="block h-[2px] bg-white" style={{ width: 'clamp(28px, 2.5vw, 40px)' }} />
+                  <span className="block h-[2px] bg-white" style={{ width: 'clamp(28px, 2.5vw, 40px)' }} />
+                  <span className="block h-[2px] bg-white" style={{ width: 'clamp(28px, 2.5vw, 40px)' }} />
+                </span>
+              )}
             </button>
           </div>
+        </div>
+
+        {/* Бургер-меню — панель справа, шапка остаётся видимой (z-50 > z-40) */}
+        <div className="fixed top-0 right-0 bottom-0 z-40 flex flex-col justify-center"
+          style={{
+            width: 'clamp(300px, 34vw, 480px)',
+            background: '#0a0a0c',
+            borderLeft: '1px solid rgba(255,255,255,0.08)',
+            transform: menuOpen ? 'translateX(0)' : 'translateX(100%)',
+            transition: 'transform .5s cubic-bezier(.22,1,.36,1)',
+            padding: `0 ${PAD}`,
+          }}>
+          <nav className="flex flex-col items-end" style={{ gap: 'clamp(18px, 3vh, 28px)' }}>
+            {['О нас', 'Аффилейтам', 'Рекламодателям', 'Связаться с нами', 'Блог', 'FAQ'].map(item => (
+              <a key={item} href="#" className="uppercase text-white font-medium hover:opacity-60 transition-opacity"
+                style={{ fontSize: 'clamp(14px, 1.5vw, 20px)', letterSpacing: '0.1em', textDecoration: 'none' }}>
+                {item}
+              </a>
+            ))}
+            <div style={{ width: '100%', height: 1, background: 'rgba(255,255,255,0.25)', margin: 'clamp(10px, 2vh, 20px) 0' }} />
+            {['Вход', 'Регистрация'].map(item => (
+              <a key={item} href="#" className="uppercase text-white font-medium hover:opacity-60 transition-opacity"
+                style={{ fontSize: 'clamp(14px, 1.5vw, 20px)', letterSpacing: '0.1em', textDecoration: 'none' }}>
+                {item}
+              </a>
+            ))}
+          </nav>
         </div>
 
         {/* Контент */}
