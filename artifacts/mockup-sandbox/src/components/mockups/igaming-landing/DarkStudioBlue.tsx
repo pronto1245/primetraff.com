@@ -33,8 +33,6 @@ export function DarkStudioBlue() {
         .marquee-right { display: flex; width: max-content; animation: marquee-right 28s linear infinite; }
         .marquee-left:hover, .marquee-right:hover { animation-play-state: paused; }
         .brand-item:hover { opacity: 1 !important; }
-        @keyframes title-up { from { transform: translateY(110%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        .title-reveal { transform: translateY(110%); opacity: 0; animation: title-up .7s cubic-bezier(.22,1,.36,1) .15s forwards; }
         ::-webkit-scrollbar { display: none; }
       `}</style>
 
@@ -87,14 +85,22 @@ export function DarkStudioBlue() {
 
           {/* Заголовок с эффектом декодирования */}
           <div className="w-full" style={{ display: 'flex', flexDirection: 'column', gap: '0.6vw' }}>
-            <div className="w-full overflow-hidden">
-              <svg viewBox="0 0 1000 100" className="w-full block title-reveal" preserveAspectRatio="none" style={{ overflow: 'visible' }}>
-                <text x="0" y="88" textLength="1000" lengthAdjust="spacingAndGlyphs"
-                  fill="#fff" style={{ fontFamily: FONT, fontWeight: 900, fontSize: 96 }}>
-                  PRIMETRAFF<tspan fill={BLUE}>.COM</tspan>
-                </text>
-              </svg>
-            </div>
+            <svg viewBox="0 0 1000 100" className="w-full block" preserveAspectRatio="none" style={{ overflow: 'visible' }}>
+              <defs>
+                <linearGradient id="comGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#2563eb">
+                    <animate attributeName="stop-color" values="#2563eb;#60a5fa;#1d4ed8;#3b82f6;#2563eb" dur="6s" repeatCount="indefinite" />
+                  </stop>
+                  <stop offset="100%" stopColor="#60a5fa">
+                    <animate attributeName="stop-color" values="#60a5fa;#1e40af;#3b82f6;#93c5fd;#60a5fa" dur="6s" repeatCount="indefinite" />
+                  </stop>
+                </linearGradient>
+              </defs>
+              <text x="0" y="88" textLength="1000" lengthAdjust="spacingAndGlyphs"
+                fill="#fff" style={{ fontFamily: FONT, fontWeight: 900, fontSize: 96 }}>
+                PRIMETRAFF<tspan fill="url(#comGrad)">.COM</tspan>
+              </text>
+            </svg>
             <div className="w-full flex justify-between uppercase text-white font-bold" style={{ fontSize: TYPE.accent, letterSpacing: TRACK }}>
               {['Private', 'Premium', 'iGaming', 'Affiliate', 'Network'].map(w => <span key={w}>{w}</span>)}
             </div>
