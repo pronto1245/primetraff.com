@@ -98,6 +98,18 @@ export function Affiliates() {
           </div>
         </div>
 
+        {/* Кнопки Регистрация / Вход — по краям, как в референсе */}
+        <div className="relative z-10 w-full flex items-center justify-between" style={{ marginTop: 'clamp(32px, 5vh, 56px)' }}>
+          <button className="rounded-full text-white uppercase cursor-pointer hover:bg-white/15 transition-colors"
+            style={{ fontFamily: FONT, fontSize: 'clamp(11px, 1vw, 14px)', letterSpacing: '0.12em', padding: 'clamp(14px, 1.6vh, 18px) 0', width: 'clamp(180px, 22vw, 300px)', background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.15)' }}>
+            Регистрация
+          </button>
+          <button className="rounded-full text-white uppercase cursor-pointer hover:bg-white/15 transition-colors"
+            style={{ fontFamily: FONT, fontSize: 'clamp(11px, 1vw, 14px)', letterSpacing: '0.12em', padding: 'clamp(14px, 1.6vh, 18px) 0', width: 'clamp(180px, 22vw, 300px)', background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.15)' }}>
+            Вход
+          </button>
+        </div>
+
         {/* Футер */}
         <div className="relative z-10 w-full" style={{ marginTop: 'clamp(40px, 6vh, 64px)' }}>
           <div className="w-full flex items-center justify-between">
