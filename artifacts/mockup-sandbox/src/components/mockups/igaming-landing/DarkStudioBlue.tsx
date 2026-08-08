@@ -75,9 +75,6 @@ export function DarkStudioBlue() {
           <div className="w-full flex justify-between uppercase text-white font-bold" style={{ fontFamily: "'Inter',sans-serif", fontSize: 'clamp(14px,2.2vw,26px)', letterSpacing: '0.12em' }}>
             {['Private', 'Premium', 'iGaming', 'Affiliate', 'Network'].map(w => <span key={w}>{w}</span>)}
           </div>
-          <p className="text-zinc-300 font-light tracking-wide text-lg max-w-[280px] mx-auto leading-relaxed pt-4">
-            Высокие ставки, моментальные выплаты. Партнёрская сеть нового поколения.
-          </p>
         </div>
 
         {/* Bottom */}
