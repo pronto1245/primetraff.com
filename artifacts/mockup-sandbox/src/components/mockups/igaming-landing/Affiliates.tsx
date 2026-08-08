@@ -96,18 +96,18 @@ export function Affiliates() {
             <p>Приватные сделки, защита от скама и компетентная команда менеджеров — это не дополнительные преимущества, а базовый уровень, который мы считаем обязательным.</p>
             <p>Наша задача — создать условия, в которых аффилейт может спокойно масштабироваться, понимать экономику своих кампаний и быть уверенным, что его интересы защищены.</p>
           </div>
-        </div>
 
-        {/* Кнопки Регистрация / Вход — по краям, как в референсе */}
-        <div className="relative z-10 w-full flex items-center justify-between" style={{ marginTop: 'clamp(32px, 5vh, 56px)' }}>
-          <button className="rounded-full text-white uppercase cursor-pointer hover:bg-white/15 transition-colors"
-            style={{ fontFamily: FONT, fontSize: 'clamp(11px, 1vw, 14px)', letterSpacing: '0.12em', padding: 'clamp(14px, 1.6vh, 18px) 0', width: 'clamp(180px, 22vw, 300px)', background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.15)' }}>
-            Регистрация
-          </button>
-          <button className="rounded-full text-white uppercase cursor-pointer hover:bg-white/15 transition-colors"
-            style={{ fontFamily: FONT, fontSize: 'clamp(11px, 1vw, 14px)', letterSpacing: '0.12em', padding: 'clamp(14px, 1.6vh, 18px) 0', width: 'clamp(180px, 22vw, 300px)', background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.15)' }}>
-            Вход
-          </button>
+          {/* Кнопки Регистрация / Вход — сразу под текстом, с отступом от краёв */}
+          <div className="w-full flex items-center justify-between" style={{ marginTop: 'clamp(40px, 7vh, 72px)', padding: '0 clamp(40px, 10vw, 160px)' }}>
+            <button className="rounded-full text-white uppercase cursor-pointer hover:bg-white/15 transition-colors"
+              style={{ fontFamily: FONT, fontSize: 'clamp(11px, 1vw, 14px)', letterSpacing: '0.12em', padding: 'clamp(14px, 1.6vh, 18px) 0', width: 'clamp(160px, 15vw, 220px)', background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.15)' }}>
+              Регистрация
+            </button>
+            <button className="rounded-full text-white uppercase cursor-pointer hover:bg-white/15 transition-colors"
+              style={{ fontFamily: FONT, fontSize: 'clamp(11px, 1vw, 14px)', letterSpacing: '0.12em', padding: 'clamp(14px, 1.6vh, 18px) 0', width: 'clamp(160px, 15vw, 220px)', background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.15)' }}>
+              Вход
+            </button>
+          </div>
         </div>
 
         {/* Футер */}
