@@ -27,6 +27,9 @@ export function Advertisers() {
         .btn-fill::before { content: ''; position: absolute; inset: 0; background: #2563eb; transform: translateX(-101%); transition: transform .45s cubic-bezier(.22,1,.36,1); }
         .btn-fill:hover::before { transform: translateX(0); }
         .btn-ghost:hover { border-color: #2563eb; }
+        @keyframes adv-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        .adv-marquee { display: flex; width: max-content; animation: adv-marquee 55s linear infinite; }
+        .adv-marquee:hover { animation-play-state: paused; }
       `}</style>
 
       {/* Шапка — как на главной, fixed */}
@@ -111,8 +114,50 @@ export function Advertisers() {
           </div>
         </div>
 
+      </section>
+
+      {/* ===== ПОЧЕМУ ВЫБИРАЮТ НАС ===== */}
+      <section className="relative bg-black" style={{ padding: `clamp(70px, 10vh, 130px) ${PAD} clamp(20px, 3vh, 32px)` }}>
+        <div className="flex flex-col items-center text-center">
+          <div className="uppercase text-zinc-400" style={{ fontSize: 'clamp(11px, 1.1vw, 15px)', letterSpacing: '0.35em', fontWeight: 300, marginBottom: 'clamp(14px, 2vh, 24px)' }}>
+            Почему
+          </div>
+          <div className="uppercase font-black text-white leading-none" style={{ fontSize: 'clamp(34px, 5.2vw, 76px)', letterSpacing: '0.02em', marginBottom: 'clamp(36px, 6vh, 64px)' }}>
+            Выбирают нас
+          </div>
+          <div className="uppercase text-white" style={{ fontSize: 'clamp(12px, 1.2vw, 17px)', letterSpacing: '0.06em', lineHeight: 1.9, fontWeight: 400, maxWidth: 1160 }}>
+            <p>Наш фокус — не количество подключённых аффилейтов, а качество партнёрства и трафика.</p>
+            <p style={{ marginTop: 'clamp(18px, 3vh, 28px)' }}>
+              Мы несём ответственность за результат и придерживаемся принципиальной позиции в отношении невалидного трафика: сомнительные источники не допускаются, а качество каждого потока контролируется на протяжении всей работы. По отзывам наших рекламодателей, за время работы мы сформировали одни из лучших показателей качества трафика на рынке.
+            </p>
+            <p style={{ marginTop: 'clamp(18px, 3vh, 28px)' }}>
+              При этом наша главная задача — максимизировать ваш доход: находить сильные источники, создавать для них лучшие условия и масштабировать то, что действительно приносит результат.
+            </p>
+          </div>
+
+          {/* Отзывы */}
+          <div className="uppercase font-black text-white" style={{ fontSize: 'clamp(16px, 1.8vw, 26px)', letterSpacing: '0.06em', marginTop: 'clamp(60px, 9vh, 110px)', marginBottom: 'clamp(28px, 4vh, 48px)' }}>
+            Отзывы о работе с нами
+          </div>
+        </div>
+
+        {/* Автоскролл отзывов */}
+        <div className="relative overflow-hidden" style={{ margin: `0 calc(-1 * ${PAD})` }}>
+          <div className="absolute left-0 top-0 bottom-0 z-10 pointer-events-none" style={{ width: 'clamp(40px, 8vw, 140px)', background: 'linear-gradient(to right, #000, transparent)' }} />
+          <div className="absolute right-0 top-0 bottom-0 z-10 pointer-events-none" style={{ width: 'clamp(40px, 8vw, 140px)', background: 'linear-gradient(to left, #000, transparent)' }} />
+          <div className="adv-marquee" style={{ gap: 'clamp(14px, 1.6vw, 24px)', padding: '4px 0' }}>
+            {[...REVIEWS, ...REVIEWS].map((r, i) => (
+              <div key={i} className="flex-shrink-0 rounded-2xl text-left"
+                style={{ width: 'clamp(280px, 26vw, 380px)', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', padding: 'clamp(20px, 2vw, 30px)' }}>
+                <div className="uppercase font-bold text-white" style={{ fontSize: 'clamp(13px, 1.2vw, 17px)', letterSpacing: TRACK, marginBottom: 'clamp(10px, 1.4vh, 16px)' }}>{r.name}</div>
+                <div className="text-zinc-300" style={{ fontSize: 'clamp(11px, 0.95vw, 13px)', lineHeight: 1.7, fontWeight: 300 }}>{r.text}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* Футер */}
-        <div className="relative z-10 w-full" style={{ marginTop: 'clamp(40px, 6vh, 64px)' }}>
+        <div className="relative z-10 w-full" style={{ marginTop: 'clamp(60px, 9vh, 110px)' }}>
           <div className="w-full flex items-center justify-between">
             <div className="flex items-center gap-3">
               {['T', 'I'].map(l => (
@@ -132,3 +177,17 @@ export function Advertisers() {
     </div>
   );
 }
+
+const REVIEWS = [
+  { name: 'Селена', text: 'Работаем с командой давно, предоставляют веб-мастеров с хорошим трафиком на наши продукты. Как рекламодатель, мы очень довольны сотрудничеством.' },
+  { name: 'Джон', text: 'Это первое сотрудничество, когда партнёрская программа реально фильтрует фрод. Трафик качественный, показатели выше, чем мы ожидали.' },
+  { name: 'Марко', text: 'Больше всего качественных потоков с трафиком — результат говорит сам за себя. Работаем уже три года и продолжаем масштабироваться.' },
+  { name: 'Анна', text: 'Прозрачная работа с источниками: слабые сорсы отключают сами, не дожидаясь наших претензий. Такое отношение — редкость на рынке.' },
+  { name: 'Давид', text: 'Качество трафика стабильно высокое, ретеншн игроков заметно лучше среднего по рынку. Рекомендуем как надёжного партнёра.' },
+  { name: 'Ольга', text: 'Быстрая коммуникация и честная позиция по невалиду. Все спорные кейсы решаются в течение суток, без затяжных разбирательств.' },
+  { name: 'Томас', text: 'Подключились полгода назад — объёмы выросли в три раза без потери качества. Команда действительно следит за каждым потоком.' },
+  { name: 'Ирина', text: 'Работали со многими сетями, но здесь лучший баланс объёма и качества. Фрода практически нет, конверсия в депозит стабильная.' },
+  { name: 'Алекс', text: 'Ценим за принципиальность: сомнительные источники не допускаются вообще. Для нас это ключевой фактор долгосрочного сотрудничества.' },
+  { name: 'Мария', text: 'Отличные показатели по FTD и удержанию. Менеджеры глубоко понимают продукт и подбирают действительно релевантные источники.' },
+  { name: 'Виктор', text: 'Сотрудничаем второй год — ни одного серьёзного инцидента с качеством. Масштабируют только то, что реально приносит результат.' },
+];
