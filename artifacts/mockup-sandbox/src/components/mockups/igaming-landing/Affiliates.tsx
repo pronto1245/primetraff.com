@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowRight, X, Zap } from 'lucide-react';
+import { X, Zap } from 'lucide-react';
 import bgImage from './assets/dsb-bg.png';
 
 /* ============================================================
@@ -10,20 +10,9 @@ const FONT = "'Unbounded', sans-serif";
 const TYPE = {
   micro:  'clamp(9px,  0.8vw, 11px)',
   small:  'clamp(11px, 1vw,   14px)',
-  body:   'clamp(12px, 1.15vw,16px)',
-  accent: 'clamp(13px, 1.6vw, 22px)',
 };
 const TRACK = '0.08em';
 const PAD   = 'clamp(20px, 3vw, 48px)';
-
-const BENEFITS = [
-  { n: '01', title: 'Высокие ставки',        text: 'RevShare до 50%, CPA выше рынка. Пересматриваем условия по результату — растёшь ты, растут ставки.' },
-  { n: '02', title: 'Моментальные выплаты',  text: 'Крипта, карты, банковский перевод. Без задержек и минималок, которые нужно ждать месяцами.' },
-  { n: '03', title: 'Прямые рекламодатели',  text: 'Работаем без посредников — офферы напрямую от брендов, никаких урезанных ставок по цепочке.' },
-  { n: '04', title: 'Личный менеджер 24/7',  text: 'Не тикеты и боты, а живой человек в Telegram, который отвечает и ночью, и в выходные.' },
-  { n: '05', title: 'Чистая статистика',     text: 'Прозрачный трекинг в реальном времени. Видишь то же, что и мы — без шейва и скрытых правок.' },
-  { n: '06', title: 'Эксклюзивные офферы',   text: 'ГЕО и продукты, которых нет в паблике. Доступ по результатам первых кап.' },
-];
 
 export function Affiliates() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -32,8 +21,6 @@ export function Affiliates() {
     <div style={{ width: '100%', fontFamily: FONT }} className="bg-black text-white">
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;700;900&family=Comforter&display=swap');
-        .benefit-row:hover { background: rgba(59,130,246,0.05); }
-        .benefit-row:hover .benefit-num { color: ${BLUE}; }
         ::-webkit-scrollbar { display: none; }
       `}</style>
 
@@ -89,71 +76,46 @@ export function Affiliates() {
         </nav>
       </div>
 
-      {/* ===== HERO страницы ===== */}
-      <section className="relative overflow-hidden flex flex-col justify-end" style={{ height: '62vh' }}>
+      {/* ===== AFFILIATES — оформление как «О нас» на главной ===== */}
+      <section className="relative overflow-hidden flex flex-col" style={{ minHeight: '100vh', padding: `clamp(60px, 8vh, 100px) ${PAD} clamp(20px, 3vh, 32px)` }}>
         <div className="absolute inset-0 z-0">
-          <img src={bgImage} alt="" className="w-full h-full object-cover opacity-40" style={{ filter: 'hue-rotate(220deg) saturate(1.1)' }} />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+          <img src={bgImage} alt="" className="w-full h-full object-cover opacity-25" style={{ filter: 'hue-rotate(220deg) saturate(1.1)' }} />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black" />
         </div>
-        <div className="relative z-10" style={{ padding: `0 ${PAD} clamp(32px, 5vh, 56px)` }}>
-          <div className="uppercase text-zinc-400" style={{ fontSize: TYPE.small, letterSpacing: '0.35em', fontWeight: 300, marginBottom: 'clamp(16px, 2.5vh, 28px)' }}>
-            Для тех, кто льёт
-          </div>
-          <h1 className="uppercase font-black leading-none" style={{ fontSize: 'clamp(40px, 8vw, 110px)', letterSpacing: '0.01em' }}>
-            Аффилей<span style={{ color: BLUE }}>там</span>
-          </h1>
-        </div>
-      </section>
-
-      {/* ===== Преимущества — нумерованные строки ===== */}
-      <section className="bg-black" style={{ padding: `clamp(40px, 6vh, 80px) 0` }}>
-        {BENEFITS.map((b, i) => (
-          <div key={b.n} className="benefit-row flex items-start transition-colors"
-            style={{ padding: `clamp(24px, 3.5vh, 40px) ${PAD}`, borderTop: '1px solid rgba(255,255,255,0.08)', borderBottom: i === BENEFITS.length - 1 ? '1px solid rgba(255,255,255,0.08)' : 'none', gap: 'clamp(20px, 4vw, 64px)' }}>
-            <div className="benefit-num font-black text-zinc-600 transition-colors" style={{ fontSize: 'clamp(18px, 2.4vw, 32px)', minWidth: 'clamp(40px, 5vw, 72px)' }}>
-              {b.n}
+        <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center w-full">
+          <div className="relative" style={{ marginBottom: 'clamp(36px, 6vh, 64px)' }}>
+            <div className="text-zinc-400" style={{ fontFamily: "'Comforter', cursive", fontSize: 'clamp(44px, 6.5vw, 96px)', lineHeight: 1, opacity: 0.8 }}>
+              Primetraff.com
             </div>
-            <div className="flex-1 flex flex-col md:flex-row" style={{ gap: 'clamp(8px, 2vw, 48px)' }}>
-              <div className="uppercase font-bold" style={{ fontSize: TYPE.accent, letterSpacing: TRACK, flex: '0 0 40%' }}>
-                {b.title}
-              </div>
-              <div className="text-zinc-400" style={{ fontSize: TYPE.body, fontWeight: 300, lineHeight: 1.7 }}>
-                {b.text}
-              </div>
+            <div className="uppercase font-bold text-white" style={{ fontSize: 'clamp(18px, 2.2vw, 30px)', letterSpacing: '0.12em', marginTop: '-0.55em', position: 'relative', zIndex: 1 }}>
+              Affiliates
             </div>
           </div>
-        ))}
-      </section>
-
-      {/* ===== CTA ===== */}
-      <section className="bg-black flex flex-col items-center text-center" style={{ padding: `clamp(60px, 10vh, 120px) ${PAD}` }}>
-        <div className="w-[1px] h-16" style={{ background: `linear-gradient(180deg, ${BLUE}, transparent)`, marginBottom: 'clamp(28px, 4vh, 48px)' }} />
-        <div className="uppercase font-black leading-tight" style={{ fontSize: 'clamp(22px, 3.4vw, 46px)', marginBottom: 'clamp(28px, 4vh, 48px)' }}>
-          Готов лить<br />в <span style={{ color: BLUE }}>плюс</span>?
-        </div>
-        <button className="flex items-center gap-3 border-b border-white/30 pb-2 hover:border-white transition-colors duration-500 group bg-transparent">
-          <span className="uppercase font-medium" style={{ fontSize: TYPE.body, letterSpacing: '0.15em' }}>Стать партнёром</span>
-          <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-500" />
-        </button>
-      </section>
-
-      {/* ===== Футер ===== */}
-      <div style={{ padding: `0 ${PAD} clamp(20px, 3vh, 32px)` }}>
-        <div className="w-full flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            {['T', 'I'].map(l => (
-              <div key={l} className="rounded-full bg-white flex items-center justify-center text-black font-bold cursor-pointer" style={{ width: 40, height: 40, fontSize: 14 }}>{l}</div>
-            ))}
+          <div className="uppercase text-white" style={{ fontSize: 'clamp(11px, 1.1vw, 15px)', letterSpacing: '0.06em', lineHeight: 1.9, fontWeight: 400, maxWidth: 920 }}>
+            <p>Мы глубоко понимаем принципы работы и экономику аффилейтов — независимо от источника трафика.</p>
+            <p style={{ marginTop: '1.9em' }}>Приватные сделки, защита от скама и компетентная команда менеджеров — это не дополнительные преимущества, а базовый уровень, который мы считаем обязательным.</p>
+            <p style={{ marginTop: '1.9em' }}>Наша задача — создать условия, в которых аффилейт может спокойно масштабироваться, понимать экономику своих кампаний и быть уверенным, что его интересы защищены.</p>
           </div>
-          <button className="rounded-full border border-white/20 bg-white/5 text-white uppercase cursor-pointer"
-            style={{ fontFamily: FONT, fontSize: 'clamp(11px, 1vw, 14px)', letterSpacing: '0.12em', padding: '14px 36px' }}>
-            Support
-          </button>
         </div>
-        <div className="text-center text-zinc-500 uppercase" style={{ fontSize: 'clamp(8px, 0.7vw, 10px)', letterSpacing: '0.1em', marginTop: 'clamp(16px, 2.5vh, 28px)' }}>
-          © 2026. PRIMETRAFF.COM. ALL RIGHTS RESERVED.
+
+        {/* Футер */}
+        <div className="relative z-10 w-full" style={{ marginTop: 'clamp(40px, 6vh, 64px)' }}>
+          <div className="w-full flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              {['T', 'I'].map(l => (
+                <div key={l} className="rounded-full bg-white flex items-center justify-center text-black font-bold cursor-pointer" style={{ width: 40, height: 40, fontSize: 14 }}>{l}</div>
+              ))}
+            </div>
+            <button className="rounded-full border border-white/20 bg-white/5 text-white uppercase cursor-pointer"
+              style={{ fontFamily: FONT, fontSize: 'clamp(11px, 1vw, 14px)', letterSpacing: '0.12em', padding: '14px 36px' }}>
+              Support
+            </button>
+          </div>
+          <div className="text-center text-zinc-500 uppercase" style={{ fontSize: 'clamp(8px, 0.7vw, 10px)', letterSpacing: '0.1em', marginTop: 'clamp(16px, 2.5vh, 28px)' }}>
+            © 2026. PRIMETRAFF.COM. ALL RIGHTS RESERVED.
+          </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }
