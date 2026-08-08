@@ -79,8 +79,8 @@ export function Affiliates() {
       {/* ===== AFFILIATES — оформление как «О нас» на главной ===== */}
       <section className="relative overflow-hidden flex flex-col" style={{ minHeight: '100vh', padding: `clamp(60px, 8vh, 100px) ${PAD} clamp(20px, 3vh, 32px)` }}>
         <div className="absolute inset-0 z-0">
-          <img src={bgImage} alt="" className="w-full h-full object-cover opacity-25" style={{ filter: 'hue-rotate(220deg) saturate(1.1)' }} />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black" />
+          <img src={bgImage} alt="" className="w-full h-full object-cover" style={{ filter: 'hue-rotate(220deg) saturate(1.1)' }} />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/70" />
         </div>
         <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center w-full">
           <div className="relative" style={{ marginBottom: 'clamp(36px, 6vh, 64px)' }}>
