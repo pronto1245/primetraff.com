@@ -90,10 +90,10 @@ export function DarkStudioBlue() {
 
       {/* Bottom corners */}
       <div className="absolute bottom-0 left-0 right-0 z-20 flex items-end justify-between px-10 pb-8 pointer-events-none">
-        <div className="text-left uppercase tracking-[0.15em] text-white text-[13px] leading-relaxed font-medium" style={{ fontFamily: "'Inter',sans-serif" }}>
+        <div className="text-left uppercase text-white font-bold leading-snug" style={{ fontFamily: "'Inter',sans-serif", fontSize: 'clamp(14px,2.2vw,26px)', letterSpacing: '0.12em' }}>
           Где трафик превращается<br />в партнёрство.
         </div>
-        <div className="text-right uppercase tracking-[0.15em] text-white text-[13px] leading-relaxed font-medium" style={{ fontFamily: "'Inter',sans-serif" }}>
+        <div className="text-right uppercase text-white font-bold leading-snug" style={{ fontFamily: "'Inter',sans-serif", fontSize: 'clamp(14px,2.2vw,26px)', letterSpacing: '0.12em' }}>
           Работаем для вас<br />с 2025 года
         </div>
       </div>
