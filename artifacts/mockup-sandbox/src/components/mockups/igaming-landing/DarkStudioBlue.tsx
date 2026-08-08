@@ -25,7 +25,7 @@ export function DarkStudioBlue() {
   return (
     <div style={{ width: '100%', fontFamily: FONT }} className="bg-black text-white">
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;700;900&family=Comforter&display=swap');
       `}</style>
 
       {/* ================= HERO (первый экран) ================= */}
@@ -119,29 +119,45 @@ export function DarkStudioBlue() {
       </div>
       </div>
 
-      {/* ================= О НАС (второй экран) ================= */}
-      <section className="relative bg-black" style={{ padding: `clamp(80px, 12vh, 160px) ${PAD}` }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-          <h2 className="uppercase font-black leading-none" style={{ fontSize: 'clamp(32px, 5.5vw, 72px)', letterSpacing: '0.02em' }}>
-            Немного <span style={{ color: BLUE }}>о нас</span>
-          </h2>
+      {/* ================= О НАС (второй экран, как у profitov) ================= */}
+      <section className="relative bg-black flex flex-col" style={{ minHeight: '100vh', padding: `clamp(60px, 8vh, 100px) ${PAD} clamp(20px, 3vh, 32px)` }}>
+        <div className="flex-1 flex flex-col items-center justify-center text-center w-full">
 
-          <div style={{ marginTop: 'clamp(40px, 6vh, 80px)', display: 'flex', flexDirection: 'column', gap: 'clamp(28px, 4vh, 44px)' }}>
-            <p className="font-medium leading-relaxed" style={{ fontSize: 'clamp(16px, 1.8vw, 26px)' }}>
-              PrimeTraff — партнёрская программа в iGaming, где интересы партнёра стоят на первом месте.
-            </p>
-            <p className="leading-relaxed text-zinc-300" style={{ fontSize: 'clamp(13px, 1.3vw, 19px)', fontWeight: 300 }}>
-              С 2025 года мы строим партнёрство на трёх принципах: <span className="text-white font-medium">сервис</span>, <span className="text-white font-medium">прозрачность</span> и <span className="text-white font-medium">результат</span>.
-            </p>
-            <p className="leading-relaxed text-zinc-300" style={{ fontSize: 'clamp(13px, 1.3vw, 19px)', fontWeight: 300 }}>
-              Мы защищаем интересы рекламодателей и аффилейтов от мошенничества, выстраиваем понятные процессы и создаём условия, в которых зарабатывают все стороны.
-            </p>
-            <p className="leading-relaxed text-zinc-300" style={{ fontSize: 'clamp(13px, 1.3vw, 19px)', fontWeight: 300 }}>
-              Наша задача проста — не просто дать вам оффер, а помочь масштабировать трафик и зарабатывать больше.
-            </p>
-            <p className="uppercase font-bold" style={{ fontSize: 'clamp(15px, 1.6vw, 24px)', letterSpacing: TRACK, color: BLUE, marginTop: 'clamp(12px, 2vh, 24px)' }}>
-              PrimeTraff — работаем для вас, чтобы вы зарабатывали.
-            </p>
+          {/* Заголовок: рукописное «Немного» + жирное «О НАС» с наложением */}
+          <div className="relative" style={{ marginBottom: 'clamp(36px, 6vh, 64px)' }}>
+            <div className="text-zinc-400" style={{ fontFamily: "'Comforter', cursive", fontSize: 'clamp(64px, 9vw, 130px)', lineHeight: 1, opacity: 0.8 }}>
+              Немного
+            </div>
+            <div className="uppercase font-bold text-white" style={{ fontSize: 'clamp(18px, 2.2vw, 30px)', letterSpacing: '0.12em', marginTop: '-0.55em', position: 'relative', zIndex: 1 }}>
+              о нас
+            </div>
+          </div>
+
+          {/* Текст — по центру, строками, как на референсе */}
+          <div className="uppercase text-white" style={{ fontSize: 'clamp(11px, 1.1vw, 15px)', letterSpacing: '0.06em', lineHeight: 1.9, fontWeight: 400, maxWidth: 920 }}>
+            <p>PrimeTraff — партнёрская программа в iGaming, где интересы партнёра стоят на первом месте.</p>
+            <p>С 2025 года мы строим партнёрство на трёх принципах: сервис, прозрачность и результат.</p>
+            <p>Защищаем интересы рекламодателей и аффилейтов от мошенничества.</p>
+            <p>Выстраиваем понятные процессы и создаём условия, в которых зарабатывают все стороны.</p>
+            <p>Наша задача — не просто дать вам оффер, а помочь масштабировать трафик и зарабатывать больше.</p>
+            <p style={{ marginTop: '1.9em' }}>PrimeTraff — работаем для вас, чтобы вы зарабатывали.</p>
+          </div>
+        </div>
+
+        {/* Низ секции: соцсети слева, Support справа, копирайт по центру */}
+        <div className="w-full" style={{ marginTop: 'clamp(40px, 6vh, 64px)' }}>
+          <div className="w-full flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              {['T', 'I'].map(l => (
+                <div key={l} className="rounded-full bg-white flex items-center justify-center text-black font-bold cursor-pointer" style={{ width: 40, height: 40, fontSize: 14 }}>{l}</div>
+              ))}
+            </div>
+            <button className="rounded-full border border-white/20 bg-white/5 text-white uppercase cursor-pointer" style={{ fontFamily: FONT, fontSize: 'clamp(11px, 1vw, 14px)', letterSpacing: '0.12em', padding: '14px 36px' }}>
+              Support
+            </button>
+          </div>
+          <div className="text-center text-zinc-500 uppercase" style={{ fontSize: 'clamp(8px, 0.7vw, 10px)', letterSpacing: '0.1em', marginTop: 'clamp(16px, 2.5vh, 28px)' }}>
+            © 2026. PRIMETRAFF.COM. ALL RIGHTS RESERVED.
           </div>
         </div>
       </section>
