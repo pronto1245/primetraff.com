@@ -96,7 +96,7 @@ export function Affiliates() {
               Affiliates
             </div>
           </div>
-          <div className="uppercase text-white" style={{ fontSize: 'clamp(13px, 1.28vw, 18px)', letterSpacing: '0.06em', lineHeight: 1.9, fontWeight: 400, maxWidth: 1160 }}>
+          <div className="uppercase text-white" style={{ fontSize: 'clamp(12px, 1.2vw, 17px)', letterSpacing: '0.06em', lineHeight: 1.9, fontWeight: 400, maxWidth: 1160 }}>
             <p>Мы глубоко понимаем принципы работы и экономику аффилейтов — независимо от источника трафика.</p>
             <p>Приватные сделки, защита от скама и компетентная команда менеджеров — это не дополнительные преимущества, а базовый уровень, который мы считаем обязательным.</p>
             <p>Наша задача — создать условия, в которых аффилейт может спокойно масштабироваться, понимать экономику своих кампаний и быть уверенным, что его интересы защищены.</p>
