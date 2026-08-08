@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { ArrowRight, Zap } from 'lucide-react';
 import bgImage from './assets/dsb-bg.png';
 
@@ -16,48 +15,12 @@ const TYPE = {
 const TRACK = '0.08em';
 const PAD   = 'clamp(20px, 3vw, 48px)';
 
-/* ============================================================
-   Эффект декодирования текста (#5)
-   ============================================================ */
-const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&';
-function useDecodeText(target: string, delay = 0) {
-  const [display, setDisplay] = useState(() => target.replace(/[A-Z0-9]/gi, '█'));
-  useEffect(() => {
-    let frame = 0;
-    let raf: number;
-    const totalFrames = 28;
-    const timeout = setTimeout(() => {
-      const tick = () => {
-        frame++;
-        const progress = frame / totalFrames;
-        setDisplay(
-          target
-            .split('')
-            .map((ch, i) => {
-              if (ch === '.' || ch === ' ') return ch;
-              if (i / target.length < progress) return ch;
-              return CHARS[Math.floor(Math.random() * CHARS.length)];
-            })
-            .join('')
-        );
-        if (frame < totalFrames) raf = requestAnimationFrame(tick);
-        else setDisplay(target);
-      };
-      raf = requestAnimationFrame(tick);
-    }, delay);
-    return () => { clearTimeout(timeout); cancelAnimationFrame(raf); };
-  }, [target, delay]);
-  return display;
-}
 
 
 /* ============================================================
    Компонент
    ============================================================ */
 export function DarkStudioBlue() {
-  // Декодирование: PRIMETRAFF отдельно, .COM отдельно (разный цвет)
-  const decodedMain = useDecodeText('PRIMETRAFF', 300);
-  const decodedDot  = useDecodeText('.COM', 600);
 
 
   return (
@@ -70,6 +33,8 @@ export function DarkStudioBlue() {
         .marquee-right { display: flex; width: max-content; animation: marquee-right 28s linear infinite; }
         .marquee-left:hover, .marquee-right:hover { animation-play-state: paused; }
         .brand-item:hover { opacity: 1 !important; }
+        @keyframes letter-up { from { transform: translateY(110%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .title-letter { display: inline-block; transform: translateY(110%); opacity: 0; animation: letter-up .6s cubic-bezier(.22,1,.36,1) forwards; }
         ::-webkit-scrollbar { display: none; }
       `}</style>
 
@@ -122,12 +87,15 @@ export function DarkStudioBlue() {
 
           {/* Заголовок с эффектом декодирования */}
           <div className="w-full" style={{ display: 'flex', flexDirection: 'column', gap: '0.6vw' }}>
-            <svg viewBox="0 0 1000 100" className="w-full block" preserveAspectRatio="none" style={{ overflow: 'visible' }}>
-              <text x="0" y="88" textLength="1000" lengthAdjust="spacingAndGlyphs"
-                fill="#fff" style={{ fontFamily: FONT, fontWeight: 900, fontSize: 96 }}>
-                {decodedMain}<tspan fill={BLUE}>{decodedDot}</tspan>
-              </text>
-            </svg>
+            <div className="w-full flex justify-between items-end overflow-hidden" style={{ lineHeight: 1 }}>
+              {'PRIMETRAFF.COM'.split('').map((ch, i) => (
+                <span key={i} className="title-letter font-black" style={{
+                  fontSize: 'clamp(40px, 7.6vw, 118px)',
+                  color: i >= 10 ? BLUE : '#fff',
+                  animationDelay: `${0.15 + i * 0.045}s`,
+                }}>{ch}</span>
+              ))}
+            </div>
             <div className="w-full flex justify-between uppercase text-white font-bold" style={{ fontSize: TYPE.accent, letterSpacing: TRACK }}>
               {['Private', 'Premium', 'iGaming', 'Affiliate', 'Network'].map(w => <span key={w}>{w}</span>)}
             </div>
