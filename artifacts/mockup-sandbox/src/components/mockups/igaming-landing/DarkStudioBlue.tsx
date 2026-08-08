@@ -37,8 +37,8 @@ export function DarkStudioBlue() {
         </div>
 
         {/* Middle */}
-        <div className="space-y-6 transform -translate-y-8 w-full">
-          <svg viewBox="0 0 1000 110" className="w-full block" preserveAspectRatio="none" style={{ overflow: 'visible' }}>
+        <div className="space-y-2 transform -translate-y-8 w-full">
+          <svg viewBox="0 0 1000 100" className="w-full block" preserveAspectRatio="none" style={{ overflow: 'visible' }}>
             <text
               x="0" y="92"
               textLength="1000" lengthAdjust="spacingAndGlyphs"
