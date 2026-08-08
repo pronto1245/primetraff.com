@@ -84,11 +84,11 @@ export function Affiliates() {
         </div>
         <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center w-full">
           <div className="relative" style={{ marginBottom: 'clamp(36px, 6vh, 64px)' }}>
-            <div className="text-zinc-400" style={{ fontFamily: "'Comforter', cursive", fontSize: 'clamp(44px, 6.5vw, 96px)', lineHeight: 1, opacity: 0.8 }}>
-              Primetraff.com
+            <div className="text-zinc-400" style={{ fontFamily: "'Comforter', cursive", fontSize: 'clamp(64px, 9vw, 130px)', lineHeight: 1, opacity: 0.8 }}>
+              Affiliates
             </div>
             <div className="uppercase font-bold text-white" style={{ fontSize: 'clamp(18px, 2.2vw, 30px)', letterSpacing: '0.12em', marginTop: '-0.55em', position: 'relative', zIndex: 1 }}>
-              Affiliates
+              Primetraff.com
             </div>
           </div>
           <div className="uppercase text-white" style={{ fontSize: 'clamp(11px, 1.1vw, 15px)', letterSpacing: '0.06em', lineHeight: 1.9, fontWeight: 400, maxWidth: 920 }}>
