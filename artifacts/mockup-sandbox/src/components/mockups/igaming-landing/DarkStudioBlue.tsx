@@ -37,13 +37,21 @@ export function DarkStudioBlue() {
         </div>
 
         {/* Middle */}
-        <div className="space-y-8 transform -translate-y-8">
-          <h1 className="text-8xl font-medium tracking-tighter leading-[0.9] font-['Playfair_Display']">
-            Prime
-            <br />
-            <span className="text-blue-500">Traff</span>
-          </h1>
-          <p className="text-zinc-300 font-light tracking-wide text-lg max-w-[280px] mx-auto leading-relaxed">
+        <div className="space-y-6 transform -translate-y-8 w-full">
+          <svg viewBox="0 0 1000 110" className="w-full block" preserveAspectRatio="none" style={{ overflow: 'visible' }}>
+            <text
+              x="0" y="92"
+              textLength="1000" lengthAdjust="spacingAndGlyphs"
+              fill="#fff"
+              style={{ fontFamily: "'Inter','Arial Black',sans-serif", fontWeight: 900, fontSize: 118, letterSpacing: '-0.02em' }}
+            >
+              PRIMETRAFF<tspan fill="#3b82f6">.COM</tspan>
+            </text>
+          </svg>
+          <div className="w-full flex justify-between font-['Space_Mono'] uppercase text-zinc-300" style={{ fontSize: 'clamp(8px,1.2vw,13px)', letterSpacing: '0.15em' }}>
+            {['Private', 'Premium', 'iGaming', 'Affiliate', 'Network'].map(w => <span key={w}>{w}</span>)}
+          </div>
+          <p className="text-zinc-300 font-light tracking-wide text-lg max-w-[280px] mx-auto leading-relaxed pt-4">
             Высокие ставки, моментальные выплаты. Партнёрская сеть нового поколения.
           </p>
         </div>
