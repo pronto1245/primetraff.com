@@ -35,14 +35,14 @@ export function DarkStudioBlue() {
         </div>
         {/* Lang + burger */}
         <div className="flex items-center gap-6">
-          <div className="text-[13px] tracking-[0.08em] font-semibold" style={{ fontFamily: "'Inter',sans-serif" }}>
+          <div className="text-[18px] tracking-[0.08em] font-bold" style={{ fontFamily: "'Inter',sans-serif" }}>
             <span className="text-white cursor-pointer">RU</span>
-            <span className="text-zinc-500 ml-1.5 cursor-pointer hover:text-white transition-colors">EN</span>
+            <span className="text-zinc-500 ml-2 cursor-pointer hover:text-white transition-colors">EN</span>
           </div>
-          <button className="flex flex-col gap-[4px] cursor-pointer bg-transparent border-none p-0 group">
-            <span className="block w-7 h-px bg-white transition-all"></span>
-            <span className="block w-7 h-px bg-white transition-all"></span>
-            <span className="block w-7 h-px bg-white transition-all"></span>
+          <button className="flex flex-col gap-[6px] cursor-pointer bg-transparent border-none p-0 group">
+            <span className="block w-10 h-[2px] bg-white transition-all"></span>
+            <span className="block w-10 h-[2px] bg-white transition-all"></span>
+            <span className="block w-10 h-[2px] bg-white transition-all"></span>
           </button>
         </div>
       </div>
