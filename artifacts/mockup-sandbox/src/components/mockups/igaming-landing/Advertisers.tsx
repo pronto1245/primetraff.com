@@ -118,7 +118,11 @@ export function Advertisers() {
 
       {/* ===== ПОЧЕМУ ВЫБИРАЮТ НАС ===== */}
       <section className="relative bg-black flex flex-col justify-between" style={{ height: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} clamp(16px, 2.5vh, 28px)`, overflow: 'hidden' }}>
-        <div className="flex flex-col items-center text-center">
+        <div className="absolute inset-0 z-0">
+          <img src={bgImage} alt="" className="w-full h-full object-cover" style={{ filter: 'hue-rotate(220deg) saturate(1.1)', opacity: 0.35 }} />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/85" />
+        </div>
+        <div className="relative z-10 flex flex-col items-center text-center">
           <div className="uppercase text-zinc-400" style={{ fontSize: 'clamp(11px, 1.1vw, 15px)', letterSpacing: '0.35em', fontWeight: 300, marginBottom: 'clamp(14px, 2vh, 24px)' }}>
             Почему
           </div>
@@ -142,7 +146,7 @@ export function Advertisers() {
         </div>
 
         {/* Автоскролл отзывов */}
-        <div className="relative overflow-hidden" style={{ margin: `0 calc(-1 * ${PAD})` }}>
+        <div className="relative z-10 overflow-hidden" style={{ margin: `0 calc(-1 * ${PAD})` }}>
           <div className="absolute left-0 top-0 bottom-0 z-10 pointer-events-none" style={{ width: 'clamp(40px, 8vw, 140px)', background: 'linear-gradient(to right, #000, transparent)' }} />
           <div className="absolute right-0 top-0 bottom-0 z-10 pointer-events-none" style={{ width: 'clamp(40px, 8vw, 140px)', background: 'linear-gradient(to left, #000, transparent)' }} />
           <div className="adv-marquee" style={{ gap: 'clamp(14px, 1.6vw, 24px)', padding: '4px 0' }}>
