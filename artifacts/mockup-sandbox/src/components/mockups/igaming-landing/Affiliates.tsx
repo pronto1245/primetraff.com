@@ -26,7 +26,6 @@ export function Affiliates() {
         .btn-fill span { position: relative; z-index: 1; }
         .btn-fill::before { content: ''; position: absolute; inset: 0; background: #2563eb; transform: translateX(-101%); transition: transform .45s cubic-bezier(.22,1,.36,1); }
         .btn-fill:hover::before { transform: translateX(0); }
-        .btn-primary { background: #3b82f6; border-color: #3b82f6; }
         .btn-ghost:hover { border-color: #2563eb; }
       `}</style>
 
@@ -105,7 +104,7 @@ export function Affiliates() {
 
           {/* Кнопки Регистрация / Вход — сразу под текстом, с отступом от краёв */}
           <div className="w-full flex items-center justify-between" style={{ marginTop: 'clamp(40px, 7vh, 72px)', padding: '0 clamp(40px, 10vw, 160px)' }}>
-            <button className="btn-fill btn-primary rounded-full text-white uppercase cursor-pointer"
+            <button className="btn-fill rounded-full text-white uppercase cursor-pointer"
               style={{ fontFamily: FONT, fontSize: 'clamp(11px, 1vw, 14px)', letterSpacing: '0.12em', padding: 'clamp(14px, 1.6vh, 18px) 0', width: 'clamp(160px, 15vw, 220px)' }}>
               <span>Регистрация</span>
             </button>
