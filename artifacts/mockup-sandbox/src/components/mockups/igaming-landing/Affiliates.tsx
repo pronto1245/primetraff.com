@@ -22,7 +22,7 @@ export function Affiliates() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;700;900&family=Comforter&display=swap');
         ::-webkit-scrollbar { display: none; }
-        .btn-fill { position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.07); }
+        .btn-fill { position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.35); background: rgba(0,0,0,0.45); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
         .btn-fill span { position: relative; z-index: 1; }
         .btn-fill::before { content: ''; position: absolute; inset: 0; background: #2563eb; transform: translateX(-101%); transition: transform .45s cubic-bezier(.22,1,.36,1); }
         .btn-fill:hover::before { transform: translateX(0); }
