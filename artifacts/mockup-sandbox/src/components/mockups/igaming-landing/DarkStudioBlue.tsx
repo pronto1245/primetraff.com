@@ -48,7 +48,7 @@ export function DarkStudioBlue() {
               PRIMETRAFF<tspan fill="#3b82f6">.COM</tspan>
             </text>
           </svg>
-          <div className="w-full flex justify-between font-['Space_Mono'] uppercase text-zinc-300" style={{ fontSize: 'clamp(8px,1.2vw,13px)', letterSpacing: '0.15em' }}>
+          <div className="w-full flex justify-between uppercase text-white font-bold" style={{ fontFamily: "'Inter',sans-serif", fontSize: 'clamp(14px,2.2vw,26px)', letterSpacing: '0.12em' }}>
             {['Private', 'Premium', 'iGaming', 'Affiliate', 'Network'].map(w => <span key={w}>{w}</span>)}
           </div>
           <p className="text-zinc-300 font-light tracking-wide text-lg max-w-[280px] mx-auto leading-relaxed pt-4">
