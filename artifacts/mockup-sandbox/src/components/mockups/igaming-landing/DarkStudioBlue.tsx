@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ArrowRight, Zap } from 'lucide-react';
 import bgImage from './assets/dsb-bg.png';
 
@@ -50,17 +50,6 @@ function useDecodeText(target: string, delay = 0) {
   return display;
 }
 
-/* ============================================================
-   Офферы для горизонтальной ленты (#4)
-   ============================================================ */
-const OFFERS = [
-  { geo: 'RU / UA / KZ', product: 'Slots + Live',  model: 'RevShare 45%', min: '$500',  tag: 'HOT' },
-  { geo: 'BR / MX / AR', product: 'Sports Betting', model: 'CPA $120',     min: '$300',  tag: 'NEW' },
-  { geo: 'DE / AT / CH', product: 'Casino',         model: 'Hybrid',       min: '$1000', tag: null  },
-  { geo: 'IN / PK / BD', product: 'Slots',          model: 'CPA $80',      min: '$200',  tag: 'HOT' },
-  { geo: 'NG / GH / KE', product: 'Sports',         model: 'RevShare 40%', min: '$100',  tag: 'NEW' },
-  { geo: 'TR / AZ / GE', product: 'Casino + Live',  model: 'CPA $95',      min: '$250',  tag: null  },
-];
 
 /* ============================================================
    Компонент
@@ -70,25 +59,17 @@ export function DarkStudioBlue() {
   const decodedMain = useDecodeText('PRIMETRAFF', 300);
   const decodedDot  = useDecodeText('.COM', 600);
 
-  // Горизонтальный скролл мышью
-  const hScrollRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const el = hScrollRef.current;
-    if (!el) return;
-    const onWheel = (e: WheelEvent) => {
-      e.preventDefault();
-      el.scrollLeft += e.deltaY * 1.2;
-    };
-    el.addEventListener('wheel', onWheel, { passive: false });
-    return () => el.removeEventListener('wheel', onWheel);
-  }, []);
 
   return (
     <div style={{ width: '100%', fontFamily: FONT }} className="bg-black text-white">
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;700;900&family=Comforter&display=swap');
-        .offer-card:hover { border-color: ${BLUE} !important; }
-        .offer-card:hover .offer-tag-geo { color: ${BLUE} !important; }
+        @keyframes marquee-left  { from { transform: translateX(0) }    to { transform: translateX(-50%) } }
+        @keyframes marquee-right { from { transform: translateX(-50%) } to { transform: translateX(0) } }
+        .marquee-left  { display: flex; width: max-content; animation: marquee-left  28s linear infinite; }
+        .marquee-right { display: flex; width: max-content; animation: marquee-right 28s linear infinite; }
+        .marquee-left:hover, .marquee-right:hover { animation-play-state: paused; }
+        .brand-item:hover { opacity: 1 !important; }
         ::-webkit-scrollbar { display: none; }
       `}</style>
 
@@ -174,6 +155,61 @@ export function DarkStudioBlue() {
         </div>
       </div>
 
+      {/* ===== ПАРТНЁРЫ — автоскролл в 2 ряда ===== */}
+      <section className="relative bg-black overflow-hidden" style={{ padding: `clamp(60px, 8vh, 100px) 0` }}>
+        <div className="uppercase text-zinc-400 text-center" style={{ fontSize: TYPE.small, letterSpacing: '0.35em', fontWeight: 300, marginBottom: 'clamp(36px, 6vh, 60px)' }}>
+          Нам доверяют лидеры рынка
+        </div>
+
+        {(() => {
+          const row1 = [
+            { name: 'VULKAN',    domain: 'vulkanvegas.com' },
+            { name: 'PIN-UP',    domain: 'pinup.casino' },
+            { name: '1WIN',      domain: '1win.pro' },
+            { name: 'STAKE',     domain: 'stake.com' },
+            { name: 'N1 CASINO', domain: 'n1casino.com' },
+            { name: 'GG.BET',    domain: 'gg.bet' },
+            { name: 'VAVADA',    domain: 'vavada.com' },
+            { name: '1XBET',     domain: '1xbet.com' },
+            { name: 'BETBOOM',   domain: 'betboom.ru' },
+            { name: 'LEON',      domain: 'leon.bet' },
+          ];
+          const row2 = [
+            { name: 'MOSTBET',   domain: 'mostbet.com' },
+            { name: 'MELBET',    domain: 'melbet.com' },
+            { name: 'PARIMATCH', domain: 'parimatch.com' },
+            { name: 'IZZI',      domain: 'izzicasino.com' },
+            { name: 'FRESH',     domain: 'fresh.casino' },
+            { name: 'JET',       domain: 'jet.casino' },
+            { name: 'RIOBET',    domain: 'riobet.com' },
+            { name: 'COLUMBUS',  domain: 'columbuscasino.com' },
+            { name: 'BOOI',      domain: 'booi.com' },
+            { name: 'KENT',      domain: 'kent.casino' },
+          ];
+
+          const BrandItem = ({ name, domain }: { name: string; domain: string }) => (
+            <div className="brand-item" style={{ display: 'inline-flex', alignItems: 'center', gap: 12, padding: '0 clamp(24px, 3vw, 48px)', flexShrink: 0, opacity: 0.4, transition: 'opacity .3s' }}>
+              <img src={`https://www.google.com/s2/favicons?domain=${domain}&sz=32`} alt={name} width={22} height={22} style={{ borderRadius: 4, flexShrink: 0 }} />
+              <span className="uppercase font-bold" style={{ fontSize: TYPE.accent, letterSpacing: TRACK, whiteSpace: 'nowrap' }}>{name}</span>
+            </div>
+          );
+
+          return (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(24px, 4vh, 40px)' }}>
+              <div style={{ overflow: 'hidden' }}>
+                <div className="marquee-right" style={{ alignItems: 'center' }}>
+                  {[...row1, ...row1].map((b, i) => <BrandItem key={i} {...b} />)}
+                </div>
+              </div>
+              <div style={{ overflow: 'hidden' }}>
+                <div className="marquee-left" style={{ alignItems: 'center' }}>
+                  {[...row2, ...row2].map((b, i) => <BrandItem key={i} {...b} />)}
+                </div>
+              </div>
+            </div>
+          );
+        })()}
+      </section>
       {/* ===== О НАС ===== */}
       <section className="relative bg-black flex flex-col" style={{ minHeight: '100vh', padding: `clamp(60px, 8vh, 100px) ${PAD} clamp(20px, 3vh, 32px)` }}>
         <div className="flex-1 flex flex-col items-center justify-center text-center w-full">
@@ -212,49 +248,6 @@ export function DarkStudioBlue() {
         </div>
       </section>
 
-      {/* ===== ОФФЕРЫ — горизонтальная лента (#4) ===== */}
-      <section className="relative bg-black" style={{ padding: `clamp(60px, 8vh, 100px) 0` }}>
-        {/* Заголовок секции */}
-        <div style={{ padding: `0 ${PAD}`, marginBottom: 'clamp(32px, 5vh, 56px)' }} className="flex items-end justify-between">
-          <h2 className="uppercase font-black leading-none" style={{ fontSize: 'clamp(28px, 4.5vw, 60px)', letterSpacing: '0.02em' }}>
-            Офферы
-          </h2>
-          <span className="uppercase text-zinc-500" style={{ fontSize: TYPE.small, letterSpacing: '0.15em' }}>
-            скролл → мышью
-          </span>
-        </div>
-
-        {/* Горизонтальная лента */}
-        <div ref={hScrollRef} style={{ overflowX: 'auto', overflowY: 'hidden', display: 'flex', gap: 'clamp(12px, 1.5vw, 20px)', padding: `0 ${PAD} clamp(16px, 2vh, 24px)`, cursor: 'grab', scrollbarWidth: 'none' }}>
-          {OFFERS.map((offer, i) => (
-            <div key={i} className="offer-card flex-none flex flex-col justify-between"
-              style={{ width: 'clamp(220px, 22vw, 300px)', minHeight: 'clamp(180px, 22vh, 240px)', border: '1px solid rgba(255,255,255,0.1)', padding: 'clamp(18px, 2.5vw, 28px)', position: 'relative', transition: 'border-color 0.25s' }}>
-              {offer.tag && (
-                <div className="absolute top-4 right-4 uppercase font-bold" style={{ fontSize: TYPE.micro, letterSpacing: '0.12em', color: BLUE }}>
-                  {offer.tag}
-                </div>
-              )}
-              <div className="offer-tag-geo uppercase font-bold transition-colors" style={{ fontSize: TYPE.small, letterSpacing: TRACK, color: 'rgba(255,255,255,0.5)' }}>
-                {offer.geo}
-              </div>
-              <div>
-                <div className="uppercase font-bold" style={{ fontSize: 'clamp(14px, 1.8vw, 22px)', letterSpacing: '0.03em', marginBottom: 8 }}>
-                  {offer.product}
-                </div>
-                <div className="uppercase font-black" style={{ fontSize: 'clamp(16px, 2vw, 26px)', letterSpacing: '0.02em', color: BLUE }}>
-                  {offer.model}
-                </div>
-              </div>
-              <div className="uppercase text-zinc-500" style={{ fontSize: TYPE.micro, letterSpacing: '0.12em' }}>
-                мин. депозит {offer.min}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Линия прогресса-декорации */}
-        <div style={{ margin: `clamp(20px, 3vh, 36px) ${PAD} 0`, height: 1, background: 'rgba(255,255,255,0.07)' }} />
-      </section>
     </div>
   );
 }
