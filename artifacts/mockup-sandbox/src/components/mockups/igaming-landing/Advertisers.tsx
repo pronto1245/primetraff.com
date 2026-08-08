@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { X, Zap } from 'lucide-react';
+import { ArrowRight, X, Zap } from 'lucide-react';
 import bgImage from './assets/dsb-bg.png';
 
 /* ============================================================
@@ -102,15 +102,11 @@ export function Advertisers() {
             <p>Наша цель проста — сохранять качество трафика и помогать сильным партнёрам расти вместе с нами.</p>
           </div>
 
-          {/* Кнопки Регистрация / Вход — сразу под текстом, с отступом от краёв */}
-          <div className="w-full flex items-center justify-between" style={{ marginTop: 'clamp(40px, 7vh, 72px)', padding: '0 clamp(40px, 10vw, 160px)' }}>
-            <button className="btn-fill rounded-full text-white uppercase cursor-pointer"
-              style={{ fontFamily: FONT, fontSize: 'clamp(11px, 1vw, 14px)', letterSpacing: '0.12em', padding: 'clamp(14px, 1.6vh, 18px) 0', width: 'clamp(160px, 15vw, 220px)' }}>
-              <span>Регистрация</span>
-            </button>
-            <button className="btn-fill btn-ghost rounded-full text-white uppercase cursor-pointer"
-              style={{ fontFamily: FONT, fontSize: 'clamp(11px, 1vw, 14px)', letterSpacing: '0.12em', padding: 'clamp(14px, 1.6vh, 18px) 0', width: 'clamp(160px, 15vw, 220px)' }}>
-              <span>Вход</span>
+          {/* CTA — Связаться с нами, как «Стать партнёром» на главной */}
+          <div className="w-full flex justify-center" style={{ marginTop: 'clamp(40px, 7vh, 72px)' }}>
+            <button className="flex items-center gap-3 border-b border-white/30 pb-2 hover:border-white transition-colors duration-500 group bg-transparent cursor-pointer">
+              <span className="uppercase font-medium text-white" style={{ fontFamily: FONT, fontSize: 'clamp(12px, 1.15vw, 16px)', letterSpacing: '0.15em' }}>Связаться с нами</span>
+              <ArrowRight className="w-4 h-4 text-white transform group-hover:translate-x-1 transition-transform duration-500" />
             </button>
           </div>
         </div>
