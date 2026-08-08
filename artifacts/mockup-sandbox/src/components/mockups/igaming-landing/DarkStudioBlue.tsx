@@ -46,8 +46,8 @@ export function DarkStudioBlue() {
         <div className="absolute inset-0 bg-black/20 mix-blend-multiply"></div>
       </div>
 
-      {/* Шапка: лого слева, язык + меню справа */}
-      <div className="absolute top-0 left-0 right-0 z-20 flex items-center justify-between" style={{ padding: `${PAD} ${PAD} 0` }}>
+      {/* Шапка: лого слева, язык + меню справа — fixed, видна всегда при скролле */}
+      <div className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between" style={{ padding: `${PAD} ${PAD} 0` }}>
         <div className="flex items-center gap-2.5">
           <Zap className="w-6 h-6" style={{ color: BLUE }} fill="currentColor" />
           <div className="flex flex-col leading-none text-left">
