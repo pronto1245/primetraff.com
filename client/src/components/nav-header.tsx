@@ -235,7 +235,7 @@ export const SHARED_STYLES = `
   @keyframes hint-bounce { 0%, 100% { transform: translateY(0); opacity: .45; } 50% { transform: translateY(9px); opacity: 1; } }
   .scroll-hint svg { animation: hint-bounce 1.8s ease-in-out infinite; }
   html { scroll-snap-type: none; }
-  section, .snap-sec { scroll-snap-align: none; }
+  section { scroll-snap-align: none; }
   @media (max-width: 640px) {
     .m-only { display: flex !important; }
     .m-hide { display: none !important; }

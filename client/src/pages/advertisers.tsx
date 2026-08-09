@@ -33,9 +33,9 @@ export default function AdvertisersPage() {
     <div style={{ width: '100%', fontFamily: FONT }} className="bg-black text-white">
       <style>{`
         ${SHARED_STYLES}
-        html { scroll-snap-type: y mandatory !important; scroll-behavior: smooth; }
-        section { scroll-snap-align: start !important; scroll-snap-stop: always; }
-        .no-snap { scroll-snap-align: none !important; scroll-snap-stop: unset !important; }
+        html { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+        .snap-sec { scroll-snap-align: start; scroll-snap-stop: always; }
+        .no-snap { scroll-snap-align: none; scroll-snap-stop: normal; }
         .faq-scroll { overscroll-behavior-y: contain; }
         @keyframes contact-marquee { from { transform: translateX(-50%); } to { transform: translateX(0); } }
         .contact-marquee-anim { display: inline-block; animation: contact-marquee 40s linear infinite; }
@@ -49,7 +49,7 @@ export default function AdvertisersPage() {
       <NavHeader activePage="advertisers" />
 
       {/* ===== ADVERTISERS HERO ===== */}
-      <section className="m-sec relative overflow-hidden flex flex-col" style={{ minHeight: '100vh', padding: `clamp(60px, 8vh, 100px) ${PAD} clamp(20px, 3vh, 32px)` }}>
+      <section className="snap-sec m-sec relative overflow-hidden flex flex-col" style={{ minHeight: '100vh', padding: `clamp(60px, 8vh, 100px) ${PAD} clamp(20px, 3vh, 32px)` }}>
         <ScrollHint />
         <div className="absolute inset-0 z-0">
           <img src="/dsb-bg-blue.webp" alt="" decoding="async" className="w-full h-full object-cover" style={{  }} />
@@ -88,7 +88,7 @@ export default function AdvertisersPage() {
       </section>
 
       {/* ===== WHY CHOOSE US ===== */}
-      <section className="vh-section relative bg-black flex flex-col justify-between" style={{ height: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} clamp(16px, 2.5vh, 28px)`, overflow: 'hidden' }}>
+      <section className="snap-sec vh-section relative bg-black flex flex-col justify-between" style={{ height: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} clamp(16px, 2.5vh, 28px)`, overflow: 'hidden' }}>
         <ScrollHint />
         <div className="absolute inset-0 z-0">
           <img src="/dsb-bg-blue.webp" alt="" decoding="async" className="w-full h-full object-cover" style={{ opacity: 0.35 }} />
@@ -129,7 +129,7 @@ export default function AdvertisersPage() {
       </section>
 
       {/* ===== DISCUSS COOPERATION ===== */}
-      <section className="relative bg-black flex flex-col justify-between overflow-hidden" style={{ minHeight: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} clamp(16px, 2.5vh, 28px)` }}>
+      <section className="snap-sec relative bg-black flex flex-col justify-between overflow-hidden" style={{ minHeight: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} clamp(16px, 2.5vh, 28px)` }}>
         <ScrollHint />
         <div className="absolute inset-0 z-0">
           <img src="/dsb-bg-blue.webp" alt="" decoding="async" className="w-full h-full object-cover" style={{ opacity: 0.25 }} />
