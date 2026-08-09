@@ -197,7 +197,7 @@ export default function BlogPage() {
         {/* Footer bar */}
         <div className="relative z-10 w-full" style={{ marginTop: 'clamp(48px, 7vh, 84px)' }}>
           <FixedFooterBar />
-          <div className="m-copy text-center text-zinc-500 uppercase" style={{ fontSize: 'clamp(8px, 0.7vw, 10px)', letterSpacing: '0.1em', marginTop: 'clamp(16px, 2.5vh, 28px)', transform: 'translateY(36px)' }}>
+          <div className="m-copy text-center text-zinc-500 uppercase" style={{ fontSize: 'clamp(8px, 0.7vw, 10px)', letterSpacing: '0.1em', marginTop: 'clamp(16px, 2.5vh, 28px)', transform: 'translateY(66px)' }}>
             © 2026. PRIMETRAFF.COM. ALL RIGHTS RESERVED.
           </div>
         </div>
