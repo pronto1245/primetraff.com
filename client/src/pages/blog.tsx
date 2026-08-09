@@ -62,7 +62,7 @@ export default function BlogPage() {
 
       {/* ===== BLOG ===== */}
       {/* Bottom padding accounts for the fixed footer bar (~76px) so no card text is ever hidden behind it */}
-      <section className="relative flex flex-col" style={{ minHeight: '100vh', padding: `clamp(90px, 13vh, 150px) ${PAD} clamp(16px, 2.5vh, 28px)` }}>
+      <section className="relative flex flex-col" style={{ minHeight: '100vh', padding: `clamp(90px, 13vh, 150px) ${PAD} clamp(140px, 16vh, 180px)` }}>
         {/* Background removed — now fixed above */}
         <div className="absolute inset-0 z-0 hidden" />
 
@@ -195,7 +195,7 @@ export default function BlogPage() {
         </div>
 
         {/* Footer bar */}
-        <div className="relative z-10 w-full" style={{ marginTop: 'clamp(20px, 3vh, 36px)' }}>
+        <div className="relative z-10 w-full" style={{ marginTop: 'clamp(48px, 7vh, 84px)' }}>
           <FixedFooterBar />
           <div className="m-copy text-center text-zinc-500 uppercase" style={{ fontSize: 'clamp(8px, 0.7vw, 10px)', letterSpacing: '0.1em', marginTop: 'clamp(16px, 2.5vh, 28px)' }}>
             © 2026. PRIMETRAFF.COM. ALL RIGHTS RESERVED.
