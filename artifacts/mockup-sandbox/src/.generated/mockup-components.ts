@@ -4,6 +4,7 @@ export const modules: ModuleMap = {
   "./components/mockups/igaming-landing/Advertisers.tsx": () => import("../components/mockups/igaming-landing/Advertisers.tsx"),
   "./components/mockups/igaming-landing/Affiliates.tsx": () => import("../components/mockups/igaming-landing/Affiliates.tsx"),
   "./components/mockups/igaming-landing/Aggressive.tsx": () => import("../components/mockups/igaming-landing/Aggressive.tsx"),
+  "./components/mockups/igaming-landing/Blog.tsx": () => import("../components/mockups/igaming-landing/Blog.tsx"),
   "./components/mockups/igaming-landing/DarkStudioBlue.tsx": () => import("../components/mockups/igaming-landing/DarkStudioBlue.tsx"),
   "./components/mockups/templates/BlueCoworkingLanding-T15Ydg/Atrium.tsx": () => import("../components/mockups/templates/BlueCoworkingLanding-T15Ydg/Atrium.tsx"),
   "./components/mockups/templates/CinematicFilmTeaserPost-T3tqRc/GlassHoursPromo.tsx": () => import("../components/mockups/templates/CinematicFilmTeaserPost-T3tqRc/GlassHoursPromo.tsx"),
