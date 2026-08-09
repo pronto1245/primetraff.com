@@ -31,8 +31,7 @@ export function Advertisers() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;700;900&family=Comforter&display=swap');
         ::-webkit-scrollbar { display: none; }
-        .text-grad { background: linear-gradient(90deg, #2563eb, #60a5fa, #93c5fd, #3b82f6, #2563eb); background-size: 300% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: grad-shift 7s linear infinite; }
-        @keyframes grad-shift { from { background-position: 0% 0; } to { background-position: 300% 0; } }
+        .text-grad { background: linear-gradient(180deg, #93c5fd 0%, #3b82f6 55%, #1d4ed8 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
         .hl { color: #3b82f6; }
         @keyframes hint-bounce { 0%, 100% { transform: translateY(0); opacity: .45; } 50% { transform: translateY(9px); opacity: 1; } }
         .scroll-hint svg { animation: hint-bounce 1.8s ease-in-out infinite; }
