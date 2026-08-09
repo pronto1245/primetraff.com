@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Fingerprint, Send, X, Zap } from 'lucide-react';
 import bgImage from './assets/dsb-bg.webp';
 
@@ -23,14 +23,27 @@ const PAD   = 'clamp(20px, 3vw, 48px)';
    ============================================================ */
 export function DarkStudioBlue() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [fontTick, setFontTick] = useState(0);
-  // На мобильных браузерах шрифт подгружается после первой отрисовки,
-  // и SVG-текст не пересчитывает растяжение textLength — перерисовываем после загрузки шрифта
+  const heroSvgRef = useRef<SVGSVGElement>(null);
+  // Мобильный Safari не поддерживает textLength с кастомными шрифтами —
+  // меряем реальную ширину текста и вписываем его в кадр вручную.
   useEffect(() => {
-    let alive = true;
-    if (document.fonts?.ready) document.fonts.ready.then(() => { if (alive) setFontTick(t => t + 1); });
-    const timer = setTimeout(() => { if (alive) setFontTick(t => t + 1); }, 1500);
-    return () => { alive = false; clearTimeout(timer); };
+    const fit = () => {
+      const svg = heroSvgRef.current; if (!svg) return;
+      const texts = Array.from(svg.querySelectorAll('text')) as SVGTextElement[];
+      if (texts.length < 2) return;
+      const [a, b] = texts;
+      a.removeAttribute('transform'); b.removeAttribute('transform');
+      const w1 = a.getComputedTextLength(); const w2 = b.getComputedTextLength();
+      if (!w1 || !w2) return;
+      const k = 988 / (w1 + w2);
+      a.setAttribute('transform', `translate(6 0) scale(${k} 1)`);
+      b.setAttribute('transform', `translate(${6 + w1 * k} 0) scale(${k} 1)`);
+    };
+    fit();
+    if (document.fonts?.ready) document.fonts.ready.then(() => setTimeout(fit, 0));
+    const timers = [setTimeout(fit, 600), setTimeout(fit, 1500), setTimeout(fit, 3000)];
+    window.addEventListener('resize', fit);
+    return () => { timers.forEach(clearTimeout); window.removeEventListener('resize', fit); };
   }, []);
 
 
@@ -155,7 +168,7 @@ export function DarkStudioBlue() {
 
           {/* Заголовок с эффектом декодирования */}
           <div className="w-full" style={{ display: 'flex', flexDirection: 'column', gap: '0.6vw' }}>
-            <svg key={fontTick} viewBox="0 0 1000 100" className="w-full block" preserveAspectRatio="none" style={{ overflow: 'visible' }}>
+            <svg ref={heroSvgRef} viewBox="0 0 1000 100" className="w-full block" preserveAspectRatio="none" style={{ overflow: 'visible' }}>
               <defs>
                 <linearGradient id="comGrad" x1="0%" y1="0%" x2="100%" y2="0%">
                   <stop offset="0%" stopColor="#2563eb">
@@ -166,11 +179,9 @@ export function DarkStudioBlue() {
                   </stop>
                 </linearGradient>
               </defs>
-              {/* Safari игнорирует textLength при наличии tspan — рисуем двумя text */}
-              <text x="4" y="88" textLength="700" lengthAdjust="spacingAndGlyphs"
-                fill="#fff" style={{ fontFamily: FONT, fontWeight: 900, fontSize: 96 }}>PRIMETRAFF</text>
-              <text x="704" y="88" textLength="288" lengthAdjust="spacingAndGlyphs"
-                fill="url(#comGrad)" style={{ fontFamily: FONT, fontWeight: 900, fontSize: 96 }}>.COM</text>
+              {/* Ширина подгоняется в JS по факту загрузки шрифта — см. useEffect */}
+              <text x="0" y="88" fill="#fff" style={{ fontFamily: FONT, fontWeight: 900, fontSize: 96 }}>PRIMETRAFF</text>
+              <text x="0" y="88" fill="url(#comGrad)" style={{ fontFamily: FONT, fontWeight: 900, fontSize: 96 }}>.COM</text>
             </svg>
             <div className="hero-words w-full flex justify-between uppercase text-white font-bold" style={{ fontSize: TYPE.accent, letterSpacing: TRACK }}>
               {['Private', 'Premium', 'iGaming', 'Affiliate', 'Network'].map(w => <span key={w}>{w}</span>)}
