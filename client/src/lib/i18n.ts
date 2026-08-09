@@ -208,18 +208,14 @@ export const translations = {
   affiliatesPage: {
     heroParas: {
       ru: [
-        "Предоставляем доступ к актуальным офферам и условиям, рассчитанным на разные источники трафика.",
-        "Помогаем разобраться с запуском, трекингом, оптимизацией и техническими вопросами.",
-        "За каждым партнёром закрепляется менеджер, который остаётся на связи в процессе работы.",
-        "Сильные результаты открывают возможности для увеличения объёмов и получения индивидуальных условий.",
-        "Мы заинтересованы в том, чтобы ваши успешные связки развивались и приносили больше дохода.",
+        "Предоставляем доступ к актуальным офферам под разные источники трафика — за каждым партнёром закрепляется менеджер на весь период работы.",
+        "Помогаем с запуском, трекингом, оптимизацией и техническими вопросами.",
+        "Сильные результаты открывают доступ к увеличению объёмов и индивидуальным условиям.",
       ],
       en: [
-        "We provide access to current offers and terms designed for different traffic sources.",
+        "We provide access to current offers for different traffic sources — each partner gets a dedicated manager for the entire period.",
         "We help with launch, tracking, optimization, and technical questions.",
-        "Each partner is assigned a dedicated manager who stays in touch throughout the process.",
-        "Strong results open opportunities for volume increases and individual terms.",
-        "We are invested in helping your successful funnels grow and generate more revenue.",
+        "Strong results unlock volume increases and individual terms.",
       ],
     },
     register: { ru: "Регистрация", en: "Register" },

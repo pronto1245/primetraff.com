@@ -45,6 +45,8 @@ export default function AffiliatesPage() {
         ${SHARED_STYLES}
         html { scroll-snap-type: y mandatory !important; scroll-behavior: smooth; }
         section { scroll-snap-align: start !important; scroll-snap-stop: always; }
+        .no-snap { scroll-snap-align: none !important; scroll-snap-stop: unset !important; }
+        .faq-scroll { overscroll-behavior-y: contain; }
         @keyframes contact-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
         .contact-marquee-anim { display: inline-block; animation: contact-marquee 40s linear infinite; }
         .contact-card:hover { border-color: rgba(255,255,255,0.28) !important; background: rgba(255,255,255,0.06) !important; transform: translateY(-4px); }
@@ -81,7 +83,7 @@ export default function AffiliatesPage() {
               href={REGISTER_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3 border-b border-white/30 pb-2 hover:border-white transition-colors duration-500 group"
+              className="flex items-center gap-3 border-b border-blue-500 pb-2 hover:border-blue-300 transition-colors duration-500 group"
               style={{ textDecoration: 'none' }}
             >
               <span className="uppercase font-medium text-white" style={{ fontFamily: FONT, fontSize: 'clamp(12px, 1.15vw, 16px)', letterSpacing: '0.15em' }}>
@@ -93,7 +95,7 @@ export default function AffiliatesPage() {
               href={LOGIN_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3 border-b border-white/30 pb-2 hover:border-white transition-colors duration-500 group"
+              className="flex items-center gap-3 border-b border-blue-500 pb-2 hover:border-blue-300 transition-colors duration-500 group"
               style={{ textDecoration: 'none' }}
             >
               <span className="uppercase font-medium text-white" style={{ fontFamily: FONT, fontSize: 'clamp(12px, 1.15vw, 16px)', letterSpacing: '0.15em' }}>

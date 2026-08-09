@@ -35,6 +35,8 @@ export default function AdvertisersPage() {
         ${SHARED_STYLES}
         html { scroll-snap-type: y mandatory !important; scroll-behavior: smooth; }
         section { scroll-snap-align: start !important; scroll-snap-stop: always; }
+        .no-snap { scroll-snap-align: none !important; scroll-snap-stop: unset !important; }
+        .faq-scroll { overscroll-behavior-y: contain; }
         @keyframes contact-marquee { from { transform: translateX(-50%); } to { transform: translateX(0); } }
         .contact-marquee-anim { display: inline-block; animation: contact-marquee 40s linear infinite; }
         @keyframes adv-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }

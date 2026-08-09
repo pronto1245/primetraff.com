@@ -15,7 +15,7 @@ function renderBannerHtml(lang: string): string {
   return `<div class="primetraff-banner" data-testid="banner-primetraff">
     <div class="primetraff-banner__glow"></div>
     <div class="primetraff-banner__inner">
-      <div class="primetraff-banner__logo"><img src="/pt-logo-new.png" alt="PrimeTraff" loading="lazy" /></div>
+      <div class="primetraff-banner__logo"><img src="/pt-logo-new.webp" alt="PrimeTraff" loading="lazy" /></div>
       <div class="primetraff-banner__actions">
         <a class="primetraff-banner__btn primetraff-banner__btn--login" href="${LOGIN_URL}" target="_blank" rel="noopener noreferrer">${loginText} &rarr;</a>
         <a class="primetraff-banner__btn primetraff-banner__btn--register" href="${REGISTER_URL}" target="_blank" rel="noopener noreferrer">${registerText}</a>

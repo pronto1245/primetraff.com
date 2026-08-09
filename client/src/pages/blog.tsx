@@ -54,7 +54,7 @@ export default function BlogPage() {
 
       {/* Fixed full-page background */}
       <div className="fixed inset-0 z-0 pointer-events-none">
-        <img src="/dsb-bg-blue.webp" alt="" loading="lazy" decoding="async" className="w-full h-full object-cover" style={{ opacity: 0.65 }} />
+        <img src="/dsb-bg-blue.webp" alt="" decoding="async" className="w-full h-full object-cover" style={{ opacity: 0.65 }} />
         <div className="absolute inset-0 bg-black/50" />
       </div>
 

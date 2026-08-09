@@ -160,7 +160,7 @@ export default function LandingPage() {
         html { scroll-snap-type: y mandatory !important; scroll-behavior: smooth; }
         section { scroll-snap-align: start !important; scroll-snap-stop: always; }
         div.snap-sec { scroll-snap-align: start !important; scroll-snap-stop: always; }
-        .no-snap { scroll-snap-align: none !important; }
+        .no-snap { scroll-snap-align: none !important; scroll-snap-stop: unset !important; }
         @keyframes marquee-left  { from { transform: translateX(0) }    to { transform: translateX(-50%) } }
         @keyframes marquee-right { from { transform: translateX(-50%) } to { transform: translateX(0) } }
         .marquee-left  { display: flex; width: max-content; animation: marquee-left  60s linear infinite; }
