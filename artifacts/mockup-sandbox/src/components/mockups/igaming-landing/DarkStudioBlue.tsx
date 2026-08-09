@@ -58,7 +58,9 @@ export function DarkStudioBlue() {
         .marquee-left:hover, .marquee-right:hover { animation-play-state: paused; }
         .brand-item:hover { opacity: 1 !important; }
         ::-webkit-scrollbar { display: none; }
+        .m-only { display: none; }
         @media (max-width: 640px) {
+          .m-only { display: flex !important; }
           .m-hide { display: none !important; }
           .vh-section { height: auto !important; min-height: 100vh !important; }
           .row-desc { display: none !important; }
@@ -168,6 +170,10 @@ export function DarkStudioBlue() {
 
           {/* Заголовок с эффектом декодирования */}
           <div className="w-full" style={{ display: 'flex', flexDirection: 'column', gap: '0.6vw' }}>
+            <div className="m-only w-full justify-between uppercase text-white font-bold" style={{ fontSize: 9, letterSpacing: '0.1em', lineHeight: 1.5, marginBottom: 10, textAlign: 'left' }}>
+              <span>Где трафик превращается<br />в партнёрство.</span>
+              <span style={{ textAlign: 'right' }}>Работаем для вас<br />с 2025 года</span>
+            </div>
             <svg ref={heroSvgRef} viewBox="0 0 1000 100" className="w-full block" preserveAspectRatio="none" style={{ overflow: 'visible' }}>
               <defs>
                 <linearGradient id="comGrad" x1="0%" y1="0%" x2="100%" y2="0%">
