@@ -220,7 +220,7 @@ export function DarkStudioBlue() {
 
         {/* Нижние углы */}
         <div className="hero-corners absolute bottom-0 left-0 right-0 z-20 flex items-end justify-between pointer-events-none"
-          style={{ padding: `0 ${PAD} ${PAD}` }}>
+          style={{ padding: `0 ${PAD} clamp(96px, 13vh, 120px)` }}>
           <div className="hero-corner text-left uppercase text-white font-bold leading-snug" style={{ fontSize: TYPE.accent, letterSpacing: TRACK }}>
             Где трафик превращается<br />в партнёрство.
           </div>
