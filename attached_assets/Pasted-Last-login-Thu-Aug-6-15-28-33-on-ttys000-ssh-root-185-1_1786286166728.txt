@@ -1,0 +1,37 @@
+Last login: Thu Aug  6 15:28:33 on ttys000
+ssh root@185.179.191.12
+a1@Macbook-pro1 ~ % ssh root@185.179.191.12
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+
+Last login: Sun Aug  9 14:35:41 2026 from 216.106.187.154
+[root@v742573 ~]# # Найти проект
+find /var/www /home /root -name "package.json" -not -path "*/node_modules/*" 2>/dev/null
+
+# Посмотреть pm2 процессы
+pm2 list
+/var/www/primetrack_old/package.json
+/var/www/primetrack/artifacts/mockup-sandbox/package.json
+/var/www/primetrack/package.json
+/var/www/primetraff.com/package.json
+/var/www/primetraff.com/artifacts/mockup-sandbox/package.json
+/root/.npm/_npx/fd45a72a545557e9/package.json
+/root/.pm2/modules/pm2-logrotate/package.json
+/root/primetraff_mediabot/package.json
+/root/telegramm_bot/package.json
+┌────┬──────────────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
+│ id │ name             │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+├────┼──────────────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
+│ 3  │ primetrack       │ default     │ 1.0.0   │ fork    │ 2397053  │ 3D     │ 8    │ online    │ 0%       │ 468.0mb  │ root     │ disabled │
+│ 1  │ primetraff       │ default     │ 1.0.0   │ fork    │ 1203     │ 9D     │ 0    │ online    │ 0%       │ 121.5mb  │ root     │ disabled │
+│ 2  │ telegramm-bot    │ default     │ 1.0.0   │ fork    │ 1222     │ 9D     │ 0    │ online    │ 0%       │ 109.1mb  │ root     │ disabled │
+└────┴──────────────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+Module
+┌────┬──────────────────────────────┬───────────────┬──────────┬──────────┬──────┬──────────┬──────────┬──────────┐
+│ id │ module                       │ version       │ pid      │ status   │ ↺    │ cpu      │ mem      │ user     │
+├────┼──────────────────────────────┼───────────────┼──────────┼──────────┼──────┼──────────┼──────────┼──────────┤
+│ 0  │ pm2-logrotate                │ 3.0.0         │ 1093     │ online   │ 0    │ 0%       │ 69.2mb   │ root     │
+└────┴──────────────────────────────┴───────────────┴──────────┴──────────┴──────┴──────────┴──────────┴──────────┘
+[root@v742573 ~]# 
+
