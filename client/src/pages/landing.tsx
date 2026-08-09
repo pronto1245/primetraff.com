@@ -241,7 +241,7 @@ export default function LandingPage() {
           </div>
         </div>
 
-        {/* Bottom corners */}
+        {/* Bottom corners — desktop */}
         <div className="hero-corners absolute bottom-0 left-0 right-0 z-20 flex items-end justify-between pointer-events-none"
           style={{ padding: `0 ${PAD} clamp(96px, 13vh, 120px)` }}>
           <div className="hero-corner text-left uppercase text-white font-bold leading-snug" style={{ fontSize: TYPE.accent, letterSpacing: TRACK }}>
@@ -249,6 +249,17 @@ export default function LandingPage() {
           </div>
           <div className="hero-corner text-right uppercase text-white font-bold leading-snug" style={{ fontSize: TYPE.accent, letterSpacing: TRACK }}>
             {t(translations.landingPage.heroSloganRight, lang).split('\n').map((line, i) => i === 0 ? <span key={i}>{line}<br /></span> : <span key={i}>{line}</span>)}
+          </div>
+        </div>
+
+        {/* Bottom corners — mobile (3 lines each) */}
+        <div className="m-only absolute bottom-0 left-0 right-0 z-20 items-end justify-between pointer-events-none"
+          style={{ padding: `0 ${PAD} 90px` }}>
+          <div className="text-left uppercase text-white font-bold leading-snug" style={{ fontSize: 9, letterSpacing: TRACK }}>
+            {lang === 'ru' ? <>Где трафик<br />превращается<br />в партнёрство</> : <>Where traffic<br />becomes<br />partnership</>}
+          </div>
+          <div className="text-right uppercase text-white font-bold leading-snug" style={{ fontSize: 9, letterSpacing: TRACK }}>
+            {lang === 'ru' ? <>Работаем<br />для вас с<br />2025 года</> : <>Working<br />for you since<br />2025</>}
           </div>
         </div>
         <ScrollHint />
