@@ -155,7 +155,7 @@ export function DarkStudioBlue() {
 
           {/* Заголовок с эффектом декодирования */}
           <div className="w-full" style={{ display: 'flex', flexDirection: 'column', gap: '0.6vw' }}>
-            <svg key={fontTick} viewBox="0 0 1000 100" className="w-full block" preserveAspectRatio="none" style={{ overflow: 'hidden' }}>
+            <svg key={fontTick} viewBox="0 0 1000 100" className="w-full block" preserveAspectRatio="none" style={{ overflow: 'visible' }}>
               <defs>
                 <linearGradient id="comGrad" x1="0%" y1="0%" x2="100%" y2="0%">
                   <stop offset="0%" stopColor="#2563eb">
@@ -167,9 +167,9 @@ export function DarkStudioBlue() {
                 </linearGradient>
               </defs>
               {/* Safari игнорирует textLength при наличии tspan — рисуем двумя text */}
-              <text x="0" y="88" textLength="708" lengthAdjust="spacingAndGlyphs"
+              <text x="4" y="88" textLength="700" lengthAdjust="spacingAndGlyphs"
                 fill="#fff" style={{ fontFamily: FONT, fontWeight: 900, fontSize: 96 }}>PRIMETRAFF</text>
-              <text x="708" y="88" textLength="292" lengthAdjust="spacingAndGlyphs"
+              <text x="704" y="88" textLength="288" lengthAdjust="spacingAndGlyphs"
                 fill="url(#comGrad)" style={{ fontFamily: FONT, fontWeight: 900, fontSize: 96 }}>.COM</text>
             </svg>
             <div className="hero-words w-full flex justify-between uppercase text-white font-bold" style={{ fontSize: TYPE.accent, letterSpacing: TRACK }}>
