@@ -4,20 +4,21 @@ import { useLang } from "@/lib/language-context";
 import { translations, t } from "@/lib/i18n";
 import { ArrowLeft, Calendar } from "lucide-react";
 import type { BlogPost } from "@shared/schema";
-import BlogNavigation from "@/components/blog-navigation";
+import { NavHeader, FixedFooterBar, SHARED_STYLES, FONT, PAD } from "@/components/nav-header";
+import bgImage from "@/assets/dsb-bg.webp";
 
-const LOGIN_URL = "https://primetrack.pro/login";
+const LOGIN_URL    = "https://primetrack.pro/login";
 const REGISTER_URL = "https://primetrack.pro/register?ref=ADV-3BT52V85";
 
 function renderBannerHtml(lang: string): string {
-  const loginText = lang === "ru" ? "ВХОД" : "LOGIN";
+  const loginText    = lang === "ru" ? "ВХОД"        : "LOGIN";
   const registerText = lang === "ru" ? "РЕГИСТРАЦИЯ" : "REGISTER";
   return `<div class="primetraff-banner" data-testid="banner-primetraff">
     <div class="primetraff-banner__glow"></div>
     <div class="primetraff-banner__inner">
-      <div class="primetraff-banner__logo"><img src="/primetraff-logo.png" alt="PrimeTraff" /></div>
+      <div class="primetraff-banner__logo"><img src="/pt-logo-new.png" alt="PrimeTraff" loading="lazy" /></div>
       <div class="primetraff-banner__actions">
-        <a class="primetraff-banner__btn primetraff-banner__btn--login" href="${LOGIN_URL}" target="_blank" rel="noopener noreferrer">${loginText} <span class="primetraff-banner__arrow">&rarr;</span></a>
+        <a class="primetraff-banner__btn primetraff-banner__btn--login" href="${LOGIN_URL}" target="_blank" rel="noopener noreferrer">${loginText} &rarr;</a>
         <a class="primetraff-banner__btn primetraff-banner__btn--register" href="${REGISTER_URL}" target="_blank" rel="noopener noreferrer">${registerText}</a>
       </div>
     </div>
@@ -38,6 +39,18 @@ function groupConsecutiveImages(html: string): string {
 
 function sanitizeContentHtml(html: string): string {
   let result = html;
+  // Strip dangerous tags entirely
+  result = result.replace(/<script[\s\S]*?<\/script>/gi, "");
+  result = result.replace(/<iframe[\s\S]*?<\/iframe>/gi, "");
+  result = result.replace(/<object[\s\S]*?<\/object>/gi, "");
+  result = result.replace(/<embed[^>]*>/gi, "");
+  // Strip event handlers and javascript: URLs (quoted, unquoted, mixed case)
+  result = result.replace(/\s+on\w+\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]*)/gi, "");
+  result = result.replace(/(href|src|action)\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]*)/gi, (attr) => {
+    if (/javascript\s*:/i.test(attr)) return attr.replace(/=.*/i, '="#"');
+    return attr;
+  });
+  // Cosmetic cleanup
   result = result.replace(/&amp;nbsp;/gi, " ");
   result = result.replace(/&nbsp;/gi, " ");
   result = result.replace(/\u00A0/g, " ");
@@ -68,10 +81,10 @@ function escapeHtml(text: string): string {
 function renderTableHtml(tableData: string): string {
   const rows = tableData.split(";;").map(r => r.trim()).filter(Boolean);
   if (rows.length < 2) return "";
-  const headers = rows[0].split("|").map(h => escapeHtml(h.trim()));
+  const headers  = rows[0].split("|").map(h => escapeHtml(h.trim()));
   const bodyRows = rows.slice(1);
-  const thCells = headers.map(h => `<th>${h}</th>`).join("");
-  const trRows = bodyRows.map(row => {
+  const thCells  = headers.map(h => `<th>${h}</th>`).join("");
+  const trRows   = bodyRows.map(row => {
     const cells = row.split("|").map(c => escapeHtml(c.trim()));
     return `<tr>${cells.map((c, i) => `<td${i === 0 ? ' class="blog-table__label"' : ""}>${c}</td>`).join("")}</tr>`;
   }).join("");
@@ -89,29 +102,16 @@ function processContent(html: string, lang: string): string {
 }
 
 const CATEGORIES = [
-  { key: "basics", label: translations.blog.categories.basics },
+  { key: "basics",   label: translations.blog.categories.basics },
   { key: "beginner", label: translations.blog.categories.beginner },
-  { key: "traffic", label: translations.blog.categories.traffic },
-  { key: "trends", label: translations.blog.categories.trends },
-  { key: "news", label: translations.blog.categories.news },
+  { key: "traffic",  label: translations.blog.categories.traffic },
+  { key: "trends",   label: translations.blog.categories.trends },
+  { key: "news",     label: translations.blog.categories.news },
 ];
-
-function BlogBackground({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="min-h-screen relative overflow-hidden">
-      <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, #001030 0%, #002060 30%, #0055AA 60%, #0088CC 100%)" }} />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(0,200,255,0.15),_transparent_60%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(0,100,200,0.2),_transparent_60%)]" />
-      <div className="hidden md:block absolute top-[20%] left-[10%] w-[500px] h-[500px] rounded-full blur-[200px] pointer-events-none" style={{ background: "radial-gradient(circle, rgba(0,140,220,0.12) 0%, transparent 70%)" }} />
-      <div className="hidden md:block absolute bottom-[10%] right-[5%] w-[400px] h-[400px] rounded-full blur-[180px] pointer-events-none" style={{ background: "radial-gradient(circle, rgba(0,180,255,0.08) 0%, transparent 70%)" }} />
-      <div className="relative z-10">{children}</div>
-    </div>
-  );
-}
 
 export default function BlogPostPage() {
   const { lang } = useLang();
-  const params = useParams<{ slug: string }>();
+  const params   = useParams<{ slug: string }>();
 
   const { data: post, isLoading, error } = useQuery<BlogPost>({
     queryKey: ["/api/blog", params.slug],
@@ -119,9 +119,14 @@ export default function BlogPostPage() {
 
   if (isLoading) {
     return (
-      <BlogBackground>
-        <BlogNavigation />
-        <div className="pt-28 pb-20 max-w-3xl mx-auto px-6 lg:px-8">
+      <div style={{ fontFamily: FONT }} className="min-h-screen text-white relative">
+        <style>{SHARED_STYLES}</style>
+        <div className="fixed inset-0 z-0 pointer-events-none">
+          <img src="/dsb-bg-blue.webp" alt="" loading="lazy" decoding="async" className="w-full h-full object-cover opacity-20" style={{  }} />
+          <div className="absolute inset-0 bg-black/60" />
+        </div>
+        <NavHeader activePage="blog" />
+        <div style={{ padding: `96px ${PAD} 120px`, maxWidth: 'clamp(700px, 90vw, 1400px)', margin: '0 auto' }}>
           <div className="animate-pulse space-y-6">
             <div className="h-8 bg-white/[0.06] rounded w-2/3" />
             <div className="h-64 bg-white/[0.06] rounded-xl" />
@@ -132,108 +137,142 @@ export default function BlogPostPage() {
             </div>
           </div>
         </div>
-      </BlogBackground>
+        <FixedFooterBar />
+      </div>
     );
   }
 
   if (error || !post) {
     return (
-      <BlogBackground>
-        <BlogNavigation />
-        <div className="min-h-screen flex items-center justify-center">
+      <div style={{ fontFamily: FONT }} className="min-h-screen bg-black text-white flex flex-col relative">
+        <style>{SHARED_STYLES}</style>
+        <div className="fixed inset-0 z-0 pointer-events-none">
+          <img src="/dsb-bg-blue.webp" alt="" loading="lazy" decoding="async" className="w-full h-full object-cover opacity-20" style={{  }} />
+          <div className="absolute inset-0 bg-black/60" />
+        </div>
+        <NavHeader activePage="blog" />
+        <div className="flex-1 flex items-center justify-center">
           <div className="text-center">
             <p className="text-white/50 text-lg mb-4">{lang === "ru" ? "Статья не найдена" : "Article not found"}</p>
-            <Link href="/blog" className="text-sky-400 hover:text-sky-300 transition-colors" data-testid="link-back-to-blog-error">
+            <Link href="/blog" className="text-blue-400 hover:text-blue-300 transition-colors" data-testid="link-back-to-blog-error">
               {t(translations.blog.backToBlog, lang)}
             </Link>
           </div>
         </div>
-      </BlogBackground>
+        <FixedFooterBar />
+      </div>
     );
   }
 
-  const title = lang === "ru" ? post.titleRu : post.titleEn;
-  const rawContent = lang === "ru" ? post.contentRu : post.contentEn;
-  const content = processContent(rawContent, lang);
-  const catLabel = CATEGORIES.find(c => c.key === post.category);
+  const title      = lang === "ru" ? post.titleRu       : post.titleEn;
+  const rawContent = lang === "ru" ? post.contentRu     : post.contentEn;
+  const content    = processContent(rawContent, lang);
+  const catLabel   = CATEGORIES.find(c => c.key === post.category);
 
   return (
-    <BlogBackground>
-      <BlogNavigation />
+    <div style={{ fontFamily: FONT }} className="min-h-screen text-white relative">
+      <style>{SHARED_STYLES}</style>
 
-      <div className="pt-24 lg:pt-28 pb-20">
-        <div className="max-w-5xl mx-auto px-6 lg:px-8">
-          <Link
-            href="/blog"
-            className="inline-flex items-center gap-1.5 text-sm text-white/40 hover:text-white/70 transition-colors mb-8"
-            data-testid="link-back-to-blog"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            {t(translations.blog.backToBlog, lang)}
-          </Link>
-
-          <div className="flex items-center gap-3 mb-5 flex-wrap">
-            {catLabel && (
-              <span className="text-xs font-medium text-sky-300 px-2.5 py-1 rounded-full bg-sky-400/15 border border-sky-400/25">
-                {t(catLabel.label, lang)}
-              </span>
-            )}
-            {post.publishedAt && (
-              <span className="flex items-center gap-1 text-xs text-white/35">
-                <Calendar className="w-3 h-3" />
-                {new Date(post.publishedAt).toLocaleDateString(lang === "ru" ? "ru-RU" : "en-US", {
-                  day: "numeric", month: "long", year: "numeric"
-                })}
-              </span>
-            )}
-          </div>
-
-          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-8 leading-tight" data-testid="text-blogpost-title">
-            {title}
-          </h1>
-
-          {post.coverImage && (
-            <div className="blog-cover-wide rounded-xl overflow-hidden mb-10 border border-white/[0.1]">
-              <img
-                src={post.coverImage}
-                alt={title}
-                className="w-full object-cover"
-                style={{ aspectRatio: "21/9" }}
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-          )}
-
-          <article
-            className="prose prose-invert prose-sm md:prose-base max-w-none
-              prose-headings:text-white prose-headings:font-bold
-              prose-p:text-white/70 prose-p:leading-relaxed
-              prose-a:text-sky-400 prose-a:no-underline hover:prose-a:text-sky-300
-              prose-strong:text-white/90
-              prose-ul:text-white/60 prose-ol:text-white/60
-              prose-li:marker:text-sky-400/50
-              prose-blockquote:border-sky-400/30 prose-blockquote:text-white/50
-              prose-img:rounded-xl prose-img:border prose-img:border-white/10
-              prose-hr:border-white/10
-              prose-code:text-sky-300 prose-code:bg-white/[0.05] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded
-              prose-pre:bg-white/[0.04] prose-pre:border prose-pre:border-white/10"
-            dangerouslySetInnerHTML={{ __html: content }}
-            data-testid="text-blogpost-content"
-          />
-        </div>
+      {/* Background — same dark texture as other pages */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <img
+          src="/dsb-bg-blue.webp"
+          alt=""
+          className="w-full h-full object-cover"
+          style={{ opacity: 0.65 }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/90" />
       </div>
 
-      <footer className="py-8 border-t border-white/[0.08]">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div className="text-white/35 text-xs">
-            © 2026 PrimeTraff. {t(translations.footer.allRights, lang)}
+      <div className="relative z-10">
+        <NavHeader activePage="blog" />
+
+        <div style={{ padding: `96px ${PAD} 120px` }}>
+          <div style={{ maxWidth: 'clamp(700px, 90vw, 1400px)', margin: "0 auto" }}>
+
+            {/* Back link */}
+            <Link
+              href="/blog"
+              className="inline-flex items-center gap-1.5 text-sm text-white/40 hover:text-white/70 transition-colors mb-8"
+              data-testid="link-back-to-blog"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              {t(translations.blog.backToBlog, lang)}
+            </Link>
+
+            {/* Meta */}
+            <div className="flex items-center gap-3 mb-5 flex-wrap">
+              {catLabel && (
+                <span className="text-xs font-medium text-blue-300 px-2.5 py-1 rounded-full bg-blue-400/15 border border-blue-400/25 uppercase tracking-widest">
+                  {t(catLabel.label, lang)}
+                </span>
+              )}
+              {post.publishedAt && (
+                <span className="flex items-center gap-1 text-xs text-white/35">
+                  <Calendar className="w-3 h-3" />
+                  {new Date(post.publishedAt).toLocaleDateString(lang === "ru" ? "ru-RU" : "en-US", {
+                    day: "numeric", month: "long", year: "numeric",
+                  })}
+                </span>
+              )}
+            </div>
+
+            {/* Title */}
+            <h1
+              className="font-bold text-white mb-8 leading-tight"
+              style={{ fontSize: "clamp(22px, 3vw, 38px)" }}
+              data-testid="text-blogpost-title"
+            >
+              {title}
+            </h1>
+
+            {/* Cover image */}
+            {post.coverImage && (
+              <div className="rounded-xl overflow-hidden mb-10 border border-white/10">
+                <img
+                  src={post.coverImage}
+                  alt={title}
+                  className="w-full object-cover"
+                  style={{ aspectRatio: "21/9" }}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            )}
+
+            {/* Article body */}
+            <article
+              className="prose prose-invert prose-sm md:prose-base max-w-none
+                prose-headings:text-white prose-headings:font-bold
+                prose-p:text-white/70 prose-p:leading-relaxed
+                prose-a:text-blue-400 prose-a:no-underline hover:prose-a:text-blue-300
+                prose-strong:text-white/90
+                prose-ul:text-white/60 prose-ol:text-white/60
+                prose-li:marker:text-blue-400/50
+                prose-blockquote:border-blue-400/30 prose-blockquote:text-white/50
+                prose-img:rounded-xl prose-img:border prose-img:border-white/10
+                prose-hr:border-white/10
+                prose-code:text-blue-300 prose-code:bg-white/[0.05] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded
+                prose-pre:bg-white/[0.04] prose-pre:border prose-pre:border-white/10"
+              dangerouslySetInnerHTML={{ __html: content }}
+              data-testid="text-blogpost-content"
+            />
+
           </div>
-          <Link href="/blog" className="text-white/35 text-xs hover:text-white/60 transition-colors" data-testid="link-blogpost-footer-blog">
-            {t(translations.blog.nav, lang)}
-          </Link>
         </div>
-      </footer>
-    </BlogBackground>
+
+        {/* Footer strip */}
+        <footer className="border-t border-white/[0.08] py-8">
+          <div
+            className="flex items-center justify-center text-white/35 text-xs"
+            style={{ maxWidth: 'clamp(700px, 90vw, 1400px)', margin: "0 auto", padding: `0 ${PAD}` }}
+          >
+            <span>© 2026 PrimeTraff. {t(translations.footer.allRights, lang)}</span>
+          </div>
+        </footer>
+      </div>
+
+      <FixedFooterBar />
+    </div>
   );
 }

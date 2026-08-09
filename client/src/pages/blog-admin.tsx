@@ -343,7 +343,9 @@ function PostEditor({ password, post, onClose }: { password: string; post: BlogP
   // Бросает ошибку если хотя бы одна картинка не смогла загрузиться — чтобы не отправлять base64 на сервер.
   const uploadBase64Images = useCallback(async (html: string): Promise<string> => {
     const regex = /<img[^>]+src="(data:image\/[^;]+;base64,[^"]+)"[^>]*>/g;
-    const matches = [...html.matchAll(regex)];
+    const matches: RegExpExecArray[] = [];
+    let _m: RegExpExecArray | null;
+    while ((_m = regex.exec(html)) !== null) { matches.push(_m); }
     if (matches.length === 0) return html;
     let result = html;
     for (const match of matches) {

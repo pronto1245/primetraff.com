@@ -1,169 +1,213 @@
-import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { Link } from "wouter";
-import { useLang } from "@/lib/language-context";
-import { translations, t } from "@/lib/i18n";
-import { ArrowRight, Calendar, LayoutGrid, BookOpen, GraduationCap, Globe, TrendingUp, Newspaper } from "lucide-react";
-import type { BlogPost } from "@shared/schema";
-import BlogNavigation from "@/components/blog-navigation";
+import { useState, useEffect } from 'react';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { Link } from 'wouter';
+import { ArrowRight } from 'lucide-react';
+import { NavHeader, FixedFooterBar, SHARED_STYLES, BLUE, FONT, TYPE, TRACK, PAD } from '@/components/nav-header';
+import { useLang } from '@/lib/language-context';
+import type { BlogPost } from '@shared/schema';
+import bgImage from '@/assets/dsb-bg.webp';
 
-const CATEGORIES = [
-  { key: "basics", label: translations.blog.categories.basics, icon: BookOpen, gradient: "from-violet-500 to-purple-600", activeBg: "bg-gradient-to-r from-violet-500/25 to-purple-600/20", activeBorder: "border-violet-400/40", activeText: "text-violet-100", activeShadow: "shadow-[0_0_25px_rgba(139,92,246,0.3)]", iconActive: "text-violet-200", iconIdle: "text-violet-400/40", hoverBg: "hover:bg-violet-500/10" },
-  { key: "beginner", label: translations.blog.categories.beginner, icon: GraduationCap, gradient: "from-emerald-500 to-teal-600", activeBg: "bg-gradient-to-r from-emerald-500/25 to-teal-600/20", activeBorder: "border-emerald-400/40", activeText: "text-emerald-100", activeShadow: "shadow-[0_0_25px_rgba(52,211,153,0.3)]", iconActive: "text-emerald-200", iconIdle: "text-emerald-400/40", hoverBg: "hover:bg-emerald-500/10" },
-  { key: "traffic", label: translations.blog.categories.traffic, icon: Globe, gradient: "from-amber-500 to-orange-600", activeBg: "bg-gradient-to-r from-amber-500/25 to-orange-600/20", activeBorder: "border-amber-400/40", activeText: "text-amber-100", activeShadow: "shadow-[0_0_25px_rgba(251,191,36,0.3)]", iconActive: "text-amber-200", iconIdle: "text-amber-400/40", hoverBg: "hover:bg-amber-500/10" },
-  { key: "trends", label: translations.blog.categories.trends, icon: TrendingUp, gradient: "from-cyan-500 to-blue-600", activeBg: "bg-gradient-to-r from-cyan-500/25 to-blue-600/20", activeBorder: "border-cyan-400/40", activeText: "text-cyan-100", activeShadow: "shadow-[0_0_25px_rgba(34,211,238,0.3)]", iconActive: "text-cyan-200", iconIdle: "text-cyan-400/40", hoverBg: "hover:bg-cyan-500/10" },
-  { key: "news", label: translations.blog.categories.news, icon: Newspaper, gradient: "from-rose-500 to-pink-600", activeBg: "bg-gradient-to-r from-rose-500/25 to-pink-600/20", activeBorder: "border-rose-400/40", activeText: "text-rose-100", activeShadow: "shadow-[0_0_25px_rgba(251,113,133,0.3)]", iconActive: "text-rose-200", iconIdle: "text-rose-400/40", hoverBg: "hover:bg-rose-500/10" },
-];
+/* Category display labels */
+const CAT_LABELS: Record<string, { ru: string; en: string }> = {
+  basics:   { ru: 'Основные понятия', en: 'Basics' },
+  beginner: { ru: 'Новичку',          en: 'Beginners' },
+  traffic:  { ru: 'Источники трафика',en: 'Traffic Sources' },
+  trends:   { ru: 'iGaming Тренды',   en: 'iGaming Trends' },
+  news:     { ru: 'Новости',           en: 'News' },
+};
+
+const ALL_CATEGORIES = Object.keys(CAT_LABELS);
+
+function getCatLabel(key: string, lang: 'ru' | 'en'): string {
+  return CAT_LABELS[key]?.[lang] ?? key;
+}
 
 export default function BlogPage() {
   const { lang } = useLang();
-  const [activeCategory, setActiveCategory] = useState<string | null>("basics");
+  const [activeCat, setActiveCat] = useState<string | null>(null);
+  const queryClient = useQueryClient();
 
   const { data: posts = [], isLoading } = useQuery<BlogPost[]>({
-    queryKey: ["/api/blog"],
+    queryKey: ['/api/blog'],
   });
 
-  const filteredPosts = activeCategory === null
+  // Seed individual post cache so opening a post is instant (no second API call)
+  useEffect(() => {
+    posts.forEach(post => {
+      queryClient.setQueryData(['/api/blog', post.slug], post);
+    });
+  }, [posts, queryClient]);
+
+  // Derive categories present in actual data
+  const presentCats = ALL_CATEGORIES.filter(cat => posts.some(p => p.category === cat));
+
+  const shown = activeCat === null
     ? posts
-    : posts.filter((p) => p.category === activeCategory);
+    : posts.filter(p => p.category === activeCat);
+
+  // Skeleton items
+  const skeletonItems = [1, 2, 3, 4, 5, 6];
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, #001030 0%, #002060 30%, #0055AA 60%, #0088CC 100%)" }} />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(0,200,255,0.15),_transparent_60%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(0,100,200,0.2),_transparent_60%)]" />
-      <div className="hidden md:block absolute top-[20%] left-[10%] w-[500px] h-[500px] rounded-full blur-[200px] pointer-events-none" style={{ background: "radial-gradient(circle, rgba(0,140,220,0.12) 0%, transparent 70%)" }} />
-      <div className="hidden md:block absolute bottom-[10%] right-[5%] w-[400px] h-[400px] rounded-full blur-[180px] pointer-events-none" style={{ background: "radial-gradient(circle, rgba(0,180,255,0.08) 0%, transparent 70%)" }} />
+    <div style={{ width: '100%', fontFamily: FONT, background: 'transparent' }} className="text-white relative">
+      <style>{`
+        ${SHARED_STYLES}
+        html { scroll-snap-type: none; }
+        section, .snap-sec { scroll-snap-align: none; scroll-snap-stop: unset; }
+        .post-card { transition: border-color .35s ease, transform .35s ease, background .35s ease; }
+        .post-card:hover { border-color: rgba(59,130,246,0.7) !important; background: rgba(59,130,246,0.08) !important; transform: translateY(-4px); }
+        .cat-btn { transition: background .25s, border-color .25s, color .25s; }
+      `}</style>
 
-      <div className="relative z-10">
-        <BlogNavigation />
+      {/* Fixed full-page background */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <img src="/dsb-bg-blue.webp" alt="" loading="lazy" decoding="async" className="w-full h-full object-cover" style={{ opacity: 0.65 }} />
+        <div className="absolute inset-0 bg-black/50" />
+      </div>
 
-        <div className="pt-24 lg:pt-28 pb-20">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <div className="text-center mb-10">
-              <h1 className="text-3xl lg:text-5xl font-bold text-white mb-3" data-testid="text-blog-title">
-                {t(translations.blog.title, lang)}
-              </h1>
-              <p className="text-white/60 text-base lg:text-lg" data-testid="text-blog-subtitle">
-                {t(translations.blog.subtitle, lang)}
-              </p>
-            </div>
+      <NavHeader activePage="blog" />
 
-            <div className="mb-10 overflow-x-auto no-scrollbar">
-              <div className="flex gap-2.5 p-2 rounded-2xl bg-white/[0.04] border border-white/[0.08] backdrop-blur-xl" data-testid="blog-category-tabs">
-                {CATEGORIES.map((cat) => {
-                  const Icon = cat.icon;
-                  const isActive = activeCategory === cat.key;
-                  return (
-                    <button
-                      key={cat.key}
-                      onClick={() => setActiveCategory(activeCategory === cat.key ? null : cat.key)}
-                      className={`relative flex-1 flex items-center justify-center gap-2.5 px-5 py-3 rounded-xl text-sm font-semibold whitespace-nowrap transition-all duration-300 border ${
-                        isActive
-                          ? `${cat.activeBg} ${cat.activeBorder} ${cat.activeText} ${cat.activeShadow}`
-                          : `text-white/40 ${cat.hoverBg} hover:text-white/70 border-transparent hover:border-white/[0.08]`
-                      }`}
-                      data-testid={`button-category-${cat.key}`}
-                    >
-                      {isActive && (
-                        <span className={`absolute inset-0 rounded-xl bg-gradient-to-r ${cat.gradient} opacity-[0.08]`} />
-                      )}
-                      <Icon className={`w-4 h-4 relative z-10 transition-all duration-300 ${isActive ? `${cat.iconActive} drop-shadow-sm` : cat.iconIdle}`} />
-                      <span className="relative z-10">{t(cat.label, lang)}</span>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
+      {/* ===== BLOG ===== */}
+      <section className="relative flex flex-col" style={{ minHeight: '100vh', padding: `clamp(90px, 13vh, 150px) ${PAD} clamp(80px, 10vh, 120px)` }}>
+        {/* Background removed — now fixed above */}
+        <div className="absolute inset-0 z-0 hidden" />
 
-            {isLoading ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {[1, 2, 3].map((i) => (
-                  <div key={i} className="rounded-xl border border-white/[0.1] bg-white/[0.05] backdrop-blur-sm animate-pulse">
-                    <div className="h-48 bg-white/[0.06] rounded-t-xl" />
-                    <div className="p-5 space-y-3">
-                      <div className="h-4 bg-white/[0.06] rounded w-1/3" />
-                      <div className="h-5 bg-white/[0.06] rounded w-3/4" />
-                      <div className="h-4 bg-white/[0.06] rounded w-full" />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : filteredPosts.length === 0 ? (
-              <div className="text-center py-20">
-                <p className="text-white/40 text-lg" data-testid="text-no-posts">{t(translations.blog.noPosts, lang)}</p>
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredPosts.map((post) => {
-                  const title = lang === "ru" ? post.titleRu : post.titleEn;
-                  const excerpt = lang === "ru" ? post.excerptRu : post.excerptEn;
-                  const catLabel = CATEGORIES.find(c => c.key === post.category);
-
-                  return (
-                    <Link
-                      key={post.id}
-                      href={`/blog/${post.slug}`}
-                      className="group block"
-                      data-testid={`card-blog-post-${post.slug}`}
-                    >
-                      <div className="rounded-xl border border-white/[0.1] bg-white/[0.05] backdrop-blur-sm overflow-hidden transition-all duration-300 group-hover:border-white/20 group-hover:bg-white/[0.08]">
-                        {post.coverImage && (
-                          <div className="h-48 overflow-hidden">
-                            <img
-                              src={post.coverImage}
-                              alt={title}
-                              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                              loading="lazy"
-                              decoding="async"
-                            />
-                          </div>
-                        )}
-                        <div className="p-5">
-                          <div className="flex items-center gap-3 mb-3 flex-wrap">
-                            {catLabel && (
-                              <span className="text-xs font-medium text-sky-300 px-2.5 py-1 rounded-full bg-sky-400/15 border border-sky-400/25">
-                                {t(catLabel.label, lang)}
-                              </span>
-                            )}
-                            {post.publishedAt && (
-                              <span className="flex items-center gap-1 text-xs text-white/35">
-                                <Calendar className="w-3 h-3" />
-                                {new Date(post.publishedAt).toLocaleDateString(lang === "ru" ? "ru-RU" : "en-US", { day: "numeric", month: "short", year: "numeric" })}
-                              </span>
-                            )}
-                          </div>
-                          <h3 className="text-lg font-semibold text-white/90 mb-2 line-clamp-2 group-hover:text-white transition-colors">
-                            {title}
-                          </h3>
-                          <p className="text-sm text-white/50 line-clamp-3 mb-4 leading-relaxed">
-                            {excerpt}
-                          </p>
-                          <div className="flex items-center gap-1.5 text-sm font-medium text-sky-300/70 group-hover:text-sky-300 transition-colors">
-                            {t(translations.blog.readMore, lang)}
-                            <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-                          </div>
-                        </div>
-                      </div>
-                    </Link>
-                  );
-                })}
-              </div>
-            )}
+        {/* Title */}
+        <div className="relative z-10 flex flex-col items-center text-center" style={{ marginBottom: 'clamp(28px, 4.5vh, 52px)' }}>
+          <div className="uppercase text-zinc-400" style={{ fontSize: 'clamp(11px, 1.1vw, 15px)', letterSpacing: '0.35em', fontWeight: 300, marginBottom: 'clamp(14px, 2vh, 24px)' }}>
+            {lang === 'ru' ? 'Полезные материалы' : 'Useful materials'}
           </div>
+          <div className="uppercase font-black text-white leading-none" style={{ fontSize: 'clamp(48px, 8.2vw, 118px)', letterSpacing: '0.02em', marginBottom: 'clamp(28px, 4.5vh, 52px)' }}>
+            {lang === 'ru' ? 'Блог' : 'Blog'}
+          </div>
+
+          {/* Category filters */}
+          {!isLoading && presentCats.length > 0 && (
+            <div className="flex flex-wrap justify-center" style={{ gap: 'clamp(8px, 1vw, 14px)', marginBottom: 'clamp(12px, 2vh, 24px)' }}>
+              <button
+                onClick={() => setActiveCat(null)}
+                className="cat-btn uppercase cursor-pointer rounded-full"
+                style={{
+                  fontFamily: FONT,
+                  fontSize: 'clamp(9px, 0.9vw, 12px)',
+                  letterSpacing: '0.1em',
+                  padding: '10px 22px',
+                  background: activeCat === null ? '#2563eb' : 'rgba(255,255,255,0.05)',
+                  border: activeCat === null ? '1px solid #2563eb' : '1px solid rgba(255,255,255,0.2)',
+                  color: '#fff',
+                  backdropFilter: 'blur(8px)',
+                  WebkitBackdropFilter: 'blur(8px)',
+                }}
+              >
+                {lang === 'ru' ? 'Все' : 'All'}
+              </button>
+              {presentCats.map(cat => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCat(activeCat === cat ? null : cat)}
+                  className="cat-btn uppercase cursor-pointer rounded-full"
+                  style={{
+                    fontFamily: FONT,
+                    fontSize: 'clamp(9px, 0.9vw, 12px)',
+                    letterSpacing: '0.1em',
+                    padding: '10px 22px',
+                    background: activeCat === cat ? '#2563eb' : 'rgba(255,255,255,0.05)',
+                    border: activeCat === cat ? '1px solid #2563eb' : '1px solid rgba(255,255,255,0.2)',
+                    color: '#fff',
+                    backdropFilter: 'blur(8px)',
+                    WebkitBackdropFilter: 'blur(8px)',
+                  }}
+                >
+                  {getCatLabel(cat, lang)}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
-        <footer className="py-8 border-t border-white/[0.08]">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
-            <div className="text-white/35 text-xs">
-              © 2026 PrimeTraff. {t(translations.footer.allRights, lang)}
-            </div>
-            <Link href="/" className="text-white/35 text-xs hover:text-white/60 transition-colors" data-testid="link-blog-footer-home">
-              {lang === "ru" ? "Главная" : "Home"}
-            </Link>
+        {/* Posts grid */}
+        <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full mx-auto" style={{ gap: 'clamp(16px, 1.8vw, 28px)', maxWidth: 1400 }}>
+          {isLoading
+            ? skeletonItems.map(i => (
+                <div key={i} className="post-card rounded-2xl overflow-hidden animate-pulse"
+                  style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)' }}>
+                  <div style={{ aspectRatio: '16 / 8', background: 'rgba(255,255,255,0.06)' }} />
+                  <div style={{ padding: 'clamp(20px, 2vw, 30px)' }}>
+                    <div style={{ height: 10, background: 'rgba(255,255,255,0.06)', borderRadius: 4, width: '40%', marginBottom: 12 }} />
+                    <div style={{ height: 16, background: 'rgba(255,255,255,0.06)', borderRadius: 4, width: '80%', marginBottom: 8 }} />
+                    <div style={{ height: 12, background: 'rgba(255,255,255,0.06)', borderRadius: 4, width: '100%', marginBottom: 6 }} />
+                    <div style={{ height: 12, background: 'rgba(255,255,255,0.06)', borderRadius: 4, width: '70%' }} />
+                  </div>
+                </div>
+              ))
+            : shown.length === 0
+            ? (
+              <div className="col-span-3 text-center" style={{ padding: 'clamp(60px, 12vh, 120px) 0' }}>
+                <p className="uppercase text-zinc-400" style={{ fontFamily: FONT, fontSize: TYPE.small, letterSpacing: '0.2em' }}>
+                  {lang === 'ru' ? 'Статей пока нет' : 'No posts yet'}
+                </p>
+              </div>
+            )
+            : shown.map(post => {
+              const title   = lang === 'ru' ? post.titleRu   : post.titleEn;
+              const excerpt = lang === 'ru' ? post.excerptRu : post.excerptEn;
+              const catKey  = post.category ?? '';
+              const catLabel = getCatLabel(catKey, lang);
+              const dateStr = post.publishedAt
+                ? new Date(post.publishedAt).toLocaleDateString(lang === 'ru' ? 'ru-RU' : 'en-US', { day: 'numeric', month: 'short', year: 'numeric' })
+                : '';
+
+              return (
+                <Link key={post.id} href={`/blog/${post.slug}`} className="block" style={{ textDecoration: 'none' }}>
+                  <div className="post-card flex flex-col text-left rounded-2xl overflow-hidden"
+                    style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', height: '100%' }}>
+                    {post.coverImage ? (
+                      <div className="relative w-full overflow-hidden" style={{ aspectRatio: '16 / 8' }}>
+                        <img
+                          src={post.coverImage}
+                          alt={title}
+                          className="w-full h-full object-cover"
+                          style={{ transition: 'transform .4s ease' }}
+                          loading="lazy"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/30" />
+                      </div>
+                    ) : (
+                      <div className="relative w-full overflow-hidden" style={{ aspectRatio: '16 / 8' }}>
+                        <img src="/dsb-bg-blue.webp" alt="" loading="lazy" decoding="async" className="w-full h-full object-cover"
+                          style={{ transform: 'scale(1.4)' }} />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/30" />
+                      </div>
+                    )}
+                    <div className="flex flex-col flex-1" style={{ padding: 'clamp(20px, 2vw, 30px)' }}>
+                      <div className="flex items-center justify-between" style={{ marginBottom: 'clamp(14px, 2vh, 22px)' }}>
+                        <span className="uppercase" style={{ color: BLUE, fontSize: 'clamp(8px, 0.75vw, 10px)', letterSpacing: '0.15em', fontWeight: 500 }}>{catLabel}</span>
+                        <span className="text-zinc-500" style={{ fontSize: 'clamp(8px, 0.75vw, 10px)', letterSpacing: '0.1em' }}>{dateStr}</span>
+                      </div>
+                      <div className="uppercase font-bold text-white" style={{ fontSize: 'clamp(13px, 1.25vw, 18px)', letterSpacing: '0.04em', lineHeight: 1.45, marginBottom: 'clamp(12px, 1.8vh, 18px)' }}>
+                        {title}
+                      </div>
+                      <div className="text-zinc-400 flex-1" style={{ fontSize: 'clamp(10px, 0.9vw, 13px)', lineHeight: 1.75, fontWeight: 300 }}>
+                        {excerpt}
+                      </div>
+                      <div className="flex items-center gap-2 uppercase text-white" style={{ fontSize: 'clamp(9px, 0.85vw, 12px)', letterSpacing: '0.15em', marginTop: 'clamp(16px, 2.4vh, 26px)', fontWeight: 500 }}>
+                        {lang === 'ru' ? 'Читать' : 'Read'} <ArrowRight className="w-4 h-4" />
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
+        </div>
+
+        {/* Footer bar */}
+        <div className="relative z-10 w-full" style={{ marginTop: 'clamp(48px, 7vh, 84px)' }}>
+          <FixedFooterBar />
+          <div className="m-copy text-center text-zinc-500 uppercase" style={{ fontSize: 'clamp(8px, 0.7vw, 10px)', letterSpacing: '0.1em', marginTop: 'clamp(16px, 2.5vh, 28px)' }}>
+            © 2026. PRIMETRAFF.COM. ALL RIGHTS RESERVED.
           </div>
-        </footer>
-      </div>
+        </div>
+      </section>
     </div>
   );
 }

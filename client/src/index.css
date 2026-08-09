@@ -258,7 +258,7 @@
   }
 
   img {
-    content-visibility: auto;
+    /* content-visibility: auto removed — caused 3-4s paint delay on snap-scrolled sections */
   }
 }
 
@@ -460,31 +460,44 @@
 .primetraff-banner {
   position: relative;
   overflow: hidden;
-  border-radius: 16px;
-  background: linear-gradient(135deg, #001030 0%, #002060 40%, #0055AA 80%, #0077BB 100%);
-  border: 2px solid rgba(0,136,204,0.25);
-  margin: 32px 0;
+  border-radius: 4px;
+  background: #0a0a0c;
+  border: 1px solid rgba(255,255,255,0.08);
+  margin: 40px 0;
   padding: 0;
-  height: 100px;
+  height: 96px;
+}
+/* Diagonal blue slice on the right */
+.primetraff-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #2563eb;
+  clip-path: polygon(58% 0%, 100% 0%, 100% 100%, 52% 100%);
+  pointer-events: none;
+  z-index: 0;
 }
 .primetraff-banner__glow {
   position: absolute;
-  top: -40%;
-  right: -10%;
-  width: 260px;
-  height: 260px;
+  top: 50%;
+  right: 5%;
+  transform: translateY(-50%);
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(0,180,255,0.18) 0%, transparent 70%);
+  background: radial-gradient(ellipse, rgba(59,130,246,0.18) 0%, transparent 70%);
   pointer-events: none;
+  z-index: 0;
 }
 .primetraff-banner__inner {
   position: relative;
   z-index: 1;
+  filter: none;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  padding: 0 28px;
+  padding: 0 40px;
   height: 100%;
 }
 .primetraff-banner__logo {
@@ -494,62 +507,54 @@
   align-items: center;
 }
 .primetraff-banner__logo img {
-  height: 200px;
+  height: 90px;
   width: auto;
   border: none !important;
-  margin: 0 0 0 -20px !important;
+  margin: 0 !important;
   border-radius: 0 !important;
 }
 .primetraff-banner__actions {
   display: flex;
-  gap: 12px;
+  gap: 40px;
   flex-shrink: 0;
+  align-items: center;
 }
 .primetraff-banner__btn {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  padding: 8px 22px;
-  border-radius: 12px;
-  font-weight: 700;
-  font-size: 13px;
-  letter-spacing: 0.05em;
+  gap: 8px;
+  padding-bottom: 4px;
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
   text-decoration: none !important;
-  color: #fff !important;
+  color: rgba(255,255,255,0.8) !important;
   white-space: nowrap;
-  transition: all 0.2s;
+  border-bottom: 1px solid rgba(255,255,255,0.3);
+  transition: border-color 0.3s, color 0.3s;
 }
-.primetraff-banner__btn--login {
-  background: rgba(255,255,255,0.04);
-  border: 2px solid rgba(255,255,255,0.2);
+.primetraff-banner__btn:hover {
+  color: #fff !important;
+  border-bottom-color: #fff;
 }
+.primetraff-banner__btn--login {}
 .primetraff-banner__btn--register {
-  background: rgba(0,136,204,0.12);
-  border: 2px solid rgba(0,170,230,0.3);
-}
-.primetraff-banner__arrow {
-  margin-left: 8px;
-  opacity: 0.6;
+  color: #fff !important;
+  border-bottom-color: rgba(255,255,255,0.6);
 }
 @media (max-width: 640px) {
+  .primetraff-banner { height: auto; padding: 20px 0; }
   .primetraff-banner__inner {
-    padding: 0 12px;
-    gap: 8px;
+    padding: 0 20px;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
   }
-  .primetraff-banner__logo img {
-    height: 70px;
-    margin: 0 0 0 -8px !important;
-  }
-  .primetraff-banner__actions {
-    gap: 6px;
-  }
-  .primetraff-banner__btn {
-    padding: 6px 10px;
-    font-size: 10px;
-    border-radius: 8px;
-    letter-spacing: 0.03em;
-  }
+  .primetraff-banner__logo img { height: 32px; }
+  .primetraff-banner__actions { gap: 24px; }
+  .primetraff-banner__btn { font-size: 9px; }
 }
 
 .blog-gallery {

@@ -9,29 +9,110 @@ import fs from "fs";
 import translate from "google-translate-api-x";
 import { parse as parseHtml } from "node-html-parser";
 
+// Tags that must be removed entirely (with their content) — raw-text or script-capable
+const DANGEROUS_TAGS = new Set([
+  "script","style","iframe","object","embed","form","base",
+  "template","svg","math","link","meta","noscript","noframes",
+  "title","textarea","xmp","plaintext","noembed",
+]);
+
+// Allowlist of HTML tags permitted in blog content
+const ALLOWED_TAGS = new Set([
+  "p","br","strong","b","em","i","u","s","del","ins",
+  "h1","h2","h3","h4","h5","h6",
+  "ul","ol","li","blockquote","pre","code","hr",
+  "a","img","figure","figcaption","picture","source",
+  "table","thead","tbody","tfoot","tr","th","td","caption","colgroup","col",
+  "div","span","section","article","aside","header","footer","main",
+  "details","summary",
+]);
+// Allowlist of attributes (global + per-tag useful ones)
+const ALLOWED_ATTRS = new Set([
+  "href","src","alt","title","class","id","width","height",
+  "target","rel","loading","decoding","colspan","rowspan",
+  "type","start","reversed","lang","dir","data-testid",
+]);
+// Decode HTML entities to catch encoded javascript: bypasses (e.g. java&#x73;cript:)
+function decodeEntities(s: string): string {
+  return s
+    .replace(/&#x([0-9a-f]+);/gi, (_, hex) => String.fromCharCode(parseInt(hex, 16)))
+    .replace(/&#([0-9]+);/g, (_, dec) => String.fromCharCode(parseInt(dec, 10)))
+    .replace(/&amp;/gi, "&").replace(/&lt;/gi, "<").replace(/&gt;/gi, ">")
+    .replace(/&quot;/gi, '"').replace(/&apos;/gi, "'");
+}
+
+// Allowed URL schemes for href/src
+function isSafeUrl(value: string): boolean {
+  // Decode entities, then strip whitespace and control chars before scheme check
+  const decoded = decodeEntities(value).replace(/[\s\u0000-\u001f\u007f]/g, "");
+  return !/^(?:javascript|vbscript|data\s*:)/i.test(decoded.trim());
+}
+
 function sanitizeHtml(html: string): string {
   if (!html) return html;
-  let result = html;
+
+  // Preserve custom placeholders before parsing
+  const bannerPh = "___BANNER_PH___";
+  const tablePhs: string[] = [];
+  let result = html
+    .replace(/\[TABLE\]([\s\S]*?)\[\/TABLE\]/g, (_, data) => {
+      tablePhs.push(data);
+      return `___TABLE_PH_${tablePhs.length - 1}___`;
+    })
+    .replace(/\[BANNER\]/g, bannerPh);
+
+  // DOM-based allowlist sanitization via node-html-parser
+  // Two-pass approach: sanitize attrs first (all nodes), then unwrap
+  // disallowed tags bottom-up so children are already clean when unwrapped.
+  const root = parseHtml(result, { comment: false });
+  const allNodes = root.querySelectorAll("*");
+
+  // Pass 1 — strip disallowed / dangerous attributes on every element
+  for (const node of allNodes) {
+    for (const attrName of Object.keys(node.attrs)) {
+      const lower = attrName.toLowerCase();
+      if (!ALLOWED_ATTRS.has(lower) || lower.startsWith("on")) {
+        node.removeAttribute(attrName);
+        continue;
+      }
+      if (lower === "href" || lower === "src" || lower === "action") {
+        const val = node.getAttribute(attrName) ?? "";
+        if (!isSafeUrl(val)) node.setAttribute(attrName, "#");
+      }
+      if (lower === "target") {
+        const rel = node.getAttribute("rel") ?? "";
+        if (!rel.includes("noopener"))
+          node.setAttribute("rel", (rel + " noopener noreferrer").trim());
+      }
+    }
+  }
+
+  // Pass 2 — dangerous tags: remove entirely (with contents, raw-text not parsed).
+  // Other disallowed tags: unwrap bottom-up so children are already attr-clean.
+  for (let i = allNodes.length - 1; i >= 0; i--) {
+    const node = allNodes[i];
+    const tag = node.rawTagName?.toLowerCase() ?? "";
+    if (DANGEROUS_TAGS.has(tag)) {
+      node.replaceWith(""); // remove entirely
+    } else if (!ALLOWED_TAGS.has(tag)) {
+      node.replaceWith(node.innerHTML); // unwrap — children already sanitized
+    }
+  }
+  result = root.innerHTML;
+
+  // Cosmetic cleanup
   result = result.replace(/&amp;nbsp;/gi, " ");
   result = result.replace(/&nbsp;/gi, " ");
   result = result.replace(/\u00A0/g, " ");
-  result = result.replace(/\s+style\s*=\s*"[^"]*"/gi, "");
-  result = result.replace(/\s+style\s*=\s*'[^']*'/gi, "");
-  result = result.replace(/<span[^>]*>([\s\S]*?)<\/span>/gi, "$1");
-  result = result.replace(/<span[^>]*>([\s\S]*?)<\/span>/gi, "$1");
-  const bannerPh = "___BANNER_PH___";
-  const tablePhs: string[] = [];
-  result = result.replace(/\[TABLE\]([\s\S]*?)\[\/TABLE\]/g, (_, data) => {
-    tablePhs.push(data);
-    return `___TABLE_PH_${tablePhs.length - 1}___`;
-  });
-  result = result.replace(/\[BANNER\]/g, bannerPh);
   result = result.replace(/<p>\s*<\/p>/g, "");
+  result = result.replace(/ {2,}/g, " ");
+
+  // Restore placeholders
   result = result.replace(new RegExp(bannerPh, "g"), "[BANNER]");
   tablePhs.forEach((data, i) => {
     result = result.replace(`___TABLE_PH_${i}___`, `[TABLE]${data}[/TABLE]`);
   });
-  result = result.replace(/(?!<pre[^>]*>|<code[^>]*>) {2,}/g, " ");
+
   return result.trim();
 }
 
