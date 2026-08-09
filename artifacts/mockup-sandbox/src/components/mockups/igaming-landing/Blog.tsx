@@ -110,12 +110,12 @@ export function Blog() {
         </div>
 
         {openPost !== null && (() => { const p = POSTS[openPost]; return (
-          <div className="relative z-10 w-full mx-auto" style={{ maxWidth: 900 }}>
+          <div className="relative z-10 w-full mx-auto" style={{ maxWidth: 1400 }}>
             <button onClick={() => setOpenPost(null)} className="flex items-center gap-2 uppercase text-zinc-300 hover:text-white transition-colors bg-transparent border-none cursor-pointer"
               style={{ fontFamily: FONT, fontSize: 'clamp(10px, 0.95vw, 13px)', letterSpacing: '0.15em', marginBottom: 'clamp(24px, 4vh, 44px)', padding: 0 }}>
               <ArrowLeft className="w-4 h-4" /> Назад в блог
             </button>
-            <div className="relative w-full overflow-hidden rounded-2xl" style={{ aspectRatio: '16 / 6', marginBottom: 'clamp(28px, 4.5vh, 48px)', border: '1px solid rgba(255,255,255,0.1)' }}>
+            <div className="relative w-full overflow-hidden rounded-2xl" style={{ aspectRatio: '16 / 5', marginBottom: 'clamp(28px, 4.5vh, 48px)', border: '1px solid rgba(255,255,255,0.1)' }}>
               <img src={bgImage} alt="" className="w-full h-full object-cover" style={{ filter: `hue-rotate(${p.hue}deg) saturate(1.2)`, transform: 'scale(1.3)' }} />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/20" />
               <div className="absolute" style={{ left: 'clamp(18px, 2vw, 32px)', bottom: 'clamp(14px, 2vh, 24px)' }}>
