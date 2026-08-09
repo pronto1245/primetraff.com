@@ -28,7 +28,7 @@ export function Affiliates() {
         .btn-fill:hover::before { transform: translateX(0); }
         .btn-ghost:hover { border-color: #2563eb; }
         .contact-row { position: relative; overflow: hidden; transition: background .35s ease; backdrop-filter: blur(2px); }
-        @keyframes contact-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        @keyframes contact-marquee { from { transform: translateX(-50%); } to { transform: translateX(0); } }
         .contact-marquee { display: inline-block; animation: contact-marquee 40s linear infinite; }
         .contact-row:hover { background: #2563eb; } .contact-row:hover span, .contact-row:hover .row-desc { color: #fff !important; }
       `}</style>
