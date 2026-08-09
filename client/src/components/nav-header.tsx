@@ -243,7 +243,7 @@ export const SHARED_STYLES = `
     .row-desc { display: none !important; }
     .hero-words { font-size: 9px !important; letter-spacing: 0.14em !important; }
     .hero-corner { font-size: 9px !important; }
-    .hero-corners { display: flex !important; }
+    .hero-corners { display: none !important; }
     .m-pad0 { padding-left: 0 !important; padding-right: 0 !important; }
     .m-copy { padding-bottom: 88px; }
     .m-title { font-size: 34px !important; }

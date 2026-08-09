@@ -182,8 +182,8 @@ export const translations = {
     nav: { ru: "Блог", en: "Blog" },
   },
   landingPage: {
-    heroSloganLeft: { ru: "Где трафик\nпревращается\nв партнёрство", en: "Where traffic\nbecomes\npartnership" },
-    heroSloganRight: { ru: "Работаем\nдля вас с\n2025 года", en: "Working\nfor you since\n2025" },
+    heroSloganLeft: { ru: "Где трафик превращается\nв партнёрство.", en: "Where traffic becomes\npartnership." },
+    heroSloganRight: { ru: "Работаем для вас\nс 2025 года", en: "Working for you\nsince 2025" },
     heroCta: { ru: "Стать партнёром", en: "Become a Partner" },
     aboutLabel: { ru: "Немного", en: "A little bit" },
     aboutTitle: { ru: "О нас", en: "About us" },
