@@ -187,7 +187,7 @@ export function FixedFooterBar() {
   return (
     <div
       className="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-between pointer-events-none"
-      style={{ padding: `0 ${PAD} clamp(18px, 2.5vh, 28px)`, fontFamily: FONT }}
+      style={{ padding: `0 ${PAD} max(clamp(18px, 2.5vh, 28px), env(safe-area-inset-bottom, 0px))`, fontFamily: FONT }}
     >
       <div className="flex items-center gap-3 pointer-events-auto">
         {[
@@ -239,7 +239,7 @@ export const SHARED_STYLES = `
   @media (max-width: 640px) {
     .m-only { display: flex !important; }
     .m-hide { display: none !important; }
-    .vh-section { height: auto !important; min-height: 100vh !important; }
+    .vh-section { height: auto !important; min-height: 100svh !important; }
     .row-desc { display: none !important; }
     .hero-words { font-size: 9px !important; letter-spacing: 0.14em !important; }
     .hero-corner { font-size: 9px !important; }
@@ -248,11 +248,13 @@ export const SHARED_STYLES = `
     .m-copy { padding-bottom: 88px; }
     .m-title { font-size: 34px !important; }
     .m-sec { padding-bottom: 120px !important; }
+    html { scroll-snap-type: none !important; }
+    section, .snap-sec { scroll-snap-align: none !important; scroll-snap-stop: unset !important; }
   }
   .m-only { display: none; }
   .tip { position: absolute; left: 50%; bottom: calc(100% + 10px); transform: translateX(-50%) translateY(4px); background: rgba(10,10,12,0.95); border: 1px solid rgba(59,130,246,0.5); color: #fff; font-size: 10px; letter-spacing: 0.12em; padding: 6px 12px; border-radius: 8px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .25s ease, transform .25s ease; }
   .tip-wrap:hover .tip { opacity: 1; transform: translateX(-50%) translateY(0); }
-  .faq-scroll { overflow-y: auto; scrollbar-width: thin; scrollbar-color: rgba(59,130,246,0.6) rgba(255,255,255,0.06); }
+  .faq-scroll { overflow-y: auto; -webkit-overflow-scrolling: touch; scrollbar-width: thin; scrollbar-color: rgba(59,130,246,0.6) rgba(255,255,255,0.06); }
   .faq-scroll::-webkit-scrollbar { display: block; width: 4px; }
   .faq-scroll::-webkit-scrollbar-track { background: rgba(255,255,255,0.06); }
   .faq-scroll::-webkit-scrollbar-thumb { background: rgba(59,130,246,0.6); border-radius: 2px; }

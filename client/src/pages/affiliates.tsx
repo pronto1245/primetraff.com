@@ -52,6 +52,11 @@ export default function AffiliatesPage() {
         .contact-card:hover { border-color: rgba(255,255,255,0.28) !important; background: rgba(255,255,255,0.06) !important; transform: translateY(-4px); }
         .contact-card:hover > div:last-child { opacity: 1 !important; }
         @media (max-width: 768px) { .contact-card { grid-column: span 3; } }
+        @media (max-width: 640px) {
+          .aff-contact-sec { height: auto !important; min-height: 100svh !important; overflow: visible !important; }
+          .aff-cta-row { flex-direction: column !important; gap: 12px !important; }
+          .aff-cta-row a { width: 100% !important; justify-content: center !important; min-height: 48px !important; }
+        }
       `}</style>
 
       <NavHeader activePage="affiliates" />
@@ -78,7 +83,7 @@ export default function AffiliatesPage() {
           </div>
 
           {/* Registration / Login buttons */}
-          <div className="m-pad0 w-full flex items-center justify-between" style={{ marginTop: 'clamp(40px, 7vh, 72px)', padding: '0 clamp(40px, 10vw, 160px)' }}>
+          <div className="aff-cta-row m-pad0 w-full flex items-center justify-between" style={{ marginTop: 'clamp(40px, 7vh, 72px)', padding: '0 clamp(40px, 10vw, 160px)' }}>
             <a
               href={REGISTER_URL}
               target="_blank"
@@ -130,7 +135,7 @@ export default function AffiliatesPage() {
       </section>
 
       {/* ===== DISCUSS COOPERATION ===== */}
-      <section id="contact" className="snap-sec relative bg-black flex flex-col justify-between overflow-hidden" style={{ height: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} clamp(16px, 2.5vh, 28px)` }}>
+      <section id="contact" className="aff-contact-sec snap-sec relative bg-black flex flex-col justify-between overflow-hidden" style={{ height: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} clamp(16px, 2.5vh, 28px)` }}>
         <ScrollHint />
         <div className="absolute inset-0 z-0">
           <img src="/dsb-bg-blue.webp" alt="" decoding="async" className="w-full h-full object-cover" style={{ opacity: 0.25 }} />
