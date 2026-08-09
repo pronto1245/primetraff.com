@@ -129,6 +129,23 @@ export default function AffiliatesPage() {
             </a>
           </div>
         </div>
+
+        {/* Sizar promo */}
+        <div className="relative z-10 flex justify-center" style={{ marginBottom: 'clamp(12px, 2vh, 24px)' }}>
+          <a href="https://sizar.app" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+            <div
+              style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '10px 20px', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', cursor: 'pointer', transition: 'background 0.2s, border-color 0.2s' }}
+              onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.background = 'rgba(255,255,255,0.08)'; (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(255,255,255,0.2)'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.background = 'rgba(255,255,255,0.04)'; (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(255,255,255,0.1)'; }}
+            >
+              <img src="/sizar-logo.jpeg" alt="Sizar" style={{ height: 28, width: 'auto', objectFit: 'contain' }} />
+              <div style={{ width: 1, height: 28, background: 'rgba(255,255,255,0.12)' }} />
+              <div style={{ fontFamily: FONT, fontSize: 'clamp(9px, 0.8vw, 11px)', color: 'rgba(255,255,255,0.45)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+                {lang === 'ru' ? 'Создавай PWA за 15 минут' : 'Build PWA in 15 minutes'}
+              </div>
+            </div>
+          </a>
+        </div>
       </section>
 
       {/* ===== WHY TRUST US ===== */}
