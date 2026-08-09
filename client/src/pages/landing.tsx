@@ -173,7 +173,7 @@ export default function LandingPage() {
         html { scroll-snap-type: y proximity; }
         .snap-sec { scroll-snap-align: start; contain: layout style; }
         .no-snap { contain: layout style; }
-        .sec-fade { opacity: 0; transition: opacity 0.7s ease; }
+        .sec-fade { opacity: 0; transition: opacity 0.25s ease; }
         .sec-fade.sec-visible { opacity: 1; }
         .no-snap { scroll-snap-align: none; scroll-snap-stop: normal; }
         @keyframes marquee-left  { from { transform: translateX(0) }    to { transform: translateX(-50%) } }
