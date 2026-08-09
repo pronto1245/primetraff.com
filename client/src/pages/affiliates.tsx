@@ -49,6 +49,9 @@ export default function AffiliatesPage() {
         .faq-scroll { overscroll-behavior-y: contain; }
         @keyframes contact-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
         .contact-marquee-anim { display: inline-block; animation: contact-marquee 40s linear infinite; }
+        @keyframes aff-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        .aff-marquee { display: flex; width: max-content; animation: aff-marquee 55s linear infinite; }
+        .aff-marquee:hover { animation-play-state: paused; }
         .contact-card:hover { border-color: rgba(255,255,255,0.28) !important; background: rgba(255,255,255,0.06) !important; transform: translateY(-4px); }
         .contact-card:hover > div:last-child { opacity: 1 !important; }
         @media (max-width: 768px) { .contact-card { grid-column: span 3; } }
@@ -129,6 +132,24 @@ export default function AffiliatesPage() {
           <div className="uppercase text-white" style={{ fontSize: 'clamp(11px, 1.05vw, 15px)', letterSpacing: '0.06em', lineHeight: 1.75, fontWeight: 400, maxWidth: 1160 }}>
             {translations.affiliatesPage.whyParas[lang].map((para, i) => (
               <p key={i} style={i > 0 ? { marginTop: 'clamp(12px, 2vh, 20px)' } : undefined}>{para}</p>
+            ))}
+          </div>
+          <div className="uppercase font-black text-white" style={{ fontSize: 'clamp(16px, 1.8vw, 26px)', letterSpacing: '0.06em', marginTop: 'clamp(8px, 1vh, 12px)', marginBottom: 'clamp(16px, 2.5vh, 30px)' }}>
+            {t(translations.affiliatesPage.reviewsTitle, lang)}
+          </div>
+        </div>
+
+        {/* Reviews marquee */}
+        <div className="relative z-10 overflow-hidden" style={{ margin: `0 calc(-1 * ${PAD})` }}>
+          <div className="absolute left-0 top-0 bottom-0 z-10 pointer-events-none" style={{ width: 'clamp(40px, 8vw, 140px)', background: 'linear-gradient(to right, #000, transparent)' }} />
+          <div className="absolute right-0 top-0 bottom-0 z-10 pointer-events-none" style={{ width: 'clamp(40px, 8vw, 140px)', background: 'linear-gradient(to left, #000, transparent)' }} />
+          <div className="aff-marquee" style={{ gap: 'clamp(14px, 1.6vw, 24px)', padding: '4px 0' }}>
+            {[...translations.affiliatesPage.reviews, ...translations.affiliatesPage.reviews].map((r, i) => (
+              <div key={i} className="flex-shrink-0 rounded-2xl text-left"
+                style={{ width: 'clamp(340px, 34vw, 520px)', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', padding: 'clamp(20px, 2vw, 30px)' }}>
+                <div className="uppercase font-bold text-white" style={{ fontSize: 'clamp(13px, 1.2vw, 17px)', letterSpacing: TRACK, marginBottom: 'clamp(10px, 1.4vh, 16px)' }}>{t(r.name, lang)}</div>
+                <div className="text-zinc-300" style={{ fontSize: 'clamp(11px, 0.95vw, 13px)', lineHeight: 1.7, fontWeight: 300 }}>{t(r.text, lang)}</div>
+              </div>
             ))}
           </div>
         </div>
