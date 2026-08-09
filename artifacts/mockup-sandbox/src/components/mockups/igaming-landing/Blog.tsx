@@ -17,12 +17,12 @@ const PAD   = 'clamp(20px, 3vw, 48px)';
 const CATEGORIES = ['Все', 'Основные понятия', 'Новичку', 'Источники трафика', 'iGaming Тренды', 'Новости'];
 
 const POSTS = [
-  { cat: 'Основные понятия', date: '05.08.2026', title: 'Невалидный трафик: как распознать и почему он опасен', excerpt: 'В арбитраже все стремятся к одному — качественному FTD. Но пути бывают разные: кто-то строит воронки и прогревает аудиторию, а кто-то использует ботов и мультиаккаунты. Разбираем, как отличить живой трафик от подделки.' },
-  { cat: 'Основные понятия', date: '02.08.2026', title: 'RevShare: доля от дохода вместо разовой выплаты', excerpt: 'Модель, при которой вы получаете процент от дохода привлечённого игрока — обычно от 20% до 70%. Считаем, когда RevShare выгоднее CPA и на что смотреть в условиях.' },
-  { cat: 'Новичку', date: '28.07.2026', title: 'Первый запуск в iGaming: пошаговый план без лишних потерь', excerpt: 'Как выбрать оффер, собрать связку и не слить бюджет на старте. Практический чек-лист для тех, кто заходит в вертикаль впервые.' },
-  { cat: 'Источники трафика', date: '21.07.2026', title: 'PWA-приложения в 2026: что изменилось и как лить дальше', excerpt: 'PWA остаётся одним из самых стабильных источников. Разбираем свежие требования сторов, настройку PUSH-уведомлений и рабочие подходы к креативам.' },
-  { cat: 'iGaming Тренды', date: '14.07.2026', title: 'Куда движется iGaming: тренды второй половины 2026', excerpt: 'Новые ГЕО, ужесточение регуляций и рост крипто-продуктов. Что это значит для веб-мастеров и на какие рынки смотреть уже сейчас.' },
-  { cat: 'Новости', date: '07.07.2026', title: 'PrimeTraff подключает новые ГЕО и офферы', excerpt: 'Расширяем список направлений: добавлены новые рынки Tier-1 и LatAm, обновлены условия по ряду топовых офферов. Детали — у вашего менеджера.' },
+  { cat: 'Основные понятия', date: '05.08.2026', hue: 220, flip: false, title: 'Невалидный трафик: как распознать и почему он опасен', excerpt: 'В арбитраже все стремятся к одному — качественному FTD. Но пути бывают разные: кто-то строит воронки и прогревает аудиторию, а кто-то использует ботов и мультиаккаунты. Разбираем, как отличить живой трафик от подделки.' },
+  { cat: 'Основные понятия', date: '02.08.2026', hue: 200, flip: true, title: 'RevShare: доля от дохода вместо разовой выплаты', excerpt: 'Модель, при которой вы получаете процент от дохода привлечённого игрока — обычно от 20% до 70%. Считаем, когда RevShare выгоднее CPA и на что смотреть в условиях.' },
+  { cat: 'Новичку', date: '28.07.2026', hue: 240, flip: false, title: 'Первый запуск в iGaming: пошаговый план без лишних потерь', excerpt: 'Как выбрать оффер, собрать связку и не слить бюджет на старте. Практический чек-лист для тех, кто заходит в вертикаль впервые.' },
+  { cat: 'Источники трафика', date: '21.07.2026', hue: 190, flip: true, title: 'PWA-приложения в 2026: что изменилось и как лить дальше', excerpt: 'PWA остаётся одним из самых стабильных источников. Разбираем свежие требования сторов, настройку PUSH-уведомлений и рабочие подходы к креативам.' },
+  { cat: 'iGaming Тренды', date: '14.07.2026', hue: 260, flip: false, title: 'Куда движется iGaming: тренды второй половины 2026', excerpt: 'Новые ГЕО, ужесточение регуляций и рост крипто-продуктов. Что это значит для веб-мастеров и на какие рынки смотреть уже сейчас.' },
+  { cat: 'Новости', date: '07.07.2026', hue: 210, flip: true, title: 'PrimeTraff подключает новые ГЕО и офферы', excerpt: 'Расширяем список направлений: добавлены новые рынки Tier-1 и LatAm, обновлены условия по ряду топовых офферов. Детали — у вашего менеджера.' },
 ];
 
 export function Blog() {
@@ -129,8 +129,18 @@ export function Blog() {
         {/* Сетка статей */}
         <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full mx-auto" style={{ gap: 'clamp(16px, 1.8vw, 28px)', maxWidth: 1400 }}>
           {shown.map(p => (
-            <a key={p.title} href="#" className="post-card flex flex-col text-left rounded-2xl no-underline"
-              style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', padding: 'clamp(22px, 2.2vw, 34px)', textDecoration: 'none' }}>
+            <a key={p.title} href="#" className="post-card flex flex-col text-left rounded-2xl no-underline overflow-hidden"
+              style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', padding: 0, textDecoration: 'none' }}>
+              <div className="relative w-full overflow-hidden" style={{ aspectRatio: '16 / 8' }}>
+                <img src={bgImage} alt="" className="w-full h-full object-cover"
+                  style={{ filter: `hue-rotate(${p.hue}deg) saturate(1.2) contrast(1.05)`, transform: `scale(1.4) rotate(${p.flip ? 180 : 0}deg)` }} />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/30" />
+                <div className="absolute flex items-center justify-center rounded-full"
+                  style={{ left: 16, bottom: 12, width: 34, height: 34, background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(59,130,246,0.6)', backdropFilter: 'blur(6px)' }}>
+                  <Zap style={{ width: 15, height: 15, color: BLUE }} fill="currentColor" />
+                </div>
+              </div>
+              <div className="flex flex-col flex-1" style={{ padding: 'clamp(20px, 2vw, 30px)' }}>
               <div className="flex items-center justify-between" style={{ marginBottom: 'clamp(14px, 2vh, 22px)' }}>
                 <span className="uppercase" style={{ color: BLUE, fontSize: 'clamp(8px, 0.75vw, 10px)', letterSpacing: '0.15em', fontWeight: 500 }}>{p.cat}</span>
                 <span className="text-zinc-500" style={{ fontSize: 'clamp(8px, 0.75vw, 10px)', letterSpacing: '0.1em' }}>{p.date}</span>
@@ -143,6 +153,7 @@ export function Blog() {
               </div>
               <div className="flex items-center gap-2 uppercase text-white" style={{ fontSize: 'clamp(9px, 0.85vw, 12px)', letterSpacing: '0.15em', marginTop: 'clamp(16px, 2.4vh, 26px)', fontWeight: 500 }}>
                 Читать <ArrowRight className="w-4 h-4" />
+              </div>
               </div>
             </a>
           ))}
