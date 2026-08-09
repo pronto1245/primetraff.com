@@ -292,9 +292,9 @@ export default function LandingPage() {
             </div>
           </div>
         </div>
-        <div className="w-full" style={{ marginTop: 'clamp(32px, 5vh, 52px)' }}>
+        <div className="w-full" style={{ marginTop: 'auto' }}>
           <FixedFooterBar />
-          <div className="m-copy text-center text-zinc-500 uppercase" style={{ fontSize: 'clamp(8px, 0.7vw, 10px)', letterSpacing: '0.1em', marginTop: 'auto' }}>
+          <div className="m-copy text-center text-zinc-500 uppercase" style={{ fontSize: 'clamp(8px, 0.7vw, 10px)', letterSpacing: '0.1em' }}>
             © 2026. PRIMETRAFF.COM. ALL RIGHTS RESERVED.
           </div>
         </div>
