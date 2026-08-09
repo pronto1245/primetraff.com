@@ -43,7 +43,7 @@ export default function AffiliatesPage() {
     <div style={{ width: '100%', fontFamily: FONT }} className="bg-black text-white">
       <style>{`
         ${SHARED_STYLES}
-        html { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+        html { scroll-snap-type: y proximity; scroll-behavior: smooth; }
         .snap-sec { scroll-snap-align: start; scroll-snap-stop: always; }
         .no-snap { scroll-snap-align: none; scroll-snap-stop: normal; }
         .faq-scroll { overscroll-behavior-y: contain; }

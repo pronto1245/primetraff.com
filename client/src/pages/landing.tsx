@@ -157,7 +157,7 @@ export default function LandingPage() {
     <div style={{ width: '100%', fontFamily: FONT }} className="bg-black text-white">
       <style>{`
         ${SHARED_STYLES}
-        html { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+        html { scroll-snap-type: y proximity; scroll-behavior: smooth; }
         .snap-sec { scroll-snap-align: start; scroll-snap-stop: always; }
         .no-snap { scroll-snap-align: none; scroll-snap-stop: normal; }
         @keyframes marquee-left  { from { transform: translateX(0) }    to { transform: translateX(-50%) } }
@@ -255,7 +255,7 @@ export default function LandingPage() {
       </div>
 
       {/* ===== ABOUT + PARTNERS ===== */}
-      <section className="no-snap relative bg-black flex flex-col" style={{ minHeight: '100vh', paddingTop: 'clamp(60px, 8vh, 100px)', paddingLeft: PAD, paddingRight: PAD, paddingBottom: '100px' }}>
+      <section className="snap-sec relative bg-black flex flex-col" style={{ minHeight: '100vh', paddingTop: 'clamp(60px, 8vh, 100px)', paddingLeft: PAD, paddingRight: PAD, paddingBottom: '100px' }}>
         <div className="flex-1 flex flex-col items-center justify-center text-center w-full">
           <div className="relative" style={{ marginBottom: 'clamp(28px, 4.5vh, 48px)' }}>
             <div className="uppercase text-zinc-400" style={{ fontSize: 'clamp(11px, 1.1vw, 15px)', letterSpacing: '0.35em', fontWeight: 300, marginBottom: 'clamp(14px, 2vh, 24px)' }}>
