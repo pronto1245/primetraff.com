@@ -61,6 +61,7 @@ export function DarkStudioBlue() {
         .m-only { display: none; }
         @media (max-width: 640px) {
           .m-only { display: flex !important; }
+          .hero-content { padding-bottom: 130px !important; }
           .m-hide { display: none !important; }
           .vh-section { height: auto !important; min-height: 100vh !important; }
           .row-desc { display: none !important; }
@@ -155,7 +156,7 @@ export function DarkStudioBlue() {
         </div>
 
         {/* Контент */}
-        <div className="relative z-10 flex flex-col items-center justify-between h-full w-full text-center"
+        <div className="hero-content relative z-10 flex flex-col items-center justify-between h-full w-full text-center"
           style={{ padding: `clamp(80px, 10vh, 120px) ${PAD} clamp(90px, 12vh, 140px)` }}>
 
           {/* Лейбл */}
