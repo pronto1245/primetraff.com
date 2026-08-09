@@ -162,8 +162,8 @@ export default function LandingPage() {
         .no-snap { scroll-snap-align: none; scroll-snap-stop: normal; }
         @keyframes marquee-left  { from { transform: translateX(0) }    to { transform: translateX(-50%) } }
         @keyframes marquee-right { from { transform: translateX(-50%) } to { transform: translateX(0) } }
-        .marquee-left  { display: flex; width: max-content; animation: marquee-left  60s linear infinite; will-change: transform; }
-        .marquee-right { display: flex; width: max-content; animation: marquee-right 60s linear infinite; will-change: transform; }
+        .marquee-left  { display: flex; width: max-content; animation: marquee-left  60s linear infinite; }
+        .marquee-right { display: flex; width: max-content; animation: marquee-right 60s linear infinite; }
         .marquee-left:hover, .marquee-right:hover { animation-play-state: paused; }
         .brand-item:hover { opacity: 1 !important; }
         @keyframes hint-bounce { 0%, 100% { transform: translateY(0); opacity: .45; } 50% { transform: translateY(9px); opacity: 1; } }
