@@ -1,0 +1,21 @@
+[root@v742573 bot]# nano .env
+[root@v742573 bot]# pm2 start index.js --name primetraff-bot && pm2 save
+[PM2] Starting /var/www/primetraff.com/bot/index.js in fork_mode (1 instance)
+[PM2] Done.
+┌────┬───────────────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
+│ id │ name              │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+├────┼───────────────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
+│ 3  │ primetrack        │ default     │ 1.0.0   │ fork    │ 2397053  │ 3D     │ 8    │ online    │ 0%       │ 465.9mb  │ root     │ disabled │
+│ 1  │ primetraff        │ default     │ 1.0.0   │ fork    │ 1491966  │ 7m     │ 7    │ online    │ 0%       │ 84.3mb   │ root     │ disabled │
+│ 4  │ primetraff-bot    │ default     │ 1.0.0   │ fork    │ 1497594  │ 0s     │ 0    │ online    │ 0%       │ 18.0mb   │ root     │ disabled │
+│ 2  │ telegramm-bot     │ default     │ 1.0.0   │ fork    │ 1222     │ 9D     │ 0    │ online    │ 0%       │ 109.8mb  │ root     │ disabled │
+└────┴───────────────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+Module
+┌────┬──────────────────────────────┬───────────────┬──────────┬──────────┬──────┬──────────┬──────────┬──────────┐
+│ id │ module                       │ version       │ pid      │ status   │ ↺    │ cpu      │ mem      │ user     │
+├────┼──────────────────────────────┼───────────────┼──────────┼──────────┼──────┼──────────┼──────────┼──────────┤
+│ 0  │ pm2-logrotate                │ 3.0.0         │ 1093     │ online   │ 0    │ 0%       │ 69.0mb   │ root     │
+└────┴──────────────────────────────┴───────────────┴──────────┴──────────┴──────┴──────────┴──────────┴──────────┘
+[PM2] Saving current process list...
+[PM2] Successfully saved in /root/.pm2/dump.pm2
+[root@v742573 bot]# 
