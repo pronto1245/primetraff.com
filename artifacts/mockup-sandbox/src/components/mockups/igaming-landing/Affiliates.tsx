@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ArrowRight, Fingerprint, Headphones, Send, UserRound, X, Zap } from 'lucide-react';
-import bgImage from './assets/dsb-bg.png';
+import bgImage from './assets/dsb-bg.webp';
 
 /* ============================================================
    Design tokens — та же система, что и на главной

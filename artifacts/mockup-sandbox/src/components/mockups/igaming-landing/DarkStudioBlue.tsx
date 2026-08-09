@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ArrowRight, Fingerprint, Send, X, Zap } from 'lucide-react';
-import bgImage from './assets/dsb-bg.png';
+import bgImage from './assets/dsb-bg.webp';
 
 /* ============================================================
    Design tokens
