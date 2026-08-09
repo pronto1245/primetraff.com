@@ -233,21 +233,50 @@ export function DarkStudioBlue() {
       {/* ===== О НАС ===== */}
       <section className="relative bg-black flex flex-col" style={{ minHeight: '100vh', padding: `clamp(60px, 8vh, 100px) ${PAD} clamp(20px, 3vh, 32px)` }}>
         <div className="flex-1 flex flex-col items-center justify-center text-center w-full">
-          <div className="relative" style={{ marginBottom: 'clamp(36px, 6vh, 64px)' }}>
-            <div className="text-zinc-400" style={{ fontFamily: "'Comforter', cursive", fontSize: 'clamp(64px, 9vw, 130px)', lineHeight: 1, opacity: 0.8 }}>
+          <div className="relative" style={{ marginBottom: 'clamp(28px, 4.5vh, 48px)' }}>
+            <div className="uppercase text-zinc-400" style={{ fontSize: 'clamp(11px, 1.1vw, 15px)', letterSpacing: '0.35em', fontWeight: 300, marginBottom: 'clamp(14px, 2vh, 24px)' }}>
               Немного
             </div>
-            <div className="uppercase font-bold text-white" style={{ fontSize: 'clamp(18px, 2.2vw, 30px)', letterSpacing: '0.12em', marginTop: '-0.55em', position: 'relative', zIndex: 1 }}>
-              о нас
+            <div className="uppercase font-black text-white leading-none" style={{ fontSize: 'clamp(30px, 4.4vw, 62px)', letterSpacing: '0.02em' }}>
+              О нас
             </div>
           </div>
-          <div className="uppercase text-white" style={{ fontSize: 'clamp(11px, 1.1vw, 15px)', letterSpacing: '0.06em', lineHeight: 1.9, fontWeight: 400, maxWidth: 920 }}>
-            <p>PrimeTraff — партнёрская программа в iGaming, где интересы партнёра стоят на первом месте.</p>
-            <p>С 2025 года мы строим партнёрство на трёх принципах: сервис, прозрачность и результат.</p>
-            <p>Защищаем интересы рекламодателей и аффилейтов от мошенничества.</p>
-            <p>Выстраиваем понятные процессы и создаём условия, в которых зарабатывают все стороны.</p>
-            <p>Наша задача — не просто дать вам оффер, а помочь масштабировать трафик и зарабатывать больше.</p>
-            <p style={{ marginTop: '1.9em' }}>PrimeTraff — работаем для вас, чтобы вы зарабатывали.</p>
+          <div className="uppercase text-white" style={{ fontSize: 'clamp(11px, 1.05vw, 15px)', letterSpacing: '0.06em', lineHeight: 1.8, fontWeight: 400, maxWidth: 1000 }}>
+            <p>PrimeTraff — партнёрская сеть в iGaming, созданная для долгосрочного сотрудничества и реального результата.</p>
+            <p>Мы объединяем рекламодателей и аффилейтов, выстраивая прозрачную и понятную модель работы.</p>
+            <p>Следим за качеством трафика, защищаем участников от фрода и оперативно решаем возникающие вопросы.</p>
+            <p>Не гонимся за количеством — развиваем сеть за счёт сильных партнёров и эффективных источников.</p>
+            <p>Наша цель — сделать сотрудничество предсказуемым, комфортным и выгодным для всех сторон.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 text-left" style={{ gap: 'clamp(24px, 3vw, 48px)', maxWidth: 1200, marginTop: 'clamp(32px, 5vh, 56px)' }}>
+            {[{
+              title: 'Для рекламодателей',
+              lines: [
+                'Подключаем проверенных партнёров и помогаем получать целевой трафик без лишнего риска.',
+                'Контролируем качество привлечённой аудитории и отслеживаем показатели на каждом этапе работы.',
+                'Отсекаем источники, которые не соответствуют согласованным требованиям и KPI.',
+                'Эффективные направления получаем возможность масштабировать вместе с рекламодателем.',
+                'В результате вы получаете не просто объём, а управляемый поток пользователей с понятной экономикой.',
+              ],
+            }, {
+              title: 'Для вебмастеров',
+              lines: [
+                'Предоставляем доступ к актуальным офферам и условиям, рассчитанным на разные источники трафика.',
+                'Помогаем разобраться с запуском, трекингом, оптимизацией и техническими вопросами.',
+                'За каждым партнёром закрепляется менеджер, который остаётся на связи в процессе работы.',
+                'Сильные результаты открывают возможности для увеличения объёмов и получения индивидуальных условий.',
+                'Мы заинтересованы в том, чтобы ваши успешные связки развивались и приносили больше дохода.',
+              ],
+            }].map(block => (
+              <div key={block.title} className="rounded-2xl" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', padding: 'clamp(22px, 2.2vw, 36px)' }}>
+                <div className="uppercase font-black" style={{ color: BLUE, fontSize: 'clamp(14px, 1.4vw, 20px)', letterSpacing: '0.08em', marginBottom: 'clamp(14px, 2vh, 22px)' }}>
+                  {block.title}
+                </div>
+                <div className="uppercase text-zinc-200" style={{ fontSize: 'clamp(10px, 0.9vw, 13px)', letterSpacing: '0.05em', lineHeight: 1.8, fontWeight: 300 }}>
+                  {block.lines.map(l => <p key={l} style={{ marginBottom: '0.8em' }}>{l}</p>)}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
         <div className="w-full" style={{ marginTop: 'clamp(40px, 6vh, 64px)' }}>
