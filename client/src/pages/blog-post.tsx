@@ -5,7 +5,6 @@ import { translations, t } from "@/lib/i18n";
 import { ArrowLeft, Calendar } from "lucide-react";
 import type { BlogPost } from "@shared/schema";
 import { NavHeader, FixedFooterBar, SHARED_STYLES, FONT, PAD } from "@/components/nav-header";
-import bgImage from "@/assets/dsb-bg.webp";
 
 const LOGIN_URL    = "https://primetrack.pro/login";
 const REGISTER_URL = "https://primetrack.pro/register?ref=ADV-3BT52V85";
