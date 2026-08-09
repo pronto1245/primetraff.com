@@ -27,8 +27,10 @@ export function Affiliates() {
         .btn-fill::before { content: ''; position: absolute; inset: 0; background: #2563eb; transform: translateX(-101%); transition: transform .45s cubic-bezier(.22,1,.36,1); }
         .btn-fill:hover::before { transform: translateX(0); }
         .btn-ghost:hover { border-color: #2563eb; }
-        .contact-row { position: relative; overflow: hidden; transition: background .35s ease; }
-        .contact-row:hover { background: rgba(59,130,246,0.15); }
+        .contact-row { position: relative; overflow: hidden; transition: background .35s ease; backdrop-filter: blur(2px); }
+        @keyframes contact-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        .contact-marquee { display: inline-block; animation: contact-marquee 40s linear infinite; }
+        .contact-row:hover { background: #2563eb; } .contact-row:hover span, .contact-row:hover .row-desc { color: #fff !important; }
       `}</style>
 
       {/* Шапка — как на главной, fixed */}
@@ -146,8 +148,17 @@ export function Affiliates() {
       </section>
 
       {/* ===== ОБСУДИТЬ СОТРУДНИЧЕСТВО ===== */}
-      <section className="relative bg-black flex flex-col justify-between" style={{ minHeight: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} clamp(16px, 2.5vh, 28px)` }}>
-        <div className="flex-1 flex flex-col items-center justify-center w-full">
+      <section className="relative bg-black flex flex-col justify-between overflow-hidden" style={{ minHeight: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} clamp(16px, 2.5vh, 28px)` }}>
+        <div className="absolute inset-0 z-0">
+          <img src={bgImage} alt="" className="w-full h-full object-cover" style={{ filter: 'hue-rotate(220deg) saturate(1.1)', opacity: 0.25 }} />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/65 to-black/90" />
+        </div>
+        <div className="absolute left-0 right-0 z-0 pointer-events-none overflow-hidden" style={{ top: '50%', transform: 'translateY(-50%)' }}>
+          <div className="contact-marquee uppercase font-black whitespace-nowrap" style={{ fontSize: 'clamp(90px, 14vw, 220px)', letterSpacing: '0.02em', color: 'transparent', WebkitTextStroke: '1px rgba(59,130,246,0.22)', lineHeight: 1 }}>
+            {'СВЯЗАТЬСЯ С НАМИ • '.repeat(6)}
+          </div>
+        </div>
+        <div className="relative z-10 flex-1 flex flex-col items-center justify-center w-full">
           <div className="text-center">
             <div className="uppercase text-zinc-400" style={{ fontSize: 'clamp(11px, 1.1vw, 15px)', letterSpacing: '0.35em', fontWeight: 300, marginBottom: 'clamp(14px, 2vh, 24px)' }}>
               Обсудить
@@ -164,12 +175,13 @@ export function Affiliates() {
             ].map((c, i) => (
               <a key={c.title} href="#" className="contact-row group flex items-center no-underline"
                 style={{ gap: 'clamp(16px, 2vw, 28px)', padding: 'clamp(18px, 2.6vh, 28px) clamp(12px, 1.5vw, 24px)', borderTop: '1px solid rgba(255,255,255,0.12)', borderBottom: i === 2 ? '1px solid rgba(255,255,255,0.12)' : 'none', textDecoration: 'none' }}>
+                <span className="font-black flex-shrink-0" style={{ color: 'rgba(59,130,246,0.85)', fontSize: 'clamp(18px, 2.2vw, 32px)', letterSpacing: '0.04em', width: 'clamp(44px, 4.5vw, 70px)' }}>{String(i + 1).padStart(2, '0')}</span>
                 <span className="flex-shrink-0 rounded-full flex items-center justify-center font-bold"
                   style={{ width: 'clamp(38px, 3.4vw, 52px)', height: 'clamp(38px, 3.4vw, 52px)', background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', fontSize: 'clamp(13px, 1.2vw, 18px)' }}>
                   {c.icon}
                 </span>
                 <span className="uppercase font-bold text-white" style={{ fontSize: 'clamp(14px, 1.5vw, 22px)', letterSpacing: '0.08em', minWidth: 'clamp(120px, 16vw, 240px)' }}>{c.title}</span>
-                <span className="uppercase text-zinc-400 flex-1" style={{ fontSize: 'clamp(9px, 0.95vw, 13px)', letterSpacing: '0.06em', fontWeight: 300 }}>{c.desc}</span>
+                <span className="row-desc uppercase text-zinc-400 flex-1" style={{ fontSize: 'clamp(9px, 0.95vw, 13px)', letterSpacing: '0.06em', fontWeight: 300 }}>{c.desc}</span>
                 <ArrowRight className="w-5 h-5 text-white flex-shrink-0 transform group-hover:translate-x-2 transition-transform duration-300" />
               </a>
             ))}
