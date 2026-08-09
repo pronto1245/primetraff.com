@@ -188,7 +188,8 @@ export default function LandingPage() {
           style={{ padding: `clamp(80px, 10vh, 120px) ${PAD} clamp(90px, 12vh, 140px)` }}>
 
           {/* Label */}
-          <div className="flex flex-col items-center" style={{ marginTop: '2.5vh' }}>
+          <div className="flex flex-col items-center" style={{ gap: 0 }}>
+            <div style={{ height: 'clamp(48px, 7vh, 80px)' }} />
             <div className="uppercase text-zinc-400" style={{ fontSize: TYPE.small, letterSpacing: '0.35em', fontWeight: 300 }}>
               iGaming Network
             </div>
