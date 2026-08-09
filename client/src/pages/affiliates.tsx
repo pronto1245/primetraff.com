@@ -279,7 +279,7 @@ export default function AffiliatesPage() {
         {/* Footer */}
         <div className="relative z-10 w-full" style={{ marginTop: 'clamp(20px, 3vh, 36px)' }}>
           <FixedFooterBar />
-          <div className="m-copy text-center text-zinc-500 uppercase" style={{ fontSize: 'clamp(8px, 0.7vw, 10px)', letterSpacing: '0.1em', marginTop: 'clamp(16px, 2.5vh, 28px)' }}>
+          <div className="m-copy text-center text-zinc-500 uppercase" style={{ fontSize: 'clamp(8px, 0.7vw, 10px)', letterSpacing: '0.1em' }}>
             © 2026. PRIMETRAFF.COM. ALL RIGHTS RESERVED.
           </div>
         </div>
