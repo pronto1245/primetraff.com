@@ -7,6 +7,7 @@ import { t, translations } from '@/lib/i18n';
 import bgImage from '@/assets/dsb-bg.webp';
 
 const SUPPORT_URL  = 'https://t.me/primetrack_support_bot';
+const MANAGER_URL  = 'https://t.me/tema_prtraff';
 const CHANNEL_URL  = 'https://t.me/prime_traf';
 
 const ScrollHint = () => (
@@ -40,7 +41,7 @@ export default function AdvertisersPage() {
 
   const CONTACTS = [
     { icon: Headphones, title: 'Support', desc: t(translations.advertisersPage.supportDesc, lang), href: SUPPORT_URL },
-    { icon: UserRound, title: t(translations.advertisersPage.managerTitle, lang), desc: t(translations.advertisersPage.managerDesc, lang), href: SUPPORT_URL },
+    { icon: UserRound, title: t(translations.advertisersPage.managerTitle, lang), desc: t(translations.advertisersPage.managerDesc, lang), href: MANAGER_URL },
     { icon: Send, title: 'TG-Channel', desc: t(translations.advertisersPage.tgChannelDesc, lang), href: CHANNEL_URL },
   ];
 
