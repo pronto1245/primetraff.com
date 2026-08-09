@@ -4,22 +4,15 @@ import { Link } from 'wouter';
 import { ArrowRight } from 'lucide-react';
 import { NavHeader, FixedFooterBar, SHARED_STYLES, BLUE, FONT, TYPE, TRACK, PAD } from '@/components/nav-header';
 import { useLang } from '@/lib/language-context';
+import { t, translations } from '@/lib/i18n';
 import type { BlogPost } from '@shared/schema';
 import bgImage from '@/assets/dsb-bg.webp';
 
-/* Category display labels */
-const CAT_LABELS: Record<string, { ru: string; en: string }> = {
-  basics:   { ru: 'Основные понятия', en: 'Basics' },
-  beginner: { ru: 'Новичку',          en: 'Beginners' },
-  traffic:  { ru: 'Источники трафика',en: 'Traffic Sources' },
-  trends:   { ru: 'iGaming Тренды',   en: 'iGaming Trends' },
-  news:     { ru: 'Новости',           en: 'News' },
-};
-
-const ALL_CATEGORIES = Object.keys(CAT_LABELS);
+const ALL_CATEGORIES = Object.keys(translations.blog.categories);
 
 function getCatLabel(key: string, lang: 'ru' | 'en'): string {
-  return CAT_LABELS[key]?.[lang] ?? key;
+  const cats = translations.blog.categories as Record<string, { ru: string; en: string }>;
+  return cats[key]?.[lang] ?? key;
 }
 
 export default function BlogPage() {
@@ -75,10 +68,10 @@ export default function BlogPage() {
         {/* Title */}
         <div className="relative z-10 flex flex-col items-center text-center" style={{ marginBottom: 'clamp(28px, 4.5vh, 52px)' }}>
           <div className="uppercase text-zinc-400" style={{ fontSize: 'clamp(11px, 1.1vw, 15px)', letterSpacing: '0.35em', fontWeight: 300, marginBottom: 'clamp(14px, 2vh, 24px)' }}>
-            {lang === 'ru' ? 'Полезные материалы' : 'Useful materials'}
+            {t(translations.blog.headerLabel, lang)}
           </div>
           <div className="uppercase font-black text-white leading-none" style={{ fontSize: 'clamp(48px, 8.2vw, 118px)', letterSpacing: '0.02em', marginBottom: 'clamp(28px, 4.5vh, 52px)' }}>
-            {lang === 'ru' ? 'Блог' : 'Blog'}
+            {t(translations.blog.title, lang)}
           </div>
 
           {/* Category filters */}
@@ -99,7 +92,7 @@ export default function BlogPage() {
                   WebkitBackdropFilter: 'blur(8px)',
                 }}
               >
-                {lang === 'ru' ? 'Все' : 'All'}
+                {t(translations.blog.allCategories, lang)}
               </button>
               {presentCats.map(cat => (
                 <button
@@ -144,7 +137,7 @@ export default function BlogPage() {
             ? (
               <div className="col-span-3 text-center" style={{ padding: 'clamp(60px, 12vh, 120px) 0' }}>
                 <p className="uppercase text-zinc-400" style={{ fontFamily: FONT, fontSize: TYPE.small, letterSpacing: '0.2em' }}>
-                  {lang === 'ru' ? 'Статей пока нет' : 'No posts yet'}
+                  {t(translations.blog.noPostsShort, lang)}
                 </p>
               </div>
             )
@@ -191,7 +184,7 @@ export default function BlogPage() {
                         {excerpt}
                       </div>
                       <div className="flex items-center gap-2 uppercase text-white" style={{ fontSize: 'clamp(9px, 0.85vw, 12px)', letterSpacing: '0.15em', marginTop: 'clamp(16px, 2.4vh, 26px)', fontWeight: 500 }}>
-                        {lang === 'ru' ? 'Читать' : 'Read'} <ArrowRight className="w-4 h-4" />
+                        {t(translations.blog.readMore, lang)} <ArrowRight className="w-4 h-4" />
                       </div>
                     </div>
                   </div>

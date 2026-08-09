@@ -166,10 +166,12 @@ export const translations = {
   blog: {
     title: { ru: "Блог", en: "Blog" },
     subtitle: { ru: "Полезные материалы для арбитражников", en: "Useful materials for affiliates" },
+    headerLabel: { ru: "Полезные материалы", en: "Useful materials" },
     allCategories: { ru: "Все", en: "All" },
     readMore: { ru: "Читать", en: "Read" },
     backToBlog: { ru: "Назад в блог", en: "Back to Blog" },
     noPosts: { ru: "Пока нет статей в этой категории", en: "No articles in this category yet" },
+    noPostsShort: { ru: "Статей пока нет", en: "No posts yet" },
     categories: {
       basics: { ru: "Основные понятия", en: "Basic Concepts" },
       beginner: { ru: "Новичку", en: "For Beginners" },
@@ -178,6 +180,207 @@ export const translations = {
       news: { ru: "Новости", en: "News" },
     },
     nav: { ru: "Блог", en: "Blog" },
+  },
+  landingPage: {
+    heroSloganLeft: { ru: "Где трафик превращается\nв партнёрство.", en: "Where traffic becomes\npartnership." },
+    heroSloganRight: { ru: "Работаем для вас\nс 2025 года", en: "Working for you\nsince 2025" },
+    heroCta: { ru: "Стать партнёром", en: "Become a Partner" },
+    aboutLabel: { ru: "Немного", en: "A little bit" },
+    aboutTitle: { ru: "О нас", en: "About us" },
+    aboutParas: {
+      ru: [
+        "PrimeTraff — партнёрская сеть в iGaming, созданная для долгосрочного сотрудничества и реального результата.",
+        "Мы объединяем рекламодателей и аффилейтов, выстраивая прозрачную и понятную модель работы.",
+        "Следим за качеством трафика, защищаем участников от фрода и оперативно решаем возникающие вопросы.",
+        "Не гонимся за количеством — развиваем сеть за счёт сильных партнёров и эффективных источников.",
+        "Наша цель — сделать сотрудничество предсказуемым, комфортным и выгодным для всех сторон.",
+      ],
+      en: [
+        "PrimeTraff is an iGaming affiliate network built for long-term partnerships and real results.",
+        "We connect advertisers and affiliates through a transparent and straightforward business model.",
+        "We monitor traffic quality, protect participants from fraud, and resolve issues promptly.",
+        "We don't chase volume — we grow the network through strong partners and effective sources.",
+        "Our goal is to make collaboration predictable, comfortable, and profitable for all parties.",
+      ],
+    },
+    trustedBy: { ru: "Нам доверяют лидеры рынка", en: "Trusted by market leaders" },
+  },
+  affiliatesPage: {
+    heroParas: {
+      ru: [
+        "Предоставляем доступ к актуальным офферам и условиям, рассчитанным на разные источники трафика.",
+        "Помогаем разобраться с запуском, трекингом, оптимизацией и техническими вопросами.",
+        "За каждым партнёром закрепляется менеджер, который остаётся на связи в процессе работы.",
+        "Сильные результаты открывают возможности для увеличения объёмов и получения индивидуальных условий.",
+        "Мы заинтересованы в том, чтобы ваши успешные связки развивались и приносили больше дохода.",
+      ],
+      en: [
+        "We provide access to current offers and terms designed for different traffic sources.",
+        "We help with launch, tracking, optimization, and technical questions.",
+        "Each partner is assigned a dedicated manager who stays in touch throughout the process.",
+        "Strong results open opportunities for volume increases and individual terms.",
+        "We are invested in helping your successful funnels grow and generate more revenue.",
+      ],
+    },
+    register: { ru: "Регистрация", en: "Register" },
+    login: { ru: "Вход", en: "Login" },
+    whyLabel: { ru: "Почему", en: "Why" },
+    whyTitle: { ru: "Нам доверяют", en: "They trust us" },
+    whyParas: {
+      ru: [
+        "Мы берём на себя решение ключевых вопросов — от индивидуальных ставок до пересмотра холдов и возможности работы по предоплате.",
+        "Партнёры отмечают высокий уровень экспертизы нашей команды и качество сопровождения на каждом этапе.",
+        "До запуска тщательно проверяем рекламодателей и условия сотрудничества, снижая вероятность спорных ситуаций и проблем с выплатами.",
+        "Вы концентрируетесь на привлечении трафика, а переговоры, контроль и организационные вопросы остаются на нашей стороне.",
+        "Ваша задача — приводить качественный трафик. Наша — сделать так, чтобы вы за него получили максимум.",
+      ],
+      en: [
+        "We handle key issues — from individual rates to hold revisions and the possibility of working with prepayment.",
+        "Partners note the high level of expertise of our team and the quality of support at every stage.",
+        "Before launch, we thoroughly check advertisers and collaboration terms, reducing the likelihood of disputes and payout issues.",
+        "You focus on driving traffic, while negotiations, control, and organizational issues remain on our side.",
+        "Your task is to bring quality traffic. Ours is to make sure you get the maximum for it.",
+      ],
+    },
+    contactMarquee: { ru: "СВЯЗАТЬСЯ С НАМИ • ", en: "CONTACT US • " },
+    contactLabel: { ru: "Обсудить", en: "Discuss" },
+    contactTitle: { ru: "Сотрудничество", en: "Partnership" },
+    go: { ru: "Перейти", en: "Go" },
+    supportDesc: { ru: "на связи 24/7 — решаем любой вопрос быстро", en: "available 24/7 — resolve any issue quickly" },
+    managerTitle: { ru: "Менеджер", en: "Manager" },
+    managerDesc: { ru: "прямой контакт для обсуждения условий, ставок и запуска", en: "direct contact to discuss terms, rates, and launch" },
+    tgChannelDesc: { ru: "новости сети, свежие офферы и апдейты — только по делу", en: "network news, fresh offers, and updates — straight to the point" },
+    faqLabel: { ru: "Частые", en: "Frequently" },
+    faqTitle: { ru: "Вопросы", en: "Asked Questions" },
+    faqItems: [
+      {
+        q: { ru: "Предоставляете ли вы готовую воронку для пролива?", en: "Do you provide a ready-made funnel?" },
+        a: { ru: "Да, в неё входит: готовое PWA-приложение с настроенными PUSH-уведомлениями + конвертящие креативы + инструкция по запуску.", en: "Yes, it includes: a ready-made PWA app with configured PUSH notifications + converting creatives + launch instructions." },
+      },
+      {
+        q: { ru: "Возможно ли получить индивидуальные условия по выплатам?", en: "Can I get individual payout terms?" },
+        a: { ru: "Да, активным веб-мастерам мы идём навстречу и готовы предоставлять индивидуальные условия для дополнительного удобства.", en: "Yes, for active webmasters we are open to providing individual terms for additional convenience." },
+      },
+      {
+        q: { ru: "У меня нет трекера, что делать?", en: "I don't have a tracker, what should I do?" },
+        a: { ru: "Мы предоставим вам полностью бесплатный трекер с интуитивным интерфейсом, где вы сможете настроить все необходимые параметры, отслеживать конверсии в реальном времени и оптимизировать свои кампании для максимальной эффективности.", en: "We will provide you with a completely free tracker with an intuitive interface where you can configure all necessary parameters, track conversions in real time, and optimize your campaigns for maximum efficiency." },
+      },
+      {
+        q: { ru: "В каких случаях трафик не соответствует минимальным требованиям компании?", en: "When doesn't traffic meet minimum company requirements?" },
+        a: { ru: "Трафик не соответствует минимальным требованиям компании в случае: 1. Относится к запрещённым видам трафика. 2. Не соответствует заявленному источнику. 3. Количество повторных депозитов менее 50% от количества первых. 4. Процент дубликатов свыше 10% от всех привлечённых игроков.", en: "Traffic does not meet minimum requirements if: 1. It belongs to prohibited traffic types. 2. It does not match the declared source. 3. The number of re-deposits is less than 50% of first deposits. 4. The duplicate rate exceeds 10% of all attracted players." },
+      },
+      {
+        q: { ru: "По каким моделям вы работаете?", en: "What models do you work with?" },
+        a: { ru: "Работаем по CPA, RevShare и гибридным моделям. Модель подбирается под источник трафика и объёмы — оптимальный вариант согласуете с менеджером до запуска.", en: "We work with CPA, RevShare, and hybrid models. The model is selected based on the traffic source and volume — the optimal option is agreed with the manager before launch." },
+      },
+      {
+        q: { ru: "Какие виды трафика вы принимаете?", en: "What types of traffic do you accept?" },
+        a: { ru: "Принимаем PWA, ASO, UAC, Facebook, In-App, SEO и другие источники. Главное условие — качество: источник согласовывается с менеджером до старта.", en: "We accept PWA, ASO, UAC, Facebook, In-App, SEO, and other sources. The main condition is quality: the source is agreed with the manager before launch." },
+      },
+      {
+        q: { ru: "Как быстро происходят выплаты?", en: "How fast are payouts?" },
+        a: { ru: "Выплаты проходят по согласованному графику без задержек. Для проверенных партнёров возможен пересмотр холдов и работа по предоплате.", en: "Payouts follow an agreed schedule without delays. For verified partners, hold revision and prepayment work is possible." },
+      },
+      {
+        q: { ru: "Есть ли жёсткие KPI по офферам?", en: "Are there strict KPIs for offers?" },
+        a: { ru: "По большинству офферов в сети жёстких KPI нет. Но это не значит, что можно лить что угодно: активность игроков мы отслеживаем постоянно, и некачественный трафик в системе не задержится.", en: "Most offers in the network don't have strict KPIs. But this doesn't mean you can drive any traffic: player activity is constantly monitored, and low-quality traffic won't stay in the system." },
+      },
+      {
+        q: { ru: "Как начать работу с вами?", en: "How do I start working with you?" },
+        a: { ru: "Зарегистрируйтесь или напишите нам — менеджер свяжется, согласует источник, оффер и условия, после чего вы получите ссылки и сможете запускаться.", en: "Register or write to us — a manager will get in touch, agree on the source, offer, and terms, after which you will receive links and can launch." },
+      },
+    ],
+  },
+  advertisersPage: {
+    heroParas: {
+      ru: [
+        "Подключаем проверенных партнёров и помогаем получать целевой трафик без лишнего риска.",
+        "Контролируем качество привлечённой аудитории и отслеживаем показатели на каждом этапе работы.",
+        "Отсекаем источники, которые не соответствуют согласованным требованиям и KPI.",
+        "Эффективные направления получаем возможность масштабировать вместе с рекламодателем.",
+        "В результате вы получаете не просто объём, а управляемый поток пользователей с понятной экономикой.",
+      ],
+      en: [
+        "We connect verified partners and help you get targeted traffic without unnecessary risk.",
+        "We control the quality of attracted audiences and track metrics at every stage.",
+        "We cut off sources that don't meet agreed requirements and KPIs.",
+        "Effective directions can be scaled together with the advertiser.",
+        "As a result, you get not just volume, but a manageable user flow with a clear economy.",
+      ],
+    },
+    contactUs: { ru: "Связаться с нами", en: "Contact us" },
+    whyLabel: { ru: "Почему", en: "Why" },
+    whyTitle: { ru: "Нам доверяют", en: "They trust us" },
+    whyParas: {
+      ru: [
+        "Наш фокус — не количество подключённых аффилейтов, а качество партнёрства и трафика.",
+        "Мы несём ответственность за результат и придерживаемся принципиальной позиции в отношении невалидного трафика: сомнительные источники не допускаются, а качество каждого потока контролируется на протяжении всей работы.",
+        "При этом наша главная задача — максимизировать ваш доход: находить сильные источники, создавать для них лучшие условия и масштабировать то, что действительно приносит результат.",
+      ],
+      en: [
+        "Our focus is not the number of connected affiliates, but the quality of partnership and traffic.",
+        "We are responsible for results and maintain a principled position on invalid traffic: dubious sources are not allowed, and the quality of each flow is monitored throughout the work.",
+        "At the same time, our main task is to maximize your income: find strong sources, create the best conditions for them, and scale what truly delivers results.",
+      ],
+    },
+    reviewsTitle: { ru: "Отзывы о работе с нами", en: "Reviews about working with us" },
+    reviews: [
+      { name: { ru: "Селена", en: "Selena" }, text: { ru: "Работаем с командой давно, предоставляют веб-мастеров с хорошим трафиком на наши продукты. Как рекламодатель, мы очень довольны сотрудничеством.", en: "We've been working with the team for a long time; they provide webmasters with good traffic for our products. As an advertiser, we are very satisfied with the collaboration." } },
+      { name: { ru: "Джон", en: "John" }, text: { ru: "Это первое сотрудничество, когда партнёрская программа реально фильтрует фрод. Трафик качественный, показатели выше, чем мы ожидали.", en: "This is the first collaboration where the affiliate program actually filters fraud. The traffic is high quality and the metrics exceeded our expectations." } },
+      { name: { ru: "Марко", en: "Marco" }, text: { ru: "Больше всего качественных потоков с трафиком — результат говорит сам за себя. Работаем уже три года и продолжаем масштабироваться.", en: "The most quality traffic flows come from here — the results speak for themselves. We've been working together for three years and continue to scale." } },
+      { name: { ru: "Анна", en: "Anna" }, text: { ru: "Прозрачная работа с источниками: слабые сорсы отключают сами, не дожидаясь наших претензий. Такое отношение — редкость на рынке.", en: "Transparent work with sources: they disconnect weak sources themselves without waiting for our complaints. Such an approach is rare in the market." } },
+      { name: { ru: "Давид", en: "David" }, text: { ru: "Качество трафика стабильно высокое, ретеншн игроков заметно лучше среднего по рынку. Рекомендуем как надёжного партнёра.", en: "Traffic quality is consistently high, player retention is noticeably better than the market average. We recommend them as a reliable partner." } },
+      { name: { ru: "Ольга", en: "Olga" }, text: { ru: "Быстрая коммуникация и честная позиция по невалиду. Все спорные кейсы решаются в течение суток, без затяжных разбирательств.", en: "Fast communication and an honest stance on invalid traffic. All disputed cases are resolved within a day, without prolonged proceedings." } },
+      { name: { ru: "Томас", en: "Thomas" }, text: { ru: "Подключились полгода назад — объёмы выросли в три раза без потери качества. Команда действительно следит за каждым потоком.", en: "We joined six months ago — volumes have tripled without any loss of quality. The team really monitors every flow." } },
+      { name: { ru: "Ирина", en: "Irina" }, text: { ru: "Работали со многими сетями, но здесь лучший баланс объёма и качества. Фрода практически нет, конверсия в депозит стабильная.", en: "We've worked with many networks, but here is the best balance of volume and quality. Almost no fraud, stable conversion to deposit." } },
+      { name: { ru: "Алекс", en: "Alex" }, text: { ru: "Ценим за принципиальность: сомнительные источники не допускаются вообще. Для нас это ключевой фактор долгосрочного сотрудничества.", en: "We value them for their principles: dubious sources are simply not allowed. For us, this is a key factor for long-term collaboration." } },
+      { name: { ru: "Мария", en: "Maria" }, text: { ru: "Отличные показатели по FTD и удержанию. Менеджеры глубоко понимают продукт и подбирают действительно релевантные источники.", en: "Excellent FTD and retention metrics. Managers deeply understand the product and select truly relevant sources." } },
+      { name: { ru: "Виктор", en: "Viktor" }, text: { ru: "Сотрудничаем второй год — ни одного серьёзного инцидента с качеством. Масштабируют только то, что реально приносит результат.", en: "We've been working together for two years — not a single serious quality incident. They scale only what actually delivers results." } },
+    ],
+    contactMarquee: { ru: "СВЯЗАТЬСЯ С НАМИ • ", en: "CONTACT US • " },
+    contactLabel: { ru: "Обсудить", en: "Discuss" },
+    contactTitle: { ru: "Сотрудничество", en: "Partnership" },
+    go: { ru: "Перейти", en: "Go" },
+    supportDesc: { ru: "на связи 24/7 — решаем любой вопрос быстро", en: "available 24/7 — resolve any issue quickly" },
+    managerTitle: { ru: "Менеджер", en: "Manager" },
+    managerDesc: { ru: "прямой контакт для обсуждения условий, ставок и запуска", en: "direct contact to discuss terms, rates, and launch" },
+    tgChannelDesc: { ru: "новости сети, свежие офферы и апдейты — только по делу", en: "network news, fresh offers, and updates — straight to the point" },
+    faqLabel: { ru: "Частые", en: "Frequently" },
+    faqTitle: { ru: "Вопросы", en: "Asked Questions" },
+    faqItems: [
+      {
+        q: { ru: "Как скоро после подключения на продукт пойдёт трафик?", en: "How soon will traffic come to the product after connection?" },
+        a: { ru: "Обычно первые переходы появляются сразу после запуска: под ваш продукт мы подбираем веб-мастеров с подходящими источниками заранее, поэтому старт происходит без длительного разгона.", en: "Usually the first clicks appear immediately after launch: we select webmasters with suitable sources for your product in advance, so the start happens without a lengthy warm-up." },
+      },
+      {
+        q: { ru: "По каким ГЕО вы льёте?", en: "What GEOs do you work with?" },
+        a: { ru: "Покрываем широкий список регионов — Tier-1, Европу, СНГ, Азию и LatAm. Конкретный набор ГЕО под ваш продукт согласовываем на этапе обсуждения условий.", en: "We cover a wide range of regions — Tier-1, Europe, CIS, Asia, and LatAm. The specific set of GEOs for your product is agreed at the stage of discussing terms." },
+      },
+      {
+        q: { ru: "На какие объёмы трафика можно рассчитывать?", en: "What traffic volumes can be expected?" },
+        a: { ru: "Точную цифру заранее назвать нельзя: объём напрямую зависит от условий выкупа с вашей стороны и конверта самого продукта. Чем конкурентнее условия — тем больше сорсов подключается к работе.", en: "The exact number cannot be given in advance: volume directly depends on your buyout terms and the product's conversion rate. The more competitive the terms, the more sources get connected." },
+      },
+      {
+        q: { ru: "Сколько занимает подключение и интеграция?", en: "How long does connection and integration take?" },
+        a: { ru: "Скорость зависит от обеих сторон. Если ответы приходят быстро и постбеки настраиваются без задержек, полная интеграция реальна за один рабочий день.", en: "Speed depends on both parties. If responses come quickly and postbacks are set up without delays, full integration is realistic within one business day." },
+      },
+      {
+        q: { ru: "Какие KPI вы готовы принимать в работу?", en: "What KPIs are you willing to work with?" },
+        a: { ru: "Для нас главное — реалистичность показателей и баланс интересов: условия должны работать и на бренд, и на веб-мастеров. Офферы с заведомо недостижимыми KPI мы в сеть не берём.", en: "For us, the main thing is the realism of metrics and a balance of interests: terms must work for both the brand and webmasters. We don't take offers with obviously unachievable KPIs into the network." },
+      },
+      {
+        q: { ru: "Есть ли гарантии, что привлечённые игроки будут активны?", en: "Are there guarantees that attracted players will be active?" },
+        a: { ru: "Жёстких гарантий активности не даёт никто: она зависит не только от источников, но и от самого продукта и работы его retention-команды. Со своей стороны мы жёстко фильтруем веб-мастеров на входе, что заметно повышает долю качественного трафика.", en: "No one gives strict activity guarantees: it depends not only on sources, but also on the product itself and its retention team's work. On our side, we strictly filter webmasters at entry, which noticeably increases the share of quality traffic." },
+      },
+      {
+        q: { ru: "Из каких шагов состоит запуск?", en: "What steps does the launch consist of?" },
+        a: { ru: "Процесс простой: согласование условий → юридическая проверка → интеграция ссылок и настройка постбеков → тестовые конверсии → запуск трафика.", en: "The process is simple: agreement on terms → legal check → link integration and postback setup → test conversions → traffic launch." },
+      },
+      {
+        q: { ru: "Подключаете ли крипто-продукты?", en: "Do you work with crypto products?" },
+        a: { ru: "Да, с крипто-вертикалью работаем. Условия и требования по таким продуктам обсуждаются с менеджером индивидуально.", en: "Yes, we work with the crypto vertical. Terms and requirements for such products are discussed with a manager individually." },
+      },
+    ],
   },
 } as const;
 

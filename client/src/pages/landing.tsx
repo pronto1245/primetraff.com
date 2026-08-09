@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { NavHeader, FixedFooterBar, SHARED_STYLES, BLUE, FONT, TYPE, TRACK, PAD } from '@/components/nav-header';
 import { useLang } from '@/lib/language-context';
+import { t, translations } from '@/lib/i18n';
 import bgImage from '@/assets/dsb-bg.webp';
 
 /* ── Partner logos ── */
@@ -201,8 +202,8 @@ export default function LandingPage() {
           <div className="w-full" style={{ display: 'flex', flexDirection: 'column', gap: '0.6vw' }}>
             <div className="m-only w-full justify-between uppercase text-white font-bold"
               style={{ fontSize: 9, letterSpacing: '0.1em', lineHeight: 1.5, marginBottom: 10, textAlign: 'left' }}>
-              <span>{lang === 'ru' ? 'Где трафик превращается\nв партнёрство.' : 'Where traffic becomes\npartnership.'}</span>
-              <span style={{ textAlign: 'right' }}>{lang === 'ru' ? 'Работаем для вас\nс 2025 года' : 'Working for you\nsince 2025'}</span>
+              <span>{t(translations.landingPage.heroSloganLeft, lang)}</span>
+              <span style={{ textAlign: 'right' }}>{t(translations.landingPage.heroSloganRight, lang)}</span>
             </div>
             <svg ref={heroSvgRef} viewBox="0 0 1000 100" className="w-full block" preserveAspectRatio="none" style={{ overflow: 'visible' }}>
               <defs>
@@ -234,7 +235,7 @@ export default function LandingPage() {
               style={{ textDecoration: 'none' }}
             >
               <span className="uppercase font-medium text-white" style={{ fontSize: TYPE.body, letterSpacing: '0.15em' }}>
-                {lang === 'ru' ? 'Стать партнёром' : 'Become a Partner'}
+                {t(translations.landingPage.heroCta, lang)}
               </span>
               <ArrowRight className="w-4 h-4 text-white transform group-hover:translate-x-1 transition-transform duration-500" />
             </a>
@@ -245,10 +246,10 @@ export default function LandingPage() {
         <div className="hero-corners absolute bottom-0 left-0 right-0 z-20 flex items-end justify-between pointer-events-none"
           style={{ padding: `0 ${PAD} clamp(96px, 13vh, 120px)` }}>
           <div className="hero-corner text-left uppercase text-white font-bold leading-snug" style={{ fontSize: TYPE.accent, letterSpacing: TRACK }}>
-            {lang === 'ru' ? <>Где трафик превращается<br />в партнёрство.</> : <>Where traffic becomes<br />partnership.</>}
+            {t(translations.landingPage.heroSloganLeft, lang).split('\n').map((line, i) => i === 0 ? <span key={i}>{line}<br /></span> : <span key={i}>{line}</span>)}
           </div>
           <div className="hero-corner text-right uppercase text-white font-bold leading-snug" style={{ fontSize: TYPE.accent, letterSpacing: TRACK }}>
-            {lang === 'ru' ? <>Работаем для вас<br />с 2025 года</> : <>Working for you<br />since 2025</>}
+            {t(translations.landingPage.heroSloganRight, lang).split('\n').map((line, i) => i === 0 ? <span key={i}>{line}<br /></span> : <span key={i}>{line}</span>)}
           </div>
         </div>
         <ScrollHint />
@@ -259,36 +260,20 @@ export default function LandingPage() {
         <div className="flex-1 flex flex-col items-center justify-center text-center w-full">
           <div className="relative" style={{ marginBottom: 'clamp(28px, 4.5vh, 48px)' }}>
             <div className="uppercase text-zinc-400" style={{ fontSize: 'clamp(11px, 1.1vw, 15px)', letterSpacing: '0.35em', fontWeight: 300, marginBottom: 'clamp(14px, 2vh, 24px)' }}>
-              {lang === 'ru' ? 'Немного' : 'A little bit'}
+              {t(translations.landingPage.aboutLabel, lang)}
             </div>
             <div className="uppercase font-black text-white leading-none" style={{ fontSize: 'clamp(30px, 4.4vw, 62px)', letterSpacing: '0.02em' }}>
-              {lang === 'ru' ? 'О нас' : 'About us'}
+              {t(translations.landingPage.aboutTitle, lang)}
             </div>
           </div>
           <div className="uppercase text-white" style={{ fontSize: 'clamp(11px, 1.05vw, 15px)', letterSpacing: '0.06em', lineHeight: 1.8, fontWeight: 400, maxWidth: 1000 }}>
-            {lang === 'ru' ? (
-              <>
-                <p>PrimeTraff — партнёрская сеть в iGaming, созданная для долгосрочного сотрудничества и реального результата.</p>
-                <p>Мы объединяем рекламодателей и аффилейтов, выстраивая прозрачную и понятную модель работы.</p>
-                <p>Следим за качеством трафика, защищаем участников от фрода и оперативно решаем возникающие вопросы.</p>
-                <p>Не гонимся за количеством — развиваем сеть за счёт сильных партнёров и эффективных источников.</p>
-                <p>Наша цель — сделать сотрудничество предсказуемым, комфортным и выгодным для всех сторон.</p>
-              </>
-            ) : (
-              <>
-                <p>PrimeTraff is an iGaming affiliate network built for long-term partnerships and real results.</p>
-                <p>We connect advertisers and affiliates through a transparent and straightforward business model.</p>
-                <p>We monitor traffic quality, protect participants from fraud, and resolve issues promptly.</p>
-                <p>We don't chase volume — we grow the network through strong partners and effective sources.</p>
-                <p>Our goal is to make collaboration predictable, comfortable, and profitable for all parties.</p>
-              </>
-            )}
+            {translations.landingPage.aboutParas[lang].map((para, i) => <p key={i}>{para}</p>)}
           </div>
         </div>
         {/* Partners marquee */}
         <div style={{ marginTop: 'clamp(40px, 6vh, 64px)', overflow: 'hidden' }}>
           <div className="uppercase text-zinc-400 text-center" style={{ fontSize: TYPE.small, letterSpacing: '0.35em', fontWeight: 300, marginBottom: 'clamp(24px, 4vh, 40px)' }}>
-            {lang === 'ru' ? 'Нам доверяют лидеры рынка' : 'Trusted by market leaders'}
+            {t(translations.landingPage.trustedBy, lang)}
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(16px, 3vh, 28px)' }}>
             <div style={{ overflow: 'hidden' }}>
