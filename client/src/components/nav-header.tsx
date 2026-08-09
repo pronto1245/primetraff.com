@@ -52,9 +52,10 @@ export function NavHeader({ activePage }: NavHeaderProps) {
           padding: `clamp(12px,1.5vh,18px) ${PAD}`,
           fontFamily: FONT,
           background: 'rgba(0,0,0,0.72)',
-          backdropFilter: 'blur(12px)',
-          WebkitBackdropFilter: 'blur(12px)',
+          backdropFilter: 'blur(8px)',
+          WebkitBackdropFilter: 'blur(8px)',
           borderBottom: '1px solid rgba(255,255,255,0.06)',
+          willChange: 'transform',
         }}
       >
         <Link href="/" onClick={close}>
@@ -108,11 +109,12 @@ export function NavHeader({ activePage }: NavHeaderProps) {
         className="fixed inset-0 z-30"
         style={{
           background: 'rgba(0,0,0,0.55)',
-          backdropFilter: 'blur(10px)',
-          WebkitBackdropFilter: 'blur(10px)',
+          backdropFilter: 'blur(8px)',
+          WebkitBackdropFilter: 'blur(8px)',
           opacity: menuOpen ? 1 : 0,
+          visibility: menuOpen ? 'visible' : 'hidden',
           pointerEvents: menuOpen ? 'auto' : 'none',
-          transition: 'opacity .5s ease',
+          transition: 'opacity .5s ease, visibility .5s ease',
         }}
       />
 
@@ -187,7 +189,7 @@ export function FixedFooterBar() {
   return (
     <div
       className="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-between pointer-events-none"
-      style={{ padding: `0 ${PAD} max(clamp(18px, 2.5vh, 28px), env(safe-area-inset-bottom, 0px))`, fontFamily: FONT }}
+      style={{ padding: `0 ${PAD} max(clamp(18px, 2.5vh, 28px), env(safe-area-inset-bottom, 0px))`, fontFamily: FONT, willChange: 'transform' }}
     >
       <div className="flex items-center gap-3 pointer-events-auto">
         {[
@@ -248,7 +250,7 @@ export const SHARED_STYLES = `
     .m-title { font-size: 34px !important; }
     .m-sec { padding-bottom: 120px !important; }
     html { scroll-snap-type: y proximity; }
-    .snap-sec { scroll-snap-align: start; scroll-snap-stop: always; }
+    .snap-sec { scroll-snap-align: start; }
   }
   .m-only { display: none; }
   .tip { position: absolute; left: 50%; bottom: calc(100% + 10px); transform: translateX(-50%) translateY(4px); background: rgba(10,10,12,0.95); border: 1px solid rgba(59,130,246,0.5); color: #fff; font-size: 10px; letter-spacing: 0.12em; padding: 6px 12px; border-radius: 8px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .25s ease, transform .25s ease; }

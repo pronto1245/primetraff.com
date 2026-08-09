@@ -43,14 +43,14 @@ export default function AffiliatesPage() {
     <div style={{ width: '100%', fontFamily: FONT }} className="bg-black text-white">
       <style>{`
         ${SHARED_STYLES}
-        html { scroll-snap-type: y proximity; scroll-behavior: smooth; }
-        .snap-sec { scroll-snap-align: start; scroll-snap-stop: always; }
+        html { scroll-snap-type: y proximity; }
+        .snap-sec { scroll-snap-align: start; }
         .no-snap { scroll-snap-align: none; scroll-snap-stop: normal; }
         .faq-scroll { overscroll-behavior-y: contain; }
         @keyframes contact-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-        .contact-marquee-anim { display: inline-block; animation: contact-marquee 40s linear infinite; }
+        .contact-marquee-anim { display: inline-block; animation: contact-marquee 40s linear infinite; will-change: transform; }
         @keyframes aff-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-        .aff-marquee { display: flex; width: max-content; animation: aff-marquee 55s linear infinite; }
+        .aff-marquee { display: flex; width: max-content; animation: aff-marquee 55s linear infinite; will-change: transform; }
         .aff-marquee:hover { animation-play-state: paused; }
         .contact-card:hover { border-color: rgba(255,255,255,0.28) !important; background: rgba(255,255,255,0.06) !important; transform: translateY(-4px); }
         .contact-card:hover > div:last-child { opacity: 1 !important; }

@@ -157,13 +157,13 @@ export default function LandingPage() {
     <div style={{ width: '100%', fontFamily: FONT }} className="bg-black text-white">
       <style>{`
         ${SHARED_STYLES}
-        html { scroll-snap-type: y proximity; scroll-behavior: smooth; }
-        .snap-sec { scroll-snap-align: start; scroll-snap-stop: always; }
+        html { scroll-snap-type: y proximity; }
+        .snap-sec { scroll-snap-align: start; }
         .no-snap { scroll-snap-align: none; scroll-snap-stop: normal; }
         @keyframes marquee-left  { from { transform: translateX(0) }    to { transform: translateX(-50%) } }
         @keyframes marquee-right { from { transform: translateX(-50%) } to { transform: translateX(0) } }
-        .marquee-left  { display: flex; width: max-content; animation: marquee-left  60s linear infinite; }
-        .marquee-right { display: flex; width: max-content; animation: marquee-right 60s linear infinite; }
+        .marquee-left  { display: flex; width: max-content; animation: marquee-left  60s linear infinite; will-change: transform; }
+        .marquee-right { display: flex; width: max-content; animation: marquee-right 60s linear infinite; will-change: transform; }
         .marquee-left:hover, .marquee-right:hover { animation-play-state: paused; }
         .brand-item:hover { opacity: 1 !important; }
         @keyframes hint-bounce { 0%, 100% { transform: translateY(0); opacity: .45; } 50% { transform: translateY(9px); opacity: 1; } }
