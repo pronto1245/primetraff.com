@@ -253,8 +253,8 @@ export function Advertisers() {
             <div className="flex items-center gap-3">
               {[{ Icon: Send, tip: 'Наш канал' }, { Icon: Fingerprint, tip: 'Уникализатор' }].map(({ Icon, tip }) => (
                 <div key={tip} className="tip-wrap relative">
-                  <div className="rounded-full bg-white flex items-center justify-center text-black cursor-pointer" style={{ width: 40, height: 40 }}>
-                    <Icon style={{ width: 18, height: 18 }} strokeWidth={2} />
+                  <div className="rounded-full flex items-center justify-center text-white cursor-pointer hover:border-blue-500 transition-colors" style={{ width: 48, height: 48, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.2)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)' }}>
+                    <Icon style={{ width: 20, height: 20 }} strokeWidth={1.8} />
                   </div>
                   <span className="tip uppercase" style={{ fontFamily: FONT }}>{tip}</span>
                 </div>
