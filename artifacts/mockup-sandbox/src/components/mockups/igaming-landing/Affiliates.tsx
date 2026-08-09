@@ -23,6 +23,8 @@ export function Affiliates() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;700;900&family=Comforter&display=swap');
         ::-webkit-scrollbar { display: none; }
+        html { scroll-snap-type: y mandatory; }
+        section, .snap-sec { scroll-snap-align: start; scroll-snap-stop: always; }
         @media (max-width: 640px) {
           .m-hide { display: none !important; }
           .vh-section { height: auto !important; min-height: 100vh !important; }

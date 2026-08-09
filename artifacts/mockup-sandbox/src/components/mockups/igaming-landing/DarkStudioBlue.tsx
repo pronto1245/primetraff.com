@@ -58,6 +58,8 @@ export function DarkStudioBlue() {
         .marquee-left:hover, .marquee-right:hover { animation-play-state: paused; }
         .brand-item:hover { opacity: 1 !important; }
         ::-webkit-scrollbar { display: none; }
+        html { scroll-snap-type: y mandatory; }
+        section, .snap-sec { scroll-snap-align: start; scroll-snap-stop: always; }
         .m-only { display: none; }
         @media (max-width: 640px) {
           .m-only { display: flex !important; }
@@ -78,7 +80,7 @@ export function DarkStudioBlue() {
       `}</style>
 
       {/* ===== HERO ===== */}
-      <div style={{ width: '100%', height: '100vh' }} className="relative overflow-hidden bg-black flex flex-col items-center text-white">
+      <div style={{ width: '100%', height: '100vh' }} className="snap-sec relative overflow-hidden bg-black flex flex-col items-center text-white">
 
         {/* Фон */}
         <div className="absolute inset-0 z-0">
