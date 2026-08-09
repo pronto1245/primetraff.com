@@ -32,9 +32,10 @@ export default function AffiliatesPage() {
   }, []);
 
   useEffect(() => {
-    const sections = document.querySelectorAll('.snap-sec');
+    const sections = document.querySelectorAll('.snap-sec, .no-snap');
     const obs = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('sec-visible');
         const marquees = entry.target.querySelectorAll('.aff-marquee, .contact-marquee-anim');
         marquees.forEach(m => m.classList.toggle('marquee-paused', !entry.isIntersecting));
       });
@@ -56,7 +57,10 @@ export default function AffiliatesPage() {
       <style>{`
         ${SHARED_STYLES}
         html { scroll-snap-type: y proximity; }
-        .snap-sec { scroll-snap-align: start; }
+        .snap-sec { scroll-snap-align: start; contain: layout style; }
+        .no-snap { contain: layout style; }
+        .sec-fade { opacity: 0; transition: opacity 0.7s ease; }
+        .sec-fade.sec-visible { opacity: 1; }
         .no-snap { scroll-snap-align: none; scroll-snap-stop: normal; }
         .faq-scroll { overscroll-behavior-y: contain; }
         @keyframes contact-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
@@ -81,7 +85,7 @@ export default function AffiliatesPage() {
       <section className="snap-sec m-sec relative overflow-hidden flex flex-col" style={{ minHeight: '100vh', padding: `clamp(60px, 8vh, 100px) ${PAD} clamp(20px, 3vh, 32px)` }}>
         <ScrollHint />
         <div className="absolute inset-0 z-0">
-          <img src="/dsb-bg-blue.webp" alt="" decoding="async" className="w-full h-full object-cover" style={{  }} />
+          <img src="/dsb-bg-blue.webp" alt="" className="w-full h-full object-cover" style={{  }} />
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/70" />
           <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 55% 45% at 50% 38%, rgba(59,130,246,0.4) 0%, rgba(37,99,235,0.16) 45%, transparent 72%)' }} />
         </div>
@@ -129,10 +133,10 @@ export default function AffiliatesPage() {
       </section>
 
       {/* ===== WHY TRUST US ===== */}
-      <section className="snap-sec vh-section relative bg-black flex flex-col justify-between" style={{ height: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} 140px`, overflow: 'hidden' }}>
+      <section className="snap-sec sec-fade vh-section relative bg-black flex flex-col justify-between" style={{ height: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} 140px`, overflow: 'hidden' }}>
         <ScrollHint />
         <div className="absolute inset-0 z-0">
-          <img src="/dsb-bg-blue.webp" alt="" decoding="async" className="w-full h-full object-cover" style={{ opacity: 0.35 }} />
+          <img src="/dsb-bg-blue.webp" alt="" className="w-full h-full object-cover" style={{ opacity: 0.35 }} />
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/85" />
         </div>
         <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center">
@@ -169,10 +173,10 @@ export default function AffiliatesPage() {
       </section>
 
       {/* ===== DISCUSS COOPERATION ===== */}
-      <section id="contact" className="aff-contact-sec snap-sec relative bg-black flex flex-col justify-between overflow-hidden" style={{ height: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} clamp(16px, 2.5vh, 28px)` }}>
+      <section id="contact" className="aff-contact-sec snap-sec sec-fade relative bg-black flex flex-col justify-between overflow-hidden" style={{ height: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} clamp(16px, 2.5vh, 28px)` }}>
         <ScrollHint />
         <div className="absolute inset-0 z-0">
-          <img src="/dsb-bg-blue.webp" alt="" decoding="async" className="w-full h-full object-cover" style={{ opacity: 0.25 }} />
+          <img src="/dsb-bg-blue.webp" alt="" className="w-full h-full object-cover" style={{ opacity: 0.25 }} />
           <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/65 to-black/90" />
         </div>
         <div className="absolute left-0 right-0 z-0 pointer-events-none overflow-hidden" style={{ top: '50%', transform: 'translateY(-50%)' }}>
@@ -258,7 +262,7 @@ export default function AffiliatesPage() {
       </section>
 
       {/* ===== FAQ ===== */}
-      <section id="faq" className="no-snap relative bg-black flex flex-col justify-between" style={{ minHeight: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} 100px` }}>
+      <section id="faq" className="no-snap sec-fade relative bg-black flex flex-col justify-between" style={{ minHeight: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} 100px` }}>
         <div className="flex-1 flex flex-col items-center justify-center w-full">
           <div className="text-center">
             <div className="uppercase text-zinc-400" style={{ fontSize: 'clamp(11px, 1.1vw, 15px)', letterSpacing: '0.35em', fontWeight: 300, marginBottom: 'clamp(14px, 2vh, 24px)' }}>

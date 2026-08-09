@@ -93,9 +93,10 @@ export default function LandingPage() {
   }, []);
 
   useEffect(() => {
-    const sections = document.querySelectorAll('.snap-sec');
+    const sections = document.querySelectorAll('.snap-sec, .no-snap');
     const obs = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('sec-visible');
         const marquees = entry.target.querySelectorAll('.marquee-left, .marquee-right');
         marquees.forEach(m => m.classList.toggle('marquee-paused', !entry.isIntersecting));
       });
@@ -170,7 +171,10 @@ export default function LandingPage() {
       <style>{`
         ${SHARED_STYLES}
         html { scroll-snap-type: y proximity; }
-        .snap-sec { scroll-snap-align: start; }
+        .snap-sec { scroll-snap-align: start; contain: layout style; }
+        .no-snap { contain: layout style; }
+        .sec-fade { opacity: 0; transition: opacity 0.7s ease; }
+        .sec-fade.sec-visible { opacity: 1; }
         .no-snap { scroll-snap-align: none; scroll-snap-stop: normal; }
         @keyframes marquee-left  { from { transform: translateX(0) }    to { transform: translateX(-50%) } }
         @keyframes marquee-right { from { transform: translateX(-50%) } to { transform: translateX(0) } }
@@ -270,7 +274,7 @@ export default function LandingPage() {
       </div>
 
       {/* ===== ABOUT + PARTNERS ===== */}
-      <section className="snap-sec relative bg-black flex flex-col" style={{ minHeight: '100vh', paddingTop: 'clamp(60px, 8vh, 100px)', paddingLeft: PAD, paddingRight: PAD, paddingBottom: '100px' }}>
+      <section className="snap-sec sec-fade relative bg-black flex flex-col" style={{ minHeight: '100vh', paddingTop: 'clamp(60px, 8vh, 100px)', paddingLeft: PAD, paddingRight: PAD, paddingBottom: '100px' }}>
         <div className="flex-1 flex flex-col items-center justify-center text-center w-full">
           <div className="relative" style={{ marginBottom: 'clamp(28px, 4.5vh, 48px)' }}>
             <div className="uppercase text-zinc-400" style={{ fontSize: 'clamp(11px, 1.1vw, 15px)', letterSpacing: '0.35em', fontWeight: 300, marginBottom: 'clamp(14px, 2vh, 24px)' }}>
