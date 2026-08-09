@@ -23,6 +23,18 @@ export function Affiliates() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;700;900&family=Comforter&display=swap');
         ::-webkit-scrollbar { display: none; }
+        @media (max-width: 640px) {
+          .m-hide { display: none !important; }
+          .vh-section { height: auto !important; min-height: 100vh !important; }
+          .row-desc { display: none !important; }
+          .hero-words { font-size: 9px !important; letter-spacing: 0.14em !important; }
+          .hero-corner { font-size: 9px !important; }
+          .hero-corners { display: none !important; }
+          .m-pad0 { padding-left: 0 !important; padding-right: 0 !important; }
+          .m-copy { padding-bottom: 88px; }
+          .m-title { font-size: 34px !important; }
+          .m-sec { padding-bottom: 120px !important; }
+        }
         .faq-scroll { overflow-y: auto; scrollbar-width: thin; scrollbar-color: rgba(59,130,246,0.6) rgba(255,255,255,0.06); }
         .faq-scroll::-webkit-scrollbar { display: block; width: 4px; }
         .faq-scroll::-webkit-scrollbar-track { background: rgba(255,255,255,0.06); }
@@ -93,7 +105,7 @@ export function Affiliates() {
       </div>
 
       {/* ===== AFFILIATES — оформление как «О нас» на главной ===== */}
-      <section className="relative overflow-hidden flex flex-col" style={{ minHeight: '100vh', padding: `clamp(60px, 8vh, 100px) ${PAD} clamp(20px, 3vh, 32px)` }}>
+      <section className="m-sec relative overflow-hidden flex flex-col" style={{ minHeight: '100vh', padding: `clamp(60px, 8vh, 100px) ${PAD} clamp(20px, 3vh, 32px)` }}>
         <div className="absolute inset-0 z-0">
           <img src={bgImage} alt="" className="w-full h-full object-cover" style={{ filter: 'hue-rotate(220deg) saturate(1.1)' }} />
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/70" />
@@ -103,7 +115,7 @@ export function Affiliates() {
             <div className="uppercase text-zinc-400" style={{ fontSize: 'clamp(11px, 1.1vw, 15px)', letterSpacing: '0.35em', fontWeight: 300, marginBottom: 'clamp(14px, 2vh, 24px)' }}>
               Primetraff.com
             </div>
-            <div className="uppercase font-black text-white leading-none" style={{ fontSize: 'clamp(48px, 8.2vw, 118px)', letterSpacing: '0.02em' }}>
+            <div className="m-title uppercase font-black text-white leading-none" style={{ fontSize: 'clamp(48px, 8.2vw, 118px)', letterSpacing: '0.02em' }}>
               Affiliates
             </div>
           </div>
@@ -116,7 +128,7 @@ export function Affiliates() {
           </div>
 
           {/* Кнопки Регистрация / Вход — сразу под текстом, с отступом от краёв */}
-          <div className="w-full flex items-center justify-between" style={{ marginTop: 'clamp(40px, 7vh, 72px)', padding: '0 clamp(40px, 10vw, 160px)' }}>
+          <div className="m-pad0 w-full flex items-center justify-between" style={{ marginTop: 'clamp(40px, 7vh, 72px)', padding: '0 clamp(40px, 10vw, 160px)' }}>
             <button className="flex items-center gap-3 border-b border-white/30 pb-2 hover:border-white transition-colors duration-500 group bg-transparent cursor-pointer">
               <span className="uppercase font-medium text-white" style={{ fontFamily: FONT, fontSize: 'clamp(12px, 1.15vw, 16px)', letterSpacing: '0.15em' }}>Регистрация</span>
               <ArrowRight className="w-4 h-4 text-white transform group-hover:translate-x-1 transition-transform duration-500" />
@@ -131,7 +143,7 @@ export function Affiliates() {
       </section>
 
       {/* ===== ПОЧЕМУ НАМ ДОВЕРЯЮТ ===== */}
-      <section className="relative bg-black flex flex-col justify-between" style={{ height: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} clamp(16px, 2.5vh, 28px)`, overflow: 'hidden' }}>
+      <section className="vh-section relative bg-black flex flex-col justify-between" style={{ height: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} clamp(16px, 2.5vh, 28px)`, overflow: 'hidden' }}>
         <div className="absolute inset-0 z-0">
           <img src={bgImage} alt="" className="w-full h-full object-cover" style={{ filter: 'hue-rotate(220deg) saturate(1.1)', opacity: 0.35 }} />
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/85" />
@@ -244,7 +256,7 @@ export function Affiliates() {
               Support
             </button>
           </div>
-          <div className="text-center text-zinc-500 uppercase" style={{ fontSize: 'clamp(8px, 0.7vw, 10px)', letterSpacing: '0.1em', marginTop: 'clamp(16px, 2.5vh, 28px)' }}>
+          <div className="m-copy text-center text-zinc-500 uppercase" style={{ fontSize: 'clamp(8px, 0.7vw, 10px)', letterSpacing: '0.1em', marginTop: 'clamp(16px, 2.5vh, 28px)' }}>
             © 2026. PRIMETRAFF.COM. ALL RIGHTS RESERVED.
           </div>
         </div>

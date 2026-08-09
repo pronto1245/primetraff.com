@@ -44,6 +44,18 @@ export function Blog() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;700;900&display=swap');
         ::-webkit-scrollbar { display: none; }
+        @media (max-width: 640px) {
+          .m-hide { display: none !important; }
+          .vh-section { height: auto !important; min-height: 100vh !important; }
+          .row-desc { display: none !important; }
+          .hero-words { font-size: 9px !important; letter-spacing: 0.14em !important; }
+          .hero-corner { font-size: 9px !important; }
+          .hero-corners { display: none !important; }
+          .m-pad0 { padding-left: 0 !important; padding-right: 0 !important; }
+          .m-copy { padding-bottom: 88px; }
+          .m-title { font-size: 34px !important; }
+          .m-sec { padding-bottom: 120px !important; }
+        }
         .tip { position: absolute; left: 50%; bottom: calc(100% + 10px); transform: translateX(-50%) translateY(4px); background: rgba(10,10,12,0.95); border: 1px solid rgba(59,130,246,0.5); color: #fff; font-size: 10px; letter-spacing: 0.12em; padding: 6px 12px; border-radius: 8px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .25s ease, transform .25s ease; }
         .tip-wrap:hover .tip { opacity: 1; transform: translateX(-50%) translateY(0); }
         .post-card { transition: border-color .35s ease, transform .35s ease, background .35s ease; }
@@ -216,7 +228,7 @@ export function Blog() {
               Support
             </button>
           </div>
-          <div className="text-center text-zinc-500 uppercase" style={{ fontSize: 'clamp(8px, 0.7vw, 10px)', letterSpacing: '0.1em', marginTop: 'clamp(16px, 2.5vh, 28px)' }}>
+          <div className="m-copy text-center text-zinc-500 uppercase" style={{ fontSize: 'clamp(8px, 0.7vw, 10px)', letterSpacing: '0.1em', marginTop: 'clamp(16px, 2.5vh, 28px)' }}>
             © 2026. PRIMETRAFF.COM. ALL RIGHTS RESERVED.
           </div>
         </div>

@@ -36,6 +36,18 @@ export function DarkStudioBlue() {
         .marquee-left:hover, .marquee-right:hover { animation-play-state: paused; }
         .brand-item:hover { opacity: 1 !important; }
         ::-webkit-scrollbar { display: none; }
+        @media (max-width: 640px) {
+          .m-hide { display: none !important; }
+          .vh-section { height: auto !important; min-height: 100vh !important; }
+          .row-desc { display: none !important; }
+          .hero-words { font-size: 9px !important; letter-spacing: 0.14em !important; }
+          .hero-corner { font-size: 9px !important; }
+          .hero-corners { display: none !important; }
+          .m-pad0 { padding-left: 0 !important; padding-right: 0 !important; }
+          .m-copy { padding-bottom: 88px; }
+          .m-title { font-size: 34px !important; }
+          .m-sec { padding-bottom: 120px !important; }
+        }
         .tip { position: absolute; left: 50%; bottom: calc(100% + 10px); transform: translateX(-50%) translateY(4px); background: rgba(10,10,12,0.95); border: 1px solid rgba(59,130,246,0.5); color: #fff; font-size: 10px; letter-spacing: 0.12em; padding: 6px 12px; border-radius: 8px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .25s ease, transform .25s ease; }
         .tip-wrap:hover .tip { opacity: 1; transform: translateX(-50%) translateY(0); }
       `}</style>
@@ -150,7 +162,7 @@ export function DarkStudioBlue() {
                 PRIMETRAFF<tspan fill="url(#comGrad)">.COM</tspan>
               </text>
             </svg>
-            <div className="w-full flex justify-between uppercase text-white font-bold" style={{ fontSize: TYPE.accent, letterSpacing: TRACK }}>
+            <div className="hero-words w-full flex justify-between uppercase text-white font-bold" style={{ fontSize: TYPE.accent, letterSpacing: TRACK }}>
               {['Private', 'Premium', 'iGaming', 'Affiliate', 'Network'].map(w => <span key={w}>{w}</span>)}
             </div>
           </div>
@@ -166,12 +178,12 @@ export function DarkStudioBlue() {
         </div>
 
         {/* Нижние углы */}
-        <div className="absolute bottom-0 left-0 right-0 z-20 flex items-end justify-between pointer-events-none"
+        <div className="hero-corners absolute bottom-0 left-0 right-0 z-20 flex items-end justify-between pointer-events-none"
           style={{ padding: `0 ${PAD} ${PAD}` }}>
-          <div className="text-left uppercase text-white font-bold leading-snug" style={{ fontSize: TYPE.accent, letterSpacing: TRACK }}>
+          <div className="hero-corner text-left uppercase text-white font-bold leading-snug" style={{ fontSize: TYPE.accent, letterSpacing: TRACK }}>
             Где трафик превращается<br />в партнёрство.
           </div>
-          <div className="text-right uppercase text-white font-bold leading-snug" style={{ fontSize: TYPE.accent, letterSpacing: TRACK }}>
+          <div className="hero-corner text-right uppercase text-white font-bold leading-snug" style={{ fontSize: TYPE.accent, letterSpacing: TRACK }}>
             Работаем для вас<br />с 2025 года
           </div>
         </div>
@@ -268,7 +280,7 @@ export function DarkStudioBlue() {
               Support
             </button>
           </div>
-          <div className="text-center text-zinc-500 uppercase" style={{ fontSize: 'clamp(8px, 0.7vw, 10px)', letterSpacing: '0.1em', marginTop: 'clamp(16px, 2.5vh, 28px)' }}>
+          <div className="m-copy text-center text-zinc-500 uppercase" style={{ fontSize: 'clamp(8px, 0.7vw, 10px)', letterSpacing: '0.1em', marginTop: 'clamp(16px, 2.5vh, 28px)' }}>
             © 2026. PRIMETRAFF.COM. ALL RIGHTS RESERVED.
           </div>
         </div>
