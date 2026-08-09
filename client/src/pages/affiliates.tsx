@@ -120,7 +120,7 @@ export default function AffiliatesPage() {
               href={REGISTER_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3 border-b border-blue-500/60 pb-2 hover:border-blue-400 transition-colors duration-500 group"
+              className="flex items-center gap-3 border-b border-blue-500 pb-2 hover:border-blue-300 transition-colors duration-500 group"
               style={{ textDecoration: 'none' }}
             >
               <span className="uppercase font-medium text-white" style={{ fontFamily: FONT, fontSize: 'clamp(12px, 1.15vw, 16px)', letterSpacing: '0.15em' }}>
@@ -132,7 +132,7 @@ export default function AffiliatesPage() {
               href={LOGIN_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3 border-b border-blue-500/60 pb-2 hover:border-blue-400 transition-colors duration-500 group"
+              className="flex items-center gap-3 border-b border-blue-500 pb-2 hover:border-blue-300 transition-colors duration-500 group"
               style={{ textDecoration: 'none' }}
             >
               <span className="uppercase font-medium text-white" style={{ fontFamily: FONT, fontSize: 'clamp(12px, 1.15vw, 16px)', letterSpacing: '0.15em' }}>
