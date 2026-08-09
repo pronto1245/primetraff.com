@@ -71,6 +71,8 @@ export function DarkStudioBlue() {
         .scroll-hint svg { animation: hint-bounce 1.8s ease-in-out infinite; }
         html { scroll-snap-type: y mandatory; }
         section, .snap-sec { scroll-snap-align: start; scroll-snap-stop: always; }
+        .no-snap { scroll-snap-align: none !important; scroll-snap-stop: unset !important; }
+        .faq-scroll { overscroll-behavior-y: contain; }
         .m-only { display: none; }
         @media (max-width: 640px) {
           .m-only { display: flex !important; }
@@ -227,7 +229,7 @@ export function DarkStudioBlue() {
       </div>
 
       {/* ===== ПАРТНЁРЫ — автоскролл в 2 ряда ===== */}
-      <section className="relative bg-black overflow-hidden" style={{ padding: `clamp(60px, 8vh, 100px) 0 clamp(80px, 10vh, 120px)` }}>
+      <section className="no-snap relative bg-black overflow-hidden" style={{ padding: `clamp(60px, 8vh, 100px) 0 clamp(80px, 10vh, 120px)` }}>
         <ScrollHint />
         <div className="uppercase text-zinc-400 text-center" style={{ fontSize: TYPE.small, letterSpacing: '0.35em', fontWeight: 300, marginBottom: 'clamp(36px, 6vh, 60px)' }}>
           Нам доверяют лидеры рынка
@@ -283,7 +285,7 @@ export function DarkStudioBlue() {
         })()}
       </section>
       {/* ===== О НАС ===== */}
-      <section className="relative bg-black flex flex-col" style={{ minHeight: '100vh', padding: `clamp(60px, 8vh, 100px) ${PAD} clamp(20px, 3vh, 32px)` }}>
+      <section className="no-snap relative bg-black flex flex-col" style={{ minHeight: '100vh', paddingTop: 'clamp(60px, 8vh, 100px)', paddingLeft: PAD, paddingRight: PAD, paddingBottom: '100px' }}>
         <div className="flex-1 flex flex-col items-center justify-center text-center w-full">
           <div className="relative" style={{ marginBottom: 'clamp(28px, 4.5vh, 48px)' }}>
             <div className="uppercase text-zinc-400" style={{ fontSize: 'clamp(11px, 1.1vw, 15px)', letterSpacing: '0.35em', fontWeight: 300, marginBottom: 'clamp(14px, 2vh, 24px)' }}>

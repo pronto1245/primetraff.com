@@ -36,6 +36,8 @@ export function Advertisers() {
         .scroll-hint svg { animation: hint-bounce 1.8s ease-in-out infinite; }
         html { scroll-snap-type: y mandatory; }
         section, .snap-sec { scroll-snap-align: start; scroll-snap-stop: always; }
+        .no-snap { scroll-snap-align: none !important; scroll-snap-stop: unset !important; }
+        .faq-scroll { overscroll-behavior-y: contain; }
         @media (max-width: 640px) {
           .m-hide { display: none !important; }
           .vh-section { height: auto !important; min-height: 100vh !important; }
@@ -48,7 +50,7 @@ export function Advertisers() {
           .m-title { font-size: 34px !important; }
           .m-sec { padding-bottom: 120px !important; }
         }
-        .faq-scroll { overflow-y: auto; scrollbar-width: thin; scrollbar-color: rgba(59,130,246,0.6) rgba(255,255,255,0.06); }
+        .faq-scroll { overscroll-behavior-y: contain; overflow-y: auto; scrollbar-width: thin; scrollbar-color: rgba(59,130,246,0.6) rgba(255,255,255,0.06); }
         .faq-scroll::-webkit-scrollbar { display: block; width: 4px; }
         .faq-scroll::-webkit-scrollbar-track { background: rgba(255,255,255,0.06); }
         .faq-scroll::-webkit-scrollbar-thumb { background: rgba(59,130,246,0.6); border-radius: 2px; }
@@ -241,7 +243,7 @@ export function Advertisers() {
       </section>
 
       {/* ===== FAQ ===== */}
-      <section className="relative bg-black flex flex-col justify-between" style={{ minHeight: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} clamp(16px, 2.5vh, 28px)` }}>
+      <section className="no-snap relative bg-black flex flex-col justify-between" style={{ minHeight: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} clamp(16px, 2.5vh, 28px)` }}>
         <div className="flex-1 flex flex-col items-center justify-center w-full">
           <div className="text-center">
             <div className="uppercase text-zinc-400" style={{ fontSize: 'clamp(11px, 1.1vw, 15px)', letterSpacing: '0.35em', fontWeight: 300, marginBottom: 'clamp(14px, 2vh, 24px)' }}>
@@ -251,7 +253,7 @@ export function Advertisers() {
               Вопросы
             </div>
           </div>
-          <div className="faq-scroll w-full" style={{ maxWidth: 1000, maxHeight: 'clamp(300px, 46vh, 430px)' }}>
+          <div className="faq-scroll w-full" style={{ maxWidth: 1000, maxHeight: 'clamp(300px, 46vh, 430px)', overscrollBehaviorY: 'contain' }}>
             {FAQ_ITEMS.map((item, i) => (
               <div key={i} style={{ borderTop: '1px solid rgba(255,255,255,0.12)', borderBottom: i === FAQ_ITEMS.length - 1 ? '1px solid rgba(255,255,255,0.12)' : 'none' }}>
                 <button onClick={() => setOpenFaq(openFaq === i ? null : i)}

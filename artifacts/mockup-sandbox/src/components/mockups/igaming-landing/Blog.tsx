@@ -55,8 +55,8 @@ export function Blog() {
         ::-webkit-scrollbar { display: none; }
         @keyframes hint-bounce { 0%, 100% { transform: translateY(0); opacity: .45; } 50% { transform: translateY(9px); opacity: 1; } }
         .scroll-hint svg { animation: hint-bounce 1.8s ease-in-out infinite; }
-        html { scroll-snap-type: y mandatory; }
-        section, .snap-sec { scroll-snap-align: start; scroll-snap-stop: always; }
+        html { scroll-snap-type: none; }
+        section, .snap-sec { scroll-snap-align: none; scroll-snap-stop: unset; }
         @media (max-width: 640px) {
           .m-hide { display: none !important; }
           .vh-section { height: auto !important; min-height: 100vh !important; }

@@ -86,7 +86,7 @@ export default function AdvertisersPage() {
       </section>
 
       {/* ===== WHY CHOOSE US ===== */}
-      <section className="vh-section relative bg-black flex flex-col justify-between" style={{ height: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} clamp(140px, 19vh, 200px)`, overflow: 'hidden' }}>
+      <section className="vh-section relative bg-black flex flex-col justify-between" style={{ height: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} clamp(16px, 2.5vh, 28px)`, overflow: 'hidden' }}>
         <ScrollHint />
         <div className="absolute inset-0 z-0">
           <img src="/dsb-bg-blue.webp" alt="" decoding="async" className="w-full h-full object-cover" style={{ opacity: 0.35 }} />
@@ -193,7 +193,7 @@ export default function AdvertisersPage() {
       </section>
 
       {/* ===== FAQ ===== */}
-      <section id="faq" className="relative bg-black flex flex-col justify-between" style={{ minHeight: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} clamp(16px, 2.5vh, 28px)` }}>
+      <section id="faq" className="no-snap relative bg-black flex flex-col justify-between" style={{ minHeight: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} clamp(16px, 2.5vh, 28px)` }}>
         <div className="flex-1 flex flex-col items-center justify-center w-full">
           <div className="text-center">
             <div className="uppercase text-zinc-400" style={{ fontSize: 'clamp(11px, 1.1vw, 15px)', letterSpacing: '0.35em', fontWeight: 300, marginBottom: 'clamp(14px, 2vh, 24px)' }}>
@@ -203,7 +203,7 @@ export default function AdvertisersPage() {
               {t(translations.advertisersPage.faqTitle, lang)}
             </div>
           </div>
-          <div className="faq-scroll w-full" style={{ maxWidth: 1000, maxHeight: 'clamp(300px, 46vh, 430px)' }}>
+          <div className="faq-scroll w-full" style={{ maxWidth: 1000, maxHeight: 'clamp(300px, 46vh, 430px)', overscrollBehaviorY: 'contain' }}>
             {faqItems.map((item, i) => (
               <div key={i} style={{ borderTop: '1px solid rgba(255,255,255,0.12)', borderBottom: i === faqItems.length - 1 ? '1px solid rgba(255,255,255,0.12)' : 'none' }}>
                 <button
