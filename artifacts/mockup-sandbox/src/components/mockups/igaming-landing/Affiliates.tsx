@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowRight, X, Zap } from 'lucide-react';
+import { ArrowRight, Headphones, Send, UserRound, X, Zap } from 'lucide-react';
 import bgImage from './assets/dsb-bg.png';
 
 /* ============================================================
@@ -169,16 +169,16 @@ export function Affiliates() {
           </div>
           <div className="w-full" style={{ maxWidth: 1100 }}>
             {[
-              { icon: 'S', title: 'Support', desc: 'на связи 24/7 — решаем любой вопрос быстро' },
-              { icon: 'M', title: 'Менеджер', desc: 'прямой контакт для обсуждения условий, ставок и запуска' },
-              { icon: 'T', title: 'TG-Channel', desc: 'новости сети, свежие офферы и апдейты — только по делу' },
+              { icon: Headphones, title: 'Support', desc: 'на связи 24/7 — решаем любой вопрос быстро' },
+              { icon: UserRound, title: 'Менеджер', desc: 'прямой контакт для обсуждения условий, ставок и запуска' },
+              { icon: Send, title: 'TG-Channel', desc: 'новости сети, свежие офферы и апдейты — только по делу' },
             ].map((c, i) => (
               <a key={c.title} href="#" className="contact-row group flex items-center no-underline"
                 style={{ gap: 'clamp(16px, 2vw, 28px)', padding: 'clamp(18px, 2.6vh, 28px) clamp(12px, 1.5vw, 24px)', borderTop: '1px solid rgba(255,255,255,0.12)', borderBottom: i === 2 ? '1px solid rgba(255,255,255,0.12)' : 'none', textDecoration: 'none' }}>
                 <span className="font-black flex-shrink-0" style={{ color: 'rgba(59,130,246,0.85)', fontSize: 'clamp(18px, 2.2vw, 32px)', letterSpacing: '0.04em', width: 'clamp(44px, 4.5vw, 70px)' }}>{String(i + 1).padStart(2, '0')}</span>
                 <span className="flex-shrink-0 rounded-full flex items-center justify-center font-bold"
                   style={{ width: 'clamp(38px, 3.4vw, 52px)', height: 'clamp(38px, 3.4vw, 52px)', background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', fontSize: 'clamp(13px, 1.2vw, 18px)' }}>
-                  {c.icon}
+                  <c.icon style={{ width: '48%', height: '48%' }} strokeWidth={1.8} />
                 </span>
                 <span className="uppercase font-bold text-white" style={{ fontSize: 'clamp(14px, 1.5vw, 22px)', letterSpacing: '0.08em', minWidth: 'clamp(120px, 16vw, 240px)' }}>{c.title}</span>
                 <span className="row-desc uppercase text-zinc-400 flex-1" style={{ fontSize: 'clamp(9px, 0.95vw, 13px)', letterSpacing: '0.06em', fontWeight: 300 }}>{c.desc}</span>
