@@ -377,6 +377,9 @@
   .animate-testimonial-scroll {
     animation-duration: 25s;
   }
+  .hero-content {
+    padding-bottom: clamp(140px, 20vh, 200px) !important;
+  }
 }
 
 @media (pointer: coarse) {
