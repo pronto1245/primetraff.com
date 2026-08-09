@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowRight, X, Zap } from 'lucide-react';
+import { ArrowRight, Fingerprint, Send, X, Zap } from 'lucide-react';
 import bgImage from './assets/dsb-bg.png';
 
 /* ============================================================
@@ -252,9 +252,12 @@ export function DarkStudioBlue() {
         <div className="w-full" style={{ marginTop: 'clamp(40px, 6vh, 64px)' }}>
           <div className="w-full flex items-center justify-between">
             <div className="flex items-center gap-3">
-              {['T', 'I'].map(l => (
-                <div key={l} className="rounded-full bg-white flex items-center justify-center text-black font-bold cursor-pointer" style={{ width: 40, height: 40, fontSize: 14 }}>{l}</div>
-              ))}
+              <div className="rounded-full bg-white flex items-center justify-center text-black cursor-pointer" style={{ width: 40, height: 40 }} title="Telegram">
+                <Send style={{ width: 18, height: 18 }} strokeWidth={2} />
+              </div>
+              <div className="rounded-full bg-white flex items-center justify-center text-black cursor-pointer" style={{ width: 40, height: 40 }} title="Уникализатор">
+                <Fingerprint style={{ width: 18, height: 18 }} strokeWidth={2} />
+              </div>
             </div>
             <button className="rounded-full border border-white/20 bg-white/5 text-white uppercase cursor-pointer"
               style={{ fontFamily: FONT, fontSize: 'clamp(11px, 1vw, 14px)', letterSpacing: '0.12em', padding: '14px 36px' }}>
