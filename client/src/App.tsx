@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { LanguageProvider } from "@/lib/language-context";
 import { lazy, Suspense, useEffect } from "react";
 import NotFound from "@/pages/not-found";
+import { CookieConsent } from "@/components/cookie-consent";
 
 function ScrollToTop() {
   const [location] = useLocation();
@@ -89,6 +90,7 @@ function App() {
         <LanguageProvider>
           <Toaster />
           <Router />
+          <CookieConsent />
         </LanguageProvider>
       </TooltipProvider>
     </QueryClientProvider>
