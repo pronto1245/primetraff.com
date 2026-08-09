@@ -18,8 +18,15 @@ export function serveStatic(app: Express) {
 
   app.use(express.static(distPath));
 
-  // fall through to index.html if the file doesn't exist
-  app.use("*", (_req, res) => {
-    res.sendFile(path.resolve(distPath, "index.html"));
+  // Known SPA routes — serve with 200
+  const knownRoutes = ["/", "/affiliates", "/advertisers", "/blog", "/admin/blog"];
+  app.use("*", (req, res) => {
+    const pathname = req.path;
+    const isKnown = knownRoutes.includes(pathname) ||
+      pathname.startsWith("/blog/") ||
+      pathname.startsWith("/uploads/") ||
+      pathname.startsWith("/assets/");
+    const status = isKnown ? 200 : 404;
+    res.status(status).sendFile(path.resolve(distPath, "index.html"));
   });
 }
