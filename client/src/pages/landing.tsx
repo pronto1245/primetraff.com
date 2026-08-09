@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { NavHeader, FixedFooterBar, SHARED_STYLES, BLUE, FONT, TYPE, TRACK, PAD } from '@/components/nav-header';
+import { usePageSnap } from '@/hooks/usePageSnap';
 import { useLang } from '@/lib/language-context';
 import { t, translations } from '@/lib/i18n';
 import bgImage from '@/assets/dsb-bg.webp';
@@ -69,6 +70,7 @@ const ScrollHint = () => (
 export default function LandingPage() {
   const heroSvgRef = useRef<SVGSVGElement>(null);
   const { lang } = useLang();
+  usePageSnap();
 
   // Mobile Safari doesn't support textLength with custom fonts —
   // measure actual text width and fit it into the frame manually.
@@ -170,8 +172,7 @@ export default function LandingPage() {
     <div style={{ width: '100%', fontFamily: FONT }} className="bg-black text-white">
       <style>{`
         ${SHARED_STYLES}
-        html { scroll-snap-type: y proximity; }
-        .snap-sec { scroll-snap-align: start; contain: layout style; }
+        .snap-sec { contain: layout style; }
         .no-snap { contain: layout style; }
         .no-snap { scroll-snap-align: none; scroll-snap-stop: normal; }
         @keyframes marquee-left  { from { transform: translateX(0) }    to { transform: translateX(-50%) } }

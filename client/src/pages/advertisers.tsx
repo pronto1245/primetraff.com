@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ArrowRight, Headphones, Send, UserRound } from 'lucide-react';
 import { NavHeader, FixedFooterBar, SHARED_STYLES, BLUE, FONT, TYPE, TRACK, PAD } from '@/components/nav-header';
+import { usePageSnap } from '@/hooks/usePageSnap';
 import { useLang } from '@/lib/language-context';
 import { t, translations } from '@/lib/i18n';
 import bgImage from '@/assets/dsb-bg.webp';
@@ -19,6 +20,7 @@ const ScrollHint = () => (
 export default function AdvertisersPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const { lang } = useLang();
+  usePageSnap();
 
   const faqItems = translations.advertisersPage.faqItems;
   const reviews = translations.advertisersPage.reviews;
@@ -46,8 +48,7 @@ export default function AdvertisersPage() {
     <div style={{ width: '100%', fontFamily: FONT }} className="bg-black text-white">
       <style>{`
         ${SHARED_STYLES}
-        html { scroll-snap-type: y proximity; }
-        .snap-sec { scroll-snap-align: start; contain: layout style; }
+        .snap-sec { contain: layout style; }
         .no-snap { contain: layout style; }
         .no-snap { scroll-snap-align: none; scroll-snap-stop: normal; }
         .faq-scroll { overscroll-behavior-y: contain; }

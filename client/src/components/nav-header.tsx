@@ -249,8 +249,6 @@ export const SHARED_STYLES = `
     .m-pad0 { padding-left: 0 !important; padding-right: 0 !important; }
     .m-title { font-size: 34px !important; }
     .m-sec { padding-bottom: 120px !important; }
-    html { scroll-snap-type: y proximity; }
-    .snap-sec { scroll-snap-align: start; }
   }
   .m-only { display: none; }
   .tip { position: absolute; left: 50%; bottom: calc(100% + 10px); transform: translateX(-50%) translateY(4px); background: rgba(10,10,12,0.95); border: 1px solid rgba(59,130,246,0.5); color: #fff; font-size: 10px; letter-spacing: 0.12em; padding: 6px 12px; border-radius: 8px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .25s ease, transform .25s ease; }
