@@ -1,2 +1,3 @@
 - [Canvas API quirks](canvas-api-quirks.md) — applyCanvasActions create uses w/h not width/height; create minimal building shape first, then update with shapeType/url/state.
 - [PrimeTraff design prefs](primetraff-design-prefs.md) — user demands exact template replicas, distinctive fonts (Unbounded, no default Inter/Space Mono mixes), token-based sizing; work only in mockup sandbox, never touch main site.
+- [Scroll freeze fix](scroll-freeze-fix.md) — CSS scroll-snap-type вызывает 3-4с зависание; решение: JS-хук usePageSnap (перехват wheel/touch + scrollIntoView). Никогда не возвращать CSS snap.

@@ -32,7 +32,7 @@ export function CookieConsent() {
         backdropFilter: 'blur(16px)',
         WebkitBackdropFilter: 'blur(16px)',
         border: '1px solid rgba(255,255,255,0.1)',
-        borderRadius: 4,
+        borderRadius: 0,
         padding: 'clamp(20px, 2.5vh, 28px) clamp(20px, 2vw, 28px)',
         fontFamily: FONT,
         animation: 'cookie-in 0.4s cubic-bezier(0.16,1,0.3,1) both',
