@@ -115,7 +115,7 @@ export default function AffiliatesPage() {
           </div>
 
           {/* Registration / Login buttons */}
-          <div className="m-pad0 w-full flex items-center justify-between" style={{ marginTop: 'clamp(56px, 9vh, 96px)', padding: '0 clamp(40px, 10vw, 160px)' }}>
+          <div className="m-pad0 w-full flex items-center justify-between" style={{ marginTop: 'clamp(40px, 7vh, 72px)', padding: '0 clamp(40px, 10vw, 160px)' }}>
             <a
               href={REGISTER_URL}
               target="_blank"

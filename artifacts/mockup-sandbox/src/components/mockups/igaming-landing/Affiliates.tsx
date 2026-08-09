@@ -135,7 +135,7 @@ export function Affiliates() {
           </div>
 
           {/* Кнопки Регистрация / Вход — сразу под текстом, с отступом от краёв */}
-          <div className="m-pad0 w-full flex items-center justify-between" style={{ marginTop: 'clamp(56px, 9vh, 96px)', padding: '0 clamp(40px, 10vw, 160px)' }}>
+          <div className="m-pad0 w-full flex items-center justify-between" style={{ marginTop: 'clamp(40px, 7vh, 72px)', padding: '0 clamp(40px, 10vw, 160px)' }}>
             <button className="flex items-center gap-3 border-b border-white/30 pb-2 hover:border-white transition-colors duration-500 group bg-transparent cursor-pointer">
               <span className="uppercase font-medium text-white" style={{ fontFamily: FONT, fontSize: 'clamp(12px, 1.15vw, 16px)', letterSpacing: '0.15em' }}>Регистрация</span>
               <ArrowRight className="w-4 h-4 text-white transform group-hover:translate-x-1 transition-transform duration-500" />
