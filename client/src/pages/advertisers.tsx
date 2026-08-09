@@ -110,7 +110,7 @@ export default function AdvertisersPage() {
               <p key={i} style={i > 0 ? { marginTop: 'clamp(12px, 2vh, 20px)' } : undefined}>{para}</p>
             ))}
           </div>
-          <div className="uppercase font-black text-white" style={{ fontSize: 'clamp(16px, 1.8vw, 26px)', letterSpacing: '0.06em', marginTop: 'clamp(24px, 3.5vh, 40px)', marginBottom: 'clamp(24px, 3.5vh, 40px)' }}>
+          <div className="uppercase font-black text-white" style={{ fontSize: 'clamp(16px, 1.8vw, 26px)', letterSpacing: '0.06em', marginTop: 'clamp(48px, 7vh, 72px)', marginBottom: 'clamp(24px, 3.5vh, 40px)' }}>
             {t(translations.advertisersPage.reviewsTitle, lang)}
           </div>
         </div>
