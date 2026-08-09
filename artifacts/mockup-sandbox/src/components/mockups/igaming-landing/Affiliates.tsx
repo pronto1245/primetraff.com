@@ -117,8 +117,32 @@ export function Affiliates() {
           </div>
         </div>
 
+      </section>
+
+      {/* ===== ПОЧЕМУ НАМ ДОВЕРЯЮТ ===== */}
+      <section className="relative bg-black flex flex-col justify-between" style={{ height: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} clamp(16px, 2.5vh, 28px)`, overflow: 'hidden' }}>
+        <div className="absolute inset-0 z-0">
+          <img src={bgImage} alt="" className="w-full h-full object-cover" style={{ filter: 'hue-rotate(220deg) saturate(1.1)', opacity: 0.35 }} />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/85" />
+        </div>
+        <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center">
+          <div className="uppercase text-zinc-400" style={{ fontSize: 'clamp(11px, 1.1vw, 15px)', letterSpacing: '0.35em', fontWeight: 300, marginBottom: 'clamp(14px, 2vh, 24px)' }}>
+            Почему
+          </div>
+          <div className="uppercase font-black text-white leading-none" style={{ fontSize: 'clamp(30px, 4.4vw, 62px)', letterSpacing: '0.02em', marginBottom: 'clamp(22px, 3.5vh, 40px)' }}>
+            Нам доверяют
+          </div>
+          <div className="uppercase text-white" style={{ fontSize: 'clamp(11px, 1.05vw, 15px)', letterSpacing: '0.06em', lineHeight: 1.75, fontWeight: 400, maxWidth: 1160 }}>
+            <p>Мы берём на себя решение ключевых вопросов — от индивидуальных ставок до пересмотра холдов и возможности работы по предоплате.</p>
+            <p style={{ marginTop: 'clamp(12px, 2vh, 20px)' }}>Партнёры отмечают высокий уровень экспертизы нашей команды и качество сопровождения на каждом этапе.</p>
+            <p style={{ marginTop: 'clamp(12px, 2vh, 20px)' }}>До запуска тщательно проверяем рекламодателей и условия сотрудничества, снижая вероятность спорных ситуаций и проблем с выплатами.</p>
+            <p style={{ marginTop: 'clamp(12px, 2vh, 20px)' }}>Вы концентрируетесь на привлечении трафика, а переговоры, контроль и организационные вопросы остаются на нашей стороне.</p>
+            <p style={{ marginTop: 'clamp(12px, 2vh, 20px)' }}>Ваша задача — приводить качественный трафик. Наша — сделать так, чтобы вы за него получили максимум.</p>
+          </div>
+        </div>
+
         {/* Футер */}
-        <div className="relative z-10 w-full" style={{ marginTop: 'clamp(40px, 6vh, 64px)' }}>
+        <div className="relative z-10 w-full" style={{ marginTop: 'clamp(20px, 3vh, 36px)' }}>
           <div className="w-full flex items-center justify-between">
             <div className="flex items-center gap-3">
               {['T', 'I'].map(l => (
