@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { X, Zap } from 'lucide-react';
+import { ArrowRight, X, Zap } from 'lucide-react';
 import bgImage from './assets/dsb-bg.png';
 
 /* ============================================================
@@ -27,6 +27,8 @@ export function Affiliates() {
         .btn-fill::before { content: ''; position: absolute; inset: 0; background: #2563eb; transform: translateX(-101%); transition: transform .45s cubic-bezier(.22,1,.36,1); }
         .btn-fill:hover::before { transform: translateX(0); }
         .btn-ghost:hover { border-color: #2563eb; }
+        .contact-row { position: relative; overflow: hidden; transition: background .35s ease; }
+        .contact-row:hover { background: rgba(59,130,246,0.15); }
       `}</style>
 
       {/* Шапка — как на главной, fixed */}
@@ -141,6 +143,39 @@ export function Affiliates() {
           </div>
         </div>
 
+      </section>
+
+      {/* ===== ОБСУДИТЬ СОТРУДНИЧЕСТВО ===== */}
+      <section className="relative bg-black flex flex-col justify-between" style={{ minHeight: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} clamp(16px, 2.5vh, 28px)` }}>
+        <div className="flex-1 flex flex-col items-center justify-center w-full">
+          <div className="text-center">
+            <div className="uppercase text-zinc-400" style={{ fontSize: 'clamp(11px, 1.1vw, 15px)', letterSpacing: '0.35em', fontWeight: 300, marginBottom: 'clamp(14px, 2vh, 24px)' }}>
+              Обсудить
+            </div>
+            <div className="uppercase font-black text-white leading-none" style={{ fontSize: 'clamp(30px, 4.4vw, 62px)', letterSpacing: '0.02em', marginBottom: 'clamp(32px, 5vh, 60px)' }}>
+              Сотрудничество
+            </div>
+          </div>
+          <div className="w-full" style={{ maxWidth: 1100 }}>
+            {[
+              { icon: 'S', title: 'Support', desc: 'ваш помощник по любому вопросу' },
+              { icon: 'M', title: 'Менеджер', desc: 'руководитель отдела — по очень важным вопросам' },
+              { icon: 'T', title: 'TG-Channel', desc: 'никакого спама — только серьёзные посты' },
+              { icon: 'I', title: 'Instagram', desc: 'смешные мемы и полезные посты' },
+            ].map((c, i) => (
+              <a key={c.title} href="#" className="contact-row group flex items-center no-underline"
+                style={{ gap: 'clamp(16px, 2vw, 28px)', padding: 'clamp(18px, 2.6vh, 28px) clamp(12px, 1.5vw, 24px)', borderTop: '1px solid rgba(255,255,255,0.12)', borderBottom: i === 3 ? '1px solid rgba(255,255,255,0.12)' : 'none', textDecoration: 'none' }}>
+                <span className="flex-shrink-0 rounded-full flex items-center justify-center font-bold"
+                  style={{ width: 'clamp(38px, 3.4vw, 52px)', height: 'clamp(38px, 3.4vw, 52px)', background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', fontSize: 'clamp(13px, 1.2vw, 18px)' }}>
+                  {c.icon}
+                </span>
+                <span className="uppercase font-bold text-white" style={{ fontSize: 'clamp(14px, 1.5vw, 22px)', letterSpacing: '0.08em', minWidth: 'clamp(120px, 16vw, 240px)' }}>{c.title}</span>
+                <span className="uppercase text-zinc-400 flex-1" style={{ fontSize: 'clamp(9px, 0.95vw, 13px)', letterSpacing: '0.06em', fontWeight: 300 }}>{c.desc}</span>
+                <ArrowRight className="w-5 h-5 text-white flex-shrink-0 transform group-hover:translate-x-2 transition-transform duration-300" />
+              </a>
+            ))}
+          </div>
+        </div>
         {/* Футер */}
         <div className="relative z-10 w-full" style={{ marginTop: 'clamp(20px, 3vh, 36px)' }}>
           <div className="w-full flex items-center justify-between">
