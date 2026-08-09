@@ -132,7 +132,7 @@ export default function AdvertisersPage() {
       </section>
 
       {/* ===== DISCUSS COOPERATION ===== */}
-      <section className="snap-sec relative bg-black flex flex-col justify-between overflow-hidden" style={{ minHeight: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} clamp(6px, 0.8vh, 10px)` }}>
+      <section className="snap-sec relative bg-black flex flex-col justify-between overflow-hidden" style={{ minHeight: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} clamp(80px, 9vh, 100px)` }}>
         <ScrollHint />
         <div className="absolute inset-0 z-0">
           <img src="/dsb-bg-blue.webp" alt="" decoding="async" className="w-full h-full object-cover" style={{ opacity: 0.25 }} />
