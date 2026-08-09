@@ -131,6 +131,7 @@ export function Blog() {
         <div className="absolute inset-0 z-0">
           <img src={bgImage} alt="" className="w-full h-full object-cover" style={{ filter: 'hue-rotate(220deg) saturate(1.1)', opacity: 0.3 }} />
           <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/60 to-black/90" />
+          <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 55% 40% at 50% 22%, rgba(59,130,246,0.35) 0%, rgba(37,99,235,0.14) 45%, transparent 72%)' }} />
         </div>
 
         {openPost !== null && (() => { const p = POSTS[openPost]; return (
