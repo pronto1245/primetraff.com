@@ -23,6 +23,10 @@ export function Affiliates() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;700;900&family=Comforter&display=swap');
         ::-webkit-scrollbar { display: none; }
+        .faq-scroll { overflow-y: auto; scrollbar-width: thin; scrollbar-color: rgba(59,130,246,0.6) rgba(255,255,255,0.06); }
+        .faq-scroll::-webkit-scrollbar { display: block; width: 4px; }
+        .faq-scroll::-webkit-scrollbar-track { background: rgba(255,255,255,0.06); }
+        .faq-scroll::-webkit-scrollbar-thumb { background: rgba(59,130,246,0.6); border-radius: 2px; }
         .tip { position: absolute; left: 50%; bottom: calc(100% + 10px); transform: translateX(-50%) translateY(4px); background: rgba(10,10,12,0.95); border: 1px solid rgba(59,130,246,0.5); color: #fff; font-size: 10px; letter-spacing: 0.12em; padding: 6px 12px; border-radius: 8px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .25s ease, transform .25s ease; }
         .tip-wrap:hover .tip { opacity: 1; transform: translateX(-50%) translateY(0); }
         .btn-fill { position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.35); background: rgba(0,0,0,0.45); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
@@ -203,7 +207,7 @@ export function Affiliates() {
               Вопросы
             </div>
           </div>
-          <div className="w-full" style={{ maxWidth: 1000 }}>
+          <div className="faq-scroll w-full" style={{ maxWidth: 1000, maxHeight: 'clamp(300px, 46vh, 430px)' }}>
             {FAQ_ITEMS.map((item, i) => (
               <div key={i} style={{ borderTop: '1px solid rgba(255,255,255,0.12)', borderBottom: i === FAQ_ITEMS.length - 1 ? '1px solid rgba(255,255,255,0.12)' : 'none' }}>
                 <button onClick={() => setOpenFaq(openFaq === i ? null : i)}
@@ -254,4 +258,8 @@ const FAQ_ITEMS = [
   { q: 'Возможно ли получить индивидуальные условия по выплатам?', a: 'Да, активным веб-мастерам мы идём навстречу и готовы предоставлять индивидуальные условия для дополнительного удобства.' },
   { q: 'У меня нет трекера, что делать?', a: 'Мы предоставим вам полностью бесплатный трекер с интуитивным интерфейсом, где вы сможете настроить все необходимые параметры, отслеживать конверсии в реальном времени и оптимизировать свои кампании для максимальной эффективности.' },
   { q: 'В каких случаях трафик не соответствует минимальным требованиям компании?', a: 'Трафик не соответствует минимальным требованиям компании в случае: 1. Относится к запрещённым видам трафика. 2. Не соответствует заявленному источнику. 3. Количество повторных депозитов менее 50% от количества первых. 4. Процент дубликатов свыше 10% от всех привлечённых игроков.' },
+  { q: 'По каким моделям вы работаете?', a: 'Работаем по CPA, RevShare и гибридным моделям. Модель подбирается под источник трафика и объёмы — оптимальный вариант согласуете с менеджером до запуска.' },
+  { q: 'Какие виды трафика вы принимаете?', a: 'Принимаем PWA, ASO, UAC, Facebook, In-App, SEO и другие источники. Главное условие — качество: источник согласовывается с менеджером до старта.' },
+  { q: 'Как быстро происходят выплаты?', a: 'Выплаты проходят по согласованному графику без задержек. Для проверенных партнёров возможен пересмотр холдов и работа по предоплате.' },
+  { q: 'Как начать работу с вами?', a: 'Зарегистрируйтесь или напишите нам — менеджер свяжется, согласует источник, оффер и условия, после чего вы получите ссылки и сможете запускаться.' },
 ];
