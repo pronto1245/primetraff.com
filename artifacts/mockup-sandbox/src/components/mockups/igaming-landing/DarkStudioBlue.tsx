@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ArrowRight, Fingerprint, Send, X, Zap } from 'lucide-react';
 import bgImage from './assets/dsb-bg.png';
 
@@ -23,6 +23,15 @@ const PAD   = 'clamp(20px, 3vw, 48px)';
    ============================================================ */
 export function DarkStudioBlue() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [fontTick, setFontTick] = useState(0);
+  // На мобильных браузерах шрифт подгружается после первой отрисовки,
+  // и SVG-текст не пересчитывает растяжение textLength — перерисовываем после загрузки шрифта
+  useEffect(() => {
+    let alive = true;
+    if (document.fonts?.ready) document.fonts.ready.then(() => { if (alive) setFontTick(t => t + 1); });
+    const timer = setTimeout(() => { if (alive) setFontTick(t => t + 1); }, 1500);
+    return () => { alive = false; clearTimeout(timer); };
+  }, []);
 
 
   return (
@@ -146,7 +155,7 @@ export function DarkStudioBlue() {
 
           {/* Заголовок с эффектом декодирования */}
           <div className="w-full" style={{ display: 'flex', flexDirection: 'column', gap: '0.6vw' }}>
-            <svg viewBox="0 0 1000 100" className="w-full block" preserveAspectRatio="none" style={{ overflow: 'visible' }}>
+            <svg key={fontTick} viewBox="0 0 1000 100" className="w-full block" preserveAspectRatio="none" style={{ overflow: 'hidden' }}>
               <defs>
                 <linearGradient id="comGrad" x1="0%" y1="0%" x2="100%" y2="0%">
                   <stop offset="0%" stopColor="#2563eb">
