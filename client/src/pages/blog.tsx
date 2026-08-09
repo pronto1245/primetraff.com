@@ -61,7 +61,8 @@ export default function BlogPage() {
       <NavHeader activePage="blog" />
 
       {/* ===== BLOG ===== */}
-      <section className="relative flex flex-col" style={{ minHeight: '100vh', padding: `clamp(90px, 13vh, 150px) ${PAD} clamp(80px, 10vh, 120px)` }}>
+      {/* Bottom padding accounts for the fixed footer bar (~76px) so no card text is ever hidden behind it */}
+      <section className="relative flex flex-col" style={{ minHeight: '100vh', padding: `clamp(90px, 13vh, 150px) ${PAD} clamp(140px, 16vh, 180px)` }}>
         {/* Background removed — now fixed above */}
         <div className="absolute inset-0 z-0 hidden" />
 
