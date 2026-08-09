@@ -129,7 +129,7 @@ export function Advertisers() {
             Почему
           </div>
           <div className="uppercase font-black text-white leading-none" style={{ fontSize: 'clamp(30px, 4.4vw, 62px)', letterSpacing: '0.02em', marginBottom: 'clamp(22px, 3.5vh, 40px)' }}>
-            Выбирают нас
+            Нам доверяют
           </div>
           <div className="uppercase text-white" style={{ fontSize: 'clamp(11px, 1.05vw, 15px)', letterSpacing: '0.06em', lineHeight: 1.75, fontWeight: 400, maxWidth: 1160 }}>
             <p>Наш фокус — не количество подключённых аффилейтов, а качество партнёрства и трафика.</p>
