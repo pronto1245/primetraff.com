@@ -166,10 +166,11 @@ export function DarkStudioBlue() {
                   </stop>
                 </linearGradient>
               </defs>
-              <text x="0" y="88" textLength="1000" lengthAdjust="spacingAndGlyphs"
-                fill="#fff" style={{ fontFamily: FONT, fontWeight: 900, fontSize: 96 }}>
-                PRIMETRAFF<tspan fill="url(#comGrad)">.COM</tspan>
-              </text>
+              {/* Safari игнорирует textLength при наличии tspan — рисуем двумя text */}
+              <text x="0" y="88" textLength="708" lengthAdjust="spacingAndGlyphs"
+                fill="#fff" style={{ fontFamily: FONT, fontWeight: 900, fontSize: 96 }}>PRIMETRAFF</text>
+              <text x="708" y="88" textLength="292" lengthAdjust="spacingAndGlyphs"
+                fill="url(#comGrad)" style={{ fontFamily: FONT, fontWeight: 900, fontSize: 96 }}>.COM</text>
             </svg>
             <div className="hero-words w-full flex justify-between uppercase text-white font-bold" style={{ fontSize: TYPE.accent, letterSpacing: TRACK }}>
               {['Private', 'Premium', 'iGaming', 'Affiliate', 'Network'].map(w => <span key={w}>{w}</span>)}
