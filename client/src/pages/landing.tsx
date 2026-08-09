@@ -260,7 +260,7 @@ export default function LandingPage() {
       </div>
 
       {/* ===== ABOUT + PARTNERS ===== */}
-      <section className="snap-sec relative bg-black flex flex-col" style={{ minHeight: '100vh', paddingTop: 'clamp(60px, 8vh, 100px)', paddingLeft: PAD, paddingRight: PAD, paddingBottom: '100px' }}>
+      <section className="snap-sec relative bg-black flex flex-col" style={{ minHeight: '100vh', paddingTop: 'clamp(60px, 8vh, 100px)', paddingLeft: PAD, paddingRight: PAD, paddingBottom: 'clamp(16px, 2.5vh, 28px)' }}>
         <div className="flex-1 flex flex-col items-center justify-center text-center w-full">
           <div className="relative" style={{ marginBottom: 'clamp(28px, 4.5vh, 48px)' }}>
             <div className="uppercase text-zinc-400" style={{ fontSize: 'clamp(11px, 1.1vw, 15px)', letterSpacing: '0.35em', fontWeight: 300, marginBottom: 'clamp(14px, 2vh, 24px)' }}>
@@ -292,7 +292,7 @@ export default function LandingPage() {
             </div>
           </div>
         </div>
-        <div className="w-full" style={{ marginTop: 'clamp(32px, 5vh, 52px)' }}>
+        <div className="w-full" style={{ marginTop: 'clamp(20px, 3vh, 36px)' }}>
           <FixedFooterBar />
           <div className="m-copy text-center text-zinc-500 uppercase" style={{ fontSize: 'clamp(8px, 0.7vw, 10px)', letterSpacing: '0.1em', marginTop: 'clamp(16px, 2.5vh, 28px)' }}>
             © 2026. PRIMETRAFF.COM. ALL RIGHTS RESERVED.
