@@ -193,7 +193,7 @@ export function NavHeader({ activePage }: NavHeaderProps) {
               onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.background = 'rgba(255,255,255,0.08)'; (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(255,255,255,0.18)'; }}
               onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.background = 'rgba(255,255,255,0.04)'; (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(255,255,255,0.08)'; }}
             >
-              <img src="/sizar-logo.jpeg" alt="Sizar" style={{ width: 36, height: 36, borderRadius: 8, flexShrink: 0, objectFit: 'cover' }} />
+              <img src="/sizar-logo.jpeg" alt="Sizar" style={{ width: 36, height: 36, borderRadius: 8, flexShrink: 0, objectFit: 'cover', objectPosition: 'left center' }} />
               <div>
                 <div style={{ fontFamily: FONT, fontSize: 'clamp(11px, 1vw, 13px)', fontWeight: 700, letterSpacing: '0.14em', color: '#fff', textTransform: 'uppercase' }}>Sizar.app</div>
                 <div style={{ fontFamily: FONT, fontSize: 'clamp(9px, 0.8vw, 11px)', color: 'rgba(255,255,255,0.4)', letterSpacing: '0.06em', marginTop: 2 }}>{lang === 'ru' ? 'Наш PWA‑сервис' : 'Our PWA service'}</div>
