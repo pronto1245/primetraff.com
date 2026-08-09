@@ -92,6 +92,18 @@ export default function LandingPage() {
     return () => { timers.forEach(clearTimeout); window.removeEventListener('resize', fit); };
   }, []);
 
+  useEffect(() => {
+    const sections = document.querySelectorAll('.snap-sec');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const marquees = entry.target.querySelectorAll('.marquee-left, .marquee-right');
+        marquees.forEach(m => m.classList.toggle('marquee-paused', !entry.isIntersecting));
+      });
+    }, { threshold: 0.05 });
+    sections.forEach(s => obs.observe(s));
+    return () => obs.disconnect();
+  }, []);
+
   const row1: { name: string; logo: string }[] = [
     { name: 'SpinAura',     logo: logoSpinAura },
     { name: 'Elonbet',      logo: logoElonbet },
@@ -165,6 +177,7 @@ export default function LandingPage() {
         .marquee-left  { display: flex; width: max-content; animation: marquee-left  60s linear infinite; }
         .marquee-right { display: flex; width: max-content; animation: marquee-right 60s linear infinite; }
         .marquee-left:hover, .marquee-right:hover { animation-play-state: paused; }
+        .marquee-paused { animation-play-state: paused !important; }
         .brand-item:hover { opacity: 1 !important; }
         @keyframes hint-bounce { 0%, 100% { transform: translateY(0); opacity: .45; } 50% { transform: translateY(9px); opacity: 1; } }
         .scroll-hint svg { animation: hint-bounce 1.8s ease-in-out infinite; }

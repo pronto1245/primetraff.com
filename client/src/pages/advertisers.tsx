@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ArrowRight, Headphones, Send, UserRound } from 'lucide-react';
 import { NavHeader, FixedFooterBar, SHARED_STYLES, BLUE, FONT, TYPE, TRACK, PAD } from '@/components/nav-header';
 import { useLang } from '@/lib/language-context';
@@ -23,6 +23,18 @@ export default function AdvertisersPage() {
   const faqItems = translations.advertisersPage.faqItems;
   const reviews = translations.advertisersPage.reviews;
 
+  useEffect(() => {
+    const sections = document.querySelectorAll('.snap-sec');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const marquees = entry.target.querySelectorAll('.adv-marquee, .contact-marquee-anim');
+        marquees.forEach(m => m.classList.toggle('marquee-paused', !entry.isIntersecting));
+      });
+    }, { threshold: 0.05 });
+    sections.forEach(s => obs.observe(s));
+    return () => obs.disconnect();
+  }, []);
+
   const CONTACTS = [
     { icon: Headphones, title: 'Support', desc: t(translations.advertisersPage.supportDesc, lang), href: SUPPORT_URL },
     { icon: UserRound, title: t(translations.advertisersPage.managerTitle, lang), desc: t(translations.advertisersPage.managerDesc, lang), href: SUPPORT_URL },
@@ -42,6 +54,7 @@ export default function AdvertisersPage() {
         @keyframes adv-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
         .adv-marquee { display: flex; width: max-content; animation: adv-marquee 55s linear infinite; }
         .adv-marquee:hover { animation-play-state: paused; }
+        .marquee-paused { animation-play-state: paused !important; }
         .contact-card:hover { border-color: rgba(255,255,255,0.28) !important; background: rgba(255,255,255,0.06) !important; transform: translateY(-4px); }
         .contact-card:hover > div:last-child { opacity: 1 !important; }
         @media (max-width: 768px) { .contact-card { grid-column: span 3; } }
