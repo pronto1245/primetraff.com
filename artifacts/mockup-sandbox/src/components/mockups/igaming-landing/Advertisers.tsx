@@ -16,6 +16,7 @@ const PAD   = 'clamp(20px, 3vw, 48px)';
 
 export function Advertisers() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   return (
     <div style={{ width: '100%', fontFamily: FONT }} className="bg-black text-white">
@@ -210,6 +211,38 @@ export function Advertisers() {
             ))}
           </div>
         </div>
+      </section>
+
+      {/* ===== FAQ ===== */}
+      <section className="relative bg-black flex flex-col justify-between" style={{ minHeight: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} clamp(16px, 2.5vh, 28px)` }}>
+        <div className="flex-1 flex flex-col items-center justify-center w-full">
+          <div className="text-center">
+            <div className="uppercase text-zinc-400" style={{ fontSize: 'clamp(11px, 1.1vw, 15px)', letterSpacing: '0.35em', fontWeight: 300, marginBottom: 'clamp(14px, 2vh, 24px)' }}>
+              Частые
+            </div>
+            <div className="uppercase font-black text-white leading-none" style={{ fontSize: 'clamp(30px, 4.4vw, 62px)', letterSpacing: '0.02em', marginBottom: 'clamp(32px, 5vh, 60px)' }}>
+              Вопросы
+            </div>
+          </div>
+          <div className="w-full" style={{ maxWidth: 1000 }}>
+            {FAQ_ITEMS.map((item, i) => (
+              <div key={i} style={{ borderTop: '1px solid rgba(255,255,255,0.12)', borderBottom: i === FAQ_ITEMS.length - 1 ? '1px solid rgba(255,255,255,0.12)' : 'none' }}>
+                <button onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  className="w-full flex items-center justify-between text-left bg-transparent border-none cursor-pointer group"
+                  style={{ gap: 'clamp(16px, 2vw, 28px)', padding: 'clamp(16px, 2.4vh, 26px) clamp(8px, 1vw, 16px)' }}>
+                  <span className="font-black flex-shrink-0" style={{ color: openFaq === i ? BLUE : 'rgba(59,130,246,0.5)', fontSize: 'clamp(14px, 1.5vw, 20px)', width: 'clamp(34px, 3.4vw, 52px)', transition: 'color .3s' }}>{String(i + 1).padStart(2, '0')}</span>
+                  <span className="uppercase text-white font-medium flex-1" style={{ fontFamily: FONT, fontSize: 'clamp(11px, 1.15vw, 16px)', letterSpacing: '0.06em', lineHeight: 1.5 }}>{item.q}</span>
+                  <span className="flex-shrink-0 text-white" style={{ fontSize: 'clamp(18px, 1.8vw, 26px)', fontWeight: 300, transform: openFaq === i ? 'rotate(45deg)' : 'none', transition: 'transform .3s ease' }}>+</span>
+                </button>
+                <div style={{ maxHeight: openFaq === i ? 400 : 0, overflow: 'hidden', transition: 'max-height .45s cubic-bezier(.22,1,.36,1)' }}>
+                  <div className="text-zinc-300" style={{ fontSize: 'clamp(10px, 1vw, 14px)', lineHeight: 1.8, fontWeight: 300, letterSpacing: '0.03em', padding: `0 clamp(8px, 1vw, 16px) clamp(18px, 2.6vh, 28px) calc(clamp(34px, 3.4vw, 52px) + clamp(16px, 2vw, 28px))` }}>
+                    {item.a}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
         {/* Футер */}
         <div className="relative z-10 w-full" style={{ marginTop: 'clamp(20px, 3vh, 36px)' }}>
           <div className="w-full flex items-center justify-between">
@@ -249,4 +282,11 @@ const REVIEWS = [
   { name: 'Алекс', text: 'Ценим за принципиальность: сомнительные источники не допускаются вообще. Для нас это ключевой фактор долгосрочного сотрудничества.' },
   { name: 'Мария', text: 'Отличные показатели по FTD и удержанию. Менеджеры глубоко понимают продукт и подбирают действительно релевантные источники.' },
   { name: 'Виктор', text: 'Сотрудничаем второй год — ни одного серьёзного инцидента с качеством. Масштабируют только то, что реально приносит результат.' },
+];
+
+const FAQ_ITEMS = [
+  { q: 'Предоставляете ли вы готовую воронку для пролива?', a: 'Да, в неё входит: готовое PWA-приложение с настроенными PUSH-уведомлениями + конвертящие креативы + инструкция по запуску.' },
+  { q: 'Возможно ли получить индивидуальные условия по выплатам?', a: 'Да, активным веб-мастерам мы идём навстречу и готовы предоставлять индивидуальные условия для дополнительного удобства.' },
+  { q: 'У меня нет трекера, что делать?', a: 'Мы предоставим вам полностью бесплатный трекер с интуитивным интерфейсом, где вы сможете настроить все необходимые параметры, отслеживать конверсии в реальном времени и оптимизировать свои кампании для максимальной эффективности.' },
+  { q: 'В каких случаях трафик не соответствует минимальным требованиям компании?', a: 'Трафик не соответствует минимальным требованиям компании в случае: 1. Относится к запрещённым видам трафика. 2. Не соответствует заявленному источнику. 3. Количество повторных депозитов менее 50% от количества первых. 4. Процент дубликатов свыше 10% от всех привлечённых игроков.' },
 ];
