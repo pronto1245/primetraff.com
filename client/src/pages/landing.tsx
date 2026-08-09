@@ -294,7 +294,7 @@ export default function LandingPage() {
         </div>
         <div className="w-full" style={{ marginTop: 'clamp(32px, 5vh, 52px)' }}>
           <FixedFooterBar />
-          <div className="m-copy text-center text-zinc-500 uppercase" style={{ fontSize: 'clamp(8px, 0.7vw, 10px)', letterSpacing: '0.1em', marginTop: 'clamp(16px, 2.5vh, 28px)' }}>
+          <div className="m-copy text-center text-zinc-500 uppercase" style={{ fontSize: 'clamp(8px, 0.7vw, 10px)', letterSpacing: '0.1em', marginTop: 'clamp(16px, 2.5vh, 28px)', transform: 'translateY(36px)' }}>
             © 2026. PRIMETRAFF.COM. ALL RIGHTS RESERVED.
           </div>
         </div>
