@@ -97,6 +97,7 @@ export function DarkStudioBlue() {
           <img src={bgImage} alt="" className="w-full h-full object-cover opacity-60"
             style={{ filter: 'hue-rotate(220deg) saturate(1.1)' }} />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+          <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 55% 45% at 50% 45%, rgba(59,130,246,0.4) 0%, rgba(37,99,235,0.16) 45%, transparent 72%)' }} />
           <div className="absolute inset-0 bg-black/20 mix-blend-multiply" />
         </div>
 
