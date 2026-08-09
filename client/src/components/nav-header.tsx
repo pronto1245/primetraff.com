@@ -20,7 +20,7 @@ export const PAD   = 'clamp(20px, 3vw, 48px)';
 
 const REGISTER_URL = 'https://primetrack.pro/register?ref=ADV-3BT52V85';
 const LOGIN_URL    = 'https://primetrack.pro/login';
-const SUPPORT_URL  = 'https://t.me/primetrack_support_bot';
+const SUPPORT_URL  = 'https://t.me/primetraffbot';
 
 type ActivePage = 'home' | 'affiliates' | 'advertisers' | 'blog' | null;
 

@@ -6,7 +6,7 @@ import { useLang } from '@/lib/language-context';
 import { t, translations } from '@/lib/i18n';
 import bgImage from '@/assets/dsb-bg.webp';
 
-const SUPPORT_URL  = 'https://t.me/primetrack_support_bot';
+const SUPPORT_URL  = 'https://t.me/primetraffbot';
 const MANAGER_URL  = 'https://t.me/tema_prtraff';
 const CHANNEL_URL  = 'https://t.me/prime_traf';
 
