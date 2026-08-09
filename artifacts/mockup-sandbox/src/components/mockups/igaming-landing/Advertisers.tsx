@@ -31,6 +31,9 @@ export function Advertisers() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;700;900&family=Comforter&display=swap');
         ::-webkit-scrollbar { display: none; }
+        .text-grad { background: linear-gradient(90deg, #2563eb, #60a5fa, #93c5fd, #3b82f6, #2563eb); background-size: 300% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: grad-shift 7s linear infinite; }
+        @keyframes grad-shift { from { background-position: 0% 0; } to { background-position: 300% 0; } }
+        .hl { color: #3b82f6; }
         @keyframes hint-bounce { 0%, 100% { transform: translateY(0); opacity: .45; } 50% { transform: translateY(9px); opacity: 1; } }
         .scroll-hint svg { animation: hint-bounce 1.8s ease-in-out infinite; }
         html { scroll-snap-type: y mandatory; }
@@ -132,15 +135,15 @@ export function Advertisers() {
               Primetraff.com
             </div>
             <div className="m-title uppercase font-black text-white leading-none" style={{ fontSize: 'clamp(48px, 8.2vw, 118px)', letterSpacing: '0.02em' }}>
-              Advertisers
+              <span className="text-grad">Advertisers</span>
             </div>
           </div>
           <div className="uppercase text-white" style={{ fontSize: 'clamp(12px, 1.2vw, 17px)', letterSpacing: '0.06em', lineHeight: 1.9, fontWeight: 400, maxWidth: 1160 }}>
-            <p>Подключаем проверенных партнёров и помогаем получать целевой трафик без лишнего риска.</p>
-            <p>Контролируем качество привлечённой аудитории и отслеживаем показатели на каждом этапе работы.</p>
+            <p>Подключаем проверенных партнёров и помогаем получать <span className="hl">целевой трафик</span> без лишнего риска.</p>
+            <p>Контролируем <span className="hl">качество</span> привлечённой аудитории и отслеживаем показатели на каждом этапе работы.</p>
             <p>Отсекаем источники, которые не соответствуют согласованным требованиям и KPI.</p>
             <p>Эффективные направления получаем возможность масштабировать вместе с рекламодателем.</p>
-            <p>В результате вы получаете не просто объём, а управляемый поток пользователей с понятной экономикой.</p>
+            <p>В результате вы получаете не просто объём, а <span className="hl">управляемый поток пользователей</span> с понятной экономикой.</p>
           </div>
 
           {/* CTA — Связаться с нами, как «Стать партнёром» на главной */}
