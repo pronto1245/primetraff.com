@@ -200,9 +200,13 @@ export default function LandingPage() {
           {/* Hero title */}
           <div className="w-full" style={{ display: 'flex', flexDirection: 'column', gap: '0.6vw' }}>
             <div className="m-only w-full justify-between uppercase text-white font-bold"
-              style={{ fontSize: 9, letterSpacing: '0.1em', lineHeight: 1.5, marginBottom: 10, textAlign: 'left' }}>
-              <span>{t(translations.landingPage.heroSloganLeft, lang)}</span>
-              <span style={{ textAlign: 'right' }}>{t(translations.landingPage.heroSloganRight, lang)}</span>
+              style={{ fontSize: 9, letterSpacing: '0.1em', lineHeight: 1.6, marginBottom: 10 }}>
+              <span style={{ textAlign: 'left' }}>
+                {lang === 'ru' ? <>Где трафик<br />превращается<br />в партнёрство</> : <>Where traffic<br />becomes<br />partnership</>}
+              </span>
+              <span style={{ textAlign: 'right' }}>
+                {lang === 'ru' ? <>Работаем<br />для вас с<br />2025 года</> : <>Working<br />for you since<br />2025</>}
+              </span>
             </div>
             <svg ref={heroSvgRef} viewBox="0 0 1000 100" className="w-full block" preserveAspectRatio="none" style={{ overflow: 'visible' }}>
               <defs>
@@ -238,17 +242,6 @@ export default function LandingPage() {
               </span>
               <ArrowRight className="w-4 h-4 text-white transform group-hover:translate-x-1 transition-transform duration-500" />
             </a>
-          </div>
-        </div>
-
-        {/* Bottom corners — mobile only, 3 lines */}
-        <div className="m-only absolute bottom-0 left-0 right-0 z-20 items-end justify-between pointer-events-none"
-          style={{ padding: `0 ${PAD} 90px` }}>
-          <div className="text-left uppercase text-white font-bold leading-snug" style={{ fontSize: TYPE.accent, letterSpacing: TRACK }}>
-            {lang === 'ru' ? <>Где трафик<br />превращается<br />в партнёрство</> : <>Where traffic<br />becomes<br />partnership</>}
-          </div>
-          <div className="text-right uppercase text-white font-bold leading-snug" style={{ fontSize: TYPE.accent, letterSpacing: TRACK }}>
-            {lang === 'ru' ? <>Работаем<br />для вас с<br />2025 года</> : <>Working<br />for you since<br />2025</>}
           </div>
         </div>
 
