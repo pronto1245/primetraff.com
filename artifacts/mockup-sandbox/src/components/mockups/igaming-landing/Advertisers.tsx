@@ -249,8 +249,8 @@ export function Advertisers() {
         </div>
         {/* Футер */}
         <div className="relative z-10 w-full" style={{ marginTop: 'clamp(20px, 3vh, 36px)' }}>
-          <div className="w-full flex items-center justify-between">
-            <div className="flex items-center gap-3">
+          <div className="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-between pointer-events-none" style={{ padding: `0 ${PAD} clamp(18px, 2.5vh, 28px)` }}>
+            <div className="flex items-center gap-3 pointer-events-auto">
               {[{ Icon: Send, tip: 'Наш канал' }, { Icon: Fingerprint, tip: 'Уникализатор' }].map(({ Icon, tip }) => (
                 <div key={tip} className="tip-wrap relative">
                   <div className="rounded-full flex items-center justify-center text-white cursor-pointer hover:border-blue-500 transition-colors" style={{ width: 48, height: 48, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.2)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)' }}>
@@ -260,7 +260,7 @@ export function Advertisers() {
                 </div>
               ))}
             </div>
-            <button className="rounded-full border border-white/20 bg-white/5 text-white uppercase cursor-pointer"
+            <button className="pointer-events-auto rounded-full border border-white/20 bg-white/5 text-white uppercase cursor-pointer"
               style={{ fontFamily: FONT, fontSize: 'clamp(11px, 1vw, 14px)', letterSpacing: '0.12em', padding: '14px 36px' }}>
               Support
             </button>
