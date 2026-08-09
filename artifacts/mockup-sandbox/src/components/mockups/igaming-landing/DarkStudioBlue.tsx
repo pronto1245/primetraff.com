@@ -36,6 +36,8 @@ export function DarkStudioBlue() {
         .marquee-left:hover, .marquee-right:hover { animation-play-state: paused; }
         .brand-item:hover { opacity: 1 !important; }
         ::-webkit-scrollbar { display: none; }
+        .tip { position: absolute; left: 50%; bottom: calc(100% + 10px); transform: translateX(-50%) translateY(4px); background: rgba(10,10,12,0.95); border: 1px solid rgba(59,130,246,0.5); color: #fff; font-size: 10px; letter-spacing: 0.12em; padding: 6px 12px; border-radius: 8px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .25s ease, transform .25s ease; }
+        .tip-wrap:hover .tip { opacity: 1; transform: translateX(-50%) translateY(0); }
       `}</style>
 
       {/* ===== HERO ===== */}
@@ -252,12 +254,14 @@ export function DarkStudioBlue() {
         <div className="w-full" style={{ marginTop: 'clamp(40px, 6vh, 64px)' }}>
           <div className="w-full flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="rounded-full bg-white flex items-center justify-center text-black cursor-pointer" style={{ width: 40, height: 40 }} title="Telegram">
-                <Send style={{ width: 18, height: 18 }} strokeWidth={2} />
-              </div>
-              <div className="rounded-full bg-white flex items-center justify-center text-black cursor-pointer" style={{ width: 40, height: 40 }} title="Уникализатор">
-                <Fingerprint style={{ width: 18, height: 18 }} strokeWidth={2} />
-              </div>
+              {[{ Icon: Send, tip: 'Наш канал' }, { Icon: Fingerprint, tip: 'Уникализатор' }].map(({ Icon, tip }) => (
+                <div key={tip} className="tip-wrap relative">
+                  <div className="rounded-full bg-white flex items-center justify-center text-black cursor-pointer" style={{ width: 40, height: 40 }}>
+                    <Icon style={{ width: 18, height: 18 }} strokeWidth={2} />
+                  </div>
+                  <span className="tip uppercase" style={{ fontFamily: FONT }}>{tip}</span>
+                </div>
+              ))}
             </div>
             <button className="rounded-full border border-white/20 bg-white/5 text-white uppercase cursor-pointer"
               style={{ fontFamily: FONT, fontSize: 'clamp(11px, 1vw, 14px)', letterSpacing: '0.12em', padding: '14px 36px' }}>

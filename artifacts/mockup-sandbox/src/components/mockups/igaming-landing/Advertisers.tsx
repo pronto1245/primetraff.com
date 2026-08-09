@@ -22,6 +22,8 @@ export function Advertisers() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;700;900&family=Comforter&display=swap');
         ::-webkit-scrollbar { display: none; }
+        .tip { position: absolute; left: 50%; bottom: calc(100% + 10px); transform: translateX(-50%) translateY(4px); background: rgba(10,10,12,0.95); border: 1px solid rgba(59,130,246,0.5); color: #fff; font-size: 10px; letter-spacing: 0.12em; padding: 6px 12px; border-radius: 8px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .25s ease, transform .25s ease; }
+        .tip-wrap:hover .tip { opacity: 1; transform: translateX(-50%) translateY(0); }
         .btn-fill { position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.35); background: rgba(0,0,0,0.45); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
         .btn-fill span { position: relative; z-index: 1; }
         .btn-fill::before { content: ''; position: absolute; inset: 0; background: #2563eb; transform: translateX(-101%); transition: transform .45s cubic-bezier(.22,1,.36,1); }
@@ -212,12 +214,14 @@ export function Advertisers() {
         <div className="relative z-10 w-full" style={{ marginTop: 'clamp(20px, 3vh, 36px)' }}>
           <div className="w-full flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="rounded-full bg-white flex items-center justify-center text-black cursor-pointer" style={{ width: 40, height: 40 }} title="Telegram">
-                <Send style={{ width: 18, height: 18 }} strokeWidth={2} />
-              </div>
-              <div className="rounded-full bg-white flex items-center justify-center text-black cursor-pointer" style={{ width: 40, height: 40 }} title="Уникализатор">
-                <Fingerprint style={{ width: 18, height: 18 }} strokeWidth={2} />
-              </div>
+              {[{ Icon: Send, tip: 'Наш канал' }, { Icon: Fingerprint, tip: 'Уникализатор' }].map(({ Icon, tip }) => (
+                <div key={tip} className="tip-wrap relative">
+                  <div className="rounded-full bg-white flex items-center justify-center text-black cursor-pointer" style={{ width: 40, height: 40 }}>
+                    <Icon style={{ width: 18, height: 18 }} strokeWidth={2} />
+                  </div>
+                  <span className="tip uppercase" style={{ fontFamily: FONT }}>{tip}</span>
+                </div>
+              ))}
             </div>
             <button className="rounded-full border border-white/20 bg-white/5 text-white uppercase cursor-pointer"
               style={{ fontFamily: FONT, fontSize: 'clamp(11px, 1vw, 14px)', letterSpacing: '0.12em', padding: '14px 36px' }}>
