@@ -1,0 +1,348 @@
+[root@v742573 ~]# cd /var/www/primetraff.com && git pull origin main && npm install && npm run build && pm2 restart primetraff
+remote: Enumerating objects: 1640, done.
+remote: Counting objects: 100% (1640/1640), done.
+remote: Compressing objects: 100% (572/572), done.
+remote: Total 1612 (delta 927), reused 1611 (delta 926), pack-reused 0 (from 0)
+Receiving objects: 100% (1612/1612), 36.54 MiB | 21.40 MiB/s, done.
+Resolving deltas: 100% (927/927), completed with 12 local objects.
+From https://github.com/pronto1245/primetraff.com
+ * branch            main       -> FETCH_HEAD
+   655f429..b08f215  main       -> origin/main
+Updating 655f429..b08f215
+Fast-forward
+ .agents/memory/MEMORY.md                                                                                  |    3 +
+ .agents/memory/canvas-api-quirks.md                                                                       |    7 +
+ .agents/memory/primetraff-design-prefs.md                                                                 |   10 +
+ .agents/memory/scroll-freeze-fix.md                                                                       |   32 +
+ .replit                                                                                                   |    6 +-
+ artifacts/mockup-sandbox/.tsbuildinfo                                                                     |    1 +
+ artifacts/mockup-sandbox/src/.generated/mockup-components.ts                                              |   17 +-
+ artifacts/mockup-sandbox/src/components/mockups/igaming-landing/Advertisers.tsx                           |  325 ++++++++++
+ artifacts/mockup-sandbox/src/components/mockups/igaming-landing/Affiliates.tsx                            |  289 +++++++++
+ artifacts/mockup-sandbox/src/components/mockups/igaming-landing/Blog.tsx                                  |  245 +++++++
+ artifacts/mockup-sandbox/src/components/mockups/igaming-landing/DarkStudioBlue.tsx                        |  331 ++++++++++
+ artifacts/mockup-sandbox/src/components/mockups/igaming-landing/assets/dsb-bg.webp                        |  Bin 0 -> 33864 bytes
+ artifacts/mockup-sandbox/src/components/mockups/igaming-landing/assets/pt-logo.webp                       |  Bin 0 -> 37884 bytes
+ artifacts/mockup-sandbox/src/components/mockups/templates/BlueCoworkingLanding-T15Ydg/Atrium.tsx          |  112 ++++
+ .../mockup-sandbox/src/components/mockups/templates/BlueCoworkingLanding-T15Ydg/assets/lp-26-hero.png     |  Bin 0 -> 1250656 bytes
+ artifacts/mockup-sandbox/src/components/mockups/templates/BlueCoworkingLanding-T15Ydg/fonts.css           |    1 +
+ .../mockup-sandbox/src/components/mockups/templates/CinematicFilmTeaserPost-T3tqRc/GlassHoursPromo.tsx    |   81 +++
+ .../mockup-sandbox/src/components/mockups/templates/CinematicFilmTeaserPost-T3tqRc/assets/soc-29-face.png |  Bin 0 -> 1395273 bytes
+ artifacts/mockup-sandbox/src/components/mockups/templates/CinematicFilmTeaserPost-T3tqRc/fonts.css        |    2 +
+ .../mockup-sandbox/src/components/mockups/templates/ColossalTypographicLanding-XL0mx8/Northbound.tsx      |   53 ++
+ artifacts/mockup-sandbox/src/components/mockups/templates/DarkAthleticCoachingLandingPage-X77PG0/Lp03.tsx |   99 +++
+ .../src/components/mockups/templates/DarkAthleticCoachingLandingPage-X77PG0/assets/lp-03-hero.png         |  Bin 0 -> 1359295 bytes
+ .../mockup-sandbox/src/components/mockups/templates/DarkAthleticCoachingLandingPage-X77PG0/fonts.css      |    2 +
+ artifacts/mockup-sandbox/src/components/mockups/templates/DarkLuxuryTravelLandingPage-t4cr_C/Lp06.tsx     |  136 ++++
+ .../src/components/mockups/templates/DarkLuxuryTravelLandingPage-t4cr_C/assets/lp-06-dest1.png            |  Bin 0 -> 1687363 bytes
+ .../src/components/mockups/templates/DarkLuxuryTravelLandingPage-t4cr_C/assets/lp-06-dest2.png            |  Bin 0 -> 2125293 bytes
+ .../src/components/mockups/templates/DarkLuxuryTravelLandingPage-t4cr_C/assets/lp-06-hero.png             |  Bin 0 -> 1960748 bytes
+ artifacts/mockup-sandbox/src/components/mockups/templates/DarkLuxuryTravelLandingPage-t4cr_C/fonts.css    |    2 +
+ artifacts/mockup-sandbox/src/components/mockups/templates/DarkStudioComingSoonPost-2Bgw0-/ComingSoon.tsx  |   61 ++
+ .../mockup-sandbox/src/components/mockups/templates/DarkStudioComingSoonPost-2Bgw0-/assets/soc-14-bg.png  |  Bin 0 -> 1089677 bytes
+ artifacts/mockup-sandbox/src/components/mockups/templates/DarkStudioComingSoonPost-2Bgw0-/fonts.css       |    2 +
+ .../mockup-sandbox/src/components/mockups/templates/DarkTypographicStudioPoster-JfGD1l/StudioLogo.tsx     |   68 ++
+ .../src/components/mockups/templates/DarkTypographicStudioPoster-JfGD1l/assets/pos-03-studio-art.png      |  Bin 0 -> 1100461 bytes
+ artifacts/mockup-sandbox/src/components/mockups/templates/DarkTypographicStudioPoster-JfGD1l/fonts.css    |    2 +
+ artifacts/mockup-sandbox/src/components/mockups/templates/EditorialDeFiMilestoneEmail-DN94NW/App.tsx      |  371 +++++++++++
+ artifacts/mockup-sandbox/src/components/mockups/templates/NeonWorkoutSupportLandingPage-igjiuS/App.tsx    |  457 +++++++++++++
+ artifacts/mockup-sandbox/src/components/mockups/templates/WabiSabiSkincarePost-6AkvsO/App.tsx             |  284 ++++++++
+ artifacts/mockup-sandbox/src/components/mockups/templates/WabiSabiSkincarePost-aBRe1X/App.tsx             |  284 ++++++++
+ attached_assets/4a1a2ff9-0f72-418a-8a0d-51525805ad0d-Photoroom_1786261248301.png                          |  Bin 0 -> 189653 bytes
+ attached_assets/5458531197450394719_1786256665576.jpg                                                     |  Bin 0 -> 50926 bytes
+ attached_assets/Gemini_Generated_Image_2333852333852333-Photoroom_1786260727541.png                       |  Bin 0 -> 152532 bytes
+ attached_assets/Gemini_Generated_Image_2333852333852333-Photoroom_1786268908264.png                       |  Bin 0 -> 152532 bytes
+ attached_assets/img69380f65d567f_1770453920456.webp                                                       |  Bin 0 -> 5496 bytes
+ attached_assets/img69525e9bc7f63_1770453425635.webp                                                       |  Bin 0 -> 2218 bytes
+ attached_assets/img695261fc58a0d_1770453425636.webp                                                       |  Bin 0 -> 2876 bytes
+ attached_assets/zQAzTcUzmpmD09fPheuQwWO7Jqm0FxinQatFQkwy_1770453920459.webp                               |  Bin 0 -> 2820 bytes
+ ...0\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(1)_1770453702150.webp" |  Bin 0 -> 1190 bytes
+ ...\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(10)_1770453702155.webp" |  Bin 0 -> 1008 bytes
+ ...\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(11)_1770453702156.webp" |  Bin 0 -> 1636 bytes
+ ...\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(12)_1770453702156.webp" |  Bin 0 -> 1156 bytes
+ ...\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(12)_1770453751817.webp" |  Bin 0 -> 1078 bytes
+ ...\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(13)_1770453751827.webp" |  Bin 0 -> 738 bytes
+ ...\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(14)_1770453751828.webp" |  Bin 0 -> 1192 bytes
+ ...\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(15)_1770453751828.webp" |  Bin 0 -> 1538 bytes
+ ...\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(15)_1770453751829.webp" |  Bin 0 -> 984 bytes
+ ...\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(16)_1770453751829.webp" |  Bin 0 -> 940 bytes
+ ...\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(17)_1770453751830.webp" |  Bin 0 -> 902 bytes
+ ...\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(18)_1770453751830.webp" |  Bin 0 -> 1852 bytes
+ ...\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(19)_1770453425635.webp" |  Bin 0 -> 2514 bytes
+ ...\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(19)_1770453751830.webp" |  Bin 0 -> 1720 bytes
+ ...0\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(2)_1770453702153.webp" |  Bin 0 -> 1050 bytes
+ ...\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(20)_1770453425635.webp" |  Bin 0 -> 2260 bytes
+ ...\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(20)_1770453751830.webp" |  Bin 0 -> 1282 bytes
+ ...\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(21)_1770453425632.webp" |  Bin 0 -> 1820 bytes
+ ...\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(21)_1770453809642.webp" |  Bin 0 -> 1666 bytes
+ ...\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(23)_1770453809647.webp" |  Bin 0 -> 1254 bytes
+ ...\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(24)_1770453809647.webp" |  Bin 0 -> 1054 bytes
+ ...\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(25)_1770453809648.webp" |  Bin 0 -> 1208 bytes
+ ...\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(28)_1770453809648.webp" |  Bin 0 -> 1132 bytes
+ ...\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(29)_1770453425635.webp" |  Bin 0 -> 1286 bytes
+ ...0\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(3)_1770453702153.webp" |  Bin 0 -> 1628 bytes
+ ...\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(30)_1770453425635.webp" |  Bin 0 -> 1154 bytes
+ ...\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(31)_1770453425635.webp" |  Bin 0 -> 1000 bytes
+ ...\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(32)_1770454010355.webp" |  Bin 0 -> 722 bytes
+ ...0\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(4)_1770453702154.webp" |  Bin 0 -> 1662 bytes
+ ...0\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(5)_1770453702154.webp" |  Bin 0 -> 566 bytes
+ ...0\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(6)_1770453702154.webp" |  Bin 0 -> 1262 bytes
+ ...0\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(6)_1770453702155.webp" |  Bin 0 -> 936 bytes
+ ...0\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(7)_1770453702155.webp" |  Bin 0 -> 996 bytes
+ ...0\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(8)_1770453702155.webp" |  Bin 0 -> 1802 bytes
+ ...0\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(9)_1770453702155.webp" |  Bin 0 -> 1166 bytes
+ ...5\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-08_\320\262_21.40.14_1786214439407.png" |  Bin 0 -> 1327150 bytes
+ ...5\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-08_\320\262_21.40.14_1786215402652.png" |  Bin 0 -> 1327150 bytes
+ ...5\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-08_\320\262_21.40.27_1786214439482.png" |  Bin 0 -> 2712952 bytes
+ ...5\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-08_\320\262_21.40.27_1786215395313.png" |  Bin 0 -> 2712952 bytes
+ ...5\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-08_\320\262_21.40.27_1786216457719.png" |  Bin 0 -> 2712952 bytes
+ ...5\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-08_\320\262_22.36.28_1786217798044.png" |  Bin 0 -> 243290 bytes
+ ...5\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-08_\320\262_22.49.34_1786219025766.png" |  Bin 0 -> 1865063 bytes
+ ...5\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-08_\320\262_23.08.15_1786219704941.png" |  Bin 0 -> 1803763 bytes
+ ...5\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-08_\320\262_23.31.21_1786221092409.png" |  Bin 0 -> 2454237 bytes
+ ...5\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_08.39.29_1786253980312.png" |  Bin 0 -> 2448441 bytes
+ ...5\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_08.59.41_1786255280401.png" |  Bin 0 -> 582706 bytes
+ ...5\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_08.59.48_1786255280401.png" |  Bin 0 -> 515172 bytes
+ ...5\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_08.59.54_1786255280401.png" |  Bin 0 -> 560018 bytes
+ ...5\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_09.00.00_1786255280400.png" |  Bin 0 -> 566439 bytes
+ ...5\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_09.00.24_1786255280370.png" |  Bin 0 -> 410145 bytes
+ ...5\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_09.00.31_1786255280398.png" |  Bin 0 -> 567869 bytes
+ ...5\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_09.00.41_1786255280399.png" |  Bin 0 -> 622409 bytes
+ ...5\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_09.00.49_1786255280399.png" |  Bin 0 -> 463890 bytes
+ ...5\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_09.00.59_1786255280400.png" |  Bin 0 -> 547270 bytes
+ ...5\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_09.02.31_1786255361278.png" |  Bin 0 -> 138150 bytes
+ ...5\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_09.36.04_1786257424905.png" |  Bin 0 -> 18153 bytes
+ ...5\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_12.27.14_1786267642900.png" |  Bin 0 -> 227471 bytes
+ ...5\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_12.43.35_1786268625663.png" |  Bin 0 -> 233706 bytes
+ ...5\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_12.52.28_1786269172971.png" |  Bin 0 -> 302020 bytes
+ ...5\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_12.54.50_1786269297910.png" |  Bin 0 -> 375594 bytes
+ ...5\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_13.24.08_1786271058718.png" |  Bin 0 -> 477769 bytes
+ ...5\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_13.24.08_1786271124959.png" |  Bin 0 -> 477769 bytes
+ ...5\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_13.33.24_1786271614271.png" |  Bin 0 -> 767810 bytes
+ ...5\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_13.43.59_1786272384283.png" |  Bin 0 -> 963085 bytes
+ ...5\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_13.43.59_1786276226863.png" |  Bin 0 -> 963085 bytes
+ ...5\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_14.04.30_1786273539808.png" |  Bin 0 -> 1502626 bytes
+ ...5\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_14.04.47_1786273539848.png" |  Bin 0 -> 1930015 bytes
+ ...5\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_15.07.23_1786277252246.png" |  Bin 0 -> 595529 bytes
+ ...5\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_16.00.37_1786280449242.png" |  Bin 0 -> 268997 bytes
+ ...5\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_16.00.37_1786280636554.png" |  Bin 0 -> 268997 bytes
+ ...5\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_16.03.16_1786280636569.png" |  Bin 0 -> 1290588 bytes
+ ...5\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_16.03.32_1786280636572.png" |  Bin 0 -> 203203 bytes
+ client/index.html                                                                                         |   17 +-
+ client/public/dsb-bg-blue.webp                                                                            |  Bin 0 -> 43012 bytes
+ client/public/dsb-bg.webp                                                                                 |  Bin 0 -> 33864 bytes
+ client/public/pt-logo-new.png                                                                             |  Bin 0 -> 152532 bytes
+ client/public/pt-logo-new.webp                                                                            |  Bin 0 -> 34586 bytes
+ client/src/App.tsx                                                                                        |   54 +-
+ client/src/assets/dsb-bg.webp                                                                             |  Bin 0 -> 33864 bytes
+ client/src/assets/pt-logo.webp                                                                            |  Bin 0 -> 37884 bytes
+ client/src/components/cookie-consent.tsx                                                                  |   98 +++
+ client/src/components/nav-header.tsx                                                                      |  263 ++++++++
+ client/src/hooks/usePageSnap.ts                                                                           |   69 ++
+ client/src/index.css                                                                                      |  102 +--
+ client/src/lib/i18n.ts                                                                                    |  206 ++++++
+ client/src/pages/advertisers.tsx                                                                          |  258 ++++++++
+ client/src/pages/affiliates.tsx                                                                           |  305 +++++++++
+ client/src/pages/blog-admin.tsx                                                                           |    4 +-
+ client/src/pages/blog-post.tsx                                                                            |  260 ++++----
+ client/src/pages/blog.tsx                                                                                 |  332 +++++-----
+ client/src/pages/landing.tsx                                                                              | 1818 ++++++++--------------------------------------------
+ scripts/post-merge.sh                                                                                     |   16 +
+ server/routes.ts                                                                                          |  107 +++-
+ 139 files changed, 5293 insertions(+), 1899 deletions(-)
+ create mode 100644 .agents/memory/MEMORY.md
+ create mode 100644 .agents/memory/canvas-api-quirks.md
+ create mode 100644 .agents/memory/primetraff-design-prefs.md
+ create mode 100644 .agents/memory/scroll-freeze-fix.md
+ create mode 100644 artifacts/mockup-sandbox/.tsbuildinfo
+ create mode 100644 artifacts/mockup-sandbox/src/components/mockups/igaming-landing/Advertisers.tsx
+ create mode 100644 artifacts/mockup-sandbox/src/components/mockups/igaming-landing/Affiliates.tsx
+ create mode 100644 artifacts/mockup-sandbox/src/components/mockups/igaming-landing/Blog.tsx
+ create mode 100644 artifacts/mockup-sandbox/src/components/mockups/igaming-landing/DarkStudioBlue.tsx
+ create mode 100644 artifacts/mockup-sandbox/src/components/mockups/igaming-landing/assets/dsb-bg.webp
+ create mode 100644 artifacts/mockup-sandbox/src/components/mockups/igaming-landing/assets/pt-logo.webp
+ create mode 100644 artifacts/mockup-sandbox/src/components/mockups/templates/BlueCoworkingLanding-T15Ydg/Atrium.tsx
+ create mode 100644 artifacts/mockup-sandbox/src/components/mockups/templates/BlueCoworkingLanding-T15Ydg/assets/lp-26-hero.png
+ create mode 100644 artifacts/mockup-sandbox/src/components/mockups/templates/BlueCoworkingLanding-T15Ydg/fonts.css
+ create mode 100644 artifacts/mockup-sandbox/src/components/mockups/templates/CinematicFilmTeaserPost-T3tqRc/GlassHoursPromo.tsx
+ create mode 100644 artifacts/mockup-sandbox/src/components/mockups/templates/CinematicFilmTeaserPost-T3tqRc/assets/soc-29-face.png
+ create mode 100644 artifacts/mockup-sandbox/src/components/mockups/templates/CinematicFilmTeaserPost-T3tqRc/fonts.css
+ create mode 100644 artifacts/mockup-sandbox/src/components/mockups/templates/ColossalTypographicLanding-XL0mx8/Northbound.tsx
+ create mode 100644 artifacts/mockup-sandbox/src/components/mockups/templates/DarkAthleticCoachingLandingPage-X77PG0/Lp03.tsx
+ create mode 100644 artifacts/mockup-sandbox/src/components/mockups/templates/DarkAthleticCoachingLandingPage-X77PG0/assets/lp-03-hero.png
+ create mode 100644 artifacts/mockup-sandbox/src/components/mockups/templates/DarkAthleticCoachingLandingPage-X77PG0/fonts.css
+ create mode 100644 artifacts/mockup-sandbox/src/components/mockups/templates/DarkLuxuryTravelLandingPage-t4cr_C/Lp06.tsx
+ create mode 100644 artifacts/mockup-sandbox/src/components/mockups/templates/DarkLuxuryTravelLandingPage-t4cr_C/assets/lp-06-dest1.png
+ create mode 100644 artifacts/mockup-sandbox/src/components/mockups/templates/DarkLuxuryTravelLandingPage-t4cr_C/assets/lp-06-dest2.png
+ create mode 100644 artifacts/mockup-sandbox/src/components/mockups/templates/DarkLuxuryTravelLandingPage-t4cr_C/assets/lp-06-hero.png
+ create mode 100644 artifacts/mockup-sandbox/src/components/mockups/templates/DarkLuxuryTravelLandingPage-t4cr_C/fonts.css
+ create mode 100644 artifacts/mockup-sandbox/src/components/mockups/templates/DarkStudioComingSoonPost-2Bgw0-/ComingSoon.tsx
+ create mode 100644 artifacts/mockup-sandbox/src/components/mockups/templates/DarkStudioComingSoonPost-2Bgw0-/assets/soc-14-bg.png
+ create mode 100644 artifacts/mockup-sandbox/src/components/mockups/templates/DarkStudioComingSoonPost-2Bgw0-/fonts.css
+ create mode 100644 artifacts/mockup-sandbox/src/components/mockups/templates/DarkTypographicStudioPoster-JfGD1l/StudioLogo.tsx
+ create mode 100644 artifacts/mockup-sandbox/src/components/mockups/templates/DarkTypographicStudioPoster-JfGD1l/assets/pos-03-studio-art.png
+ create mode 100644 artifacts/mockup-sandbox/src/components/mockups/templates/DarkTypographicStudioPoster-JfGD1l/fonts.css
+ create mode 100644 artifacts/mockup-sandbox/src/components/mockups/templates/EditorialDeFiMilestoneEmail-DN94NW/App.tsx
+ create mode 100644 artifacts/mockup-sandbox/src/components/mockups/templates/NeonWorkoutSupportLandingPage-igjiuS/App.tsx
+ create mode 100644 artifacts/mockup-sandbox/src/components/mockups/templates/WabiSabiSkincarePost-6AkvsO/App.tsx
+ create mode 100644 artifacts/mockup-sandbox/src/components/mockups/templates/WabiSabiSkincarePost-aBRe1X/App.tsx
+ create mode 100644 attached_assets/4a1a2ff9-0f72-418a-8a0d-51525805ad0d-Photoroom_1786261248301.png
+ create mode 100644 attached_assets/5458531197450394719_1786256665576.jpg
+ create mode 100644 attached_assets/Gemini_Generated_Image_2333852333852333-Photoroom_1786260727541.png
+ create mode 100644 attached_assets/Gemini_Generated_Image_2333852333852333-Photoroom_1786268908264.png
+ create mode 100644 attached_assets/img69380f65d567f_1770453920456.webp
+ create mode 100644 attached_assets/img69525e9bc7f63_1770453425635.webp
+ create mode 100644 attached_assets/img695261fc58a0d_1770453425636.webp
+ create mode 100644 attached_assets/zQAzTcUzmpmD09fPheuQwWO7Jqm0FxinQatFQkwy_1770453920459.webp
+ create mode 100644 "attached_assets/\320\221\320\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(1)_1770453702150.webp"
+ create mode 100644 "attached_assets/\320\221\320\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(10)_1770453702155.webp"
+ create mode 100644 "attached_assets/\320\221\320\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(11)_1770453702156.webp"
+ create mode 100644 "attached_assets/\320\221\320\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(12)_1770453702156.webp"
+ create mode 100644 "attached_assets/\320\221\320\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(12)_1770453751817.webp"
+ create mode 100644 "attached_assets/\320\221\320\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(13)_1770453751827.webp"
+ create mode 100644 "attached_assets/\320\221\320\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(14)_1770453751828.webp"
+ create mode 100644 "attached_assets/\320\221\320\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(15)_1770453751828.webp"
+ create mode 100644 "attached_assets/\320\221\320\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(15)_1770453751829.webp"
+ create mode 100644 "attached_assets/\320\221\320\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(16)_1770453751829.webp"
+ create mode 100644 "attached_assets/\320\221\320\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(17)_1770453751830.webp"
+ create mode 100644 "attached_assets/\320\221\320\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(18)_1770453751830.webp"
+ create mode 100644 "attached_assets/\320\221\320\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(19)_1770453425635.webp"
+ create mode 100644 "attached_assets/\320\221\320\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(19)_1770453751830.webp"
+ create mode 100644 "attached_assets/\320\221\320\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(2)_1770453702153.webp"
+ create mode 100644 "attached_assets/\320\221\320\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(20)_1770453425635.webp"
+ create mode 100644 "attached_assets/\320\221\320\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(20)_1770453751830.webp"
+ create mode 100644 "attached_assets/\320\221\320\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(21)_1770453425632.webp"
+ create mode 100644 "attached_assets/\320\221\320\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(21)_1770453809642.webp"
+ create mode 100644 "attached_assets/\320\221\320\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(23)_1770453809647.webp"
+ create mode 100644 "attached_assets/\320\221\320\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(24)_1770453809647.webp"
+ create mode 100644 "attached_assets/\320\221\320\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(25)_1770453809648.webp"
+ create mode 100644 "attached_assets/\320\221\320\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(28)_1770453809648.webp"
+ create mode 100644 "attached_assets/\320\221\320\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(29)_1770453425635.webp"
+ create mode 100644 "attached_assets/\320\221\320\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(3)_1770453702153.webp"
+ create mode 100644 "attached_assets/\320\221\320\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(30)_1770453425635.webp"
+ create mode 100644 "attached_assets/\320\221\320\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(31)_1770453425635.webp"
+ create mode 100644 "attached_assets/\320\221\320\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(32)_1770454010355.webp"
+ create mode 100644 "attached_assets/\320\221\320\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(4)_1770453702154.webp"
+ create mode 100644 "attached_assets/\320\221\320\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(5)_1770453702154.webp"
+ create mode 100644 "attached_assets/\320\221\320\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(6)_1770453702154.webp"
+ create mode 100644 "attached_assets/\320\221\320\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(6)_1770453702155.webp"
+ create mode 100644 "attached_assets/\320\221\320\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(7)_1770453702155.webp"
+ create mode 100644 "attached_assets/\320\221\320\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(8)_1770453702155.webp"
+ create mode 100644 "attached_assets/\320\221\320\265\320\267_\320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\217_(9)_1770453702155.webp"
+ create mode 100644 "attached_assets/\320\241\320\275\320\270\320\274\320\276\320\272_\321\215\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-08_\320\262_21.40.14_1786214439407.png"
+ create mode 100644 "attached_assets/\320\241\320\275\320\270\320\274\320\276\320\272_\321\215\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-08_\320\262_21.40.14_1786215402652.png"
+ create mode 100644 "attached_assets/\320\241\320\275\320\270\320\274\320\276\320\272_\321\215\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-08_\320\262_21.40.27_1786214439482.png"
+ create mode 100644 "attached_assets/\320\241\320\275\320\270\320\274\320\276\320\272_\321\215\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-08_\320\262_21.40.27_1786215395313.png"
+ create mode 100644 "attached_assets/\320\241\320\275\320\270\320\274\320\276\320\272_\321\215\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-08_\320\262_21.40.27_1786216457719.png"
+ create mode 100644 "attached_assets/\320\241\320\275\320\270\320\274\320\276\320\272_\321\215\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-08_\320\262_22.36.28_1786217798044.png"
+ create mode 100644 "attached_assets/\320\241\320\275\320\270\320\274\320\276\320\272_\321\215\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-08_\320\262_22.49.34_1786219025766.png"
+ create mode 100644 "attached_assets/\320\241\320\275\320\270\320\274\320\276\320\272_\321\215\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-08_\320\262_23.08.15_1786219704941.png"
+ create mode 100644 "attached_assets/\320\241\320\275\320\270\320\274\320\276\320\272_\321\215\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-08_\320\262_23.31.21_1786221092409.png"
+ create mode 100644 "attached_assets/\320\241\320\275\320\270\320\274\320\276\320\272_\321\215\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_08.39.29_1786253980312.png"
+ create mode 100644 "attached_assets/\320\241\320\275\320\270\320\274\320\276\320\272_\321\215\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_08.59.41_1786255280401.png"
+ create mode 100644 "attached_assets/\320\241\320\275\320\270\320\274\320\276\320\272_\321\215\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_08.59.48_1786255280401.png"
+ create mode 100644 "attached_assets/\320\241\320\275\320\270\320\274\320\276\320\272_\321\215\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_08.59.54_1786255280401.png"
+ create mode 100644 "attached_assets/\320\241\320\275\320\270\320\274\320\276\320\272_\321\215\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_09.00.00_1786255280400.png"
+ create mode 100644 "attached_assets/\320\241\320\275\320\270\320\274\320\276\320\272_\321\215\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_09.00.24_1786255280370.png"
+ create mode 100644 "attached_assets/\320\241\320\275\320\270\320\274\320\276\320\272_\321\215\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_09.00.31_1786255280398.png"
+ create mode 100644 "attached_assets/\320\241\320\275\320\270\320\274\320\276\320\272_\321\215\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_09.00.41_1786255280399.png"
+ create mode 100644 "attached_assets/\320\241\320\275\320\270\320\274\320\276\320\272_\321\215\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_09.00.49_1786255280399.png"
+ create mode 100644 "attached_assets/\320\241\320\275\320\270\320\274\320\276\320\272_\321\215\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_09.00.59_1786255280400.png"
+ create mode 100644 "attached_assets/\320\241\320\275\320\270\320\274\320\276\320\272_\321\215\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_09.02.31_1786255361278.png"
+ create mode 100644 "attached_assets/\320\241\320\275\320\270\320\274\320\276\320\272_\321\215\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_09.36.04_1786257424905.png"
+ create mode 100644 "attached_assets/\320\241\320\275\320\270\320\274\320\276\320\272_\321\215\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_12.27.14_1786267642900.png"
+ create mode 100644 "attached_assets/\320\241\320\275\320\270\320\274\320\276\320\272_\321\215\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_12.43.35_1786268625663.png"
+ create mode 100644 "attached_assets/\320\241\320\275\320\270\320\274\320\276\320\272_\321\215\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_12.52.28_1786269172971.png"
+ create mode 100644 "attached_assets/\320\241\320\275\320\270\320\274\320\276\320\272_\321\215\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_12.54.50_1786269297910.png"
+ create mode 100644 "attached_assets/\320\241\320\275\320\270\320\274\320\276\320\272_\321\215\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_13.24.08_1786271058718.png"
+ create mode 100644 "attached_assets/\320\241\320\275\320\270\320\274\320\276\320\272_\321\215\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_13.24.08_1786271124959.png"
+ create mode 100644 "attached_assets/\320\241\320\275\320\270\320\274\320\276\320\272_\321\215\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_13.33.24_1786271614271.png"
+ create mode 100644 "attached_assets/\320\241\320\275\320\270\320\274\320\276\320\272_\321\215\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_13.43.59_1786272384283.png"
+ create mode 100644 "attached_assets/\320\241\320\275\320\270\320\274\320\276\320\272_\321\215\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_13.43.59_1786276226863.png"
+ create mode 100644 "attached_assets/\320\241\320\275\320\270\320\274\320\276\320\272_\321\215\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_14.04.30_1786273539808.png"
+ create mode 100644 "attached_assets/\320\241\320\275\320\270\320\274\320\276\320\272_\321\215\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_14.04.47_1786273539848.png"
+ create mode 100644 "attached_assets/\320\241\320\275\320\270\320\274\320\276\320\272_\321\215\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_15.07.23_1786277252246.png"
+ create mode 100644 "attached_assets/\320\241\320\275\320\270\320\274\320\276\320\272_\321\215\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_16.00.37_1786280449242.png"
+ create mode 100644 "attached_assets/\320\241\320\275\320\270\320\274\320\276\320\272_\321\215\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_16.00.37_1786280636554.png"
+ create mode 100644 "attached_assets/\320\241\320\275\320\270\320\274\320\276\320\272_\321\215\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_16.03.16_1786280636569.png"
+ create mode 100644 "attached_assets/\320\241\320\275\320\270\320\274\320\276\320\272_\321\215\320\272\321\200\320\260\320\275\320\260_\342\200\224_2026-08-09_\320\262_16.03.32_1786280636572.png"
+ create mode 100644 client/public/dsb-bg-blue.webp
+ create mode 100644 client/public/dsb-bg.webp
+ create mode 100644 client/public/pt-logo-new.png
+ create mode 100644 client/public/pt-logo-new.webp
+ create mode 100644 client/src/assets/dsb-bg.webp
+ create mode 100644 client/src/assets/pt-logo.webp
+ create mode 100644 client/src/components/cookie-consent.tsx
+ create mode 100644 client/src/components/nav-header.tsx
+ create mode 100644 client/src/hooks/usePageSnap.ts
+ create mode 100644 client/src/pages/advertisers.tsx
+ create mode 100644 client/src/pages/affiliates.tsx
+ create mode 100644 scripts/post-merge.sh
+
+up to date, audited 582 packages in 5s
+
+81 packages are looking for funding
+  run `npm fund` for details
+
+20 vulnerabilities (3 low, 3 moderate, 14 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+
+> rest-express@1.0.0 build
+> tsx script/build.ts
+
+building client...
+vite v7.3.0 building client environment for production...
+transforming (1) src/main.tsxBrowserslist: browsers data (caniuse-lite) is 10 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+transforming (5) src/App.tsx
+A PostCSS plugin did not pass the `from` option to `postcss.parse`. This may cause imported assets to be incorrectly transformed. If you've recently added a PostCSS plugin that raised this warning, please contact the package author to fix the issue.
+✓ 2434 modules transformed.
+../dist/public/assets/img69380f65d567f_1770453920456-CpIgRxua.webp    5.50 kB
+../dist/public/index.html                                             9.15 kB │ gzip:  3.32 kB
+../dist/public/assets/pt-logo-BGIiMJk_.webp                          37.88 kB
+../dist/public/assets/blog-admin-CQ7DNbul.css                        24.24 kB │ gzip:  3.62 kB
+../dist/public/assets/index-BVfDGFJt.css                            116.37 kB │ gzip: 18.20 kB
+../dist/public/assets/arrow-right-Dqq4820z.js                         0.16 kB │ gzip:  0.16 kB
+../dist/public/assets/arrow-left-BAwmK8-0.js                          0.16 kB │ gzip:  0.16 kB
+../dist/public/assets/user-round-BYbgvHSi.js                          0.36 kB │ gzip:  0.26 kB
+../dist/public/assets/usePageSnap-B32VyfJM.js                         1.06 kB │ gzip:  0.60 kB
+../dist/public/assets/blog-wrInM_J9.js                                7.22 kB │ gzip:  2.32 kB
+../dist/public/assets/useQuery-CJugB5JD.js                            8.72 kB │ gzip:  3.15 kB
+../dist/public/assets/blog-post-DppYj1Kz.js                           8.74 kB │ gzip:  3.04 kB
+../dist/public/assets/advertisers-CQycYx1V.js                        13.75 kB │ gzip:  3.64 kB
+../dist/public/assets/affiliates-BixJYLVs.js                         14.91 kB │ gzip:  3.88 kB
+../dist/public/assets/i18n-E_nEdH-V.js                               27.42 kB │ gzip:  9.72 kB
+../dist/public/assets/landing-DGyoloi0.js                            83.58 kB │ gzip: 56.99 kB
+../dist/public/assets/blog-admin-Bw3O4DMz.js                        240.01 kB │ gzip: 71.65 kB
+../dist/public/assets/index-CcOoUdqW.js                             268.49 kB │ gzip: 88.72 kB
+✓ built in 11.83s
+building server...
+
+  dist/index.cjs  1.1mb ⚠️
+
+⚡ Done in 370ms
+Use --update-env to update environment variables
+[PM2] Applying action restartProcessId on app [primetraff](ids: [ 1 ])
+[PM2] [primetraff](1) ✓
+┌────┬──────────────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
+│ id │ name             │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+├────┼──────────────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
+│ 3  │ primetrack       │ default     │ 1.0.0   │ fork    │ 2397053  │ 3D     │ 8    │ online    │ 0%       │ 468.5mb  │ root     │ disabled │
+│ 1  │ primetraff       │ default     │ 1.0.0   │ fork    │ 1424777  │ 0s     │ 1    │ online    │ 0%       │ 24.8mb   │ root     │ disabled │
+│ 2  │ telegramm-bot    │ default     │ 1.0.0   │ fork    │ 1222     │ 9D     │ 0    │ online    │ 7.1%     │ 109.7mb  │ root     │ disabled │
+└────┴──────────────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+Module
+┌────┬──────────────────────────────┬───────────────┬──────────┬──────────┬──────┬──────────┬──────────┬──────────┐
+│ id │ module                       │ version       │ pid      │ status   │ ↺    │ cpu      │ mem      │ user     │
+├────┼──────────────────────────────┼───────────────┼──────────┼──────────┼──────┼──────────┼──────────┼──────────┤
+│ 0  │ pm2-logrotate                │ 3.0.0         │ 1093     │ online   │ 0    │ 0%       │ 68.9mb   │ root     │
+└────┴──────────────────────────────┴───────────────┴──────────┴──────────┴──────┴──────────┴──────────┴──────────┘
+[root@v742573 primetraff.com]# 
