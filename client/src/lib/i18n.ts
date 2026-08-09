@@ -320,14 +320,14 @@ export const translations = {
     whyTitle: { ru: "Нам доверяют", en: "They trust us" },
     whyParas: {
       ru: [
-        "Наш фокус — не количество подключённых аффилейтов, а качество партнёрства и трафика.",
-        "Мы несём ответственность за результат и придерживаемся принципиальной позиции в отношении невалидного трафика: сомнительные источники не допускаются, а качество каждого потока контролируется на протяжении всей работы.",
-        "При этом наша главная задача — максимизировать ваш доход: находить сильные источники, создавать для них лучшие условия и масштабировать то, что действительно приносит результат.",
+        "Подключаем только проверенных партнёров — каждый источник проходит проверку до запуска трафика на ваш продукт.",
+        "Контролируем качество на каждом этапе: слабые источники отключаем сами, не дожидаясь претензий с вашей стороны.",
+        "Эффективные связки масштабируем вместе с вами — вы получаете управляемый поток с понятной экономикой, а не просто объём.",
       ],
       en: [
-        "Our focus is not the number of connected affiliates, but the quality of partnership and traffic.",
-        "We are responsible for results and maintain a principled position on invalid traffic: dubious sources are not allowed, and the quality of each flow is monitored throughout the work.",
-        "At the same time, our main task is to maximize your income: find strong sources, create the best conditions for them, and scale what truly delivers results.",
+        "We connect only verified partners — each source is checked before traffic is launched on your product.",
+        "We control quality at every stage: we disconnect weak sources ourselves, without waiting for complaints from your side.",
+        "We scale effective bundles together with you — you get a manageable flow with a clear economy, not just volume.",
       ],
     },
     reviewsTitle: { ru: "Отзывы о работе с нами", en: "Reviews about working with us" },
