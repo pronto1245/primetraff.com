@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Fingerprint, Send, X, Zap } from 'lucide-react';
 import bgImage from './assets/dsb-bg.webp';
+import ptLogo from './assets/pt-logo.webp';
 
 /* ============================================================
    Design tokens
@@ -103,13 +104,7 @@ export function DarkStudioBlue() {
 
         {/* Шапка — fixed */}
         <div className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between" style={{ padding: `${PAD} ${PAD} 0` }}>
-          <div className="flex items-center gap-2.5">
-            <Zap className="w-6 h-6" style={{ color: BLUE }} fill="currentColor" />
-            <div className="flex flex-col leading-none text-left">
-              <span className="font-bold uppercase" style={{ fontSize: TYPE.small, letterSpacing: TRACK }}>PrimeTraff</span>
-              <span className="uppercase text-zinc-400 mt-1" style={{ fontSize: TYPE.micro, letterSpacing: '0.25em', fontWeight: 300 }}>Affiliate Network</span>
-            </div>
-          </div>
+          <img src={ptLogo} alt="PrimeTraff.com" style={{ height: 'clamp(34px, 3.2vw, 46px)', width: 'auto' }} />
           <div className="flex items-center" style={{ gap: 'clamp(16px, 2vw, 32px)' }}>
             <div className="font-bold" style={{ fontSize: TYPE.small, letterSpacing: TRACK }}>
               <span className="text-white cursor-pointer">RU</span>
