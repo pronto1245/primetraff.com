@@ -31,8 +31,6 @@ export function Affiliates() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;700;900&family=Comforter&display=swap');
         ::-webkit-scrollbar { display: none; }
-        .text-grad { background: linear-gradient(180deg, #93c5fd 0%, #3b82f6 55%, #1d4ed8 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        .hl { color: #3b82f6; }
         @keyframes hint-bounce { 0%, 100% { transform: translateY(0); opacity: .45; } 50% { transform: translateY(9px); opacity: 1; } }
         .scroll-hint svg { animation: hint-bounce 1.8s ease-in-out infinite; }
         html { scroll-snap-type: y mandatory; }
@@ -131,14 +129,14 @@ export function Affiliates() {
               Primetraff.com
             </div>
             <div className="m-title uppercase font-black text-white leading-none" style={{ fontSize: 'clamp(48px, 8.2vw, 118px)', letterSpacing: '0.02em' }}>
-              <span className="text-grad">Affiliates</span>
+              Affiliates
             </div>
           </div>
           <div className="uppercase text-white" style={{ fontSize: 'clamp(12px, 1.2vw, 17px)', letterSpacing: '0.06em', lineHeight: 1.9, fontWeight: 400, maxWidth: 1160 }}>
-            <p>Предоставляем доступ к <span className="hl">актуальным офферам</span> и условиям, рассчитанным на разные источники трафика.</p>
+            <p>Предоставляем доступ к актуальным офферам и условиям, рассчитанным на разные источники трафика.</p>
             <p>Помогаем разобраться с запуском, трекингом, оптимизацией и техническими вопросами.</p>
-            <p>За каждым партнёром закрепляется <span className="hl">менеджер</span>, который остаётся на связи в процессе работы.</p>
-            <p>Сильные результаты открывают возможности для увеличения объёмов и получения <span className="hl">индивидуальных условий</span>.</p>
+            <p>За каждым партнёром закрепляется менеджер, который остаётся на связи в процессе работы.</p>
+            <p>Сильные результаты открывают возможности для увеличения объёмов и получения индивидуальных условий.</p>
             <p>Мы заинтересованы в том, чтобы ваши успешные связки развивались и приносили больше дохода.</p>
           </div>
 
