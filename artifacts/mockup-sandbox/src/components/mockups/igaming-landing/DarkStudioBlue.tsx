@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { ChevronDown, ArrowRight, Fingerprint, Send, X, Zap } from 'lucide-react';
+import { ArrowRight, Fingerprint, Send, X, Zap } from 'lucide-react';
 import bgImage from './assets/dsb-bg.webp';
 
 /* ============================================================
@@ -18,7 +18,9 @@ const PAD   = 'clamp(20px, 3vw, 48px)';
 
 const ScrollHint = () => (
   <div className="scroll-hint absolute left-1/2 z-20 pointer-events-none" style={{ bottom: 8, transform: 'translateX(-50%)' }}>
-    <ChevronDown style={{ width: 72, height: 72, color: 'rgba(255,255,255,0.9)' }} strokeWidth={0.9} />
+    <svg width="86" height="22" viewBox="0 0 86 22" fill="none">
+      <path d="M2 2 L43 19 L84 2" stroke="rgba(255,255,255,0.9)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
   </div>
 );
 
