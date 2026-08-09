@@ -236,7 +236,6 @@ export const SHARED_STYLES = `
   .scroll-hint svg { animation: hint-bounce 1.8s ease-in-out infinite; }
   html { scroll-snap-type: none; }
   section { scroll-snap-align: none; }
-  .m-copy { position: fixed; left: 0; right: 0; z-index: 51; bottom: calc(max(clamp(18px, 2.5vh, 28px), env(safe-area-inset-bottom, 0px)) + 58px); padding-bottom: 0; }
   @media (max-width: 640px) {
     .m-only { display: flex !important; }
     .m-hide { display: none !important; }
