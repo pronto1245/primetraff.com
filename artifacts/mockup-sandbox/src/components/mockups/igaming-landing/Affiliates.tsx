@@ -158,13 +158,12 @@ export function Affiliates() {
           </div>
           <div className="w-full" style={{ maxWidth: 1100 }}>
             {[
-              { icon: 'S', title: 'Support', desc: 'ваш помощник по любому вопросу' },
-              { icon: 'M', title: 'Менеджер', desc: 'руководитель отдела — по очень важным вопросам' },
-              { icon: 'T', title: 'TG-Channel', desc: 'никакого спама — только серьёзные посты' },
-              { icon: 'I', title: 'Instagram', desc: 'смешные мемы и полезные посты' },
+              { icon: 'S', title: 'Support', desc: 'на связи 24/7 — решаем любой вопрос быстро' },
+              { icon: 'M', title: 'Менеджер', desc: 'прямой контакт для обсуждения условий, ставок и запуска' },
+              { icon: 'T', title: 'TG-Channel', desc: 'новости сети, свежие офферы и апдейты — только по делу' },
             ].map((c, i) => (
               <a key={c.title} href="#" className="contact-row group flex items-center no-underline"
-                style={{ gap: 'clamp(16px, 2vw, 28px)', padding: 'clamp(18px, 2.6vh, 28px) clamp(12px, 1.5vw, 24px)', borderTop: '1px solid rgba(255,255,255,0.12)', borderBottom: i === 3 ? '1px solid rgba(255,255,255,0.12)' : 'none', textDecoration: 'none' }}>
+                style={{ gap: 'clamp(16px, 2vw, 28px)', padding: 'clamp(18px, 2.6vh, 28px) clamp(12px, 1.5vw, 24px)', borderTop: '1px solid rgba(255,255,255,0.12)', borderBottom: i === 2 ? '1px solid rgba(255,255,255,0.12)' : 'none', textDecoration: 'none' }}>
                 <span className="flex-shrink-0 rounded-full flex items-center justify-center font-bold"
                   style={{ width: 'clamp(38px, 3.4vw, 52px)', height: 'clamp(38px, 3.4vw, 52px)', background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', fontSize: 'clamp(13px, 1.2vw, 18px)' }}>
                   {c.icon}
