@@ -189,7 +189,7 @@ export default function LandingPage() {
 
           {/* Label */}
           <div className="flex flex-col items-center" style={{ gap: 0 }}>
-            <div style={{ height: 'clamp(48px, 7vh, 80px)' }} />
+            <div style={{ height: 'clamp(80px, 13vh, 130px)' }} />
             <div className="uppercase text-zinc-400" style={{ fontSize: TYPE.small, letterSpacing: '0.35em', fontWeight: 300 }}>
               iGaming Network
             </div>
