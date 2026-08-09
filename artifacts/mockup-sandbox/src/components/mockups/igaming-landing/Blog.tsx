@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowRight, Fingerprint, Send, X, Zap } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Fingerprint, Send, X, Zap } from 'lucide-react';
 import bgImage from './assets/dsb-bg.png';
 
 /* ============================================================
@@ -16,6 +16,13 @@ const PAD   = 'clamp(20px, 3vw, 48px)';
 
 const CATEGORIES = ['Все', 'Основные понятия', 'Новичку', 'Источники трафика', 'iGaming Тренды', 'Новости'];
 
+const ARTICLE = [
+  'В арбитраже трафика все стремятся к одному результату — качественному FTD. Однако пути к этой цели бывают разными. Кто-то выстраивает грамотные воронки и прогревает аудиторию, а кто-то использует ботов, мультиаккаунты и подмену данных. Внешне такой трафик может выглядеть живым, но реальной ценности рекламодателю он не несёт.',
+  'Невалидный трафик — это любые привлечённые «игроки», которые не совершают реальных действий: не депонируют повторно, не играют, а часто вообще не существуют. Основные признаки: аномально высокий CR при нулевом ретеншне, совпадающие паттерны поведения у разных аккаунтов, высокий процент дубликатов.',
+  'Для веб-мастера работа с таким трафиком — короткая дорога к бану и потере выплат. Для рекламодателя — прямые убытки. Именно поэтому мы проверяем каждый источник до запуска и отслеживаем качество потока на всей дистанции.',
+  'Если сомневаетесь в своём источнике — напишите менеджеру до запуска. Разобраться заранее всегда дешевле, чем терять выплату из-за несоответствия требованиям.',
+];
+
 const POSTS = [
   { cat: 'Основные понятия', date: '05.08.2026', hue: 220, flip: false, title: 'Невалидный трафик: как распознать и почему он опасен', excerpt: 'В арбитраже все стремятся к одному — качественному FTD. Но пути бывают разные: кто-то строит воронки и прогревает аудиторию, а кто-то использует ботов и мультиаккаунты. Разбираем, как отличить живой трафик от подделки.' },
   { cat: 'Основные понятия', date: '02.08.2026', hue: 200, flip: true, title: 'RevShare: доля от дохода вместо разовой выплаты', excerpt: 'Модель, при которой вы получаете процент от дохода привлечённого игрока — обычно от 20% до 70%. Считаем, когда RevShare выгоднее CPA и на что смотреть в условиях.' },
@@ -28,6 +35,7 @@ const POSTS = [
 export function Blog() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeCat, setActiveCat] = useState('Все');
+  const [openPost, setOpenPost] = useState<number | null>(null);
 
   const shown = activeCat === 'Все' ? POSTS : POSTS.filter(p => p.cat === activeCat);
 
@@ -101,6 +109,36 @@ export function Blog() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/60 to-black/90" />
         </div>
 
+        {openPost !== null && (() => { const p = POSTS[openPost]; return (
+          <div className="relative z-10 w-full mx-auto" style={{ maxWidth: 900 }}>
+            <button onClick={() => setOpenPost(null)} className="flex items-center gap-2 uppercase text-zinc-300 hover:text-white transition-colors bg-transparent border-none cursor-pointer"
+              style={{ fontFamily: FONT, fontSize: 'clamp(10px, 0.95vw, 13px)', letterSpacing: '0.15em', marginBottom: 'clamp(24px, 4vh, 44px)', padding: 0 }}>
+              <ArrowLeft className="w-4 h-4" /> Назад в блог
+            </button>
+            <div className="relative w-full overflow-hidden rounded-2xl" style={{ aspectRatio: '16 / 6', marginBottom: 'clamp(28px, 4.5vh, 48px)', border: '1px solid rgba(255,255,255,0.1)' }}>
+              <img src={bgImage} alt="" className="w-full h-full object-cover" style={{ filter: `hue-rotate(${p.hue}deg) saturate(1.2)`, transform: 'scale(1.3)' }} />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/20" />
+              <div className="absolute" style={{ left: 'clamp(18px, 2vw, 32px)', bottom: 'clamp(14px, 2vh, 24px)' }}>
+                <span className="uppercase" style={{ color: BLUE, fontSize: 'clamp(9px, 0.85vw, 12px)', letterSpacing: '0.18em', fontWeight: 500 }}>{p.cat}</span>
+                <span className="text-zinc-400 ml-4" style={{ fontSize: 'clamp(9px, 0.85vw, 12px)', letterSpacing: '0.1em' }}>{p.date}</span>
+              </div>
+            </div>
+            <h1 className="uppercase font-black text-white" style={{ fontSize: 'clamp(22px, 2.8vw, 44px)', letterSpacing: '0.02em', lineHeight: 1.25, marginBottom: 'clamp(24px, 4vh, 44px)' }}>
+              {p.title}
+            </h1>
+            {ARTICLE.map((par, i) => (
+              <p key={i} className="text-zinc-300" style={{ fontSize: 'clamp(12px, 1.05vw, 15px)', lineHeight: 1.9, fontWeight: 300, marginBottom: 'clamp(16px, 2.4vh, 26px)' }}>{par}</p>
+            ))}
+            <div className="flex" style={{ marginTop: 'clamp(28px, 4.5vh, 48px)' }}>
+              <button onClick={() => setOpenPost(null)} className="flex items-center gap-3 border-b border-white/30 pb-2 hover:border-white transition-colors duration-500 group bg-transparent cursor-pointer">
+                <span className="uppercase font-medium text-white" style={{ fontFamily: FONT, fontSize: 'clamp(11px, 1vw, 14px)', letterSpacing: '0.15em' }}>Все статьи</span>
+                <ArrowRight className="w-4 h-4 text-white transform group-hover:translate-x-1 transition-transform duration-500" />
+              </button>
+            </div>
+          </div>
+        ); })()}
+
+        {openPost === null && (<>
         <div className="relative z-10 flex flex-col items-center text-center">
           <div className="uppercase text-zinc-400" style={{ fontSize: 'clamp(11px, 1.1vw, 15px)', letterSpacing: '0.35em', fontWeight: 300, marginBottom: 'clamp(14px, 2vh, 24px)' }}>
             Полезные материалы
@@ -129,7 +167,7 @@ export function Blog() {
         {/* Сетка статей */}
         <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full mx-auto" style={{ gap: 'clamp(16px, 1.8vw, 28px)', maxWidth: 1400 }}>
           {shown.map(p => (
-            <a key={p.title} href="#" className="post-card flex flex-col text-left rounded-2xl no-underline overflow-hidden"
+            <a key={p.title} href="#" onClick={e => { e.preventDefault(); setOpenPost(POSTS.indexOf(p)); }} className="post-card flex flex-col text-left rounded-2xl no-underline overflow-hidden"
               style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', padding: 0, textDecoration: 'none' }}>
               <div className="relative w-full overflow-hidden" style={{ aspectRatio: '16 / 8' }}>
                 <img src={bgImage} alt="" className="w-full h-full object-cover"
@@ -158,6 +196,7 @@ export function Blog() {
             </a>
           ))}
         </div>
+        </>)}
 
         {/* Футер */}
         <div className="relative z-10 w-full" style={{ marginTop: 'clamp(48px, 7vh, 84px)' }}>
