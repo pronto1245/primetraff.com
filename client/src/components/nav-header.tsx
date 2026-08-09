@@ -236,7 +236,6 @@ export const SHARED_STYLES = `
   .scroll-hint svg { animation: hint-bounce 1.8s ease-in-out infinite; }
   html { scroll-snap-type: none; }
   section { scroll-snap-align: none; }
-  .m-copy { padding-bottom: 88px; }
   @media (max-width: 640px) {
     .m-only { display: flex !important; }
     .m-hide { display: none !important; }
@@ -246,6 +245,7 @@ export const SHARED_STYLES = `
     .hero-corner { font-size: 9px !important; }
     .hero-corners { display: none !important; }
     .m-pad0 { padding-left: 0 !important; padding-right: 0 !important; }
+    .m-copy { padding-bottom: 88px; }
     .m-title { font-size: 34px !important; }
     .m-sec { padding-bottom: 120px !important; }
     html { scroll-snap-type: y proximity; }
