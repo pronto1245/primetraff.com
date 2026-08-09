@@ -132,7 +132,7 @@ export default function AdvertisersPage() {
       </section>
 
       {/* ===== DISCUSS COOPERATION ===== */}
-      <section className="snap-sec relative bg-black flex flex-col justify-between overflow-hidden" style={{ minHeight: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} clamp(80px, 9vh, 100px)` }}>
+      <section className="snap-sec relative bg-black flex flex-col justify-between overflow-hidden" style={{ minHeight: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} clamp(16px, 2.5vh, 28px)` }}>
         <ScrollHint />
         <div className="absolute inset-0 z-0">
           <img src="/dsb-bg-blue.webp" alt="" decoding="async" className="w-full h-full object-cover" style={{ opacity: 0.25 }} />
@@ -232,7 +232,7 @@ export default function AdvertisersPage() {
         {/* Footer */}
         <div className="relative z-10 w-full" style={{ marginTop: 'clamp(20px, 3vh, 36px)' }}>
           <FixedFooterBar />
-          <div className="m-copy text-center text-zinc-500 uppercase" style={{ fontSize: 'clamp(8px, 0.7vw, 10px)', letterSpacing: '0.1em' }}>
+          <div className="m-copy text-center text-zinc-500 uppercase" style={{ fontSize: 'clamp(8px, 0.7vw, 10px)', letterSpacing: '0.1em', marginTop: 'clamp(16px, 2.5vh, 28px)' }}>
             © 2026. PRIMETRAFF.COM. ALL RIGHTS RESERVED.
           </div>
         </div>
