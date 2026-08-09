@@ -196,7 +196,7 @@ export function NavHeader({ activePage }: NavHeaderProps) {
               <img src="/sizar-logo.jpeg" alt="Sizar" style={{ height: 36, width: 'auto', maxWidth: '50%', objectFit: 'contain', flexShrink: 0 }} />
               <div>
                 <div style={{ fontFamily: FONT, fontSize: 'clamp(11px, 1vw, 13px)', fontWeight: 700, letterSpacing: '0.14em', color: '#fff', textTransform: 'uppercase' }}>Sizar.app</div>
-                <div style={{ fontFamily: FONT, fontSize: 'clamp(9px, 0.8vw, 11px)', color: 'rgba(255,255,255,0.4)', letterSpacing: '0.06em', marginTop: 2 }}>{lang === 'ru' ? 'Наш PWA‑сервис' : 'Our PWA service'}</div>
+                <div style={{ fontFamily: FONT, fontSize: 'clamp(9px, 0.8vw, 11px)', color: 'rgba(255,255,255,0.4)', letterSpacing: '0.06em', marginTop: 2 }}>{lang === 'ru' ? 'Создавай PWA за 15 минут' : 'Build PWA in 15 minutes'}</div>
               </div>
             </div>
           </a>
