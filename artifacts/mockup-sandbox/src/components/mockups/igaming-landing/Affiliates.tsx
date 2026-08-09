@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowRight, Fingerprint, Headphones, Send, UserRound, X, Zap } from 'lucide-react';
+import { ChevronDown, ArrowRight, Fingerprint, Headphones, Send, UserRound, X, Zap } from 'lucide-react';
 import bgImage from './assets/dsb-bg.webp';
 
 /* ============================================================
@@ -14,6 +14,12 @@ const TYPE = {
 const TRACK = '0.08em';
 const PAD   = 'clamp(20px, 3vw, 48px)';
 
+const ScrollHint = () => (
+  <div className="scroll-hint absolute left-1/2 z-20 pointer-events-none" style={{ bottom: 8, transform: 'translateX(-50%)' }}>
+    <ChevronDown style={{ width: 32, height: 32, color: 'rgba(255,255,255,0.85)' }} strokeWidth={1.1} />
+  </div>
+);
+
 export function Affiliates() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
@@ -23,6 +29,8 @@ export function Affiliates() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;700;900&family=Comforter&display=swap');
         ::-webkit-scrollbar { display: none; }
+        @keyframes hint-bounce { 0%, 100% { transform: translateY(0); opacity: .45; } 50% { transform: translateY(9px); opacity: 1; } }
+        .scroll-hint svg { animation: hint-bounce 1.8s ease-in-out infinite; }
         html { scroll-snap-type: y mandatory; }
         section, .snap-sec { scroll-snap-align: start; scroll-snap-stop: always; }
         @media (max-width: 640px) {
@@ -108,6 +116,7 @@ export function Affiliates() {
 
       {/* ===== AFFILIATES — оформление как «О нас» на главной ===== */}
       <section className="m-sec relative overflow-hidden flex flex-col" style={{ minHeight: '100vh', padding: `clamp(60px, 8vh, 100px) ${PAD} clamp(20px, 3vh, 32px)` }}>
+        <ScrollHint />
         <div className="absolute inset-0 z-0">
           <img src={bgImage} alt="" className="w-full h-full object-cover" style={{ filter: 'hue-rotate(220deg) saturate(1.1)' }} />
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/70" />
@@ -146,6 +155,7 @@ export function Affiliates() {
 
       {/* ===== ПОЧЕМУ НАМ ДОВЕРЯЮТ ===== */}
       <section className="vh-section relative bg-black flex flex-col justify-between" style={{ height: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} clamp(16px, 2.5vh, 28px)`, overflow: 'hidden' }}>
+        <ScrollHint />
         <div className="absolute inset-0 z-0">
           <img src={bgImage} alt="" className="w-full h-full object-cover" style={{ filter: 'hue-rotate(220deg) saturate(1.1)', opacity: 0.35 }} />
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/85" />
@@ -170,6 +180,7 @@ export function Affiliates() {
 
       {/* ===== ОБСУДИТЬ СОТРУДНИЧЕСТВО ===== */}
       <section className="relative bg-black flex flex-col justify-between overflow-hidden" style={{ minHeight: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} clamp(16px, 2.5vh, 28px)` }}>
+        <ScrollHint />
         <div className="absolute inset-0 z-0">
           <img src={bgImage} alt="" className="w-full h-full object-cover" style={{ filter: 'hue-rotate(220deg) saturate(1.1)', opacity: 0.25 }} />
           <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/65 to-black/90" />

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { ArrowRight, Fingerprint, Send, X, Zap } from 'lucide-react';
+import { ChevronDown, ArrowRight, Fingerprint, Send, X, Zap } from 'lucide-react';
 import bgImage from './assets/dsb-bg.webp';
 
 /* ============================================================
@@ -15,6 +15,12 @@ const TYPE = {
 };
 const TRACK = '0.08em';
 const PAD   = 'clamp(20px, 3vw, 48px)';
+
+const ScrollHint = () => (
+  <div className="scroll-hint absolute left-1/2 z-20 pointer-events-none" style={{ bottom: 8, transform: 'translateX(-50%)' }}>
+    <ChevronDown style={{ width: 32, height: 32, color: 'rgba(255,255,255,0.85)' }} strokeWidth={1.1} />
+  </div>
+);
 
 
 
@@ -58,6 +64,8 @@ export function DarkStudioBlue() {
         .marquee-left:hover, .marquee-right:hover { animation-play-state: paused; }
         .brand-item:hover { opacity: 1 !important; }
         ::-webkit-scrollbar { display: none; }
+        @keyframes hint-bounce { 0%, 100% { transform: translateY(0); opacity: .45; } 50% { transform: translateY(9px); opacity: 1; } }
+        .scroll-hint svg { animation: hint-bounce 1.8s ease-in-out infinite; }
         html { scroll-snap-type: y mandatory; }
         section, .snap-sec { scroll-snap-align: start; scroll-snap-stop: always; }
         .m-only { display: none; }
@@ -217,10 +225,12 @@ export function DarkStudioBlue() {
             Работаем для вас<br />с 2025 года
           </div>
         </div>
+        <ScrollHint />
       </div>
 
       {/* ===== ПАРТНЁРЫ — автоскролл в 2 ряда ===== */}
-      <section className="relative bg-black overflow-hidden" style={{ padding: `clamp(60px, 8vh, 100px) 0` }}>
+      <section className="relative bg-black overflow-hidden" style={{ padding: `clamp(60px, 8vh, 100px) 0 clamp(80px, 10vh, 120px)` }}>
+        <ScrollHint />
         <div className="uppercase text-zinc-400 text-center" style={{ fontSize: TYPE.small, letterSpacing: '0.35em', fontWeight: 300, marginBottom: 'clamp(36px, 6vh, 60px)' }}>
           Нам доверяют лидеры рынка
         </div>
