@@ -58,8 +58,8 @@ export default function AffiliatesPage() {
     <div style={{ width: '100%', fontFamily: FONT }} className="bg-black text-white">
       <style>{`
         ${SHARED_STYLES}
-        .snap-sec { contain: layout style; }
-        .no-snap { contain: layout style; }
+        .snap-sec { contain: style; }
+        .no-snap { contain: style; }
         .no-snap { scroll-snap-align: none; scroll-snap-stop: normal; }
         .faq-scroll { overscroll-behavior-y: contain; }
         @keyframes contact-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
