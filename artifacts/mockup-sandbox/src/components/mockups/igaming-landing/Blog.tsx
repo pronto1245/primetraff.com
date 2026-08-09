@@ -16,7 +16,7 @@ const PAD   = 'clamp(20px, 3vw, 48px)';
 
 const ScrollHint = () => (
   <div className="scroll-hint absolute left-1/2 z-20 pointer-events-none" style={{ bottom: 8, transform: 'translateX(-50%)' }}>
-    <ChevronDown style={{ width: 32, height: 32, color: 'rgba(255,255,255,0.85)' }} strokeWidth={1.1} />
+    <ChevronDown style={{ width: 72, height: 72, color: 'rgba(255,255,255,0.9)' }} strokeWidth={0.9} />
   </div>
 );
 
