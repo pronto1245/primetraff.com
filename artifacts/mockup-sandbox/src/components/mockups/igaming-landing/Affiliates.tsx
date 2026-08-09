@@ -175,7 +175,7 @@ export function Affiliates() {
       </section>
 
       {/* ===== ОБСУДИТЬ СОТРУДНИЧЕСТВО ===== */}
-      <section className="relative bg-black flex flex-col justify-between overflow-hidden" style={{ minHeight: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} clamp(16px, 2.5vh, 28px)` }}>
+      <section className="relative bg-black flex flex-col justify-between overflow-hidden" style={{ height: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} clamp(16px, 2.5vh, 28px)` }}>
         <ScrollHint />
         <div className="absolute inset-0 z-0">
           <img src={bgImage} alt="" className="w-full h-full object-cover" style={{ filter: 'hue-rotate(220deg) saturate(1.1)', opacity: 0.25 }} />
@@ -218,7 +218,7 @@ export function Affiliates() {
       </section>
 
       {/* ===== FAQ ===== */}
-      <section className="relative bg-black flex flex-col justify-between" style={{ minHeight: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} clamp(16px, 2.5vh, 28px)` }}>
+      <section className="relative bg-black flex flex-col justify-between overflow-hidden" style={{ height: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} clamp(16px, 2.5vh, 28px)` }}>
         <div className="flex-1 flex flex-col items-center justify-center w-full">
           <div className="text-center">
             <div className="uppercase text-zinc-400" style={{ fontSize: 'clamp(11px, 1.1vw, 15px)', letterSpacing: '0.35em', fontWeight: 300, marginBottom: 'clamp(14px, 2vh, 24px)' }}>

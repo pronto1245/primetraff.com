@@ -181,7 +181,7 @@ export default function AffiliatesPage() {
       </section>
 
       {/* ===== DISCUSS COOPERATION ===== */}
-      <section id="contact" className="relative bg-black flex flex-col justify-between overflow-hidden" style={{ minHeight: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} clamp(16px, 2.5vh, 28px)` }}>
+      <section id="contact" className="relative bg-black flex flex-col justify-between overflow-hidden" style={{ height: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} clamp(16px, 2.5vh, 28px)` }}>
         <ScrollHint />
         <div className="absolute inset-0 z-0">
           <img src="/dsb-bg-blue.webp" alt="" decoding="async" className="w-full h-full object-cover" style={{ opacity: 0.25 }} />
@@ -270,7 +270,7 @@ export default function AffiliatesPage() {
       </section>
 
       {/* ===== FAQ ===== */}
-      <section id="faq" className="relative bg-black flex flex-col justify-between" style={{ minHeight: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} clamp(16px, 2.5vh, 28px)` }}>
+      <section id="faq" className="relative bg-black flex flex-col justify-between overflow-hidden" style={{ height: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} clamp(16px, 2.5vh, 28px)` }}>
         <div className="flex-1 flex flex-col items-center justify-center w-full">
           <div className="text-center">
             <div className="uppercase text-zinc-400" style={{ fontSize: 'clamp(11px, 1.1vw, 15px)', letterSpacing: '0.35em', fontWeight: 300, marginBottom: 'clamp(14px, 2vh, 24px)' }}>

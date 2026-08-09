@@ -206,7 +206,7 @@ export function DarkStudioBlue() {
           {/* CTA */}
           <div className="w-full flex flex-col items-center" style={{ gap: 'clamp(24px, 4vh, 48px)' }}>
             <div className="w-[1px] h-16" style={{ background: `linear-gradient(180deg, ${BLUE}, transparent)` }} />
-            <button className="flex items-center gap-3 border-b border-white/30 pb-2 hover:border-white transition-colors duration-500 group bg-transparent">
+            <button className="flex items-center gap-3 border-b border-blue-500 pb-2 hover:border-blue-300 transition-colors duration-500 group bg-transparent">
               <span className="uppercase font-medium" style={{ fontSize: TYPE.body, letterSpacing: '0.15em' }}>Стать партнёром</span>
               <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-500" />
             </button>

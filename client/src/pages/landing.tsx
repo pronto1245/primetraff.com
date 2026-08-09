@@ -230,7 +230,7 @@ export default function LandingPage() {
               href={REGISTER_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3 border-b border-white/30 pb-2 hover:border-white transition-colors duration-500 group"
+              className="flex items-center gap-3 border-b border-blue-500 pb-2 hover:border-blue-300 transition-colors duration-500 group"
               style={{ textDecoration: 'none' }}
             >
               <span className="uppercase font-medium text-white" style={{ fontSize: TYPE.body, letterSpacing: '0.15em' }}>
