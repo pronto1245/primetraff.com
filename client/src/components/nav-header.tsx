@@ -239,7 +239,7 @@ export const SHARED_STYLES = `
   @media (max-width: 640px) {
     .m-only { display: flex !important; }
     .m-hide { display: none !important; }
-    .vh-section { height: auto !important; min-height: 100svh !important; }
+    .vh-section { height: auto !important; min-height: 100vh !important; }
     .row-desc { display: none !important; }
     .hero-words { font-size: 9px !important; letter-spacing: 0.14em !important; }
     .hero-corner { font-size: 9px !important; }
