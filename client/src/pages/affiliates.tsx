@@ -156,7 +156,7 @@ export default function AffiliatesPage() {
       </section>
 
       {/* ===== DISCUSS COOPERATION ===== */}
-      <section id="contact" className="aff-contact-sec snap-sec relative bg-black flex flex-col justify-between overflow-hidden" style={{ height: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} clamp(16px, 2.5vh, 28px)` }}>
+      <section id="contact" className="aff-contact-sec snap-sec relative bg-black flex flex-col justify-between overflow-hidden" style={{ height: '100vh', padding: `clamp(50px, 8vh, 90px) ${PAD} 84px` }}>
         <ScrollHint />
         <div className="absolute inset-0 z-0">
           <img src="/dsb-bg-blue.webp" alt="" decoding="async" className="w-full h-full object-cover" style={{ opacity: 0.25 }} />

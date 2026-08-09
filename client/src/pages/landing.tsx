@@ -260,7 +260,7 @@ export default function LandingPage() {
       </div>
 
       {/* ===== ABOUT + PARTNERS ===== */}
-      <section className="snap-sec relative bg-black flex flex-col" style={{ minHeight: '100vh', paddingTop: 'clamp(60px, 8vh, 100px)', paddingLeft: PAD, paddingRight: PAD, paddingBottom: '100px' }}>
+      <section className="snap-sec relative bg-black flex flex-col" style={{ minHeight: '100vh', paddingTop: 'clamp(60px, 8vh, 100px)', paddingLeft: PAD, paddingRight: PAD, paddingBottom: '84px' }}>
         <div className="flex-1 flex flex-col items-center justify-center text-center w-full">
           <div className="relative" style={{ marginBottom: 'clamp(28px, 4.5vh, 48px)' }}>
             <div className="uppercase text-zinc-400" style={{ fontSize: 'clamp(11px, 1.1vw, 15px)', letterSpacing: '0.35em', fontWeight: 300, marginBottom: 'clamp(14px, 2vh, 24px)' }}>
