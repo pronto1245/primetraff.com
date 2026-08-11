@@ -21,6 +21,8 @@ import {
   Languages,
   Loader2,
   Table,
+  BarChart2,
+  FileText,
 } from "lucide-react";
 import type { BlogPost, InsertBlogPost } from "@shared/schema";
 import ReactQuill from "react-quill-new";
@@ -143,6 +145,7 @@ export default function BlogAdminPage() {
 }
 
 function PostList({ password, onEdit, onCreate }: { password: string; onEdit: (p: BlogPost) => void; onCreate: () => void }) {
+  const [activeTab, setActiveTab] = useState<'blog' | 'analytics'>('blog');
   const { data: posts = [], isLoading } = useQuery<BlogPost[]>({
     queryKey: ["/api/blog-admin"],
     queryFn: async () => {
@@ -195,7 +198,7 @@ function PostList({ password, onEdit, onCreate }: { password: string; onEdit: (p
   return (
     <div className="min-h-screen" style={{ background: "linear-gradient(180deg, #001030 0%, #001845 50%, #001030 100%)" }}>
       <div className="max-w-5xl mx-auto px-6 py-10">
-        <div className="flex items-center justify-between mb-8 flex-wrap gap-4">
+        <div className="flex items-center justify-between mb-6 flex-wrap gap-4">
           <div className="flex items-center gap-4">
             <Link href="/blog" data-testid="link-admin-back-to-blog">
               <Button variant="ghost" size="icon" className="text-white/50">
@@ -203,24 +206,112 @@ function PostList({ password, onEdit, onCreate }: { password: string; onEdit: (p
               </Button>
             </Link>
             <div>
-              <h1 className="text-2xl font-bold text-white" data-testid="text-admin-title">Управление блогом</h1>
-              <p className="text-white/40 text-sm mt-0.5">Создавайте и публикуйте статьи</p>
+              <h1 className="text-2xl font-bold text-white" data-testid="text-admin-title">Админ-панель</h1>
+              <p className="text-white/40 text-sm mt-0.5">PrimeTraff</p>
             </div>
           </div>
-          <Button onClick={onCreate} data-testid="button-admin-create-post">
-            <Plus className="w-4 h-4 mr-2" />
-            Новая статья
-          </Button>
+          {activeTab === 'blog' && (
+            <Button onClick={onCreate} data-testid="button-admin-create-post">
+              <Plus className="w-4 h-4 mr-2" />
+              Новая статья
+            </Button>
+          )}
         </div>
 
-        {togglePublish.error && (
+        {/* Tabs */}
+        <div className="flex gap-2 mb-8 border-b border-white/10 pb-0">
+          <button
+            onClick={() => setActiveTab('blog')}
+            className={`flex items-center gap-2 px-4 py-2.5 text-sm font-medium transition-colors border-b-2 -mb-px ${activeTab === 'blog' ? 'border-sky-400 text-sky-400' : 'border-transparent text-white/40 hover:text-white/60'}`}
+          >
+            <FileText className="w-4 h-4" />
+            Блог
+          </button>
+          <button
+            onClick={() => setActiveTab('analytics')}
+            className={`flex items-center gap-2 px-4 py-2.5 text-sm font-medium transition-colors border-b-2 -mb-px ${activeTab === 'analytics' ? 'border-sky-400 text-sky-400' : 'border-transparent text-white/40 hover:text-white/60'}`}
+          >
+            <BarChart2 className="w-4 h-4" />
+            Аналитика
+          </button>
+        </div>
+
+        {/* Analytics tab */}
+        {activeTab === 'analytics' && (
+          <div className="space-y-6">
+            {/* GA */}
+            <div className="rounded-xl border border-white/10 bg-white/[0.03] p-6">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center">
+                  <BarChart2 className="w-5 h-5 text-orange-400" />
+                </div>
+                <div>
+                  <h2 className="text-white font-semibold">Google Analytics</h2>
+                  <p className="text-white/40 text-xs mt-0.5">ID: G-1NBD8RW4CS</p>
+                </div>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+                {[
+                  { label: 'Реальное время', url: 'https://analytics.google.com/analytics/web/#/p000000000/realtime/overview' },
+                  { label: 'Аудитория', url: 'https://analytics.google.com/analytics/web/' },
+                  { label: 'Источники', url: 'https://analytics.google.com/analytics/web/' },
+                ].map(({ label, url }) => (
+                  <a key={label} href={url} target="_blank" rel="noopener noreferrer"
+                    className="flex items-center justify-between px-4 py-3 rounded-lg border border-white/[0.08] bg-white/[0.02] text-white/60 text-sm hover:border-orange-400/40 hover:text-white transition-colors">
+                    {label}
+                    <ExternalLink className="w-3.5 h-3.5 opacity-50" />
+                  </a>
+                ))}
+              </div>
+              <a href="https://analytics.google.com" target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-orange-500/10 border border-orange-500/20 text-orange-300 text-sm font-medium hover:bg-orange-500/20 transition-colors">
+                Открыть Google Analytics
+                <ExternalLink className="w-4 h-4" />
+              </a>
+            </div>
+
+            {/* Yandex */}
+            <div className="rounded-xl border border-white/10 bg-white/[0.03] p-6">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-lg bg-red-500/10 flex items-center justify-center">
+                  <BarChart2 className="w-5 h-5 text-red-400" />
+                </div>
+                <div>
+                  <h2 className="text-white font-semibold">Яндекс.Метрика</h2>
+                  <p className="text-white/40 text-xs mt-0.5">Счётчик: 111508843</p>
+                </div>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+                {[
+                  { label: 'Сводка', url: 'https://metrika.yandex.ru/dashboard?id=111508843' },
+                  { label: 'Вебвизор', url: 'https://metrika.yandex.ru/webvisor?id=111508843' },
+                  { label: 'Источники', url: 'https://metrika.yandex.ru/traffic?id=111508843' },
+                ].map(({ label, url }) => (
+                  <a key={label} href={url} target="_blank" rel="noopener noreferrer"
+                    className="flex items-center justify-between px-4 py-3 rounded-lg border border-white/[0.08] bg-white/[0.02] text-white/60 text-sm hover:border-red-400/40 hover:text-white transition-colors">
+                    {label}
+                    <ExternalLink className="w-3.5 h-3.5 opacity-50" />
+                  </a>
+                ))}
+              </div>
+              <a href="https://metrika.yandex.ru/list" target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-red-500/10 border border-red-500/20 text-red-300 text-sm font-medium hover:bg-red-500/20 transition-colors">
+                Открыть Яндекс.Метрику
+                <ExternalLink className="w-4 h-4" />
+              </a>
+            </div>
+          </div>
+        )}
+
+        {/* Blog tab */}
+        {activeTab === 'blog' && togglePublish.error && (
           <div className="mb-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-300 text-sm flex items-center gap-2">
             <AlertCircle className="w-4 h-4 flex-shrink-0" />
             {(togglePublish.error as Error).message}
           </div>
         )}
 
-        {isLoading ? (
+        {activeTab === 'blog' && (isLoading ? (
           <div className="text-white/40 text-center py-20">Загрузка...</div>
         ) : posts.length === 0 ? (
           <div className="text-center py-20">
@@ -302,7 +393,7 @@ function PostList({ password, onEdit, onCreate }: { password: string; onEdit: (p
               </div>
             ))}
           </div>
-        )}
+        ))}
       </div>
     </div>
   );
