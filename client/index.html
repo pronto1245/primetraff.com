@@ -6,11 +6,32 @@
     <meta name="theme-color" content="#001030" />
     <meta name="color-scheme" content="dark" />
     
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1NBD8RW4CS"></script>
+    <!-- Google Consent Mode v2 — default DENIED until user accepts -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        analytics_storage: 'denied',
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        wait_for_update: 2000,
+        region: ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','GB','NO','IS','LI']
+      });
+      // If already accepted — grant immediately
+      if (localStorage.getItem('pt_cookie_accepted')) {
+        gtag('consent', 'update', {
+          analytics_storage: 'granted',
+          ad_storage: 'granted',
+          ad_user_data: 'granted',
+          ad_personalization: 'granted',
+        });
+      }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1NBD8RW4CS"></script>
+    <script>
       gtag('js', new Date());
       gtag('config', 'G-1NBD8RW4CS');
     </script>

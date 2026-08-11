@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
 import { FONT, BLUE } from '@/components/nav-header';
 
+declare global {
+  interface Window { gtag?: (...args: unknown[]) => void; }
+}
+
 const STORAGE_KEY = 'pt_cookie_accepted';
 
 export function CookieConsent() {
@@ -16,6 +20,15 @@ export function CookieConsent() {
   const accept = () => {
     localStorage.setItem(STORAGE_KEY, '1');
     setVisible(false);
+    // Активируем Google Analytics после согласия
+    if (typeof window.gtag === 'function') {
+      window.gtag('consent', 'update', {
+        analytics_storage: 'granted',
+        ad_storage: 'granted',
+        ad_user_data: 'granted',
+        ad_personalization: 'granted',
+      });
+    }
   };
 
   if (!visible) return null;
