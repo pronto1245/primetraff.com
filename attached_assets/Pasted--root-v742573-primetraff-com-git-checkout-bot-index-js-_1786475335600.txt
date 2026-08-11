@@ -1,0 +1,75 @@
+[root@v742573 primetraff.com]# git checkout -- bot/index.js && git pull origin main && npm run build && pm2 restart primetraff
+From https://github.com/pronto1245/primetraff.com
+ * branch            main       -> FETCH_HEAD
+Updating 40daff1..b4397e2
+Fast-forward
+ attached_assets/Pasted--root-v742573-bot-nano-env-root-v742573-bot-pm2-start-i_1786292169245.txt | 21 +++++++++++++++++++++
+ attached_assets/Pasted--root-v742573-bot-sed-i-s-const-TelegramBot-require-nod_1786292364318.txt | 35 +++++++++++++++++++++++++++++++++++
+ bot/index.js                                                                                     |  3 ++-
+ client/index.html                                                                                | 22 ++++++++++++++++++++++
+ 4 files changed, 80 insertions(+), 1 deletion(-)
+ create mode 100644 attached_assets/Pasted--root-v742573-bot-nano-env-root-v742573-bot-pm2-start-i_1786292169245.txt
+ create mode 100644 attached_assets/Pasted--root-v742573-bot-sed-i-s-const-TelegramBot-require-nod_1786292364318.txt
+
+> rest-express@1.0.0 build
+> tsx script/build.ts
+
+building client...
+vite v7.3.0 building client environment for production...
+
+Unable to parse HTML; parse5 error code disallowed-content-in-noscript-in-head
+ at /var/www/primetraff.com/client/index.html:28:15
+26 |        ym(111508843,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",referrer:document.referrer,url:...
+27 |      </script>
+28 |      <noscript><div><img src="https://mc.yandex.ru/watch/111508843" style="position:absolute;left:-9999px;" alt="" /><...
+   |                ^^^^^
+29 |      <!-- /Yandex.Metrika counter -->
+30 |  
+transforming (1) src/main.tsxBrowserslist: browsers data (caniuse-lite) is 10 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+transforming (5) src/App.tsx
+A PostCSS plugin did not pass the `from` option to `postcss.parse`. This may cause imported assets to be incorrectly transformed. If you've recently added a PostCSS plugin that raised this warning, please contact the package author to fix the issue.
+✓ 2433 modules transformed.
+../dist/public/assets/img69380f65d567f_1770453920456-CpIgRxua.webp    5.50 kB
+../dist/public/index.html                                            10.39 kB │ gzip:  3.61 kB
+../dist/public/assets/pt-logo-BGIiMJk_.webp                          37.88 kB
+../dist/public/assets/blog-admin-CQ7DNbul.css                        24.24 kB │ gzip:  3.62 kB
+../dist/public/assets/index-CEggWA4b.css                            116.00 kB │ gzip: 18.15 kB
+../dist/public/assets/arrow-right-DV2JPUjw.js                         0.16 kB │ gzip:  0.16 kB
+../dist/public/assets/arrow-left-RtbYOfz_.js                          0.16 kB │ gzip:  0.16 kB
+../dist/public/assets/user-round-Bem6YWEs.js                          0.36 kB │ gzip:  0.25 kB
+../dist/public/assets/usePageSnap-c4uWH5y2.js                         1.06 kB │ gzip:  0.60 kB
+../dist/public/assets/blog-S30x7jws.js                                7.22 kB │ gzip:  2.33 kB
+../dist/public/assets/useQuery-BYCIXDcG.js                            8.72 kB │ gzip:  3.14 kB
+../dist/public/assets/blog-post-jQ5_AKxJ.js                           8.74 kB │ gzip:  3.04 kB
+../dist/public/assets/advertisers-Cd0KYoIY.js                        13.77 kB │ gzip:  3.65 kB
+../dist/public/assets/affiliates-BeQWMpaD.js                         15.65 kB │ gzip:  4.18 kB
+../dist/public/assets/i18n-E_nEdH-V.js                               27.42 kB │ gzip:  9.72 kB
+../dist/public/assets/landing-BiyLlzcf.js                            83.58 kB │ gzip: 56.99 kB
+../dist/public/assets/blog-admin-CoTg1Yyx.js                        240.19 kB │ gzip: 71.68 kB
+../dist/public/assets/index-DjzunMmk.js                             270.18 kB │ gzip: 89.00 kB
+✓ built in 10.81s
+building server...
+
+  dist/index.cjs  1.1mb ⚠️
+
+⚡ Done in 326ms
+Use --update-env to update environment variables
+[PM2] Applying action restartProcessId on app [primetraff](ids: [ 1 ])
+[PM2] [primetraff](1) ✓
+┌────┬───────────────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
+│ id │ name              │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+├────┼───────────────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
+│ 3  │ primetrack        │ default     │ 1.0.0   │ fork    │ 3669400  │ 51m    │ 10   │ online    │ 0%       │ 412.5mb  │ root     │ disabled │
+│ 1  │ primetraff        │ default     │ 1.0.0   │ fork    │ 3706887  │ 0s     │ 8    │ online    │ 0%       │ 12.4mb   │ root     │ disabled │
+│ 4  │ primetraff-bot    │ default     │ 1.0.0   │ fork    │ 1500073  │ 2D     │ 15   │ online    │ 0%       │ 77.3mb   │ root     │ disabled │
+│ 2  │ telegramm-bot     │ default     │ 1.0.0   │ fork    │ 1222     │ 11D    │ 0    │ online    │ 0%       │ 109.7mb  │ root     │ disabled │
+└────┴───────────────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+Module
+┌────┬──────────────────────────────┬───────────────┬──────────┬──────────┬──────┬──────────┬──────────┬──────────┐
+│ id │ module                       │ version       │ pid      │ status   │ ↺    │ cpu      │ mem      │ user     │
+├────┼──────────────────────────────┼───────────────┼──────────┼──────────┼──────┼──────────┼──────────┼──────────┤
+│ 0  │ pm2-logrotate                │ 3.0.0         │ 1093     │ online   │ 0    │ 0%       │ 69.3mb   │ root     │
+└────┴──────────────────────────────┴───────────────┴──────────┴──────────┴──────┴──────────┴──────────┴──────────┘
+[root@v742573 primetraff.com]# 
