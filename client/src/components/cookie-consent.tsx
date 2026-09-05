@@ -17,8 +17,15 @@ export function CookieConsent() {
     }
   }, []);
 
+  useEffect(() => {
+    if (!visible) return;
+    document.body.classList.add('cookie-consent-visible');
+    return () => document.body.classList.remove('cookie-consent-visible');
+  }, [visible]);
+
   const accept = () => {
     localStorage.setItem(STORAGE_KEY, '1');
+    document.body.classList.remove('cookie-consent-visible');
     setVisible(false);
     // Активируем Google Analytics после согласия
     if (typeof window.gtag === 'function') {
@@ -39,10 +46,12 @@ export function CookieConsent() {
       style={{
         position: 'fixed',
         bottom: 'clamp(18px, 3vh, 28px)',
-        left: 'clamp(150px, 14vw, 190px)',
-        right: 'clamp(180px, 17vw, 220px)',
+        left: 'calc(clamp(20px, 3vw, 48px) + 120px)',
+        right: 'calc(clamp(20px, 3vw, 48px) + 144px)',
         zIndex: 9999,
         width: 'auto',
+        height: 48,
+        boxSizing: 'border-box',
         background: 'rgba(8, 8, 12, 0.92)',
         backdropFilter: 'blur(16px)',
         WebkitBackdropFilter: 'blur(16px)',
@@ -64,8 +73,8 @@ export function CookieConsent() {
         }
         @media (max-width: 767px) {
           .cookie-consent-bar {
-            left: 142px !important;
-            right: 180px !important;
+            left: calc(clamp(20px, 3vw, 48px) + 120px) !important;
+            right: calc(clamp(20px, 3vw, 48px) + 144px) !important;
             width: auto !important;
             padding: 7px 9px !important;
             gap: 6px !important;
@@ -84,6 +93,9 @@ export function CookieConsent() {
             letter-spacing: 0.06em !important;
             padding: 3px 0 !important;
           }
+        }
+        body.cookie-consent-visible .scroll-hint {
+          bottom: 78px !important;
         }
       `}</style>
 
