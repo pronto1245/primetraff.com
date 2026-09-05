@@ -1,0 +1,108 @@
+c/assets/user-round-BhFsLiQo.js                          0.36 kB │ gzip:  0.25 kB
+../dist/public/assets/usePageSnap-Bc5ew9vw.js                         1.06 kB │ gzip:  0.60 kB
+../dist/public/assets/blog-BS8XPAEX.js                                7.22 kB │ gzip:  2.32 kB
+../dist/public/assets/useQuery-C2EX8mwY.js                            8.72 kB │ gzip:  3.14 kB
+../dist/public/assets/blog-post-Cpj1ySTU.js                           8.74 kB │ gzip:  3.03 kB
+../dist/public/assets/advertisers-CwMlFlTd.js                        13.77 kB │ gzip:  3.65 kB
+../dist/public/assets/affiliates-Ddk6nB7d.js                         15.65 kB │ gzip:  4.18 kB
+../dist/public/assets/i18n-E_nEdH-V.js                               27.42 kB │ gzip:  9.72 kB
+../dist/public/assets/landing-Bf9F15eA.js                            83.58 kB │ gzip: 56.99 kB
+../dist/public/assets/blog-admin-B59AcZAc.js                        244.54 kB │ gzip: 72.50 kB
+../dist/public/assets/index-u5C2Sy1v.js                             271.20 kB │ gzip: 89.22 kB
+✓ built in 10.44s
+building server...
+
+  dist/index.cjs  1.1mb ⚠️
+
+⚡ Done in 195ms
+Use --update-env to update environment variables
+[PM2] Applying action restartProcessId on app [primetraff](ids: [ 1 ])
+[PM2] [primetraff](1) ✓
+┌────┬────────────────────┬──────────┬──────┬───────────┬──────────┬──────────┐
+│ id │ name               │ mode     │ ↺    │ status    │ cpu      │ memory   │
+├────┼────────────────────┼──────────┼──────┼───────────┼──────────┼──────────┤
+│ 3  │ primetrack         │ fork     │ 0    │ online    │ 0%       │ 439.6mb  │
+│ 1  │ primetraff         │ fork     │ 1    │ online    │ 0%       │ 18.7mb   │
+│ 2  │ primetraff-bot     │ fork     │ 0    │ online    │ 0%       │ 83.5mb   │
+│ 4  │ telegramm-bot      │ fork     │ 0    │ online    │ 0%       │ 100.3mb  │
+└────┴────────────────────┴──────────┴──────┴───────────┴──────────┴──────────┘
+Module
+┌────┬────────────────────┬──────────┬──────────┬──────────┐
+│ id │ name               │ status   │ cpu      │ mem      │
+├────┼────────────────────┼──────────┼──────────┼──────────┤
+│ 0  │ pm2-logrotate      │ online   │ 0%       │ 68.6mb   │
+└────┴────────────────────┴──────────┴──────────┴──────────┘
+[PM2][ERROR] Command not found
+
+usage: pm2 [options] <command>
+
+pm2 -h, --help             all available commands and options
+pm2 examples               display pm2 usage examples
+pm2 <command> -h           help on a specific command
+
+Access pm2 files in ~/.pm2
+
+> rest-express@1.0.0 build
+> tsx script/build.ts
+
+building client...
+vite v7.3.0 building client environment for production...
+
+Unable to parse HTML; parse5 error code disallowed-content-in-noscript-in-head
+ at /var/www/primetraff.com/client/index.html:49:15
+47 |        ym(111508843,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",referrer:document.referrer,url:...
+48 |      </script>
+49 |      <noscript><div><img src="https://mc.yandex.ru/watch/111508843" style="position:absolute;left:-9999px;" alt="" /><...
+   |                ^^^^^
+50 |      <!-- /Yandex.Metrika counter -->
+51 |  
+transforming (1) src/main.tsxBrowserslist: browsers data (caniuse-lite) is 11 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+transforming (5) src/App.tsx
+A PostCSS plugin did not pass the `from` option to `postcss.parse`. This may cause imported assets to be incorrectly transformed. If you've recently added a PostCSS plugin that raised this warning, please contact the package author to fix the issue.
+✓ 2433 modules transformed.
+../dist/public/assets/img69380f65d567f_1770453920456-CpIgRxua.webp    5.50 kB
+../dist/public/index.html                                            11.19 kB │ gzip:  3.92 kB
+../dist/public/assets/pt-logo-BGIiMJk_.webp                          37.88 kB
+../dist/public/assets/blog-admin-CQ7DNbul.css                        24.24 kB │ gzip:  3.62 kB
+../dist/public/assets/index-Cx8aDHmq.css                            116.92 kB │ gzip: 18.33 kB
+../dist/public/assets/arrow-right-CFgnVXLg.js                         0.16 kB │ gzip:  0.16 kB
+../dist/public/assets/arrow-left-gitdrLgZ.js                          0.16 kB │ gzip:  0.16 kB
+../dist/public/assets/user-round-BhFsLiQo.js                          0.36 kB │ gzip:  0.25 kB
+../dist/public/assets/usePageSnap-Bc5ew9vw.js                         1.06 kB │ gzip:  0.60 kB
+../dist/public/assets/blog-BS8XPAEX.js                                7.22 kB │ gzip:  2.32 kB
+../dist/public/assets/useQuery-C2EX8mwY.js                            8.72 kB │ gzip:  3.14 kB
+../dist/public/assets/blog-post-Cpj1ySTU.js                           8.74 kB │ gzip:  3.03 kB
+../dist/public/assets/advertisers-CwMlFlTd.js                        13.77 kB │ gzip:  3.65 kB
+../dist/public/assets/affiliates-Ddk6nB7d.js                         15.65 kB │ gzip:  4.18 kB
+../dist/public/assets/i18n-E_nEdH-V.js                               27.42 kB │ gzip:  9.72 kB
+../dist/public/assets/landing-Bf9F15eA.js                            83.58 kB │ gzip: 56.99 kB
+../dist/public/assets/blog-admin-B59AcZAc.js                        244.54 kB │ gzip: 72.50 kB
+../dist/public/assets/index-u5C2Sy1v.js                             271.20 kB │ gzip: 89.22 kB
+✓ built in 9.73s
+building server...
+
+  dist/index.cjs  1.1mb ⚠️
+
+⚡ Done in 167ms
+Use --update-env to update environment variables
+[PM2] Applying action restartProcessId on app [primetraff](ids: [ 1 ])
+[PM2] [primetraff](1) ✓
+┌────┬────────────────────┬──────────┬──────┬───────────┬──────────┬──────────┐
+│ id │ name               │ mode     │ ↺    │ status    │ cpu      │ memory   │
+├────┼────────────────────┼──────────┼──────┼───────────┼──────────┼──────────┤
+│ 3  │ primetrack         │ fork     │ 0    │ online    │ 0%       │ 439.8mb  │
+│ 1  │ primetraff         │ fork     │ 2    │ online    │ 0%       │ 22.4mb   │
+│ 2  │ primetraff-bot     │ fork     │ 0    │ online    │ 0%       │ 83.4mb   │
+│ 4  │ telegramm-bot      │ fork     │ 0    │ online    │ 0%       │ 99.9mb   │
+└────┴────────────────────┴──────────┴──────┴───────────┴──────────┴──────────┘
+Module
+┌────┬────────────────────┬──────────┬──────────┬──────────┐
+│ id │ name               │ status   │ cpu      │ mem      │
+├────┼────────────────────┼──────────┼──────────┼──────────┤
+│ 0  │ pm2-logrotate      │ online   │ 0%       │ 68.1mb   │
+└────┴────────────────────┴──────────┴──────────┴──────────┘
+[PM2] Saving current process list...
+[PM2] Successfully saved in /root/.pm2/dump.pm2
+root@423:/var/www/primetraff.com# 
