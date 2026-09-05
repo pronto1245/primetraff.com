@@ -42,15 +42,19 @@ export function CookieConsent() {
         left: '50%',
         transform: 'translateX(-50%)',
         zIndex: 9999,
-        width: 'min(440px, 38vw)',
+        width: 'min(360px, 34vw)',
         background: 'rgba(8, 8, 12, 0.92)',
         backdropFilter: 'blur(16px)',
         WebkitBackdropFilter: 'blur(16px)',
         border: '1px solid rgba(255,255,255,0.1)',
         borderRadius: 0,
-        padding: '12px 16px',
+        padding: '9px 14px',
         fontFamily: FONT,
         animation: 'cookie-in 0.4s cubic-bezier(0.16,1,0.3,1) both',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        gap: 12,
       }}
     >
       <style>{`
@@ -61,7 +65,8 @@ export function CookieConsent() {
         @media (max-width: 767px) {
           .cookie-consent-bar {
             width: 132px !important;
-            padding: 8px 10px !important;
+            padding: 7px 9px !important;
+            gap: 6px !important;
           }
           .cookie-consent-description {
             display: none;
@@ -69,7 +74,7 @@ export function CookieConsent() {
           .cookie-consent-title {
             font-size: 8px !important;
             letter-spacing: 0.08em !important;
-            margin-bottom: 4px !important;
+            margin-bottom: 0 !important;
             text-align: center;
           }
           .cookie-consent-divider {
@@ -89,10 +94,11 @@ export function CookieConsent() {
         fontWeight: 700,
         letterSpacing: '0.18em',
         color: '#fff',
-        marginBottom: 10,
+        marginBottom: 0,
         textTransform: 'uppercase',
+        whiteSpace: 'nowrap',
       }}>
-        Мы используем cookies
+        Cookies
       </div>
 
       {/* Description */}
@@ -101,13 +107,14 @@ export function CookieConsent() {
         color: 'rgba(255,255,255,0.45)',
         lineHeight: 1.6,
         letterSpacing: '0.04em',
-        marginBottom: 20,
+        marginBottom: 0,
+        display: 'none',
       }}>
         Для удобства пользования сайтом и улучшения качества работы сервиса.
       </div>
 
       {/* Divider */}
-      <div className="cookie-consent-divider" style={{ height: 1, background: 'rgba(255,255,255,0.08)', marginBottom: 8 }} />
+      <div className="cookie-consent-divider" style={{ width: 1, height: 18, background: 'rgba(255,255,255,0.12)', flexShrink: 0 }} />
 
       {/* Button */}
       <button
@@ -124,8 +131,9 @@ export function CookieConsent() {
           letterSpacing: '0.2em',
           color: '#fff',
           textTransform: 'uppercase',
-          padding: '10px 0',
+          padding: '4px 0',
           transition: 'color 0.2s',
+          whiteSpace: 'nowrap',
         }}
         onMouseEnter={e => (e.currentTarget.style.color = BLUE)}
         onMouseLeave={e => (e.currentTarget.style.color = '#fff')}
