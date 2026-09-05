@@ -41,8 +41,8 @@ export function CookieConsent() {
       style={{
         position: 'fixed',
         bottom: 'clamp(18px, 3vh, 28px)',
-        left: 'calc(clamp(20px, 3vw, 48px) + 132px)',
-        right: 'calc(clamp(20px, 3vw, 48px) + 156px)',
+        left: 'calc(clamp(20px, 3vw, 48px) + 144px)',
+        right: 'calc(clamp(20px, 3vw, 48px) + 180px)',
         zIndex: 9999,
         width: 'auto',
         height: 48,
@@ -68,8 +68,8 @@ export function CookieConsent() {
         }
         @media (max-width: 767px) {
           .cookie-consent-bar {
-            left: calc(clamp(20px, 3vw, 48px) + 128px) !important;
-            right: calc(clamp(20px, 3vw, 48px) + 152px) !important;
+            left: calc(clamp(20px, 3vw, 48px) + 140px) !important;
+            right: calc(clamp(20px, 3vw, 48px) + 176px) !important;
             width: auto !important;
             padding: 7px 9px !important;
             gap: 6px !important;
