@@ -17,15 +17,8 @@ export function CookieConsent() {
     }
   }, []);
 
-  useEffect(() => {
-    if (!visible) return;
-    document.body.classList.add('cookie-consent-visible');
-    return () => document.body.classList.remove('cookie-consent-visible');
-  }, [visible]);
-
   const accept = () => {
     localStorage.setItem(STORAGE_KEY, '1');
-    document.body.classList.remove('cookie-consent-visible');
     setVisible(false);
     // Активируем Google Analytics после согласия
     if (typeof window.gtag === 'function') {
@@ -93,9 +86,6 @@ export function CookieConsent() {
             letter-spacing: 0.06em !important;
             padding: 3px 0 !important;
           }
-        }
-        body.cookie-consent-visible .scroll-hint {
-          bottom: 78px !important;
         }
       `}</style>
 
