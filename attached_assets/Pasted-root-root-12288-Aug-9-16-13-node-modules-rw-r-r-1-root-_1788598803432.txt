@@ -1,0 +1,158 @@
+root root  12288 Aug  9 16:13 node_modules
+-rw-r--r--   1 root root 348461 Aug  9 16:13 package-lock.json
+-rw-r--r--   1 root root   3972 Feb 15  2026 package.json
+-rw-r--r--   1 root root     80 Feb  7  2026 postcss.config.js
+-rw-r--r--   1 root root   4648 Feb  7  2026 replit.md
+drwxr-xr-x   2 root root   4096 Feb  7  2026 script
+drwxr-xr-x   2 root root   4096 Aug  9 14:36 scripts
+drwxr-xr-x   2 root root   4096 Aug  9 15:04 server
+drwxr-xr-x   2 root root   4096 Feb 15  2026 shared
+-rw-r--r--   1 root root   7332 Feb  7  2026 tailwind.config.ts
+-rw-r--r--   1 root root    657 Feb  7  2026 tsconfig.json
+drwxr-xr-x   2 root root  12288 Jun 25 07:20 uploads
+-rw-r--r--   1 root root   1080 Feb  7  2026 vite.config.ts
+root@423:/var/www/primetraff.com# pm2 describe primetraff | grep -E "script path|exec cwd"
+│ script path       │ /var/www/primetraff.com/dist/index.cjs │
+│ exec cwd          │ /var/www/primetraff.com                │
+root@423:/var/www/primetraff.com# cd /var/www/primetraff.com
+git init -b main
+git remote add origin https://github.com/pronto1245/primetraff.com.git
+git fetch origin main
+git reset --mixed origin/main
+git status --short
+Initialized empty Git repository in /var/www/primetraff.com/.git/
+remote: Enumerating objects: 3762, done.
+remote: Total 3762 (delta 0), reused 0 (delta 0), pack-reused 3762 (from 1)
+Receiving objects: 100% (3762/3762), 442.94 MiB | 32.82 MiB/s, done.
+Resolving deltas: 100% (2382/2382), done.
+From https://github.com/pronto1245/primetraff.com
+ * branch            main       -> FETCH_HEAD
+ * [new branch]      main       -> origin/main
+Unstaged changes after reset:
+M	client/src/components/cookie-consent.tsx
+
+It took 3.58 seconds to enumerate unstaged changes after reset.  You can
+use '--quiet' to avoid this.  Set the config setting reset.quiet to true
+to make this the default.
+ M client/src/components/cookie-consent.tsx
+?? .env
+?? bot/.env
+?? bot/yarn.lock
+?? uploads/02247512-b670-4d8c-a1a8-582f3ab9fa9a.png
+?? uploads/0556aa68-f41d-4672-a9e0-9590288a7177.png
+?? uploads/0647fc83-f656-4761-8a31-df58871797ed.png
+?? uploads/09f1cbd0-c928-4934-ad2e-b0c885a22d65.png
+?? uploads/0a506be6-966c-4ee1-8007-71ffc6ad8df4.png
+?? uploads/0d560da5-5844-43a4-93c3-bfbd3625fb98.png
+?? uploads/0e419b09-b017-48e8-925b-bd80129b334c.png
+?? uploads/0e6df428-244f-4e24-a3b9-a35741db2050.svg
+?? uploads/1466e0ed-3345-4a5b-9879-6e784d00bbdc.png
+?? uploads/16165ec9-d413-45c7-843b-f04e6798ada3.png
+?? uploads/1afeb4bc-1a5f-44b6-8740-a984e9064b5a.png
+?? uploads/1fbe86a7-7dfc-4a5a-9a56-f537a34fb3c0.png
+?? uploads/20912494-28d1-4921-8242-657f63cc36b1.png
+?? uploads/21158014-95e8-4504-be6c-77d95a803d9d.png
+?? uploads/21f938f9-30c4-408c-bbe7-ebf4ac4f818e.png
+?? uploads/27e78021-66ec-4268-856c-701bc5074d51.png
+?? uploads/283262e2-ea2b-41b8-8518-30b151a0ef71.png
+?? uploads/28b7a6a7-87c5-4ef5-9a54-a9477120d475.png
+?? uploads/28f5a715-f1a2-487c-9990-b0f618753d4f.png
+?? uploads/295eb7cd-ba75-4958-afab-6571248ff621.png
+?? uploads/2ab14823-775a-4376-8b04-e7963f1b1c6b.png
+?? uploads/2f184274-be34-465c-8b56-c57b1b9803c8.png
+?? uploads/30439048-626e-44c0-b88d-ca0ea9ee19db.png
+?? uploads/30cd1586-ff28-45b5-8721-cc626232d895.png
+?? uploads/3344b0f6-d6f4-4f94-82c3-531fb0545897.png
+?? uploads/35c4948c-dc43-4edd-bcf5-298f2834ab46.png
+?? uploads/37dfdad4-4cbb-4049-8081-dfe9f6ecc473.png
+?? uploads/383adc9d-4434-4dbe-ba20-98dcfd08d545.png
+?? uploads/38d20206-aaa9-406b-a2b7-fd4fc4d8e41d.svg
+?? uploads/39bda47f-2fb3-45fe-b738-2d067ba11621.png
+?? uploads/3c0606b2-6cd4-4e99-9d59-8ddcab4ae7a4.png
+?? uploads/3c9647b0-b584-4049-988e-7657ce6bcc71.png
+?? uploads/3cf1da67-5557-423b-b73e-99b86b2251e4.png
+?? uploads/43866994-079e-4c84-bbcd-fa4ddeda9866.png
+?? uploads/43a31937-1362-476e-a0cb-9d9b92219708.png
+?? uploads/4a51f8f2-f5a8-44d6-800a-af8d23de821b.png
+?? uploads/4bdd7742-15d5-4981-9162-a08f213d44ef.png
+?? uploads/4d0794e5-203d-4be8-9d79-bbbcac5e02e0.png
+?? uploads/502b6cdd-9a7b-4cca-9dc2-6e2c393c0683.png
+?? uploads/50765c27-00f2-4c3f-9f02-b89e9a9c8e63.png
+?? uploads/5283d437-b5d1-4e30-8188-b268b72796c2.png
+?? uploads/54ea6a48-63ae-4470-93ba-5e292a3f55a6.png
+?? uploads/5ae43df8-05ef-47d4-b3ba-f97beb1427c3.png
+?? uploads/5b6678c8-8389-4322-917d-c9aae0944e35.png
+?? uploads/5ceeeb65-5f3b-4602-960c-baab4e4c04ec.png
+?? uploads/62ecb5b5-ced6-4846-a654-ecb6096c2343.png
+?? uploads/6964ff89-1c5b-474e-ae24-c89b204157da.png
+?? uploads/69c005d4-e936-4c6a-89c6-4782f6199909.png
+?? uploads/6bc0fded-9419-4d94-946a-63626b7a8086.png
+?? uploads/6ced673d-921a-4fe5-a54a-161d3208b406.png
+?? uploads/6da006c7-f3de-478c-9e06-508da44fb8f2.png
+?? uploads/6e658c7a-ec3e-4f48-aa37-7212df335507.png
+?? uploads/6ec5ba40-c449-45e0-80be-b08fe02de2ee.png
+?? uploads/72b6d474-c7d6-442e-80f1-380502991678.png
+?? uploads/73a41f37-0f16-4cee-8402-302dbcd47267.png
+?? uploads/7591d385-4824-4bac-ad1d-fc949af9098e.png
+?? uploads/77f38aa9-445a-44cc-b44a-a7134d4bb903.png
+?? uploads/77f4b79a-e3f9-428e-b22c-df110ee879d4.png
+?? uploads/79921794-e266-42cf-933c-b734eca97be2.png
+?? uploads/7a907327-3827-4dc2-88a0-02768ad77d71.jpg
+?? uploads/81561865-9b76-4cd1-9a95-d51ba0160bc2.png
+?? uploads/82020b39-d42c-4e20-b792-e76acdc8bab7.png
+?? uploads/839cd1d0-b8aa-4a24-aa9c-3046b14eec30.png
+?? uploads/84d0da4e-f117-4f2d-87a1-34d3551ae6d9.png
+?? uploads/8549fe09-af14-4dae-b6a6-9787b7676562.png
+?? uploads/88de91cf-ddec-48c5-b55b-43a9d03c99b7.png
+?? uploads/88ea2165-87b5-44c7-a98d-eb9a5e142f3e.png
+?? uploads/8a44909f-1c59-4b8f-b296-b5e60d828490.png
+?? uploads/8b295706-d9e5-47e3-9b59-8f2893748b00.png
+?? uploads/8c1dc548-cdba-4ab6-beff-175976784a85.png
+?? uploads/93243435-e5a4-43db-b05a-a9943b74cfce.png
+?? uploads/93daa5eb-dfa7-484f-88bc-2ea5e618dbc5.png
+?? uploads/94cd6ceb-6885-44a6-8770-84681aac81df.png
+?? uploads/965f2af4-41f3-4982-8a06-60755f07d3ac.svg
+?? uploads/98406130-657b-48f9-85cf-1ec317908dd9.png
+?? uploads/99989eac-d37e-43cb-8a79-182f199f7961.png
+?? uploads/9e561ad4-752f-4af6-a35f-5bfe10bc5732.png
+?? uploads/a2544519-c4dc-4e94-bc42-937833205f31.png
+?? uploads/a4b4738a-3bfe-43e1-9621-63e59accdad4.png
+?? uploads/a6d70173-9728-44e4-96ed-7c36d0ca708b.png
+?? uploads/a87f1666-e556-412a-8b29-01a1129fe2a7.png
+?? uploads/adfe30ff-4422-4321-8a44-f8614f503082.png
+?? uploads/ae749281-ea25-4698-8f95-15fe5d756feb.png
+?? uploads/afb7bd69-7c3f-4ee4-ab55-c760bd1e1e76.png
+?? uploads/b1a344c9-8650-484a-a809-6e50ec122c62.png
+?? uploads/b58c73c7-8dd9-4601-a00e-8bbca7b006c5.png
+?? uploads/b5e57422-c48d-40a3-8e42-2408aa5dd5e9.png
+?? uploads/b6f48920-e017-4a42-a23f-214b3a5314e0.png
+?? uploads/b8bcf0a5-660e-4444-8190-873dda606dbe.png
+?? uploads/ba5847be-31ef-40f8-b7b5-98726f968ba2.png
+?? uploads/bbfef5d7-5ab4-489b-a314-e1179f318d6e.png
+?? uploads/c2b1b6a7-b7cb-4ccd-ab4b-18d8e168b99d.png
+?? uploads/c7ec9103-f4b9-45cd-8126-7c8926067799.png
+?? uploads/c81de139-ecaf-4944-927e-7948e0af23fc.webp
+?? uploads/cd633b55-7d15-4ce6-81e2-37b30061a30c.png
+?? uploads/d0205faa-4b27-485d-ae76-8a5b90e1c471.png
+?? uploads/d144bb78-5eca-4c27-afc0-e859483c69f8.png
+?? uploads/d2088fa5-fd8f-4440-905a-90d0e3a5b975.png
+?? uploads/d2c9d958-4baf-48c3-8c95-8d675189e03e.png
+?? uploads/d2de5de1-bfff-4eea-8479-1f9744d3c82b.png
+?? uploads/d7c852b5-f911-4692-9f60-4bac210f3508.png
+?? uploads/d7e1b346-c835-4563-999a-c8d33c437443.png
+?? uploads/d8162bb0-2462-41dd-a860-b27ce7617611.png
+?? uploads/dc4cc034-1ec1-4f8a-bb47-a207fceec6da.png
+?? uploads/dd859f07-d8fd-416b-b8e5-176e246ca750.png
+?? uploads/df941c6e-1eda-415f-b45f-97c2d313a285.png
+?? uploads/e6793086-5b2f-4035-8904-e87bd7fa3ae9.png
+?? uploads/e6e05521-94a8-4763-8ae0-e8a462a43a67.png
+?? uploads/eb25a9fc-1d88-4bb4-bbf8-2b72d3b49d43.png
+?? uploads/ee79cf97-fa29-4f86-a2c2-c0c2b6e9f60d.svg
+?? uploads/f908032b-ebfc-4851-9b59-61c13953f841.png
+?? uploads/fa6a46dc-7a94-4951-887d-b8d8418878a5.png
+?? uploads/fb158759-102c-4ccd-8001-272644fc50d3.png
+?? uploads/fd1bccc3-8eb5-4358-8615-8f6170ca1c82.png
+?? uploads/fd52f087-2428-4642-923d-bdc303b994cb.png
+?? uploads/fde83f13-f130-424e-b21e-e61e13a56fe5.png
+?? uploads/ff2c57e9-2ea3-4b51-9f8d-ea28d19bffdb.png
+root@423:/var/www/primetraff.com# 
