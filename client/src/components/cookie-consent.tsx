@@ -35,31 +35,56 @@ export function CookieConsent() {
 
   return (
     <div
+      className="cookie-consent-bar"
       style={{
         position: 'fixed',
-        bottom: 'clamp(24px, 4vh, 40px)',
-        right: 'clamp(16px, 3vw, 40px)',
+        bottom: 'clamp(18px, 3vh, 28px)',
+        left: '50%',
+        transform: 'translateX(-50%)',
         zIndex: 9999,
-        width: 'clamp(280px, 28vw, 360px)',
+        width: 'min(440px, 38vw)',
         background: 'rgba(8, 8, 12, 0.92)',
         backdropFilter: 'blur(16px)',
         WebkitBackdropFilter: 'blur(16px)',
         border: '1px solid rgba(255,255,255,0.1)',
         borderRadius: 0,
-        padding: 'clamp(20px, 2.5vh, 28px) clamp(20px, 2vw, 28px)',
+        padding: '12px 16px',
         fontFamily: FONT,
         animation: 'cookie-in 0.4s cubic-bezier(0.16,1,0.3,1) both',
       }}
     >
       <style>{`
         @keyframes cookie-in {
-          from { opacity: 0; transform: translateY(16px); }
-          to   { opacity: 1; transform: translateY(0); }
+          from { opacity: 0; transform: translate(-50%, 16px); }
+          to   { opacity: 1; transform: translate(-50%, 0); }
+        }
+        @media (max-width: 767px) {
+          .cookie-consent-bar {
+            width: 132px !important;
+            padding: 8px 10px !important;
+          }
+          .cookie-consent-description {
+            display: none;
+          }
+          .cookie-consent-title {
+            font-size: 8px !important;
+            letter-spacing: 0.08em !important;
+            margin-bottom: 4px !important;
+            text-align: center;
+          }
+          .cookie-consent-divider {
+            margin-bottom: 3px !important;
+          }
+          .cookie-consent-button {
+            font-size: 8px !important;
+            letter-spacing: 0.1em !important;
+            padding: 3px 0 !important;
+          }
         }
       `}</style>
 
       {/* Title */}
-      <div style={{
+      <div className="cookie-consent-title" style={{
         fontSize: 'clamp(11px, 1vw, 13px)',
         fontWeight: 700,
         letterSpacing: '0.18em',
@@ -71,7 +96,7 @@ export function CookieConsent() {
       </div>
 
       {/* Description */}
-      <div style={{
+      <div className="cookie-consent-description" style={{
         fontSize: 'clamp(10px, 0.85vw, 12px)',
         color: 'rgba(255,255,255,0.45)',
         lineHeight: 1.6,
@@ -82,10 +107,11 @@ export function CookieConsent() {
       </div>
 
       {/* Divider */}
-      <div style={{ height: 1, background: 'rgba(255,255,255,0.08)', marginBottom: 20 }} />
+      <div className="cookie-consent-divider" style={{ height: 1, background: 'rgba(255,255,255,0.08)', marginBottom: 8 }} />
 
       {/* Button */}
       <button
+        className="cookie-consent-button"
         onClick={accept}
         style={{
           width: '100%',
