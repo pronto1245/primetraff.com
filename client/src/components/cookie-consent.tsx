@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { FONT, BLUE } from '@/components/nav-header';
+import { useLang } from '@/lib/language-context';
 
 declare global {
   interface Window { gtag?: (...args: unknown[]) => void; }
@@ -8,6 +9,7 @@ declare global {
 const STORAGE_KEY = 'pt_cookie_accepted';
 
 export function CookieConsent() {
+  const { lang } = useLang();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -39,8 +41,8 @@ export function CookieConsent() {
       style={{
         position: 'fixed',
         bottom: 'clamp(18px, 3vh, 28px)',
-        left: 'calc(clamp(20px, 3vw, 48px) + 120px)',
-        right: 'calc(clamp(20px, 3vw, 48px) + 144px)',
+        left: 'calc(clamp(20px, 3vw, 48px) + 132px)',
+        right: 'calc(clamp(20px, 3vw, 48px) + 156px)',
         zIndex: 9999,
         width: 'auto',
         height: 48,
@@ -55,8 +57,8 @@ export function CookieConsent() {
         animation: 'cookie-in 0.4s cubic-bezier(0.16,1,0.3,1) both',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-between',
-        gap: 12,
+        justifyContent: 'center',
+        gap: 'clamp(10px, 2vw, 28px)',
       }}
     >
       <style>{`
@@ -66,17 +68,19 @@ export function CookieConsent() {
         }
         @media (max-width: 767px) {
           .cookie-consent-bar {
-            left: calc(clamp(20px, 3vw, 48px) + 120px) !important;
-            right: calc(clamp(20px, 3vw, 48px) + 144px) !important;
+            left: calc(clamp(20px, 3vw, 48px) + 128px) !important;
+            right: calc(clamp(20px, 3vw, 48px) + 152px) !important;
             width: auto !important;
             padding: 7px 9px !important;
             gap: 6px !important;
           }
           .cookie-consent-description {
-            display: none;
+            display: none !important;
           }
           .cookie-consent-title {
-            display: none;
+            display: block !important;
+            font-size: 7px !important;
+            letter-spacing: 0.02em !important;
           }
           .cookie-consent-divider {
             margin-bottom: 3px !important;
@@ -91,27 +95,30 @@ export function CookieConsent() {
 
       {/* Title */}
       <div className="cookie-consent-title" style={{
-        fontSize: 'clamp(11px, 1vw, 13px)',
+        fontSize: 'clamp(8px, 0.75vw, 10px)',
         fontWeight: 700,
-        letterSpacing: '0.18em',
+        letterSpacing: '0.1em',
         color: '#fff',
         marginBottom: 0,
         textTransform: 'uppercase',
         whiteSpace: 'nowrap',
       }}>
-        Мы используем cookies
+        {lang === 'ru' ? 'Мы используем cookies' : 'We use cookies'}
       </div>
 
       {/* Description */}
       <div className="cookie-consent-description" style={{
-        fontSize: 'clamp(10px, 0.85vw, 12px)',
+        fontSize: 'clamp(7px, 0.65vw, 9px)',
         color: 'rgba(255,255,255,0.45)',
         lineHeight: 1.6,
-        letterSpacing: '0.04em',
+        letterSpacing: '0.02em',
         marginBottom: 0,
-        display: 'none',
+        display: 'block',
+        whiteSpace: 'nowrap',
       }}>
-        Для удобства пользования сайтом и улучшения качества работы сервиса.
+        {lang === 'ru'
+          ? 'Для удобства пользования сайтом и улучшения качества работы сервиса.'
+          : 'To improve your experience and the quality of our service.'}
       </div>
 
       {/* Divider */}
@@ -122,7 +129,7 @@ export function CookieConsent() {
         className="cookie-consent-button"
         onClick={accept}
         style={{
-          width: '100%',
+          width: 'auto',
           background: 'transparent',
           border: 'none',
           cursor: 'pointer',
@@ -139,7 +146,7 @@ export function CookieConsent() {
         onMouseEnter={e => (e.currentTarget.style.color = BLUE)}
         onMouseLeave={e => (e.currentTarget.style.color = '#fff')}
       >
-        Принять
+        {lang === 'ru' ? 'Принять' : 'Accept'}
       </button>
     </div>
   );
