@@ -1,0 +1,38 @@
+root@423:/var/www/primetraff.com# find /var/www /opt /root -type d -name .git 2>/dev/null
+root@423:/var/www/primetraff.com# cd /var/www/primetraff.com
+pwd
+ls -la
+/var/www/primetraff.com
+total 512
+drwxr-xr-x  14 root root   4096 Sep  4 11:51 .
+drwxr-xr-x   5 root root   4096 Sep  4 11:15 ..
+drwxr-xr-x   3 root root   4096 Aug  9 14:36 .agents
+-rw-------   1 root root    172 Sep  4 11:51 .env
+-rw-r--r--   1 root root     67 Feb  7  2026 .gitignore
+-rw-r--r--   1 root root    834 Aug  9 14:36 .replit
+drwxr-xr-x   3 root root   4096 Jun 24 11:37 artifacts
+drwxr-xr-x   4 root root  36864 Aug 11 19:20 attached_assets
+drwxr-xr-x   3 root root   4096 Sep  4 11:43 bot
+drwxr-xr-x   4 root root   4096 Aug 11 19:23 client
+-rw-r--r--   1 root root    459 Feb  7  2026 components.json
+-rw-r--r--   1 root root   5971 Feb  7  2026 design_guidelines.md
+drwxr-xr-x   3 root root   4096 Aug 11 19:24 dist
+-rw-r--r--   1 root root    325 Feb  7  2026 drizzle.config.ts
+-rw-r--r--   1 root root    476 Feb 15  2026 ecosystem.config.cjs
+drwxr-xr-x 391 root root  12288 Aug  9 16:13 node_modules
+-rw-r--r--   1 root root 348461 Aug  9 16:13 package-lock.json
+-rw-r--r--   1 root root   3972 Feb 15  2026 package.json
+-rw-r--r--   1 root root     80 Feb  7  2026 postcss.config.js
+-rw-r--r--   1 root root   4648 Feb  7  2026 replit.md
+drwxr-xr-x   2 root root   4096 Feb  7  2026 script
+drwxr-xr-x   2 root root   4096 Aug  9 14:36 scripts
+drwxr-xr-x   2 root root   4096 Aug  9 15:04 server
+drwxr-xr-x   2 root root   4096 Feb 15  2026 shared
+-rw-r--r--   1 root root   7332 Feb  7  2026 tailwind.config.ts
+-rw-r--r--   1 root root    657 Feb  7  2026 tsconfig.json
+drwxr-xr-x   2 root root  12288 Jun 25 07:20 uploads
+-rw-r--r--   1 root root   1080 Feb  7  2026 vite.config.ts
+root@423:/var/www/primetraff.com# pm2 describe primetraff | grep -E "script path|exec cwd"
+│ script path       │ /var/www/primetraff.com/dist/index.cjs │
+│ exec cwd          │ /var/www/primetraff.com                │
+root@423:/var/www/primetraff.com# 
