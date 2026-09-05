@@ -39,10 +39,10 @@ export function CookieConsent() {
       style={{
         position: 'fixed',
         bottom: 'clamp(18px, 3vh, 28px)',
-        left: '50%',
-        transform: 'translateX(-50%)',
+        left: 'clamp(150px, 14vw, 190px)',
+        right: 'clamp(180px, 17vw, 220px)',
         zIndex: 9999,
-        width: 'min(360px, 34vw)',
+        width: 'auto',
         background: 'rgba(8, 8, 12, 0.92)',
         backdropFilter: 'blur(16px)',
         WebkitBackdropFilter: 'blur(16px)',
@@ -59,12 +59,14 @@ export function CookieConsent() {
     >
       <style>{`
         @keyframes cookie-in {
-          from { opacity: 0; transform: translate(-50%, 16px); }
-          to   { opacity: 1; transform: translate(-50%, 0); }
+          from { opacity: 0; transform: translateY(16px); }
+          to   { opacity: 1; transform: translateY(0); }
         }
         @media (max-width: 767px) {
           .cookie-consent-bar {
-            width: 132px !important;
+            left: 142px !important;
+            right: 180px !important;
+            width: auto !important;
             padding: 7px 9px !important;
             gap: 6px !important;
           }
@@ -72,17 +74,14 @@ export function CookieConsent() {
             display: none;
           }
           .cookie-consent-title {
-            font-size: 8px !important;
-            letter-spacing: 0.08em !important;
-            margin-bottom: 0 !important;
-            text-align: center;
+            display: none;
           }
           .cookie-consent-divider {
             margin-bottom: 3px !important;
           }
           .cookie-consent-button {
             font-size: 8px !important;
-            letter-spacing: 0.1em !important;
+            letter-spacing: 0.06em !important;
             padding: 3px 0 !important;
           }
         }
@@ -98,7 +97,7 @@ export function CookieConsent() {
         textTransform: 'uppercase',
         whiteSpace: 'nowrap',
       }}>
-        Cookies
+        Мы используем cookies
       </div>
 
       {/* Description */}
@@ -138,7 +137,7 @@ export function CookieConsent() {
         onMouseEnter={e => (e.currentTarget.style.color = BLUE)}
         onMouseLeave={e => (e.currentTarget.style.color = '#fff')}
       >
-        Принято
+        Принять
       </button>
     </div>
   );
