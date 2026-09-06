@@ -72,7 +72,7 @@ export function NavHeader({ activePage }: NavHeaderProps) {
           className="hidden xl:flex items-center"
           style={{ gap: 'clamp(10px, 1vw, 18px)' }}
         >
-          {NAV_ITEMS.map(item => (
+          {NAV_ITEMS.filter(item => item.page !== 'privacy').map(item => (
             <Link
               key={`desktop-${item.label}`}
               href={item.href}
