@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { NavHeader, FONT, BLUE, PAD } from '@/components/nav-header';
+import { NavHeader, FixedFooterBar, FONT, BLUE, PAD } from '@/components/nav-header';
 import { useLang } from '@/lib/language-context';
 
 type Section = {
@@ -319,7 +319,12 @@ export default function PrivacyPage() {
         </div>
       </main>
 
+      <FixedFooterBar />
+
       <style>{`
+        .tip-wrap .tip {
+          display: none;
+        }
         @media (max-width: 720px) {
           .privacy-section {
             grid-template-columns: 1fr !important;
