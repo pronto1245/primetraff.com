@@ -1,0 +1,29 @@
+✓ 2434 modules transformed.
+../dist/public/assets/img69380f65d567f_1770453920456-CpIgRxua.webp    5.50 kB
+../dist/public/index.html                                            11.19 kB │ gzip:  3.87 kB
+../dist/public/assets/pt-logo-BGIiMJk_.webp                          37.88 kB
+../dist/public/assets/blog-admin-CQ7DNbul.css                        24.24 kB │ gzip:  3.62 kB
+../dist/public/assets/index-BWhY18yE.css                            116.97 kB │ gzip: 18.33 kB
+../dist/public/assets/arrow-right-DU6uIkXe.js                         0.16 kB │ gzip:  0.16 kB
+../dist/public/assets/arrow-left-ButAo4iE.js                          0.16 kB │ gzip:  0.16 kB
+../dist/public/assets/user-round-B1Ud1PZH.js                          0.36 kB │ gzip:  0.25 kB
+../dist/public/assets/usePageSnap-BNet0Oc4.js                         1.06 kB │ gzip:  0.60 kB
+../dist/public/assets/blog-DIcOZUTM.js                                7.22 kB │ gzip:  2.33 kB
+../dist/public/assets/useQuery-CAPRzLv3.js                            8.72 kB │ gzip:  3.15 kB
+../dist/public/assets/blog-post-DHCLhK-x.js                           8.74 kB │ gzip:  3.03 kB
+../dist/public/assets/advertisers-CvkmdNHv.js                        13.77 kB │ gzip:  3.65 kB
+../dist/public/assets/affiliates-BVCDjYCr.js                         15.65 kB │ gzip:  4.17 kB
+../dist/public/assets/privacy-DbDVR_XA.js                            18.02 kB │ gzip:  6.49 kB
+../dist/public/assets/i18n-E_nEdH-V.js                               27.42 kB │ gzip:  9.69 kB
+../dist/public/assets/landing-BoiC6nwz.js                            83.58 kB │ gzip: 57.10 kB
+../dist/public/assets/blog-admin-CCI6f0pc.js                        244.54 kB │ gzip: 72.10 kB
+../dist/public/assets/index-mfKrmNK6.js                             272.76 kB │ gzip: 89.36 kB
+✓ built in 5.03s
+building server...
+
+  dist/index.cjs  1.1mb ⚠️
+
+⚡ Done in 230ms
+pm2: command not installed, but was located via Nix.
+package: pm2  5.3.1  Node.js production process manager with a built-in load balancer
+Would you like to run pm2 from Nix and add it to your project? [Yn]: 
