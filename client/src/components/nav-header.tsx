@@ -70,7 +70,7 @@ export function NavHeader({ activePage }: NavHeaderProps) {
         {/* Desktop navigation */}
         <nav
           className="hidden xl:flex items-center"
-          style={{ gap: 'clamp(10px, 1vw, 18px)' }}
+          style={{ gap: 'clamp(30px, 2.5vw, 48px)' }}
         >
           {NAV_ITEMS.filter(item => item.page !== 'privacy').map(item => (
             <Link
