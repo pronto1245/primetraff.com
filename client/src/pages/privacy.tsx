@@ -239,14 +239,24 @@ export default function PrivacyPage() {
     <div style={{ minHeight: '100vh', background: '#000', color: '#fff', fontFamily: FONT }}>
       <NavHeader activePage="privacy" />
 
-      <main style={{ padding: `clamp(130px, 16vh, 190px) ${PAD} clamp(130px, 16vh, 180px)` }}>
+      <div style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
+        <img
+          src="/dsb-bg-blue.webp"
+          alt=""
+          style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.32 }}
+        />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.82) 48%, #000 100%)' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 65% 38% at 50% 22%, rgba(59,130,246,0.28) 0%, transparent 72%)' }} />
+      </div>
+
+      <main style={{ position: 'relative', zIndex: 1, padding: `clamp(130px, 16vh, 190px) ${PAD} clamp(130px, 16vh, 180px)` }}>
         <div style={{ width: 'min(980px, 100%)', margin: '0 auto' }}>
-          <header style={{ paddingBottom: 'clamp(42px, 7vh, 78px)', borderBottom: '1px solid rgba(255,255,255,0.12)' }}>
+          <header style={{ paddingBottom: 'clamp(42px, 7vh, 78px)', borderBottom: '1px solid rgba(255,255,255,0.12)', textAlign: 'center' }}>
             <div style={{ color: BLUE, fontSize: 'clamp(9px, 0.8vw, 11px)', letterSpacing: '0.28em', marginBottom: 18 }}>
               {page.eyebrow}
             </div>
             <h1 style={{
-              margin: 0,
+              margin: '0 auto',
               maxWidth: 900,
               fontSize: 'clamp(22px, 4.4vw, 56px)',
               lineHeight: 1.02,
@@ -260,7 +270,7 @@ export default function PrivacyPage() {
             </h1>
             <p style={{
               maxWidth: 760,
-              margin: 'clamp(24px, 4vh, 40px) 0 0',
+              margin: 'clamp(24px, 4vh, 40px) auto 0',
               color: 'rgba(255,255,255,0.58)',
               fontSize: 'clamp(12px, 1.05vw, 15px)',
               lineHeight: 1.8,
