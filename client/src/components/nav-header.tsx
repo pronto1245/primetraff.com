@@ -66,6 +66,41 @@ export function NavHeader({ activePage }: NavHeaderProps) {
             style={{ height: 'clamp(34px, 3.2vw, 46px)', width: 'auto', cursor: 'pointer' }}
           />
         </Link>
+
+        {/* Desktop navigation */}
+        <nav
+          className="hidden xl:flex items-center"
+          style={{ gap: 'clamp(12px, 1.35vw, 24px)' }}
+        >
+          {NAV_ITEMS.map(item => (
+            <Link
+              key={`desktop-${item.label}`}
+              href={item.href}
+              className="uppercase font-medium transition-colors"
+              style={{
+                position: 'relative',
+                color: item.page === activePage ? BLUE : 'rgba(255,255,255,0.72)',
+                fontSize: item.page === 'privacy' ? 'clamp(8px, 0.65vw, 10px)' : 'clamp(9px, 0.75vw, 11px)',
+                letterSpacing: item.page === 'privacy' ? '0.05em' : '0.08em',
+                textDecoration: 'none',
+                whiteSpace: 'nowrap',
+                padding: '9px 0',
+                borderBottom: `1px solid ${item.page === activePage ? BLUE : 'transparent'}`,
+              }}
+              onMouseEnter={e => {
+                if (item.page !== activePage) e.currentTarget.style.color = '#fff';
+              }}
+              onMouseLeave={e => {
+                if (item.page !== activePage) e.currentTarget.style.color = 'rgba(255,255,255,0.72)';
+              }}
+            >
+              {item.page === 'privacy'
+                ? (lang === 'ru' ? 'Конфиденциальность' : 'Privacy')
+                : item.label}
+            </Link>
+          ))}
+        </nav>
+
         <div className="flex items-center" style={{ gap: 'clamp(16px, 2vw, 32px)' }}>
           <div className="font-bold" style={{ fontSize: TYPE.small, letterSpacing: TRACK }}>
             <button
