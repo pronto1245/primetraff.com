@@ -135,10 +135,12 @@ export function NavHeader({ activePage }: NavHeaderProps) {
         <nav className="flex flex-col items-end" style={{ gap: 'clamp(18px, 3vh, 28px)' }}>
           {NAV_ITEMS.map(item => {
             const linkStyle = {
-              fontSize: 'clamp(14px, 1.5vw, 20px)',
+              fontSize: item.page === 'privacy' ? 'clamp(10px, 1vw, 14px)' : 'clamp(14px, 1.5vw, 20px)',
               letterSpacing: '0.1em',
               textDecoration: 'none',
               color: (!item.external && item.page === activePage) ? BLUE : '#fff',
+              textAlign: 'right' as const,
+              maxWidth: '100%',
             };
             if (item.external) return (
               <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer"
