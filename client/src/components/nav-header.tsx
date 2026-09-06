@@ -70,7 +70,7 @@ export function NavHeader({ activePage }: NavHeaderProps) {
         {/* Desktop navigation */}
         <nav
           className="hidden xl:flex items-center"
-          style={{ gap: 'clamp(12px, 1.35vw, 24px)' }}
+          style={{ gap: 'clamp(10px, 1vw, 18px)' }}
         >
           {NAV_ITEMS.map(item => (
             <Link
@@ -80,7 +80,7 @@ export function NavHeader({ activePage }: NavHeaderProps) {
               style={{
                 position: 'relative',
                 color: item.page === activePage ? BLUE : 'rgba(255,255,255,0.72)',
-                fontSize: item.page === 'privacy' ? 'clamp(8px, 0.65vw, 10px)' : 'clamp(9px, 0.75vw, 11px)',
+                fontSize: item.page === 'privacy' ? 'clamp(10px, 0.8vw, 12px)' : 'clamp(11px, 0.9vw, 13px)',
                 letterSpacing: item.page === 'privacy' ? '0.05em' : '0.08em',
                 textDecoration: 'none',
                 whiteSpace: 'nowrap',
