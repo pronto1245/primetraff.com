@@ -80,7 +80,8 @@ export function NavHeader({ activePage }: NavHeaderProps) {
               style={{
                 position: 'relative',
                 color: item.page === activePage ? BLUE : 'rgba(255,255,255,0.72)',
-                fontSize: item.page === 'privacy' ? 'clamp(10px, 0.8vw, 12px)' : 'clamp(11px, 0.9vw, 13px)',
+                fontSize: TYPE.small,
+                fontWeight: 700,
                 letterSpacing: item.page === 'privacy' ? '0.05em' : '0.08em',
                 textDecoration: 'none',
                 whiteSpace: 'nowrap',
