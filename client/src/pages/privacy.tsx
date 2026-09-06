@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { NavHeader, FixedFooterBar, FONT, BLUE, PAD } from '@/components/nav-header';
+import { NavHeader, FONT, BLUE, PAD } from '@/components/nav-header';
 import { useLang } from '@/lib/language-context';
 
 type Section = {
@@ -318,8 +318,6 @@ export default function PrivacyPage() {
           </p>
         </div>
       </main>
-
-      <FixedFooterBar />
 
       <style>{`
         @media (max-width: 720px) {
