@@ -19,7 +19,7 @@ export function serveStatic(app: Express) {
   app.use(express.static(distPath));
 
   // Known SPA routes — serve with 200
-  const knownRoutes = ["/", "/affiliates", "/advertisers", "/blog", "/admin/blog"];
+  const knownRoutes = ["/", "/affiliates", "/advertisers", "/blog", "/privacy", "/admin/blog"];
   app.use("*", (req, res) => {
     const pathname = req.path;
     const isKnown = knownRoutes.includes(pathname) ||

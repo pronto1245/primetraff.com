@@ -22,6 +22,7 @@ const BlogPostPage   = lazy(() => import("@/pages/blog-post"));
 const AffiliatesPage = lazy(() => import("@/pages/affiliates"));
 const AdvertisersPage= lazy(() => import("@/pages/advertisers"));
 const BlogAdminPage  = lazy(() => import("@/pages/blog-admin"));
+const PrivacyPage    = lazy(() => import("@/pages/privacy"));
 
 function PageLoader() {
   return (
@@ -76,6 +77,7 @@ function Router() {
         <Route path="/advertisers" component={AdvertisersPage} />
         <Route path="/blog" component={BlogPage} />
         <Route path="/blog/:slug" component={BlogPostPage} />
+        <Route path="/privacy" component={PrivacyPage} />
         <Route path="/admin/blog" component={BlogAdminPage} />
         <Route component={NotFound} />
       </Switch>

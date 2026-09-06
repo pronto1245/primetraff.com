@@ -22,7 +22,7 @@ const REGISTER_URL = 'https://primetrack.pro/register?ref=ADV-3BT52V85';
 const LOGIN_URL    = 'https://primetrack.pro/login';
 const SUPPORT_URL  = 'https://t.me/primetraffbot';
 
-type ActivePage = 'home' | 'affiliates' | 'advertisers' | 'blog' | null;
+type ActivePage = 'home' | 'affiliates' | 'advertisers' | 'blog' | 'privacy' | null;
 
 interface NavHeaderProps {
   activePage?: ActivePage;
@@ -41,6 +41,7 @@ export function NavHeader({ activePage }: NavHeaderProps) {
     { label: lang === 'ru' ? 'Рекламодателям' : 'Advertisers', href: '/advertisers', page: 'advertisers' },
     { label: lang === 'ru' ? 'Связаться' : 'Contact', href: '/affiliates#contact' },
     { label: lang === 'ru' ? 'Блог' : 'Blog', href: '/blog', page: 'blog' },
+    { label: lang === 'ru' ? 'Политика конфиденциальности' : 'Privacy Policy', href: '/privacy', page: 'privacy' },
   ];
 
   return (
