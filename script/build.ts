@@ -38,6 +38,17 @@ async function buildAll() {
   console.log("building client...");
   await viteBuild();
 
+  // Server-render bundle, loaded by server/ssr.ts so search engines and link
+  // previews get real page HTML.
+  console.log("building ssr bundle...");
+  await viteBuild({
+    build: {
+      ssr: "src/entry-server.tsx",
+      outDir: "../dist/server",
+      emptyOutDir: true,
+    },
+  });
+
   console.log("building server...");
   const pkg = JSON.parse(await readFile("package.json", "utf-8"));
   const allDeps = [

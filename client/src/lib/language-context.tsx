@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useCallback } from "react";
+import { createContext, useContext, useState, useCallback, useEffect } from "react";
 import type { Lang } from "./i18n";
 
 type LanguageContextType = {
@@ -12,13 +12,18 @@ const LanguageContext = createContext<LanguageContextType>({
 });
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [lang, setLang] = useState<Lang>(() => {
-    if (typeof window !== "undefined") {
+  // Always start in "ru" so the first render matches the server-rendered HTML;
+  // the saved choice is applied right after mount.
+  const [lang, setLang] = useState<Lang>("ru");
+
+  useEffect(() => {
+    try {
       const saved = localStorage.getItem("lang");
-      if (saved === "en" || saved === "ru") return saved;
+      if (saved === "en") setLang("en");
+    } catch {
+      /* storage unavailable */
     }
-    return "ru";
-  });
+  }, []);
 
   const toggleLang = useCallback(() => {
     setLang((prev) => {

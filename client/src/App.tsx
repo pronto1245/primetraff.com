@@ -1,6 +1,6 @@
 import { Switch, Route, useLocation } from "wouter";
 import { queryClient } from "./lib/queryClient";
-import { QueryClientProvider } from "@tanstack/react-query";
+import { QueryClientProvider, type QueryClient } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { LanguageProvider } from "@/lib/language-context";
@@ -85,9 +85,11 @@ function Router() {
   );
 }
 
-function App() {
+// Shared by the browser (App) and server rendering (entry-server.tsx),
+// which passes its own per-request QueryClient.
+export function AppShell({ queryClient: client }: { queryClient: QueryClient }) {
   return (
-    <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={client}>
       <TooltipProvider>
         <LanguageProvider>
           <Toaster />
@@ -97,6 +99,10 @@ function App() {
       </TooltipProvider>
     </QueryClientProvider>
   );
+}
+
+function App() {
+  return <AppShell queryClient={queryClient} />;
 }
 
 export default App;

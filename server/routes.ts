@@ -1,6 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
+import { clearSsrCache } from "./ssr";
 import { insertBlogPostSchema } from "@shared/schema";
 import multer from "multer";
 import path from "path";
@@ -192,6 +193,7 @@ export async function registerRoutes(
       const sanitized = sanitizePostContent(req.body);
       const parsed = insertBlogPostSchema.parse(sanitized);
       const post = await storage.createBlogPost(parsed);
+      clearSsrCache();
       res.status(201).json(post);
     } catch (e: any) {
       res.status(400).json({ error: e.message });
@@ -204,6 +206,7 @@ export async function registerRoutes(
       const updateSchema = insertBlogPostSchema.partial();
       const parsed = updateSchema.parse(sanitized);
       const post = await storage.updateBlogPost(req.params.id, parsed);
+      clearSsrCache();
       if (!post) return res.status(404).json({ error: "Post not found" });
       res.json(post);
     } catch (e: any) {
@@ -214,6 +217,7 @@ export async function registerRoutes(
   app.delete("/api/blog/:id", checkAdmin, async (req, res) => {
     try {
       const ok = await storage.deleteBlogPost(req.params.id);
+      clearSsrCache();
       if (!ok) return res.status(404).json({ error: "Post not found" });
       res.json({ success: true });
     } catch (e: any) {
