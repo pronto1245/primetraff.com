@@ -40,14 +40,20 @@ async function buildAll() {
 
   // Server-render bundle, loaded by server/ssr.ts so search engines and link
   // previews get real page HTML.
+  // Non-fatal: if this step fails, the site still builds and is served as the
+  // plain SPA shell, exactly as before (server/ssr.ts falls back automatically).
   console.log("building ssr bundle...");
-  await viteBuild({
-    build: {
-      ssr: "src/entry-server.tsx",
-      outDir: "../dist/server",
-      emptyOutDir: true,
-    },
-  });
+  try {
+    await viteBuild({
+      build: {
+        ssr: "src/entry-server.tsx",
+        outDir: "../dist/server",
+        emptyOutDir: true,
+      },
+    });
+  } catch (err) {
+    console.warn("WARNING: ssr bundle failed to build, serving SPA shell only:", err);
+  }
 
   console.log("building server...");
   const pkg = JSON.parse(await readFile("package.json", "utf-8"));

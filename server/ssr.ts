@@ -124,8 +124,8 @@ function applyMeta(template: string, meta: Meta, pagePath: string, image?: strin
 function serializeState(state: unknown) {
   return JSON.stringify(state)
     .replace(/</g, "\\u003c")
-    .replace(/ /g, "\\u2028")
-    .replace(/ /g, "\\u2029");
+    .replace(/\u2028/g, "\\u2028")
+    .replace(/\u2029/g, "\\u2029");
 }
 
 /**
