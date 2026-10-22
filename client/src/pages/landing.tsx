@@ -57,7 +57,7 @@ import logoVegas        from '@assets/img69380f65d567f_1770453920456.webp';
 import logoBr4bet       from '@assets/zQAzTcUzmpmD09fPheuQwWO7Jqm0FxinQatFQkwy_1770453920459.webp';
 import logoWinhero      from '@assets/Без_названия_(32)_1770454010355.webp';
 
-const REGISTER_URL = 'https://primetrack.pro/register?ref=ADV-3BT52V85';
+const REGISTER_URL = 'https://my.primetraff.com/register?ref=ADV-3BT52V85';
 
 const ScrollHint = () => (
   <div className="scroll-hint absolute left-1/2 z-20 pointer-events-none" style={{ bottom: 22, transform: 'translateX(-50%)' }}>

@@ -6,8 +6,8 @@ import { ArrowLeft, Calendar } from "lucide-react";
 import type { BlogPost } from "@shared/schema";
 import { NavHeader, FixedFooterBar, SHARED_STYLES, FONT, PAD } from "@/components/nav-header";
 
-const LOGIN_URL    = "https://primetrack.pro/login";
-const REGISTER_URL = "https://primetrack.pro/register?ref=ADV-3BT52V85";
+const LOGIN_URL    = "https://my.primetraff.com/login";
+const REGISTER_URL = "https://my.primetraff.com/register?ref=ADV-3BT52V85";
 
 function renderBannerHtml(lang: string): string {
   const loginText    = lang === "ru" ? "ВХОД"        : "LOGIN";

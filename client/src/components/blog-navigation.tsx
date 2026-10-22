@@ -7,8 +7,8 @@ import { SiTelegram } from "react-icons/si";
 import { Button } from "@/components/ui/button";
 import primeTraffLogo from "@assets/IMG_9022_1770529061025.png";
 
-const REGISTER_URL = "https://primetrack.pro/register?ref=ADV-3BT52V85";
-const LOGIN_URL = "https://primetrack.pro/login";
+const REGISTER_URL = "https://my.primetraff.com/register?ref=ADV-3BT52V85";
+const LOGIN_URL = "https://my.primetraff.com/login";
 const TELEGRAM_CHANNEL_URL = "https://t.me/prime_traf";
 
 export default function BlogNavigation() {

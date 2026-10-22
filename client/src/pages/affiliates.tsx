@@ -6,8 +6,8 @@ import { useLang } from '@/lib/language-context';
 import { t, translations } from '@/lib/i18n';
 import bgImage from '@/assets/dsb-bg.webp';
 
-const REGISTER_URL = 'https://primetrack.pro/register?ref=ADV-3BT52V85';
-const LOGIN_URL    = 'https://primetrack.pro/login';
+const REGISTER_URL = 'https://my.primetraff.com/register?ref=ADV-3BT52V85';
+const LOGIN_URL    = 'https://my.primetraff.com/login';
 const SUPPORT_URL  = 'https://t.me/primetraffbot';
 const MANAGER_URL  = 'https://t.me/tema_prtraff';
 const CHANNEL_URL  = 'https://t.me/prime_traf';

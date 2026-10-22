@@ -18,8 +18,8 @@ export const TYPE = {
 export const TRACK = '0.08em';
 export const PAD   = 'clamp(20px, 3vw, 48px)';
 
-const REGISTER_URL = 'https://primetrack.pro/register?ref=ADV-3BT52V85';
-const LOGIN_URL    = 'https://primetrack.pro/login';
+const REGISTER_URL = 'https://my.primetraff.com/register?ref=ADV-3BT52V85';
+const LOGIN_URL    = 'https://my.primetraff.com/login';
 const SUPPORT_URL  = 'https://t.me/primetraffbot';
 
 type ActivePage = 'home' | 'affiliates' | 'advertisers' | 'blog' | 'privacy' | null;
