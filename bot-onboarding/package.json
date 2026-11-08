@@ -1,0 +1,17 @@
+{
+  "name": "primetraff-onboarding",
+  "version": "1.0.0",
+  "private": true,
+  "description": "PrimeTraff: Telegram onboarding of new partners (bot + manager account) via PrimeTrack",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "login": "node login.js",
+    "test": "node --test test/*.test.js"
+  },
+  "dependencies": {
+    "big-integer": "1.6.52",
+    "dotenv": "17.4.2",
+    "telegram": "2.26.22"
+  }
+}
